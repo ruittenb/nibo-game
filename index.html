@@ -460,10 +460,10 @@
             );
         }
 
-        /* Ladder 1: ground to platform 1, position 6 */
+        /* Ladder 1: ground to platform 1, position 5 */
         .ladder-1 {
             bottom: var(--ground-height);
-            left: calc(var(--pos-offset) + var(--pos-width) * 5 + 42px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 4 + 42px);
         }
 
         /* Ladder 2: platform 1 to platform 2, position 3 */
@@ -546,9 +546,9 @@
         #level-4:checked ~ .arrow-h { bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px); }
 
         /* Up arrow positions (at ladder locations) */
-        /* Ladder 1: position 6, level 0 -> 1 */
-        .arrow-up-L0P6 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 5 + 45px);
+        /* Ladder 1: position 5, level 0 -> 1 */
+        .arrow-up-L0P5 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 4 + 45px);
             bottom: calc(var(--ground-height) + 27.5px);
         }
         /* Ladder 2: position 3, level 1 -> 2 */
@@ -602,8 +602,8 @@
         #pos-6:checked ~ .arrow-6-5 { display: block; }
 
         /* Show up arrow at ladder locations */
-        /* Ladder 1: level 0, position 6 */
-        #level-0:checked ~ #pos-6:checked ~ .arrow-up-L0P6 { display: block; }
+        /* Ladder 1: level 0, position 5 */
+        #level-0:checked ~ #pos-5:checked ~ .arrow-up-L0P5 { display: block; }
         /* Ladder 2: level 1, position 3 */
         #level-1:checked ~ #pos-3:checked ~ .arrow-up-L1P3 { display: block; }
         /* Ladder 3: level 2, position 1 */
@@ -728,7 +728,7 @@
         #pos-5:checked ~ .nav-panel .nav-right[for="pos-6"] { display: block; }
 
         /* Show up arrow at ladder locations */
-        #level-0:checked ~ #pos-6:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
+        #level-0:checked ~ #pos-5:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
         #level-1:checked ~ #pos-3:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
         #level-2:checked ~ #pos-1:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
         #level-3:checked ~ #pos-4:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
@@ -839,7 +839,7 @@
         <label for="pos-5" class="arrow arrow-left arrow-h arrow-6-5"></label>
 
         <!-- Up arrow labels (at ladder positions) -->
-        <label for="level-1" class="arrow arrow-up arrow-up-L0P6"></label>
+        <label for="level-1" class="arrow arrow-up arrow-up-L0P5"></label>
         <label for="level-2" class="arrow arrow-up arrow-up-L1P3"></label>
         <label for="level-3" class="arrow arrow-up arrow-up-L2P1"></label>
         <label for="level-4" class="arrow arrow-up arrow-up-L3P4"></label>
