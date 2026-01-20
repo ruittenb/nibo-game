@@ -22,8 +22,8 @@
 
         .game-container {
             position: relative;
-            width: 600px;
-            height: 400px;
+            width: 900px;
+            height: 600px;
             background: #0f0f23;
             border: 3px solid #4a4a6a;
             border-radius: 8px;
@@ -40,17 +40,24 @@
             width: 66.67%;
         }
 
-        /* Middle platform: 2/3 width, aligned right */
-        /* Vertical spacing: title ~40px, then 3 levels evenly in ~320px = ~107px each */
-        /* Ground at bottom, middle platform at ~133px, upper at ~240px */
-        .platform-middle {
-            bottom: 133px;
+        /* 5 levels: ground + 4 platforms, evenly spaced in ~550px = ~110px each */
+        .platform-1 {
+            bottom: 110px;
             right: 0;
         }
 
-        /* Upper platform: 2/3 width, aligned left */
-        .platform-upper {
-            bottom: 266px;
+        .platform-2 {
+            bottom: 220px;
+            left: 0;
+        }
+
+        .platform-3 {
+            bottom: 330px;
+            right: 0;
+        }
+
+        .platform-4 {
+            bottom: 440px;
             left: 0;
         }
 
@@ -68,23 +75,31 @@
             text-shadow: 0 0 5px #00ff88;
             animation: idle 1s ease-in-out infinite;
             z-index: 100;
-            /* Default: middle position on ground */
+            /* Default: position 3 (middle) on ground */
             bottom: 37px;
-            left: 280px;
+            left: 430px;
             transition: left 0.3s ease;
         }
 
-        /* Player positions based on radio state */
-        #pos-left:checked ~ .player {
+        /* Player positions based on radio state (5 positions) */
+        #pos-1:checked ~ .player {
             left: 70px;
         }
 
-        #pos-middle:checked ~ .player {
-            left: 280px;
+        #pos-2:checked ~ .player {
+            left: 250px;
         }
 
-        #pos-right:checked ~ .player {
-            left: 490px;
+        #pos-3:checked ~ .player {
+            left: 430px;
+        }
+
+        #pos-4:checked ~ .player {
+            left: 610px;
+        }
+
+        #pos-5:checked ~ .player {
+            left: 790px;
         }
 
         @keyframes idle {
@@ -111,9 +126,9 @@
             left: 50%;
             transform: translateX(-50%);
             color: #ffd700;
-            font-size: 18px;
+            font-size: 20px;
             text-shadow: 2px 2px 0 #b8860b;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
 
         /* Arrow labels (clickable) */
@@ -132,21 +147,15 @@
             text-shadow: 0 0 15px #ffcc00, 0 0 25px #ffcc00;
         }
 
-        .arrow-left-to-middle {
-            left: 150px;
-        }
-
-        .arrow-middle-to-left {
-            left: 150px;
-        }
-
-        .arrow-middle-to-right {
-            left: 400px;
-        }
-
-        .arrow-right-to-middle {
-            left: 400px;
-        }
+        /* Arrow positions between the 5 player positions */
+        .arrow-1-2 { left: 160px; }
+        .arrow-2-1 { left: 160px; }
+        .arrow-2-3 { left: 340px; }
+        .arrow-3-2 { left: 340px; }
+        .arrow-3-4 { left: 520px; }
+        .arrow-4-3 { left: 520px; }
+        .arrow-4-5 { left: 700px; }
+        .arrow-5-4 { left: 700px; }
 
         /* Hide all arrows by default */
         .arrow {
@@ -154,22 +163,37 @@
         }
 
         /* Show arrows based on current position */
-        /* When in left position: show right arrow to middle */
-        #pos-left:checked ~ .arrow-left-to-middle {
+        /* Position 1: can only go right */
+        #pos-1:checked ~ .arrow-1-2 {
             display: block;
         }
 
-        /* When in middle position: show both arrows */
-        #pos-middle:checked ~ .arrow-middle-to-left {
+        /* Position 2: can go left or right */
+        #pos-2:checked ~ .arrow-2-1 {
+            display: block;
+        }
+        #pos-2:checked ~ .arrow-2-3 {
             display: block;
         }
 
-        #pos-middle:checked ~ .arrow-middle-to-right {
+        /* Position 3: can go left or right */
+        #pos-3:checked ~ .arrow-3-2 {
+            display: block;
+        }
+        #pos-3:checked ~ .arrow-3-4 {
             display: block;
         }
 
-        /* When in right position: show left arrow to middle */
-        #pos-right:checked ~ .arrow-right-to-middle {
+        /* Position 4: can go left or right */
+        #pos-4:checked ~ .arrow-4-3 {
+            display: block;
+        }
+        #pos-4:checked ~ .arrow-4-5 {
+            display: block;
+        }
+
+        /* Position 5: can only go left */
+        #pos-5:checked ~ .arrow-5-4 {
             display: block;
         }
     </style>
@@ -178,21 +202,29 @@
     <div class="game-container">
         <div class="title">LIFTS AND LADDERS</div>
 
-        <!-- Radio buttons for position state -->
-        <input type="radio" name="position" id="pos-left" class="position-radio">
-        <input type="radio" name="position" id="pos-middle" class="position-radio" checked>
-        <input type="radio" name="position" id="pos-right" class="position-radio">
+        <!-- Radio buttons for position state (5 positions) -->
+        <input type="radio" name="position" id="pos-1" class="position-radio">
+        <input type="radio" name="position" id="pos-2" class="position-radio">
+        <input type="radio" name="position" id="pos-3" class="position-radio" checked>
+        <input type="radio" name="position" id="pos-4" class="position-radio">
+        <input type="radio" name="position" id="pos-5" class="position-radio">
 
         <!-- Arrow labels that control the radio buttons -->
-        <!-- From left: go to middle -->
-        <label for="pos-middle" class="arrow arrow-left-to-middle">►</label>
+        <!-- Between pos 1 and 2 -->
+        <label for="pos-2" class="arrow arrow-1-2">►</label>
+        <label for="pos-1" class="arrow arrow-2-1">◄</label>
 
-        <!-- From middle: go to left or right -->
-        <label for="pos-left" class="arrow arrow-middle-to-left">◄</label>
-        <label for="pos-right" class="arrow arrow-middle-to-right">►</label>
+        <!-- Between pos 2 and 3 -->
+        <label for="pos-3" class="arrow arrow-2-3">►</label>
+        <label for="pos-2" class="arrow arrow-3-2">◄</label>
 
-        <!-- From right: go to middle -->
-        <label for="pos-middle" class="arrow arrow-right-to-middle">◄</label>
+        <!-- Between pos 3 and 4 -->
+        <label for="pos-4" class="arrow arrow-3-4">►</label>
+        <label for="pos-3" class="arrow arrow-4-3">◄</label>
+
+        <!-- Between pos 4 and 5 -->
+        <label for="pos-5" class="arrow arrow-4-5">►</label>
+        <label for="pos-4" class="arrow arrow-5-4">◄</label>
 
         <!-- Player character -->
         <div class="player">
@@ -200,22 +232,34 @@
  /|\
  / \</div>
 
-        <!-- Middle platform (2/3 width, aligned right) -->
-        <div class="platform platform-middle">
-╔═════════════════════════════════════════════════╗
-║█████████████████████████████████████████████████║
-╚═════════════════════════════════════════════════╝</div>
+        <!-- Platform 1 (aligned right) -->
+        <div class="platform platform-1">
+╔═══════════════════════════════════════════════════════════════════════════╗
+║███████████████████████████████████████████████████████████████████████████║
+╚═══════════════════════════════════════════════════════════════════════════╝</div>
 
-        <!-- Upper platform (2/3 width, aligned left) -->
-        <div class="platform platform-upper">
-╔═════════════════════════════════════════════════╗
-║█████████████████████████████████████████████████║
-╚═════════════════════════════════════════════════╝</div>
+        <!-- Platform 2 (aligned left) -->
+        <div class="platform platform-2">
+╔═══════════════════════════════════════════════════════════════════════════╗
+║███████████████████████████████████████████████████████████████████████████║
+╚═══════════════════════════════════════════════════════════════════════════╝</div>
+
+        <!-- Platform 3 (aligned right) -->
+        <div class="platform platform-3">
+╔═══════════════════════════════════════════════════════════════════════════╗
+║███████████████████████████████████████████████████████████████████████████║
+╚═══════════════════════════════════════════════════════════════════════════╝</div>
+
+        <!-- Platform 4 (aligned left) -->
+        <div class="platform platform-4">
+╔═══════════════════════════════════════════════════════════════════════════╗
+║███████████████████████████████████████████████████████████████████████████║
+╚═══════════════════════════════════════════════════════════════════════════╝</div>
 
         <!-- Ground (functions as lower platform) -->
         <div class="ground">
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-████████████████████████████████████████████████████████████████████████████████</div>
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████</div>
     </div>
 </body>
 </html>
