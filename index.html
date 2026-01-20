@@ -85,7 +85,7 @@
         }
 
         /* Hide radio buttons */
-        .position-radio {
+        .position-radio, .level-radio {
             display: none;
         }
 
@@ -100,33 +100,23 @@
             z-index: 100;
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 2);
-            transition: left 0.3s ease;
+            transition: left 0.3s ease, bottom 0.3s ease;
         }
 
-        /* Player positions based on radio state (6 positions) */
-        #pos-1:checked ~ .player {
-            left: var(--pos-offset);
-        }
+        /* Player horizontal positions */
+        #pos-1:checked ~ .player { left: var(--pos-offset); }
+        #pos-2:checked ~ .player { left: calc(var(--pos-offset) + var(--pos-width)); }
+        #pos-3:checked ~ .player { left: calc(var(--pos-offset) + var(--pos-width) * 2); }
+        #pos-4:checked ~ .player { left: calc(var(--pos-offset) + var(--pos-width) * 3); }
+        #pos-5:checked ~ .player { left: calc(var(--pos-offset) + var(--pos-width) * 4); }
+        #pos-6:checked ~ .player { left: calc(var(--pos-offset) + var(--pos-width) * 5); }
 
-        #pos-2:checked ~ .player {
-            left: calc(var(--pos-offset) + var(--pos-width));
-        }
-
-        #pos-3:checked ~ .player {
-            left: calc(var(--pos-offset) + var(--pos-width) * 2);
-        }
-
-        #pos-4:checked ~ .player {
-            left: calc(var(--pos-offset) + var(--pos-width) * 3);
-        }
-
-        #pos-5:checked ~ .player {
-            left: calc(var(--pos-offset) + var(--pos-width) * 4);
-        }
-
-        #pos-6:checked ~ .player {
-            left: calc(var(--pos-offset) + var(--pos-width) * 5);
-        }
+        /* Player vertical levels */
+        #level-0:checked ~ .player { bottom: var(--ground-height); }
+        #level-1:checked ~ .player { bottom: calc(var(--platform-height) + var(--platform-thickness)); }
+        #level-2:checked ~ .player { bottom: calc(var(--platform-height) * 2 + var(--platform-thickness)); }
+        #level-3:checked ~ .player { bottom: calc(var(--platform-height) * 3 + var(--platform-thickness)); }
+        #level-4:checked ~ .player { bottom: calc(var(--platform-height) * 4 + var(--platform-thickness)); }
 
         @keyframes idle {
             0%, 100% { transform: translateY(0); }
@@ -191,79 +181,87 @@
         /* Arrow labels (clickable) */
         .arrow {
             position: absolute;
-            bottom: calc(var(--ground-height) - 10px);
             color: #ffcc00;
             font-size: 24px;
             text-shadow: 0 0 8px #ffcc00;
             z-index: 50;
             cursor: pointer;
             user-select: none;
+            display: none;
         }
 
         .arrow:hover {
             text-shadow: 0 0 15px #ffcc00, 0 0 25px #ffcc00;
         }
 
-        /* Arrow positions between the 6 player positions */
-        .arrow-1-2 { left: calc(var(--pos-offset) + var(--pos-width) * 0.5); }
-        .arrow-2-1 { left: calc(var(--pos-offset) + var(--pos-width) * 0.5); }
-        .arrow-2-3 { left: calc(var(--pos-offset) + var(--pos-width) * 1.5); }
-        .arrow-3-2 { left: calc(var(--pos-offset) + var(--pos-width) * 1.5); }
-        .arrow-3-4 { left: calc(var(--pos-offset) + var(--pos-width) * 2.5); }
-        .arrow-4-3 { left: calc(var(--pos-offset) + var(--pos-width) * 2.5); }
-        .arrow-4-5 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5); }
-        .arrow-5-4 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5); }
-        .arrow-5-6 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5); }
-        .arrow-6-5 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5); }
+        /* Horizontal arrow positions */
+        .arrow-h { bottom: calc(var(--ground-height) - 10px); }
+        .arrow-1-2, .arrow-2-1 { left: calc(var(--pos-offset) + var(--pos-width) * 0.5); }
+        .arrow-2-3, .arrow-3-2 { left: calc(var(--pos-offset) + var(--pos-width) * 1.5); }
+        .arrow-3-4, .arrow-4-3 { left: calc(var(--pos-offset) + var(--pos-width) * 2.5); }
+        .arrow-4-5, .arrow-5-4 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5); }
+        .arrow-5-6, .arrow-6-5 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5); }
 
-        /* Hide all arrows by default */
-        .arrow {
-            display: none;
+        /* Up arrow positions (at ladder locations) */
+        .arrow-up {
+            left: calc(var(--pos-offset) + 45px);
         }
-
-        /* Show arrows based on current position */
-        #pos-1:checked ~ .arrow-1-2 {
-            display: block;
+        /* Ladder 1: position 6, level 0 -> 1 */
+        .arrow-up-L0P6 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 + 45px);
+            bottom: calc(var(--ground-height) + 10px);
         }
-
-        #pos-2:checked ~ .arrow-2-1 {
-            display: block;
+        /* Ladder 2: position 3, level 1 -> 2 */
+        .arrow-up-L1P3 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 2 + 45px);
+            bottom: calc(var(--platform-height) + var(--platform-thickness) + 10px);
         }
-        #pos-2:checked ~ .arrow-2-3 {
-            display: block;
+        /* Ladder 3: position 1, level 2 -> 3 */
+        .arrow-up-L2P1 {
+            left: calc(var(--pos-offset) + 45px);
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 10px);
         }
-
-        #pos-3:checked ~ .arrow-3-2 {
-            display: block;
-        }
-        #pos-3:checked ~ .arrow-3-4 {
-            display: block;
+        /* Ladder 4: position 4, level 3 -> 4 */
+        .arrow-up-L3P4 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 3 + 45px);
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 10px);
         }
 
-        #pos-4:checked ~ .arrow-4-3 {
-            display: block;
-        }
-        #pos-4:checked ~ .arrow-4-5 {
-            display: block;
-        }
+        /* Show horizontal arrows based on position (only on level 0 for now) */
+        #level-0:checked ~ #pos-1:checked ~ .arrow-1-2 { display: block; }
+        #level-0:checked ~ #pos-2:checked ~ .arrow-2-1 { display: block; }
+        #level-0:checked ~ #pos-2:checked ~ .arrow-2-3 { display: block; }
+        #level-0:checked ~ #pos-3:checked ~ .arrow-3-2 { display: block; }
+        #level-0:checked ~ #pos-3:checked ~ .arrow-3-4 { display: block; }
+        #level-0:checked ~ #pos-4:checked ~ .arrow-4-3 { display: block; }
+        #level-0:checked ~ #pos-4:checked ~ .arrow-4-5 { display: block; }
+        #level-0:checked ~ #pos-5:checked ~ .arrow-5-4 { display: block; }
+        #level-0:checked ~ #pos-5:checked ~ .arrow-5-6 { display: block; }
+        #level-0:checked ~ #pos-6:checked ~ .arrow-6-5 { display: block; }
 
-        #pos-5:checked ~ .arrow-5-4 {
-            display: block;
-        }
-        #pos-5:checked ~ .arrow-5-6 {
-            display: block;
-        }
-
-        #pos-6:checked ~ .arrow-6-5 {
-            display: block;
-        }
+        /* Show up arrow at ladder locations */
+        /* Ladder 1: level 0, position 6 */
+        #level-0:checked ~ #pos-6:checked ~ .arrow-up-L0P6 { display: block; }
+        /* Ladder 2: level 1, position 3 */
+        #level-1:checked ~ #pos-3:checked ~ .arrow-up-L1P3 { display: block; }
+        /* Ladder 3: level 2, position 1 */
+        #level-2:checked ~ #pos-1:checked ~ .arrow-up-L2P1 { display: block; }
+        /* Ladder 4: level 3, position 4 */
+        #level-3:checked ~ #pos-4:checked ~ .arrow-up-L3P4 { display: block; }
     </style>
 </head>
 <body>
     <div class="game-container">
         <div class="title">LIFTS AND LADDERS</div>
 
-        <!-- Radio buttons for position state (6 positions) -->
+        <!-- Radio buttons for level (vertical) -->
+        <input type="radio" name="level" id="level-0" class="level-radio" checked>
+        <input type="radio" name="level" id="level-1" class="level-radio">
+        <input type="radio" name="level" id="level-2" class="level-radio">
+        <input type="radio" name="level" id="level-3" class="level-radio">
+        <input type="radio" name="level" id="level-4" class="level-radio">
+
+        <!-- Radio buttons for position (horizontal) -->
         <input type="radio" name="position" id="pos-1" class="position-radio">
         <input type="radio" name="position" id="pos-2" class="position-radio">
         <input type="radio" name="position" id="pos-3" class="position-radio" checked>
@@ -271,17 +269,23 @@
         <input type="radio" name="position" id="pos-5" class="position-radio">
         <input type="radio" name="position" id="pos-6" class="position-radio">
 
-        <!-- Arrow labels that control the radio buttons -->
-        <label for="pos-2" class="arrow arrow-1-2">►</label>
-        <label for="pos-1" class="arrow arrow-2-1">◄</label>
-        <label for="pos-3" class="arrow arrow-2-3">►</label>
-        <label for="pos-2" class="arrow arrow-3-2">◄</label>
-        <label for="pos-4" class="arrow arrow-3-4">►</label>
-        <label for="pos-3" class="arrow arrow-4-3">◄</label>
-        <label for="pos-5" class="arrow arrow-4-5">►</label>
-        <label for="pos-4" class="arrow arrow-5-4">◄</label>
-        <label for="pos-6" class="arrow arrow-5-6">►</label>
-        <label for="pos-5" class="arrow arrow-6-5">◄</label>
+        <!-- Horizontal arrow labels -->
+        <label for="pos-2" class="arrow arrow-h arrow-1-2">►</label>
+        <label for="pos-1" class="arrow arrow-h arrow-2-1">◄</label>
+        <label for="pos-3" class="arrow arrow-h arrow-2-3">►</label>
+        <label for="pos-2" class="arrow arrow-h arrow-3-2">◄</label>
+        <label for="pos-4" class="arrow arrow-h arrow-3-4">►</label>
+        <label for="pos-3" class="arrow arrow-h arrow-4-3">◄</label>
+        <label for="pos-5" class="arrow arrow-h arrow-4-5">►</label>
+        <label for="pos-4" class="arrow arrow-h arrow-5-4">◄</label>
+        <label for="pos-6" class="arrow arrow-h arrow-5-6">►</label>
+        <label for="pos-5" class="arrow arrow-h arrow-6-5">◄</label>
+
+        <!-- Up arrow labels (at ladder positions) -->
+        <label for="level-1" class="arrow arrow-up arrow-up-L0P6">▲</label>
+        <label for="level-2" class="arrow arrow-up arrow-up-L1P3">▲</label>
+        <label for="level-3" class="arrow arrow-up arrow-up-L2P1">▲</label>
+        <label for="level-4" class="arrow arrow-up arrow-up-L3P4">▲</label>
 
         <!-- Player character -->
         <div class="player">
