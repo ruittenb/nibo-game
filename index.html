@@ -90,6 +90,65 @@
             width: calc(var(--pos-width) * 5);
         }
 
+        /* Grate (3D grid at platform gaps) */
+        .grate {
+            position: absolute;
+            width: var(--pos-width);
+            height: 12px;
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    #999 0px,
+                    #999 4px,
+                    transparent 4px,
+                    transparent 12px
+                );
+            border-top: 2px solid #aaa;
+            border-bottom: 2px solid #555;
+        }
+        .grate::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 100%;
+            height: 100%;
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    #333 0px,
+                    #333 4px,
+                    transparent 4px,
+                    transparent 12px
+                );
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        /* Platform 1 gap: position 1 */
+        .grate-L1P1 {
+            bottom: calc(var(--platform-height) + var(--platform-thickness) - 3px);
+            left: 0;
+        }
+
+        /* Platform 2 gap: position 5 */
+        .grate-L2P5 {
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 3px);
+            left: calc(var(--pos-width) * 4);
+        }
+
+        /* Platform 3 gap: position 3 */
+        .grate-L3P3 {
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 3px);
+            left: calc(var(--pos-width) * 2);
+        }
+
+        /* Platform 4 gap: position 6 */
+        .grate-L4P6 {
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 3px);
+            left: calc(var(--pos-width) * 5);
+        }
+
         /* Hide radio buttons */
         .position-radio, .level-radio {
             display: none;
@@ -303,9 +362,9 @@
         <div class="title">LIFTS AND LADDERS</div>
 
         <!-- Radio buttons for level (vertical) -->
-        <input type="radio" name="level" id="level-0" class="level-radio" checked>
+        <input type="radio" name="level" id="level-0" class="level-radio">
         <input type="radio" name="level" id="level-1" class="level-radio">
-        <input type="radio" name="level" id="level-2" class="level-radio">
+        <input type="radio" name="level" id="level-2" class="level-radio" checked>
         <input type="radio" name="level" id="level-3" class="level-radio">
         <input type="radio" name="level" id="level-4" class="level-radio">
 
@@ -386,6 +445,12 @@
 |--|
 |--|
 |--|</div>
+
+        <!-- Grates at platform gaps -->
+        <div class="grate grate-L1P1"></div>
+        <div class="grate grate-L2P5"></div>
+        <div class="grate grate-L3P3"></div>
+        <div class="grate grate-L4P6"></div>
 
         <!-- Platform 1 (lowest): 5/6 width, aligned right -->
         <div class="platform platform-1"></div>
