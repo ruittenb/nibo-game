@@ -33,45 +33,45 @@
 
         .platform {
             position: absolute;
-            color: #8b4513;
-            font-size: 12px;
-            line-height: 1;
-            white-space: pre;
-            text-shadow: 1px 1px 0 #5d2e0a;
+            height: 30px;
+            background: #8b4513;
+            border: 3px solid #5d2e0a;
+            border-radius: 4px;
+            box-shadow: inset 0 -5px 0 rgba(0,0,0,0.3);
         }
 
-        /* 5 levels: ground + 4 platforms, evenly spaced in ~550px = ~110px each */
-        /* Platform 1: 83.33% (5/6) wide, aligned right - gap on left for 1 position */
+        /* Platform 1 (lowest): 5/6 width, aligned right */
         .platform-1 {
             bottom: 110px;
             right: 0;
             width: 83.33%;
         }
 
-        /* Platform 2: 83.33% (5/6) wide, aligned left - gap on right for 1 position */
+        /* Platform 2 (third from above): 4/6 width, aligned left */
         .platform-2 {
             bottom: 220px;
             left: 0;
-            width: 83.33%;
+            width: 66.67%;
         }
 
-        /* Platform 3: split - 33.33% left, 33.33% gap, 33.33% right (2 positions each side, 2 in gap) */
-        .platform-3-left {
+        /* Platform 2-right (third from above): 1/6 width, aligned right */
+        .platform-2-right {
+            bottom: 220px;
+            right: 0;
+            width: 16.67%;
+        }
+
+        /* Platform 3 (second from above): 100% width */
+        .platform-3 {
             bottom: 330px;
             left: 0;
-            width: 33.33%;
+            width: 100%;
         }
 
-        .platform-3-right {
-            bottom: 330px;
-            right: 0;
-            width: 33.33%;
-        }
-
-        /* Platform 4: 83.33% (5/6) wide, aligned right - gap on left for 1 position */
+        /* Platform 4 (top): 5/6 width, aligned left */
         .platform-4 {
             bottom: 440px;
-            right: 0;
+            left: 0;
             width: 83.33%;
         }
 
@@ -89,14 +89,12 @@
             text-shadow: 0 0 5px #00ff88;
             animation: idle 1s ease-in-out infinite;
             z-index: 100;
-            /* Default: position 3 (middle) on ground */
             bottom: 37px;
             left: 375px;
             transition: left 0.3s ease;
         }
 
         /* Player positions based on radio state (6 positions) */
-        /* 900px width, 6 positions = 150px apart, starting at ~75px */
         #pos-1:checked ~ .player {
             left: 55px;
         }
@@ -131,12 +129,9 @@
             bottom: 0;
             left: 0;
             right: 0;
-            color: #2d5016;
-            font-size: 12px;
-            line-height: 1;
-            white-space: pre;
-            background: #1a3009;
-            padding-top: 5px;
+            height: 35px;
+            background: linear-gradient(to bottom, #2d5016 0%, #1a3009 100%);
+            border-top: 3px solid #4a7023;
         }
 
         .title {
@@ -162,7 +157,22 @@
 
         .ladder-1 {
             bottom: 37px;
-            left: 80px;
+            left: 812px;
+        }
+
+        .ladder-2 {
+            bottom: 140px;
+            left: 362px;
+        }
+
+        .ladder-3 {
+            bottom: 250px;
+            left: 62px;
+        }
+
+        .ladder-4 {
+            bottom: 360px;
+            left: 512px;
         }
 
         /* Arrow labels (clickable) */
@@ -199,12 +209,10 @@
         }
 
         /* Show arrows based on current position */
-        /* Position 1: can only go right */
         #pos-1:checked ~ .arrow-1-2 {
             display: block;
         }
 
-        /* Position 2: can go left or right */
         #pos-2:checked ~ .arrow-2-1 {
             display: block;
         }
@@ -212,7 +220,6 @@
             display: block;
         }
 
-        /* Position 3: can go left or right */
         #pos-3:checked ~ .arrow-3-2 {
             display: block;
         }
@@ -220,7 +227,6 @@
             display: block;
         }
 
-        /* Position 4: can go left or right */
         #pos-4:checked ~ .arrow-4-3 {
             display: block;
         }
@@ -228,7 +234,6 @@
             display: block;
         }
 
-        /* Position 5: can go left or right */
         #pos-5:checked ~ .arrow-5-4 {
             display: block;
         }
@@ -236,7 +241,6 @@
             display: block;
         }
 
-        /* Position 6: can only go left */
         #pos-6:checked ~ .arrow-6-5 {
             display: block;
         }
@@ -255,23 +259,14 @@
         <input type="radio" name="position" id="pos-6" class="position-radio">
 
         <!-- Arrow labels that control the radio buttons -->
-        <!-- Between pos 1 and 2 -->
         <label for="pos-2" class="arrow arrow-1-2">►</label>
         <label for="pos-1" class="arrow arrow-2-1">◄</label>
-
-        <!-- Between pos 2 and 3 -->
         <label for="pos-3" class="arrow arrow-2-3">►</label>
         <label for="pos-2" class="arrow arrow-3-2">◄</label>
-
-        <!-- Between pos 3 and 4 -->
         <label for="pos-4" class="arrow arrow-3-4">►</label>
         <label for="pos-3" class="arrow arrow-4-3">◄</label>
-
-        <!-- Between pos 4 and 5 -->
         <label for="pos-5" class="arrow arrow-4-5">►</label>
         <label for="pos-4" class="arrow arrow-5-4">◄</label>
-
-        <!-- Between pos 5 and 6 -->
         <label for="pos-6" class="arrow arrow-5-6">►</label>
         <label for="pos-5" class="arrow arrow-6-5">◄</label>
 
@@ -281,8 +276,9 @@
  /|\
  / \</div>
 
-        <!-- Ladder from ground to platform 1 -->
+        <!-- Ladder from ground to platform 1 (position 6) -->
         <div class="ladder ladder-1">
+|--|
 |--|
 |--|
 |--|
@@ -290,39 +286,53 @@
 |--|
 |--|</div>
 
-        <!-- Platform 1 (extends to right edge, gap at position 1) -->
-        <div class="platform platform-1">
-╔═════════════════════════════════════════════════════════════════════════════════════════════════════╗
-║█████████████████████████████████████████████████████████████████████████████████████████████████████║
-╚═════════════════════════════════════════════════════════════════════════════════════════════════════╝</div>
+        <!-- Ladder from platform 1 to platform 2 (position 2) -->
+        <div class="ladder ladder-2">
+|--|
+|--|
+|--|
+|--|
+|--|
+|--|
+|--|</div>
 
-        <!-- Platform 2 (aligned left, 83.33% width - gap at position 6) -->
-        <div class="platform platform-2">
-╔════════════════════════════════════════════════════════════════════════════════════════════╗
-║████████████████████████████████████████████████████████████████████████████████████████████║
-╚════════════════════════════════════════════════════════════════════════════════════════════╝</div>
+        <!-- Ladder from platform 2 to platform 3 (position 1) -->
+        <div class="ladder ladder-3">
+|--|
+|--|
+|--|
+|--|
+|--|
+|--|
+|--|</div>
 
-        <!-- Platform 3 (split: 33.33% left, 33.33% gap, 33.33% right) -->
-        <div class="platform platform-3-left">
-╔══════════════════════════════════╗
-║██████████████████████████████████║
-╚══════════════════════════════════╝</div>
+        <!-- Ladder from platform 3 to platform 4 (position 4) -->
+        <div class="ladder ladder-4">
+|--|
+|--|
+|--|
+|--|
+|--|
+|--|
+|--|</div>
 
-        <div class="platform platform-3-right">
-╔══════════════════════════════════╗
-║██████████████████████████████████║
-╚══════════════════════════════════╝</div>
+        <!-- Platform 1 (lowest): 5/6 width, aligned right -->
+        <div class="platform platform-1"></div>
 
-        <!-- Platform 4 (extends to right edge, gap at position 1) -->
-        <div class="platform platform-4">
-╔═════════════════════════════════════════════════════════════════════════════════════════════════════╗
-║█████████████████████████████████████████████████████████████████████████████████████████████████████║
-╚═════════════════════════════════════════════════════════════════════════════════════════════════════╝</div>
+        <!-- Platform 2 (third from above): 4/6 width, aligned left -->
+        <div class="platform platform-2"></div>
 
-        <!-- Ground (functions as lower platform) -->
-        <div class="ground">
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████</div>
+        <!-- Platform 2-right (third from above): 1/6 width, aligned right -->
+        <div class="platform platform-2-right"></div>
+
+        <!-- Platform 3 (second from above): 100% width -->
+        <div class="platform platform-3"></div>
+
+        <!-- Platform 4 (top): 5/6 width, aligned left -->
+        <div class="platform platform-4"></div>
+
+        <!-- Ground -->
+        <div class="ground"></div>
     </div>
 </body>
 </html>
