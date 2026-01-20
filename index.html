@@ -189,7 +189,8 @@
             background: rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-end;
+            padding-right: 10px;
         }
         .inventory .tool {
             font-size: 24px;
@@ -213,35 +214,82 @@
             position: absolute;
             font-size: 28px;
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 5 - 30px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 - 34px);
             z-index: 20;
         }
         #tool-pickup:checked ~ .tool-in-game {
             display: none;
         }
 
-        /* Pickup button - only visible when player at tool location and tool not picked up */
+        /* Key above safe - pulsates when user has key */
+        .key-at-safe {
+            position: absolute;
+            font-size: 24px;
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 35px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 - 28px);
+            z-index: 20;
+            display: none;
+        }
+        @keyframes key-pulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 8px #ffd700);
+            }
+            50% {
+                transform: scale(1.2);
+                filter: drop-shadow(0 0 15px #ffd700) drop-shadow(0 0 25px #ffd700);
+            }
+        }
+        /* Only show key at safe when player is at level 2, position 6, AND has key */
+        #level-2:checked ~ #pos-6:checked ~ #tool-pickup:checked ~ .key-at-safe {
+            display: block;
+            animation: key-pulse 1s ease-in-out infinite;
+        }
+
+        /* Pickup button - CSS arrow (triangle + stem), only visible when player at tool location and tool not picked up */
         .pickup-btn {
             position: absolute;
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 29px);
-            left: calc(var(--pos-offset) - 25px);
-            color: #00ff88;
-            font-size: 20px;
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 37px);
+            left: calc(var(--pos-offset) - 18px);
+            width: 20px;
+            height: 24px;
             cursor: pointer;
             display: none;
             z-index: 60;
-            text-shadow: 0 0 8px #00ff88;
+            filter: drop-shadow(0 0 8px #00ff88);
+        }
+        /* Arrow head (triangle) */
+        .pickup-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 12px solid #00ff88;
+        }
+        /* Arrow stem */
+        .pickup-btn::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 6px;
+            width: 8px;
+            height: 12px;
+            background: #00ff88;
         }
         .pickup-btn:hover {
-            text-shadow: 0 0 15px #00ff88, 0 0 25px #00ff88;
+            filter: drop-shadow(0 0 15px #00ff88) drop-shadow(0 0 25px #00ff88);
         }
         @keyframes pulse-glow {
             0%, 100% {
-                text-shadow: 0 0 8px #00ff88, 0 0 15px #00ff88;
+                filter: drop-shadow(0 0 8px #00ff88) drop-shadow(0 0 15px #00ff88);
                 opacity: 0.7;
             }
             50% {
-                text-shadow: 0 0 20px #00ff88, 0 0 35px #00ff88, 0 0 50px #00ff88;
+                filter: drop-shadow(0 0 20px #00ff88) drop-shadow(0 0 35px #00ff88) drop-shadow(0 0 50px #00ff88);
                 opacity: 1;
             }
         }
@@ -511,9 +559,9 @@
         <!-- Radio buttons for level (vertical) -->
         <input type="radio" name="level" id="level-0" class="level-radio">
         <input type="radio" name="level" id="level-1" class="level-radio">
-        <input type="radio" name="level" id="level-2" class="level-radio" checked>
+        <input type="radio" name="level" id="level-2" class="level-radio">
         <input type="radio" name="level" id="level-3" class="level-radio">
-        <input type="radio" name="level" id="level-4" class="level-radio">
+        <input type="radio" name="level" id="level-4" class="level-radio" checked>
 
         <!-- Radio buttons for position (horizontal) -->
         <input type="radio" name="position" id="pos-1" class="position-radio">
@@ -537,8 +585,11 @@
         <!-- Safe on level 2, position 6 -->
         <div class="safe">🗄️</div>
 
+        <!-- Key above safe (appears when user has key) -->
+        <div class="key-at-safe">🔑</div>
+
         <!-- Pickup button -->
-        <label for="tool-pickup" class="pickup-btn">⬆</label>
+        <label for="tool-pickup" class="pickup-btn"></label>
 
         <!-- Horizontal arrow labels -->
         <label for="pos-2" class="arrow arrow-right arrow-h arrow-1-2"></label>
