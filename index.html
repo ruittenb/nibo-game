@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifts and Ladders</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: monospace;
+        }
+
+        .game-container {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            background: #0f0f23;
+            border: 3px solid #4a4a6a;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .platform {
+            position: absolute;
+            color: #8b4513;
+            font-size: 12px;
+            line-height: 1;
+            white-space: pre;
+            text-shadow: 1px 1px 0 #5d2e0a;
+            width: 66.67%;
+        }
+
+        /* Middle platform: 2/3 width, aligned right */
+        /* Vertical spacing: title ~40px, then 3 levels evenly in ~320px = ~107px each */
+        /* Ground at bottom, middle platform at ~133px, upper at ~240px */
+        .platform-middle {
+            bottom: 133px;
+            right: 0;
+        }
+
+        /* Upper platform: 2/3 width, aligned left */
+        .platform-upper {
+            bottom: 266px;
+            left: 0;
+        }
+
+        /* Hide radio buttons */
+        .position-radio {
+            display: none;
+        }
+
+        .player {
+            position: absolute;
+            color: #00ff88;
+            font-size: 10px;
+            line-height: 1;
+            white-space: pre;
+            text-shadow: 0 0 5px #00ff88;
+            animation: idle 1s ease-in-out infinite;
+            z-index: 100;
+            /* Default: middle position on ground */
+            bottom: 37px;
+            left: 280px;
+            transition: left 0.3s ease;
+        }
+
+        /* Player positions based on radio state */
+        #pos-left:checked ~ .player {
+            left: 70px;
+        }
+
+        #pos-middle:checked ~ .player {
+            left: 280px;
+        }
+
+        #pos-right:checked ~ .player {
+            left: 490px;
+        }
+
+        @keyframes idle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: #2d5016;
+            font-size: 12px;
+            line-height: 1;
+            white-space: pre;
+            background: #1a3009;
+            padding-top: 5px;
+        }
+
+        .title {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffd700;
+            font-size: 18px;
+            text-shadow: 2px 2px 0 #b8860b;
+            letter-spacing: 2px;
+        }
+
+        /* Arrow labels (clickable) */
+        .arrow {
+            position: absolute;
+            bottom: 26px;
+            color: #ffcc00;
+            font-size: 24px;
+            text-shadow: 0 0 8px #ffcc00;
+            z-index: 50;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .arrow:hover {
+            text-shadow: 0 0 15px #ffcc00, 0 0 25px #ffcc00;
+        }
+
+        .arrow-left-to-middle {
+            left: 150px;
+        }
+
+        .arrow-middle-to-left {
+            left: 150px;
+        }
+
+        .arrow-middle-to-right {
+            left: 400px;
+        }
+
+        .arrow-right-to-middle {
+            left: 400px;
+        }
+
+        /* Hide all arrows by default */
+        .arrow {
+            display: none;
+        }
+
+        /* Show arrows based on current position */
+        /* When in left position: show right arrow to middle */
+        #pos-left:checked ~ .arrow-left-to-middle {
+            display: block;
+        }
+
+        /* When in middle position: show both arrows */
+        #pos-middle:checked ~ .arrow-middle-to-left {
+            display: block;
+        }
+
+        #pos-middle:checked ~ .arrow-middle-to-right {
+            display: block;
+        }
+
+        /* When in right position: show left arrow to middle */
+        #pos-right:checked ~ .arrow-right-to-middle {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="title">LIFTS AND LADDERS</div>
+
+        <!-- Radio buttons for position state -->
+        <input type="radio" name="position" id="pos-left" class="position-radio">
+        <input type="radio" name="position" id="pos-middle" class="position-radio" checked>
+        <input type="radio" name="position" id="pos-right" class="position-radio">
+
+        <!-- Arrow labels that control the radio buttons -->
+        <!-- From left: go to middle -->
+        <label for="pos-middle" class="arrow arrow-left-to-middle">►</label>
+
+        <!-- From middle: go to left or right -->
+        <label for="pos-left" class="arrow arrow-middle-to-left">◄</label>
+        <label for="pos-right" class="arrow arrow-middle-to-right">►</label>
+
+        <!-- From right: go to middle -->
+        <label for="pos-middle" class="arrow arrow-right-to-middle">◄</label>
+
+        <!-- Player character -->
+        <div class="player">
+  O
+ /|\
+ / \</div>
+
+        <!-- Middle platform (2/3 width, aligned right) -->
+        <div class="platform platform-middle">
+╔═════════════════════════════════════════════════╗
+║█████████████████████████████████████████████████║
+╚═════════════════════════════════════════════════╝</div>
+
+        <!-- Upper platform (2/3 width, aligned left) -->
+        <div class="platform platform-upper">
+╔═════════════════════════════════════════════════╗
+║█████████████████████████████████████████████████║
+╚═════════════════════════════════════════════════╝</div>
+
+        <!-- Ground (functions as lower platform) -->
+        <div class="ground">
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+████████████████████████████████████████████████████████████████████████████████</div>
+    </div>
+</body>
+</html>
