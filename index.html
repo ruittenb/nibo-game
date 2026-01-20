@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nibo's Way Out</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" rel="stylesheet">
     <style>
         :root {
             /* Core layout variables */
@@ -26,7 +27,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: monospace;
+            font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
         }
 
         .game-container {
@@ -181,7 +182,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            width: 40px;
+            width: 84px;
             height: 40px;
             border: 2px solid #4a4a6a;
             border-radius: 4px;
@@ -204,6 +205,15 @@
             font-size: 24px;
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) - 30px);
+            z-index: 20;
+        }
+
+        /* Safe on level 2, position 6 */
+        .safe {
+            position: absolute;
+            font-size: 28px;
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 - 30px);
             z-index: 20;
         }
         #tool-pickup:checked ~ .tool-in-game {
@@ -246,7 +256,7 @@
         .player {
             position: absolute;
             width: auto;
-            height: 60px;
+            height: 56px;
             animation: idle 1s ease-in-out infinite;
             z-index: 100;
             bottom: var(--ground-height);
@@ -267,11 +277,11 @@
         #pos-6:checked ~ .player { left: calc(var(--pos-offset) + var(--pos-width) * 5); }
 
         /* Player vertical levels */
-        #level-0:checked ~ .player { bottom: var(--ground-height); }
-        #level-1:checked ~ .player { bottom: calc(var(--platform-height) + var(--platform-thickness)); }
-        #level-2:checked ~ .player { bottom: calc(var(--platform-height) * 2 + var(--platform-thickness)); }
-        #level-3:checked ~ .player { bottom: calc(var(--platform-height) * 3 + var(--platform-thickness)); }
-        #level-4:checked ~ .player { bottom: calc(var(--platform-height) * 4 + var(--platform-thickness)); }
+        #level-0:checked ~ .player { bottom: calc(var(--ground-height) - 2px); }
+        #level-1:checked ~ .player { bottom: calc(var(--platform-height) + var(--platform-thickness) - 2px); }
+        #level-2:checked ~ .player { bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 2px); }
+        #level-3:checked ~ .player { bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 2px); }
+        #level-4:checked ~ .player { bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 2px); }
 
         @keyframes idle {
             0%, 100% { transform: translateY(0); }
@@ -356,26 +366,53 @@
             left: calc(var(--pos-offset) + var(--pos-width) * 3 + 42px);
         }
 
-        /* Arrow labels (clickable) */
+        /* Arrow labels (clickable) - CSS triangles */
         .arrow {
             position: absolute;
-            color: #ffcc00;
-            font-size: 24px;
-            text-shadow: 0 0 8px #ffcc00;
+            width: 0;
+            height: 0;
             z-index: 50;
             cursor: pointer;
             user-select: none;
             display: none;
+            filter: drop-shadow(0 0 8px #ffcc00);
         }
 
         .arrow:hover {
-            text-shadow: 0 0 15px #ffcc00, 0 0 25px #ffcc00;
+            filter: drop-shadow(0 0 15px #ffcc00) drop-shadow(0 0 25px #ffcc00);
+        }
+
+        /* Right arrow */
+        .arrow-right {
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-left: 16px solid #ffcc00;
+        }
+
+        /* Left arrow */
+        .arrow-left {
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-right: 16px solid #ffcc00;
+        }
+
+        /* Up arrow */
+        .arrow-up {
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 16px solid #ffcc00;
+        }
+
+        /* Down arrow */
+        .arrow-down {
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 16px solid #ffcc00;
         }
 
         /* Horizontal arrow positions */
         .arrow-h {
             bottom: calc(var(--ground-height) - 10px);
-            transform: scaleY(2);
         }
         .arrow-1-2, .arrow-2-1 { left: calc(var(--pos-offset) + var(--pos-width) * 0.5 + 12px); }
         .arrow-2-3, .arrow-3-2 { left: calc(var(--pos-offset) + var(--pos-width) * 1.5 + 12px); }
@@ -391,9 +428,6 @@
         #level-4:checked ~ .arrow-h { bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px); }
 
         /* Up arrow positions (at ladder locations) */
-        .arrow-up {
-            left: calc(var(--pos-offset) + 45px);
-        }
         /* Ladder 1: position 6, level 0 -> 1 */
         .arrow-up-L0P6 {
             left: calc(var(--pos-offset) + var(--pos-width) * 5 + 45px);
@@ -477,9 +511,9 @@
         <!-- Radio buttons for level (vertical) -->
         <input type="radio" name="level" id="level-0" class="level-radio">
         <input type="radio" name="level" id="level-1" class="level-radio">
-        <input type="radio" name="level" id="level-2" class="level-radio">
+        <input type="radio" name="level" id="level-2" class="level-radio" checked>
         <input type="radio" name="level" id="level-3" class="level-radio">
-        <input type="radio" name="level" id="level-4" class="level-radio" checked>
+        <input type="radio" name="level" id="level-4" class="level-radio">
 
         <!-- Radio buttons for position (horizontal) -->
         <input type="radio" name="position" id="pos-1" class="position-radio">
@@ -494,38 +528,41 @@
 
         <!-- Inventory -->
         <div class="inventory">
-            <span class="tool">🔧</span>
+            <span class="tool">🔑</span>
         </div>
 
         <!-- Tool in game world -->
-        <div class="tool-in-game">🔧</div>
+        <div class="tool-in-game">🔑</div>
+
+        <!-- Safe on level 2, position 6 -->
+        <div class="safe">🗄️</div>
 
         <!-- Pickup button -->
         <label for="tool-pickup" class="pickup-btn">⬆</label>
 
         <!-- Horizontal arrow labels -->
-        <label for="pos-2" class="arrow arrow-h arrow-1-2">►</label>
-        <label for="pos-1" class="arrow arrow-h arrow-2-1">◄</label>
-        <label for="pos-3" class="arrow arrow-h arrow-2-3">►</label>
-        <label for="pos-2" class="arrow arrow-h arrow-3-2">◄</label>
-        <label for="pos-4" class="arrow arrow-h arrow-3-4">►</label>
-        <label for="pos-3" class="arrow arrow-h arrow-4-3">◄</label>
-        <label for="pos-5" class="arrow arrow-h arrow-4-5">►</label>
-        <label for="pos-4" class="arrow arrow-h arrow-5-4">◄</label>
-        <label for="pos-6" class="arrow arrow-h arrow-5-6">►</label>
-        <label for="pos-5" class="arrow arrow-h arrow-6-5">◄</label>
+        <label for="pos-2" class="arrow arrow-right arrow-h arrow-1-2"></label>
+        <label for="pos-1" class="arrow arrow-left arrow-h arrow-2-1"></label>
+        <label for="pos-3" class="arrow arrow-right arrow-h arrow-2-3"></label>
+        <label for="pos-2" class="arrow arrow-left arrow-h arrow-3-2"></label>
+        <label for="pos-4" class="arrow arrow-right arrow-h arrow-3-4"></label>
+        <label for="pos-3" class="arrow arrow-left arrow-h arrow-4-3"></label>
+        <label for="pos-5" class="arrow arrow-right arrow-h arrow-4-5"></label>
+        <label for="pos-4" class="arrow arrow-left arrow-h arrow-5-4"></label>
+        <label for="pos-6" class="arrow arrow-right arrow-h arrow-5-6"></label>
+        <label for="pos-5" class="arrow arrow-left arrow-h arrow-6-5"></label>
 
         <!-- Up arrow labels (at ladder positions) -->
-        <label for="level-1" class="arrow arrow-up arrow-up-L0P6">▲</label>
-        <label for="level-2" class="arrow arrow-up arrow-up-L1P3">▲</label>
-        <label for="level-3" class="arrow arrow-up arrow-up-L2P1">▲</label>
-        <label for="level-4" class="arrow arrow-up arrow-up-L3P4">▲</label>
+        <label for="level-1" class="arrow arrow-up arrow-up-L0P6"></label>
+        <label for="level-2" class="arrow arrow-up arrow-up-L1P3"></label>
+        <label for="level-3" class="arrow arrow-up arrow-up-L2P1"></label>
+        <label for="level-4" class="arrow arrow-up arrow-up-L3P4"></label>
 
         <!-- Down arrow labels (at platform gaps) -->
-        <label for="level-0" class="arrow arrow-down arrow-down-L1P1">▼</label>
-        <label for="level-1" class="arrow arrow-down arrow-down-L2P5">▼</label>
-        <label for="level-3" class="arrow arrow-down arrow-down-L4P6">▼</label>
-        <label for="level-2" class="arrow arrow-down arrow-down-L3P3">▼</label>
+        <label for="level-0" class="arrow arrow-down arrow-down-L1P1"></label>
+        <label for="level-1" class="arrow arrow-down arrow-down-L2P5"></label>
+        <label for="level-3" class="arrow arrow-down arrow-down-L4P6"></label>
+        <label for="level-2" class="arrow arrow-down arrow-down-L3P3"></label>
 
         <!-- Player character -->
         <div class="player">
