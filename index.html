@@ -173,7 +173,7 @@
         }
 
         /* Hide radio buttons and checkboxes */
-        .position-radio, .level-radio, .pickup-checkbox {
+        .position-radio, .level-radio, .pickup-checkbox, .safe-checkbox {
             display: none;
         }
 
@@ -196,7 +196,8 @@
             font-size: 24px;
             display: none;
         }
-        #tool-pickup:checked ~ .inventory .tool {
+        /* Show key in inventory when picked up, but hide when safe is unlocked */
+        #tool-pickup:checked ~ #safe-unlock:not(:checked) ~ .inventory .tool {
             display: block;
         }
 
@@ -217,11 +218,28 @@
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - 34px);
             z-index: 20;
         }
+        /* Hide safe when unlocked */
+        #safe-unlock:checked ~ .safe {
+            display: none;
+        }
         #tool-pickup:checked ~ .tool-in-game {
             display: none;
         }
 
-        /* Key above safe - pulsates when user has key */
+        /* Wrench appears when safe is unlocked */
+        .wrench {
+            position: absolute;
+            font-size: 28px;
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 - 34px);
+            z-index: 20;
+            display: none;
+        }
+        #safe-unlock:checked ~ .wrench {
+            display: block;
+        }
+
+        /* Key above safe - pulsates when user has key, clickable to unlock */
         .key-at-safe {
             position: absolute;
             font-size: 24px;
@@ -229,6 +247,7 @@
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - 28px);
             z-index: 20;
             display: none;
+            cursor: pointer;
         }
         @keyframes key-pulse {
             0%, 100% {
@@ -240,8 +259,8 @@
                 filter: drop-shadow(0 0 15px #ffd700) drop-shadow(0 0 25px #ffd700);
             }
         }
-        /* Only show key at safe when player is at level 2, position 6, AND has key */
-        #level-2:checked ~ #pos-6:checked ~ #tool-pickup:checked ~ .key-at-safe {
+        /* Only show key at safe when player is at level 2, position 6, has key, AND safe not yet unlocked */
+        #level-2:checked ~ #pos-6:checked ~ #tool-pickup:checked ~ #safe-unlock:not(:checked) ~ .key-at-safe {
             display: block;
             animation: key-pulse 1s ease-in-out infinite;
         }
@@ -250,7 +269,7 @@
         .pickup-btn {
             position: absolute;
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 37px);
-            left: calc(var(--pos-offset) - 18px);
+            left: calc(var(--pos-offset) - 22px);
             width: 20px;
             height: 24px;
             cursor: pointer;
@@ -574,6 +593,9 @@
         <!-- Tool pickup checkbox -->
         <input type="checkbox" id="tool-pickup" class="pickup-checkbox">
 
+        <!-- Safe unlock checkbox -->
+        <input type="checkbox" id="safe-unlock" class="safe-checkbox">
+
         <!-- Inventory -->
         <div class="inventory">
             <span class="tool">🔑</span>
@@ -585,8 +607,11 @@
         <!-- Safe on level 2, position 6 -->
         <div class="safe">🗄️</div>
 
-        <!-- Key above safe (appears when user has key) -->
-        <div class="key-at-safe">🔑</div>
+        <!-- Wrench (appears when safe is unlocked) -->
+        <div class="wrench">🔧</div>
+
+        <!-- Key above safe (appears when user has key, clickable to unlock) -->
+        <label for="safe-unlock" class="key-at-safe">🔑</label>
 
         <!-- Pickup button -->
         <label for="tool-pickup" class="pickup-btn"></label>
