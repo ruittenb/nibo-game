@@ -171,9 +171,63 @@
             left: calc(var(--pos-width) * 5);
         }
 
-        /* Hide radio buttons */
-        .position-radio, .level-radio {
+        /* Hide radio buttons and checkboxes */
+        .position-radio, .level-radio, .pickup-checkbox {
             display: none;
+        }
+
+        /* Inventory area */
+        .inventory {
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #4a4a6a;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .inventory .tool {
+            font-size: 24px;
+            display: none;
+        }
+        #tool-pickup:checked ~ .inventory .tool {
+            display: block;
+        }
+
+        /* Tool in game world */
+        .tool-in-game {
+            position: absolute;
+            font-size: 24px;
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) - 30px);
+            z-index: 20;
+        }
+        #tool-pickup:checked ~ .tool-in-game {
+            display: none;
+        }
+
+        /* Pickup button - only visible when player at tool location and tool not picked up */
+        .pickup-btn {
+            position: absolute;
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 45px);
+            left: calc(var(--pos-offset) - 25px);
+            color: #00ff88;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            z-index: 60;
+            text-shadow: 0 0 8px #00ff88;
+        }
+        .pickup-btn:hover {
+            text-shadow: 0 0 15px #00ff88, 0 0 25px #00ff88;
+        }
+        /* Show pickup button when at level 4, position 1, and tool not yet picked up */
+        #level-4:checked ~ #pos-1:checked ~ #tool-pickup:not(:checked) ~ .pickup-btn {
+            display: block;
         }
 
         .player {
@@ -410,9 +464,9 @@
         <!-- Radio buttons for level (vertical) -->
         <input type="radio" name="level" id="level-0" class="level-radio">
         <input type="radio" name="level" id="level-1" class="level-radio">
-        <input type="radio" name="level" id="level-2" class="level-radio" checked>
+        <input type="radio" name="level" id="level-2" class="level-radio">
         <input type="radio" name="level" id="level-3" class="level-radio">
-        <input type="radio" name="level" id="level-4" class="level-radio">
+        <input type="radio" name="level" id="level-4" class="level-radio" checked>
 
         <!-- Radio buttons for position (horizontal) -->
         <input type="radio" name="position" id="pos-1" class="position-radio">
@@ -421,6 +475,20 @@
         <input type="radio" name="position" id="pos-4" class="position-radio">
         <input type="radio" name="position" id="pos-5" class="position-radio">
         <input type="radio" name="position" id="pos-6" class="position-radio">
+
+        <!-- Tool pickup checkbox -->
+        <input type="checkbox" id="tool-pickup" class="pickup-checkbox">
+
+        <!-- Inventory -->
+        <div class="inventory">
+            <span class="tool">🔧</span>
+        </div>
+
+        <!-- Tool in game world -->
+        <div class="tool-in-game">🔧</div>
+
+        <!-- Pickup button -->
+        <label for="tool-pickup" class="pickup-btn">⬆</label>
 
         <!-- Horizontal arrow labels -->
         <label for="pos-2" class="arrow arrow-h arrow-1-2">►</label>
