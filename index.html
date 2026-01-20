@@ -70,11 +70,17 @@
             width: var(--pos-width);
         }
 
-        /* Platform 3 (second from above): 100% width */
-        .platform-3 {
+        /* Platform 3 (second from above): split with gap at position 3 */
+        .platform-3-left {
             bottom: calc(var(--platform-height) * 3);
             left: 0;
-            width: calc(var(--pos-width) * 6);
+            width: calc(var(--pos-width) * 2);
+        }
+
+        .platform-3-right {
+            bottom: calc(var(--platform-height) * 3);
+            right: 0;
+            width: calc(var(--pos-width) * 3);
         }
 
         /* Platform 4 (top): 5/6 width, aligned left */
@@ -237,6 +243,28 @@
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 27.5px);
         }
 
+        /* Down arrow positions (at platform gaps) */
+        /* Platform 1 gap: position 1, level 1 -> 0 */
+        .arrow-down-L1P1 {
+            left: calc(var(--pos-offset) + 10px);
+            bottom: calc(var(--platform-height) - 5px);
+        }
+        /* Platform 2 gap: position 5, level 2 -> 1 */
+        .arrow-down-L2P5 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 4 + 10px);
+            bottom: calc(var(--platform-height) * 2 - 5px);
+        }
+        /* Platform 4 gap: position 6, level 4 -> 3 */
+        .arrow-down-L4P6 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 + 10px);
+            bottom: calc(var(--platform-height) * 4 - 5px);
+        }
+        /* Platform 3 gap: position 3, level 3 -> 2 */
+        .arrow-down-L3P3 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 2 + 10px);
+            bottom: calc(var(--platform-height) * 3 - 5px);
+        }
+
         /* Show horizontal arrows based on position (all levels) */
         #pos-1:checked ~ .arrow-1-2 { display: block; }
         #pos-2:checked ~ .arrow-2-1 { display: block; }
@@ -258,6 +286,16 @@
         #level-2:checked ~ #pos-1:checked ~ .arrow-up-L2P1 { display: block; }
         /* Ladder 4: level 3, position 4 */
         #level-3:checked ~ #pos-4:checked ~ .arrow-up-L3P4 { display: block; }
+
+        /* Show down arrow at platform gaps */
+        /* Platform 1 gap: level 1, position 1 */
+        #level-1:checked ~ #pos-1:checked ~ .arrow-down-L1P1 { display: block; }
+        /* Platform 2 gap: level 2, position 5 */
+        #level-2:checked ~ #pos-5:checked ~ .arrow-down-L2P5 { display: block; }
+        /* Platform 4 gap: level 4, position 6 */
+        #level-4:checked ~ #pos-6:checked ~ .arrow-down-L4P6 { display: block; }
+        /* Platform 3 gap: level 3, position 3 */
+        #level-3:checked ~ #pos-3:checked ~ .arrow-down-L3P3 { display: block; }
     </style>
 </head>
 <body>
@@ -296,6 +334,12 @@
         <label for="level-2" class="arrow arrow-up arrow-up-L1P3">▲</label>
         <label for="level-3" class="arrow arrow-up arrow-up-L2P1">▲</label>
         <label for="level-4" class="arrow arrow-up arrow-up-L3P4">▲</label>
+
+        <!-- Down arrow labels (at platform gaps) -->
+        <label for="level-0" class="arrow arrow-down arrow-down-L1P1">▼</label>
+        <label for="level-1" class="arrow arrow-down arrow-down-L2P5">▼</label>
+        <label for="level-3" class="arrow arrow-down arrow-down-L4P6">▼</label>
+        <label for="level-2" class="arrow arrow-down arrow-down-L3P3">▼</label>
 
         <!-- Player character -->
         <div class="player">
@@ -352,8 +396,9 @@
         <!-- Platform 2-right (third from above): 1/6 width, aligned right -->
         <div class="platform platform-2-right"></div>
 
-        <!-- Platform 3 (second from above): 100% width -->
-        <div class="platform platform-3"></div>
+        <!-- Platform 3 (second from above): split with gap at position 3 -->
+        <div class="platform platform-3-left"></div>
+        <div class="platform platform-3-right"></div>
 
         <!-- Platform 4 (top): 5/6 width, aligned left -->
         <div class="platform platform-4"></div>
