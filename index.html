@@ -619,6 +619,84 @@
         #level-4:checked ~ #pos-6:checked ~ .arrow-down-L4P6 { display: block; }
         /* Platform 3 gap: level 3, position 3 */
         #level-3:checked ~ #pos-3:checked ~ .arrow-down-L3P3 { display: block; }
+
+        /* Fixed navigation panel */
+        .nav-panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 70px;
+            height: 70px;
+            z-index: 200;
+        }
+
+        .nav-btn {
+            position: absolute;
+            width: 0;
+            height: 0;
+            cursor: pointer;
+            display: none;
+            filter: drop-shadow(0 0 4px #ffcc00);
+        }
+        .nav-btn:hover {
+            filter: drop-shadow(0 0 10px #ffcc00) drop-shadow(0 0 15px #ffcc00);
+        }
+
+        /* Arrow shapes */
+        .nav-up {
+            left: 27px;
+            top: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 14px solid #ffcc00;
+        }
+        .nav-down {
+            left: 27px;
+            bottom: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 14px solid #ffcc00;
+        }
+        .nav-left {
+            left: 0;
+            top: 27px;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 14px solid #ffcc00;
+        }
+        .nav-right {
+            right: 0;
+            top: 27px;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 14px solid #ffcc00;
+        }
+
+        /* Show correct left arrow based on current position */
+        #pos-2:checked ~ .nav-panel .nav-left[for="pos-1"] { display: block; }
+        #pos-3:checked ~ .nav-panel .nav-left[for="pos-2"] { display: block; }
+        #pos-4:checked ~ .nav-panel .nav-left[for="pos-3"] { display: block; }
+        #pos-5:checked ~ .nav-panel .nav-left[for="pos-4"] { display: block; }
+        #pos-6:checked ~ .nav-panel .nav-left[for="pos-5"] { display: block; }
+
+        /* Show correct right arrow based on current position */
+        #pos-1:checked ~ .nav-panel .nav-right[for="pos-2"] { display: block; }
+        #pos-2:checked ~ .nav-panel .nav-right[for="pos-3"] { display: block; }
+        #pos-3:checked ~ .nav-panel .nav-right[for="pos-4"] { display: block; }
+        #pos-4:checked ~ .nav-panel .nav-right[for="pos-5"] { display: block; }
+        #pos-5:checked ~ .nav-panel .nav-right[for="pos-6"] { display: block; }
+
+        /* Show up arrow at ladder locations */
+        #level-0:checked ~ #pos-6:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
+        #level-1:checked ~ #pos-3:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
+        #level-2:checked ~ #pos-1:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
+        #level-3:checked ~ #pos-4:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
+
+        /* Show down arrow at grate locations */
+        #level-1:checked ~ #pos-1:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
+        #level-2:checked ~ #pos-5:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
+        #level-3:checked ~ #pos-3:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
+        #level-4:checked ~ #pos-6:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
     </style>
 </head>
 <body>
@@ -648,6 +726,35 @@
 
         <!-- Wrench pickup checkbox -->
         <input type="checkbox" id="wrench-pickup" class="wrench-checkbox">
+
+        <!-- Fixed navigation panel -->
+        <div class="nav-panel">
+            <!-- Left arrows (one per possible source position) -->
+            <label for="pos-1" class="nav-btn nav-left"></label>
+            <label for="pos-2" class="nav-btn nav-left"></label>
+            <label for="pos-3" class="nav-btn nav-left"></label>
+            <label for="pos-4" class="nav-btn nav-left"></label>
+            <label for="pos-5" class="nav-btn nav-left"></label>
+
+            <!-- Right arrows -->
+            <label for="pos-2" class="nav-btn nav-right"></label>
+            <label for="pos-3" class="nav-btn nav-right"></label>
+            <label for="pos-4" class="nav-btn nav-right"></label>
+            <label for="pos-5" class="nav-btn nav-right"></label>
+            <label for="pos-6" class="nav-btn nav-right"></label>
+
+            <!-- Up arrows (at ladder positions) -->
+            <label for="level-1" class="nav-btn nav-up"></label>
+            <label for="level-2" class="nav-btn nav-up"></label>
+            <label for="level-3" class="nav-btn nav-up"></label>
+            <label for="level-4" class="nav-btn nav-up"></label>
+
+            <!-- Down arrows (at grate positions) -->
+            <label for="level-0" class="nav-btn nav-down"></label>
+            <label for="level-1" class="nav-btn nav-down"></label>
+            <label for="level-2" class="nav-btn nav-down"></label>
+            <label for="level-3" class="nav-btn nav-down"></label>
+        </div>
 
         <!-- Inventory -->
         <div class="inventory">
