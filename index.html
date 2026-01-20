@@ -253,12 +253,35 @@
 
         .ladder {
             position: absolute;
-            color: #cd853f;
-            font-size: 12px;
-            line-height: 1;
-            white-space: pre;
-            text-shadow: 1px 1px 0 #8b5a2b;
+            width: 24px;
+            height: calc(var(--platform-height) - var(--platform-thickness));
             z-index: 10;
+            /* Two vertical rails (4px each) */
+            background:
+                linear-gradient(90deg,
+                    #cd853f 0px, #cd853f 4px,
+                    transparent 4px, transparent 20px,
+                    #cd853f 20px, #cd853f 24px
+                );
+            box-shadow:
+                inset 1px 0 0 #8b5a2b,
+                inset -1px 0 0 #8b5a2b;
+        }
+        /* Horizontal rungs using repeating gradient */
+        .ladder::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 4px;
+            right: 4px;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 10px,
+                #cd853f 10px,
+                #cd853f 14px
+            );
         }
 
         /* Ladder 1: ground to platform 1, position 6 */
@@ -449,44 +472,16 @@
  / \</div>
 
         <!-- Ladder from ground to platform 1 (position 6) -->
-        <div class="ladder ladder-1">
-|--|
-|--|
-|--|
-|--|
-|--|
-|--|
-|--|</div>
+        <div class="ladder ladder-1"></div>
 
         <!-- Ladder from platform 1 to platform 2 (position 3) -->
-        <div class="ladder ladder-2">
-|--|
-|--|
-|--|
-|--|
-|--|
-|--|
-|--|</div>
+        <div class="ladder ladder-2"></div>
 
         <!-- Ladder from platform 2 to platform 3 (position 1) -->
-        <div class="ladder ladder-3">
-|--|
-|--|
-|--|
-|--|
-|--|
-|--|
-|--|</div>
+        <div class="ladder ladder-3"></div>
 
         <!-- Ladder from platform 3 to platform 4 (position 4) -->
-        <div class="ladder ladder-4">
-|--|
-|--|
-|--|
-|--|
-|--|
-|--|
-|--|</div>
+        <div class="ladder ladder-4"></div>
 
         <!-- Grates at platform gaps -->
         <div class="grate grate-L1P1"></div>
