@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="René Uittenbogaard">
+    <meta name="creator" content="Claude Code">
     <title>Nibo's Way Out</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" rel="stylesheet">
     <style>
@@ -14,8 +16,15 @@
             --platform-thickness: 30px;   /* Thickness of platforms */
             --pos-offset: 55px;           /* Offset for position 1 from left edge */
             --top-margin: 70px;           /* Extra space above topmost platform */
-            --item-offset: 34px;        /* Offset for items left of player position */
-            --nav-arrow-color: #48d8d8; /* Navigation arrow color */
+            --item-offset: 34px;          /* Offset for items left of player position */
+            --ladder-offset: 42px;        /* Horizontal offset for ladders */
+
+            /* Colors */
+            --nav-arrow-color: #48d8d8;   /* Navigation arrow color */
+            --inactive-arrow-color: #666; /* Inactive navigation arrow color */
+            --pickup-glow-color: #00ff88; /* Pickup button glow color */
+            --gold-color: #ffd700;        /* Gold color for title and key */
+            --border-color: #4a4a6a;      /* Border color for UI elements */
         }
 
         * {
@@ -39,7 +48,7 @@
             user-select: none;
             height: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin));
             background: #0f0f23;
-            border: 3px solid #4a4a6a;
+            border: 3px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
         }
@@ -187,7 +196,7 @@
             right: 10px;
             width: 84px;
             height: 40px;
-            border: 2px solid #4a4a6a;
+            border: 2px solid var(--border-color);
             border-radius: 4px;
             background: rgba(0, 0, 0, 0.3);
             display: flex;
@@ -261,7 +270,7 @@
             cursor: pointer;
             display: none;
             z-index: 60;
-            filter: drop-shadow(0 0 8px #00ff88);
+            filter: drop-shadow(0 0 8px var(--pickup-glow-color));
             animation: pulse-glow 1.5s ease-in-out infinite;
         }
         .wrench-pickup-btn::before {
@@ -273,7 +282,7 @@
             height: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-bottom: 12px solid #00ff88;
+            border-bottom: 12px solid var(--pickup-glow-color);
         }
         .wrench-pickup-btn::after {
             content: '';
@@ -282,10 +291,10 @@
             left: 6px;
             width: 8px;
             height: 6px;
-            background: #00ff88;
+            background: var(--pickup-glow-color);
         }
         .wrench-pickup-btn:hover {
-            filter: drop-shadow(0 0 15px #00ff88) drop-shadow(0 0 25px #00ff88);
+            filter: drop-shadow(0 0 15px var(--pickup-glow-color)) drop-shadow(0 0 25px var(--pickup-glow-color));
         }
         /* Show wrench pickup button when at level 2, position 6, safe unlocked, wrench not picked up */
         #level-2:checked ~ #pos-6:checked ~ #safe-unlock:checked ~ #wrench-pickup:not(:checked) ~ .wrench-pickup-btn {
@@ -305,11 +314,11 @@
         @keyframes key-pulse {
             0%, 100% {
                 transform: scale(1);
-                filter: drop-shadow(0 0 8px #ffd700);
+                filter: drop-shadow(0 0 8px var(--gold-color));
             }
             50% {
                 transform: scale(1.2);
-                filter: drop-shadow(0 0 15px #ffd700) drop-shadow(0 0 25px #ffd700);
+                filter: drop-shadow(0 0 15px var(--gold-color)) drop-shadow(0 0 25px var(--gold-color));
             }
         }
         /* Only show key at safe when player is at level 2, position 6, has key, AND safe not yet unlocked */
@@ -328,7 +337,7 @@
             cursor: pointer;
             display: none;
             z-index: 60;
-            filter: drop-shadow(0 0 8px #00ff88);
+            filter: drop-shadow(0 0 8px var(--pickup-glow-color));
         }
         /* Arrow head (triangle) */
         .key-pickup-btn::before {
@@ -340,7 +349,7 @@
             height: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-bottom: 12px solid #00ff88;
+            border-bottom: 12px solid var(--pickup-glow-color);
         }
         /* Arrow stem */
         .key-pickup-btn::after {
@@ -350,18 +359,18 @@
             left: 6px;
             width: 8px;
             height: 6px;
-            background: #00ff88;
+            background: var(--pickup-glow-color);
         }
         .key-pickup-btn:hover {
-            filter: drop-shadow(0 0 15px #00ff88) drop-shadow(0 0 25px #00ff88);
+            filter: drop-shadow(0 0 15px var(--pickup-glow-color)) drop-shadow(0 0 25px var(--pickup-glow-color));
         }
         @keyframes pulse-glow {
             0%, 100% {
-                filter: drop-shadow(0 0 8px #00ff88) drop-shadow(0 0 15px #00ff88);
+                filter: drop-shadow(0 0 8px var(--pickup-glow-color)) drop-shadow(0 0 15px var(--pickup-glow-color));
                 opacity: 0.7;
             }
             50% {
-                filter: drop-shadow(0 0 20px #00ff88) drop-shadow(0 0 35px #00ff88) drop-shadow(0 0 50px #00ff88);
+                filter: drop-shadow(0 0 20px var(--pickup-glow-color)) drop-shadow(0 0 35px var(--pickup-glow-color)) drop-shadow(0 0 50px var(--pickup-glow-color));
                 opacity: 1;
             }
         }
@@ -423,7 +432,7 @@
             top: 15px;
             left: 50%;
             transform: translateX(-50%);
-            color: #ffd700;
+            color: var(--gold-color);
             font-size: 20px;
             text-shadow: 2px 2px 0 #b8860b;
             letter-spacing: 3px;
@@ -465,25 +474,25 @@
         /* Ladder 1: ground to platform 1, position 5 */
         .ladder-1 {
             bottom: var(--ground-height);
-            left: calc(var(--pos-offset) + var(--pos-width) * 4 + 42px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 4 + var(--ladder-offset));
         }
 
         /* Ladder 2: platform 1 to platform 2, position 3 */
         .ladder-2 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 2 + 42px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 2 + var(--ladder-offset));
         }
 
         /* Ladder 3: platform 2 to platform 3, position 1 */
         .ladder-3 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + 42px);
+            left: calc(var(--pos-offset) + var(--ladder-offset));
         }
 
         /* Ladder 4: platform 3 to platform 4, position 4 */
         .ladder-4 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 3 + 42px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 3 + var(--ladder-offset));
         }
 
         /* Arrow labels (clickable) - CSS triangles */
@@ -631,7 +640,7 @@
             width: 70px;
             height: 70px;
             z-index: 200;
-            border: 2px solid #4a4a6a;
+            border: 2px solid var(--border-color);
             border-radius: 4px;
             background: rgba(0, 0, 0, 0.3);
             display: grid;
@@ -663,22 +672,22 @@
         .nav-cell-up::before {
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-bottom: 14px solid #666;
+            border-bottom: 14px solid var(--inactive-arrow-color);
         }
         .nav-cell-down::before {
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-top: 14px solid #666;
+            border-top: 14px solid var(--inactive-arrow-color);
         }
         .nav-cell-left::before {
             border-top: 10px solid transparent;
             border-bottom: 10px solid transparent;
-            border-right: 14px solid #666;
+            border-right: 14px solid var(--inactive-arrow-color);
         }
         .nav-cell-right::before {
             border-top: 10px solid transparent;
             border-bottom: 10px solid transparent;
-            border-left: 14px solid #666;
+            border-left: 14px solid var(--inactive-arrow-color);
         }
 
         .nav-btn {
@@ -892,7 +901,7 @@
 
         <!-- Player character -->
         <div class="player">
-            <img src="images/walk-80.png" alt="Player">
+            <img src="images/walk-56.png" alt="Player">
         </div>
 
         <!-- Ladder from ground to platform 1 (position 6) -->
