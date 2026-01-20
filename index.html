@@ -13,6 +13,7 @@
             --ground-height: 35px;        /* Height of ground */
             --platform-thickness: 30px;   /* Thickness of platforms */
             --pos-offset: 55px;           /* Offset for position 1 from left edge */
+            --top-margin: 70px;           /* Extra space above topmost platform */
         }
 
         * {
@@ -34,7 +35,7 @@
             position: relative;
             width: calc(var(--pos-width) * 6);
             user-select: none;
-            height: calc(var(--ground-height) + var(--platform-height) * 5);
+            height: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin));
             background: #0f0f23;
             border: 3px solid #4a4a6a;
             border-radius: 8px;
@@ -620,7 +621,7 @@
         /* Platform 3 gap: level 3, position 3 */
         #level-3:checked ~ #pos-3:checked ~ .arrow-down-L3P3 { display: block; }
 
-        /* Fixed navigation panel */
+        /* Fixed navigation panel - 3x3 grid */
         .nav-panel {
             position: absolute;
             top: 10px;
@@ -628,6 +629,54 @@
             width: 70px;
             height: 70px;
             z-index: 200;
+            border: 2px solid #4a4a6a;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.3);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            place-items: center;
+        }
+
+        .nav-cell {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-cell-up { grid-column: 2; grid-row: 1; }
+        .nav-cell-down { grid-column: 2; grid-row: 3; }
+        .nav-cell-left { grid-column: 1; grid-row: 2; }
+        .nav-cell-right { grid-column: 3; grid-row: 2; }
+
+        /* Arrow triangles (gray inactive shown via ::before, yellow active via ::after on labels) */
+        .nav-cell::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+        .nav-cell-up::before {
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 14px solid #666;
+        }
+        .nav-cell-down::before {
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 14px solid #666;
+        }
+        .nav-cell-left::before {
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 14px solid #666;
+        }
+        .nav-cell-right::before {
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 14px solid #666;
         }
 
         .nav-btn {
@@ -644,29 +693,21 @@
 
         /* Arrow shapes */
         .nav-up {
-            left: 27px;
-            top: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
             border-bottom: 14px solid #ffcc00;
         }
         .nav-down {
-            left: 27px;
-            bottom: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
             border-top: 14px solid #ffcc00;
         }
         .nav-left {
-            left: 0;
-            top: 27px;
             border-top: 10px solid transparent;
             border-bottom: 10px solid transparent;
             border-right: 14px solid #ffcc00;
         }
         .nav-right {
-            right: 0;
-            top: 27px;
             border-top: 10px solid transparent;
             border-bottom: 10px solid transparent;
             border-left: 14px solid #ffcc00;
@@ -729,31 +770,36 @@
 
         <!-- Fixed navigation panel -->
         <div class="nav-panel">
-            <!-- Left arrows (one per possible source position) -->
-            <label for="pos-1" class="nav-btn nav-left"></label>
-            <label for="pos-2" class="nav-btn nav-left"></label>
-            <label for="pos-3" class="nav-btn nav-left"></label>
-            <label for="pos-4" class="nav-btn nav-left"></label>
-            <label for="pos-5" class="nav-btn nav-left"></label>
-
-            <!-- Right arrows -->
-            <label for="pos-2" class="nav-btn nav-right"></label>
-            <label for="pos-3" class="nav-btn nav-right"></label>
-            <label for="pos-4" class="nav-btn nav-right"></label>
-            <label for="pos-5" class="nav-btn nav-right"></label>
-            <label for="pos-6" class="nav-btn nav-right"></label>
-
-            <!-- Up arrows (at ladder positions) -->
-            <label for="level-1" class="nav-btn nav-up"></label>
-            <label for="level-2" class="nav-btn nav-up"></label>
-            <label for="level-3" class="nav-btn nav-up"></label>
-            <label for="level-4" class="nav-btn nav-up"></label>
-
-            <!-- Down arrows (at grate positions) -->
-            <label for="level-0" class="nav-btn nav-down"></label>
-            <label for="level-1" class="nav-btn nav-down"></label>
-            <label for="level-2" class="nav-btn nav-down"></label>
-            <label for="level-3" class="nav-btn nav-down"></label>
+            <!-- Up cell -->
+            <div class="nav-cell nav-cell-up">
+                <label for="level-1" class="nav-btn nav-up"></label>
+                <label for="level-2" class="nav-btn nav-up"></label>
+                <label for="level-3" class="nav-btn nav-up"></label>
+                <label for="level-4" class="nav-btn nav-up"></label>
+            </div>
+            <!-- Left cell -->
+            <div class="nav-cell nav-cell-left">
+                <label for="pos-1" class="nav-btn nav-left"></label>
+                <label for="pos-2" class="nav-btn nav-left"></label>
+                <label for="pos-3" class="nav-btn nav-left"></label>
+                <label for="pos-4" class="nav-btn nav-left"></label>
+                <label for="pos-5" class="nav-btn nav-left"></label>
+            </div>
+            <!-- Right cell -->
+            <div class="nav-cell nav-cell-right">
+                <label for="pos-2" class="nav-btn nav-right"></label>
+                <label for="pos-3" class="nav-btn nav-right"></label>
+                <label for="pos-4" class="nav-btn nav-right"></label>
+                <label for="pos-5" class="nav-btn nav-right"></label>
+                <label for="pos-6" class="nav-btn nav-right"></label>
+            </div>
+            <!-- Down cell -->
+            <div class="nav-cell nav-cell-down">
+                <label for="level-0" class="nav-btn nav-down"></label>
+                <label for="level-1" class="nav-btn nav-down"></label>
+                <label for="level-2" class="nav-btn nav-down"></label>
+                <label for="level-3" class="nav-btn nav-down"></label>
+            </div>
         </div>
 
         <!-- Inventory -->
