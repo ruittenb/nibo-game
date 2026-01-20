@@ -14,6 +14,7 @@
             --platform-thickness: 30px;   /* Thickness of platforms */
             --pos-offset: 55px;           /* Offset for position 1 from left edge */
             --top-margin: 70px;           /* Extra space above topmost platform */
+            --item-offset: 34px;        /* Offset for objects left of player position */
         }
 
         * {
@@ -207,7 +208,7 @@
             position: absolute;
             font-size: 24px;
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
-            left: calc(var(--pos-offset) - 30px);
+            left: calc(var(--pos-offset) - var(--item-offset));
             z-index: 20;
         }
 
@@ -216,7 +217,7 @@
             position: absolute;
             font-size: 28px;
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 5 - 34px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
             z-index: 20;
         }
         /* Hide safe when unlocked */
@@ -232,7 +233,7 @@
             position: absolute;
             font-size: 28px;
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 5 - 34px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
             z-index: 20;
             display: none;
         }
@@ -320,7 +321,7 @@
         .key-pickup-btn {
             position: absolute;
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 37px);
-            left: calc(var(--pos-offset) - 22px);
+            left: calc(var(--pos-offset) - var(--item-offset) + 8px);
             width: 20px;
             height: 24px;
             cursor: pointer;
@@ -738,9 +739,47 @@
         #level-2:checked ~ #pos-5:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
         #level-3:checked ~ #pos-3:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
         #level-4:checked ~ #pos-6:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
+
+        /* Coins */
+        .coin {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            color: gold;
+            z-index: 15;
+        }
+
+        /* Coin positions - on platforms */
+        .coin-L0P2 {
+            bottom: calc(var(--ground-height) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset));
+        }
+        .coin-L1P4 {
+            bottom: calc(var(--platform-height) + var(--platform-thickness) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--item-offset));
+        }
+        .coin-L2P3 {
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 2 - var(--item-offset));
+        }
+        .coin-L3P5 {
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--item-offset));
+        }
+        .coin-L4P4 {
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--item-offset));
+        }
     </style>
 </head>
 <body>
+    <!-- SVG symbols for reuse -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="coin" viewBox="96 32 384 384">
+            <path fill="currentColor" d="M 96 224 a 192 192 0 1 1 384 0 192 192 0 1 1 -384 0 z m 176 -92 l 0 4 c -28.8 .3 -52 23.7 -52 52.5 0 25.7 18.5 47.6 43.9 51.8 l 41.7 7 c 6 1 10.4 6.2 10.4 12.3 0 6.9 -5.6 12.5 -12.5 12.5 L 248 272 c -11 0 -20 9 -20 20 s 9 20 20 20 l 24 0 0 4 c 0 11 9 20 20 20 s 20 -9 20 -20 l 0 -4.7 c 25 -4.1 44 -25.7 44 -51.8 0 -25.7 -18.5 -47.6 -43.9 -51.8 l -41.7 -7 c -6 -1 -10.4 -6.2 -10.4 -12.3 0 -6.9 5.6 -12.5 12.5 -12.5 l 47.5 0 c 11 0 20 -9 20 -20 s -9 -20 -20 -20 l -8 0 0 -4 c 0 -11 -9 -20 -20 -20 s -20 9 -20 20 z"/>
+        </symbol>
+    </svg>
+
     <div class="game-container">
         <div class="title">NIBO'S WAY OUT</div>
 
@@ -891,6 +930,13 @@
 
         <!-- Ground -->
         <div class="ground"></div>
+
+        <!-- Coins -->
+        <svg class="coin coin-L0P2"><use href="#coin"/></svg>
+        <svg class="coin coin-L1P4"><use href="#coin"/></svg>
+        <svg class="coin coin-L2P3"><use href="#coin"/></svg>
+        <svg class="coin coin-L3P5"><use href="#coin"/></svg>
+        <svg class="coin coin-L4P4"><use href="#coin"/></svg>
     </div>
 </body>
 </html>
