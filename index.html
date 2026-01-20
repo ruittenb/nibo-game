@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lifts and Ladders</title>
+    <title>Nibo's Way Out</title>
     <style>
         :root {
             /* Core layout variables */
@@ -224,6 +224,19 @@
         }
         .pickup-btn:hover {
             text-shadow: 0 0 15px #00ff88, 0 0 25px #00ff88;
+        }
+        @keyframes pulse-glow {
+            0%, 100% {
+                text-shadow: 0 0 8px #00ff88, 0 0 15px #00ff88;
+                opacity: 0.7;
+            }
+            50% {
+                text-shadow: 0 0 20px #00ff88, 0 0 35px #00ff88, 0 0 50px #00ff88;
+                opacity: 1;
+            }
+        }
+        .pickup-btn {
+            animation: pulse-glow 1.5s ease-in-out infinite;
         }
         /* Show pickup button when at level 4, position 1, and tool not yet picked up */
         #level-4:checked ~ #pos-1:checked ~ #tool-pickup:not(:checked) ~ .pickup-btn {
@@ -459,7 +472,7 @@
 </head>
 <body>
     <div class="game-container">
-        <div class="title">LIFTS AND LADDERS</div>
+        <div class="title">NIBO'S WAY OUT</div>
 
         <!-- Radio buttons for level (vertical) -->
         <input type="radio" name="level" id="level-0" class="level-radio">
