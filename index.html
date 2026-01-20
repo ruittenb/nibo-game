@@ -179,7 +179,7 @@
         .player {
             position: absolute;
             width: auto;
-            height: 40px;
+            height: 60px;
             animation: idle 1s ease-in-out infinite;
             z-index: 100;
             bottom: var(--ground-height);
@@ -268,25 +268,25 @@
         /* Ladder 1: ground to platform 1, position 6 */
         .ladder-1 {
             bottom: var(--ground-height);
-            left: calc(var(--pos-offset) + var(--pos-width) * 5 + 30px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 + 42px);
         }
 
         /* Ladder 2: platform 1 to platform 2, position 3 */
         .ladder-2 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 2 + 30px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 2 + 42px);
         }
 
         /* Ladder 3: platform 2 to platform 3, position 1 */
         .ladder-3 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + 30px);
+            left: calc(var(--pos-offset) + 42px);
         }
 
         /* Ladder 4: platform 3 to platform 4, position 4 */
         .ladder-4 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 3 + 30px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 3 + 42px);
         }
 
         /* Arrow labels (clickable) */
@@ -310,11 +310,11 @@
             bottom: calc(var(--ground-height) - 10px);
             transform: scaleY(2);
         }
-        .arrow-1-2, .arrow-2-1 { left: calc(var(--pos-offset) + var(--pos-width) * 0.5); }
-        .arrow-2-3, .arrow-3-2 { left: calc(var(--pos-offset) + var(--pos-width) * 1.5); }
-        .arrow-3-4, .arrow-4-3 { left: calc(var(--pos-offset) + var(--pos-width) * 2.5); }
-        .arrow-4-5, .arrow-5-4 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5); }
-        .arrow-5-6, .arrow-6-5 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5); }
+        .arrow-1-2, .arrow-2-1 { left: calc(var(--pos-offset) + var(--pos-width) * 0.5 + 12px); }
+        .arrow-2-3, .arrow-3-2 { left: calc(var(--pos-offset) + var(--pos-width) * 1.5 + 12px); }
+        .arrow-3-4, .arrow-4-3 { left: calc(var(--pos-offset) + var(--pos-width) * 2.5 + 12px); }
+        .arrow-4-5, .arrow-5-4 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5 + 12px); }
+        .arrow-5-6, .arrow-6-5 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5 + 12px); }
 
         /* Horizontal arrows move with level */
         #level-0:checked ~ .arrow-h { bottom: calc(var(--ground-height) + 5px); }
@@ -447,7 +447,9 @@
         <label for="level-2" class="arrow arrow-down arrow-down-L3P3">▼</label>
 
         <!-- Player character -->
-        <div class="player"><img src="images/stand.jpg" alt="Player"></div>
+        <div class="player">
+            <img src="images/walk.jpg" alt="Player">
+        </div>
 
         <!-- Ladder from ground to platform 1 (position 6) -->
         <div class="ladder ladder-1"></div>
