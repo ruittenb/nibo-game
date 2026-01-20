@@ -14,7 +14,8 @@
             --platform-thickness: 30px;   /* Thickness of platforms */
             --pos-offset: 55px;           /* Offset for position 1 from left edge */
             --top-margin: 70px;           /* Extra space above topmost platform */
-            --item-offset: 34px;        /* Offset for objects left of player position */
+            --item-offset: 34px;        /* Offset for items left of player position */
+            --nav-arrow-color: #48d8d8; /* Navigation arrow color */
         }
 
         * {
@@ -494,39 +495,39 @@
             cursor: pointer;
             user-select: none;
             display: none;
-            filter: drop-shadow(0 0 8px #ffcc00);
+            filter: drop-shadow(0 0 8px var(--nav-arrow-color));
         }
 
         .arrow:hover {
-            filter: drop-shadow(0 0 15px #ffcc00) drop-shadow(0 0 25px #ffcc00);
+            filter: drop-shadow(0 0 15px var(--nav-arrow-color)) drop-shadow(0 0 25px var(--nav-arrow-color));
         }
 
         /* Right arrow */
         .arrow-right {
             border-top: 12px solid transparent;
             border-bottom: 12px solid transparent;
-            border-left: 16px solid #ffcc00;
+            border-left: 16px solid var(--nav-arrow-color);
         }
 
         /* Left arrow */
         .arrow-left {
             border-top: 12px solid transparent;
             border-bottom: 12px solid transparent;
-            border-right: 16px solid #ffcc00;
+            border-right: 16px solid var(--nav-arrow-color);
         }
 
         /* Up arrow */
         .arrow-up {
             border-left: 12px solid transparent;
             border-right: 12px solid transparent;
-            border-bottom: 16px solid #ffcc00;
+            border-bottom: 16px solid var(--nav-arrow-color);
         }
 
         /* Down arrow */
         .arrow-down {
             border-left: 12px solid transparent;
             border-right: 12px solid transparent;
-            border-top: 16px solid #ffcc00;
+            border-top: 16px solid var(--nav-arrow-color);
         }
 
         /* Horizontal arrow positions */
@@ -549,45 +550,45 @@
         /* Up arrow positions (at ladder locations) */
         /* Ladder 1: position 5, level 0 -> 1 */
         .arrow-up-L0P5 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 4 + 45px);
-            bottom: calc(var(--ground-height) + 27.5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 4 + 10px);
+            bottom: calc(var(--ground-height) + 72.5px);
         }
         /* Ladder 2: position 3, level 1 -> 2 */
         .arrow-up-L1P3 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 2 + 45px);
-            bottom: calc(var(--platform-height) + var(--platform-thickness) + 27.5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 2 + 10px);
+            bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px);
         }
         /* Ladder 3: position 1, level 2 -> 3 */
         .arrow-up-L2P1 {
-            left: calc(var(--pos-offset) + 45px);
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 27.5px);
+            left: calc(var(--pos-offset) + 10px);
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 72.5px);
         }
         /* Ladder 4: position 4, level 3 -> 4 */
         .arrow-up-L3P4 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 3 + 45px);
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 27.5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 3 + 10px);
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
         }
 
         /* Down arrow positions (at platform gaps) */
         /* Platform 1 gap: position 1, level 1 -> 0 */
         .arrow-down-L1P1 {
             left: calc(var(--pos-offset) + 10px);
-            bottom: calc(var(--platform-height) - 5px);
+            bottom: var(--platform-height);
         }
         /* Platform 2 gap: position 5, level 2 -> 1 */
         .arrow-down-L2P5 {
             left: calc(var(--pos-offset) + var(--pos-width) * 4 + 10px);
-            bottom: calc(var(--platform-height) * 2 - 5px);
+            bottom: calc(var(--platform-height) * 2);
         }
         /* Platform 4 gap: position 6, level 4 -> 3 */
         .arrow-down-L4P6 {
             left: calc(var(--pos-offset) + var(--pos-width) * 5 + 10px);
-            bottom: calc(var(--platform-height) * 4 - 5px);
+            bottom: calc(var(--platform-height) * 4);
         }
         /* Platform 3 gap: position 3, level 3 -> 2 */
         .arrow-down-L3P3 {
             left: calc(var(--pos-offset) + var(--pos-width) * 2 + 10px);
-            bottom: calc(var(--platform-height) * 3 - 5px);
+            bottom: calc(var(--platform-height) * 3);
         }
 
         /* Show horizontal arrows based on position (all levels) */
@@ -686,32 +687,32 @@
             height: 0;
             cursor: pointer;
             display: none;
-            filter: drop-shadow(0 0 4px #ffcc00);
+            filter: drop-shadow(0 0 4px var(--nav-arrow-color));
         }
         .nav-btn:hover {
-            filter: drop-shadow(0 0 10px #ffcc00) drop-shadow(0 0 15px #ffcc00);
+            filter: drop-shadow(0 0 10px var(--nav-arrow-color)) drop-shadow(0 0 15px var(--nav-arrow-color));
         }
 
         /* Arrow shapes */
         .nav-up {
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-bottom: 14px solid #ffcc00;
+            border-bottom: 14px solid var(--nav-arrow-color);
         }
         .nav-down {
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-top: 14px solid #ffcc00;
+            border-top: 14px solid var(--nav-arrow-color);
         }
         .nav-left {
             border-top: 10px solid transparent;
             border-bottom: 10px solid transparent;
-            border-right: 14px solid #ffcc00;
+            border-right: 14px solid var(--nav-arrow-color);
         }
         .nav-right {
             border-top: 10px solid transparent;
             border-bottom: 10px solid transparent;
-            border-left: 14px solid #ffcc00;
+            border-left: 14px solid var(--nav-arrow-color);
         }
 
         /* Show correct left arrow based on current position */
@@ -750,17 +751,17 @@
         }
 
         /* Coin positions - on platforms */
-        .coin-L0P2 {
+        .coin-L0P3 {
             bottom: calc(var(--ground-height) + 5px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset));
-        }
-        .coin-L1P4 {
-            bottom: calc(var(--platform-height) + var(--platform-thickness) + 5px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--item-offset));
-        }
-        .coin-L2P3 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 2 - var(--item-offset));
+        }
+        .coin-L1P5 {
+            bottom: calc(var(--platform-height) + var(--platform-thickness) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--item-offset));
+        }
+        .coin-L2P4 {
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--item-offset));
         }
         .coin-L3P6 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 5px);
@@ -932,9 +933,9 @@
         <div class="ground"></div>
 
         <!-- Coins -->
-        <svg class="coin coin-L0P2"><use href="#coin"/></svg>
-        <svg class="coin coin-L1P4"><use href="#coin"/></svg>
-        <svg class="coin coin-L2P3"><use href="#coin"/></svg>
+        <svg class="coin coin-L0P3"><use href="#coin"/></svg>
+        <svg class="coin coin-L1P5"><use href="#coin"/></svg>
+        <svg class="coin coin-L2P4"><use href="#coin"/></svg>
         <svg class="coin coin-L3P6"><use href="#coin"/></svg>
         <svg class="coin coin-L4P2"><use href="#coin"/></svg>
     </div>
