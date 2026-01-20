@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lifts and Ladders</title>
     <style>
+        :root {
+            /* Core layout variables */
+            --pos-width: 150px;           /* Distance between horizontal positions */
+            --platform-height: 110px;     /* Distance between platforms */
+            --ground-height: 35px;        /* Height of ground */
+            --platform-thickness: 30px;   /* Thickness of platforms */
+            --pos-offset: 55px;           /* Offset for position 1 from left edge */
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -22,9 +31,9 @@
 
         .game-container {
             position: relative;
-            width: 900px;
+            width: calc(var(--pos-width) * 6);
             user-select: none;
-            height: 600px;
+            height: calc(var(--ground-height) + var(--platform-height) * 5);
             background: #0f0f23;
             border: 3px solid #4a4a6a;
             border-radius: 8px;
@@ -33,7 +42,7 @@
 
         .platform {
             position: absolute;
-            height: 30px;
+            height: var(--platform-thickness);
             background: #8b4513;
             border: 3px solid #5d2e0a;
             border-radius: 4px;
@@ -42,37 +51,37 @@
 
         /* Platform 1 (lowest): 5/6 width, aligned right */
         .platform-1 {
-            bottom: 110px;
+            bottom: var(--platform-height);
             right: 0;
-            width: 83.33%;
+            width: calc(var(--pos-width) * 5);
         }
 
         /* Platform 2 (third from above): 4/6 width, aligned left */
         .platform-2 {
-            bottom: 220px;
+            bottom: calc(var(--platform-height) * 2);
             left: 0;
-            width: 66.67%;
+            width: calc(var(--pos-width) * 4);
         }
 
         /* Platform 2-right (third from above): 1/6 width, aligned right */
         .platform-2-right {
-            bottom: 220px;
+            bottom: calc(var(--platform-height) * 2);
             right: 0;
-            width: 16.67%;
+            width: var(--pos-width);
         }
 
         /* Platform 3 (second from above): 100% width */
         .platform-3 {
-            bottom: 330px;
+            bottom: calc(var(--platform-height) * 3);
             left: 0;
-            width: 100%;
+            width: calc(var(--pos-width) * 6);
         }
 
         /* Platform 4 (top): 5/6 width, aligned left */
         .platform-4 {
-            bottom: 440px;
+            bottom: calc(var(--platform-height) * 4);
             left: 0;
-            width: 83.33%;
+            width: calc(var(--pos-width) * 5);
         }
 
         /* Hide radio buttons */
@@ -89,34 +98,34 @@
             text-shadow: 0 0 5px #00ff88;
             animation: idle 1s ease-in-out infinite;
             z-index: 100;
-            bottom: 37px;
-            left: 375px;
+            bottom: var(--ground-height);
+            left: calc(var(--pos-offset) + var(--pos-width) * 2);
             transition: left 0.3s ease;
         }
 
         /* Player positions based on radio state (6 positions) */
         #pos-1:checked ~ .player {
-            left: 55px;
+            left: var(--pos-offset);
         }
 
         #pos-2:checked ~ .player {
-            left: 205px;
+            left: calc(var(--pos-offset) + var(--pos-width));
         }
 
         #pos-3:checked ~ .player {
-            left: 355px;
+            left: calc(var(--pos-offset) + var(--pos-width) * 2);
         }
 
         #pos-4:checked ~ .player {
-            left: 505px;
+            left: calc(var(--pos-offset) + var(--pos-width) * 3);
         }
 
         #pos-5:checked ~ .player {
-            left: 655px;
+            left: calc(var(--pos-offset) + var(--pos-width) * 4);
         }
 
         #pos-6:checked ~ .player {
-            left: 805px;
+            left: calc(var(--pos-offset) + var(--pos-width) * 5);
         }
 
         @keyframes idle {
@@ -129,7 +138,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 35px;
+            height: var(--ground-height);
             background: linear-gradient(to bottom, #2d5016 0%, #1a3009 100%);
             border-top: 3px solid #4a7023;
         }
@@ -155,30 +164,34 @@
             z-index: 10;
         }
 
+        /* Ladder 1: ground to platform 1, position 6 */
         .ladder-1 {
-            bottom: 37px;
-            left: 812px;
+            bottom: var(--ground-height);
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 + 30px);
         }
 
+        /* Ladder 2: platform 1 to platform 2, position 3 */
         .ladder-2 {
-            bottom: 140px;
-            left: 362px;
+            bottom: calc(var(--platform-height) + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 2 + 30px);
         }
 
+        /* Ladder 3: platform 2 to platform 3, position 1 */
         .ladder-3 {
-            bottom: 250px;
-            left: 62px;
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + 30px);
         }
 
+        /* Ladder 4: platform 3 to platform 4, position 4 */
         .ladder-4 {
-            bottom: 360px;
-            left: 512px;
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 3 + 30px);
         }
 
         /* Arrow labels (clickable) */
         .arrow {
             position: absolute;
-            bottom: 26px;
+            bottom: calc(var(--ground-height) - 10px);
             color: #ffcc00;
             font-size: 24px;
             text-shadow: 0 0 8px #ffcc00;
@@ -192,16 +205,16 @@
         }
 
         /* Arrow positions between the 6 player positions */
-        .arrow-1-2 { left: 130px; }
-        .arrow-2-1 { left: 130px; }
-        .arrow-2-3 { left: 280px; }
-        .arrow-3-2 { left: 280px; }
-        .arrow-3-4 { left: 430px; }
-        .arrow-4-3 { left: 430px; }
-        .arrow-4-5 { left: 580px; }
-        .arrow-5-4 { left: 580px; }
-        .arrow-5-6 { left: 730px; }
-        .arrow-6-5 { left: 730px; }
+        .arrow-1-2 { left: calc(var(--pos-offset) + var(--pos-width) * 0.5); }
+        .arrow-2-1 { left: calc(var(--pos-offset) + var(--pos-width) * 0.5); }
+        .arrow-2-3 { left: calc(var(--pos-offset) + var(--pos-width) * 1.5); }
+        .arrow-3-2 { left: calc(var(--pos-offset) + var(--pos-width) * 1.5); }
+        .arrow-3-4 { left: calc(var(--pos-offset) + var(--pos-width) * 2.5); }
+        .arrow-4-3 { left: calc(var(--pos-offset) + var(--pos-width) * 2.5); }
+        .arrow-4-5 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5); }
+        .arrow-5-4 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5); }
+        .arrow-5-6 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5); }
+        .arrow-6-5 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5); }
 
         /* Hide all arrows by default */
         .arrow {
@@ -286,7 +299,7 @@
 |--|
 |--|</div>
 
-        <!-- Ladder from platform 1 to platform 2 (position 2) -->
+        <!-- Ladder from platform 1 to platform 2 (position 3) -->
         <div class="ladder ladder-2">
 |--|
 |--|
