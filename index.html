@@ -195,7 +195,10 @@
         }
 
         /* Horizontal arrow positions */
-        .arrow-h { bottom: calc(var(--ground-height) - 10px); }
+        .arrow-h {
+            bottom: calc(var(--ground-height) - 10px);
+            transform: scaleY(2);
+        }
         .arrow-1-2, .arrow-2-1 { left: calc(var(--pos-offset) + var(--pos-width) * 0.5); }
         .arrow-2-3, .arrow-3-2 { left: calc(var(--pos-offset) + var(--pos-width) * 1.5); }
         .arrow-3-4, .arrow-4-3 { left: calc(var(--pos-offset) + var(--pos-width) * 2.5); }
