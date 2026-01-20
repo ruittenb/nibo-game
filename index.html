@@ -202,6 +202,13 @@
         .arrow-4-5, .arrow-5-4 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5); }
         .arrow-5-6, .arrow-6-5 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5); }
 
+        /* Horizontal arrows move with level */
+        #level-0:checked ~ .arrow-h { bottom: calc(var(--ground-height) + 5px); }
+        #level-1:checked ~ .arrow-h { bottom: calc(var(--platform-height) + var(--platform-thickness) + 5px); }
+        #level-2:checked ~ .arrow-h { bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px); }
+        #level-3:checked ~ .arrow-h { bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 5px); }
+        #level-4:checked ~ .arrow-h { bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px); }
+
         /* Up arrow positions (at ladder locations) */
         .arrow-up {
             left: calc(var(--pos-offset) + 45px);
@@ -209,35 +216,35 @@
         /* Ladder 1: position 6, level 0 -> 1 */
         .arrow-up-L0P6 {
             left: calc(var(--pos-offset) + var(--pos-width) * 5 + 45px);
-            bottom: calc(var(--ground-height) + 10px);
+            bottom: calc(var(--ground-height) + 27.5px);
         }
         /* Ladder 2: position 3, level 1 -> 2 */
         .arrow-up-L1P3 {
             left: calc(var(--pos-offset) + var(--pos-width) * 2 + 45px);
-            bottom: calc(var(--platform-height) + var(--platform-thickness) + 10px);
+            bottom: calc(var(--platform-height) + var(--platform-thickness) + 27.5px);
         }
         /* Ladder 3: position 1, level 2 -> 3 */
         .arrow-up-L2P1 {
             left: calc(var(--pos-offset) + 45px);
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 10px);
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 27.5px);
         }
         /* Ladder 4: position 4, level 3 -> 4 */
         .arrow-up-L3P4 {
             left: calc(var(--pos-offset) + var(--pos-width) * 3 + 45px);
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 10px);
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 27.5px);
         }
 
-        /* Show horizontal arrows based on position (only on level 0 for now) */
-        #level-0:checked ~ #pos-1:checked ~ .arrow-1-2 { display: block; }
-        #level-0:checked ~ #pos-2:checked ~ .arrow-2-1 { display: block; }
-        #level-0:checked ~ #pos-2:checked ~ .arrow-2-3 { display: block; }
-        #level-0:checked ~ #pos-3:checked ~ .arrow-3-2 { display: block; }
-        #level-0:checked ~ #pos-3:checked ~ .arrow-3-4 { display: block; }
-        #level-0:checked ~ #pos-4:checked ~ .arrow-4-3 { display: block; }
-        #level-0:checked ~ #pos-4:checked ~ .arrow-4-5 { display: block; }
-        #level-0:checked ~ #pos-5:checked ~ .arrow-5-4 { display: block; }
-        #level-0:checked ~ #pos-5:checked ~ .arrow-5-6 { display: block; }
-        #level-0:checked ~ #pos-6:checked ~ .arrow-6-5 { display: block; }
+        /* Show horizontal arrows based on position (all levels) */
+        #pos-1:checked ~ .arrow-1-2 { display: block; }
+        #pos-2:checked ~ .arrow-2-1 { display: block; }
+        #pos-2:checked ~ .arrow-2-3 { display: block; }
+        #pos-3:checked ~ .arrow-3-2 { display: block; }
+        #pos-3:checked ~ .arrow-3-4 { display: block; }
+        #pos-4:checked ~ .arrow-4-3 { display: block; }
+        #pos-4:checked ~ .arrow-4-5 { display: block; }
+        #pos-5:checked ~ .arrow-5-4 { display: block; }
+        #pos-5:checked ~ .arrow-5-6 { display: block; }
+        #pos-6:checked ~ .arrow-6-5 { display: block; }
 
         /* Show up arrow at ladder locations */
         /* Ladder 1: level 0, position 6 */
