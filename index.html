@@ -38,38 +38,41 @@
             line-height: 1;
             white-space: pre;
             text-shadow: 1px 1px 0 #5d2e0a;
-            width: 66.67%;
         }
 
         /* 5 levels: ground + 4 platforms, evenly spaced in ~550px = ~110px each */
+        /* Platform 1: 83.33% (5/6) wide, aligned right - gap on left for 1 position */
         .platform-1 {
             bottom: 110px;
             right: 0;
-            width: 80%;
+            width: 83.33%;
         }
 
+        /* Platform 2: 83.33% (5/6) wide, aligned left - gap on right for 1 position */
         .platform-2 {
             bottom: 220px;
             left: 0;
-            width: 80%;
+            width: 83.33%;
         }
 
+        /* Platform 3: split - 33.33% left, 33.33% gap, 33.33% right (2 positions each side, 2 in gap) */
         .platform-3-left {
             bottom: 330px;
             left: 0;
-            width: 40%;
+            width: 33.33%;
         }
 
         .platform-3-right {
             bottom: 330px;
             right: 0;
-            width: 40%;
+            width: 33.33%;
         }
 
+        /* Platform 4: 83.33% (5/6) wide, aligned right - gap on left for 1 position */
         .platform-4 {
             bottom: 440px;
             right: 0;
-            width: 80%;
+            width: 83.33%;
         }
 
         /* Hide radio buttons */
@@ -88,29 +91,34 @@
             z-index: 100;
             /* Default: position 3 (middle) on ground */
             bottom: 37px;
-            left: 430px;
+            left: 375px;
             transition: left 0.3s ease;
         }
 
-        /* Player positions based on radio state (5 positions) */
+        /* Player positions based on radio state (6 positions) */
+        /* 900px width, 6 positions = 150px apart, starting at ~75px */
         #pos-1:checked ~ .player {
-            left: 70px;
+            left: 55px;
         }
 
         #pos-2:checked ~ .player {
-            left: 250px;
+            left: 205px;
         }
 
         #pos-3:checked ~ .player {
-            left: 430px;
+            left: 355px;
         }
 
         #pos-4:checked ~ .player {
-            left: 610px;
+            left: 505px;
         }
 
         #pos-5:checked ~ .player {
-            left: 790px;
+            left: 655px;
+        }
+
+        #pos-6:checked ~ .player {
+            left: 805px;
         }
 
         @keyframes idle {
@@ -154,7 +162,7 @@
 
         .ladder-1 {
             bottom: 37px;
-            left: 95px;
+            left: 80px;
         }
 
         /* Arrow labels (clickable) */
@@ -173,15 +181,17 @@
             text-shadow: 0 0 15px #ffcc00, 0 0 25px #ffcc00;
         }
 
-        /* Arrow positions between the 5 player positions */
-        .arrow-1-2 { left: 160px; }
-        .arrow-2-1 { left: 160px; }
-        .arrow-2-3 { left: 340px; }
-        .arrow-3-2 { left: 340px; }
-        .arrow-3-4 { left: 520px; }
-        .arrow-4-3 { left: 520px; }
-        .arrow-4-5 { left: 700px; }
-        .arrow-5-4 { left: 700px; }
+        /* Arrow positions between the 6 player positions */
+        .arrow-1-2 { left: 130px; }
+        .arrow-2-1 { left: 130px; }
+        .arrow-2-3 { left: 280px; }
+        .arrow-3-2 { left: 280px; }
+        .arrow-3-4 { left: 430px; }
+        .arrow-4-3 { left: 430px; }
+        .arrow-4-5 { left: 580px; }
+        .arrow-5-4 { left: 580px; }
+        .arrow-5-6 { left: 730px; }
+        .arrow-6-5 { left: 730px; }
 
         /* Hide all arrows by default */
         .arrow {
@@ -218,8 +228,16 @@
             display: block;
         }
 
-        /* Position 5: can only go left */
+        /* Position 5: can go left or right */
         #pos-5:checked ~ .arrow-5-4 {
+            display: block;
+        }
+        #pos-5:checked ~ .arrow-5-6 {
+            display: block;
+        }
+
+        /* Position 6: can only go left */
+        #pos-6:checked ~ .arrow-6-5 {
             display: block;
         }
     </style>
@@ -228,12 +246,13 @@
     <div class="game-container">
         <div class="title">LIFTS AND LADDERS</div>
 
-        <!-- Radio buttons for position state (5 positions) -->
+        <!-- Radio buttons for position state (6 positions) -->
         <input type="radio" name="position" id="pos-1" class="position-radio">
         <input type="radio" name="position" id="pos-2" class="position-radio">
         <input type="radio" name="position" id="pos-3" class="position-radio" checked>
         <input type="radio" name="position" id="pos-4" class="position-radio">
         <input type="radio" name="position" id="pos-5" class="position-radio">
+        <input type="radio" name="position" id="pos-6" class="position-radio">
 
         <!-- Arrow labels that control the radio buttons -->
         <!-- Between pos 1 and 2 -->
@@ -252,6 +271,10 @@
         <label for="pos-5" class="arrow arrow-4-5">►</label>
         <label for="pos-4" class="arrow arrow-5-4">◄</label>
 
+        <!-- Between pos 5 and 6 -->
+        <label for="pos-6" class="arrow arrow-5-6">►</label>
+        <label for="pos-5" class="arrow arrow-6-5">◄</label>
+
         <!-- Player character -->
         <div class="player">
   O
@@ -267,34 +290,34 @@
 |--|
 |--|</div>
 
-        <!-- Platform 1 (aligned right, 80% width) -->
+        <!-- Platform 1 (extends to right edge, gap at position 1) -->
         <div class="platform platform-1">
-╔═════════════════════════════════════════════════════════════════════════════════════════════════╗
-║█████████████████████████████████████████████████████████████████████████████████████████████████║
-╚═════════════════════════════════════════════════════════════════════════════════════════════════╝</div>
+╔═════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║█████████████████████████████████████████████████████████████████████████████████████████████████████║
+╚═════════════════════════════════════════════════════════════════════════════════════════════════════╝</div>
 
-        <!-- Platform 2 (aligned left, 80% width) -->
+        <!-- Platform 2 (aligned left, 83.33% width - gap at position 6) -->
         <div class="platform platform-2">
-╔═════════════════════════════════════════════════════════════════════════════════════════════════╗
-║█████████████████████████████████████████████████████████████████████████████████████████████████║
-╚═════════════════════════════════════════════════════════════════════════════════════════════════╝</div>
+╔════════════════════════════════════════════════════════════════════════════════════════════╗
+║████████████████████████████████████████████████████████████████████████████████████████████║
+╚════════════════════════════════════════════════════════════════════════════════════════════╝</div>
 
-        <!-- Platform 3 (split: 40% left, 20% gap, 40% right) -->
+        <!-- Platform 3 (split: 33.33% left, 33.33% gap, 33.33% right) -->
         <div class="platform platform-3-left">
-╔════════════════════════════════════════════╗
-║████████████████████████████████████████████║
-╚════════════════════════════════════════════╝</div>
+╔══════════════════════════════════╗
+║██████████████████████████████████║
+╚══════════════════════════════════╝</div>
 
         <div class="platform platform-3-right">
-╔════════════════════════════════════════════════╗
-║████████████████████████████████████████████████║
-╚════════════════════════════════════════════════╝</div>
+╔══════════════════════════════════╗
+║██████████████████████████████████║
+╚══════════════════════════════════╝</div>
 
-        <!-- Platform 4 (aligned right, 80% width) -->
+        <!-- Platform 4 (extends to right edge, gap at position 1) -->
         <div class="platform platform-4">
-╔═════════════════════════════════════════════════════════════════════════════════════════════════╗
-║█████████████████████████████████████████████████████████████████████████████████████████████████║
-╚═════════════════════════════════════════════════════════════════════════════════════════════════╝</div>
+╔═════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║█████████████████████████████████████████████████████████████████████████████████████████████████████║
+╚═════════════════════════════════════════════════════════════════════════════════════════════════════╝</div>
 
         <!-- Ground (functions as lower platform) -->
         <div class="ground">
