@@ -47,10 +47,6 @@
             font-family: sans-serif;
         }
 
-        body > div > input:first-of-type {
-            margin-left: 90px;
-        }
-
         .game-container {
             position: relative;
             width: calc(var(--pos-width) * 6);
@@ -274,7 +270,45 @@
         /* Hide radio buttons and checkboxes */
         .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .coin-checkbox, .door-checkbox {
             display: none;
+            /* When unhidden for debugging: */
+            z-index: 9999;
+            position: fixed;
         }
+        /* Debug positions - levels (row 1) */
+        #level-0 { top: 10px; left: 10px; }
+        #level-1 { top: 10px; left: 30px; }
+        #level-2 { top: 10px; left: 50px; }
+        #level-3 { top: 10px; left: 70px; }
+        #level-4 { top: 10px; left: 90px; }
+        /* Debug positions - positions (row 2) */
+        #pos-1 { top: 30px; left: 10px; }
+        #pos-2 { top: 30px; left: 30px; }
+        #pos-3 { top: 30px; left: 50px; }
+        #pos-4 { top: 30px; left: 70px; }
+        #pos-5 { top: 30px; left: 90px; }
+        #pos-6 { top: 30px; left: 110px; }
+        #pos-7 { top: 30px; left: 130px; }
+        #pos-8 { top: 30px; left: 150px; }
+        #pos-9 { top: 30px; left: 170px; }
+        #pos-10 { top: 30px; left: 190px; }
+        #pos-11 { top: 30px; left: 210px; }
+        #pos-12 { top: 30px; left: 230px; }
+        /* Debug positions - items (row 3) */
+        #key-pickup { top: 50px; left: 10px; }
+        #toolbox-unlock { top: 50px; left: 30px; }
+        #wrench-pickup { top: 50px; left: 50px; }
+        #door-opened { top: 50px; left: 70px; }
+        /* Debug positions - coins (row 4) */
+        #coin-L0P3-pickup { top: 70px; left: 10px; }
+        #coin-L1P4-pickup { top: 70px; left: 30px; }
+        #coin-L3P5-pickup { top: 70px; left: 50px; }
+        #coin-L2P1-pickup { top: 70px; left: 70px; }
+        #coin-L4P2-pickup { top: 70px; left: 90px; }
+        #coin-L0P9-pickup { top: 70px; left: 110px; }
+        #coin-L1P11-pickup { top: 70px; left: 130px; }
+        #coin-L2P7-pickup { top: 70px; left: 150px; }
+        #coin-L3P8-pickup { top: 70px; left: 170px; }
+        #coin-L4P10-pickup { top: 70px; left: 190px; }
 
         /* Inventory area */
         .inventory {
