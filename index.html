@@ -47,6 +47,10 @@
             font-family: sans-serif;
         }
 
+        body > div > input:first-of-type {
+            margin-left: 90px;
+        }
+
         .game-container {
             position: relative;
             width: calc(var(--pos-width) * 6);
@@ -900,7 +904,7 @@
             transform: scaleY(1.4);
         }
         .door-L0P6 {
-            bottom: calc(var(--ground-height) + 6px);
+            bottom: calc(var(--ground-height) + 2px);
             right: 10px;
         }
         /* Door closed - show by default, hide when opened */
@@ -1008,9 +1012,9 @@
         <input type="radio" name="level" id="level-4" class="level-radio">
 
         <!-- Radio buttons for position (horizontal) -->
-        <input type="radio" name="position" id="pos-1" class="position-radio">
+        <input type="radio" name="position" id="pos-1" class="position-radio" checked>
         <input type="radio" name="position" id="pos-2" class="position-radio">
-        <input type="radio" name="position" id="pos-3" class="position-radio" checked>
+        <input type="radio" name="position" id="pos-3" class="position-radio">
         <input type="radio" name="position" id="pos-4" class="position-radio">
         <input type="radio" name="position" id="pos-5" class="position-radio">
         <input type="radio" name="position" id="pos-6" class="position-radio">
