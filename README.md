@@ -10,6 +10,10 @@ Help Nibo the little spaceman to find his way out of the level.
 
 ![Level 1](images/level-1.png)
 
+# Project location
+
+ - [Github](https://github.com/ruittenb/nibo-game)
+
 # More Examples
 
  - [The Mine](https://codepen.io/jcoulterdesign/pen/NOMeEb)
