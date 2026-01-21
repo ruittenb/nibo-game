@@ -1230,8 +1230,8 @@
         /* Skull */
         .skull {
             position: absolute;
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             padding: 3px;
             --skull-bg-purple: #4a0050;
             color: purple;
@@ -1248,8 +1248,8 @@
         /* Stage 2 Bacteria */
         .bacteria {
             position: absolute;
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             padding: 3px;
             --bacteria-bg-purple: #4a0050;
             color: purple;
@@ -1266,6 +1266,21 @@
         .bacteria-L1P9 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
+        }
+
+        /* Sprout on level 0, position 12 */
+        .sprout {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            bottom: calc(var(--ground-height) + 22px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset) + 5px);
+            z-index: 15;
+        }
+        .sprout svg {
+            width: 150%;
+            height: 180%;
+            color: #4a4;
         }
 
         /* Door */
@@ -1408,6 +1423,10 @@
         <symbol id="axe" viewBox="0 0 24 24">
             <path fill="#cc1010" d="M 12,2 L 22,8 C 22,12 20,14 16,15 L 13,10 L 9,6 L 12,2 z"/>
             <path fill="#c4a484" d="M 4.11,19.84 L 2.12,18.33 L 9.19,9 L 11,10.81 L 4.11,19.84 Z"/>
+        </symbol>
+        <symbol id="sprout" viewBox="0 0 24 34">
+            <path fill="currentColor" d="M 2,32 V 30 C 2,30 7,28 12,28 C 17,28 22,30 22,30 V 32 H 2 Z"/>
+            <path fill="currentColor" d="M 11.3,9.1 C 10.1,5.2 4,6.1 4,6.1 C 4,6.1 4.2,13.9 9.9,12.7 C 9.5,9.8 8,9 8,9 C 10.8,9 11,12.4 11,12.4 V 26 C 11.3,26 11.7,26 12,26 C 12.3,26 12.7,26 13,26 V 12.8 C 13,12.8 13,8.9 16,7.9 C 16,7.9 14,10.9 14,12.9 C 21,13.6 21,4 21,4 C 21,4 12.1,3 11.3,9.1 Z"/>
         </symbol>
     </svg>
 
@@ -1687,6 +1706,9 @@
         <label for="coin-L2P7-pickup" class="coin-in-game coin-L2P7"><svg><use href="#coin"/></svg></label>
         <label for="coin-L3P9-pickup" class="coin-in-game coin-L3P9"><svg><use href="#coin"/></svg></label>
         <label for="coin-L4P10-pickup" class="coin-in-game coin-L4P10"><svg><use href="#coin"/></svg></label>
+
+        <!-- Sprout on level 0, position 12 -->
+        <div class="sprout"><svg><use href="#sprout"/></svg></div>
 
         <!-- Door -->
         <label for="door-opened" class="door door-L0P6">
