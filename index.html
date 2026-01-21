@@ -811,6 +811,41 @@
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
         }
+
+        /* Death overlay */
+        .death-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease-in;
+        }
+        .death-overlay .death-message {
+            color: #ff0000;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #000;
+            text-align: center;
+        }
+        .death-overlay .death-submessage {
+            color: #888;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        /* Show death overlay when player is at skull location (L1P6) */
+        #level-1:checked ~ #pos-6:checked ~ .death-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body>
@@ -1000,6 +1035,12 @@
 
         <!-- Skull -->
         <svg class="skull skull-L1P6"><use href="#skull"/></svg>
+
+        <!-- Death overlay -->
+        <div class="death-overlay">
+            <div class="death-message">YOU DIED</div>
+            <div class="death-submessage">GAME OVER</div>
+        </div>
     </div>
 </body>
 </html>
