@@ -355,6 +355,10 @@
             height: 100%;
             color: var(--gold-color);
         }
+        @keyframes skull-roll {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
         @keyframes key-pulse {
             0%, 100% {
                 transform: scale(1);
@@ -831,9 +835,15 @@
         /* Skull */
         .skull {
             position: absolute;
-            width: 24px;
-            height: 29px;
+            width: 27px;
+            height: 27px;
+            padding: 2px;
+            --skull-bg-purple: #4a0050;
             color: purple;
+            background: linear-gradient(to top, transparent 0%, var(--skull-bg-purple) 12.5%, transparent 25%, var(--skull-bg-purple) 37.5%, transparent 50%, var(--skull-bg-purple) 62.5%, transparent 75%, var(--skull-bg-purple) 87.5%, transparent 100%);
+            background-size: 100% 200%;
+            animation: skull-roll 1s linear infinite;
+            border-radius: 6px;
             z-index: 15;
         }
         .skull-L1P6 {
