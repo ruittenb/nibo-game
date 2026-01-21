@@ -219,7 +219,7 @@
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 2px);
             left: calc(var(--pos-offset) - var(--item-offset));
             z-index: 200;
-            cursor: pointer;
+            pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
         }
         .key-in-game svg {
@@ -231,6 +231,12 @@
         #safe-unlock:checked ~ .key-in-game {
             display: none;
         }
+        /* Enable clicking key only when player is at level 4, position 1 */
+        #level-4:checked ~ #pos-1:checked ~ #key-pickup:not(:checked) ~ .key-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
+        }
         /* Move key to inventory when picked up */
         /* Container height = ground-height + platform-height*5 + top-margin */
         /* To center 24px key in 40px inventory vertically: (inventory-height - 24px) / 2 = 8px from top of inventory */
@@ -238,11 +244,6 @@
         #key-pickup:checked ~ .key-in-game {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--inventory-top) - var(--inventory-height) / 2 - 12px - 6px);
             left: calc(var(--pos-width) * 6 - var(--inventory-right) - var(--inventory-width) + var(--inventory-padding) - 4px);
-            pointer-events: none;
-        }
-        /* Pulsating glow when player is nearby and key not picked up */
-        #level-4:checked ~ #pos-1:checked ~ #key-pickup:not(:checked) ~ .key-in-game {
-            animation: coin-pulse 1s ease-in-out infinite;
         }
 
         /* Safe on level 2, position 6 */
