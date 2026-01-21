@@ -257,7 +257,7 @@
         .toolbox svg {
             width: 100%;
             height: 100%;
-            color: #888;
+            color: #cc1010;
         }
         /* Hide toolbox when unlocked */
         #toolbox-unlock:checked ~ .toolbox {
@@ -754,17 +754,17 @@
             bottom: calc(var(--ground-height) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 2 - var(--item-offset));
         }
-        .coin-L1P5 {
+        .coin-L1P4 {
             bottom: calc(var(--platform-height) + var(--platform-thickness) + 5px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--item-offset));
-        }
-        .coin-L2P4 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--item-offset));
         }
-        .coin-L3P6 {
+        .coin-L3P5 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 5px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--item-offset));
+        }
+        .coin-L2P1 {
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px);
+            left: calc(var(--pos-offset) - var(--item-offset));
         }
         .coin-L4P2 {
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px);
@@ -773,9 +773,9 @@
 
         /* Hide coins when picked up */
         #coin-L0P3-pickup:checked ~ .coin-L0P3 { display: none; }
-        #coin-L1P5-pickup:checked ~ .coin-L1P5 { display: none; }
-        #coin-L2P4-pickup:checked ~ .coin-L2P4 { display: none; }
-        #coin-L3P6-pickup:checked ~ .coin-L3P6 { display: none; }
+        #coin-L1P4-pickup:checked ~ .coin-L1P4 { display: none; }
+        #coin-L3P5-pickup:checked ~ .coin-L3P5 { display: none; }
+        #coin-L2P1-pickup:checked ~ .coin-L2P1 { display: none; }
         #coin-L4P2-pickup:checked ~ .coin-L4P2 { display: none; }
 
         /* Coin pulsating glow when player is nearby */
@@ -784,9 +784,9 @@
             50% { filter: drop-shadow(0 0 12px var(--gold-color)) drop-shadow(0 0 20px var(--gold-color)); }
         }
         #level-0:checked ~ #pos-3:checked ~ #coin-L0P3-pickup:not(:checked) ~ .coin-L0P3 { animation: coin-pulse 1s ease-in-out infinite; }
-        #level-1:checked ~ #pos-5:checked ~ #coin-L1P5-pickup:not(:checked) ~ .coin-L1P5 { animation: coin-pulse 1s ease-in-out infinite; }
-        #level-2:checked ~ #pos-4:checked ~ #coin-L2P4-pickup:not(:checked) ~ .coin-L2P4 { animation: coin-pulse 1s ease-in-out infinite; }
-        #level-3:checked ~ #pos-6:checked ~ #coin-L3P6-pickup:not(:checked) ~ .coin-L3P6 { animation: coin-pulse 1s ease-in-out infinite; }
+        #level-1:checked ~ #pos-4:checked ~ #coin-L1P4-pickup:not(:checked) ~ .coin-L1P4 { animation: coin-pulse 1s ease-in-out infinite; }
+        #level-3:checked ~ #pos-5:checked ~ #coin-L3P5-pickup:not(:checked) ~ .coin-L3P5 { animation: coin-pulse 1s ease-in-out infinite; }
+        #level-2:checked ~ #pos-1:checked ~ #coin-L2P1-pickup:not(:checked) ~ .coin-L2P1 { animation: coin-pulse 1s ease-in-out infinite; }
         #level-4:checked ~ #pos-2:checked ~ #coin-L4P2-pickup:not(:checked) ~ .coin-L4P2 { animation: coin-pulse 1s ease-in-out infinite; }
 
         /* Coin pickup buttons */
@@ -801,9 +801,9 @@
 
         /* Show coin pickup button when player is at coin location and coin not picked up */
         #level-0:checked ~ #pos-3:checked ~ #coin-L0P3-pickup:not(:checked) ~ .coin-pickup-btn-L0P3 { display: block; }
-        #level-1:checked ~ #pos-5:checked ~ #coin-L1P5-pickup:not(:checked) ~ .coin-pickup-btn-L1P5 { display: block; }
-        #level-2:checked ~ #pos-4:checked ~ #coin-L2P4-pickup:not(:checked) ~ .coin-pickup-btn-L2P4 { display: block; }
-        #level-3:checked ~ #pos-6:checked ~ #coin-L3P6-pickup:not(:checked) ~ .coin-pickup-btn-L3P6 { display: block; }
+        #level-1:checked ~ #pos-4:checked ~ #coin-L1P4-pickup:not(:checked) ~ .coin-pickup-btn-L1P4 { display: block; }
+        #level-3:checked ~ #pos-5:checked ~ #coin-L3P5-pickup:not(:checked) ~ .coin-pickup-btn-L3P5 { display: block; }
+        #level-2:checked ~ #pos-1:checked ~ #coin-L2P1-pickup:not(:checked) ~ .coin-pickup-btn-L2P1 { display: block; }
         #level-4:checked ~ #pos-2:checked ~ #coin-L4P2-pickup:not(:checked) ~ .coin-pickup-btn-L4P2 { display: block; }
 
         /* Coin pickup button positions (same as coins) */
@@ -811,17 +811,17 @@
             bottom: calc(var(--ground-height) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 2 - var(--item-offset));
         }
-        .coin-pickup-btn-L1P5 {
+        .coin-pickup-btn-L1P4 {
             bottom: calc(var(--platform-height) + var(--platform-thickness) + 5px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--item-offset));
-        }
-        .coin-pickup-btn-L2P4 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--item-offset));
         }
-        .coin-pickup-btn-L3P6 {
+        .coin-pickup-btn-L3P5 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 5px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--item-offset));
+        }
+        .coin-pickup-btn-L2P1 {
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px);
+            left: calc(var(--pos-offset) - var(--item-offset));
         }
         .coin-pickup-btn-L4P2 {
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px);
@@ -891,9 +891,9 @@
 
         <!-- Coin pickup checkboxes -->
         <input type="checkbox" id="coin-L0P3-pickup" class="coin-checkbox">
-        <input type="checkbox" id="coin-L1P5-pickup" class="coin-checkbox">
-        <input type="checkbox" id="coin-L2P4-pickup" class="coin-checkbox">
-        <input type="checkbox" id="coin-L3P6-pickup" class="coin-checkbox">
+        <input type="checkbox" id="coin-L1P4-pickup" class="coin-checkbox">
+        <input type="checkbox" id="coin-L3P5-pickup" class="coin-checkbox">
+        <input type="checkbox" id="coin-L2P1-pickup" class="coin-checkbox">
         <input type="checkbox" id="coin-L4P2-pickup" class="coin-checkbox">
 
         <!-- Fixed navigation panel -->
@@ -1018,16 +1018,16 @@
 
         <!-- Coins -->
         <svg class="coin coin-L0P3"><use href="#coin"/></svg>
-        <svg class="coin coin-L1P5"><use href="#coin"/></svg>
-        <svg class="coin coin-L2P4"><use href="#coin"/></svg>
-        <svg class="coin coin-L3P6"><use href="#coin"/></svg>
+        <svg class="coin coin-L1P4"><use href="#coin"/></svg>
+        <svg class="coin coin-L3P5"><use href="#coin"/></svg>
+        <svg class="coin coin-L2P1"><use href="#coin"/></svg>
         <svg class="coin coin-L4P2"><use href="#coin"/></svg>
 
         <!-- Coin pickup buttons -->
         <label for="coin-L0P3-pickup" class="coin-pickup-btn coin-pickup-btn-L0P3"></label>
-        <label for="coin-L1P5-pickup" class="coin-pickup-btn coin-pickup-btn-L1P5"></label>
-        <label for="coin-L2P4-pickup" class="coin-pickup-btn coin-pickup-btn-L2P4"></label>
-        <label for="coin-L3P6-pickup" class="coin-pickup-btn coin-pickup-btn-L3P6"></label>
+        <label for="coin-L1P4-pickup" class="coin-pickup-btn coin-pickup-btn-L1P4"></label>
+        <label for="coin-L3P5-pickup" class="coin-pickup-btn coin-pickup-btn-L3P5"></label>
+        <label for="coin-L2P1-pickup" class="coin-pickup-btn coin-pickup-btn-L2P1"></label>
         <label for="coin-L4P2-pickup" class="coin-pickup-btn coin-pickup-btn-L4P2"></label>
 
         <!-- Skull -->
