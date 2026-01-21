@@ -584,6 +584,10 @@
             0% { background-position: 0 0; }
             100% { background-position: 0 100%; }
         }
+        @keyframes bacteria-roll {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
         @keyframes key-pulse {
             0%, 100% {
                 transform: scale(1);
@@ -1250,9 +1254,9 @@
         /* Skull */
         .skull {
             position: absolute;
-            width: 27px;
-            height: 27px;
-            padding: 2px;
+            width: 40px;
+            height: 40px;
+            padding: 3px;
             --skull-bg-purple: #4a0050;
             color: purple;
             background: linear-gradient(to top, transparent 0%, var(--skull-bg-purple) 12.5%, transparent 25%, var(--skull-bg-purple) 37.5%, transparent 50%, var(--skull-bg-purple) 62.5%, transparent 75%, var(--skull-bg-purple) 87.5%, transparent 100%);
@@ -1265,12 +1269,25 @@
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
         }
-        /* Stage 2 Skulls */
-        .skull-L0P10 {
+        /* Stage 2 Bacteria */
+        .bacteria {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            padding: 3px;
+            --bacteria-bg-purple: #4a0050;
+            color: purple;
+            background: linear-gradient(to top, transparent 0%, var(--bacteria-bg-purple) 12.5%, transparent 25%, var(--bacteria-bg-purple) 37.5%, transparent 50%, var(--bacteria-bg-purple) 62.5%, transparent 75%, var(--bacteria-bg-purple) 87.5%, transparent 100%);
+            background-size: 100% 200%;
+            animation: bacteria-roll 1s linear infinite;
+            border-radius: 6px;
+            z-index: 15;
+        }
+        .bacteria-L0P10 {
             bottom: calc(var(--ground-height) + 2px);
             left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset));
         }
-        .skull-L1P9 {
+        .bacteria-L1P9 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
         }
@@ -1408,6 +1425,9 @@
         </symbol>
         <symbol id="door-open" viewBox="0 0 448 512">
             <path fill="currentColor" d="M 288 64 l 64 0 0 416 c 0 17.7 14.3 32 32 32 l 32 0 c 17.7 0 32 -14.3 32 -32 s -14.3 -32 -32 -32 l 0 -384 c 0 -35.3 -28.7 -64 -64 -64 l -96 0 0 0 -160 0 C 60.7 0 32 28.7 32 64 l 0 384 c -17.7 0 -32 14.3 -32 32 s 14.3 32 32 32 l 224 0 c 17.7 0 32 -14.3 32 -32 l 0 -416 z M 160 256 a 32 32 0 1 1 64 0 32 32 0 1 1 -64 0 z"/>
+        </symbol>
+        <symbol id="bacteria" viewBox="0 -40 640 600">
+            <path fill="currentColor" d="M 256 -32 c 13.3 0 24 10.7 24 24 l 0 11 c 8.6 2.2 16.9 5.6 24.8 10.3 L 311 7 c 9.4 -9.4 24.6 -9.4 33.9 0 s 9.4 24.6 0 33.9 l -6.3 6.3 c 4.6 7.8 8 16.2 10.3 24.8 l 11 0 c 13.3 0 24 10.7 24 24 s -10.7 24 -24 24 l -11 0 c -2.2 8.6 -5.6 16.9 -10.3 24.8 L 345 151 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 -30.1 30.1 4.1 4.1 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 c -10 10 -20 20 -30.1 30.1 L 217 279 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -6.3 -6.3 c -7.8 4.6 -16.2 8 -24.8 10.3 l 0 11 c 0 13.3 -10.7 24 -24 24 s -24 -10.7 -24 -24 l 0 -11 c -8.6 -2.2 -16.9 -5.6 -24.8 -10.3 L 73 313 c -9.4 9.4 -24.6 9.4 -33.9 0 s -9.4 -24.6 0 -33.9 l 6.3 -6.3 c -4.6 -7.8 -8 -16.2 -10.3 -24.8 l -11 0 c -13.3 0 -24 -10.7 -24 -24 s 10.7 -24 24 -24 l 11 0 c 2.2 -8.6 5.6 -16.9 10.3 -24.8 L 39 169 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 c 10 -10 20 -20 30.1 -30.1 L 103 105 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 30.1 -30.1 -4.1 -4.1 c -9.4 -9.4 -9.4 -24.6 0 -33.9 S 191.6 -2.3 201 7 l 6.3 6.3 c 7.8 -4.6 16.2 -8 24.8 -10.3 l 0 -11 c 0 -13.3 10.7 -24 24 -24 z M 128 256 a 32 32 0 1 0 0 -64 32 32 0 1 0 0 64 z M 240 144 a 32 32 0 1 0 -64 0 32 32 0 1 0 64 0 z m 296 40 l 0 11 c 8.6 2.2 16.9 5.6 24.8 10.3 L 567 199 c 9.4 -9.4 24.6 -9.4 33.9 0 s 9.4 24.6 0 33.9 l -6.3 6.3 c 4.6 7.8 8 16.2 10.3 24.8 l 11 0 c 13.3 0 24 10.7 24 24 s -10.7 24 -24 24 l -11 0 c -2.2 8.6 -5.6 16.9 -10.3 24.8 L 601 343 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 -30.1 30.1 4.1 4.1 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 c -10 10 -20 20 -30.1 30.1 L 473 471 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -6.3 -6.3 c -7.8 4.6 -16.2 8 -24.8 10.3 l 0 11 c 0 13.3 -10.7 24 -24 24 s -24 -10.7 -24 -24 l 0 -11 c -8.6 -2.2 -16.9 -5.6 -24.8 -10.3 L 329 505 c -9.4 9.4 -24.6 9.4 -33.9 0 s -9.4 -24.6 0 -33.9 l 6.3 -6.3 c -4.6 -7.8 -8 -16.2 -10.3 -24.8 l -11 0 c -13.3 0 -24 -10.7 -24 -24 s 10.7 -24 24 -24 l 11 0 c 2.2 -8.6 5.6 -16.9 10.3 -24.8 L 295 361 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 c 10 -10 20 -20 30.1 -30.1 L 359 297 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 30.1 -30.1 -4.1 -4.1 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 6.3 6.3 c 7.8 -4.6 16.2 -8 24.8 -10.3 l 0 -11 c 0 -13.3 10.7 -24 24 -24 s 24 10.7 24 24 z M 448 384 a 32 32 0 1 0 -64 0 32 32 0 1 0 64 0 z"/>
         </symbol>
     </svg>
 
@@ -1696,9 +1716,9 @@
         <!-- Skull -->
         <svg class="skull skull-L1P6"><use href="#skull"/></svg>
 
-        <!-- Stage 2 Skulls -->
-        <svg class="skull skull-L0P10"><use href="#skull"/></svg>
-        <svg class="skull skull-L1P9"><use href="#skull"/></svg>
+        <!-- Stage 2 Bacteria -->
+        <svg class="bacteria bacteria-L0P10"><use href="#bacteria"/></svg>
+        <svg class="bacteria bacteria-L1P9"><use href="#bacteria"/></svg>
 
         </div><!-- end game-world -->
 
