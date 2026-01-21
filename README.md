@@ -8,16 +8,7 @@ Help Nibo the little spaceman to find his way out of the level.
 
 ## Level 1:
 
-```
-    ┌─────────────────┐
-    │K_.$_.__.__.__.  │
-    │__.__.  ._H.$_.__│
-    │$H.__.__.__.  .B_│
-    │  .__._H.$_.__.X_│
-    │__.__.$_.__._H.__│
-    └─────────────────┘
-
-```
+![Level 1](images/level-1.png)
 
 # More Examples
 
