@@ -210,6 +210,26 @@
             justify-content: flex-end;
             padding-right: var(--inventory-padding);
         }
+
+        /* Coin counter box */
+        .coin-counter {
+            position: absolute;
+            top: calc(var(--inventory-top) + var(--inventory-height) + var(--inventory-top));
+            right: var(--inventory-right);
+            width: var(--inventory-width);
+            height: var(--inventory-height);
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            padding-left: var(--inventory-padding);
+        }
+        .coin-counter .coin-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--gold-color);
+        }
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
             position: absolute;
@@ -938,6 +958,11 @@
 
         <!-- Inventory -->
         <div class="inventory">
+        </div>
+
+        <!-- Coin counter -->
+        <div class="coin-counter">
+            <svg class="coin-icon"><use href="#coin"/></svg>
         </div>
 
         <!-- Key in game world (clickable to pick up) -->
