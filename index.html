@@ -899,6 +899,8 @@
         #pos-5:checked ~ .game-world .arrow-5-4 { display: block; }
         #pos-5:checked ~ .game-world .arrow-5-6 { display: block; }
         #pos-6:checked ~ .game-world .arrow-6-5 { display: block; }
+        /* Nav widget arrow to Stage 2 when door is open and player at pos-6 */
+        #pos-6:checked ~ #door-opened:checked ~ .nav-panel .nav-right[for="pos-7"] { display: block; }
         /* Stage 2 arrows - no left arrow at pos-7 (one-way from Stage 1) */
         #pos-7:checked ~ .game-world .arrow-7-8 { display: block; }
         #pos-8:checked ~ .game-world .arrow-8-7 { display: block; }
@@ -1316,10 +1318,6 @@
         #level-0:checked ~ #pos-6:checked ~ #door-opened:checked ~ .game-world .door-exit {
             pointer-events: auto;
             cursor: pointer;
-        }
-        /* Show nav arrow when door is open */
-        #level-0:checked ~ #pos-6:checked ~ #door-opened:checked ~ .nav-panel .nav-right[for="pos-7"] {
-            display: block;
         }
 
         /* Death overlay */
