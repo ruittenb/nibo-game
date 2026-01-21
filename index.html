@@ -185,7 +185,7 @@
         }
 
         /* Hide radio buttons and checkboxes */
-        .position-radio, .level-radio, .key-checkbox, .safe-checkbox, .wrench-checkbox {
+        .position-radio, .level-radio, .key-checkbox, .safe-checkbox, .wrench-checkbox, .coin-checkbox {
             display: none;
         }
 
@@ -780,6 +780,65 @@
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset));
         }
+
+        /* Hide coins when picked up */
+        #coin-L0P3-pickup:checked ~ .coin-L0P3 { display: none; }
+        #coin-L1P5-pickup:checked ~ .coin-L1P5 { display: none; }
+        #coin-L2P4-pickup:checked ~ .coin-L2P4 { display: none; }
+        #coin-L3P6-pickup:checked ~ .coin-L3P6 { display: none; }
+        #coin-L4P2-pickup:checked ~ .coin-L4P2 { display: none; }
+
+        /* Coin pickup buttons */
+        .coin-pickup-btn {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            z-index: 25;
+            display: none;
+        }
+
+        /* Show coin pickup button when player is at coin location and coin not picked up */
+        #level-0:checked ~ #pos-3:checked ~ #coin-L0P3-pickup:not(:checked) ~ .coin-pickup-btn-L0P3 { display: block; }
+        #level-1:checked ~ #pos-5:checked ~ #coin-L1P5-pickup:not(:checked) ~ .coin-pickup-btn-L1P5 { display: block; }
+        #level-2:checked ~ #pos-4:checked ~ #coin-L2P4-pickup:not(:checked) ~ .coin-pickup-btn-L2P4 { display: block; }
+        #level-3:checked ~ #pos-6:checked ~ #coin-L3P6-pickup:not(:checked) ~ .coin-pickup-btn-L3P6 { display: block; }
+        #level-4:checked ~ #pos-2:checked ~ #coin-L4P2-pickup:not(:checked) ~ .coin-pickup-btn-L4P2 { display: block; }
+
+        /* Coin pickup button positions (same as coins) */
+        .coin-pickup-btn-L0P3 {
+            bottom: calc(var(--ground-height) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 2 - var(--item-offset));
+        }
+        .coin-pickup-btn-L1P5 {
+            bottom: calc(var(--platform-height) + var(--platform-thickness) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--item-offset));
+        }
+        .coin-pickup-btn-L2P4 {
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--item-offset));
+        }
+        .coin-pickup-btn-L3P6 {
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
+        }
+        .coin-pickup-btn-L4P2 {
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset));
+        }
+
+        /* Skull */
+        .skull {
+            position: absolute;
+            width: 24px;
+            height: 29px;
+            color: purple;
+            z-index: 15;
+        }
+        .skull-L1P6 {
+            bottom: calc(var(--platform-height) + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
+        }
     </style>
 </head>
 <body>
@@ -787,6 +846,9 @@
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="coin" viewBox="96 32 384 384">
             <path fill="currentColor" d="M 96 224 a 192 192 0 1 1 384 0 192 192 0 1 1 -384 0 z m 176 -92 l 0 4 c -28.8 .3 -52 23.7 -52 52.5 0 25.7 18.5 47.6 43.9 51.8 l 41.7 7 c 6 1 10.4 6.2 10.4 12.3 0 6.9 -5.6 12.5 -12.5 12.5 L 248 272 c -11 0 -20 9 -20 20 s 9 20 20 20 l 24 0 0 4 c 0 11 9 20 20 20 s 20 -9 20 -20 l 0 -4.7 c 25 -4.1 44 -25.7 44 -51.8 0 -25.7 -18.5 -47.6 -43.9 -51.8 l -41.7 -7 c -6 -1 -10.4 -6.2 -10.4 -12.3 0 -6.9 5.6 -12.5 12.5 -12.5 l 47.5 0 c 11 0 20 -9 20 -20 s -9 -20 -20 -20 l -8 0 0 -4 c 0 -11 -9 -20 -20 -20 s -20 9 -20 20 z"/>
+        </symbol>
+        <symbol id="skull" viewBox="0 0 448 545">
+            <path fill="currentColor" d="M 384 144 C 384 64.5 312.4 0 224 0 S 64 64.5 64 144 c 0 47.1 25.1 88.9 64 115.2 l 0 28.8 c 0 17.7 14.3 32 32 32 l 128 0 c 17.7 0 32 -14.3 32 -32 l 0 -28.8 c 38.9 -26.3 64 -68.1 64 -115.2 z M 160 128 a 32 32 0 1 1 0 64 32 32 0 1 1 0 -64 z m 96 32 a 32 32 0 1 1 64 0 32 32 0 1 1 -64 0 z M 445.5 339.7 c -6.8 -16.3 -25.5 -24 -41.8 -17.2 L 224 397.3 44.3 322.5 c -16.3 -6.8 -35 .9 -41.8 17.2 s .9 35 17.2 41.8 L 140.8 432 19.7 482.5 C 3.4 489.3 -4.3 508 2.5 524.3 s 25.5 24 41.8 17.2 L 224 466.7 403.7 541.5 c 16.3 6.8 35 -.9 41.8 -17.2 s -.9 -35 -17.2 -41.8 L 307.2 432 428.3 381.5 c 16.3 -6.8 24 -25.5 17.2 -41.8 z"/>
         </symbol>
     </svg>
 
@@ -816,6 +878,13 @@
 
         <!-- Wrench pickup checkbox -->
         <input type="checkbox" id="wrench-pickup" class="wrench-checkbox">
+
+        <!-- Coin pickup checkboxes -->
+        <input type="checkbox" id="coin-L0P3-pickup" class="coin-checkbox">
+        <input type="checkbox" id="coin-L1P5-pickup" class="coin-checkbox">
+        <input type="checkbox" id="coin-L2P4-pickup" class="coin-checkbox">
+        <input type="checkbox" id="coin-L3P6-pickup" class="coin-checkbox">
+        <input type="checkbox" id="coin-L4P2-pickup" class="coin-checkbox">
 
         <!-- Fixed navigation panel -->
         <div class="nav-panel">
@@ -947,6 +1016,16 @@
         <svg class="coin coin-L2P4"><use href="#coin"/></svg>
         <svg class="coin coin-L3P6"><use href="#coin"/></svg>
         <svg class="coin coin-L4P2"><use href="#coin"/></svg>
+
+        <!-- Coin pickup buttons -->
+        <label for="coin-L0P3-pickup" class="coin-pickup-btn coin-pickup-btn-L0P3"></label>
+        <label for="coin-L1P5-pickup" class="coin-pickup-btn coin-pickup-btn-L1P5"></label>
+        <label for="coin-L2P4-pickup" class="coin-pickup-btn coin-pickup-btn-L2P4"></label>
+        <label for="coin-L3P6-pickup" class="coin-pickup-btn coin-pickup-btn-L3P6"></label>
+        <label for="coin-L4P2-pickup" class="coin-pickup-btn coin-pickup-btn-L4P2"></label>
+
+        <!-- Skull -->
+        <svg class="skull skull-L1P6"><use href="#skull"/></svg>
     </div>
 </body>
 </html>
