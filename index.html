@@ -367,6 +367,17 @@
             align-items: center;
             padding-left: var(--inventory-padding);
             overflow: hidden;
+            /* Coin variables (0 = not collected, 1 = collected) */
+            --coin-L0P3: 0;
+            --coin-L1P4: 0;
+            --coin-L3P5: 0;
+            --coin-L2P1: 0;
+            --coin-L4P2: 0;
+            --coin-L0P8: 0;
+            --coin-L1P11: 0;
+            --coin-L2P7: 0;
+            --coin-L3P9: 0;
+            --coin-L4P10: 0;
         }
         .coin-counter .coin-icon {
             width: 24px;
@@ -378,14 +389,16 @@
             overflow: hidden;
             margin-left: 14px;
         }
-        .coin-counter .digit-strip-s1 {
-            transition: transform 0.5s ease-out;
-        }
-        .coin-counter .digit-strip-s2 {
+        .coin-counter .digit-strip {
             display: flex;
             flex-direction: column;
             align-items: center;
             transition: transform 0.5s ease-out;
+            transform: translateY(calc(
+                (var(--coin-L0P3) + var(--coin-L1P4) + var(--coin-L3P5) + var(--coin-L2P1) + var(--coin-L4P2) +
+                 var(--coin-L0P8) + var(--coin-L1P11) + var(--coin-L2P7) + var(--coin-L3P9) + var(--coin-L4P10))
+                * -24px
+            ));
         }
         .coin-counter .digit {
             height: 24px;
@@ -394,85 +407,17 @@
             font-weight: bold;
             color: var(--gold-color);
         }
-        /* === NESTED DIGIT STRIPS COIN COUNTER === */
-        /* S1 coins control outer strip (digit-strip-s1), S2 coins control inner strip (digit-strip-s2) */
-        /* Translations add up: S1 translateY + S2 translateY = total offset */
-
-        /* S1 coins: control digit-strip-s1 (outer) */
-        /* 1 S1 coin */
-        #coin-L0P3-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L1P4-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L3P5-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1 { transform: translateY(-24px); }
-        /* 2 S1 coins */
-        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L0P3-pickup:checked ~ #coin-L3P5-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L0P3-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L0P3-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L1P4-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L1P4-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L3P5-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1 { transform: translateY(-48px); }
-        /* 3 S1 coins */
-        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L0P3-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L0P3-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L0P3-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L1P4-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1 { transform: translateY(-72px); }
-        /* 4 S1 coins */
-        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L0P3-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1,
-        #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1 { transform: translateY(-96px); }
-        /* 5 S1 coins */
-        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip-s1 { transform: translateY(-120px); }
-
-        /* S2 coins: control digit-strip-s2 (inner) */
-        /* 1 S2 coin */
-        #coin-L0P8-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L1P11-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L2P7-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L3P9-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2 { transform: translateY(-24px); }
-        /* 2 S2 coins */
-        #coin-L0P8-pickup:checked ~ #coin-L1P11-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L0P8-pickup:checked ~ #coin-L2P7-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L0P8-pickup:checked ~ #coin-L3P9-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L0P8-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L1P11-pickup:checked ~ #coin-L2P7-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L1P11-pickup:checked ~ #coin-L3P9-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L1P11-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L2P7-pickup:checked ~ #coin-L3P9-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L2P7-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L3P9-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2 { transform: translateY(-48px); }
-        /* 3 S2 coins */
-        #coin-L0P8-pickup:checked ~ #coin-L1P11-pickup:checked ~ #coin-L2P7-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L0P8-pickup:checked ~ #coin-L1P11-pickup:checked ~ #coin-L3P9-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L0P8-pickup:checked ~ #coin-L1P11-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L0P8-pickup:checked ~ #coin-L2P7-pickup:checked ~ #coin-L3P9-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L0P8-pickup:checked ~ #coin-L2P7-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L0P8-pickup:checked ~ #coin-L3P9-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L1P11-pickup:checked ~ #coin-L2P7-pickup:checked ~ #coin-L3P9-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L1P11-pickup:checked ~ #coin-L2P7-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L1P11-pickup:checked ~ #coin-L3P9-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L2P7-pickup:checked ~ #coin-L3P9-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2 { transform: translateY(-72px); }
-        /* 4 S2 coins */
-        #coin-L0P8-pickup:checked ~ #coin-L1P11-pickup:checked ~ #coin-L2P7-pickup:checked ~ #coin-L3P9-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L0P8-pickup:checked ~ #coin-L1P11-pickup:checked ~ #coin-L2P7-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L0P8-pickup:checked ~ #coin-L1P11-pickup:checked ~ #coin-L3P9-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L0P8-pickup:checked ~ #coin-L2P7-pickup:checked ~ #coin-L3P9-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2,
-        #coin-L1P11-pickup:checked ~ #coin-L2P7-pickup:checked ~ #coin-L3P9-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2 { transform: translateY(-96px); }
-        /* 5 S2 coins */
-        #coin-L0P8-pickup:checked ~ #coin-L1P11-pickup:checked ~ #coin-L2P7-pickup:checked ~ #coin-L3P9-pickup:checked ~ #coin-L4P10-pickup:checked ~ .coin-counter .digit-strip-s2 { transform: translateY(-120px); }
+        /* Coin collection: set variable to 1 when collected */
+        #coin-L0P3-pickup:checked ~ .coin-counter { --coin-L0P3: 1; }
+        #coin-L1P4-pickup:checked ~ .coin-counter { --coin-L1P4: 1; }
+        #coin-L3P5-pickup:checked ~ .coin-counter { --coin-L3P5: 1; }
+        #coin-L2P1-pickup:checked ~ .coin-counter { --coin-L2P1: 1; }
+        #coin-L4P2-pickup:checked ~ .coin-counter { --coin-L4P2: 1; }
+        #coin-L0P8-pickup:checked ~ .coin-counter { --coin-L0P8: 1; }
+        #coin-L1P11-pickup:checked ~ .coin-counter { --coin-L1P11: 1; }
+        #coin-L2P7-pickup:checked ~ .coin-counter { --coin-L2P7: 1; }
+        #coin-L3P9-pickup:checked ~ .coin-counter { --coin-L3P9: 1; }
+        #coin-L4P10-pickup:checked ~ .coin-counter { --coin-L4P10: 1; }
 
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
@@ -1539,20 +1484,18 @@
         <div class="coin-counter">
             <svg class="coin-icon"><use href="#coin"/></svg>
             <div class="digit-container">
-                <div class="digit-strip-s1">
-                    <div class="digit-strip-s2">
-                        <div class="digit">0</div>
-                        <div class="digit">1</div>
-                        <div class="digit">2</div>
-                        <div class="digit">3</div>
-                        <div class="digit">4</div>
-                        <div class="digit">5</div>
-                        <div class="digit">6</div>
-                        <div class="digit">7</div>
-                        <div class="digit">8</div>
-                        <div class="digit">9</div>
-                        <div class="digit">10</div>
-                    </div>
+                <div class="digit-strip">
+                    <div class="digit">0</div>
+                    <div class="digit">1</div>
+                    <div class="digit">2</div>
+                    <div class="digit">3</div>
+                    <div class="digit">4</div>
+                    <div class="digit">5</div>
+                    <div class="digit">6</div>
+                    <div class="digit">7</div>
+                    <div class="digit">8</div>
+                    <div class="digit">9</div>
+                    <div class="digit">10</div>
                 </div>
             </div>
         </div>
