@@ -6,7 +6,6 @@
     <meta name="author" content="René Uittenbogaard">
     <meta name="creator" content="Claude Code">
     <title>Nibo's Way Out</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" rel="stylesheet">
     <style>
         :root {
             /* Core layout variables */
@@ -46,7 +45,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+            font-family: sans-serif;
         }
 
         .game-container {
@@ -268,11 +267,17 @@
         /* Wrench appears when toolbox is unlocked, hides when picked up */
         .wrench {
             position: absolute;
-            font-size: 28px;
+            width: 28px;
+            height: 28px;
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
             z-index: 20;
             display: none;
+        }
+        .wrench svg {
+            width: 100%;
+            height: 100%;
+            color: #708090;
         }
         #toolbox-unlock:checked ~ #wrench-pickup:not(:checked) ~ .wrench {
             display: block;
@@ -280,8 +285,14 @@
 
         /* Wrench in inventory */
         .inventory .wrench-inv {
-            font-size: 24px;
+            width: 24px;
+            height: 24px;
             display: none;
+        }
+        .inventory .wrench-inv svg {
+            width: 100%;
+            height: 100%;
+            color: #708090;
         }
         #wrench-pickup:checked ~ .inventory .wrench-inv {
             display: block;
@@ -331,8 +342,8 @@
         /* Key above toolbox - pulsates when user has key, clickable to unlock */
         .key-at-toolbox {
             position: absolute;
-            width: 24px;
-            height: 24px;
+            width: 19px;
+            height: 19px;
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 35px);
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - 28px);
             z-index: 20;
@@ -921,7 +932,7 @@
 
         <!-- Inventory -->
         <div class="inventory">
-            <span class="wrench-inv">🔧</span>
+            <span class="wrench-inv"><svg><use href="#wrench"/></svg></span>
         </div>
 
         <!-- Key in game world (clickable to pick up) -->
@@ -931,7 +942,7 @@
         <div class="toolbox"><svg><use href="#toolbox"/></svg></div>
 
         <!-- Wrench (appears when toolbox is unlocked) -->
-        <div class="wrench">🔧</div>
+        <div class="wrench"><svg><use href="#wrench"/></svg></div>
 
         <!-- Key above toolbox (appears when user has key, clickable to unlock) -->
         <label for="toolbox-unlock" class="key-at-toolbox"><svg><use href="#key"/></svg></label>
