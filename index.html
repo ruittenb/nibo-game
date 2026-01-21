@@ -285,7 +285,7 @@
             pointer-events: none;
         }
         /* Hide radio buttons and checkboxes by default */
-        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .coin-checkbox, .door-checkbox {
+        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .coin-checkbox, .door-checkbox {
             display: none;
             /* When unhidden for debugging: */
             z-index: 9999;
@@ -304,34 +304,36 @@
         #pos-4 { top: 10px; left: 90px; }
         #pos-5 { top: 10px; left: 110px; }
         #pos-6 { top: 10px; left: 130px; }
-        #pos-7 { top: 10px; left: 150px; }
-        #pos-8 { top: 10px; left: 170px; }
-        #pos-9 { top: 10px; left: 190px; }
-        #pos-10 { top: 10px; left: 210px; }
-        #pos-11 { top: 10px; left: 230px; }
-        #pos-12 { top: 10px; left: 250px; }
+        #pos-7 { top: 10px; left: 160px; }
+        #pos-8 { top: 10px; left: 180px; }
+        #pos-9 { top: 10px; left: 200px; }
+        #pos-10 { top: 10px; left: 220px; }
+        #pos-11 { top: 10px; left: 240px; }
+        #pos-12 { top: 10px; left: 260px; }
         /* Debug positions - items (row 2) */
         #key-pickup { top: 30px; left: 30px; }
         #toolbox-unlock { top: 30px; left: 50px; }
         #wrench-pickup { top: 30px; left: 70px; }
         #door-opened { top: 30px; left: 90px; }
+        #axe-pickup { top: 30px; left: 110px; }
         /* Debug positions - coins (row 3) */
         #coin-L0P3-pickup { top: 50px; left: 30px; }
         #coin-L1P4-pickup { top: 50px; left: 50px; }
         #coin-L3P5-pickup { top: 50px; left: 70px; }
         #coin-L2P1-pickup { top: 50px; left: 90px; }
         #coin-L4P2-pickup { top: 50px; left: 110px; }
-        #coin-L0P8-pickup { top: 50px; left: 130px; }
-        #coin-L1P11-pickup { top: 50px; left: 150px; }
-        #coin-L2P7-pickup { top: 50px; left: 170px; }
-        #coin-L3P9-pickup { top: 50px; left: 190px; }
-        #coin-L4P10-pickup { top: 50px; left: 210px; }
+        #coin-L0P8-pickup { top: 50px; left: 140px; }
+        #coin-L1P11-pickup { top: 50px; left: 160px; }
+        #coin-L2P7-pickup { top: 50px; left: 180px; }
+        #coin-L3P9-pickup { top: 50px; left: 200px; }
+        #coin-L4P10-pickup { top: 50px; left: 220px; }
         /* Show inputs when debug is checked */
         #debug-toggle:checked ~ .game-container .position-radio,
         #debug-toggle:checked ~ .game-container .level-radio,
         #debug-toggle:checked ~ .game-container .key-checkbox,
         #debug-toggle:checked ~ .game-container .toolbox-checkbox,
         #debug-toggle:checked ~ .game-container .wrench-checkbox,
+        #debug-toggle:checked ~ .game-container .axe-checkbox,
         #debug-toggle:checked ~ .game-container .coin-checkbox,
         #debug-toggle:checked ~ .game-container .door-checkbox {
             display: block;
@@ -471,6 +473,35 @@
         /* Hide toolbox when unlocked */
         #toolbox-unlock:checked ~ .game-world .toolbox {
             display: none;
+        }
+
+        /* Axe on level 4, position 12 */
+        .axe-in-game {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
+            z-index: 200;
+            pointer-events: none;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+        }
+        .axe-in-game svg {
+            width: 100%;
+            height: 100%;
+        }
+        /* Enable clicking axe only when player is at level 4, position 12 */
+        #level-4:checked ~ #pos-12:checked ~ #axe-pickup:not(:checked) ~ .game-world .axe-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
+        }
+        /* Move axe to inventory when picked up (stage 2 inventory) */
+        #axe-pickup:checked ~ .game-world .axe-in-game {
+            width: 24px;
+            height: 24px;
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--inventory-top) - var(--inventory-height) / 2 - 12px - 6px);
+            left: calc(var(--pos-width) * 12 - var(--inventory-right) - var(--inventory-width) + var(--inventory-padding) - 4px);
         }
 
         /* Wrench - single element that animates from game world to inventory */
@@ -1374,6 +1405,10 @@
         <symbol id="bacteria" viewBox="0 -40 640 600">
             <path fill="currentColor" d="M 256 -32 c 13.3 0 24 10.7 24 24 l 0 11 c 8.6 2.2 16.9 5.6 24.8 10.3 L 311 7 c 9.4 -9.4 24.6 -9.4 33.9 0 s 9.4 24.6 0 33.9 l -6.3 6.3 c 4.6 7.8 8 16.2 10.3 24.8 l 11 0 c 13.3 0 24 10.7 24 24 s -10.7 24 -24 24 l -11 0 c -2.2 8.6 -5.6 16.9 -10.3 24.8 L 345 151 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 -30.1 30.1 4.1 4.1 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 c -10 10 -20 20 -30.1 30.1 L 217 279 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -6.3 -6.3 c -7.8 4.6 -16.2 8 -24.8 10.3 l 0 11 c 0 13.3 -10.7 24 -24 24 s -24 -10.7 -24 -24 l 0 -11 c -8.6 -2.2 -16.9 -5.6 -24.8 -10.3 L 73 313 c -9.4 9.4 -24.6 9.4 -33.9 0 s -9.4 -24.6 0 -33.9 l 6.3 -6.3 c -4.6 -7.8 -8 -16.2 -10.3 -24.8 l -11 0 c -13.3 0 -24 -10.7 -24 -24 s 10.7 -24 24 -24 l 11 0 c 2.2 -8.6 5.6 -16.9 10.3 -24.8 L 39 169 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 c 10 -10 20 -20 30.1 -30.1 L 103 105 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 30.1 -30.1 -4.1 -4.1 c -9.4 -9.4 -9.4 -24.6 0 -33.9 S 191.6 -2.3 201 7 l 6.3 6.3 c 7.8 -4.6 16.2 -8 24.8 -10.3 l 0 -11 c 0 -13.3 10.7 -24 24 -24 z M 128 256 a 32 32 0 1 0 0 -64 32 32 0 1 0 0 64 z M 240 144 a 32 32 0 1 0 -64 0 32 32 0 1 0 64 0 z m 296 40 l 0 11 c 8.6 2.2 16.9 5.6 24.8 10.3 L 567 199 c 9.4 -9.4 24.6 -9.4 33.9 0 s 9.4 24.6 0 33.9 l -6.3 6.3 c 4.6 7.8 8 16.2 10.3 24.8 l 11 0 c 13.3 0 24 10.7 24 24 s -10.7 24 -24 24 l -11 0 c -2.2 8.6 -5.6 16.9 -10.3 24.8 L 601 343 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 -30.1 30.1 4.1 4.1 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 c -10 10 -20 20 -30.1 30.1 L 473 471 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -6.3 -6.3 c -7.8 4.6 -16.2 8 -24.8 10.3 l 0 11 c 0 13.3 -10.7 24 -24 24 s -24 -10.7 -24 -24 l 0 -11 c -8.6 -2.2 -16.9 -5.6 -24.8 -10.3 L 329 505 c -9.4 9.4 -24.6 9.4 -33.9 0 s -9.4 -24.6 0 -33.9 l 6.3 -6.3 c -4.6 -7.8 -8 -16.2 -10.3 -24.8 l -11 0 c -13.3 0 -24 -10.7 -24 -24 s 10.7 -24 24 -24 l 11 0 c 2.2 -8.6 5.6 -16.9 10.3 -24.8 L 295 361 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 c 10 -10 20 -20 30.1 -30.1 L 359 297 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 30.1 -30.1 -4.1 -4.1 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 6.3 6.3 c 7.8 -4.6 16.2 -8 24.8 -10.3 l 0 -11 c 0 -13.3 10.7 -24 24 -24 s 24 10.7 24 24 z M 448 384 a 32 32 0 1 0 -64 0 32 32 0 1 0 64 0 z"/>
         </symbol>
+        <symbol id="axe" viewBox="0 0 24 24">
+            <path fill="#cc1010" d="M 12,2 L 22,8 C 22,12 20,14 16,15 L 13,10 L 9,6 L 12,2 z"/>
+            <path fill="#c4a484" d="M 4.11,19.84 L 2.12,18.33 L 9.19,9 L 11,10.81 L 4.11,19.84 Z"/>
+        </symbol>
     </svg>
 
     <!-- Debug toggle: Alt+D (Windows/Linux) or Ctrl+Alt+D (Mac) -->
@@ -1412,6 +1447,9 @@
 
         <!-- Wrench pickup checkbox -->
         <input type="checkbox" id="wrench-pickup" class="wrench-checkbox">
+
+        <!-- Axe pickup checkbox -->
+        <input type="checkbox" id="axe-pickup" class="axe-checkbox">
 
         <!-- Door open checkbox -->
         <input type="checkbox" id="door-opened" class="door-checkbox">
@@ -1508,6 +1546,9 @@
 
         <!-- Toolbox on level 2, position 6 -->
         <div class="toolbox"><svg><use href="#toolbox"/></svg></div>
+
+        <!-- Axe on level 4, position 12 (clickable to pick up) -->
+        <label for="axe-pickup" class="axe-in-game"><svg><use href="#axe"/></svg></label>
 
         <!-- Wrench in game world (clickable to pick up) -->
         <label for="wrench-pickup" class="wrench-in-game"><svg><use href="#wrench"/></svg></label>
