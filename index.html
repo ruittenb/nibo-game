@@ -224,12 +224,68 @@
             display: flex;
             align-items: center;
             padding-left: var(--inventory-padding);
+            overflow: hidden;
         }
         .coin-counter .coin-icon {
             width: 24px;
             height: 24px;
             color: var(--gold-color);
         }
+        .coin-counter .digit-container {
+            height: 24px;
+            overflow: hidden;
+            margin-left: 14px;
+        }
+        .coin-counter .digit-strip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.5s ease-out;
+        }
+        .coin-counter .digit {
+            height: 24px;
+            line-height: 24px;
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--gold-color);
+        }
+        /* Move digit strip based on coins collected */
+        /* 1 coin - any single coin */
+        #coin-L0P3-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L1P4-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L3P5-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip { transform: translateY(-24px); }
+        /* 2 coins - DOM order: L0P3, L1P4, L3P5, L2P1, L4P2 */
+        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L0P3-pickup:checked ~ #coin-L3P5-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L0P3-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L0P3-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L1P4-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L1P4-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L3P5-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip { transform: translateY(-48px); }
+        /* 3 coins */
+        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L0P3-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L0P3-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L0P3-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L1P4-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip { transform: translateY(-72px); }
+        /* 4 coins */
+        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L0P3-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip,
+        #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip { transform: translateY(-96px); }
+        /* 5 coins */
+        #coin-L0P3-pickup:checked ~ #coin-L1P4-pickup:checked ~ #coin-L3P5-pickup:checked ~ #coin-L2P1-pickup:checked ~ #coin-L4P2-pickup:checked ~ .coin-counter .digit-strip { transform: translateY(-120px); }
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
             position: absolute;
@@ -725,13 +781,19 @@
         #level-3:checked ~ #pos-3:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
         #level-4:checked ~ #pos-6:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
 
-        /* Coins */
-        .coin {
+        /* Coins - animated elements that fly to counter when picked up */
+        .coin-in-game {
             position: absolute;
             width: 24px;
             height: 24px;
-            color: gold;
-            z-index: 15;
+            color: var(--gold-color);
+            z-index: 200;
+            pointer-events: none;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
+        }
+        .coin-in-game svg {
+            width: 100%;
+            height: 100%;
         }
 
         /* Coin positions - on platforms */
@@ -756,61 +818,49 @@
             left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset));
         }
 
-        /* Hide coins when picked up */
-        #coin-L0P3-pickup:checked ~ .coin-L0P3 { display: none; }
-        #coin-L1P4-pickup:checked ~ .coin-L1P4 { display: none; }
-        #coin-L3P5-pickup:checked ~ .coin-L3P5 { display: none; }
-        #coin-L2P1-pickup:checked ~ .coin-L2P1 { display: none; }
-        #coin-L4P2-pickup:checked ~ .coin-L4P2 { display: none; }
-
         /* Coin pulsating glow when player is nearby */
         @keyframes coin-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--gold-color)); }
             50% { filter: drop-shadow(0 0 12px var(--gold-color)) drop-shadow(0 0 20px var(--gold-color)); }
         }
-        #level-0:checked ~ #pos-3:checked ~ #coin-L0P3-pickup:not(:checked) ~ .coin-L0P3 { animation: coin-pulse 1s ease-in-out infinite; }
-        #level-1:checked ~ #pos-4:checked ~ #coin-L1P4-pickup:not(:checked) ~ .coin-L1P4 { animation: coin-pulse 1s ease-in-out infinite; }
-        #level-3:checked ~ #pos-5:checked ~ #coin-L3P5-pickup:not(:checked) ~ .coin-L3P5 { animation: coin-pulse 1s ease-in-out infinite; }
-        #level-2:checked ~ #pos-1:checked ~ #coin-L2P1-pickup:not(:checked) ~ .coin-L2P1 { animation: coin-pulse 1s ease-in-out infinite; }
-        #level-4:checked ~ #pos-2:checked ~ #coin-L4P2-pickup:not(:checked) ~ .coin-L4P2 { animation: coin-pulse 1s ease-in-out infinite; }
 
-        /* Coin pickup buttons */
-        .coin-pickup-btn {
-            position: absolute;
-            width: 24px;
-            height: 24px;
+        /* Enable clicking and pulsing when player is adjacent */
+        #level-0:checked ~ #pos-3:checked ~ #coin-L0P3-pickup:not(:checked) ~ .coin-L0P3 {
+            pointer-events: auto;
             cursor: pointer;
-            z-index: 25;
-            display: none;
+            animation: coin-pulse 1s ease-in-out infinite;
+        }
+        #level-1:checked ~ #pos-4:checked ~ #coin-L1P4-pickup:not(:checked) ~ .coin-L1P4 {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
+        }
+        #level-3:checked ~ #pos-5:checked ~ #coin-L3P5-pickup:not(:checked) ~ .coin-L3P5 {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
+        }
+        #level-2:checked ~ #pos-1:checked ~ #coin-L2P1-pickup:not(:checked) ~ .coin-L2P1 {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
+        }
+        #level-4:checked ~ #pos-2:checked ~ #coin-L4P2-pickup:not(:checked) ~ .coin-L4P2 {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
         }
 
-        /* Show coin pickup button when player is at coin location and coin not picked up */
-        #level-0:checked ~ #pos-3:checked ~ #coin-L0P3-pickup:not(:checked) ~ .coin-pickup-btn-L0P3 { display: block; }
-        #level-1:checked ~ #pos-4:checked ~ #coin-L1P4-pickup:not(:checked) ~ .coin-pickup-btn-L1P4 { display: block; }
-        #level-3:checked ~ #pos-5:checked ~ #coin-L3P5-pickup:not(:checked) ~ .coin-pickup-btn-L3P5 { display: block; }
-        #level-2:checked ~ #pos-1:checked ~ #coin-L2P1-pickup:not(:checked) ~ .coin-pickup-btn-L2P1 { display: block; }
-        #level-4:checked ~ #pos-2:checked ~ #coin-L4P2-pickup:not(:checked) ~ .coin-pickup-btn-L4P2 { display: block; }
-
-        /* Coin pickup button positions (same as coins) */
-        .coin-pickup-btn-L0P3 {
-            bottom: calc(var(--ground-height) + 5px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 2 - var(--item-offset));
-        }
-        .coin-pickup-btn-L1P4 {
-            bottom: calc(var(--platform-height) + var(--platform-thickness) + 5px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--item-offset));
-        }
-        .coin-pickup-btn-L3P5 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 5px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--item-offset));
-        }
-        .coin-pickup-btn-L2P1 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px);
-            left: calc(var(--pos-offset) - var(--item-offset));
-        }
-        .coin-pickup-btn-L4P2 {
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset));
+        /* Move coins to counter when picked up */
+        #coin-L0P3-pickup:checked ~ .coin-L0P3,
+        #coin-L1P4-pickup:checked ~ .coin-L1P4,
+        #coin-L3P5-pickup:checked ~ .coin-L3P5,
+        #coin-L2P1-pickup:checked ~ .coin-L2P1,
+        #coin-L4P2-pickup:checked ~ .coin-L4P2 {
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--inventory-top) - var(--inventory-height) - var(--inventory-top) - var(--inventory-height) / 2 - 16px);
+            left: calc(var(--pos-width) * 6 - var(--inventory-right) - var(--inventory-width) + var(--inventory-padding) - 2px);
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
 
         /* Skull */
@@ -963,6 +1013,16 @@
         <!-- Coin counter -->
         <div class="coin-counter">
             <svg class="coin-icon"><use href="#coin"/></svg>
+            <div class="digit-container">
+                <div class="digit-strip">
+                    <div class="digit">0</div>
+                    <div class="digit">1</div>
+                    <div class="digit">2</div>
+                    <div class="digit">3</div>
+                    <div class="digit">4</div>
+                    <div class="digit">5</div>
+                </div>
+            </div>
         </div>
 
         <!-- Key in game world (clickable to pick up) -->
@@ -1044,19 +1104,12 @@
         <!-- Ground -->
         <div class="ground"></div>
 
-        <!-- Coins -->
-        <svg class="coin coin-L0P3"><use href="#coin"/></svg>
-        <svg class="coin coin-L1P4"><use href="#coin"/></svg>
-        <svg class="coin coin-L3P5"><use href="#coin"/></svg>
-        <svg class="coin coin-L2P1"><use href="#coin"/></svg>
-        <svg class="coin coin-L4P2"><use href="#coin"/></svg>
-
-        <!-- Coin pickup buttons -->
-        <label for="coin-L0P3-pickup" class="coin-pickup-btn coin-pickup-btn-L0P3"></label>
-        <label for="coin-L1P4-pickup" class="coin-pickup-btn coin-pickup-btn-L1P4"></label>
-        <label for="coin-L3P5-pickup" class="coin-pickup-btn coin-pickup-btn-L3P5"></label>
-        <label for="coin-L2P1-pickup" class="coin-pickup-btn coin-pickup-btn-L2P1"></label>
-        <label for="coin-L4P2-pickup" class="coin-pickup-btn coin-pickup-btn-L4P2"></label>
+        <!-- Coins (clickable to pick up, animate to counter) -->
+        <label for="coin-L0P3-pickup" class="coin-in-game coin-L0P3"><svg><use href="#coin"/></svg></label>
+        <label for="coin-L1P4-pickup" class="coin-in-game coin-L1P4"><svg><use href="#coin"/></svg></label>
+        <label for="coin-L3P5-pickup" class="coin-in-game coin-L3P5"><svg><use href="#coin"/></svg></label>
+        <label for="coin-L2P1-pickup" class="coin-in-game coin-L2P1"><svg><use href="#coin"/></svg></label>
+        <label for="coin-L4P2-pickup" class="coin-in-game coin-L4P2"><svg><use href="#coin"/></svg></label>
 
         <!-- Skull -->
         <svg class="skull skull-L1P6"><use href="#skull"/></svg>
