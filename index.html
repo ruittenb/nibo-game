@@ -262,29 +262,58 @@
             left: calc(var(--pos-width) * 5);
         }
 
-        /* Stage 2 Grates: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
-        .grate-s2-L1P7 {
-            bottom: calc(var(--platform-height) + var(--platform-thickness) - 16px);
+        /* Stage 2 Branches (replaces grates) */
+        .branch {
+            position: absolute;
+            width: var(--pos-width);
+            height: 12px;
+            background: linear-gradient(to bottom,
+                #8b5a2b 0%,
+                #a0522d 30%,
+                #8b4513 50%,
+                #6b3e0a 70%,
+                #5d3a1a 100%
+            );
+            border-radius: 6px 6px 4px 4px;
+            box-shadow:
+                0 3px 2px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        .branch::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 15%;
+            width: 8px;
+            height: 6px;
+            background: #5d3a1a;
+            border-radius: 50%;
+            box-shadow:
+                25px -1px 0 #6b3e0a,
+                50px 1px 0 #5d3a1a;
+        }
+        .branch-s2-L1P7 {
+            bottom: calc(var(--platform-height) + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 6);
         }
-        .grate-s2-L1P12 {
-            bottom: calc(var(--platform-height) + var(--platform-thickness) - 16px);
+        .branch-s2-L1P12 {
+            bottom: calc(var(--platform-height) + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 11);
         }
-        .grate-s2-L2P8 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
+        .branch-s2-L2P8 {
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 7);
         }
-        .grate-s2-L2P11 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
+        .branch-s2-L2P11 {
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 10);
         }
-        .grate-s2-L3P10 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 16px);
+        .branch-s2-L3P10 {
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 9);
         }
-        .grate-s2-L4P7 {
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 16px);
+        .branch-s2-L4P7 {
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 6);
         }
 
@@ -672,10 +701,20 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            right: 0;
+            width: calc(var(--pos-width) * 6);
             height: var(--ground-height);
             background: linear-gradient(to bottom, #2d5016 0%, #1a3009 100%);
             border-top: 3px solid #4a7023;
+        }
+        /* Stage 2 ground is brown (soil) */
+        .ground-s2 {
+            position: absolute;
+            bottom: 0;
+            left: calc(var(--pos-width) * 6);
+            width: calc(var(--pos-width) * 6);
+            height: var(--ground-height);
+            background: linear-gradient(to bottom, #8b5a2b 0%, #5d3a1a 100%);
+            border-top: 3px solid #a0522d;
         }
 
         .title {
@@ -1731,12 +1770,12 @@
         <div class="grate grate-L4P6"></div>
 
         <!-- Stage 2 Grates: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 -->
-        <div class="grate grate-s2-L1P7"></div>
-        <div class="grate grate-s2-L1P12"></div>
-        <div class="grate grate-s2-L2P8"></div>
-        <div class="grate grate-s2-L2P11"></div>
-        <div class="grate grate-s2-L3P10"></div>
-        <div class="grate grate-s2-L4P7"></div>
+        <div class="branch branch-s2-L1P7"></div>
+        <div class="branch branch-s2-L1P12"></div>
+        <div class="branch branch-s2-L2P8"></div>
+        <div class="branch branch-s2-L2P11"></div>
+        <div class="branch branch-s2-L3P10"></div>
+        <div class="branch branch-s2-L4P7"></div>
 
         <!-- Platform 1 (lowest): 5/6 width, aligned right -->
         <div class="platform platform-1"></div>
@@ -1765,6 +1804,7 @@
 
         <!-- Ground -->
         <div class="ground"></div>
+        <div class="ground-s2"></div>
 
         <!-- Coins (clickable to pick up, animate to counter) -->
         <label for="coin-L0P3-pickup" class="coin-in-game coin-L0P3"><svg><use href="#coin"/></svg></label>
