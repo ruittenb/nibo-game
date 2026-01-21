@@ -1249,7 +1249,7 @@
         }
         .door-L0P6 {
             bottom: calc(var(--ground-height) + 2px);
-            right: 10px;
+            left: calc(var(--pos-width) * 6 - 42px);
         }
         /* Door closed - show by default, hide when opened */
         .door-closed {
@@ -1289,15 +1289,19 @@
             height: 58px;
             z-index: 16;
             pointer-events: none;
-            cursor: pointer;
         }
         .door-exit-L0P6 {
             bottom: calc(var(--ground-height) + 2px);
-            right: 10px;
+            left: calc(var(--pos-width) * 6 - 42px);
         }
         /* Show door exit only when door is open and player is at door location */
         #level-0:checked ~ #pos-6:checked ~ #door-opened:checked ~ .game-world .door-exit {
             pointer-events: auto;
+            cursor: pointer;
+        }
+        /* Show nav arrow when door is open */
+        #level-0:checked ~ #pos-6:checked ~ #door-opened:checked ~ .nav-panel .nav-right[for="pos-7"] {
+            display: block;
         }
 
         /* Death overlay */
@@ -1445,6 +1449,7 @@
                 <label for="pos-5" class="nav-btn nav-right"></label>
                 <label for="pos-6" class="nav-btn nav-right"></label>
                 <!-- Stage 2 -->
+                <label for="pos-7" class="nav-btn nav-right"></label>
                 <label for="pos-8" class="nav-btn nav-right"></label>
                 <label for="pos-9" class="nav-btn nav-right"></label>
                 <label for="pos-10" class="nav-btn nav-right"></label>
