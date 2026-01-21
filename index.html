@@ -220,6 +220,16 @@
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) - var(--item-offset));
             z-index: 20;
+            cursor: pointer;
+            display: none;
+        }
+        /* Show key when not picked up */
+        #key-pickup:not(:checked) ~ .key-in-game {
+            display: block;
+        }
+        /* Pulsating glow when player is nearby */
+        #level-4:checked ~ #pos-1:checked ~ #key-pickup:not(:checked) ~ .key-in-game {
+            animation: coin-pulse 1s ease-in-out infinite;
         }
 
         /* Safe on level 2, position 6 */
@@ -232,9 +242,6 @@
         }
         /* Hide safe when unlocked */
         #safe-unlock:checked ~ .safe {
-            display: none;
-        }
-        #key-pickup:checked ~ .key-in-game {
             display: none;
         }
 
@@ -327,60 +334,6 @@
             animation: key-pulse 1s ease-in-out infinite;
         }
 
-        /* Key pickup button - CSS arrow (triangle + stem), only visible when player at key location and key not picked up */
-        .key-pickup-btn {
-            position: absolute;
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 33px);
-            left: calc(var(--pos-offset) - var(--item-offset) + 8px);
-            width: 20px;
-            height: 24px;
-            cursor: pointer;
-            display: none;
-            z-index: 60;
-            filter: drop-shadow(0 0 8px var(--pickup-glow-color));
-        }
-        /* Arrow head (triangle) */
-        .key-pickup-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 12px solid var(--pickup-glow-color);
-        }
-        /* Arrow stem */
-        .key-pickup-btn::after {
-            content: '';
-            position: absolute;
-            top: 12px;
-            left: 6px;
-            width: 8px;
-            height: 6px;
-            background: var(--pickup-glow-color);
-        }
-        .key-pickup-btn:hover {
-            filter: drop-shadow(0 0 15px var(--pickup-glow-color)) drop-shadow(0 0 25px var(--pickup-glow-color));
-        }
-        @keyframes pulse-glow {
-            0%, 100% {
-                filter: drop-shadow(0 0 8px var(--pickup-glow-color)) drop-shadow(0 0 15px var(--pickup-glow-color));
-                opacity: 0.7;
-            }
-            50% {
-                filter: drop-shadow(0 0 20px var(--pickup-glow-color)) drop-shadow(0 0 35px var(--pickup-glow-color)) drop-shadow(0 0 50px var(--pickup-glow-color));
-                opacity: 1;
-            }
-        }
-        .key-pickup-btn {
-            animation: pulse-glow 1.5s ease-in-out infinite;
-        }
-        /* Show key pickup button when at level 4, position 1, and key not yet picked up */
-        #level-4:checked ~ #pos-1:checked ~ #key-pickup:not(:checked) ~ .key-pickup-btn {
-            display: block;
-        }
 
         .player {
             position: absolute;
@@ -788,6 +741,17 @@
         #coin-L3P6-pickup:checked ~ .coin-L3P6 { display: none; }
         #coin-L4P2-pickup:checked ~ .coin-L4P2 { display: none; }
 
+        /* Coin pulsating glow when player is nearby */
+        @keyframes coin-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--gold-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--gold-color)) drop-shadow(0 0 20px var(--gold-color)); }
+        }
+        #level-0:checked ~ #pos-3:checked ~ #coin-L0P3-pickup:not(:checked) ~ .coin-L0P3 { animation: coin-pulse 1s ease-in-out infinite; }
+        #level-1:checked ~ #pos-5:checked ~ #coin-L1P5-pickup:not(:checked) ~ .coin-L1P5 { animation: coin-pulse 1s ease-in-out infinite; }
+        #level-2:checked ~ #pos-4:checked ~ #coin-L2P4-pickup:not(:checked) ~ .coin-L2P4 { animation: coin-pulse 1s ease-in-out infinite; }
+        #level-3:checked ~ #pos-6:checked ~ #coin-L3P6-pickup:not(:checked) ~ .coin-L3P6 { animation: coin-pulse 1s ease-in-out infinite; }
+        #level-4:checked ~ #pos-2:checked ~ #coin-L4P2-pickup:not(:checked) ~ .coin-L4P2 { animation: coin-pulse 1s ease-in-out infinite; }
+
         /* Coin pickup buttons */
         .coin-pickup-btn {
             position: absolute;
@@ -926,8 +890,8 @@
             <span class="wrench-inv">🔧</span>
         </div>
 
-        <!-- Key in game world -->
-        <div class="key-in-game">🔑</div>
+        <!-- Key in game world (clickable to pick up) -->
+        <label for="key-pickup" class="key-in-game">🔑</label>
 
         <!-- Safe on level 2, position 6 -->
         <div class="safe">🗄️</div>
@@ -937,9 +901,6 @@
 
         <!-- Key above safe (appears when user has key, clickable to unlock) -->
         <label for="safe-unlock" class="key-at-safe">🔑</label>
-
-        <!-- Pickup button for key -->
-        <label for="key-pickup" class="key-pickup-btn"></label>
 
         <!-- Pickup button for wrench -->
         <label for="wrench-pickup" class="wrench-pickup-btn"></label>
