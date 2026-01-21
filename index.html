@@ -267,7 +267,15 @@
             left: calc(var(--pos-width) * 6);
         }
 
-        /* Hide radio buttons and checkboxes */
+        /* Debug toggle - press Alt+D (or Alt+Shift+D on Mac) to toggle */
+        #debug-toggle {
+            position: fixed;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+        /* Hide radio buttons and checkboxes by default */
         .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .coin-checkbox, .door-checkbox {
             display: none;
             /* When unhidden for debugging: */
@@ -309,6 +317,16 @@
         #coin-L2P7-pickup { top: 70px; left: 150px; }
         #coin-L3P8-pickup { top: 70px; left: 170px; }
         #coin-L4P10-pickup { top: 70px; left: 190px; }
+        /* Show inputs when debug is checked */
+        #debug-toggle:checked ~ .game-container .position-radio,
+        #debug-toggle:checked ~ .game-container .level-radio,
+        #debug-toggle:checked ~ .game-container .key-checkbox,
+        #debug-toggle:checked ~ .game-container .toolbox-checkbox,
+        #debug-toggle:checked ~ .game-container .wrench-checkbox,
+        #debug-toggle:checked ~ .game-container .coin-checkbox,
+        #debug-toggle:checked ~ .game-container .door-checkbox {
+            display: block;
+        }
 
         /* Inventory area */
         .inventory {
@@ -1367,6 +1385,9 @@
             <path fill="currentColor" d="M 288 64 l 64 0 0 416 c 0 17.7 14.3 32 32 32 l 32 0 c 17.7 0 32 -14.3 32 -32 s -14.3 -32 -32 -32 l 0 -384 c 0 -35.3 -28.7 -64 -64 -64 l -96 0 0 0 -160 0 C 60.7 0 32 28.7 32 64 l 0 384 c -17.7 0 -32 14.3 -32 32 s 14.3 32 32 32 l 224 0 c 17.7 0 32 -14.3 32 -32 l 0 -416 z M 160 256 a 32 32 0 1 1 64 0 32 32 0 1 1 -64 0 z"/>
         </symbol>
     </svg>
+
+    <!-- Debug toggle: Alt+D (Windows/Linux) or Ctrl+Alt+D (Mac) -->
+    <input type="checkbox" id="debug-toggle" accesskey="d">
 
     <div class="game-container">
         <div class="title">NIBO'S WAY OUT</div>
