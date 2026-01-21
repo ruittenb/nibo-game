@@ -19,6 +19,13 @@
             --item-offset: 34px;          /* Offset for items left of player position */
             --ladder-offset: 42px;        /* Horizontal offset for ladders */
 
+            /* Inventory */
+            --inventory-top: 10px;        /* Inventory distance from top */
+            --inventory-right: 10px;      /* Inventory distance from right */
+            --inventory-width: 84px;      /* Inventory width */
+            --inventory-height: 40px;     /* Inventory height */
+            --inventory-padding: 10px;    /* Inventory padding */
+
             /* Colors */
             --nav-arrow-color: #48d8d8;   /* Navigation arrow color */
             --inactive-arrow-color: #666; /* Inactive navigation arrow color */
@@ -192,42 +199,48 @@
         /* Inventory area */
         .inventory {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 84px;
-            height: 40px;
+            top: var(--inventory-top);
+            right: var(--inventory-right);
+            width: var(--inventory-width);
+            height: var(--inventory-height);
             border: 2px solid var(--border-color);
             border-radius: 4px;
             background: rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            padding-right: 10px;
+            padding-right: var(--inventory-padding);
         }
-        .inventory .key-inv {
-            font-size: 24px;
-            display: none;
-        }
-        /* Show key in inventory when picked up, but hide when safe is unlocked */
-        #key-pickup:checked ~ #safe-unlock:not(:checked) ~ .inventory .key-inv {
-            display: block;
-        }
-
-        /* Key in game world */
+        /* Key - single element that animates from game world to inventory */
         .key-in-game {
             position: absolute;
-            font-size: 24px;
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
+            width: 24px;
+            height: 24px;
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 2px);
             left: calc(var(--pos-offset) - var(--item-offset));
-            z-index: 20;
+            z-index: 200;
             cursor: pointer;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
+        }
+        .key-in-game svg {
+            width: 100%;
+            height: 100%;
+            color: var(--gold-color);
+        }
+        /* Hide key when safe is unlocked (key used) */
+        #safe-unlock:checked ~ .key-in-game {
             display: none;
         }
-        /* Show key when not picked up */
-        #key-pickup:not(:checked) ~ .key-in-game {
-            display: block;
+        /* Move key to inventory when picked up */
+        /* Container height = ground-height + platform-height*5 + top-margin */
+        /* To center 24px key in 40px inventory vertically: (inventory-height - 24px) / 2 = 8px from top of inventory */
+        /* Bottom = container-height - inventory-top - inventory-height + 8px */
+        #key-pickup:checked ~ .key-in-game {
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--inventory-top) - var(--inventory-height) / 2 - 12px - 6px);
+            left: calc(var(--pos-width) * 6 - var(--inventory-right) - var(--inventory-width) + var(--inventory-padding) - 4px);
+            pointer-events: none;
         }
-        /* Pulsating glow when player is nearby */
+        /* Pulsating glow when player is nearby and key not picked up */
         #level-4:checked ~ #pos-1:checked ~ #key-pickup:not(:checked) ~ .key-in-game {
             animation: coin-pulse 1s ease-in-out infinite;
         }
@@ -311,12 +324,18 @@
         /* Key above safe - pulsates when user has key, clickable to unlock */
         .key-at-safe {
             position: absolute;
-            font-size: 24px;
+            width: 24px;
+            height: 24px;
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 35px);
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - 28px);
             z-index: 20;
             display: none;
             cursor: pointer;
+        }
+        .key-at-safe svg {
+            width: 100%;
+            height: 100%;
+            color: var(--gold-color);
         }
         @keyframes key-pulse {
             0%, 100% {
@@ -814,6 +833,9 @@
         <symbol id="skull" viewBox="0 0 448 545">
             <path fill="currentColor" d="M 384 144 C 384 64.5 312.4 0 224 0 S 64 64.5 64 144 c 0 47.1 25.1 88.9 64 115.2 l 0 28.8 c 0 17.7 14.3 32 32 32 l 128 0 c 17.7 0 32 -14.3 32 -32 l 0 -28.8 c 38.9 -26.3 64 -68.1 64 -115.2 z M 160 128 a 32 32 0 1 1 0 64 32 32 0 1 1 0 -64 z m 96 32 a 32 32 0 1 1 64 0 32 32 0 1 1 -64 0 z M 445.5 339.7 c -6.8 -16.3 -25.5 -24 -41.8 -17.2 L 224 397.3 44.3 322.5 c -16.3 -6.8 -35 .9 -41.8 17.2 s .9 35 17.2 41.8 L 140.8 432 19.7 482.5 C 3.4 489.3 -4.3 508 2.5 524.3 s 25.5 24 41.8 17.2 L 224 466.7 403.7 541.5 c 16.3 6.8 35 -.9 41.8 -17.2 s -.9 -35 -17.2 -41.8 L 307.2 432 428.3 381.5 c 16.3 -6.8 24 -25.5 17.2 -41.8 z"/>
         </symbol>
+        <symbol id="key" viewBox="0 0 512 512">
+            <path fill="currentColor" d="M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0 160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17l0 80c0 13.3 10.7 24 24 24l80 0c13.3 0 24-10.7 24-24l0-40 40 0c13.3 0 24-10.7 24-24l0-40 40 0c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"/>
+        </symbol>
     </svg>
 
     <div class="game-container">
@@ -886,12 +908,11 @@
 
         <!-- Inventory -->
         <div class="inventory">
-            <span class="key-inv">🔑</span>
             <span class="wrench-inv">🔧</span>
         </div>
 
         <!-- Key in game world (clickable to pick up) -->
-        <label for="key-pickup" class="key-in-game">🔑</label>
+        <label for="key-pickup" class="key-in-game"><svg><use href="#key"/></svg></label>
 
         <!-- Safe on level 2, position 6 -->
         <div class="safe">🗄️</div>
@@ -900,7 +921,7 @@
         <div class="wrench">🔧</div>
 
         <!-- Key above safe (appears when user has key, clickable to unlock) -->
-        <label for="safe-unlock" class="key-at-safe">🔑</label>
+        <label for="safe-unlock" class="key-at-safe"><svg><use href="#key"/></svg></label>
 
         <!-- Pickup button for wrench -->
         <label for="wrench-pickup" class="wrench-pickup-btn"></label>
