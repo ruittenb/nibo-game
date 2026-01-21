@@ -128,25 +128,30 @@
         }
 
         /* Stage 2 Platforms (positions 7-12) */
-        /* S2 Platform 1 (lowest): 5/6 width, aligned left in stage 2 area */
+        /* Grates at: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
+        /* S2 Level 1: gaps at P7 and P12 → solid P8-P11 */
         .platform-s2-1 {
             bottom: var(--platform-height);
-            left: calc(var(--pos-width) * 6);
-            width: calc(var(--pos-width) * 5);
-        }
-        /* S2 Platform 2: 4/6 width, aligned right in stage 2 */
-        .platform-s2-2 {
-            bottom: calc(var(--platform-height) * 2);
-            left: calc(var(--pos-width) * 8);
+            left: calc(var(--pos-width) * 7);
             width: calc(var(--pos-width) * 4);
         }
-        /* S2 Platform 2-left: 1/6 width */
+        /* S2 Level 2: gaps at P8 and P11 → pieces at P7, P9-P10, P12 */
         .platform-s2-2-left {
             bottom: calc(var(--platform-height) * 2);
             left: calc(var(--pos-width) * 6);
             width: var(--pos-width);
         }
-        /* S2 Platform 3: split with gap */
+        .platform-s2-2-mid {
+            bottom: calc(var(--platform-height) * 2);
+            left: calc(var(--pos-width) * 8);
+            width: calc(var(--pos-width) * 2);
+        }
+        .platform-s2-2-right {
+            bottom: calc(var(--platform-height) * 2);
+            left: calc(var(--pos-width) * 11);
+            width: var(--pos-width);
+        }
+        /* S2 Level 3: gap at P10 → pieces at P7-P9, P11-P12 */
         .platform-s2-3-left {
             bottom: calc(var(--platform-height) * 3);
             left: calc(var(--pos-width) * 6);
@@ -157,7 +162,7 @@
             left: calc(var(--pos-width) * 10);
             width: calc(var(--pos-width) * 2);
         }
-        /* S2 Platform 4 (top): 5/6 width */
+        /* S2 Level 4: gap at P7 → solid P8-P12 */
         .platform-s2-4 {
             bottom: calc(var(--platform-height) * 4);
             left: calc(var(--pos-width) * 7);
@@ -245,23 +250,27 @@
             left: calc(var(--pos-width) * 5);
         }
 
-        /* Stage 2 Grates */
-        /* S2 Platform 1 gap: position 12 */
+        /* Stage 2 Grates: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
+        .grate-s2-L1P7 {
+            bottom: calc(var(--platform-height) + var(--platform-thickness) - 16px);
+            left: calc(var(--pos-width) * 6);
+        }
         .grate-s2-L1P12 {
             bottom: calc(var(--platform-height) + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 11);
         }
-        /* S2 Platform 2 gap: position 8 */
         .grate-s2-L2P8 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 7);
         }
-        /* S2 Platform 3 gap: position 10 */
+        .grate-s2-L2P11 {
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
+            left: calc(var(--pos-width) * 10);
+        }
         .grate-s2-L3P10 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 9);
         }
-        /* S2 Platform 4 gap: position 7 */
         .grate-s2-L4P7 {
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 6);
@@ -710,24 +719,24 @@
             left: calc(var(--pos-offset) + var(--pos-width) * 3 + var(--ladder-offset));
         }
 
-        /* Stage 2 Ladders */
-        /* S2 Ladder 1: ground to S2 platform 1, position 8 */
-        .ladder-s2-1 {
+        /* Stage 2 Ladders: L0P8, L0P11, L1P7, L2P12, L3P9 */
+        .ladder-s2-L0P8 {
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 7 + var(--ladder-offset));
         }
-        /* S2 Ladder 2: S2 platform 1 to S2 platform 2, position 10 */
-        .ladder-s2-2 {
-            bottom: calc(var(--platform-height) + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 9 + var(--ladder-offset));
+        .ladder-s2-L0P11 {
+            bottom: var(--ground-height);
+            left: calc(var(--pos-offset) + var(--pos-width) * 10 + var(--ladder-offset));
         }
-        /* S2 Ladder 3: S2 platform 2 to S2 platform 3, position 12 */
-        .ladder-s2-3 {
+        .ladder-s2-L1P7 {
+            bottom: calc(var(--platform-height) + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 6 + var(--ladder-offset));
+        }
+        .ladder-s2-L2P12 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset));
         }
-        /* S2 Ladder 4: S2 platform 3 to S2 platform 4, position 9 */
-        .ladder-s2-4 {
+        .ladder-s2-L3P9 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 8 + var(--ladder-offset));
         }
@@ -821,23 +830,23 @@
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
         }
 
-        /* Stage 2 Up arrows */
-        /* S2 Ladder 1: position 8, level 0 -> 1 */
+        /* Stage 2 Up arrows: L0P8, L0P11, L1P7, L2P12, L3P9 */
         .arrow-up-L0P8 {
             left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px);
             bottom: calc(var(--ground-height) + 72.5px);
         }
-        /* S2 Ladder 2: position 10, level 1 -> 2 */
-        .arrow-up-L1P10 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 9 + 10px);
+        .arrow-up-L0P11 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
+            bottom: calc(var(--ground-height) + 72.5px);
+        }
+        .arrow-up-L1P7 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
             bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px);
         }
-        /* S2 Ladder 3: position 12, level 2 -> 3 */
         .arrow-up-L2P12 {
             left: calc(var(--pos-offset) + var(--pos-width) * 11 + 10px);
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 72.5px);
         }
-        /* S2 Ladder 4: position 9, level 3 -> 4 */
         .arrow-up-L3P9 {
             left: calc(var(--pos-offset) + var(--pos-width) * 8 + 10px);
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
@@ -865,23 +874,27 @@
             bottom: calc(var(--platform-height) * 3);
         }
 
-        /* Stage 2 Down arrows */
-        /* S2 Platform 1 gap: position 12, level 1 -> 0 */
+        /* Stage 2 Down arrows: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
+        .arrow-down-L1P7 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
+            bottom: var(--platform-height);
+        }
         .arrow-down-L1P12 {
             left: calc(var(--pos-offset) + var(--pos-width) * 11 + 10px);
             bottom: var(--platform-height);
         }
-        /* S2 Platform 2 gap: position 8, level 2 -> 1 */
         .arrow-down-L2P8 {
             left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px);
             bottom: calc(var(--platform-height) * 2);
         }
-        /* S2 Platform 3 gap: position 10, level 3 -> 2 */
+        .arrow-down-L2P11 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
+            bottom: calc(var(--platform-height) * 2);
+        }
         .arrow-down-L3P10 {
             left: calc(var(--pos-offset) + var(--pos-width) * 9 + 10px);
             bottom: calc(var(--platform-height) * 3);
         }
-        /* S2 Platform 4 gap: position 7, level 4 -> 3 */
         .arrow-down-L4P7 {
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
             bottom: calc(var(--platform-height) * 4);
@@ -922,14 +935,11 @@
         #level-2:checked ~ #pos-1:checked ~ .game-world .arrow-up-L2P1 { display: block; }
         /* Ladder 4: level 3, position 4 */
         #level-3:checked ~ #pos-4:checked ~ .game-world .arrow-up-L3P4 { display: block; }
-        /* Stage 2 up arrows */
-        /* S2 Ladder 1: level 0, position 8 */
+        /* Stage 2 up arrows: L0P8, L0P11, L1P7, L2P12, L3P9 */
         #level-0:checked ~ #pos-8:checked ~ .game-world .arrow-up-L0P8 { display: block; }
-        /* S2 Ladder 2: level 1, position 10 */
-        #level-1:checked ~ #pos-10:checked ~ .game-world .arrow-up-L1P10 { display: block; }
-        /* S2 Ladder 3: level 2, position 12 */
+        #level-0:checked ~ #pos-11:checked ~ .game-world .arrow-up-L0P11 { display: block; }
+        #level-1:checked ~ #pos-7:checked ~ .game-world .arrow-up-L1P7 { display: block; }
         #level-2:checked ~ #pos-12:checked ~ .game-world .arrow-up-L2P12 { display: block; }
-        /* S2 Ladder 4: level 3, position 9 */
         #level-3:checked ~ #pos-9:checked ~ .game-world .arrow-up-L3P9 { display: block; }
 
         /* Show down arrow at platform gaps */
@@ -941,14 +951,12 @@
         #level-4:checked ~ #pos-6:checked ~ .game-world .arrow-down-L4P6 { display: block; }
         /* Platform 3 gap: level 3, position 3 */
         #level-3:checked ~ #pos-3:checked ~ .game-world .arrow-down-L3P3 { display: block; }
-        /* Stage 2 down arrows */
-        /* S2 Platform 1 gap: level 1, position 12 */
+        /* Stage 2 down arrows: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
+        #level-1:checked ~ #pos-7:checked ~ .game-world .arrow-down-L1P7 { display: block; }
         #level-1:checked ~ #pos-12:checked ~ .game-world .arrow-down-L1P12 { display: block; }
-        /* S2 Platform 2 gap: level 2, position 8 */
         #level-2:checked ~ #pos-8:checked ~ .game-world .arrow-down-L2P8 { display: block; }
-        /* S2 Platform 3 gap: level 3, position 10 */
+        #level-2:checked ~ #pos-11:checked ~ .game-world .arrow-down-L2P11 { display: block; }
         #level-3:checked ~ #pos-10:checked ~ .game-world .arrow-down-L3P10 { display: block; }
-        /* S2 Platform 4 gap: level 4, position 7 */
         #level-4:checked ~ #pos-7:checked ~ .game-world .arrow-down-L4P7 { display: block; }
 
         /* Fixed navigation panel - 3x3 grid */
@@ -1074,8 +1082,10 @@
         #level-2:checked ~ #pos-1:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
         #level-3:checked ~ #pos-4:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
         /* Stage 2 up arrows */
+        /* Stage 2 nav up: L0P8, L0P11, L1P7, L2P12, L3P9 */
         #level-0:checked ~ #pos-8:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
-        #level-1:checked ~ #pos-10:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
+        #level-0:checked ~ #pos-11:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
+        #level-1:checked ~ #pos-7:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
         #level-2:checked ~ #pos-12:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
         #level-3:checked ~ #pos-9:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
 
@@ -1085,8 +1095,11 @@
         #level-3:checked ~ #pos-3:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
         #level-4:checked ~ #pos-6:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
         /* Stage 2 down arrows */
+        /* Stage 2 nav down: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
+        #level-1:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
         #level-1:checked ~ #pos-12:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
         #level-2:checked ~ #pos-8:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
+        #level-2:checked ~ #pos-11:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
         #level-3:checked ~ #pos-10:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
         #level-4:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
 
@@ -1560,15 +1573,18 @@
         <label for="level-3" class="arrow arrow-down arrow-down-L4P6"></label>
         <label for="level-2" class="arrow arrow-down arrow-down-L3P3"></label>
 
-        <!-- Stage 2 Up arrow labels -->
+        <!-- Stage 2 Up arrow labels: L0P8, L0P11, L1P7, L2P12, L3P9 -->
         <label for="level-1" class="arrow arrow-up arrow-up-L0P8"></label>
-        <label for="level-2" class="arrow arrow-up arrow-up-L1P10"></label>
+        <label for="level-1" class="arrow arrow-up arrow-up-L0P11"></label>
+        <label for="level-2" class="arrow arrow-up arrow-up-L1P7"></label>
         <label for="level-3" class="arrow arrow-up arrow-up-L2P12"></label>
         <label for="level-4" class="arrow arrow-up arrow-up-L3P9"></label>
 
-        <!-- Stage 2 Down arrow labels -->
+        <!-- Stage 2 Down arrow labels: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 -->
+        <label for="level-0" class="arrow arrow-down arrow-down-L1P7"></label>
         <label for="level-0" class="arrow arrow-down arrow-down-L1P12"></label>
         <label for="level-1" class="arrow arrow-down arrow-down-L2P8"></label>
+        <label for="level-1" class="arrow arrow-down arrow-down-L2P11"></label>
         <label for="level-2" class="arrow arrow-down arrow-down-L3P10"></label>
         <label for="level-3" class="arrow arrow-down arrow-down-L4P7"></label>
 
@@ -1589,11 +1605,12 @@
         <!-- Ladder from platform 3 to platform 4 (position 4) -->
         <div class="ladder ladder-4"></div>
 
-        <!-- Stage 2 Ladders -->
-        <div class="ladder ladder-s2-1"></div>
-        <div class="ladder ladder-s2-2"></div>
-        <div class="ladder ladder-s2-3"></div>
-        <div class="ladder ladder-s2-4"></div>
+        <!-- Stage 2 Ladders: L0P8, L0P11, L1P7, L2P12, L3P9 -->
+        <div class="ladder ladder-s2-L0P8"></div>
+        <div class="ladder ladder-s2-L0P11"></div>
+        <div class="ladder ladder-s2-L1P7"></div>
+        <div class="ladder ladder-s2-L2P12"></div>
+        <div class="ladder ladder-s2-L3P9"></div>
 
         <!-- Grates at platform gaps -->
         <div class="grate grate-L1P1"></div>
@@ -1601,9 +1618,11 @@
         <div class="grate grate-L3P3"></div>
         <div class="grate grate-L4P6"></div>
 
-        <!-- Stage 2 Grates -->
+        <!-- Stage 2 Grates: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 -->
+        <div class="grate grate-s2-L1P7"></div>
         <div class="grate grate-s2-L1P12"></div>
         <div class="grate grate-s2-L2P8"></div>
+        <div class="grate grate-s2-L2P11"></div>
         <div class="grate grate-s2-L3P10"></div>
         <div class="grate grate-s2-L4P7"></div>
 
@@ -1625,8 +1644,9 @@
 
         <!-- Stage 2 Platforms -->
         <div class="platform platform-s2-1"></div>
-        <div class="platform platform-s2-2"></div>
         <div class="platform platform-s2-2-left"></div>
+        <div class="platform platform-s2-2-mid"></div>
+        <div class="platform platform-s2-2-right"></div>
         <div class="platform platform-s2-3-left"></div>
         <div class="platform platform-s2-3-right"></div>
         <div class="platform platform-s2-4"></div>
