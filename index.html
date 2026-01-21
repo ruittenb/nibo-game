@@ -192,7 +192,7 @@
         }
 
         /* Hide radio buttons and checkboxes */
-        .position-radio, .level-radio, .key-checkbox, .safe-checkbox, .wrench-checkbox, .coin-checkbox {
+        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .coin-checkbox {
             display: none;
         }
 
@@ -227,8 +227,8 @@
             height: 100%;
             color: var(--gold-color);
         }
-        /* Hide key when safe is unlocked (key used) */
-        #safe-unlock:checked ~ .key-in-game {
+        /* Hide key when toolbox is unlocked (key used) */
+        #toolbox-unlock:checked ~ .key-in-game {
             display: none;
         }
         /* Enable clicking key only when player is at level 4, position 1 */
@@ -246,20 +246,26 @@
             left: calc(var(--pos-width) * 6 - var(--inventory-right) - var(--inventory-width) + var(--inventory-padding) - 4px);
         }
 
-        /* Safe on level 2, position 6 */
-        .safe {
+        /* Toolbox on level 2, position 6 */
+        .toolbox {
             position: absolute;
-            font-size: 28px;
+            width: 28px;
+            height: 28px;
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
             z-index: 20;
         }
-        /* Hide safe when unlocked */
-        #safe-unlock:checked ~ .safe {
+        .toolbox svg {
+            width: 100%;
+            height: 100%;
+            color: #888;
+        }
+        /* Hide toolbox when unlocked */
+        #toolbox-unlock:checked ~ .toolbox {
             display: none;
         }
 
-        /* Wrench appears when safe is unlocked, hides when picked up */
+        /* Wrench appears when toolbox is unlocked, hides when picked up */
         .wrench {
             position: absolute;
             font-size: 28px;
@@ -268,7 +274,7 @@
             z-index: 20;
             display: none;
         }
-        #safe-unlock:checked ~ #wrench-pickup:not(:checked) ~ .wrench {
+        #toolbox-unlock:checked ~ #wrench-pickup:not(:checked) ~ .wrench {
             display: block;
         }
 
@@ -317,13 +323,13 @@
         .wrench-pickup-btn:hover {
             filter: drop-shadow(0 0 15px var(--pickup-glow-color)) drop-shadow(0 0 25px var(--pickup-glow-color));
         }
-        /* Show wrench pickup button when at level 2, position 6, safe unlocked, wrench not picked up */
-        #level-2:checked ~ #pos-6:checked ~ #safe-unlock:checked ~ #wrench-pickup:not(:checked) ~ .wrench-pickup-btn {
+        /* Show wrench pickup button when at level 2, position 6, toolbox unlocked, wrench not picked up */
+        #level-2:checked ~ #pos-6:checked ~ #toolbox-unlock:checked ~ #wrench-pickup:not(:checked) ~ .wrench-pickup-btn {
             display: block;
         }
 
-        /* Key above safe - pulsates when user has key, clickable to unlock */
-        .key-at-safe {
+        /* Key above toolbox - pulsates when user has key, clickable to unlock */
+        .key-at-toolbox {
             position: absolute;
             width: 24px;
             height: 24px;
@@ -333,7 +339,7 @@
             display: none;
             cursor: pointer;
         }
-        .key-at-safe svg {
+        .key-at-toolbox svg {
             width: 100%;
             height: 100%;
             color: var(--gold-color);
@@ -348,8 +354,8 @@
                 filter: drop-shadow(0 0 15px var(--gold-color)) drop-shadow(0 0 25px var(--gold-color));
             }
         }
-        /* Only show key at safe when player is at level 2, position 6, has key, AND safe not yet unlocked */
-        #level-2:checked ~ #pos-6:checked ~ #key-pickup:checked ~ #safe-unlock:not(:checked) ~ .key-at-safe {
+        /* Only show key at toolbox when player is at level 2, position 6, has key, AND toolbox not yet unlocked */
+        #level-2:checked ~ #pos-6:checked ~ #key-pickup:checked ~ #toolbox-unlock:not(:checked) ~ .key-at-toolbox {
             display: block;
             animation: key-pulse 1s ease-in-out infinite;
         }
@@ -837,6 +843,12 @@
         <symbol id="key" viewBox="0 0 512 512">
             <path fill="currentColor" d="M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0 160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17l0 80c0 13.3 10.7 24 24 24l80 0c13.3 0 24-10.7 24-24l0-40 40 0c13.3 0 24-10.7 24-24l0-40 40 0c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"/>
         </symbol>
+        <symbol id="toolbox" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M18 16H16V15H8V16H6V15H2V20H22V15H18V16M20 8H17V6C17 4.9 16.1 4 15 4H9C7.9 4 7 4.9 7 6V8H4C2.9 8 2 8.9 2 10V14H6V12H8V14H16V12H18V14H22V10C22 8.9 21.1 8 20 8M15 8H9V6H15V8Z"/>
+        </symbol>
+        <symbol id="wrench" viewBox="0 0 576 512">
+            <path fill="currentColor" d="M509.4 98.6c7.6-7.6 20.3-5.7 24.1 4.3 6.8 17.7 10.5 37 10.5 57.1 0 88.4-71.6 160-160 160-17.5 0-34.4-2.8-50.2-8L146.9 498.9c-28.1 28.1-73.7 28.1-101.8 0s-28.1-73.7 0-101.8L232 210.2c-5.2-15.8-8-32.6-8-50.2 0-88.4 71.6-160 160-160 20.1 0 39.4 3.7 57.1 10.5 10 3.8 11.8 16.5 4.3 24.1l-88.7 88.7c-3 3-4.7 7.1-4.7 11.3l0 41.4c0 8.8 7.2 16 16 16l41.4 0c4.2 0 8.3-1.7 11.3-4.7l88.7-88.7z"/>
+        </symbol>
     </svg>
 
     <div class="game-container">
@@ -861,7 +873,7 @@
         <input type="checkbox" id="key-pickup" class="key-checkbox">
 
         <!-- Safe unlock checkbox -->
-        <input type="checkbox" id="safe-unlock" class="safe-checkbox">
+        <input type="checkbox" id="toolbox-unlock" class="toolbox-checkbox">
 
         <!-- Wrench pickup checkbox -->
         <input type="checkbox" id="wrench-pickup" class="wrench-checkbox">
@@ -915,14 +927,14 @@
         <!-- Key in game world (clickable to pick up) -->
         <label for="key-pickup" class="key-in-game"><svg><use href="#key"/></svg></label>
 
-        <!-- Safe on level 2, position 6 -->
-        <div class="safe">🗄️</div>
+        <!-- Toolbox on level 2, position 6 -->
+        <div class="toolbox"><svg><use href="#toolbox"/></svg></div>
 
-        <!-- Wrench (appears when safe is unlocked) -->
+        <!-- Wrench (appears when toolbox is unlocked) -->
         <div class="wrench">🔧</div>
 
-        <!-- Key above safe (appears when user has key, clickable to unlock) -->
-        <label for="safe-unlock" class="key-at-safe"><svg><use href="#key"/></svg></label>
+        <!-- Key above toolbox (appears when user has key, clickable to unlock) -->
+        <label for="toolbox-unlock" class="key-at-toolbox"><svg><use href="#key"/></svg></label>
 
         <!-- Pickup button for wrench -->
         <label for="wrench-pickup" class="wrench-pickup-btn"></label>
