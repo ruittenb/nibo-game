@@ -776,11 +776,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
             color: var(--gold-color);
         }
-        @keyframes skull-roll {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 100%; }
-        }
-        @keyframes bacteria-roll {
+        @keyframes hazard-roll {
             0% { background-position: 0 0; }
             100% { background-position: 0 100%; }
         }
@@ -1089,8 +1085,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .arrow-3-4, .arrow-4-3 { left: calc(var(--pos-offset) + var(--pos-width) * 2.5 + 12px); }
         .arrow-4-5, .arrow-5-4 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5 + 12px); }
         .arrow-5-6, .arrow-6-5 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5 + 12px); }
-        /* Stage 1 to Stage 2 transition arrow */
-        .arrow-6-7, .arrow-7-6 { left: calc(var(--pos-offset) + var(--pos-width) * 5.5 + 27px); }
+        /* Stage 1 to Stage 2 transition arrows */
+        .arrow-7-6 { left: calc(var(--pos-offset) + var(--pos-width) * 5.5 + 27px); }
+        .arrow-6-7 { left: calc(var(--pos-offset) + var(--pos-width) * 5 + 66px); }
         /* Stage 2 horizontal arrows */
         .arrow-7-8, .arrow-8-7 { left: calc(var(--pos-offset) + var(--pos-width) * 6.5 + 12px); }
         .arrow-8-9, .arrow-9-8 { left: calc(var(--pos-offset) + var(--pos-width) * 7.5 + 12px); }
@@ -1160,15 +1157,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 4 + 10px);
             bottom: calc(var(--platform-height) * 2);
         }
-        /* Platform 4 gap: position 6, level 4 -> 3 */
-        .arrow-down-L4P6 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 5 + 10px);
-            bottom: calc(var(--platform-height) * 4);
-        }
         /* Platform 3 gap: position 3, level 3 -> 2 */
         .arrow-down-L3P3 {
             left: calc(var(--pos-offset) + var(--pos-width) * 2 + 10px);
             bottom: calc(var(--platform-height) * 3);
+        }
+        /* Platform 4 gap: position 6, level 4 -> 3 */
+        .arrow-down-L4P6 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 + 10px);
+            bottom: calc(var(--platform-height) * 4);
         }
 
         /* Stage 2 Down arrows: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
@@ -1209,7 +1206,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-5:checked ~ .game-world .arrow-5-4 { display: block; }
         #pos-5:checked ~ .game-world .arrow-5-6 { display: block; }
         #pos-6:checked ~ .game-world .arrow-6-5 { display: block; }
-        /* Nav widget arrow to Stage 2 when door is open and player at pos-6 */
+        /* Arrow to Stage 2 when door is open and player at pos-6 */
+        #level-0:checked ~ #pos-6:checked ~ #door-opened:checked ~ .game-world .arrow-6-7 { display: block; }
         #pos-6:checked ~ #door-opened:checked ~ .nav-panel .nav-right[for="pos-7"] { display: block; }
         /* Stage 2 arrows */
         #level-0:checked ~ #pos-7:checked ~ .game-world .arrow-7-6 { display: block; }
@@ -1245,10 +1243,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-1:checked ~ #pos-1:checked ~ .game-world .arrow-down-L1P1 { display: block; }
         /* Platform 2 gap: level 2, position 5 */
         #level-2:checked ~ #pos-5:checked ~ .game-world .arrow-down-L2P5 { display: block; }
-        /* Platform 4 gap: level 4, position 6 */
-        #level-4:checked ~ #pos-6:checked ~ .game-world .arrow-down-L4P6 { display: block; }
         /* Platform 3 gap: level 3, position 3 */
         #level-3:checked ~ #pos-3:checked ~ .game-world .arrow-down-L3P3 { display: block; }
+        /* Platform 4 gap: level 4, position 6 */
+        #level-4:checked ~ #pos-6:checked ~ .game-world .arrow-down-L4P6 { display: block; }
         /* Stage 2 down arrows: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
         #level-1:checked ~ #pos-7:checked ~ .game-world .arrow-down-L1P7 { display: block; }
         #level-1:checked ~ #pos-12:checked ~ .game-world .arrow-down-L1P12 { display: block; }
@@ -1553,7 +1551,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: purple;
             background: linear-gradient(to top, transparent 0%, var(--skull-bg-purple) 12.5%, transparent 25%, var(--skull-bg-purple) 37.5%, transparent 50%, var(--skull-bg-purple) 62.5%, transparent 75%, var(--skull-bg-purple) 87.5%, transparent 100%);
             background-size: 100% 200%;
-            animation: skull-roll 1s linear infinite;
+            animation: hazard-roll 1s linear infinite;
             border-radius: 6px;
             z-index: 15;
         }
@@ -1571,7 +1569,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: purple;
             background: linear-gradient(to top, transparent 0%, var(--bacteria-bg-purple) 12.5%, transparent 25%, var(--bacteria-bg-purple) 37.5%, transparent 50%, var(--bacteria-bg-purple) 62.5%, transparent 75%, var(--bacteria-bg-purple) 87.5%, transparent 100%);
             background-size: 100% 200%;
-            animation: bacteria-roll 1s linear infinite;
+            animation: hazard-roll 1s linear infinite;
             border-radius: 6px;
             z-index: 15;
         }
@@ -1636,7 +1634,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .door svg {
             position: absolute;
             top: 0;
-            left: 0;
+            left: 22px;
             width: 100%;
             height: 100%;
             color: #6a6a6a;
@@ -1672,9 +1670,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
         }
         #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ #door-opened:not(:checked) ~ .game-world .door .door-closed {
-            animation: door-pulse 1s ease-in-out infinite;
-        }
-        #level-0:checked ~ #pos-6:checked ~ #door-opened:checked ~ .game-world .door .door-open {
             animation: door-pulse 1s ease-in-out infinite;
         }
 
@@ -1933,6 +1928,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="pos-4" class="arrow arrow-left arrow-h arrow-5-4"></label>
         <label for="pos-6" class="arrow arrow-right arrow-h arrow-5-6"></label>
         <label for="pos-5" class="arrow arrow-left arrow-h arrow-6-5"></label>
+        <label for="pos-7" class="arrow arrow-right arrow-h arrow-6-7"></label>
 
         <!-- Stage 2 horizontal arrow labels -->
         <label for="pos-6" class="arrow arrow-left arrow-h arrow-7-6"></label>
