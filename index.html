@@ -536,8 +536,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #toolbox-unlock { top: 30px; left: 50px; }
         #wrench-pickup { top: 30px; left: 70px; }
         #door-unlocked { top: 30px; left: 90px; }
-        #axe-pickup { top: 30px; left: 110px; }
-        #plant-unlock { top: 30px; left: 130px; }
+        #axe-pickup { top: 30px; left: 170px; }
+        #plant-unlock { top: 30px; left: 190px; }
         /* Debug positions - coins (row 3) */
         #coin-L0P3-pickup { top: 50px; left: 30px; }
         #coin-L1P4-pickup { top: 50px; left: 50px; }
@@ -1049,6 +1049,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + var(--ladder-offset));
         }
+        .vine-s2-L1P10 {
+            bottom: calc(var(--platform-height) + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 9 + var(--ladder-offset));
+        }
         .vine-s2-L2P12 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset));
@@ -1163,6 +1167,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
             bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px);
         }
+        .arrow-up-L1P10 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 9 + 10px);
+            bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px);
+        }
         .arrow-up-L2P12 {
             left: calc(var(--pos-offset) + var(--pos-width) * 11 + 10px);
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 72.5px);
@@ -1261,6 +1269,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-0:checked ~ #pos-8:checked ~ .game-world .arrow-up-L0P8 { display: block; }
         #level-0:checked ~ #pos-11:checked ~ .game-world .arrow-up-L0P11 { display: block; }
         #level-1:checked ~ #pos-7:checked ~ .game-world .arrow-up-L1P7 { display: block; }
+        #level-1:checked ~ #pos-10:checked ~ .game-world .arrow-up-L1P10 { display: block; }
         #level-2:checked ~ #pos-12:checked ~ .game-world .arrow-up-L2P12 { display: block; }
         #level-3:checked ~ #pos-9:checked ~ .game-world .arrow-up-L3P9 { display: block; }
 
@@ -1409,6 +1418,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-0:checked ~ #pos-8:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
         #level-0:checked ~ #pos-11:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
         #level-1:checked ~ #pos-7:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
+        #level-1:checked ~ #pos-10:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
         #level-2:checked ~ #pos-12:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
         #level-3:checked ~ #pos-9:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
 
@@ -1981,10 +1991,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="level-3" class="arrow arrow-down arrow-down-L4P6"></label>
         <label for="level-2" class="arrow arrow-down arrow-down-L3P3"></label>
 
-        <!-- Stage 2 Up arrow labels: L0P8, L0P11, L1P7, L2P12, L3P9 -->
+        <!-- Stage 2 Up arrow labels: L0P8, L0P11, L1P7, L1P10, L2P12, L3P9 -->
         <label for="level-1" class="arrow arrow-up arrow-up-L0P8"></label>
         <label for="level-1" class="arrow arrow-up arrow-up-L0P11"></label>
         <label for="level-2" class="arrow arrow-up arrow-up-L1P7"></label>
+        <label for="level-2" class="arrow arrow-up arrow-up-L1P10"></label>
         <label for="level-3" class="arrow arrow-up arrow-up-L2P12"></label>
         <label for="level-4" class="arrow arrow-up arrow-up-L3P9"></label>
 
@@ -2017,6 +2028,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="vine vine-s2-L0P8"></div>
         <div class="vine vine-s2-L0P11"></div>
         <div class="vine vine-s2-L1P7"></div>
+        <div class="vine vine-s2-L1P10"></div>
         <div class="vine vine-s2-L2P12"></div>
         <div class="vine vine-s2-L3P9"></div>
 
