@@ -192,6 +192,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --item-offset: 34px;          /* Offset for items left of player position */
             --ladder-offset: 42px;        /* Horizontal offset for ladders */
 
+            /* Warning strips */
+            --warning-strip-width: 8px;   /* Width of warning strips */
+
             /* Inventory */
             --inventory-top: 10px;        /* Inventory distance from top */
             --inventory-right: 10px;      /* Inventory distance from right */
@@ -776,7 +779,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
             color: var(--gold-color);
         }
-        @keyframes hazard-roll {
+        @keyframes deadly-roll {
             0% { background-position: 0 0; }
             100% { background-position: 0 100%; }
         }
@@ -878,6 +881,29 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: var(--ground-height);
             background: linear-gradient(to bottom, #2d5016 0%, #1a3009 100%);
             border-top: 3px solid #4a7023;
+        }
+
+        /* Warning strips - yellow/black diagonal stripes marking stage edges */
+        .warning-strip {
+            position: absolute;
+            width: var(--warning-strip-width);
+            background: repeating-linear-gradient(
+                -45deg,
+                #ffcc00,
+                #ffcc00 4px,
+                #222 4px,
+                #222 8px
+            );
+        }
+        .warning-strip-left {
+            left: 0;
+            bottom: var(--ground-height);
+            top: 90px;
+        }
+        .warning-strip-right {
+            left: calc(var(--pos-width) * 6 - var(--warning-strip-width) - 4px);
+            bottom: calc(var(--ground-height) + 60px);
+            top: 110px;
         }
         /* Stage 2 ground is brown (soil) */
         .ground-s2 {
@@ -1551,7 +1577,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: purple;
             background: linear-gradient(to top, transparent 0%, var(--skull-bg-purple) 12.5%, transparent 25%, var(--skull-bg-purple) 37.5%, transparent 50%, var(--skull-bg-purple) 62.5%, transparent 75%, var(--skull-bg-purple) 87.5%, transparent 100%);
             background-size: 100% 200%;
-            animation: hazard-roll 1s linear infinite;
+            animation: deadly-roll 1s linear infinite;
             border-radius: 6px;
             z-index: 15;
         }
@@ -1569,7 +1595,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: purple;
             background: linear-gradient(to top, transparent 0%, var(--bacteria-bg-purple) 12.5%, transparent 25%, var(--bacteria-bg-purple) 37.5%, transparent 50%, var(--bacteria-bg-purple) 62.5%, transparent 75%, var(--bacteria-bg-purple) 87.5%, transparent 100%);
             background-size: 100% 200%;
-            animation: hazard-roll 1s linear infinite;
+            animation: deadly-roll 1s linear infinite;
             border-radius: 6px;
             z-index: 15;
         }
@@ -2036,6 +2062,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Ground -->
         <div class="ground"></div>
         <div class="ground-s2"></div>
+
+        <!-- Warning strips marking stage 1 edges -->
+        <div class="warning-strip warning-strip-left"></div>
+        <div class="warning-strip warning-strip-right"></div>
 
         <!-- Coins (clickable to pick up, animate to counter) -->
         <label for="coin-L0P3-pickup" class="coin-in-game coin-L0P3"><svg><use href="#coin"/></svg></label>
