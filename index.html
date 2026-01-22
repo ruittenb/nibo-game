@@ -808,6 +808,58 @@
             left: calc(var(--pos-offset) + var(--pos-width) * 8 + var(--ladder-offset));
         }
 
+        /* Vines for stage 2 */
+        .vine {
+            position: absolute;
+            width: 24px;
+            height: calc(var(--platform-height) - var(--platform-thickness));
+            z-index: 10;
+            /* Wavy main stem */
+            background:
+                radial-gradient(ellipse 8px 12px at 8px 10px, #228b22 50%, transparent 50%),
+                radial-gradient(ellipse 8px 12px at 16px 30px, #228b22 50%, transparent 50%),
+                radial-gradient(ellipse 8px 12px at 8px 50px, #228b22 50%, transparent 50%),
+                radial-gradient(ellipse 8px 12px at 16px 70px, #228b22 50%, transparent 50%),
+                radial-gradient(ellipse 8px 12px at 8px 90px, #228b22 50%, transparent 50%),
+                radial-gradient(ellipse 8px 12px at 16px 110px, #228b22 50%, transparent 50%),
+                linear-gradient(90deg, transparent 10px, #1a6b1a 10px, #1a6b1a 14px, transparent 14px);
+        }
+        /* Leaves on the vine */
+        .vine::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse 10px 6px at 2px 20px, #32cd32 50%, transparent 50%),
+                radial-gradient(ellipse 10px 6px at 22px 45px, #32cd32 50%, transparent 50%),
+                radial-gradient(ellipse 10px 6px at 2px 65px, #32cd32 50%, transparent 50%),
+                radial-gradient(ellipse 10px 6px at 22px 85px, #32cd32 50%, transparent 50%),
+                radial-gradient(ellipse 10px 6px at 2px 105px, #32cd32 50%, transparent 50%);
+        }
+
+        /* Stage 2 Vines */
+        .vine-s2-L0P8 {
+            bottom: var(--ground-height);
+            left: calc(var(--pos-offset) + var(--pos-width) * 7 + var(--ladder-offset));
+        }
+        .vine-s2-L0P11 {
+            bottom: var(--ground-height);
+            left: calc(var(--pos-offset) + var(--pos-width) * 10 + var(--ladder-offset));
+        }
+        .vine-s2-L1P7 {
+            bottom: calc(var(--platform-height) + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 6 + var(--ladder-offset));
+        }
+        .vine-s2-L2P12 {
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset));
+        }
+        .vine-s2-L3P9 {
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 8 + var(--ladder-offset));
+        }
+
         /* Arrow labels (clickable) - CSS triangles */
         .arrow {
             position: absolute;
@@ -1757,12 +1809,12 @@
         <!-- Ladder from platform 3 to platform 4 (position 4) -->
         <div class="ladder ladder-4"></div>
 
-        <!-- Stage 2 Ladders: L0P8, L0P11, L1P7, L2P12, L3P9 -->
-        <div class="ladder ladder-s2-L0P8"></div>
-        <div class="ladder ladder-s2-L0P11"></div>
-        <div class="ladder ladder-s2-L1P7"></div>
-        <div class="ladder ladder-s2-L2P12"></div>
-        <div class="ladder ladder-s2-L3P9"></div>
+        <!-- Stage 2 Vines -->
+        <div class="vine vine-s2-L0P8"></div>
+        <div class="vine vine-s2-L0P11"></div>
+        <div class="vine vine-s2-L1P7"></div>
+        <div class="vine vine-s2-L2P12"></div>
+        <div class="vine vine-s2-L3P9"></div>
 
         <!-- Grates at platform gaps -->
         <div class="grate grate-L1P1"></div>
