@@ -6,9 +6,9 @@ with Claude Code.
 
 Help Nibo the little spaceman to find his way out of the level.
 
-## Level 1:
+## Stage 1:
 
-![Level 1](images/level-1.png)
+![Stage 1](images/stage-1.png)
 
 # Project location
 
@@ -16,6 +16,6 @@ Help Nibo the little spaceman to find his way out of the level.
 
 # More Examples
 
- - [The Mine](https://codepen.io/jcoulterdesign/pen/NOMeEb)
- - [CSScape room](https://csscape-room.iamdanielmarino.com/)
+ - [The Mine](https://codepen.io/jcoulterdesign/pen/NOMeEb) by Jamie Coulter
+ - [CSScape room](https://csscape-room.iamdanielmarino.com/) by Daniel Marino
 
