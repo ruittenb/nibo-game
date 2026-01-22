@@ -1089,6 +1089,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .arrow-3-4, .arrow-4-3 { left: calc(var(--pos-offset) + var(--pos-width) * 2.5 + 12px); }
         .arrow-4-5, .arrow-5-4 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5 + 12px); }
         .arrow-5-6, .arrow-6-5 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5 + 12px); }
+        /* Stage 1 to Stage 2 transition arrow */
+        .arrow-6-7, .arrow-7-6 { left: calc(var(--pos-offset) + var(--pos-width) * 5.5 + 27px); }
         /* Stage 2 horizontal arrows */
         .arrow-7-8, .arrow-8-7 { left: calc(var(--pos-offset) + var(--pos-width) * 6.5 + 12px); }
         .arrow-8-9, .arrow-9-8 { left: calc(var(--pos-offset) + var(--pos-width) * 7.5 + 12px); }
@@ -1209,7 +1211,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-6:checked ~ .game-world .arrow-6-5 { display: block; }
         /* Nav widget arrow to Stage 2 when door is open and player at pos-6 */
         #pos-6:checked ~ #door-opened:checked ~ .nav-panel .nav-right[for="pos-7"] { display: block; }
-        /* Stage 2 arrows - no left arrow at pos-7 (one-way from Stage 1) */
+        /* Stage 2 arrows */
+        #level-0:checked ~ #pos-7:checked ~ .game-world .arrow-7-6 { display: block; }
         #pos-7:checked ~ .game-world .arrow-7-8 { display: block; }
         #pos-8:checked ~ .game-world .arrow-8-7 { display: block; }
         #pos-8:checked ~ .game-world .arrow-8-9 { display: block; }
@@ -1359,7 +1362,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-3:checked ~ .nav-panel .nav-right[for="pos-4"] { display: block; }
         #pos-4:checked ~ .nav-panel .nav-right[for="pos-5"] { display: block; }
         #pos-5:checked ~ .nav-panel .nav-right[for="pos-6"] { display: block; }
-        /* Stage 2 nav panel arrows - no left at pos-7 (one-way) */
+        /* Stage 2 nav panel arrows */
+        #level-0:checked ~ #pos-7:checked ~ .nav-panel .nav-left[for="pos-6"] { display: block; }
         #pos-7:checked ~ .nav-panel .nav-right[for="pos-8"] { display: block; }
         #pos-8:checked ~ .nav-panel .nav-left[for="pos-7"] { display: block; }
         #pos-8:checked ~ .nav-panel .nav-right[for="pos-9"] { display: block; }
@@ -1843,7 +1847,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="pos-3" class="nav-btn nav-left"></label>
                 <label for="pos-4" class="nav-btn nav-left"></label>
                 <label for="pos-5" class="nav-btn nav-left"></label>
-                <!-- Stage 2 - no pos-6 (one-way from Stage 1) -->
+                <!-- Stage 2 -->
+                <label for="pos-6" class="nav-btn nav-left"></label>
                 <label for="pos-7" class="nav-btn nav-left"></label>
                 <label for="pos-8" class="nav-btn nav-left"></label>
                 <label for="pos-9" class="nav-btn nav-left"></label>
@@ -1930,6 +1935,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="pos-5" class="arrow arrow-left arrow-h arrow-6-5"></label>
 
         <!-- Stage 2 horizontal arrow labels -->
+        <label for="pos-6" class="arrow arrow-left arrow-h arrow-7-6"></label>
         <label for="pos-8" class="arrow arrow-right arrow-h arrow-7-8"></label>
         <label for="pos-7" class="arrow arrow-left arrow-h arrow-8-7"></label>
         <label for="pos-9" class="arrow arrow-right arrow-h arrow-8-9"></label>
