@@ -639,7 +639,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #coin-L2P1-pickup:checked ~ .coin-counter { --coin-L2P1: 1; }
         #coin-L4P2-pickup:checked ~ .coin-counter { --coin-L4P2: 1; }
         #coin-L0P8-pickup:checked ~ .coin-counter { --coin-L0P8: 1; }
-        #coin-L1P11-pickup:checked ~ .coin-counter { --coin-L1P11: 1; }
+        #coin-L1P11-pickup:checked ~ .coin-counter { --coin-L1P11: 2; }
         #coin-L2P7-pickup:checked ~ .coin-counter { --coin-L2P7: 1; }
         #coin-L3P9-pickup:checked ~ .coin-counter { --coin-L3P9: 1; }
         #coin-L4P10-pickup:checked ~ .coin-counter { --coin-L4P10: 1; }
@@ -1450,6 +1450,28 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
         }
+        .coin-in-game.gem {
+            color: #87ceeb;
+            animation: gem-sparkle 2s ease-in-out infinite;
+        }
+        @keyframes gem-sparkle {
+            0%, 100% {
+                color: #87ceeb;
+                filter: drop-shadow(0 0 2px #87ceeb);
+            }
+            25% {
+                color: #b0e0ff;
+                filter: drop-shadow(0 0 6px #ffffff);
+            }
+            50% {
+                color: #60c0e8;
+                filter: drop-shadow(0 0 3px #87ceeb);
+            }
+            75% {
+                color: #c0f0ff;
+                filter: drop-shadow(0 0 8px #ffffff);
+            }
+        }
 
         /* Coin positions - on platforms */
         .coin-L0P3 {
@@ -1801,6 +1823,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <path fill="currentColor" d="M 2,32 V 30 C 2,30 7,28 12,28 C 17,28 22,30 22,30 V 32 H 2 Z"/>
             <path fill="currentColor" d="M 11.3,9.1 C 10.1,5.2 4,6.1 4,6.1 C 4,6.1 4.2,13.9 9.9,12.7 C 9.5,9.8 8,9 8,9 C 10.8,9 11,12.4 11,12.4 V 26 C 11.3,26 11.7,26 12,26 C 12.3,26 12.7,26 13,26 V 12.8 C 13,12.8 13,8.9 16,7.9 C 16,7.9 14,10.9 14,12.9 C 21,13.6 21,4 21,4 C 21,4 12.1,3 11.3,9.1 Z"/>
         </symbol>
+        <symbol id="gem" viewBox="0 0 512 512">
+            <path fill="currentColor" d="M 168.5 72 l 87.5 93 87.5 -93 -175 0 z M 383.9 99.1 l -72.3 76.9 129 0 -56.6 -76.9 z m 50 124.9 L 78.1 224 256 420.3 433.9 224 z M 71.5 176 l 129 0 -72.3 -76.9 -56.6 76.9 z m 434.3 40.1 l -232 256 c -4.5 5 -11 7.9 -17.8 7.9 s -13.2 -2.9 -17.8 -7.9 l -232 -256 c -7.7 -8.5 -8.3 -21.2 -1.5 -30.4 l 112 -152 c 4.5 -6.1 11.7 -9.8 19.3 -9.8 l 240 0 c 7.6 0 14.8 3.6 19.3 9.8 l 112 152 c 6.8 9.2 6.1 21.9 -1.5 30.4 z"/>
+        </symbol>
     </svg>
 
     <!-- Debug toggle: Alt+D (Windows/Linux) or Ctrl+Alt+D (Mac) -->
@@ -1930,6 +1955,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                     <div class="digit">8</div>
                     <div class="digit">9</div>
                     <div class="digit">10</div>
+                    <div class="digit">11</div>
                 </div>
             </div>
         </div>
@@ -2088,7 +2114,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         <!-- Stage 2 Coins -->
         <label for="coin-L0P8-pickup" class="coin-in-game coin-L0P8"><svg><use href="#coin"/></svg></label>
-        <label for="coin-L1P11-pickup" class="coin-in-game coin-L1P11"><svg><use href="#coin"/></svg></label>
+        <label for="coin-L1P11-pickup" class="coin-in-game coin-L1P11 gem"><svg><use href="#gem"/></svg></label>
         <label for="coin-L2P7-pickup" class="coin-in-game coin-L2P7"><svg><use href="#coin"/></svg></label>
         <label for="coin-L3P9-pickup" class="coin-in-game coin-L3P9"><svg><use href="#coin"/></svg></label>
         <label for="coin-L4P10-pickup" class="coin-in-game coin-L4P10"><svg><use href="#coin"/></svg></label>
