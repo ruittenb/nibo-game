@@ -267,41 +267,41 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .platform-1 {
             bottom: var(--platform-height);
             left: var(--pos-width);
-            width: calc(var(--pos-width) * 5);
+            width: calc(var(--pos-width) * 5 - var(--warning-strip-width) - 4px);
         }
 
         /* Platform 2 (third from above): 4/6 width, aligned left */
         .platform-2 {
             bottom: calc(var(--platform-height) * 2);
-            left: 0;
-            width: calc(var(--pos-width) * 4);
+            left: var(--warning-strip-width);
+            width: calc(var(--pos-width) * 4 - var(--warning-strip-width));
         }
 
         /* Platform 2-right (third from above): 1/6 width, aligned right in Stage 1 */
         .platform-2-right {
             bottom: calc(var(--platform-height) * 2);
             left: calc(var(--pos-width) * 5);
-            width: var(--pos-width);
+            width: calc(var(--pos-width) - var(--warning-strip-width) - 4px);
         }
 
         /* Platform 3 (second from above): split with gap at position 3 */
         .platform-3-left {
             bottom: calc(var(--platform-height) * 3);
-            left: 0;
-            width: calc(var(--pos-width) * 2);
+            left: var(--warning-strip-width);
+            width: calc(var(--pos-width) * 2 - var(--warning-strip-width));
         }
 
         .platform-3-right {
             bottom: calc(var(--platform-height) * 3);
             left: calc(var(--pos-width) * 3);
-            width: calc(var(--pos-width) * 3);
+            width: calc(var(--pos-width) * 3 - var(--warning-strip-width) - 4px);
         }
 
         /* Platform 4 (top): 5/6 width, aligned left */
         .platform-4 {
             bottom: calc(var(--platform-height) * 4);
-            left: 0;
-            width: calc(var(--pos-width) * 5);
+            left: var(--warning-strip-width);
+            width: calc(var(--pos-width) * 5 - var(--warning-strip-width));
         }
 
         /* Stage 2 Platforms (positions 7-12) */
