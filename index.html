@@ -535,7 +535,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #key-pickup { top: 30px; left: 30px; }
         #toolbox-unlock { top: 30px; left: 50px; }
         #wrench-pickup { top: 30px; left: 70px; }
-        #door-opened { top: 30px; left: 90px; }
+        #door-unlocked { top: 30px; left: 90px; }
         #axe-pickup { top: 30px; left: 110px; }
         #plant-unlock { top: 30px; left: 130px; }
         /* Debug positions - coins (row 3) */
@@ -1112,8 +1112,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .arrow-4-5, .arrow-5-4 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5 + 12px); }
         .arrow-5-6, .arrow-6-5 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5 + 12px); }
         /* Stage 1 to Stage 2 transition arrows */
-        .arrow-7-6 { left: calc(var(--pos-offset) + var(--pos-width) * 5.5 + 27px); }
-        .arrow-6-7 { left: calc(var(--pos-offset) + var(--pos-width) * 5 + 66px); }
+        .arrow-7-6 { left: calc(var(--pos-offset) + var(--pos-width) * 5.5 + 33px); }
+        .arrow-6-7 { left: calc(var(--pos-offset) + var(--pos-width) * 5 + 60px); }
         /* Stage 2 horizontal arrows */
         .arrow-7-8, .arrow-8-7 { left: calc(var(--pos-offset) + var(--pos-width) * 6.5 + 12px); }
         .arrow-8-9, .arrow-9-8 { left: calc(var(--pos-offset) + var(--pos-width) * 7.5 + 12px); }
@@ -1233,8 +1233,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-5:checked ~ .game-world .arrow-5-6 { display: block; }
         #pos-6:checked ~ .game-world .arrow-6-5 { display: block; }
         /* Arrow to Stage 2 when door is open and player at pos-6 */
-        #level-0:checked ~ #pos-6:checked ~ #door-opened:checked ~ .game-world .arrow-6-7 { display: block; }
-        #pos-6:checked ~ #door-opened:checked ~ .nav-panel .nav-right[for="pos-7"] { display: block; }
+        #level-0:checked ~ #pos-6:checked ~ #door-unlocked:checked ~ .game-world .arrow-6-7 { display: block; }
+        #pos-6:checked ~ #door-unlocked:checked ~ .nav-panel .nav-right[for="pos-7"] { display: block; }
         /* Stage 2 arrows */
         #level-0:checked ~ #pos-7:checked ~ .game-world .arrow-7-6 { display: block; }
         #pos-7:checked ~ .game-world .arrow-7-8 { display: block; }
@@ -1665,7 +1665,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
             color: #6a6a6a;
             filter: drop-shadow(1px 1px 0 #aaa) drop-shadow(-1px -1px 0 #444);
-            transform: scaleY(1.4);
+            transform: scaleX(1.65) scaleY(1.7);
         }
         .door-L0P6 {
             bottom: calc(var(--ground-height) + 2px);
@@ -1675,14 +1675,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .door-closed {
             display: block;
         }
-        #door-opened:checked ~ .game-world .door .door-closed {
+        #door-unlocked:checked ~ .game-world .door .door-closed {
             display: none;
         }
         /* Door open - hidden by default, show when opened */
         .door-open {
             display: none;
         }
-        #door-opened:checked ~ .game-world .door .door-open {
+        #door-unlocked:checked ~ .game-world .door .door-open {
             display: block;
         }
         /* Door pulse animation */
@@ -1691,11 +1691,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             50% { filter: drop-shadow(1px 1px 0 #aaa) drop-shadow(-1px -1px 0 #444) drop-shadow(0 0 12px #9a9a9a) drop-shadow(0 0 20px #6a6a6a); }
         }
         /* Pulse glow when player has wrench and is at door location */
-        #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ #door-opened:not(:checked) ~ .game-world .door {
+        #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .door {
             pointer-events: auto;
             cursor: pointer;
         }
-        #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ #door-opened:not(:checked) ~ .game-world .door .door-closed {
+        #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .door .door-closed {
             animation: door-pulse 1s ease-in-out infinite;
         }
 
@@ -1712,7 +1712,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 6 - 42px);
         }
         /* Show door exit only when door is open and player is at door location */
-        #level-0:checked ~ #pos-6:checked ~ #door-opened:checked ~ .game-world .door-exit {
+        #level-0:checked ~ #pos-6:checked ~ #door-unlocked:checked ~ .game-world .door-exit {
             pointer-events: auto;
             cursor: pointer;
         }
@@ -1775,10 +1775,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <path fill="currentColor" d="M 509.4 98.6 c 7.6 -7.6 20.3 -5.7 24.1 4.3 6.8 17.7 10.5 37 10.5 57.1 0 88.4 -71.6 160 -160 160 -17.5 0 -34.4 -2.8 -50.2 -8 L 146.9 498.9 c -28.1 28.1 -73.7 28.1 -101.8 0 s -28.1 -73.7 0 -101.8 L 232 210.2 c -5.2 -15.8 -8 -32.6 -8 -50.2 0 -88.4 71.6 -160 160 -160 20.1 0 39.4 3.7 57.1 10.5 10 3.8 11.8 16.5 4.3 24.1 l -88.7 88.7 c -3 3 -4.7 7.1 -4.7 11.3 l 0 41.4 c 0 8.8 7.2 16 16 16 l 41.4 0 c 4.2 0 8.3 -1.7 11.3 -4.7 l 88.7 -88.7 z"/>
         </symbol>
         <symbol id="door-closed" viewBox="0 0 448 512">
-            <path fill="currentColor" d="M 32 64 C 32 28.7 60.7 0 96 0 L 352 0 c 35.3 0 64 28.7 64 64 l 0 384 c 17.7 0 32 14.3 32 32 s -14.3 32 -32 32 L 32 512 c -17.7 0 -32 -14.3 -32 -32 s 14.3 -32 32 -32 L 32 64 z M 320 288 a 32 32 0 1 0 0 -64 32 32 0 1 0 0 64 z"/>
+            <path fill="currentColor" d="M 32 64 C 32 28.7 60.7 0 96 0 L 352 0 c 35.3 0 64 28.7 64 64 l 0 384 c 17.7 0 32 14.3 32 32 s -14.3 32 -32 32 L 32 512 c -17.7 0 -32 -14.3 -32 -32 s 14.3 -32 32 -32 L 32 64 z M 104 288 a 32 32 0 1 0 0 -64 32 32 0 1 0 0 64 z"/>
         </symbol>
         <symbol id="door-open" viewBox="0 0 448 512">
-            <path fill="currentColor" d="M 288 64 l 64 0 0 416 c 0 17.7 14.3 32 32 32 l 32 0 c 17.7 0 32 -14.3 32 -32 s -14.3 -32 -32 -32 l 0 -384 c 0 -35.3 -28.7 -64 -64 -64 l -96 0 0 0 -160 0 C 60.7 0 32 28.7 32 64 l 0 384 c -17.7 0 -32 14.3 -32 32 s 14.3 32 32 32 l 224 0 c 17.7 0 32 -14.3 32 -32 l 0 -416 z M 160 256 a 32 32 0 1 1 64 0 32 32 0 1 1 -64 0 z"/>
+            <path fill="currentColor" d="M 288 64 l 64 0 0 416 c 0 17.7 14.3 32 32 32 l 32 0 c 17.7 0 32 -14.3 32 -32 s -14.3 -32 -32 -32 l 0 -384 c 0 -35.3 -28.7 -64 -64 -64 l -96 0 0 0 -160 0 C 60.7 0 32 28.7 32 64 l 0 384 c -17.7 0 -32 14.3 -32 32 s 14.3 32 32 32 l 32 0 c 17.7 0 32 -14.3 32 -32 l 0 -416 z"/>
         </symbol>
         <symbol id="bacteria" viewBox="0 -40 640 600">
             <path fill="currentColor" d="M 256 -32 c 13.3 0 24 10.7 24 24 l 0 11 c 8.6 2.2 16.9 5.6 24.8 10.3 L 311 7 c 9.4 -9.4 24.6 -9.4 33.9 0 s 9.4 24.6 0 33.9 l -6.3 6.3 c 4.6 7.8 8 16.2 10.3 24.8 l 11 0 c 13.3 0 24 10.7 24 24 s -10.7 24 -24 24 l -11 0 c -2.2 8.6 -5.6 16.9 -10.3 24.8 L 345 151 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 -30.1 30.1 4.1 4.1 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 c -10 10 -20 20 -30.1 30.1 L 217 279 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -6.3 -6.3 c -7.8 4.6 -16.2 8 -24.8 10.3 l 0 11 c 0 13.3 -10.7 24 -24 24 s -24 -10.7 -24 -24 l 0 -11 c -8.6 -2.2 -16.9 -5.6 -24.8 -10.3 L 73 313 c -9.4 9.4 -24.6 9.4 -33.9 0 s -9.4 -24.6 0 -33.9 l 6.3 -6.3 c -4.6 -7.8 -8 -16.2 -10.3 -24.8 l -11 0 c -13.3 0 -24 -10.7 -24 -24 s 10.7 -24 24 -24 l 11 0 c 2.2 -8.6 5.6 -16.9 10.3 -24.8 L 39 169 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 c 10 -10 20 -20 30.1 -30.1 L 103 105 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 30.1 -30.1 -4.1 -4.1 c -9.4 -9.4 -9.4 -24.6 0 -33.9 S 191.6 -2.3 201 7 l 6.3 6.3 c 7.8 -4.6 16.2 -8 24.8 -10.3 l 0 -11 c 0 -13.3 10.7 -24 24 -24 z M 128 256 a 32 32 0 1 0 0 -64 32 32 0 1 0 0 64 z M 240 144 a 32 32 0 1 0 -64 0 32 32 0 1 0 64 0 z m 296 40 l 0 11 c 8.6 2.2 16.9 5.6 24.8 10.3 L 567 199 c 9.4 -9.4 24.6 -9.4 33.9 0 s 9.4 24.6 0 33.9 l -6.3 6.3 c 4.6 7.8 8 16.2 10.3 24.8 l 11 0 c 13.3 0 24 10.7 24 24 s -10.7 24 -24 24 l -11 0 c -2.2 8.6 -5.6 16.9 -10.3 24.8 L 601 343 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 -30.1 30.1 4.1 4.1 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 c -10 10 -20 20 -30.1 30.1 L 473 471 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -6.3 -6.3 c -7.8 4.6 -16.2 8 -24.8 10.3 l 0 11 c 0 13.3 -10.7 24 -24 24 s -24 -10.7 -24 -24 l 0 -11 c -8.6 -2.2 -16.9 -5.6 -24.8 -10.3 L 329 505 c -9.4 9.4 -24.6 9.4 -33.9 0 s -9.4 -24.6 0 -33.9 l 6.3 -6.3 c -4.6 -7.8 -8 -16.2 -10.3 -24.8 l -11 0 c -13.3 0 -24 -10.7 -24 -24 s 10.7 -24 24 -24 l 11 0 c 2.2 -8.6 5.6 -16.9 10.3 -24.8 L 295 361 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 c 10 -10 20 -20 30.1 -30.1 L 359 297 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 30.1 -30.1 -4.1 -4.1 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 6.3 6.3 c 7.8 -4.6 16.2 -8 24.8 -10.3 l 0 -11 c 0 -13.3 10.7 -24 24 -24 s 24 10.7 24 24 z M 448 384 a 32 32 0 1 0 -64 0 32 32 0 1 0 64 0 z"/>
@@ -1837,7 +1837,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="plant-unlock" class="plant-checkbox">
 
         <!-- Door open checkbox -->
-        <input type="checkbox" id="door-opened" class="door-checkbox">
+        <input type="checkbox" id="door-unlocked" class="door-checkbox">
 
         <!-- Coin pickup checkboxes -->
         <input type="checkbox" id="coin-L0P3-pickup" class="coin-checkbox">
@@ -2088,7 +2088,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="plant-unlock" class="axe-at-plant"><svg><use href="#axe"/></svg></label>
 
         <!-- Door -->
-        <label for="door-opened" class="door door-L0P6">
+        <label for="door-unlocked" class="door door-L0P6">
             <svg class="door-closed" preserveAspectRatio="none"><use href="#door-closed"/></svg>
             <svg class="door-open" preserveAspectRatio="none"><use href="#door-open"/></svg>
         </label>
