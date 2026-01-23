@@ -506,7 +506,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
         /* Hide radio buttons and checkboxes by default */
-        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .tree-checkbox, .coin-checkbox, .door-checkbox {
+        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .tree-checkbox, .escaped-checkbox, .coin-checkbox, .door-checkbox {
             display: none;
             /* When unhidden for debugging: */
             z-index: 9999;
@@ -538,6 +538,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #door-unlocked { top: 30px; left: 90px; }
         #axe-pickup { top: 30px; left: 160px; }
         #tree-chopped { top: 30px; left: 180px; }
+        #escaped { top: 30px; left: 200px; }
         /* Debug positions - coins (row 3) */
         #coin-L0P3-pickup { top: 50px; left: 30px; }
         #coin-L1P4-pickup { top: 50px; left: 50px; }
@@ -557,6 +558,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ .game-container .wrench-checkbox,
         #debug-toggle:checked ~ .game-container .axe-checkbox,
         #debug-toggle:checked ~ .game-container .tree-checkbox,
+        #debug-toggle:checked ~ .game-container .escaped-checkbox,
         #debug-toggle:checked ~ .game-container .coin-checkbox,
         #debug-toggle:checked ~ .game-container .door-checkbox {
             display: block;
@@ -1171,6 +1173,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .arrow-9-10, .arrow-10-9 { left: calc(var(--pos-offset) + var(--pos-width) * 8.5 + 12px); }
         .arrow-10-11, .arrow-11-10 { left: calc(var(--pos-offset) + var(--pos-width) * 9.5 + 12px); }
         .arrow-11-12, .arrow-12-11 { left: calc(var(--pos-offset) + var(--pos-width) * 10.5 + 12px); }
+        /* Escape arrow (positioned like arrow-6-7, but at pos-12) */
+        .arrow-escape { left: calc(var(--pos-offset) + var(--pos-width) * 11 + 60px); }
 
         /* Horizontal arrows move with level */
         #level-0:checked ~ .game-world .arrow-h { bottom: calc(var(--ground-height) + 5px); }
@@ -1302,6 +1306,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-11:checked ~ .game-world .arrow-11-10 { display: block; }
         #pos-11:checked ~ .game-world .arrow-11-12 { display: block; }
         #pos-12:checked ~ .game-world .arrow-12-11 { display: block; }
+        /* Escape arrow when tree is chopped and player at pos-12 */
+        #level-0:checked ~ #pos-12:checked ~ #tree-chopped:checked ~ .game-world .arrow-escape { display: block; }
 
         /* Show up arrow at ladder locations */
         /* Ladder 1: level 0, position 5 */
@@ -1454,6 +1460,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-11:checked ~ .nav-panel .nav-left[for="pos-10"] { display: block; }
         #pos-11:checked ~ .nav-panel .nav-right[for="pos-12"] { display: block; }
         #pos-12:checked ~ .nav-panel .nav-left[for="pos-11"] { display: block; }
+        /* Escape arrow when tree is chopped and player at pos-12 */
+        #level-0:checked ~ #pos-12:checked ~ #tree-chopped:checked ~ .nav-panel .nav-escape { display: block; }
 
         /* Show up arrow at ladder locations */
         #level-0:checked ~ #pos-5:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
@@ -1831,6 +1839,41 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
             pointer-events: auto;
         }
+
+        /* Escape overlay */
+        .escape-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease-in;
+        }
+        .escape-overlay .escape-message {
+            color: #4ade80;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #000;
+            text-align: center;
+        }
+        .escape-overlay .escape-submessage {
+            color: #888;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        /* Show escape overlay when escaped checkbox is checked */
+        #escaped:checked ~ .escape-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body>
@@ -1936,6 +1979,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Sprout unlock checkbox -->
         <input type="checkbox" id="tree-chopped" class="tree-checkbox" title="tree">
 
+        <!-- Escaped checkbox -->
+        <input type="checkbox" id="escaped" class="escaped-checkbox" title="escaped">
+
         <!-- Door open checkbox -->
         <input type="checkbox" id="door-unlocked" class="door-checkbox" title="door">
 
@@ -1990,6 +2036,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="pos-10" class="nav-btn nav-right"></label>
                 <label for="pos-11" class="nav-btn nav-right"></label>
                 <label for="pos-12" class="nav-btn nav-right"></label>
+                <!-- Escape -->
+                <label for="escaped" class="nav-btn nav-right nav-escape"></label>
             </div>
             <!-- Down cell -->
             <div class="nav-cell nav-cell-down">
@@ -2069,6 +2117,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="pos-10" class="arrow arrow-left arrow-h arrow-11-10"></label>
         <label for="pos-12" class="arrow arrow-right arrow-h arrow-11-12"></label>
         <label for="pos-11" class="arrow arrow-left arrow-h arrow-12-11"></label>
+        <!-- Escape arrow (when tree is chopped at pos-12) -->
+        <label for="escaped" class="arrow arrow-right arrow-h arrow-escape"></label>
 
         <!-- Up arrow labels (at ladder positions) -->
         <label for="level-1" class="arrow arrow-up arrow-up-L0P5"></label>
@@ -2215,6 +2265,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="death-overlay">
             <div class="death-message">YOU DIED</div>
             <div class="death-submessage">GAME OVER</div>
+        </div>
+
+        <!-- Escape overlay -->
+        <div class="escape-overlay">
+            <div class="escape-message">You Escaped!</div>
+            <div class="escape-submessage">Well done</div>
         </div>
     </div>
 </body>
