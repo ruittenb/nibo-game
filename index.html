@@ -649,7 +649,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #coin-L0P8-pickup:checked ~ .coin-counter { --coin-L0P8: 1; }
         #coin-L1P11-pickup:checked ~ .coin-counter { --coin-L1P11: 2; }
         #coin-L2P7-pickup:checked ~ .coin-counter { --coin-L2P7: 1; }
-        #coin-L3P9-pickup:checked ~ .coin-counter { --coin-L3P9: 1; }
+        #coin-L3P9-pickup:checked ~ .coin-counter { --coin-L3P9: 2; }
         #coin-L4P10-pickup:checked ~ .coin-counter { --coin-L4P10: 1; }
 
         /* Key - single element that animates from game world to inventory */
@@ -1638,7 +1638,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        #level-3:checked ~ #pos-9:checked ~ #coin-L3P9-pickup:not(:checked) ~ .game-world .coin-L3P9 {
+        #level-3:checked ~ #pos-9:checked ~ #coin-L3P9-pickup:not(:checked) ~ .game-world .coin-L3P9 .coin-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
@@ -1746,13 +1746,18 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Sprout on level 0, position 12 */
-        .tree {
+        .tree-container {
             position: absolute;
             width: 92px;
             height: calc(var(--platform-height) - var(--ground-height) + 10px);
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset) - 5px - 26px);
-            z-index: var(--z-items);
+            z-index: var(--z-door);
+        }
+        .tree {
+            position: absolute;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
         }
         .tree svg {
@@ -1776,12 +1781,45 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: auto;
             cursor: pointer;
         }
-        /* Hide tree when chopped (axe used) */
-        #tree-chopped:checked ~ .game-world .tree {
+        /* Hide tree container when chopped (axe used) */
+        #tree-chopped:checked ~ .game-world .tree-container {
             display: none;
         }
         /* Hide axe when tree is chopped (axe used) */
         #tree-chopped:checked ~ .game-world .axe-in-game {
+            display: none;
+        }
+
+        /* Tree tooltip */
+        .tree-tooltip, .tree-tooltip-axe {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(calc(-50% - 35px));
+            margin-bottom: 8px;
+        }
+        .tree-hover-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: auto;
+            z-index: 1;
+        }
+        /* Hide hover area when player has axe and is at tree (so label click works) */
+        #level-0:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ .game-world .tree-container .tree-hover-area {
+            display: none;
+        }
+        /* Show "blocked" tooltip on hover (without axe, tree not chopped) */
+        #axe-pickup:not(:checked) ~ #tree-chopped:not(:checked) ~ .game-world .tree-hover-area:hover ~ .tree-tooltip {
+            opacity: 1;
+        }
+        /* Show "chop" tooltip on hover (with axe, tree not chopped, not at P12) */
+        #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree-container:hover .tree-tooltip-axe {
+            opacity: 1;
+        }
+        /* Hide chop tooltip when at P12 (clicking will work) */
+        #level-0:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree-container .tree-tooltip-axe {
             display: none;
         }
 
@@ -2021,11 +2059,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: 1;
         }
         /* Hide hover area when player is at gem location (so pickup works) */
-        #level-1:checked ~ #pos-11:checked ~ .game-world .gem-container .gem-hover-area {
+        #level-1:checked ~ #pos-11:checked ~ .game-world .coin-L1P11 .gem-hover-area,
+        #level-3:checked ~ #pos-9:checked ~ .game-world .coin-L3P9 .gem-hover-area {
             display: none;
         }
         /* Show gem tooltip on hover */
-        #coin-L1P11-pickup:not(:checked) ~ .game-world .gem-hover-area:hover ~ .gem-tooltip {
+        #coin-L1P11-pickup:not(:checked) ~ .game-world .coin-L1P11 .gem-hover-area:hover ~ .gem-tooltip,
+        #coin-L3P9-pickup:not(:checked) ~ .game-world .coin-L3P9 .gem-hover-area:hover ~ .gem-tooltip {
             opacity: 1;
         }
     </style>
@@ -2149,7 +2189,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="coin-L0P8-pickup" class="coin-checkbox" title="coin">
         <input type="checkbox" id="coin-L1P11-pickup" class="coin-checkbox" title="gem">
         <input type="checkbox" id="coin-L2P7-pickup" class="coin-checkbox" title="coin">
-        <input type="checkbox" id="coin-L3P9-pickup" class="coin-checkbox" title="coin">
+        <input type="checkbox" id="coin-L3P9-pickup" class="coin-checkbox" title="gem">
         <input type="checkbox" id="coin-L4P10-pickup" class="coin-checkbox" title="coin">
 
         <!-- Fixed navigation panel -->
@@ -2223,6 +2263,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                     <div class="digit">9</div>
                     <div class="digit">10</div>
                     <div class="digit">11</div>
+                    <div class="digit">12</div>
                 </div>
             </div>
         </div>
@@ -2397,11 +2438,24 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="tooltip gem-tooltip">Aquamarine</span>
         </div>
         <label for="coin-L2P7-pickup" class="coin-in-game coin-L2P7"><svg><use href="#coin"/></svg></label>
-        <label for="coin-L3P9-pickup" class="coin-in-game coin-L3P9"><svg><use href="#coin"/></svg></label>
+        <div class="gem-container coin-L3P9">
+            <label for="coin-L3P9-pickup" class="coin-in-game gem">
+                <svg><use href="#gem"/></svg>
+            </label>
+            <span class="gem-hover-area"></span>
+            <span class="tooltip gem-tooltip">Aquamarine</span>
+        </div>
         <label for="coin-L4P10-pickup" class="coin-in-game coin-L4P10"><svg><use href="#coin"/></svg></label>
 
-        <!-- Sprout on level 0, position 12 -->
-        <label for="tree-chopped" class="tree"><svg><use href="#tree"/></svg></label>
+        <!-- Tree on level 0, position 12 -->
+        <div class="tree-container">
+            <label for="tree-chopped" class="tree">
+                <svg><use href="#tree"/></svg>
+            </label>
+            <span class="tree-hover-area"></span>
+            <span class="tooltip tree-tooltip">The way is blocked.<br>You need an axe.</span>
+            <span class="tooltip tree-tooltip-axe">Chop down the tree</span>
+        </div>
 
         <!-- Axe above tree (appears when user has axe, clickable to use) -->
         <label for="tree-chopped" class="axe-at-tree"><svg><use href="#axe"/></svg></label>
