@@ -207,6 +207,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --inactive-arrow-color: #666; /* Inactive navigation arrow color */
             --gold-color: #ffd700;        /* Gold color for title and key */
             --border-color: #4a4a6a;      /* Border color for UI elements */
+
+            /* Z-index layers */
+            --z-items: 15;                /* Items, hazards */
+            --z-door: 20;                 /* Door (above hazards for tooltip) */
+            --z-tooltip: 500;             /* Tooltips */
+            --z-overlay: 1000;            /* Death and escape overlays */
         }
 
         * {
@@ -699,6 +705,18 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Hide toolbox when unlocked */
         #toolbox-unlock:checked ~ .game-world .toolbox {
             display: none;
+        }
+        .toolbox-tooltip {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
+        .toolbox:hover {
+            z-index: var(--z-tooltip);
+        }
+        .toolbox:hover .tooltip {
+            opacity: 1;
         }
 
         /* Axe on level 4, position 12 */
@@ -1610,7 +1628,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        #level-1:checked ~ #pos-11:checked ~ #coin-L1P11-pickup:not(:checked) ~ .game-world .coin-L1P11 {
+        #level-1:checked ~ #pos-11:checked ~ #coin-L1P11-pickup:not(:checked) ~ .game-world .coin-L1P11 .coin-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
@@ -1666,11 +1684,27 @@ AAAAAAAAAAAAAAAAAAAAAA==
             background-size: 100% 200%;
             animation: deadly-roll 1s linear infinite;
             border-radius: 6px;
-            z-index: 15;
+            z-index: var(--z-items);
         }
         .skull-L1P6 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
+        }
+        .skull svg {
+            width: 100%;
+            height: 100%;
+        }
+        .skull-tooltip {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
+        .skull:hover {
+            z-index: var(--z-tooltip);
+        }
+        .skull:hover .tooltip {
+            opacity: 1;
         }
         /* Stage 2 Bacteria */
         .bacteria {
@@ -1684,7 +1718,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             background-size: 100% 200%;
             animation: deadly-roll 1s linear infinite;
             border-radius: 6px;
-            z-index: 15;
+            z-index: var(--z-items);
         }
         .bacteria-L0P10 {
             bottom: calc(var(--ground-height) + 2px);
@@ -1694,6 +1728,22 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
         }
+        .bacteria svg {
+            width: 100%;
+            height: 100%;
+        }
+        .bacteria-tooltip {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
+        .bacteria:hover {
+            z-index: var(--z-tooltip);
+        }
+        .bacteria:hover .tooltip {
+            opacity: 1;
+        }
 
         /* Sprout on level 0, position 12 */
         .tree {
@@ -1702,7 +1752,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: calc(var(--platform-height) - var(--ground-height) + 10px);
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset) - 5px - 26px);
-            z-index: 15;
+            z-index: var(--z-items);
             pointer-events: none;
         }
         .tree svg {
@@ -1736,11 +1786,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Door */
-        .door {
+        .door-container {
             position: absolute;
             width: 32px;
             height: 58px;
-            z-index: 15;
+            z-index: var(--z-door);
+        }
+        .door-container.door-L0P6 {
+            bottom: calc(var(--ground-height) + 2px);
+            left: calc(var(--pos-width) * 6 - 42px);
+        }
+        .door {
+            position: absolute;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
         }
         .door svg {
@@ -1752,10 +1811,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: #6a6a6a;
             filter: drop-shadow(1px 1px 0 #aaa) drop-shadow(-1px -1px 0 #444);
             transform: scaleX(1.65) scaleY(1.7);
-        }
-        .door-L0P6 {
-            bottom: calc(var(--ground-height) + 2px);
-            left: calc(var(--pos-width) * 6 - 42px);
         }
         /* Door closed - show by default, hide when opened */
         .door-closed {
@@ -1815,7 +1870,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            z-index: 1000;
+            z-index: var(--z-overlay);
             opacity: 0;
             pointer-events: none;
             transition: opacity 1s ease-in;
@@ -1852,7 +1907,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            z-index: 1000;
+            z-index: var(--z-overlay);
             opacity: 0;
             pointer-events: none;
             transition: opacity 1s ease-in;
@@ -1873,6 +1928,105 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #escaped:checked ~ .escape-overlay {
             opacity: 1;
             pointer-events: auto;
+        }
+
+        /* Tooltip styling */
+        .tooltip {
+            position: absolute;
+            background: #1a1a2e;
+            border: 3px solid var(--border-color);
+            border-radius: 4px;
+            padding: 8px 12px;
+            color: #ccc;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: var(--z-tooltip);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .door-tooltip {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(calc(-50% - 40px));
+            margin-bottom: 8px;
+        }
+
+        /* Transparent hover area for door tooltip (doesn't trigger label click) */
+        .door-hover-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: auto;
+            z-index: 1;
+        }
+
+        /* Hide hover area when player has wrench and is at door (so label click works) */
+        #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ .game-world .door-container .door-hover-area {
+            display: none;
+        }
+
+        /* Second tooltip for when player has wrench */
+        .door-tooltip-wrench {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(calc(-50% - 40px));
+            margin-bottom: 8px;
+        }
+
+        /* Show "broken door" tooltip on hover (without wrench, door not unlocked) */
+        #wrench-pickup:not(:checked) ~ #door-unlocked:not(:checked) ~ .game-world .door-hover-area:hover ~ .door-tooltip {
+            opacity: 1;
+        }
+
+        /* Show "repair door" tooltip on hover (with wrench, door not unlocked, not at P6) */
+        #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .door-container:hover .door-tooltip-wrench {
+            opacity: 1;
+        }
+
+        /* Hide repair tooltip when at P6 (clicking will work) */
+        #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .door-container .door-tooltip-wrench {
+            display: none;
+        }
+
+        /* Gem container and tooltip */
+        .gem-container {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            z-index: 200;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
+        }
+        .gem-container .coin-in-game {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .gem-tooltip {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
+        .gem-hover-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: auto;
+            z-index: 1;
+        }
+        /* Hide hover area when player is at gem location (so pickup works) */
+        #level-1:checked ~ #pos-11:checked ~ .game-world .gem-container .gem-hover-area {
+            display: none;
+        }
+        /* Show gem tooltip on hover */
+        #coin-L1P11-pickup:not(:checked) ~ .game-world .gem-hover-area:hover ~ .gem-tooltip {
+            opacity: 1;
         }
     </style>
 </head>
@@ -2080,7 +2234,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="key-pickup" class="key-in-game"><svg><use href="#key"/></svg></label>
 
         <!-- Toolbox on level 2, position 6 -->
-        <div class="toolbox"><svg><use href="#toolbox"/></svg></div>
+        <div class="toolbox">
+            <span class="tooltip toolbox-tooltip">A locked toolbox.<br>You need a key.</span>
+            <svg><use href="#toolbox"/></svg>
+        </div>
 
         <!-- Axe on level 4, position 12 (clickable to pick up) -->
         <label for="axe-pickup" class="axe-in-game"><svg><use href="#axe"/></svg></label>
@@ -2232,7 +2389,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         <!-- Stage 2 Coins -->
         <label for="coin-L0P8-pickup" class="coin-in-game coin-L0P8"><svg><use href="#coin"/></svg></label>
-        <label for="coin-L1P11-pickup" class="coin-in-game coin-L1P11 gem"><svg><use href="#gem"/></svg></label>
+        <div class="gem-container coin-L1P11">
+            <label for="coin-L1P11-pickup" class="coin-in-game gem">
+                <svg><use href="#gem"/></svg>
+            </label>
+            <span class="gem-hover-area"></span>
+            <span class="tooltip gem-tooltip">Aquamarine</span>
+        </div>
         <label for="coin-L2P7-pickup" class="coin-in-game coin-L2P7"><svg><use href="#coin"/></svg></label>
         <label for="coin-L3P9-pickup" class="coin-in-game coin-L3P9"><svg><use href="#coin"/></svg></label>
         <label for="coin-L4P10-pickup" class="coin-in-game coin-L4P10"><svg><use href="#coin"/></svg></label>
@@ -2244,20 +2407,34 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="tree-chopped" class="axe-at-tree"><svg><use href="#axe"/></svg></label>
 
         <!-- Door -->
-        <label for="door-unlocked" class="door door-L0P6">
-            <svg class="door-closed" preserveAspectRatio="none"><use href="#door-closed"/></svg>
-            <svg class="door-open" preserveAspectRatio="none"><use href="#door-open"/></svg>
-        </label>
+        <div class="door-container door-L0P6">
+            <label for="door-unlocked" class="door">
+                <svg class="door-closed" preserveAspectRatio="none"><use href="#door-closed"/></svg>
+                <svg class="door-open" preserveAspectRatio="none"><use href="#door-open"/></svg>
+            </label>
+            <span class="door-hover-area"></span>
+            <span class="tooltip door-tooltip">The door is broken.<br>You need a wrench.</span>
+            <span class="tooltip door-tooltip-wrench">Repair the door</span>
+        </div>
 
         <!-- Door exit (takes player to Stage 2 when door is open) -->
         <label for="pos-7" class="door-exit door-exit-L0P6"></label>
 
         <!-- Skull -->
-        <svg class="skull skull-L1P6"><use href="#skull"/></svg>
+        <div class="skull skull-L1P6">
+            <span class="tooltip skull-tooltip">Poison</span>
+            <svg><use href="#skull"/></svg>
+        </div>
 
         <!-- Stage 2 Bacteria -->
-        <svg class="bacteria bacteria-L0P10"><use href="#bacteria"/></svg>
-        <svg class="bacteria bacteria-L1P9"><use href="#bacteria"/></svg>
+        <div class="bacteria bacteria-L0P10">
+            <span class="tooltip bacteria-tooltip">Disease</span>
+            <svg><use href="#bacteria"/></svg>
+        </div>
+        <div class="bacteria bacteria-L1P9">
+            <span class="tooltip bacteria-tooltip">Disease</span>
+            <svg><use href="#bacteria"/></svg>
+        </div>
 
         </div><!-- end game-world -->
 
