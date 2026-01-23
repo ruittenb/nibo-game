@@ -512,7 +512,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
         /* Hide radio buttons and checkboxes by default */
-        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .tree-checkbox, .escaped-checkbox, .coin-checkbox, .door-checkbox {
+        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .tree-checkbox, .escaped-checkbox, .valuable-checkbox, .door-checkbox {
             display: none;
             /* When unhidden for debugging: */
             z-index: 9999;
@@ -545,17 +545,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #axe-pickup { top: 30px; left: 160px; }
         #tree-chopped { top: 30px; left: 180px; }
         #escaped { top: 30px; left: 200px; }
-        /* Debug positions - coins (row 3) */
-        #coin-L0P3-pickup { top: 50px; left: 30px; }
-        #coin-L1P4-pickup { top: 50px; left: 50px; }
-        #coin-L3P5-pickup { top: 50px; left: 70px; }
-        #coin-L2P1-pickup { top: 50px; left: 90px; }
-        #coin-L4P2-pickup { top: 50px; left: 110px; }
-        #coin-L0P8-pickup { top: 50px; left: 160px; }
-        #coin-L1P11-pickup { top: 50px; left: 180px; }
-        #coin-L2P7-pickup { top: 50px; left: 200px; }
-        #coin-L3P9-pickup { top: 50px; left: 220px; }
-        #coin-L4P10-pickup { top: 50px; left: 240px; }
+        /* Debug positions - valuables (row 3) */
+        #valuable-L0P3-pickup { top: 50px; left: 30px; }
+        #valuable-L1P4-pickup { top: 50px; left: 50px; }
+        #valuable-L3P5-pickup { top: 50px; left: 70px; }
+        #valuable-L2P1-pickup { top: 50px; left: 90px; }
+        #valuable-L4P2-pickup { top: 50px; left: 110px; }
+        #valuable-L0P8-pickup { top: 50px; left: 160px; }
+        #valuable-L1P11-pickup { top: 50px; left: 180px; }
+        #valuable-L2P7-pickup { top: 50px; left: 200px; }
+        #valuable-L3P9-pickup { top: 50px; left: 220px; }
+        #valuable-L4P10-pickup { top: 50px; left: 240px; }
         /* Show inputs when debug is checked */
         #debug-toggle:checked ~ .game-container .position-radio,
         #debug-toggle:checked ~ .game-container .level-radio,
@@ -565,7 +565,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ .game-container .axe-checkbox,
         #debug-toggle:checked ~ .game-container .tree-checkbox,
         #debug-toggle:checked ~ .game-container .escaped-checkbox,
-        #debug-toggle:checked ~ .game-container .coin-checkbox,
+        #debug-toggle:checked ~ .game-container .valuable-checkbox,
         #debug-toggle:checked ~ .game-container .door-checkbox {
             display: block;
         }
@@ -586,8 +586,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             padding-right: var(--inventory-padding);
         }
 
-        /* Coin counter box */
-        .coin-counter {
+        /* Valuable counter box */
+        .valuable-counter {
             position: absolute;
             top: calc(var(--inventory-top) + var(--inventory-height) + var(--inventory-top));
             right: var(--inventory-right);
@@ -600,57 +600,57 @@ AAAAAAAAAAAAAAAAAAAAAA==
             align-items: center;
             padding-left: var(--inventory-padding);
             overflow: hidden;
-            /* Coin variables (0 = not collected, 1 = collected) */
-            --coin-L0P3: 0;
-            --coin-L1P4: 0;
-            --coin-L3P5: 0;
-            --coin-L2P1: 0;
-            --coin-L4P2: 0;
-            --coin-L0P8: 0;
-            --coin-L1P11: 0;
-            --coin-L2P7: 0;
-            --coin-L3P9: 0;
-            --coin-L4P10: 0;
+            /* Valuable variables (0 = not collected, 1 = collected, 2 for gems) */
+            --valuable-L0P3: 0;
+            --valuable-L1P4: 0;
+            --valuable-L3P5: 0;
+            --valuable-L2P1: 0;
+            --valuable-L4P2: 0;
+            --valuable-L0P8: 0;
+            --valuable-L1P11: 0;
+            --valuable-L2P7: 0;
+            --valuable-L3P9: 0;
+            --valuable-L4P10: 0;
         }
-        .coin-counter .coin-icon {
+        .valuable-counter .valuable-icon {
             width: 24px;
             height: 24px;
             color: var(--gold-color);
         }
-        .coin-counter .digit-container {
+        .valuable-counter .digit-container {
             height: 24px;
             overflow: hidden;
             margin-left: 14px;
         }
-        .coin-counter .digit-strip {
+        .valuable-counter .digit-strip {
             display: flex;
             flex-direction: column;
             align-items: center;
             transition: transform 0.5s ease-out;
             transform: translateY(calc(
-                (var(--coin-L0P3) + var(--coin-L1P4) + var(--coin-L3P5) + var(--coin-L2P1) + var(--coin-L4P2) +
-                 var(--coin-L0P8) + var(--coin-L1P11) + var(--coin-L2P7) + var(--coin-L3P9) + var(--coin-L4P10))
+                (var(--valuable-L0P3) + var(--valuable-L1P4) + var(--valuable-L3P5) + var(--valuable-L2P1) + var(--valuable-L4P2) +
+                 var(--valuable-L0P8) + var(--valuable-L1P11) + var(--valuable-L2P7) + var(--valuable-L3P9) + var(--valuable-L4P10))
                 * -24px
             ));
         }
-        .coin-counter .digit {
+        .valuable-counter .digit {
             height: 24px;
             line-height: 24px;
             font-size: 20px;
             font-weight: bold;
             color: var(--gold-color);
         }
-        /* Coin collection: set variable to 1 when collected */
-        #coin-L0P3-pickup:checked ~ .coin-counter { --coin-L0P3: 1; }
-        #coin-L1P4-pickup:checked ~ .coin-counter { --coin-L1P4: 1; }
-        #coin-L3P5-pickup:checked ~ .coin-counter { --coin-L3P5: 1; }
-        #coin-L2P1-pickup:checked ~ .coin-counter { --coin-L2P1: 1; }
-        #coin-L4P2-pickup:checked ~ .coin-counter { --coin-L4P2: 1; }
-        #coin-L0P8-pickup:checked ~ .coin-counter { --coin-L0P8: 1; }
-        #coin-L1P11-pickup:checked ~ .coin-counter { --coin-L1P11: 2; }
-        #coin-L2P7-pickup:checked ~ .coin-counter { --coin-L2P7: 1; }
-        #coin-L3P9-pickup:checked ~ .coin-counter { --coin-L3P9: 2; }
-        #coin-L4P10-pickup:checked ~ .coin-counter { --coin-L4P10: 1; }
+        /* Valuable collection: set variable to 1 when collected (gems are worth 2) */
+        #valuable-L0P3-pickup:checked ~ .valuable-counter { --valuable-L0P3: 1; }
+        #valuable-L1P4-pickup:checked ~ .valuable-counter { --valuable-L1P4: 1; }
+        #valuable-L3P5-pickup:checked ~ .valuable-counter { --valuable-L3P5: 1; }
+        #valuable-L2P1-pickup:checked ~ .valuable-counter { --valuable-L2P1: 1; }
+        #valuable-L4P2-pickup:checked ~ .valuable-counter { --valuable-L4P2: 1; }
+        #valuable-L0P8-pickup:checked ~ .valuable-counter { --valuable-L0P8: 1; }
+        #valuable-L1P11-pickup:checked ~ .valuable-counter { --valuable-L1P11: 2; }
+        #valuable-L2P7-pickup:checked ~ .valuable-counter { --valuable-L2P7: 1; }
+        #valuable-L3P9-pickup:checked ~ .valuable-counter { --valuable-L3P9: 2; }
+        #valuable-L4P10-pickup:checked ~ .valuable-counter { --valuable-L4P10: 1; }
 
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
@@ -676,7 +676,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ #pos-1:checked ~ #key-pickup:not(:checked) ~ .game-world .key-in-game {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: valuable-pulse 1s ease-in-out infinite;
         }
         /* Move key to inventory when picked up */
         /* Container height = ground-height + platform-height*5 + top-margin */
@@ -738,7 +738,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ #pos-12:checked ~ #axe-pickup:not(:checked) ~ .game-world .axe-in-game {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: valuable-pulse 1s ease-in-out infinite;
         }
         /* Move axe to inventory when picked up (stage 2 inventory) */
         #axe-pickup:checked ~ .game-world .axe-in-game {
@@ -773,7 +773,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-2:checked ~ #pos-6:checked ~ #toolbox-unlock:checked ~ #wrench-pickup:not(:checked) ~ .game-world .wrench-in-game {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: valuable-pulse 1s ease-in-out infinite;
         }
         /* Move wrench to inventory when picked up */
         #toolbox-unlock:checked ~ #wrench-pickup:checked ~ .game-world .wrench-in-game {
@@ -1509,8 +1509,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #pos-10:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
         #level-4:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
 
-        /* Coins - animated elements that fly to counter when picked up */
-        .coin-in-game {
+        /* Valuables - animated elements that fly to counter when picked up */
+        .valuable-in-game {
             position: absolute;
             width: 24px;
             height: 24px;
@@ -1519,11 +1519,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
         }
-        .coin-in-game svg {
+        .valuable-in-game svg {
             width: 100%;
             height: 100%;
         }
-        .coin-in-game.gem {
+        .valuable-in-game.gem {
             color: #87ceeb;
             animation: gem-sparkle 2s ease-in-out infinite;
         }
@@ -1546,126 +1546,126 @@ AAAAAAAAAAAAAAAAAAAAAA==
             }
         }
 
-        /* Coin positions - on platforms */
-        .coin-L0P3 {
+        /* Valuable positions - on platforms */
+        .valuable-L0P3 {
             bottom: calc(var(--ground-height) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 2 - var(--item-offset));
         }
-        .coin-L1P4 {
+        .valuable-L1P4 {
             bottom: calc(var(--platform-height) + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--item-offset));
         }
-        .coin-L3P5 {
+        .valuable-L3P5 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--item-offset));
         }
-        .coin-L2P1 {
+        .valuable-L2P1 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) - var(--item-offset));
         }
-        .coin-L4P2 {
+        .valuable-L4P2 {
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset));
         }
 
-        /* Stage 2 coin positions */
-        .coin-L0P8 {
+        /* Stage 2 valuable positions */
+        .valuable-L0P8 {
             bottom: calc(var(--ground-height) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 7 - var(--item-offset));
         }
-        .coin-L1P11 {
+        .valuable-L1P11 {
             bottom: calc(var(--platform-height) + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 10 - var(--item-offset));
         }
-        .coin-L2P7 {
+        .valuable-L2P7 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 6 - var(--item-offset));
         }
-        .coin-L3P9 {
+        .valuable-L3P9 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
         }
-        .coin-L4P10 {
+        .valuable-L4P10 {
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset));
         }
 
-        /* Coin pulsating glow when player is nearby */
-        @keyframes coin-pulse {
+        /* Valuable pulsating glow when player is nearby */
+        @keyframes valuable-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--gold-color)); }
             50% { filter: drop-shadow(0 0 12px var(--gold-color)) drop-shadow(0 0 20px var(--gold-color)); }
         }
 
         /* Enable clicking and pulsing when player is adjacent */
-        #level-0:checked ~ #pos-3:checked ~ #coin-L0P3-pickup:not(:checked) ~ .game-world .coin-L0P3 {
+        #level-0:checked ~ #pos-3:checked ~ #valuable-L0P3-pickup:not(:checked) ~ .game-world .valuable-L0P3 {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: valuable-pulse 1s ease-in-out infinite;
         }
-        #level-1:checked ~ #pos-4:checked ~ #coin-L1P4-pickup:not(:checked) ~ .game-world .coin-L1P4 {
+        #level-1:checked ~ #pos-4:checked ~ #valuable-L1P4-pickup:not(:checked) ~ .game-world .valuable-L1P4 {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: valuable-pulse 1s ease-in-out infinite;
         }
-        #level-3:checked ~ #pos-5:checked ~ #coin-L3P5-pickup:not(:checked) ~ .game-world .coin-L3P5 {
+        #level-3:checked ~ #pos-5:checked ~ #valuable-L3P5-pickup:not(:checked) ~ .game-world .valuable-L3P5 {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: valuable-pulse 1s ease-in-out infinite;
         }
-        #level-2:checked ~ #pos-1:checked ~ #coin-L2P1-pickup:not(:checked) ~ .game-world .coin-L2P1 {
+        #level-2:checked ~ #pos-1:checked ~ #valuable-L2P1-pickup:not(:checked) ~ .game-world .valuable-L2P1 {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: valuable-pulse 1s ease-in-out infinite;
         }
-        #level-4:checked ~ #pos-2:checked ~ #coin-L4P2-pickup:not(:checked) ~ .game-world .coin-L4P2 {
+        #level-4:checked ~ #pos-2:checked ~ #valuable-L4P2-pickup:not(:checked) ~ .game-world .valuable-L4P2 {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: valuable-pulse 1s ease-in-out infinite;
         }
-        /* Stage 2 coin pulse/click */
-        #level-0:checked ~ #pos-8:checked ~ #coin-L0P8-pickup:not(:checked) ~ .game-world .coin-L0P8 {
+        /* Stage 2 valuable pulse/click */
+        #level-0:checked ~ #pos-8:checked ~ #valuable-L0P8-pickup:not(:checked) ~ .game-world .valuable-L0P8 {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: valuable-pulse 1s ease-in-out infinite;
         }
-        #level-1:checked ~ #pos-11:checked ~ #coin-L1P11-pickup:not(:checked) ~ .game-world .coin-L1P11 .coin-in-game {
+        #level-1:checked ~ #pos-11:checked ~ #valuable-L1P11-pickup:not(:checked) ~ .game-world .valuable-L1P11 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: valuable-pulse 1s ease-in-out infinite;
         }
-        #level-2:checked ~ #pos-7:checked ~ #coin-L2P7-pickup:not(:checked) ~ .game-world .coin-L2P7 {
+        #level-2:checked ~ #pos-7:checked ~ #valuable-L2P7-pickup:not(:checked) ~ .game-world .valuable-L2P7 {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: valuable-pulse 1s ease-in-out infinite;
         }
-        #level-3:checked ~ #pos-9:checked ~ #coin-L3P9-pickup:not(:checked) ~ .game-world .coin-L3P9 .coin-in-game {
+        #level-3:checked ~ #pos-9:checked ~ #valuable-L3P9-pickup:not(:checked) ~ .game-world .valuable-L3P9 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: valuable-pulse 1s ease-in-out infinite;
         }
-        #level-4:checked ~ #pos-10:checked ~ #coin-L4P10-pickup:not(:checked) ~ .game-world .coin-L4P10 {
+        #level-4:checked ~ #pos-10:checked ~ #valuable-L4P10-pickup:not(:checked) ~ .game-world .valuable-L4P10 {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: valuable-pulse 1s ease-in-out infinite;
         }
 
-        /* Move Stage 1 coins to counter when picked up */
-        #coin-L0P3-pickup:checked ~ .game-world .coin-L0P3,
-        #coin-L1P4-pickup:checked ~ .game-world .coin-L1P4,
-        #coin-L3P5-pickup:checked ~ .game-world .coin-L3P5,
-        #coin-L2P1-pickup:checked ~ .game-world .coin-L2P1,
-        #coin-L4P2-pickup:checked ~ .game-world .coin-L4P2 {
+        /* Move Stage 1 valuables to counter when picked up */
+        #valuable-L0P3-pickup:checked ~ .game-world .valuable-L0P3,
+        #valuable-L1P4-pickup:checked ~ .game-world .valuable-L1P4,
+        #valuable-L3P5-pickup:checked ~ .game-world .valuable-L3P5,
+        #valuable-L2P1-pickup:checked ~ .game-world .valuable-L2P1,
+        #valuable-L4P2-pickup:checked ~ .game-world .valuable-L4P2 {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--inventory-top) - var(--inventory-height) - var(--inventory-top) - var(--inventory-height) / 2 - 16px);
             left: calc(var(--pos-width) * 6 - var(--inventory-right) - var(--inventory-width) + var(--inventory-padding) - 2px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
-        /* Move Stage 2 coins to counter when picked up (add viewport offset) */
-        #coin-L0P8-pickup:checked ~ .game-world .coin-L0P8,
-        #coin-L1P11-pickup:checked ~ .game-world .coin-L1P11,
-        #coin-L2P7-pickup:checked ~ .game-world .coin-L2P7,
-        #coin-L3P9-pickup:checked ~ .game-world .coin-L3P9,
-        #coin-L4P10-pickup:checked ~ .game-world .coin-L4P10 {
+        /* Move Stage 2 valuables to counter when picked up (add viewport offset) */
+        #valuable-L0P8-pickup:checked ~ .game-world .valuable-L0P8,
+        #valuable-L1P11-pickup:checked ~ .game-world .valuable-L1P11,
+        #valuable-L2P7-pickup:checked ~ .game-world .valuable-L2P7,
+        #valuable-L3P9-pickup:checked ~ .game-world .valuable-L3P9,
+        #valuable-L4P10-pickup:checked ~ .game-world .valuable-L4P10 {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--inventory-top) - var(--inventory-height) - var(--inventory-top) - var(--inventory-height) / 2 - 16px);
             left: calc(var(--pos-width) * 12 - var(--inventory-right) - var(--inventory-width) + var(--inventory-padding) - 2px);
             opacity: 0;
@@ -2038,7 +2038,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: 200;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
         }
-        .gem-container .coin-in-game {
+        .gem-container .valuable-in-game {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -2059,13 +2059,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: 1;
         }
         /* Hide hover area when player is at gem location (so pickup works) */
-        #level-1:checked ~ #pos-11:checked ~ .game-world .coin-L1P11 .gem-hover-area,
-        #level-3:checked ~ #pos-9:checked ~ .game-world .coin-L3P9 .gem-hover-area {
+        #level-1:checked ~ #pos-11:checked ~ .game-world .valuable-L1P11 .gem-hover-area,
+        #level-3:checked ~ #pos-9:checked ~ .game-world .valuable-L3P9 .gem-hover-area {
             display: none;
         }
         /* Show gem tooltip on hover */
-        #coin-L1P11-pickup:not(:checked) ~ .game-world .coin-L1P11 .gem-hover-area:hover ~ .gem-tooltip,
-        #coin-L3P9-pickup:not(:checked) ~ .game-world .coin-L3P9 .gem-hover-area:hover ~ .gem-tooltip {
+        #valuable-L1P11-pickup:not(:checked) ~ .game-world .valuable-L1P11 .gem-hover-area:hover ~ .gem-tooltip,
+        #valuable-L3P9-pickup:not(:checked) ~ .game-world .valuable-L3P9 .gem-hover-area:hover ~ .gem-tooltip {
             opacity: 1;
         }
     </style>
@@ -2179,18 +2179,18 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Door open checkbox -->
         <input type="checkbox" id="door-unlocked" class="door-checkbox" title="door">
 
-        <!-- Coin pickup checkboxes -->
-        <input type="checkbox" id="coin-L0P3-pickup" class="coin-checkbox" title="coin">
-        <input type="checkbox" id="coin-L1P4-pickup" class="coin-checkbox" title="coin">
-        <input type="checkbox" id="coin-L3P5-pickup" class="coin-checkbox" title="coin">
-        <input type="checkbox" id="coin-L2P1-pickup" class="coin-checkbox" title="coin">
-        <input type="checkbox" id="coin-L4P2-pickup" class="coin-checkbox" title="coin">
-        <!-- Stage 2 coin pickup checkboxes -->
-        <input type="checkbox" id="coin-L0P8-pickup" class="coin-checkbox" title="coin">
-        <input type="checkbox" id="coin-L1P11-pickup" class="coin-checkbox" title="gem">
-        <input type="checkbox" id="coin-L2P7-pickup" class="coin-checkbox" title="coin">
-        <input type="checkbox" id="coin-L3P9-pickup" class="coin-checkbox" title="gem">
-        <input type="checkbox" id="coin-L4P10-pickup" class="coin-checkbox" title="coin">
+        <!-- Valuable pickup checkboxes -->
+        <input type="checkbox" id="valuable-L0P3-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-L1P4-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-L3P5-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-L2P1-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-L4P2-pickup" class="valuable-checkbox" title="valuable">
+        <!-- Stage 2 valuable pickup checkboxes -->
+        <input type="checkbox" id="valuable-L0P8-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-L1P11-pickup" class="valuable-checkbox" title="gem">
+        <input type="checkbox" id="valuable-L2P7-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-L3P9-pickup" class="valuable-checkbox" title="gem">
+        <input type="checkbox" id="valuable-L4P10-pickup" class="valuable-checkbox" title="valuable">
 
         <!-- Fixed navigation panel -->
         <div class="nav-panel">
@@ -2246,9 +2246,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="inventory">
         </div>
 
-        <!-- Coin counter -->
-        <div class="coin-counter">
-            <svg class="coin-icon"><use href="#coin"/></svg>
+        <!-- Valuable counter -->
+        <div class="valuable-counter">
+            <svg class="valuable-icon"><use href="#coin"/></svg>
             <div class="digit-container">
                 <div class="digit-strip">
                     <div class="digit">0</div>
@@ -2421,31 +2421,31 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Mountain strip on left side of Stage 2 -->
         <div class="mountain-strip"></div>
 
-        <!-- Coins (clickable to pick up, animate to counter) -->
-        <label for="coin-L0P3-pickup" class="coin-in-game coin-L0P3"><svg><use href="#coin"/></svg></label>
-        <label for="coin-L1P4-pickup" class="coin-in-game coin-L1P4"><svg><use href="#coin"/></svg></label>
-        <label for="coin-L3P5-pickup" class="coin-in-game coin-L3P5"><svg><use href="#coin"/></svg></label>
-        <label for="coin-L2P1-pickup" class="coin-in-game coin-L2P1"><svg><use href="#coin"/></svg></label>
-        <label for="coin-L4P2-pickup" class="coin-in-game coin-L4P2"><svg><use href="#coin"/></svg></label>
+        <!-- Valuables (clickable to pick up, animate to counter) -->
+        <label for="valuable-L0P3-pickup" class="valuable-in-game valuable-L0P3"><svg><use href="#coin"/></svg></label>
+        <label for="valuable-L1P4-pickup" class="valuable-in-game valuable-L1P4"><svg><use href="#coin"/></svg></label>
+        <label for="valuable-L3P5-pickup" class="valuable-in-game valuable-L3P5"><svg><use href="#coin"/></svg></label>
+        <label for="valuable-L2P1-pickup" class="valuable-in-game valuable-L2P1"><svg><use href="#coin"/></svg></label>
+        <label for="valuable-L4P2-pickup" class="valuable-in-game valuable-L4P2"><svg><use href="#coin"/></svg></label>
 
-        <!-- Stage 2 Coins -->
-        <label for="coin-L0P8-pickup" class="coin-in-game coin-L0P8"><svg><use href="#coin"/></svg></label>
-        <div class="gem-container coin-L1P11">
-            <label for="coin-L1P11-pickup" class="coin-in-game gem">
+        <!-- Stage 2 Valuables -->
+        <label for="valuable-L0P8-pickup" class="valuable-in-game valuable-L0P8"><svg><use href="#coin"/></svg></label>
+        <div class="gem-container valuable-L1P11">
+            <label for="valuable-L1P11-pickup" class="valuable-in-game gem">
                 <svg><use href="#gem"/></svg>
             </label>
             <span class="gem-hover-area"></span>
             <span class="tooltip gem-tooltip">Aquamarine</span>
         </div>
-        <label for="coin-L2P7-pickup" class="coin-in-game coin-L2P7"><svg><use href="#coin"/></svg></label>
-        <div class="gem-container coin-L3P9">
-            <label for="coin-L3P9-pickup" class="coin-in-game gem">
+        <label for="valuable-L2P7-pickup" class="valuable-in-game valuable-L2P7"><svg><use href="#coin"/></svg></label>
+        <div class="gem-container valuable-L3P9">
+            <label for="valuable-L3P9-pickup" class="valuable-in-game gem">
                 <svg><use href="#gem"/></svg>
             </label>
             <span class="gem-hover-area"></span>
             <span class="tooltip gem-tooltip">Aquamarine</span>
         </div>
-        <label for="coin-L4P10-pickup" class="coin-in-game coin-L4P10"><svg><use href="#coin"/></svg></label>
+        <label for="valuable-L4P10-pickup" class="valuable-in-game valuable-L4P10"><svg><use href="#coin"/></svg></label>
 
         <!-- Tree on level 0, position 12 -->
         <div class="tree-container">
