@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebSearch"
+      "WebSearch",
+      "Bash(git -C /Users/reneuittenbogaard/Desktop/projects/nibo-game log --oneline -20)"
     ]
   }
 }
