@@ -312,6 +312,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: calc(var(--pos-width) * 5 - var(--warning-strip-width));
         }
 
+        /* Stage 1 platforms are reddish-gray (rusted metal) with rivets */
+        .platform-1,
+        .platform-2,
+        .platform-2-right,
+        .platform-3-left,
+        .platform-3-right,
+        .platform-4 {
+            background:
+                radial-gradient(circle at 15px 50%, #2a2a2a 3px, transparent 3px),
+                radial-gradient(circle at calc(100% - 15px) 50%, #2a2a2a 3px, transparent 3px),
+                linear-gradient(to bottom, #6b5555 0%, #4a3c3c 100%);
+            border-color: #5a4a4a;
+        }
+
         /* Stage 2 Platforms (positions 7-12) */
         /* Grates at: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
         /* S2 Level 1: gaps at P7 and P12 → solid P8-P11 */
@@ -952,14 +966,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
 
-        .ground {
+        .ground-s1,
+        .ground-s2 {
             position: absolute;
             bottom: 0;
-            left: 0;
             width: calc(var(--pos-width) * 6);
             height: var(--ground-height);
-            background: linear-gradient(to bottom, #2d5016 0%, #1a3009 100%);
-            border-top: 3px solid #4a7023;
+        }
+        .ground-s1 {
+            left: 0;
+            background: linear-gradient(to bottom, #4a5568 0%, #2d3748 100%);
+            border-top: 3px solid #718096;
         }
 
         /* Warning strips - yellow/black diagonal stripes marking stage edges */
@@ -1022,11 +1039,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Stage 2 ground is brown (soil) */
         .ground-s2 {
-            position: absolute;
-            bottom: 0;
             left: calc(var(--pos-width) * 6);
-            width: calc(var(--pos-width) * 6);
-            height: var(--ground-height);
             background: linear-gradient(to bottom, #8b5a2b 0%, #5d3a1a 100%);
             border-top: 3px solid #a0522d;
         }
@@ -1097,28 +1110,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .ladder-4 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 3 + var(--ladder-offset));
-        }
-
-        /* Stage 2 Ladders: L0P8, L0P11, L1P7, L2P12, L3P9 */
-        .ladder-s2-L0P8 {
-            bottom: var(--ground-height);
-            left: calc(var(--pos-offset) + var(--pos-width) * 7 + var(--ladder-offset));
-        }
-        .ladder-s2-L0P11 {
-            bottom: var(--ground-height);
-            left: calc(var(--pos-offset) + var(--pos-width) * 10 + var(--ladder-offset));
-        }
-        .ladder-s2-L1P7 {
-            bottom: calc(var(--platform-height) + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 6 + var(--ladder-offset));
-        }
-        .ladder-s2-L2P12 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset));
-        }
-        .ladder-s2-L3P9 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 8 + var(--ladder-offset));
         }
 
         /* Vines for stage 2 */
@@ -1243,11 +1234,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .arrow-escape { left: calc(var(--pos-offset) + var(--pos-width) * 11 + 60px); }
 
         /* Horizontal arrows move with level */
-        #level-0:checked ~ .game-world .arrow-h { bottom: calc(var(--ground-height) + 5px); }
-        #level-1:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) + var(--platform-thickness) + 5px); }
-        #level-2:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px); }
-        #level-3:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 5px); }
-        #level-4:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px); }
+        #level-0:checked ~ .game-world .arrow-h { bottom: calc(var(--ground-height) + 19px); }
+        #level-1:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) + var(--platform-thickness) + 19px); }
+        #level-2:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 19px); }
+        #level-3:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 19px); }
+        #level-4:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 19px); }
 
         /* Up arrow positions (at ladder locations) */
         /* Ladder 1: position 5, level 0 -> 1 */
@@ -2043,7 +2034,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .door-tooltip {
             bottom: 100%;
             left: 50%;
-            transform: translateX(calc(-50% - 40px));
+            transform: translateX(calc(-50% - 68px));
             margin-bottom: 8px;
         }
 
@@ -2067,7 +2058,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .door-tooltip-wrench {
             bottom: 100%;
             left: 50%;
-            transform: translateX(calc(-50% - 40px));
+            transform: translateX(calc(-50% - 60px));
             margin-bottom: 8px;
         }
 
@@ -2491,7 +2482,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="platform platform-s2-4"></div>
 
         <!-- Ground -->
-        <div class="ground"></div>
+        <div class="ground-s1"></div>
         <div class="ground-s2"></div>
 
         <!-- Warning strips marking stage 1 edges -->
@@ -2567,8 +2558,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <svg class="door-open" preserveAspectRatio="none"><use href="#door-open"/></svg>
             </label>
             <span class="door-hover-area"></span>
-            <span class="tooltip door-tooltip">The door is broken.<br>You need a wrench.</span>
-            <span class="tooltip door-tooltip-wrench">Repair the door</span>
+            <span class="tooltip door-tooltip">The door handle is broken.<br>You need a wrench.</span>
+            <span class="tooltip door-tooltip-wrench">Repair the door handle.</span>
         </div>
 
         <!-- Door exit (takes player to Stage 2 when door is open) -->
