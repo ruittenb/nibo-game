@@ -190,17 +190,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --pos-offset: 55px;           /* Offset for position 1 from left edge */
             --top-margin: 70px;           /* Extra space above topmost platform */
             --item-offset: 34px;          /* Offset for items left of player position */
+            --pickup-size: 28px;          /* Size of pick-uppable items and valuables */
             --ladder-offset: 42px;        /* Horizontal offset for ladders */
 
             /* Warning strips */
             --warning-strip-width: 8px;   /* Width of warning strips */
 
-            /* Inventory */
-            --inventory-top: 10px;        /* Inventory distance from top */
-            --inventory-right: 10px;      /* Inventory distance from right */
-            --inventory-width: 84px;      /* Inventory width */
-            --inventory-height: 40px;     /* Inventory height */
-            --inventory-padding: 10px;    /* Inventory padding */
+            /* Item boxes (inventory and valuable counter) */
+            --item-box-top: 10px;         /* Distance from top */
+            --item-box-right: 10px;       /* Distance from right */
+            --item-box-height: 40px;      /* Box height */
+            --item-box-padding: 10px;     /* Box padding */
+            --inventory-width: 124px;     /* padding (10) + 2 gaps (16) + 3 items (84) + padding (10) + border (4) */
+            --valuable-counter-width: 84px; /* Valuable counter width */
 
             /* Colors */
             --nav-arrow-color: #48d8d8;   /* Navigation arrow color */
@@ -573,32 +575,63 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Inventory area */
         .inventory {
             position: absolute;
-            top: var(--inventory-top);
-            right: var(--inventory-right);
+            top: var(--item-box-top);
+            right: var(--item-box-right);
             width: var(--inventory-width);
-            height: var(--inventory-height);
+            height: var(--item-box-height);
             border: 2px solid var(--border-color);
             border-radius: 4px;
             background: rgba(0, 0, 0, 0.3);
             display: flex;
+            flex-direction: row-reverse;
             align-items: center;
-            justify-content: flex-end;
-            padding-right: var(--inventory-padding);
+            justify-content: flex-start;
+            padding-left: var(--item-box-padding);
+            padding-right: var(--item-box-padding);
+            gap: 8px;
+        }
+        /* Inventory item icons - hidden by default */
+        .inventory-key,
+        .inventory-wrench,
+        .inventory-axe {
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            justify-content: center;
+            align-items: center;
+        }
+        .inventory-key svg,
+        .inventory-wrench svg,
+        .inventory-axe svg {
+            width: 24px;
+            height: 24px;
+        }
+        .inventory-key svg { color: var(--gold-color); }
+        .inventory-wrench svg { color: #708090; }
+        .inventory-axe svg { color: #708090; }
+        /* Show inventory items when picked up */
+        #key-pickup:checked ~ .inventory .inventory-key,
+        #wrench-pickup:checked ~ .inventory .inventory-wrench,
+        #axe-pickup:checked ~ .inventory .inventory-axe {
+            display: flex;
+            opacity: 1;
         }
 
         /* Valuable counter box */
         .valuable-counter {
             position: absolute;
-            top: calc(var(--inventory-top) + var(--inventory-height) + var(--inventory-top));
-            right: var(--inventory-right);
-            width: var(--inventory-width);
-            height: var(--inventory-height);
+            top: calc(var(--item-box-top) + var(--item-box-height) + var(--item-box-top));
+            right: var(--item-box-right);
+            width: var(--valuable-counter-width);
+            height: var(--item-box-height);
             border: 2px solid var(--border-color);
             border-radius: 4px;
             background: rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
-            padding-left: var(--inventory-padding);
+            padding-left: var(--item-box-padding);
             overflow: hidden;
             /* Valuable variables (0 = not collected, 1 = collected, 2 for gems) */
             --valuable-L0P3: 0;
@@ -655,17 +688,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
             position: absolute;
-            width: 24px;
-            height: 24px;
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 2px);
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) - var(--item-offset));
             z-index: 200;
             pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .key-in-game svg {
-            width: 100%;
-            height: 100%;
+            width: 24px;
+            height: 24px;
             color: var(--gold-color);
         }
         /* Hide key when toolbox is unlocked (key used) */
@@ -680,18 +716,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Move key to inventory when picked up */
         /* Container height = ground-height + platform-height*5 + top-margin */
-        /* To center 24px key in 40px inventory vertically: (inventory-height - 24px) / 2 = 8px from top of inventory */
-        /* Bottom = container-height - inventory-top - inventory-height + 8px */
+        /* Fly key to inventory when picked up */
         #key-pickup:checked ~ .game-world .key-in-game {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--inventory-top) - var(--inventory-height) / 2 - 12px - 6px);
-            left: calc(var(--pos-width) * 6 - var(--inventory-right) - var(--inventory-width) + var(--inventory-padding) - 4px);
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - 12px);
+            left: calc(var(--pos-width) * 6 - var(--item-box-right) - var(--inventory-width) + var(--item-box-padding));
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
 
         /* Toolbox on level 2, position 6 */
         .toolbox {
             position: absolute;
-            width: 28px;
-            height: 28px;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
             z-index: 20;
@@ -722,8 +759,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Axe on level 4, position 12 */
         .axe-in-game {
             position: absolute;
-            width: 28px;
-            height: 28px;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             z-index: 200;
@@ -740,19 +777,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        /* Move axe to inventory when picked up (stage 2 inventory) */
+        /* Fly axe to inventory when picked up */
         #axe-pickup:checked ~ .game-world .axe-in-game {
-            width: 24px;
-            height: 24px;
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--inventory-top) - var(--inventory-height) / 2 - 12px - 6px);
-            left: calc(var(--pos-width) * 12 - var(--inventory-right) - var(--inventory-width) + var(--inventory-padding) - 4px);
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - 12px);
+            left: calc(var(--pos-width) * 12 - var(--item-box-right) - var(--inventory-width) + var(--item-box-padding));
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
 
         /* Wrench - single element that animates from game world to inventory */
         .wrench-in-game {
             position: absolute;
-            width: 28px;
-            height: 28px;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
             z-index: 200;
@@ -775,12 +812,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        /* Move wrench to inventory when picked up */
+        /* Fly wrench to inventory when picked up */
         #toolbox-unlock:checked ~ #wrench-pickup:checked ~ .game-world .wrench-in-game {
-            width: 24px;
-            height: 24px;
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--inventory-top) - var(--inventory-height) / 2 - 12px - 6px);
-            left: calc(var(--pos-width) * 6 - var(--inventory-right) - var(--inventory-width) + var(--inventory-padding) + 34px);
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - 12px);
+            left: calc(var(--pos-width) * 6 - var(--item-box-right) - var(--inventory-width) + var(--item-box-padding));
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
 
 
@@ -1561,45 +1598,45 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         /* Valuable positions - on platforms */
         .valuable-L0P3 {
-            bottom: calc(var(--ground-height) + 5px);
+            bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 2 - var(--item-offset));
         }
         .valuable-L1P4 {
-            bottom: calc(var(--platform-height) + var(--platform-thickness) + 5px);
+            bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--item-offset));
         }
         .valuable-L3P5 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 5px);
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--item-offset));
         }
         .valuable-L2P1 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px);
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) - var(--item-offset));
         }
         .valuable-L4P2 {
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px);
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset));
         }
 
         /* Stage 2 valuable positions */
         .valuable-L0P8 {
-            bottom: calc(var(--ground-height) + 5px);
+            bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 7 - var(--item-offset));
         }
         .valuable-L1P11 {
-            bottom: calc(var(--platform-height) + var(--platform-thickness) + 5px);
+            bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 10 - var(--item-offset));
         }
         .valuable-L2P7 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 5px);
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 6 - var(--item-offset));
         }
         .valuable-L3P9 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 5px);
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
         }
         .valuable-L4P10 {
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 5px);
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset));
         }
 
@@ -1673,8 +1710,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-L3P5-pickup:checked ~ .game-world .valuable-L3P5,
         #valuable-L2P1-pickup:checked ~ .game-world .valuable-L2P1,
         #valuable-L4P2-pickup:checked ~ .game-world .valuable-L4P2 {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--inventory-top) - var(--inventory-height) - var(--inventory-top) - var(--inventory-height) / 2 - 16px);
-            left: calc(var(--pos-width) * 6 - var(--inventory-right) - var(--inventory-width) + var(--inventory-padding) - 2px);
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 16px);
+            left: calc(var(--pos-width) * 6 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 2px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -1684,8 +1721,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-L2P7-pickup:checked ~ .game-world .valuable-L2P7,
         #valuable-L3P9-pickup:checked ~ .game-world .valuable-L3P9,
         #valuable-L4P10-pickup:checked ~ .game-world .valuable-L4P10 {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--inventory-top) - var(--inventory-height) - var(--inventory-top) - var(--inventory-height) / 2 - 16px);
-            left: calc(var(--pos-width) * 12 - var(--inventory-right) - var(--inventory-width) + var(--inventory-padding) - 2px);
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 16px);
+            left: calc(var(--pos-width) * 12 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 2px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -2049,18 +2086,22 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
 
+        /* Utility classes */
+
         /* Valuable container */
         .container {
             position: absolute;
-            width: 24px;
-            height: 24px;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
             z-index: 200;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .container .valuable-in-game {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 24px;
+            height: 24px;
         }
         .container .tooltip {
             bottom: 100%;
@@ -2279,6 +2320,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         <!-- Inventory -->
         <div class="inventory">
+            <span class="inventory-key"><svg><use href="#key"/></svg></span>
+            <span class="inventory-wrench"><svg><use href="#wrench"/></svg></span>
+            <span class="inventory-axe"><svg><use href="#axe"/></svg></span>
         </div>
 
         <!-- Valuable counter -->
@@ -2461,35 +2505,29 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="container coin valuable-L0P3">
             <label for="valuable-L0P3-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
-            <span class="tooltip">Coin</span>
-        </div>
+                    </div>
         <div class="container coin valuable-L1P4">
             <label for="valuable-L1P4-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
-            <span class="tooltip">Coin</span>
-        </div>
+                    </div>
         <div class="container coin valuable-L3P5">
             <label for="valuable-L3P5-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
-            <span class="tooltip">Coin</span>
-        </div>
+                    </div>
         <div class="container coin valuable-L2P1">
             <label for="valuable-L2P1-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
-            <span class="tooltip">Coin</span>
-        </div>
+                    </div>
         <div class="container coin valuable-L4P2">
             <label for="valuable-L4P2-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
-            <span class="tooltip">Coin</span>
-        </div>
+                    </div>
 
         <!-- Stage 2 Valuables -->
         <div class="container coin valuable-L0P8">
             <label for="valuable-L0P8-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
-            <span class="tooltip">Coin</span>
-        </div>
+                    </div>
         <div class="container gem valuable-L1P11">
             <label for="valuable-L1P11-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
             <span class="hover-area"></span>
@@ -2498,8 +2536,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="container coin valuable-L2P7">
             <label for="valuable-L2P7-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
-            <span class="tooltip">Coin</span>
-        </div>
+                    </div>
         <div class="container gem valuable-L3P9">
             <label for="valuable-L3P9-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
             <span class="hover-area"></span>
@@ -2508,8 +2545,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="container coin valuable-L4P10">
             <label for="valuable-L4P10-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
-            <span class="tooltip">Coin</span>
-        </div>
+                    </div>
 
         <!-- Tree on level 0, position 12 -->
         <div class="tree-container">
