@@ -1533,10 +1533,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
         }
-        .valuable-in-game.coin {
+        .coin .valuable-in-game {
             color: var(--gold-color);
         }
-        .valuable-in-game.gem {
+        .gem .valuable-in-game {
             color: #87ceeb;
             animation: gem-sparkle 2s ease-in-out infinite;
         }
@@ -2049,26 +2049,26 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
 
-        /* Gem container and tooltip */
-        .gem-container {
+        /* Valuable container */
+        .container {
             position: absolute;
             width: 24px;
             height: 24px;
             z-index: 200;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
         }
-        .gem-container .valuable-in-game {
+        .container .valuable-in-game {
             position: absolute;
             width: 100%;
             height: 100%;
         }
-        .gem-tooltip {
+        .container .tooltip {
             bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
-        .gem-hover-area {
+        .hover-area {
             position: absolute;
             top: 0;
             left: 0;
@@ -2077,65 +2077,30 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: auto;
             z-index: 1;
         }
-        /* Hide hover area when player is at gem location (so pickup works) */
-        #level-1:checked ~ #pos-11:checked ~ .game-world .valuable-L1P11 .gem-hover-area,
-        #level-3:checked ~ #pos-9:checked ~ .game-world .valuable-L3P9 .gem-hover-area {
+        /* Hide hover area when player is at valuable location (so pickup works) */
+        #level-0:checked ~ #pos-3:checked ~ .game-world .valuable-L0P3 .hover-area,
+        #level-1:checked ~ #pos-4:checked ~ .game-world .valuable-L1P4 .hover-area,
+        #level-3:checked ~ #pos-5:checked ~ .game-world .valuable-L3P5 .hover-area,
+        #level-2:checked ~ #pos-1:checked ~ .game-world .valuable-L2P1 .hover-area,
+        #level-4:checked ~ #pos-2:checked ~ .game-world .valuable-L4P2 .hover-area,
+        #level-0:checked ~ #pos-8:checked ~ .game-world .valuable-L0P8 .hover-area,
+        #level-1:checked ~ #pos-11:checked ~ .game-world .valuable-L1P11 .hover-area,
+        #level-2:checked ~ #pos-7:checked ~ .game-world .valuable-L2P7 .hover-area,
+        #level-3:checked ~ #pos-9:checked ~ .game-world .valuable-L3P9 .hover-area,
+        #level-4:checked ~ #pos-10:checked ~ .game-world .valuable-L4P10 .hover-area {
             display: none;
         }
-        /* Show gem tooltip on hover */
-        #valuable-L1P11-pickup:not(:checked) ~ .game-world .valuable-L1P11 .gem-hover-area:hover ~ .gem-tooltip,
-        #valuable-L3P9-pickup:not(:checked) ~ .game-world .valuable-L3P9 .gem-hover-area:hover ~ .gem-tooltip {
-            opacity: 1;
-        }
-
-        /* Coin container and tooltip */
-        .coin-container {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            z-index: 200;
-            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
-        }
-        .coin-container .valuable-in-game {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-        .coin-tooltip {
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-bottom: 8px;
-        }
-        .coin-hover-area {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: auto;
-            z-index: 1;
-        }
-        /* Hide hover area when player is at coin location (so pickup works) */
-        #level-0:checked ~ #pos-3:checked ~ .game-world .valuable-L0P3 .coin-hover-area,
-        #level-1:checked ~ #pos-4:checked ~ .game-world .valuable-L1P4 .coin-hover-area,
-        #level-3:checked ~ #pos-5:checked ~ .game-world .valuable-L3P5 .coin-hover-area,
-        #level-2:checked ~ #pos-1:checked ~ .game-world .valuable-L2P1 .coin-hover-area,
-        #level-4:checked ~ #pos-2:checked ~ .game-world .valuable-L4P2 .coin-hover-area,
-        #level-0:checked ~ #pos-8:checked ~ .game-world .valuable-L0P8 .coin-hover-area,
-        #level-2:checked ~ #pos-7:checked ~ .game-world .valuable-L2P7 .coin-hover-area,
-        #level-4:checked ~ #pos-10:checked ~ .game-world .valuable-L4P10 .coin-hover-area {
-            display: none;
-        }
-        /* Show coin tooltip on hover */
-        #valuable-L0P3-pickup:not(:checked) ~ .game-world .valuable-L0P3 .coin-hover-area:hover ~ .coin-tooltip,
-        #valuable-L1P4-pickup:not(:checked) ~ .game-world .valuable-L1P4 .coin-hover-area:hover ~ .coin-tooltip,
-        #valuable-L3P5-pickup:not(:checked) ~ .game-world .valuable-L3P5 .coin-hover-area:hover ~ .coin-tooltip,
-        #valuable-L2P1-pickup:not(:checked) ~ .game-world .valuable-L2P1 .coin-hover-area:hover ~ .coin-tooltip,
-        #valuable-L4P2-pickup:not(:checked) ~ .game-world .valuable-L4P2 .coin-hover-area:hover ~ .coin-tooltip,
-        #valuable-L0P8-pickup:not(:checked) ~ .game-world .valuable-L0P8 .coin-hover-area:hover ~ .coin-tooltip,
-        #valuable-L2P7-pickup:not(:checked) ~ .game-world .valuable-L2P7 .coin-hover-area:hover ~ .coin-tooltip,
-        #valuable-L4P10-pickup:not(:checked) ~ .game-world .valuable-L4P10 .coin-hover-area:hover ~ .coin-tooltip {
+        /* Show tooltip on hover */
+        #valuable-L0P3-pickup:not(:checked) ~ .game-world .valuable-L0P3 .hover-area:hover ~ .tooltip,
+        #valuable-L1P4-pickup:not(:checked) ~ .game-world .valuable-L1P4 .hover-area:hover ~ .tooltip,
+        #valuable-L3P5-pickup:not(:checked) ~ .game-world .valuable-L3P5 .hover-area:hover ~ .tooltip,
+        #valuable-L2P1-pickup:not(:checked) ~ .game-world .valuable-L2P1 .hover-area:hover ~ .tooltip,
+        #valuable-L4P2-pickup:not(:checked) ~ .game-world .valuable-L4P2 .hover-area:hover ~ .tooltip,
+        #valuable-L0P8-pickup:not(:checked) ~ .game-world .valuable-L0P8 .hover-area:hover ~ .tooltip,
+        #valuable-L1P11-pickup:not(:checked) ~ .game-world .valuable-L1P11 .hover-area:hover ~ .tooltip,
+        #valuable-L2P7-pickup:not(:checked) ~ .game-world .valuable-L2P7 .hover-area:hover ~ .tooltip,
+        #valuable-L3P9-pickup:not(:checked) ~ .game-world .valuable-L3P9 .hover-area:hover ~ .tooltip,
+        #valuable-L4P10-pickup:not(:checked) ~ .game-world .valuable-L4P10 .hover-area:hover ~ .tooltip {
             opacity: 1;
         }
     </style>
@@ -2493,61 +2458,57 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="mountain-strip"></div>
 
         <!-- Valuables (clickable to pick up, animate to counter) -->
-        <div class="coin-container valuable-L0P3">
-            <label for="valuable-L0P3-pickup" class="valuable-in-game coin"><svg><use href="#coin"/></svg></label>
-            <span class="coin-hover-area"></span>
-            <span class="tooltip coin-tooltip">Coin</span>
+        <div class="container coin valuable-L0P3">
+            <label for="valuable-L0P3-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Coin</span>
         </div>
-        <div class="coin-container valuable-L1P4">
-            <label for="valuable-L1P4-pickup" class="valuable-in-game coin"><svg><use href="#coin"/></svg></label>
-            <span class="coin-hover-area"></span>
-            <span class="tooltip coin-tooltip">Coin</span>
+        <div class="container coin valuable-L1P4">
+            <label for="valuable-L1P4-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Coin</span>
         </div>
-        <div class="coin-container valuable-L3P5">
-            <label for="valuable-L3P5-pickup" class="valuable-in-game coin"><svg><use href="#coin"/></svg></label>
-            <span class="coin-hover-area"></span>
-            <span class="tooltip coin-tooltip">Coin</span>
+        <div class="container coin valuable-L3P5">
+            <label for="valuable-L3P5-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Coin</span>
         </div>
-        <div class="coin-container valuable-L2P1">
-            <label for="valuable-L2P1-pickup" class="valuable-in-game coin"><svg><use href="#coin"/></svg></label>
-            <span class="coin-hover-area"></span>
-            <span class="tooltip coin-tooltip">Coin</span>
+        <div class="container coin valuable-L2P1">
+            <label for="valuable-L2P1-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Coin</span>
         </div>
-        <div class="coin-container valuable-L4P2">
-            <label for="valuable-L4P2-pickup" class="valuable-in-game coin"><svg><use href="#coin"/></svg></label>
-            <span class="coin-hover-area"></span>
-            <span class="tooltip coin-tooltip">Coin</span>
+        <div class="container coin valuable-L4P2">
+            <label for="valuable-L4P2-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Coin</span>
         </div>
 
         <!-- Stage 2 Valuables -->
-        <div class="coin-container valuable-L0P8">
-            <label for="valuable-L0P8-pickup" class="valuable-in-game coin"><svg><use href="#coin"/></svg></label>
-            <span class="coin-hover-area"></span>
-            <span class="tooltip coin-tooltip">Coin</span>
+        <div class="container coin valuable-L0P8">
+            <label for="valuable-L0P8-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Coin</span>
         </div>
-        <div class="gem-container valuable-L1P11">
-            <label for="valuable-L1P11-pickup" class="valuable-in-game gem">
-                <svg><use href="#gem"/></svg>
-            </label>
-            <span class="gem-hover-area"></span>
-            <span class="tooltip gem-tooltip">Aquamarine</span>
+        <div class="container gem valuable-L1P11">
+            <label for="valuable-L1P11-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Aquamarine</span>
         </div>
-        <div class="coin-container valuable-L2P7">
-            <label for="valuable-L2P7-pickup" class="valuable-in-game coin"><svg><use href="#coin"/></svg></label>
-            <span class="coin-hover-area"></span>
-            <span class="tooltip coin-tooltip">Coin</span>
+        <div class="container coin valuable-L2P7">
+            <label for="valuable-L2P7-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Coin</span>
         </div>
-        <div class="gem-container valuable-L3P9">
-            <label for="valuable-L3P9-pickup" class="valuable-in-game gem">
-                <svg><use href="#gem"/></svg>
-            </label>
-            <span class="gem-hover-area"></span>
-            <span class="tooltip gem-tooltip">Aquamarine</span>
+        <div class="container gem valuable-L3P9">
+            <label for="valuable-L3P9-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Aquamarine</span>
         </div>
-        <div class="coin-container valuable-L4P10">
-            <label for="valuable-L4P10-pickup" class="valuable-in-game coin"><svg><use href="#coin"/></svg></label>
-            <span class="coin-hover-area"></span>
-            <span class="tooltip coin-tooltip">Coin</span>
+        <div class="container coin valuable-L4P10">
+            <label for="valuable-L4P10-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Coin</span>
         </div>
 
         <!-- Tree on level 0, position 12 -->
