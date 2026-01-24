@@ -272,53 +272,52 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Platform 1 (lowest): 5/6 width, aligned right in Stage 1 */
-        .platform-1 {
+        .platform-s1-1 {
             bottom: var(--platform-height);
             left: var(--pos-width);
             width: calc(var(--pos-width) * 5 - var(--warning-strip-width) - 4px);
         }
 
-        /* Platform 2 (third from above): 4/6 width, aligned left */
-        .platform-2 {
+        /* Platform 2 (third from above): split in Stage 1 */
+        .platform-s1-2-left {
             bottom: calc(var(--platform-height) * 2);
             left: var(--warning-strip-width);
             width: calc(var(--pos-width) * 4 - var(--warning-strip-width));
         }
 
-        /* Platform 2-right (third from above): 1/6 width, aligned right in Stage 1 */
-        .platform-2-right {
+        .platform-s1-2-right {
             bottom: calc(var(--platform-height) * 2);
             left: calc(var(--pos-width) * 5);
             width: calc(var(--pos-width) - var(--warning-strip-width) - 4px);
         }
 
         /* Platform 3 (second from above): split with gap at position 3 */
-        .platform-3-left {
+        .platform-s1-3-left {
             bottom: calc(var(--platform-height) * 3);
             left: var(--warning-strip-width);
             width: calc(var(--pos-width) * 2 - var(--warning-strip-width));
         }
 
-        .platform-3-right {
+        .platform-s1-3-right {
             bottom: calc(var(--platform-height) * 3);
             left: calc(var(--pos-width) * 3);
             width: calc(var(--pos-width) * 3 - var(--warning-strip-width) - 4px);
         }
 
         /* Platform 4 (top): 5/6 width, aligned left */
-        .platform-4 {
+        .platform-s1-4 {
             bottom: calc(var(--platform-height) * 4);
             left: var(--warning-strip-width);
             width: calc(var(--pos-width) * 5 - var(--warning-strip-width));
         }
 
         /* Stage 1 platforms are reddish-gray (rusted metal) with rivets */
-        .platform-1,
-        .platform-2,
-        .platform-2-right,
-        .platform-3-left,
-        .platform-3-right,
-        .platform-4 {
+        .platform-s1-1,
+        .platform-s1-2-left,
+        .platform-s1-2-right,
+        .platform-s1-3-left,
+        .platform-s1-3-right,
+        .platform-s1-4 {
             background:
                 radial-gradient(circle at 15px 50%, #2a2a2a 3px, transparent 3px),
                 radial-gradient(circle at calc(100% - 15px) 50%, #2a2a2a 3px, transparent 3px),
@@ -438,25 +437,25 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Platform 1 gap: position 1 */
-        .grate-L1P1 {
+        .grate-s1-L1P1 {
             bottom: calc(var(--platform-height) + var(--platform-thickness) - 16px);
             left: 0;
         }
 
         /* Platform 2 gap: position 5 */
-        .grate-L2P5 {
+        .grate-s1-L2P5 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 4);
         }
 
         /* Platform 3 gap: position 3 */
-        .grate-L3P3 {
+        .grate-s1-L3P3 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 2);
         }
 
         /* Platform 4 gap: position 6 */
-        .grate-L4P6 {
+        .grate-s1-L4P6 {
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 5);
         }
@@ -610,9 +609,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-axe {
             width: var(--pickup-size);
             height: var(--pickup-size);
-            display: none;
+            display: flex;
             opacity: 0;
-            transition: opacity 0.3s ease-in-out;
+            visibility: hidden;
             justify-content: center;
             align-items: center;
         }
@@ -625,12 +624,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-key svg { color: var(--gold-color); }
         .inventory-wrench svg { color: #708090; }
         .inventory-axe svg { color: #708090; }
-        /* Show inventory items when picked up */
+        /* Show inventory items when picked up (delayed until flying animation completes) */
         #key-pickup:checked ~ .inventory .inventory-key,
         #wrench-pickup:checked ~ .inventory .inventory-wrench,
         #axe-pickup:checked ~ .inventory .inventory-axe {
-            display: flex;
             opacity: 1;
+            visibility: visible;
+            transition: visibility 0s linear 0.5s;
+        }
+        /* Hide key from inventory when toolbox is unlocked (key used) */
+        #toolbox-unlock:checked ~ .inventory .inventory-key {
+            display: none;
         }
 
         /* Valuable counter box */
@@ -732,8 +736,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Container height = ground-height + platform-height*5 + top-margin */
         /* Fly key to inventory when picked up */
         #key-pickup:checked ~ .game-world .key-in-game {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - 12px);
-            left: calc(var(--pos-width) * 6 - var(--item-box-right) - var(--inventory-width) + var(--item-box-padding));
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 6 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -828,8 +832,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Fly wrench to inventory when picked up */
         #toolbox-unlock:checked ~ #wrench-pickup:checked ~ .game-world .wrench-in-game {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - 12px);
-            left: calc(var(--pos-width) * 6 - var(--item-box-right) - var(--inventory-width) + var(--item-box-padding));
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 6 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -1118,26 +1122,26 @@ AAAAAAAAAAAAAAAAAAAAAA==
             );
         }
 
-        /* Ladder 1: ground to platform 1, position 5 */
-        .ladder-1 {
+        /* Ladder at L0P5: ground to platform 1 */
+        .ladder-s1-L0P5 {
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 4 + var(--ladder-offset));
         }
 
-        /* Ladder 2: platform 1 to platform 2, position 3 */
-        .ladder-2 {
+        /* Ladder at L1P3: platform 1 to platform 2 */
+        .ladder-s1-L1P3 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 2 + var(--ladder-offset));
         }
 
-        /* Ladder 3: platform 2 to platform 3, position 1 */
-        .ladder-3 {
+        /* Ladder at L2P1: platform 2 to platform 3 */
+        .ladder-s1-L2P1 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--ladder-offset));
         }
 
-        /* Ladder 4: platform 3 to platform 4, position 4 */
-        .ladder-4 {
+        /* Ladder at L3P4: platform 3 to platform 4 */
+        .ladder-s1-L3P4 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 3 + var(--ladder-offset));
         }
@@ -2455,19 +2459,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="tooltip player-tooltip">Nibo</span>
         </div>
 
-        <!-- Ladder from ground to platform 1 (position 6) -->
-        <div class="ladder ladder-1"></div>
+        <!-- Stage 1 Up: Ladders -->
+        <div class="ladder ladder-s1-L0P5"></div>
+        <div class="ladder ladder-s1-L1P3"></div>
+        <div class="ladder ladder-s1-L2P1"></div>
+        <div class="ladder ladder-s1-L3P4"></div>
 
-        <!-- Ladder from platform 1 to platform 2 (position 3) -->
-        <div class="ladder ladder-2"></div>
-
-        <!-- Ladder from platform 2 to platform 3 (position 1) -->
-        <div class="ladder ladder-3"></div>
-
-        <!-- Ladder from platform 3 to platform 4 (position 4) -->
-        <div class="ladder ladder-4"></div>
-
-        <!-- Stage 2 Vines -->
+        <!-- Stage 2 Up: Vines -->
         <div class="vine vine-s2-L0P8"></div>
         <div class="vine vine-s2-L0P11"></div>
         <div class="vine vine-s2-L1P7"></div>
@@ -2475,13 +2473,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="vine vine-s2-L2P12"></div>
         <div class="vine vine-s2-L3P9"></div>
 
-        <!-- Grates at platform gaps -->
-        <div class="grate grate-L1P1"></div>
-        <div class="grate grate-L2P5"></div>
-        <div class="grate grate-L3P3"></div>
-        <div class="grate grate-L4P6"></div>
+        <!-- Stage 1 Down: Grates -->
+        <div class="grate grate-s1-L1P1"></div>
+        <div class="grate grate-s1-L2P5"></div>
+        <div class="grate grate-s1-L3P3"></div>
+        <div class="grate grate-s1-L4P6"></div>
 
-        <!-- Stage 2 Grates: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 -->
+        <!-- Stage 2 Down: Branches -->
         <div class="branch branch-s2-L1P7"></div>
         <div class="branch branch-s2-L1P12"></div>
         <div class="branch branch-s2-L2P8"></div>
@@ -2489,21 +2487,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="branch branch-s2-L3P10"></div>
         <div class="branch branch-s2-L4P7"></div>
 
-        <!-- Platform 1 (lowest): 5/6 width, aligned right -->
-        <div class="platform platform-1"></div>
-
-        <!-- Platform 2 (third from above): 4/6 width, aligned left -->
-        <div class="platform platform-2"></div>
-
-        <!-- Platform 2-right (third from above): 1/6 width, aligned right -->
-        <div class="platform platform-2-right"></div>
-
-        <!-- Platform 3 (second from above): split with gap at position 3 -->
-        <div class="platform platform-3-left"></div>
-        <div class="platform platform-3-right"></div>
-
-        <!-- Platform 4 (top): 5/6 width, aligned left -->
-        <div class="platform platform-4"></div>
+        <!-- Stage 1 Platforms -->
+        <div class="platform platform-s1-1"></div>
+        <div class="platform platform-s1-2-left"></div>
+        <div class="platform platform-s1-2-right"></div>
+        <div class="platform platform-s1-3-left"></div>
+        <div class="platform platform-s1-3-right"></div>
+        <div class="platform platform-s1-4"></div>
 
         <!-- Stage 2 Platforms -->
         <div class="platform platform-s2-1"></div>
