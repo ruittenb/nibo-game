@@ -1054,6 +1054,36 @@ AAAAAAAAAAAAAAAAAAAAAA==
             text-shadow: 2px 2px 0 #b8860b;
             letter-spacing: 3px;
         }
+        .subtitle {
+            position: absolute;
+            top: 42px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold-color);
+            font-size: 14px;
+            font-style: italic;
+            text-shadow: 1px 1px 0 #b8860b;
+        }
+        .subtitle-s1,
+        .subtitle-s2 {
+            display: none;
+        }
+        #pos-1:checked ~ .subtitle-s1,
+        #pos-2:checked ~ .subtitle-s1,
+        #pos-3:checked ~ .subtitle-s1,
+        #pos-4:checked ~ .subtitle-s1,
+        #pos-5:checked ~ .subtitle-s1,
+        #pos-6:checked ~ .subtitle-s1 {
+            display: block;
+        }
+        #pos-7:checked ~ .subtitle-s2,
+        #pos-8:checked ~ .subtitle-s2,
+        #pos-9:checked ~ .subtitle-s2,
+        #pos-10:checked ~ .subtitle-s2,
+        #pos-11:checked ~ .subtitle-s2,
+        #pos-12:checked ~ .subtitle-s2 {
+            display: block;
+        }
 
         .ladder {
             position: absolute;
@@ -2258,6 +2288,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="valuable-L2P7-pickup" class="valuable-checkbox" title="valuable">
         <input type="checkbox" id="valuable-L3P9-pickup" class="valuable-checkbox" title="gem">
         <input type="checkbox" id="valuable-L4P10-pickup" class="valuable-checkbox" title="valuable">
+
+        <div class="subtitle subtitle-s1">The Factory</div>
+        <div class="subtitle subtitle-s2">The Jungle</div>
 
         <!-- Fixed navigation panel -->
         <div class="nav-panel">
