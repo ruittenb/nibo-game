@@ -1,4 +1,4 @@
-# NIBO'S WAY OUT - CSS-Only Platform Game
+# Nibo's Way Out
 
 A complete platform game implemented **entirely in HTML and CSS** with
 no JavaScript. All game logic, state management, animations, and
@@ -31,7 +31,7 @@ Positions: #pos-1 through #pos-12 (pos 1-6 = stage 1, pos 7-12 = stage 2)
 | `#axe-pickup` | Player has axe |
 | `#tree-chopped` | Tree destroyed (needs axe) |
 | `#escaped` | Victory triggered |
-| `#coin-LxPy-pickup` | Coin at level x, position y collected |
+| `#valuable-LxPy-pickup` | Valuable (coin/gem) at level x, position y collected |
 | `#debug-toggle` | Shows state checkboxes for debugging |
 
 ### CSS Selector Pattern
@@ -51,6 +51,7 @@ All positioning uses CSS variables:
 --ground-height: 35px;        /* Ground level height */
 --platform-thickness: 30px;   /* Platform visual thickness */
 --pos-offset: 55px;           /* Starting X offset */
+--pickup-size: 28px;          /* Size of pick-uppable items and valuables */
 ```
 
 **Player X position:** `calc(var(--pos-offset) + var(--pos-width) * (pos - 1))`
@@ -104,16 +105,17 @@ Arrow visibility controlled by selectors like:
 
 - **Location format:** `LxPy` (Level x, Position y) - e.g., `L2P6`, `L0P12`
 - **Arrows:** `arrow-X-Y` (from position X to Y)
-- **Stage 2 prefix:** `s2` or `-s2-` for stage 2 elements
+- **Stage 1 prefix:** `-s1-` for stage 1 elements (e.g., `platform-s1-1`, `ladder-s1-L0P5`, `grate-s1-L1P1`)
+- **Stage 2 prefix:** `-s2-` for stage 2 elements (e.g., `platform-s2-1`, `vine-s2-L0P8`, `branch-s2-L1P7`)
 - **Checkboxes:** `id="thing-action"` (e.g., `key-pickup`, `door-unlocked`)
 
 ## Key Files Structure
 
-Everything is in `index.html`:
-- Lines 1-1900: CSS (styles, animations, state selectors)
-- Lines 1900-2000: State inputs (radios, checkboxes)
-- Lines 2000-2100: Nav panel, inventory, UI
-- Lines 2100-2280: Game world (platforms, items, hazards, overlays)
+Everything is in `index.html` (~2600 lines):
+- CSS styles, animations, state selectors
+- State inputs (radios, checkboxes)
+- Nav panel, inventory, UI
+- Game world (platforms, items, hazards, overlays)
 
 ## Debug Mode
 
@@ -130,9 +132,11 @@ Each has a `title` attribute showing what it controls.
 
 Key animations defined via `@keyframes`:
 - `idle` - player breathing
-- `coin-pulse`, `key-pulse`, `axe-pulse`, `tree-pulse`, `door-pulse` - item availability
+- `coin-pulse` - item/coin availability glow
+- `gem-pulse` - gem availability glow (aquamarine)
+- `tree-pulse`, `door-pulse` - interactive object availability
 - `deadly-roll` - hazard animation
-- `gem-sparkle` - special gem effect
+- `gem-sparkle` - gem idle sparkle effect
 
 ## Stage Scrolling
 
@@ -140,3 +144,9 @@ At positions 7+, the game world translates left to show stage 2:
 ```css
 #pos-7:checked ~ .game-world { transform: translateX(calc(var(--pos-width) * -6)); }
 ```
+
+## Stage Subtitles
+
+Below the title "NIBO'S WAY OUT", subtitles indicate the current stage:
+- `.subtitle-s1` "The Factory" - shown on positions 1-6
+- `.subtitle-s2` "The Jungle" - shown on positions 7-12
