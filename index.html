@@ -208,6 +208,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --nav-arrow-color: #48d8d8;   /* Navigation arrow color */
             --inactive-arrow-color: #666; /* Inactive navigation arrow color */
             --gold-color: #ffd700;        /* Gold color for title and key */
+            --aquamarine-color: #87ceeb;  /* Aquamarine color for gems */
             --border-color: #4a4a6a;      /* Border color for UI elements */
 
             /* Z-index layers */
@@ -1706,14 +1707,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .coin .valuable-in-game {
             color: var(--gold-color);
         }
-        .gem .valuable-in-game {
-            color: #87ceeb;
-            animation: gem-sparkle 2s ease-in-out infinite;
+        .aquamarine .valuable-in-game {
+            color: var(--aquamarine-color);
+            animation: aquamarine-sparkle 2s ease-in-out infinite;
         }
-        @keyframes gem-sparkle {
+        @keyframes aquamarine-sparkle {
             0%, 100% {
-                color: #87ceeb;
-                filter: drop-shadow(0 0 2px #87ceeb);
+                color: var(--aquamarine-color);
+                filter: drop-shadow(0 0 2px var(--aquamarine-color));
             }
             25% {
                 color: #b0e0ff;
@@ -1721,7 +1722,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             }
             50% {
                 color: #60c0e8;
-                filter: drop-shadow(0 0 3px #87ceeb);
+                filter: drop-shadow(0 0 3px var(--aquamarine-color));
             }
             75% {
                 color: #c0f0ff;
@@ -1779,9 +1780,23 @@ AAAAAAAAAAAAAAAAAAAAAA==
             50% { filter: drop-shadow(0 0 12px var(--gold-color)) drop-shadow(0 0 20px var(--gold-color)); }
         }
         /* Gem pulsating glow when player is nearby */
-        @keyframes gem-pulse {
-            0%, 100% { filter: drop-shadow(0 0 4px #87ceeb); }
-            50% { filter: drop-shadow(0 0 12px #87ceeb) drop-shadow(0 0 20px #87ceeb); }
+        @keyframes aquamarine-pulse {
+            0%, 100% {
+                color: var(--aquamarine-color);
+                filter: drop-shadow(0 0 4px var(--aquamarine-color));
+            }
+            25% {
+                color: #b0e0ff;
+                filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 16px var(--aquamarine-color));
+            }
+            50% {
+                color: #60c0e8;
+                filter: drop-shadow(0 0 12px var(--aquamarine-color)) drop-shadow(0 0 20px var(--aquamarine-color));
+            }
+            75% {
+                color: #c0f0ff;
+                filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 16px var(--aquamarine-color));
+            }
         }
 
         /* Enable clicking and pulsing when player is adjacent */
@@ -1819,7 +1834,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-1:checked ~ #pos-11:checked ~ #valuable-L1P11-pickup:not(:checked) ~ .game-world .valuable-L1P11 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
-            animation: gem-pulse 1s ease-in-out infinite;
+            animation: aquamarine-pulse 1s ease-in-out infinite;
         }
         #level-2:checked ~ #pos-7:checked ~ #valuable-L2P7-pickup:not(:checked) ~ .game-world .valuable-L2P7 .valuable-in-game {
             pointer-events: auto;
@@ -1829,7 +1844,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #pos-9:checked ~ #valuable-L3P9-pickup:not(:checked) ~ .game-world .valuable-L3P9 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
-            animation: gem-pulse 1s ease-in-out infinite;
+            animation: aquamarine-pulse 1s ease-in-out infinite;
         }
         #level-4:checked ~ #pos-10:checked ~ #valuable-L4P10-pickup:not(:checked) ~ .game-world .valuable-L4P10 .valuable-in-game {
             pointer-events: auto;
@@ -2668,7 +2683,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <label for="valuable-L0P8-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
                     </div>
-        <div class="container gem valuable-L1P11">
+        <div class="container aquamarine valuable-L1P11">
             <label for="valuable-L1P11-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
             <span class="hover-area"></span>
             <span class="tooltip">Aquamarine</span>
@@ -2677,7 +2692,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <label for="valuable-L2P7-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
                     </div>
-        <div class="container gem valuable-L3P9">
+        <div class="container aquamarine valuable-L3P9">
             <label for="valuable-L3P9-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
             <span class="hover-area"></span>
             <span class="tooltip">Aquamarine</span>
