@@ -208,7 +208,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --nav-arrow-color: #48d8d8;   /* Navigation arrow color */
             --inactive-arrow-color: #666; /* Inactive navigation arrow color */
             --gold-color: #ffd700;        /* Gold color for title and key */
-            --aquamarine-color: #87ceeb;  /* Aquamarine color for gems */
+            --aquamarine-color-1: #5ab0d0;
+            --aquamarine-color-2: #78c8e8;
+            --aquamarine-color-3: #a0e0f8;
+            --aquamarine-color-4: #c8f0ff;
+            --ruby-color-1: #c03020;
+            --ruby-color-2: #d84838;
+            --ruby-color-3: #f06858;
+            --ruby-color-4: #ffa090;
             --border-color: #4a4a6a;      /* Border color for UI elements */
 
             /* Z-index layers */
@@ -620,6 +627,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-L2P7-pickup { top: 50px; left: 200px; }
         #valuable-L3P9-pickup { top: 50px; left: 220px; }
         #valuable-L4P10-pickup { top: 50px; left: 240px; }
+        #valuable-L4P15-pickup { top: 50px; left: 290px; }
         /* Show inputs when debug is checked */
         #debug-toggle:checked ~ .game-container .position-radio,
         #debug-toggle:checked ~ .game-container .level-radio,
@@ -711,6 +719,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --valuable-L2P7: 0;
             --valuable-L3P9: 0;
             --valuable-L4P10: 0;
+            --valuable-L4P15: 0;
         }
         .valuable-counter .valuable-icon {
             width: 24px;
@@ -729,7 +738,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transition: transform 0.5s ease-out;
             transform: translateY(calc(
                 (var(--valuable-L0P3) + var(--valuable-L1P4) + var(--valuable-L3P5) + var(--valuable-L2P1) + var(--valuable-L4P2) +
-                 var(--valuable-L0P8) + var(--valuable-L1P11) + var(--valuable-L2P7) + var(--valuable-L3P9) + var(--valuable-L4P10))
+                 var(--valuable-L0P8) + var(--valuable-L1P11) + var(--valuable-L2P7) + var(--valuable-L3P9) + var(--valuable-L4P10) +
+                 var(--valuable-L4P15))
                 * -24px
             ));
         }
@@ -751,6 +761,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-L2P7-pickup:checked ~ .valuable-counter { --valuable-L2P7: 1; }
         #valuable-L3P9-pickup:checked ~ .valuable-counter { --valuable-L3P9: 2; }
         #valuable-L4P10-pickup:checked ~ .valuable-counter { --valuable-L4P10: 1; }
+        #valuable-L4P15-pickup:checked ~ .valuable-counter { --valuable-L4P15: 3; }
 
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
@@ -1708,26 +1719,28 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--gold-color);
         }
         .aquamarine .valuable-in-game {
-            color: var(--aquamarine-color);
-            animation: aquamarine-sparkle 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 3px var(--aquamarine-color-1));
+            animation: aquamarine-sparkle 1s ease-in-out infinite;
         }
         @keyframes aquamarine-sparkle {
-            0%, 100% {
-                color: var(--aquamarine-color);
-                filter: drop-shadow(0 0 2px var(--aquamarine-color));
-            }
-            25% {
-                color: #b0e0ff;
-                filter: drop-shadow(0 0 6px #ffffff);
-            }
-            50% {
-                color: #60c0e8;
-                filter: drop-shadow(0 0 3px var(--aquamarine-color));
-            }
-            75% {
-                color: #c0f0ff;
-                filter: drop-shadow(0 0 8px #ffffff);
-            }
+            0%, 100% { color: var(--aquamarine-color-1); }
+            17% { color: var(--aquamarine-color-2); }
+            33% { color: var(--aquamarine-color-3); }
+            50% { color: var(--aquamarine-color-4); }
+            67% { color: var(--aquamarine-color-3); }
+            83% { color: var(--aquamarine-color-2); }
+        }
+        .ruby .valuable-in-game {
+            filter: drop-shadow(0 0 3px var(--ruby-color-1));
+            animation: ruby-sparkle 1s ease-in-out infinite;
+        }
+        @keyframes ruby-sparkle {
+            0%, 100% { color: var(--ruby-color-1); }
+            17% { color: var(--ruby-color-2); }
+            33% { color: var(--ruby-color-3); }
+            50% { color: var(--ruby-color-4); }
+            67% { color: var(--ruby-color-3); }
+            83% { color: var(--ruby-color-2); }
         }
 
         /* Valuable positions - on platforms */
@@ -1774,6 +1787,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset));
         }
 
+        /* Stage 3 valuable positions */
+        .valuable-L4P15 {
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
+        }
+
         /* Coin pulsating glow when player is nearby */
         @keyframes coin-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--gold-color)); }
@@ -1781,22 +1800,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Gem pulsating glow when player is nearby */
         @keyframes aquamarine-pulse {
-            0%, 100% {
-                color: var(--aquamarine-color);
-                filter: drop-shadow(0 0 4px var(--aquamarine-color));
-            }
-            25% {
-                color: #b0e0ff;
-                filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 16px var(--aquamarine-color));
-            }
-            50% {
-                color: #60c0e8;
-                filter: drop-shadow(0 0 12px var(--aquamarine-color)) drop-shadow(0 0 20px var(--aquamarine-color));
-            }
-            75% {
-                color: #c0f0ff;
-                filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 16px var(--aquamarine-color));
-            }
+            0%, 100% { color: var(--aquamarine-color-1); filter: drop-shadow(0 0 4px var(--aquamarine-color-1)); }
+            17% { color: var(--aquamarine-color-2); filter: drop-shadow(0 0 8px var(--aquamarine-color-2)); }
+            33% { color: var(--aquamarine-color-3); filter: drop-shadow(0 0 12px var(--aquamarine-color-3)); }
+            50% { color: var(--aquamarine-color-4); filter: drop-shadow(0 0 16px var(--aquamarine-color-4)); }
+            67% { color: var(--aquamarine-color-3); filter: drop-shadow(0 0 12px var(--aquamarine-color-3)); }
+            83% { color: var(--aquamarine-color-2); filter: drop-shadow(0 0 8px var(--aquamarine-color-2)); }
+        }
+        @keyframes ruby-pulse {
+            0%, 100% { color: var(--ruby-color-1); filter: drop-shadow(0 0 4px var(--ruby-color-1)); }
+            17% { color: var(--ruby-color-2); filter: drop-shadow(0 0 8px var(--ruby-color-2)); }
+            33% { color: var(--ruby-color-3); filter: drop-shadow(0 0 12px var(--ruby-color-3)); }
+            50% { color: var(--ruby-color-4); filter: drop-shadow(0 0 16px var(--ruby-color-4)); }
+            67% { color: var(--ruby-color-3); filter: drop-shadow(0 0 12px var(--ruby-color-3)); }
+            83% { color: var(--ruby-color-2); filter: drop-shadow(0 0 8px var(--ruby-color-2)); }
         }
 
         /* Enable clicking and pulsing when player is adjacent */
@@ -1851,6 +1868,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
+        #level-4:checked ~ #pos-15:checked ~ #valuable-L4P15-pickup:not(:checked) ~ .game-world .valuable-L4P15 .valuable-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: ruby-pulse 1s ease-in-out infinite;
+        }
 
         /* Move Stage 1 valuables to counter when picked up */
         #valuable-L0P3-pickup:checked ~ .game-world .valuable-L0P3,
@@ -1871,6 +1893,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-L4P10-pickup:checked ~ .game-world .valuable-L4P10 {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 16px);
             left: calc(var(--pos-width) * 12 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 2px);
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
+        }
+        /* Move Stage 3 valuables to counter when picked up (add viewport offset) */
+        #valuable-L4P15-pickup:checked ~ .game-world .valuable-L4P15 {
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 16px);
+            left: calc(var(--pos-width) * 18 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 2px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -2422,6 +2451,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="valuable-L2P7-pickup" class="valuable-checkbox" title="valuable">
         <input type="checkbox" id="valuable-L3P9-pickup" class="valuable-checkbox" title="gem">
         <input type="checkbox" id="valuable-L4P10-pickup" class="valuable-checkbox" title="valuable">
+        <!-- Stage 3 valuables -->
+        <input type="checkbox" id="valuable-L4P15-pickup" class="valuable-checkbox" title="ruby">
 
         <div class="subtitle subtitle-s1">The Factory</div>
         <div class="subtitle subtitle-s2">The Jungle</div>
@@ -2502,6 +2533,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
                     <div class="digit">10</div>
                     <div class="digit">11</div>
                     <div class="digit">12</div>
+                    <div class="digit">13</div>
+                    <div class="digit">14</div>
+                    <div class="digit">15</div>
                 </div>
             </div>
         </div>
@@ -2700,7 +2734,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="container coin valuable-L4P10">
             <label for="valuable-L4P10-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
-                    </div>
+        </div>
+
+        <!-- Stage 3 valuables -->
+        <div class="container ruby valuable-L4P15">
+            <label for="valuable-L4P15-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Ruby</span>
+        </div>
 
         <!-- Tree on level 0, position 12 -->
         <div class="tree-container">
