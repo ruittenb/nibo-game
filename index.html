@@ -628,7 +628,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #axe-pickup { top: 50px; left: 160px; }
         #tree-chopped { top: 50px; left: 180px; }
         #escaped { top: 50px; left: 200px; }
-        #battery-pickup { top: 50px; left: 310px; }
+        #battery-pickup { top: 50px; left: 290px; }
         /* Show inputs when debug is checked */
         #debug-toggle:checked ~ .game-container .position-radio,
         #debug-toggle:checked ~ .game-container .level-radio,
@@ -685,7 +685,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-key svg { color: var(--gold-color); }
         .inventory-wrench svg { color: #708090; }
         .inventory-axe svg { color: #708090; }
-        .inventory-battery svg { color: #50c050; }
+        .inventory-battery svg { color: #e04040; }
         /* Show inventory items when picked up (delayed until flying animation completes) */
         #key-pickup:checked ~ .inventory .inventory-key,
         #wrench-pickup:checked ~ .inventory .inventory-wrench,
@@ -697,6 +697,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Hide key from inventory when toolbox is unlocked (key used) */
         #toolbox-unlock:checked ~ .inventory .inventory-key {
+            display: none;
+        }
+        /* Hide axe from inventory when tree is chopped (axe used) */
+        #tree-chopped:checked ~ .inventory .inventory-axe {
             display: none;
         }
 
@@ -883,7 +887,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .battery-in-game svg {
             width: 100%;
             height: 100%;
-            color: #50c050;
+            color: #e04040;
         }
         /* Enable clicking battery only when player is at level 2, position 14 */
         #level-2:checked ~ #pos-14:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game {
@@ -1916,8 +1920,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-L3P5-pickup:checked ~ .game-world .valuable-L3P5,
         #valuable-L2P1-pickup:checked ~ .game-world .valuable-L2P1,
         #valuable-L4P2-pickup:checked ~ .game-world .valuable-L4P2 {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 16px);
-            left: calc(var(--pos-width) * 6 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 2px);
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
+            left: calc(var(--pos-width) * 6 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -1927,15 +1931,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-L2P7-pickup:checked ~ .game-world .valuable-L2P7,
         #valuable-L3P9-pickup:checked ~ .game-world .valuable-L3P9,
         #valuable-L4P10-pickup:checked ~ .game-world .valuable-L4P10 {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 16px);
-            left: calc(var(--pos-width) * 12 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 2px);
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
+            left: calc(var(--pos-width) * 12 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Move Stage 3 valuables to counter when picked up (add viewport offset) */
         #valuable-L4P15-pickup:checked ~ .game-world .valuable-L4P15 {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 16px);
-            left: calc(var(--pos-width) * 18 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 2px);
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
+            left: calc(var(--pos-width) * 18 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
