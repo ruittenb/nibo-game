@@ -201,7 +201,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --item-box-right: 10px;       /* Distance from right */
             --item-box-height: 40px;      /* Box height */
             --item-box-padding: 10px;     /* Box padding */
-            --inventory-width: 124px;     /* padding (10) + 2 gaps (16) + 3 items (84) + padding (10) + border (4) */
+            --inventory-width: 160px;     /* padding (10) + 3 gaps (24) + 4 items (112) + padding (10) + border (4) */
             --valuable-counter-width: 84px; /* Valuable counter width */
 
             /* Colors */
@@ -576,7 +576,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
         /* Hide radio buttons and checkboxes by default */
-        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .tree-checkbox, .escaped-checkbox, .valuable-checkbox, .door-checkbox {
+        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .battery-checkbox, .tree-checkbox, .escaped-checkbox, .valuable-checkbox, .door-checkbox {
             display: none;
             /* When unhidden for debugging: */
             z-index: 9999;
@@ -628,6 +628,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #axe-pickup { top: 50px; left: 160px; }
         #tree-chopped { top: 50px; left: 180px; }
         #escaped { top: 50px; left: 200px; }
+        #battery-pickup { top: 50px; left: 310px; }
         /* Show inputs when debug is checked */
         #debug-toggle:checked ~ .game-container .position-radio,
         #debug-toggle:checked ~ .game-container .level-radio,
@@ -635,6 +636,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ .game-container .toolbox-checkbox,
         #debug-toggle:checked ~ .game-container .wrench-checkbox,
         #debug-toggle:checked ~ .game-container .axe-checkbox,
+        #debug-toggle:checked ~ .game-container .battery-checkbox,
         #debug-toggle:checked ~ .game-container .tree-checkbox,
         #debug-toggle:checked ~ .game-container .escaped-checkbox,
         #debug-toggle:checked ~ .game-container .valuable-checkbox,
@@ -663,7 +665,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Inventory item icons - hidden by default */
         .inventory-key,
         .inventory-wrench,
-        .inventory-axe {
+        .inventory-axe,
+        .inventory-battery {
             width: var(--pickup-size);
             height: var(--pickup-size);
             display: flex;
@@ -674,17 +677,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         .inventory-key svg,
         .inventory-wrench svg,
-        .inventory-axe svg {
+        .inventory-axe svg,
+        .inventory-battery svg {
             width: 24px;
             height: 24px;
         }
         .inventory-key svg { color: var(--gold-color); }
         .inventory-wrench svg { color: #708090; }
         .inventory-axe svg { color: #708090; }
+        .inventory-battery svg { color: #50c050; }
         /* Show inventory items when picked up (delayed until flying animation completes) */
         #key-pickup:checked ~ .inventory .inventory-key,
         #wrench-pickup:checked ~ .inventory .inventory-wrench,
-        #axe-pickup:checked ~ .inventory .inventory-axe {
+        #axe-pickup:checked ~ .inventory .inventory-axe,
+        #battery-pickup:checked ~ .inventory .inventory-battery {
             opacity: 1;
             visibility: visible;
             transition: visibility 0s linear 0.5s;
@@ -859,6 +865,36 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #axe-pickup:checked ~ .game-world .axe-in-game {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) * 2 - 8px - 4px);
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
+        }
+
+        /* Battery on level 2, position 14 (stage 3) */
+        .battery-in-game {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
+            z-index: 200;
+            pointer-events: none;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+        }
+        .battery-in-game svg {
+            width: 100%;
+            height: 100%;
+            color: #50c050;
+        }
+        /* Enable clicking battery only when player is at level 2, position 14 */
+        #level-2:checked ~ #pos-14:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
+        }
+        /* Fly battery to inventory when picked up */
+        #battery-pickup:checked ~ .game-world .battery-in-game {
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 18 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) * 3 - 16px - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -2355,6 +2391,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <path fill="#cc1010" d="M 12,2 L 22,8 C 22,12 20,14 16,15 L 13,10 L 9,6 L 12,2 z"/>
             <path fill="#c4a484" d="M 4.11,19.84 L 2.12,18.33 L 9.19,9 L 11,10.81 L 4.11,19.84 Z"/>
         </symbol>
+        <symbol id="battery" viewBox="0 0 512 512">
+            <path fill="currentColor" d="M 80 64 c 0 -17.7 14.3 -32 32 -32 l 64 0 c 17.7 0 32 14.3 32 32 l 96 0 c 0 -17.7 14.3 -32 32 -32 l 64 0 c 17.7 0 32 14.3 32 32 l 16 0 c 35.3 0 64 28.7 64 64 l 0 256 c 0 35.3 -28.7 64 -64 64 L 64 448 c -35.3 0 -64 -28.7 -64 -64 L 0 128 C 0 92.7 28.7 64 64 64 l 16 0 z M 392 184 c 0 -13.3 -10.7 -24 -24 -24 s -24 10.7 -24 24 l 0 32 -32 0 c -13.3 0 -24 10.7 -24 24 s 10.7 24 24 24 l 32 0 0 32 c 0 13.3 10.7 24 24 24 s 24 -10.7 24 -24 l 0 -32 32 0 c 13.3 0 24 -10.7 24 -24 s -10.7 -24 -24 -24 l -32 0 0 -32 z M 64 240 c 0 13.3 10.7 24 24 24 l 112 0 c 13.3 0 24 -10.7 24 -24 s -10.7 -24 -24 -24 L 88 216 c -13.3 0 -24 10.7 -24 24 z"/>
+        </symbol>
         <symbol id="tree" viewBox="-26 0 92 110">
             <!-- Foliage - overlapping circles (drawn first, behind trunk/branches) -->
             <circle fill="#2d5a2d" cx="-10" cy="38" r="16"/>
@@ -2429,6 +2468,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         <!-- Axe pickup checkbox -->
         <input type="checkbox" id="axe-pickup" class="axe-checkbox" title="axe">
+
+        <!-- Battery pickup checkbox -->
+        <input type="checkbox" id="battery-pickup" class="battery-checkbox" title="battery">
 
         <!-- Sprout unlock checkbox -->
         <input type="checkbox" id="tree-chopped" class="tree-checkbox" title="tree">
@@ -2513,6 +2555,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="inventory-key"><svg><use href="#key"/></svg></span>
             <span class="inventory-wrench"><svg><use href="#wrench"/></svg></span>
             <span class="inventory-axe"><svg><use href="#axe"/></svg></span>
+            <span class="inventory-battery"><svg><use href="#battery"/></svg></span>
         </div>
 
         <!-- Valuable counter -->
@@ -2554,6 +2597,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         <!-- Axe on level 4, position 12 (clickable to pick up) -->
         <label for="axe-pickup" class="axe-in-game"><svg><use href="#axe"/></svg></label>
+
+        <!-- Battery on level 2, position 14 (clickable to pick up) -->
+        <label for="battery-pickup" class="battery-in-game"><svg><use href="#battery"/></svg></label>
 
         <!-- Wrench in game world (clickable to pick up) -->
         <label for="wrench-pickup" class="wrench-in-game"><svg><use href="#wrench"/></svg></label>
