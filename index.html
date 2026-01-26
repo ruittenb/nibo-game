@@ -278,7 +278,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #stage-3-pos-3:checked ~ .game-world,
         #stage-3-pos-4:checked ~ .game-world,
         #stage-3-pos-5:checked ~ .game-world,
-        #stage-3-pos-6:checked ~ .game-world {
+        #stage-3-pos-6:checked ~ .game-world,
+        #stage-3-pos-φ:checked ~ .game-world {
             transform: translateX(calc(var(--pos-width) * -12));
         }
 
@@ -408,7 +409,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .platform-S3-L4 {
             bottom: calc(var(--platform-height) * 4);
             left: calc(var(--pos-width) * 12);
-            width: calc(var(--pos-width) * 6 - 12px);
+            width: calc(var(--pos-width) * 3); /* P1-P3 only, gaps at P4 and P6 */
         }
 
         /* Stage 3 platforms are cyan */
@@ -492,10 +493,21 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 5);
         }
 
-        /* Stage 3 grate: S3-L2-P13 */
+        /* Stage 3 grate: S3-L2-P1 */
         .grate-S3-L2-P1 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 12);
+        }
+        .platform-S3-L4-P5-floating {
+            position: absolute;
+            bottom: calc(var(--platform-height) * 4);
+            left: calc(var(--pos-width) * 16);
+            width: var(--pos-width);
+            height: var(--platform-thickness);
+            background: #2e8b8b;
+            border: 3px solid #1a5c5c;
+            border-radius: 4px;
+            box-shadow: inset 0 -5px 0 rgba(0,0,0,0.3);
         }
 
         /* Stage 2 Branches (replaces grates) */
@@ -595,6 +607,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #stage-3-pos-4 { top: 10px; left: 350px; }
         #stage-3-pos-5 { top: 10px; left: 370px; }
         #stage-3-pos-6 { top: 10px; left: 390px; }
+        #stage-3-pos-φ { top: 10px; left: 420px; }
         /* Debug positions - valuables (row 2) */
         #valuable-S1-L0-P3-pickup { top: 30px; left: 30px; }
         #valuable-S1-L1-P4-pickup { top: 30px; left: 50px; }
@@ -1040,6 +1053,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #stage-3-pos-4:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 15); }
         #stage-3-pos-5:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 16); }
         #stage-3-pos-6:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 17); }
+        /* Phantom position: L3-Pφ displays at L4-P5 visual location */
+        #level-3:checked ~ #stage-3-pos-φ:checked ~ .game-world .player {
+            left: calc(var(--pos-offset) + var(--pos-width) * 16); /* P5 X position */
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 2px); /* L4 height */
+        }
 
         /* Player vertical levels */
         #level-0:checked ~ .game-world .player { bottom: calc(var(--ground-height) - 2px); }
@@ -1146,44 +1164,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='400'%3E%3Cdefs%3E%3Cfilter id='f' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur stdDeviation='0.4'/%3E%3C/filter%3E%3C/defs%3E%3Cpolygon points='2,5 8,7 10,13 5,15 1,11' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,35 11,39 9,47 4,45 2,40' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='1,58 7,56 10,62 8,68 3,66' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='4,105 9,103 11,108 7,114 2,110' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='2,122 6,119 10,124 8,132 3,129' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='5,168 10,171 8,179 3,177 1,172' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='3,195 8,192 11,198 6,205 1,200' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,212 10,215 8,222 3,220 2,216' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='1,265 7,263 10,270 5,277 2,272' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='4,295 9,292 11,299 7,305 2,301' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='2,310 8,308 10,315 6,322 1,317' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='5,352 10,355 8,363 3,360 1,356' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='3,368 7,365 11,371 8,378 2,374' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,390 10,394 7,402 2,399 3,393' fill='%232a2a2a' filter='url(%23f)'/%3E%3C/svg%3E");
             background-repeat: repeat-y;
         }
-        /* Rock strip on right side of Stage 3 (mirrored from rock-strip-S2) */
-        .rock-strip-S3 {
-            position: absolute;
-            right: calc(var(--pos-width) * 18);
-            left: calc(var(--pos-width) * 18 - 12px);
-            width: 12px;
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
-            top: 110px;
-            background: repeating-linear-gradient(
-                -10deg,
-                #777 0px,
-                #777 8px,
-                #666 8px,
-                #666 10px,
-                #777 10px,
-                #777 22px,
-                #333 22px,
-                #333 24px
-            );
-            box-shadow: inset 2px 0 3px rgba(0,0,0,0.4);
-            clip-path: polygon(
-                100% 0%, 0% 0%, 0% 2%, 28% 4%, 0% 7%, 15% 9%, 32% 13%,
-                0% 16%, 22% 21%, 0% 23%, 35% 27%, 12% 31%, 0% 34%,
-                30% 38%, 0% 41%, 18% 46%, 0% 48%, 32% 53%, 10% 56%,
-                0% 59%, 25% 64%, 0% 67%, 35% 72%, 15% 75%, 0% 78%,
-                28% 83%, 0% 86%, 20% 91%, 32% 94%, 0% 97%, 0% 100%,
-                100% 100%
-            );
-        }
-        .rock-strip-S3::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='400'%3E%3Cdefs%3E%3Cfilter id='f' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur stdDeviation='0.4'/%3E%3C/filter%3E%3C/defs%3E%3Cpolygon points='10,5 4,7 2,13 7,15 11,11' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,35 1,39 3,47 8,45 10,40' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='11,58 5,56 2,62 4,68 9,66' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='8,105 3,103 1,108 5,114 10,110' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='10,122 6,119 2,124 4,132 9,129' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='7,168 2,171 4,179 9,177 11,172' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='9,195 4,192 1,198 6,205 11,200' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,212 2,215 4,222 9,220 10,216' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='11,265 5,263 2,270 7,277 10,272' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='8,295 3,292 1,299 5,305 10,301' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='10,310 4,308 2,315 6,322 11,317' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='7,352 2,355 4,363 9,360 11,356' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='9,368 5,365 1,371 4,378 10,374' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,390 2,394 5,402 10,399 9,393' fill='%232a2a2a' filter='url(%23f)'/%3E%3C/svg%3E");
-            background-repeat: repeat-y;
-        }
-
         /* Spaceship background in Stage 3 */
         .spacecraft-bg {
             position: absolute;
@@ -1335,6 +1315,18 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .ladder-S1-L3-P4 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 3 + var(--ladder-offset));
+        }
+
+        /* Ladder at S3-L0-P4: ground to platform 1 */
+        .ladder-S3-L0-P4 {
+            bottom: var(--ground-height);
+            left: calc(var(--pos-offset) + var(--pos-width) * 15 + var(--ladder-offset));
+        }
+
+        /* Ladder at S3-L3-P5: platform 3 to floating platform (phantom) */
+        .ladder-S3-L3-P5 {
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 16 + var(--ladder-offset));
         }
 
         /* Vines for stage 2 */
@@ -1519,6 +1511,26 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
         }
 
+        /* Stage 3 Up arrows */
+        .arrow-up-S3-L0-P4 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 15 + 10px);
+            bottom: calc(var(--ground-height) + 72.5px);
+        }
+        .arrow-up-S3-L3-P5 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 16 + 10px);
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
+        }
+
+        /* Stage 3 phantom position arrows (at visual L4-P5) */
+        .arrow-left-S3-Pφ {
+            left: calc(var(--pos-offset) + var(--pos-width) * 15 + 10px);
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 15px);
+        }
+        .arrow-right-S3-Pφ {
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px);
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 15px);
+        }
+
         /* Down arrow positions (at platform gaps) */
         .arrow-down-S1-L1-P1 {
             left: calc(var(--pos-offset) + 10px);
@@ -1609,6 +1621,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #stage-3-pos-5:checked ~ .game-world .arrow-S3-P5-P4 { display: block; }
         #stage-3-pos-5:checked ~ .game-world .arrow-S3-P5-P6 { display: block; }
         #stage-3-pos-6:checked ~ .game-world .arrow-S3-P6-P5 { display: block; }
+        /* Hide horizontal arrows at L4 platform gaps (P4, P5, P6 have no platform at L4) */
+        #level-4:checked ~ #stage-3-pos-3:checked ~ .game-world .arrow-S3-P3-P4 { display: none; }
+        #level-4:checked ~ #stage-3-pos-4:checked ~ .game-world .arrow-S3-P4-P3 { display: none; }
+        #level-4:checked ~ #stage-3-pos-4:checked ~ .game-world .arrow-S3-P4-P5 { display: none; }
+        #level-4:checked ~ #stage-3-pos-5:checked ~ .game-world .arrow-S3-P5-P4 { display: none; }
+        #level-4:checked ~ #stage-3-pos-5:checked ~ .game-world .arrow-S3-P5-P6 { display: none; }
+        #level-4:checked ~ #stage-3-pos-6:checked ~ .game-world .arrow-S3-P6-P5 { display: none; }
 
         /* Show up arrow at ladder locations */
         /* Ladder 1: level 0, position 5 */
@@ -1626,6 +1645,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-1:checked ~ #stage-2-pos-4:checked ~ .game-world .arrow-up-S2-L1-P4 { display: block; }
         #level-2:checked ~ #stage-2-pos-6:checked ~ .game-world .arrow-up-S2-L2-P6 { display: block; }
         #level-3:checked ~ #stage-2-pos-3:checked ~ .game-world .arrow-up-S2-L3-P3 { display: block; }
+        /* Stage 3 up arrows */
+        #level-0:checked ~ #stage-3-pos-4:checked ~ .game-world .arrow-up-S3-L0-P4 { display: block; }
+        #level-3:checked ~ #stage-3-pos-5:checked ~ .game-world .arrow-up-S3-L3-P5 { display: block; }
+        /* Stage 3 phantom position arrows (fall left/right from floating platform) */
+        #level-3:checked ~ #stage-3-pos-φ:checked ~ .game-world .arrow-left-S3-Pφ { display: block; }
+        #level-3:checked ~ #stage-3-pos-φ:checked ~ .game-world .arrow-right-S3-Pφ { display: block; }
 
         /* Show down arrow at platform gaps */
         #level-1:checked ~ #stage-1-pos-1:checked ~ .game-world .arrow-down-S1-L1-P1 { display: block; }
@@ -1776,6 +1801,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #stage-3-pos-5:checked ~ .nav-panel .nav-left[for="stage-3-pos-4"] { display: block; }
         #stage-3-pos-5:checked ~ .nav-panel .nav-right[for="stage-3-pos-6"] { display: block; }
         #stage-3-pos-6:checked ~ .nav-panel .nav-left[for="stage-3-pos-5"] { display: block; }
+        /* Stage 3 phantom position nav arrows (fall left/right from floating platform) */
+        #level-3:checked ~ #stage-3-pos-φ:checked ~ .nav-panel .nav-left[for="stage-3-pos-4"] { display: block; }
+        #level-3:checked ~ #stage-3-pos-φ:checked ~ .nav-panel .nav-right[for="stage-3-pos-6"] { display: block; }
+        /* Hide nav arrows at L4 platform gaps */
+        #level-4:checked ~ #stage-3-pos-3:checked ~ .nav-panel .nav-right[for="stage-3-pos-4"] { display: none; }
+        #level-4:checked ~ #stage-3-pos-4:checked ~ .nav-panel .nav-left[for="stage-3-pos-3"] { display: none; }
+        #level-4:checked ~ #stage-3-pos-4:checked ~ .nav-panel .nav-right[for="stage-3-pos-5"] { display: none; }
+        #level-4:checked ~ #stage-3-pos-5:checked ~ .nav-panel .nav-left[for="stage-3-pos-4"] { display: none; }
+        #level-4:checked ~ #stage-3-pos-5:checked ~ .nav-panel .nav-right[for="stage-3-pos-6"] { display: none; }
+        #level-4:checked ~ #stage-3-pos-6:checked ~ .nav-panel .nav-left[for="stage-3-pos-5"] { display: none; }
 
         /* Show up arrow at ladder locations */
         #level-0:checked ~ #stage-1-pos-5:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
@@ -1790,6 +1825,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-1:checked ~ #stage-2-pos-4:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
         #level-2:checked ~ #stage-2-pos-6:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
         #level-3:checked ~ #stage-2-pos-3:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
+        /* Stage 3 nav up */
+        #level-0:checked ~ #stage-3-pos-4:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
+        #level-3:checked ~ #stage-3-pos-5:checked ~ .nav-panel .nav-up[for="stage-3-pos-φ"] { display: block; }
 
         /* Show down arrow at grate locations */
         #level-1:checked ~ #stage-1-pos-1:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
@@ -2830,6 +2868,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="position" id="stage-3-pos-4" class="position-radio">
         <input type="radio" name="position" id="stage-3-pos-5" class="position-radio">
         <input type="radio" name="position" id="stage-3-pos-6" class="position-radio">
+        <input type="radio" name="position" id="stage-3-pos-φ" class="position-radio" title="S3 phantom platform">
 
         <!-- Key pickup checkbox -->
         <input type="checkbox" id="key-pickup" class="key-checkbox" title="key">
@@ -3060,8 +3099,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="level-2" class="arrow arrow-down arrow-down-S2-L3-P4"></label>
         <label for="level-3" class="arrow arrow-down arrow-down-S2-L4-P1"></label>
 
-        <!-- Stage 3 Down arrow label: L2P13 -->
+        <!-- Stage 3 Down arrow label: L2P1 -->
         <label for="level-1" class="arrow arrow-down arrow-down-S3-L2-P1"></label>
+
+        <!-- Stage 3 Up arrow labels -->
+        <label for="level-1" class="arrow arrow-up arrow-up-S3-L0-P4"></label>
+        <label for="stage-3-pos-φ" class="arrow arrow-up arrow-up-S3-L3-P5"></label>
+
+        <!-- Stage 3 Phantom position arrows (fall left/right) -->
+        <label for="stage-3-pos-4" class="arrow arrow-left arrow-left-S3-Pφ"></label>
+        <label for="stage-3-pos-6" class="arrow arrow-right arrow-right-S3-Pφ"></label>
 
         <!-- Player character -->
         <div class="player">
@@ -3171,14 +3218,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
         <!-- Ground -->
         <div class="ground-S3"></div>
-        <!-- Rock strip on right edge -->
-        <div class="rock-strip-S3"></div>
         <!-- Platforms -->
         <div class="platform platform-S3-L1"></div>
         <div class="platform platform-S3-L3"></div>
         <div class="platform platform-S3-L4"></div>
         <!-- Grate (down) -->
         <div class="grate grate-S3-L2-P1"></div>
+        <!-- Floating platform (phantom position) -->
+        <div class="platform-S3-L4-P5-floating"></div>
+        <!-- Ladders -->
+        <div class="ladder ladder-S3-L0-P4"></div>
+        <div class="ladder ladder-S3-L3-P5"></div>
 
         <!-- ==================== STAGE 1 VALUABLES ==================== -->
         <div class="container coin valuable-S1-L0-P3">
