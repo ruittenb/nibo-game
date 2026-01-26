@@ -1446,23 +1446,23 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .arrow-h {
             bottom: calc(var(--ground-height) - 10px);
         }
-        .arrow-P1-P2, .arrow-P2-P1 { left: calc(var(--pos-offset) + var(--pos-width) * 0.5 + 12px); }
-        .arrow-P2-P3, .arrow-P3-P2 { left: calc(var(--pos-offset) + var(--pos-width) * 1.5 + 12px); }
-        .arrow-P3-P4, .arrow-P4-P3 { left: calc(var(--pos-offset) + var(--pos-width) * 2.5 + 12px); }
-        .arrow-P4-P5, .arrow-P5-P4 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5 + 12px); }
-        .arrow-P5-P6, .arrow-P6-P5 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5 + 12px); }
+        .arrow-S1-P1-P2, .arrow-S1-P2-P1 { left: calc(var(--pos-offset) + var(--pos-width) * 0.5 + 12px); }
+        .arrow-S1-P2-P3, .arrow-S1-P3-P2 { left: calc(var(--pos-offset) + var(--pos-width) * 1.5 + 12px); }
+        .arrow-S1-P3-P4, .arrow-S1-P4-P3 { left: calc(var(--pos-offset) + var(--pos-width) * 2.5 + 12px); }
+        .arrow-S1-P4-P5, .arrow-S1-P5-P4 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5 + 12px); }
+        .arrow-S1-P5-P6, .arrow-S1-P6-P5 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5 + 12px); }
         /* Stage 1 to Stage 2 transition arrows */
-        .arrow-P7-P6 { left: calc(var(--pos-offset) + var(--pos-width) * 5.5 + 33px); }
-        .arrow-P6-P7 { left: calc(var(--pos-offset) + var(--pos-width) * 5 + 60px); }
+        .arrow-S2-P7-S1-P6 { left: calc(var(--pos-offset) + var(--pos-width) * 5.5 + 33px); }
+        .arrow-S1-P6-S2-P7 { left: calc(var(--pos-offset) + var(--pos-width) * 5 + 60px); }
         /* Stage 2 horizontal arrows */
-        .arrow-P7-P8, .arrow-P8-P7 { left: calc(var(--pos-offset) + var(--pos-width) * 6.5 + 12px); }
-        .arrow-P8-P9, .arrow-P9-P8 { left: calc(var(--pos-offset) + var(--pos-width) * 7.5 + 12px); }
-        .arrow-P9-P10, .arrow-P10-P9 { left: calc(var(--pos-offset) + var(--pos-width) * 8.5 + 12px); }
-        .arrow-P10-P11, .arrow-P11-P10 { left: calc(var(--pos-offset) + var(--pos-width) * 9.5 + 12px); }
-        .arrow-P11-P12, .arrow-P12-P11 { left: calc(var(--pos-offset) + var(--pos-width) * 10.5 + 12px); }
-        .arrow-P12-P13 { left: calc(var(--pos-offset) + var(--pos-width) * 11 + 60px); }
-        .arrow-P13-P12 { left: calc(var(--pos-offset) + var(--pos-width) * 11.5 + 33px); }
-        /* Escape arrow (positioned like arrow-P6-P7, but at S2-P12) */
+        .arrow-S2-P7-P8, .arrow-S2-P8-P7 { left: calc(var(--pos-offset) + var(--pos-width) * 6.5 + 12px); }
+        .arrow-S2-P8-P9, .arrow-S2-P9-P8 { left: calc(var(--pos-offset) + var(--pos-width) * 7.5 + 12px); }
+        .arrow-S2-P9-P10, .arrow-S2-P10-P9 { left: calc(var(--pos-offset) + var(--pos-width) * 8.5 + 12px); }
+        .arrow-S2-P10-P11, .arrow-S2-P11-P10 { left: calc(var(--pos-offset) + var(--pos-width) * 9.5 + 12px); }
+        .arrow-S2-P11-P12, .arrow-S2-P12-P11 { left: calc(var(--pos-offset) + var(--pos-width) * 10.5 + 12px); }
+        .arrow-S2-P12-S3-P13 { left: calc(var(--pos-offset) + var(--pos-width) * 11 + 60px); }
+        .arrow-S3-P13-S2-P12 { left: calc(var(--pos-offset) + var(--pos-width) * 11.5 + 33px); }
+        /* Escape arrow (positioned like arrow-S1-P6-S2-P7, but at S2-P12) */
 
         /* Horizontal arrows move with level */
         #level-0:checked ~ .game-world .arrow-h { bottom: calc(var(--ground-height) + 19px); }
@@ -1566,38 +1566,38 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         /* Show horizontal arrows based on position (all levels) */
         /* Stage 1 arrows */
-        #stage-1-pos-1:checked ~ .game-world .arrow-P1-P2 { display: block; }
-        #stage-1-pos-2:checked ~ .game-world .arrow-P2-P1 { display: block; }
-        #stage-1-pos-2:checked ~ .game-world .arrow-P2-P3 { display: block; }
-        #stage-1-pos-3:checked ~ .game-world .arrow-P3-P2 { display: block; }
-        #stage-1-pos-3:checked ~ .game-world .arrow-P3-P4 { display: block; }
-        #stage-1-pos-4:checked ~ .game-world .arrow-P4-P3 { display: block; }
-        #stage-1-pos-4:checked ~ .game-world .arrow-P4-P5 { display: block; }
-        #stage-1-pos-5:checked ~ .game-world .arrow-P5-P4 { display: block; }
-        #stage-1-pos-5:checked ~ .game-world .arrow-P5-P6 { display: block; }
-        #stage-1-pos-6:checked ~ .game-world .arrow-P6-P5 { display: block; }
+        #stage-1-pos-1:checked ~ .game-world .arrow-S1-P1-P2 { display: block; }
+        #stage-1-pos-2:checked ~ .game-world .arrow-S1-P2-P1 { display: block; }
+        #stage-1-pos-2:checked ~ .game-world .arrow-S1-P2-P3 { display: block; }
+        #stage-1-pos-3:checked ~ .game-world .arrow-S1-P3-P2 { display: block; }
+        #stage-1-pos-3:checked ~ .game-world .arrow-S1-P3-P4 { display: block; }
+        #stage-1-pos-4:checked ~ .game-world .arrow-S1-P4-P3 { display: block; }
+        #stage-1-pos-4:checked ~ .game-world .arrow-S1-P4-P5 { display: block; }
+        #stage-1-pos-5:checked ~ .game-world .arrow-S1-P5-P4 { display: block; }
+        #stage-1-pos-5:checked ~ .game-world .arrow-S1-P5-P6 { display: block; }
+        #stage-1-pos-6:checked ~ .game-world .arrow-S1-P6-P5 { display: block; }
         /* Arrow to Stage 2 when door is open and player at S1-P6 */
-        #level-0:checked ~ #stage-1-pos-6:checked ~ #door-unlocked:checked ~ .game-world .arrow-P6-P7 { display: block; }
+        #level-0:checked ~ #stage-1-pos-6:checked ~ #door-unlocked:checked ~ .game-world .arrow-S1-P6-S2-P7 { display: block; }
         #stage-1-pos-6:checked ~ #door-unlocked:checked ~ .nav-panel .nav-right[for="stage-2-pos-7"] { display: block; }
         /* Stage 2 arrows */
-        #level-0:checked ~ #stage-2-pos-7:checked ~ #door-unlocked:checked ~ .game-world .arrow-P7-P6 { display: block; }
-        #stage-2-pos-7:checked ~ .game-world .arrow-P7-P8 { display: block; }
-        #stage-2-pos-8:checked ~ .game-world .arrow-P8-P7 { display: block; }
-        #stage-2-pos-8:checked ~ .game-world .arrow-P8-P9 { display: block; }
-        #stage-2-pos-9:checked ~ .game-world .arrow-P9-P8 { display: block; }
-        #stage-2-pos-9:checked ~ .game-world .arrow-P9-P10 { display: block; }
-        #stage-2-pos-10:checked ~ .game-world .arrow-P10-P9 { display: block; }
-        #stage-2-pos-10:checked ~ .game-world .arrow-P10-P11 { display: block; }
-        #stage-2-pos-11:checked ~ .game-world .arrow-P11-P10 { display: block; }
-        #stage-2-pos-11:checked ~ .game-world .arrow-P11-P12 { display: block; }
-        #stage-2-pos-12:checked ~ .game-world .arrow-P12-P11 { display: block; }
+        #level-0:checked ~ #stage-2-pos-7:checked ~ #door-unlocked:checked ~ .game-world .arrow-S2-P7-S1-P6 { display: block; }
+        #stage-2-pos-7:checked ~ .game-world .arrow-S2-P7-P8 { display: block; }
+        #stage-2-pos-8:checked ~ .game-world .arrow-S2-P8-P7 { display: block; }
+        #stage-2-pos-8:checked ~ .game-world .arrow-S2-P8-P9 { display: block; }
+        #stage-2-pos-9:checked ~ .game-world .arrow-S2-P9-P8 { display: block; }
+        #stage-2-pos-9:checked ~ .game-world .arrow-S2-P9-P10 { display: block; }
+        #stage-2-pos-10:checked ~ .game-world .arrow-S2-P10-P9 { display: block; }
+        #stage-2-pos-10:checked ~ .game-world .arrow-S2-P10-P11 { display: block; }
+        #stage-2-pos-11:checked ~ .game-world .arrow-S2-P11-P10 { display: block; }
+        #stage-2-pos-11:checked ~ .game-world .arrow-S2-P11-P12 { display: block; }
+        #stage-2-pos-12:checked ~ .game-world .arrow-S2-P12-P11 { display: block; }
         /* Arrows to/from Stage 3 */
-        #level-0:checked ~ #stage-2-pos-12:checked ~ #tree-chopped:checked ~ .game-world .arrow-P12-P13 { display: block; }
-        #level-1:checked ~ #stage-2-pos-12:checked ~ .game-world .arrow-P12-P13 { display: block; }
-        #level-2:checked ~ #stage-2-pos-12:checked ~ .game-world .arrow-P12-P13 { display: block; }
-        #level-3:checked ~ #stage-2-pos-12:checked ~ .game-world .arrow-P12-P13 { display: block; }
-        #level-4:checked ~ #stage-2-pos-12:checked ~ .game-world .arrow-P12-P13 { display: block; }
-        #stage-3-pos-13:checked ~ .game-world .arrow-P13-P12 { display: block; }
+        #level-0:checked ~ #stage-2-pos-12:checked ~ #tree-chopped:checked ~ .game-world .arrow-S2-P12-S3-P13 { display: block; }
+        #level-1:checked ~ #stage-2-pos-12:checked ~ .game-world .arrow-S2-P12-S3-P13 { display: block; }
+        #level-2:checked ~ #stage-2-pos-12:checked ~ .game-world .arrow-S2-P12-S3-P13 { display: block; }
+        #level-3:checked ~ #stage-2-pos-12:checked ~ .game-world .arrow-S2-P12-S3-P13 { display: block; }
+        #level-4:checked ~ #stage-2-pos-12:checked ~ .game-world .arrow-S2-P12-S3-P13 { display: block; }
+        #stage-3-pos-13:checked ~ .game-world .arrow-S3-P13-S2-P12 { display: block; }
         /* Escape arrow when tree is chopped and player at S2-P12 */
 
         /* Show up arrow at ladder locations */
@@ -2964,33 +2964,33 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
 
         <!-- Horizontal arrow labels -->
-        <label for="stage-1-pos-2" class="arrow arrow-right arrow-h arrow-P1-P2"></label>
-        <label for="stage-1-pos-1" class="arrow arrow-left arrow-h arrow-P2-P1"></label>
-        <label for="stage-1-pos-3" class="arrow arrow-right arrow-h arrow-P2-P3"></label>
-        <label for="stage-1-pos-2" class="arrow arrow-left arrow-h arrow-P3-P2"></label>
-        <label for="stage-1-pos-4" class="arrow arrow-right arrow-h arrow-P3-P4"></label>
-        <label for="stage-1-pos-3" class="arrow arrow-left arrow-h arrow-P4-P3"></label>
-        <label for="stage-1-pos-5" class="arrow arrow-right arrow-h arrow-P4-P5"></label>
-        <label for="stage-1-pos-4" class="arrow arrow-left arrow-h arrow-P5-P4"></label>
-        <label for="stage-1-pos-6" class="arrow arrow-right arrow-h arrow-P5-P6"></label>
-        <label for="stage-1-pos-5" class="arrow arrow-left arrow-h arrow-P6-P5"></label>
-        <label for="stage-2-pos-7" class="arrow arrow-right arrow-h arrow-P6-P7"></label>
+        <label for="stage-1-pos-2" class="arrow arrow-right arrow-h arrow-S1-P1-P2"></label>
+        <label for="stage-1-pos-1" class="arrow arrow-left arrow-h arrow-S1-P2-P1"></label>
+        <label for="stage-1-pos-3" class="arrow arrow-right arrow-h arrow-S1-P2-P3"></label>
+        <label for="stage-1-pos-2" class="arrow arrow-left arrow-h arrow-S1-P3-P2"></label>
+        <label for="stage-1-pos-4" class="arrow arrow-right arrow-h arrow-S1-P3-P4"></label>
+        <label for="stage-1-pos-3" class="arrow arrow-left arrow-h arrow-S1-P4-P3"></label>
+        <label for="stage-1-pos-5" class="arrow arrow-right arrow-h arrow-S1-P4-P5"></label>
+        <label for="stage-1-pos-4" class="arrow arrow-left arrow-h arrow-S1-P5-P4"></label>
+        <label for="stage-1-pos-6" class="arrow arrow-right arrow-h arrow-S1-P5-P6"></label>
+        <label for="stage-1-pos-5" class="arrow arrow-left arrow-h arrow-S1-P6-P5"></label>
+        <label for="stage-2-pos-7" class="arrow arrow-right arrow-h arrow-S1-P6-S2-P7"></label>
 
         <!-- Stage 2 horizontal arrow labels -->
-        <label for="stage-1-pos-6" class="arrow arrow-left arrow-h arrow-P7-P6"></label>
-        <label for="stage-2-pos-8" class="arrow arrow-right arrow-h arrow-P7-P8"></label>
-        <label for="stage-2-pos-7" class="arrow arrow-left arrow-h arrow-P8-P7"></label>
-        <label for="stage-2-pos-9" class="arrow arrow-right arrow-h arrow-P8-P9"></label>
-        <label for="stage-2-pos-8" class="arrow arrow-left arrow-h arrow-P9-P8"></label>
-        <label for="stage-2-pos-10" class="arrow arrow-right arrow-h arrow-P9-P10"></label>
-        <label for="stage-2-pos-9" class="arrow arrow-left arrow-h arrow-P10-P9"></label>
-        <label for="stage-2-pos-11" class="arrow arrow-right arrow-h arrow-P10-P11"></label>
-        <label for="stage-2-pos-10" class="arrow arrow-left arrow-h arrow-P11-P10"></label>
-        <label for="stage-2-pos-12" class="arrow arrow-right arrow-h arrow-P11-P12"></label>
-        <label for="stage-2-pos-11" class="arrow arrow-left arrow-h arrow-P12-P11"></label>
+        <label for="stage-1-pos-6" class="arrow arrow-left arrow-h arrow-S2-P7-S1-P6"></label>
+        <label for="stage-2-pos-8" class="arrow arrow-right arrow-h arrow-S2-P7-P8"></label>
+        <label for="stage-2-pos-7" class="arrow arrow-left arrow-h arrow-S2-P8-P7"></label>
+        <label for="stage-2-pos-9" class="arrow arrow-right arrow-h arrow-S2-P8-P9"></label>
+        <label for="stage-2-pos-8" class="arrow arrow-left arrow-h arrow-S2-P9-P8"></label>
+        <label for="stage-2-pos-10" class="arrow arrow-right arrow-h arrow-S2-P9-P10"></label>
+        <label for="stage-2-pos-9" class="arrow arrow-left arrow-h arrow-S2-P10-P9"></label>
+        <label for="stage-2-pos-11" class="arrow arrow-right arrow-h arrow-S2-P10-P11"></label>
+        <label for="stage-2-pos-10" class="arrow arrow-left arrow-h arrow-S2-P11-P10"></label>
+        <label for="stage-2-pos-12" class="arrow arrow-right arrow-h arrow-S2-P11-P12"></label>
+        <label for="stage-2-pos-11" class="arrow arrow-left arrow-h arrow-S2-P12-P11"></label>
         <!-- Stage 2 to Stage 3 arrows -->
-        <label for="stage-3-pos-13" class="arrow arrow-right arrow-h arrow-P12-P13"></label>
-        <label for="stage-2-pos-12" class="arrow arrow-left arrow-h arrow-P13-P12"></label>
+        <label for="stage-3-pos-13" class="arrow arrow-right arrow-h arrow-S2-P12-S3-P13"></label>
+        <label for="stage-2-pos-12" class="arrow arrow-left arrow-h arrow-S3-P13-S2-P12"></label>
 
         <!-- Up arrow labels (at ladder positions) -->
         <label for="level-1" class="arrow arrow-up arrow-up-S1-L0-P5"></label>
