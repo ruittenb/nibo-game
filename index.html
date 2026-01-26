@@ -201,7 +201,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --item-box-right: 10px;       /* Distance from right */
             --item-box-height: 40px;      /* Box height */
             --item-box-padding: 10px;     /* Box padding */
-            --inventory-width: 160px;     /* padding (10) + 3 gaps (24) + 4 items (112) + padding (10) + border (4) */
+            --inventory-width: 124px;     /* padding (10) + 2 gaps (16) + 3 items (84) + padding (10) + border (4) */
             --valuable-counter-width: 84px; /* Valuable counter width */
 
             /* Colors */
@@ -216,6 +216,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --ruby-color-2: #d84838;
             --ruby-color-3: #f06858;
             --ruby-color-4: #ffa090;
+            --battery-color: #e04040;
+            --wrench-color: #708090;
             --border-color: #4a4a6a;      /* Border color for UI elements */
 
             /* Z-index layers */
@@ -683,9 +685,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 24px;
         }
         .inventory-key svg { color: var(--gold-color); }
-        .inventory-wrench svg { color: #708090; }
-        .inventory-axe svg { color: #708090; }
-        .inventory-battery svg { color: #e04040; }
+        .inventory-wrench svg { color: var(--wrench-color); }
+        .inventory-axe svg { color: var(--wrench-color); }
+        .inventory-battery svg { color: var(--battery-color); }
         /* Show inventory items when picked up (delayed until flying animation completes) */
         #key-pickup:checked ~ .inventory .inventory-key,
         #wrench-pickup:checked ~ .inventory .inventory-wrench,
@@ -887,13 +889,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .battery-in-game svg {
             width: 100%;
             height: 100%;
-            color: #e04040;
+            color: var(--battery-color);
         }
         /* Enable clicking battery only when player is at level 2, position 14 */
         #level-2:checked ~ #pos-14:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: battery-pulse 1s ease-in-out infinite;
         }
         /* Fly battery to inventory when picked up */
         #battery-pickup:checked ~ .game-world .battery-in-game {
@@ -918,7 +920,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .wrench-in-game svg {
             width: 100%;
             height: 100%;
-            color: #708090;
+            color: var(--wrench-color);
         }
         /* Show wrench when toolbox is unlocked */
         #toolbox-unlock:checked ~ .game-world .wrench-in-game {
@@ -928,7 +930,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-2:checked ~ #pos-6:checked ~ #toolbox-unlock:checked ~ #wrench-pickup:not(:checked) ~ .game-world .wrench-in-game {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: wrench-pulse 1s ease-in-out infinite;
         }
         /* Fly wrench to inventory when picked up */
         #toolbox-unlock:checked ~ #wrench-pickup:checked ~ .game-world .wrench-in-game {
@@ -1837,6 +1839,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         @keyframes coin-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--gold-color)); }
             50% { filter: drop-shadow(0 0 12px var(--gold-color)) drop-shadow(0 0 20px var(--gold-color)); }
+        }
+        @keyframes wrench-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--wrench-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--wrench-color)) drop-shadow(0 0 20px var(--wrench-color)); }
+        }
+        @keyframes battery-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--battery-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--battery-color)) drop-shadow(0 0 20px var(--battery-color)); }
         }
         /* Gem pulsating glow when player is nearby */
         @keyframes aquamarine-pulse {
