@@ -2253,10 +2253,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             font-size: 18px;
             margin-top: 10px;
         }
-        /* Show death overlay when player is at skull location (L1P6, L0P10, L1P9) */
-        #level-1:checked ~ #pos-6:checked ~ .death-overlay,
-        #level-0:checked ~ #pos-10:checked ~ .death-overlay,
-        #level-1:checked ~ #pos-9:checked ~ .death-overlay {
+        /* Show death overlay when player is at hazard locations */
+        #level-1:checked ~ #pos-6:checked ~ .death-overlay-poison {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #level-0:checked ~ #pos-10:checked ~ .death-overlay-disease,
+        #level-1:checked ~ #pos-9:checked ~ .death-overlay-disease {
             opacity: 1;
             pointer-events: auto;
         }
@@ -3164,9 +3167,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         </div><!-- end game-world -->
 
-        <!-- Death overlay -->
-        <div class="death-overlay">
-            <div class="death-message">YOU DIED</div>
+        <!-- Death overlays -->
+        <div class="death-overlay death-overlay-poison">
+            <div class="death-message">You died from poison</div>
+            <div class="death-submessage">GAME OVER</div>
+        </div>
+        <div class="death-overlay death-overlay-disease">
+            <div class="death-message">You died from a deadly disease</div>
+            <div class="death-submessage">GAME OVER</div>
+        </div>
+        <div class="death-overlay death-overlay-chemical">
+            <div class="death-message">You died from chemical waste</div>
             <div class="death-submessage">GAME OVER</div>
         </div>
 
