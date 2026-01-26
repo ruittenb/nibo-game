@@ -1188,13 +1188,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .spacecraft-bg {
             position: absolute;
             left: calc(var(--pos-width) * 12);
-            bottom: var(--ground-height);
+            bottom: calc(var(--ground-height) + 40px);
             z-index: 0;
         }
         .spacecraft-bg svg {
             display: block;
-            width: calc(var(--pos-width) * 12 * 0.9);
-            height: calc(var(--pos-width) * 12 * 438 / 1440 * 0.9);
+            width: calc(var(--pos-width) * 12 * 0.729);
+            height: calc(var(--pos-width) * 12 * 438 / 1440 * 0.729);
             opacity: 0.85;
         }
 
