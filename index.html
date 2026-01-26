@@ -216,7 +216,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --ruby-color-2: #d84838;
             --ruby-color-3: #f06858;
             --ruby-color-4: #ffa090;
-            --battery-color: #ff69b4;
+            --battery-color: #2d6b2d;
             --wrench-color: #708090;
             --idcard-color: #3090f0;
             --border-color: #4a4a6a;      /* Border color for UI elements */
@@ -494,10 +494,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 5);
         }
 
-        /* Stage 3 grate: S3-L2-P1 */
+        /* Stage 3 grates: S3-L2-P1, S3-L2-P2 */
         .grate-S3-L2-P1 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 12);
+        }
+        .grate-S3-L2-P2 {
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
+            left: calc(var(--pos-width) * 13);
         }
         .platform-S3-L4-P5-floating {
             position: absolute;
@@ -620,7 +624,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S2-L2-P1-pickup { top: 30px; left: 200px; }
         #valuable-S2-L3-P3-pickup { top: 30px; left: 220px; }
         #valuable-S2-L4-P4-pickup { top: 30px; left: 240px; }
-        #valuable-S3-L4-P3-pickup { top: 30px; left: 290px; }
+        #valuable-S3-L0-P6-pickup { top: 30px; left: 290px; }
+        #valuable-S3-L4-P3-pickup { top: 30px; left: 310px; }
         /* Debug positions - items (row 3) */
         #key-pickup { top: 50px; left: 30px; }
         #toolbox-unlock { top: 50px; left: 50px; }
@@ -740,6 +745,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --valuable-S2-L2-P1: 0;
             --valuable-S2-L3-P3: 0;
             --valuable-S2-L4-P4: 0;
+            --valuable-S3-L0-P6: 0;
             --valuable-S3-L4-P3: 0;
         }
         .valuable-counter .valuable-icon {
@@ -760,7 +766,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: translateY(calc(
                 (var(--valuable-S1-L0-P3) + var(--valuable-S1-L1-P4) + var(--valuable-S1-L3-P5) + var(--valuable-S1-L2-P1) + var(--valuable-S1-L4-P2) +
                  var(--valuable-S2-L0-P2) + var(--valuable-S2-L1-P5) + var(--valuable-S2-L2-P1) + var(--valuable-S2-L3-P3) + var(--valuable-S2-L4-P4) +
-                 var(--valuable-S3-L4-P3))
+                 var(--valuable-S3-L0-P6) + var(--valuable-S3-L4-P3))
                 * -24px
             ));
         }
@@ -782,7 +788,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S2-L2-P1-pickup:checked ~ .valuable-counter { --valuable-S2-L2-P1: 1; }
         #valuable-S2-L3-P3-pickup:checked ~ .valuable-counter { --valuable-S2-L3-P3: 2; }
         #valuable-S2-L4-P4-pickup:checked ~ .valuable-counter { --valuable-S2-L4-P4: 1; }
-        #valuable-S3-L4-P3-pickup:checked ~ .valuable-counter { --valuable-S3-L4-P3: 3; }
+        #valuable-S3-L0-P6-pickup:checked ~ .valuable-counter { --valuable-S3-L0-P6: 3; }
+        #valuable-S3-L4-P3-pickup:checked ~ .valuable-counter { --valuable-S3-L4-P3: 1; }
 
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
@@ -914,13 +921,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
 
-        /* Battery on stage 3, level 2, pos 1 */
+        /* Battery on stage 3, level 1, pos 2 */
         .battery-in-game {
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 12 - var(--item-offset));
+            bottom: calc(var(--platform-height) + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
             z-index: 200;
             pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
@@ -931,7 +938,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--battery-color);
         }
         /* Enable clicking battery only when player is next to it */
-        #level-2:checked ~ #stage-3-pos-1:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game {
+        #level-1:checked ~ #stage-3-pos-2:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: battery-pulse 1s ease-in-out infinite;
@@ -1065,7 +1072,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: 100;
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 2);
-            transition: left 0.3s ease, bottom 0.3s ease;
+            transition: left 0.3s ease-out, bottom 0.3s ease-in-out;
         }
         .player svg {
             height: 100%;
@@ -1370,6 +1377,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 16 + var(--ladder-offset));
         }
+        /* Ladder at S3-L1-P6: platform 1 to platform 2 (extended) */
+        .ladder-S3-L1-P6 {
+            bottom: calc(var(--platform-height) + var(--platform-thickness) - 14px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 + var(--ladder-offset));
+            height: calc(var(--platform-height) - var(--platform-thickness) + 28px);
+        }
 
         /* Barrel at S3-L4-P3 */
         .barrel-S3-L4-P3 {
@@ -1590,6 +1603,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 16 + 10px);
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
         }
+        .arrow-up-S3-L1-P6 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px);
+            bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px);
+        }
 
         /* Stage 3 phantom position arrows (at visual L4-P5) */
         .arrow-left-S3-Pφ {
@@ -1640,9 +1657,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
             bottom: calc(var(--platform-height) * 4);
         }
-        /* Stage 3 down arrow */
+        /* Stage 3 down arrows */
         .arrow-down-S3-L2-P1 {
             left: calc(var(--pos-offset) + var(--pos-width) * 12 + 10px);
+            bottom: calc(var(--platform-height) * 2);
+        }
+        .arrow-down-S3-L2-P2 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 13 + 10px);
             bottom: calc(var(--platform-height) * 2);
         }
 
@@ -1698,6 +1719,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ #stage-3-pos-5:checked ~ .game-world .arrow-S3-P5-P4 { display: none; }
         #level-4:checked ~ #stage-3-pos-5:checked ~ .game-world .arrow-S3-P5-P6 { display: none; }
         #level-4:checked ~ #stage-3-pos-6:checked ~ .game-world .arrow-S3-P6-P5 { display: none; }
+        /* Hide arrows at S3 platform ends */
+        #level-1:checked ~ #stage-3-pos-3:checked ~ .game-world .arrow-S3-P3-P4 { display: none; }
+        #level-2:checked ~ #stage-3-pos-2:checked ~ .game-world .arrow-S3-P2-P3 { display: none; }
+        #level-2:checked ~ #stage-3-pos-3:checked ~ .game-world .arrow-S3-P3-P2 { display: none; }
 
         /* Show up arrow at ladder locations */
         /* Ladder 1: level 0, position 5 */
@@ -1717,6 +1742,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #stage-2-pos-3:checked ~ .game-world .arrow-up-S2-L3-P3 { display: block; }
         /* Stage 3 up arrows */
         #level-0:checked ~ #stage-3-pos-4:checked ~ .game-world .arrow-up-S3-L0-P4 { display: block; }
+        #level-1:checked ~ #stage-3-pos-6:checked ~ .game-world .arrow-up-S3-L1-P6 { display: block; }
         #level-3:checked ~ #stage-3-pos-5:checked ~ .game-world .arrow-up-S3-L3-P5 { display: block; }
         /* Stage 3 phantom position arrows (fall left/right from floating platform) */
         #level-3:checked ~ #stage-3-pos-φ:checked ~ .game-world .arrow-left-S3-Pφ { display: block; }
@@ -1735,6 +1761,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ #stage-2-pos-1:checked ~ .game-world .arrow-down-S2-L4-P1 { display: block; }
         /* Stage 3 down arrow */
         #level-2:checked ~ #stage-3-pos-1:checked ~ .game-world .arrow-down-S3-L2-P1 { display: block; }
+        #level-2:checked ~ #stage-3-pos-2:checked ~ .game-world .arrow-down-S3-L2-P2 { display: block; }
 
         /* Fixed navigation panel - 3x3 grid */
         .nav-panel {
@@ -1881,6 +1908,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ #stage-3-pos-5:checked ~ .nav-panel .nav-left[for="stage-3-pos-4"] { display: none; }
         #level-4:checked ~ #stage-3-pos-5:checked ~ .nav-panel .nav-right[for="stage-3-pos-6"] { display: none; }
         #level-4:checked ~ #stage-3-pos-6:checked ~ .nav-panel .nav-left[for="stage-3-pos-5"] { display: none; }
+        /* Hide nav arrows at S3 platform ends */
+        #level-1:checked ~ #stage-3-pos-3:checked ~ .nav-panel .nav-right[for="stage-3-pos-4"] { display: none; }
+        #level-2:checked ~ #stage-3-pos-2:checked ~ .nav-panel .nav-right[for="stage-3-pos-3"] { display: none; }
+        #level-2:checked ~ #stage-3-pos-3:checked ~ .nav-panel .nav-left[for="stage-3-pos-2"] { display: none; }
 
         /* Show up arrow at ladder locations */
         #level-0:checked ~ #stage-1-pos-5:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
@@ -1897,6 +1928,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #stage-2-pos-3:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
         /* Stage 3 nav up */
         #level-0:checked ~ #stage-3-pos-4:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
+        #level-1:checked ~ #stage-3-pos-6:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
         #level-3:checked ~ #stage-3-pos-5:checked ~ .nav-panel .nav-up[for="stage-3-pos-φ"] { display: block; }
 
         /* Show down arrow at grate locations */
@@ -1913,6 +1945,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ #stage-2-pos-1:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
         /* Stage 3 nav down */
         #level-2:checked ~ #stage-3-pos-1:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
+        #level-2:checked ~ #stage-3-pos-2:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
 
         /* Valuables - animated elements that fly to counter when picked up */
         .valuable-in-game {
@@ -2000,6 +2033,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Stage 3 valuable positions */
+        .valuable-S3-L0-P6 {
+            bottom: var(--ground-height);
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset));
+        }
         .valuable-S3-L4-P3 {
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
@@ -2092,10 +2129,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        #level-4:checked ~ #stage-3-pos-3:checked ~ #valuable-S3-L4-P3-pickup:not(:checked) ~ .game-world .valuable-S3-L4-P3 .valuable-in-game {
+        #level-0:checked ~ #stage-3-pos-6:checked ~ #valuable-S3-L0-P6-pickup:not(:checked) ~ .game-world .valuable-S3-L0-P6 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: ruby-pulse 1s ease-in-out infinite;
+        }
+        #level-4:checked ~ #stage-3-pos-3:checked ~ #valuable-S3-L4-P3-pickup:not(:checked) ~ .game-world .valuable-S3-L4-P3 .valuable-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
         }
 
         /* Move Stage 1 valuables to counter when picked up */
@@ -2121,6 +2163,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Move Stage 3 valuables to counter when picked up (add viewport offset) */
+        #valuable-S3-L0-P6-pickup:checked ~ .game-world .valuable-S3-L0-P6,
         #valuable-S3-L4-P3-pickup:checked ~ .game-world .valuable-S3-L4-P3 {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
             left: calc(var(--pos-width) * 18 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
@@ -2572,6 +2615,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S2-L2-P1-pickup:not(:checked) ~ .game-world .valuable-S2-L2-P1 .hover-area:hover ~ .tooltip,
         #valuable-S2-L3-P3-pickup:not(:checked) ~ .game-world .valuable-S2-L3-P3 .hover-area:hover ~ .tooltip,
         #valuable-S2-L4-P4-pickup:not(:checked) ~ .game-world .valuable-S2-L4-P4 .hover-area:hover ~ .tooltip,
+        #valuable-S3-L0-P6-pickup:not(:checked) ~ .game-world .valuable-S3-L0-P6 .hover-area:hover ~ .tooltip,
         #valuable-S3-L4-P3-pickup:not(:checked) ~ .game-world .valuable-S3-L4-P3 .hover-area:hover ~ .tooltip {
             opacity: 1;
         }
@@ -2994,7 +3038,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="valuable-S2-L3-P3-pickup" class="valuable-checkbox" title="gem">
         <input type="checkbox" id="valuable-S2-L4-P4-pickup" class="valuable-checkbox" title="valuable">
         <!-- Stage 3 valuables -->
-        <input type="checkbox" id="valuable-S3-L4-P3-pickup" class="valuable-checkbox" title="ruby">
+        <input type="checkbox" id="valuable-S3-L0-P6-pickup" class="valuable-checkbox" title="ruby">
+        <input type="checkbox" id="valuable-S3-L4-P3-pickup" class="valuable-checkbox" title="coin">
 
         <div class="subtitle subtitle-S1">The Factory</div>
         <div class="subtitle subtitle-S2">The Jungle</div>
@@ -3193,9 +3238,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         <!-- Stage 3 Down arrow label: L2P1 -->
         <label for="level-1" class="arrow arrow-down arrow-down-S3-L2-P1"></label>
+        <label for="level-1" class="arrow arrow-down arrow-down-S3-L2-P2"></label>
 
         <!-- Stage 3 Up arrow labels -->
         <label for="level-1" class="arrow arrow-up arrow-up-S3-L0-P4"></label>
+        <label for="level-2" class="arrow arrow-up arrow-up-S3-L1-P6"></label>
         <label for="stage-3-pos-φ" class="arrow arrow-up arrow-up-S3-L3-P5"></label>
 
         <!-- Stage 3 Phantom position arrows (fall left/right) -->
@@ -3323,10 +3370,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="platform platform-S3-L4"></div>
         <!-- Grate (down) -->
         <div class="grate grate-S3-L2-P1"></div>
+        <div class="grate grate-S3-L2-P2"></div>
         <!-- Floating platform (phantom position) -->
         <div class="platform-S3-L4-P5-floating"></div>
         <!-- Ladders -->
         <div class="ladder ladder-S3-L0-P4"></div>
+        <div class="ladder ladder-S3-L1-P6"></div>
         <div class="ladder ladder-S3-L3-P5"></div>
 
         <!-- ==================== STAGE 1 VALUABLES ==================== -->
@@ -3376,10 +3425,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
 
         <!-- ==================== STAGE 3 VALUABLES ==================== -->
-        <div class="container ruby valuable-S3-L4-P3">
-            <label for="valuable-S3-L4-P3-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
+        <div class="container ruby valuable-S3-L0-P6">
+            <label for="valuable-S3-L0-P6-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
             <span class="hover-area"></span>
             <span class="tooltip">Ruby</span>
+        </div>
+        <div class="container coin valuable-S3-L4-P3">
+            <label for="valuable-S3-L4-P3-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="hover-area"></span>
         </div>
 
         </div><!-- end game-world -->
