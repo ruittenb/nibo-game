@@ -402,11 +402,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 12);
             width: calc(var(--pos-width) * 3);
         }
-        .platform-S3-L3 {
-            bottom: calc(var(--platform-height) * 3);
-            left: calc(var(--pos-width) * 12);
-            width: calc(var(--pos-width) * 2);
-        }
         .platform-S3-L4 {
             bottom: calc(var(--platform-height) * 4);
             left: calc(var(--pos-width) * 12);
@@ -415,7 +410,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         /* Stage 3 platforms are cyan */
         .platform-S3-L1,
-        .platform-S3-L3,
         .platform-S3-L4 {
             background: #2e8b8b;
             border-color: #1a5c5c;
@@ -495,13 +489,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Stage 3 grates: S3-L2-P1, S3-L2-P2 */
-        .grate-S3-L2-P1 {
+        .grate-S3-L2-P1-P2 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 12);
+            width: calc(var(--pos-width) * 2);
         }
-        .grate-S3-L2-P2 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
-            left: calc(var(--pos-width) * 13);
+        .grate-S3-L3-P1-P2 {
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 16px);
+            left: calc(var(--pos-width) * 12);
+            width: calc(var(--pos-width) * 2);
         }
         .platform-S3-L4-P5-floating {
             position: absolute;
@@ -3366,11 +3362,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="ground-S3"></div>
         <!-- Platforms -->
         <div class="platform platform-S3-L1"></div>
-        <div class="platform platform-S3-L3"></div>
+        <div class="grate grate-S3-L3-P1-P2"></div>
         <div class="platform platform-S3-L4"></div>
         <!-- Grate (down) -->
-        <div class="grate grate-S3-L2-P1"></div>
-        <div class="grate grate-S3-L2-P2"></div>
+        <div class="grate grate-S3-L2-P1-P2"></div>
         <!-- Floating platform (phantom position) -->
         <div class="platform-S3-L4-P5-floating"></div>
         <!-- Ladders -->
