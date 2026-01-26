@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+    <filter id="blur2" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="blur3" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="#0e0f23"/>
+  
+  <!-- Far background - large machinery silhouettes, very blurry -->
+  <g filter="url(#blur3)">
+    <!-- Giant tank/vat left -->
+    <path d="M-20,100 Q30,80 80,100 L80,450 Q30,480 -20,450 Z" fill="#1a1d35"/>
+    <ellipse cx="30" cy="100" rx="55" ry="25" fill="#1e2140"/>
+    
+    <!-- Massive machine center-back -->
+    <rect x="250" y="50" width="200" height="400" rx="10" fill="#181b30"/>
+    <rect x="270" y="80" width="160" height="100" rx="5" fill="#1a1d35"/>
+    <rect x="270" y="200" width="160" height="80" rx="5" fill="#1a1d35"/>
+    <circle cx="350" cy="130" r="35" fill="#1e2140"/>
+    <circle cx="350" cy="240" r="25" fill="#1e2140"/>
+    
+    <!-- Large tank right -->
+    <path d="M650,80 Q720,60 780,80 L780,500 Q720,530 650,500 Z" fill="#1a1d35"/>
+    <ellipse cx="715" cy="80" rx="70" ry="30" fill="#1e2140"/>
+  </g>
+  
+  <!-- Horizontal pipes - background layer -->
+  <g filter="url(#blur2)">
+    <!-- Upper pipe rack -->
+    <rect x="0" y="60" width="800" height="18" rx="9" fill="#1e2140"/>
+    <rect x="0" y="90" width="800" height="14" rx="7" fill="#1a1d35"/>
+    <rect x="0" y="115" width="800" height="20" rx="10" fill="#1c1f38"/>
+    
+    <!-- Mid pipe rack -->
+    <rect x="0" y="280" width="800" height="16" rx="8" fill="#1a1d35"/>
+    <rect x="0" y="305" width="800" height="22" rx="11" fill="#1e2140"/>
+    
+    <!-- Lower pipes -->
+    <rect x="0" y="480" width="800" height="20" rx="10" fill="#1c1f38"/>
+    <rect x="0" y="510" width="800" height="14" rx="7" fill="#1a1d35"/>
+  </g>
+  
+  <!-- Vertical pipes and columns -->
+  <g filter="url(#blur2)">
+    <rect x="50" y="0" width="25" height="600" rx="12" fill="#1a1d35"/>
+    <rect x="150" y="0" width="18" height="600" rx="9" fill="#1c1f38"/>
+    <rect x="320" y="0" width="30" height="600" rx="15" fill="#1a1d35"/>
+    <rect x="480" y="0" width="22" height="600" rx="11" fill="#1e2140"/>
+    <rect x="580" y="0" width="28" height="600" rx="14" fill="#1a1d35"/>
+    <rect x="720" y="0" width="20" height="600" rx="10" fill="#1c1f38"/>
+  </g>
+  
+  <!-- Mid-ground machines and instruments -->
+  <g filter="url(#blur)">
+    <!-- Control panel left -->
+    <rect x="80" y="180" width="90" height="140" rx="5" fill="#1c1f38"/>
+    <rect x="90" y="195" width="70" height="45" rx="3" fill="#1a1d35"/>
+    <circle cx="105" cy="270" r="12" fill="#1e2140"/>
+    <circle cx="135" cy="270" r="12" fill="#1e2140"/>
+    <rect x="90" y="290" width="30" height="15" rx="2" fill="#1e2140"/>
+    <rect x="125" y="290" width="30" height="15" rx="2" fill="#1e2140"/>
+    
+    <!-- Gauges and dials -->
+    <circle cx="200" cy="200" r="30" fill="#1a1d35"/>
+    <circle cx="200" cy="200" r="22" fill="#1e2140"/>
+    <circle cx="200" cy="380" r="25" fill="#1a1d35"/>
+    <circle cx="200" cy="380" r="18" fill="#1e2140"/>
+    
+    <!-- Machine with gears mid-left -->
+    <rect x="100" y="400" width="120" height="150" rx="8" fill="#1c1f38"/>
+    <circle cx="160" cy="450" r="35" fill="#1a1d35"/>
+    <circle cx="160" cy="450" r="25" fill="#1e2140"/>
+    <circle cx="160" cy="520" r="25" fill="#1a1d35"/>
+    
+    <!-- Pump/compressor center -->
+    <path d="M380,340 Q400,320 450,320 Q500,320 520,340 L520,450 Q500,470 450,470 Q400,470 380,450 Z" fill="#1c1f38"/>
+    <ellipse cx="450" cy="340" rx="70" ry="25" fill="#1e2140"/>
+    <circle cx="450" cy="400" r="30" fill="#1a1d35"/>
+    <rect x="420" y="450" width="60" height="80" rx="5" fill="#1a1d35"/>
+    
+    <!-- Cylindrical tank center-right -->
+    <rect x="540" y="150" width="80" height="200" rx="40" fill="#1a1d35"/>
+    <ellipse cx="580" cy="150" rx="40" ry="15" fill="#1e2140"/>
+    <ellipse cx="580" cy="350" rx="40" ry="15" fill="#1c1f38"/>
+    <rect x="555" y="200" width="50" height="8" fill="#1e2140"/>
+    <rect x="555" y="240" width="50" height="8" fill="#1e2140"/>
+    <rect x="555" y="280" width="50" height="8" fill="#1e2140"/>
+    
+    <!-- Control station right -->
+    <rect x="650" y="200" width="100" height="180" rx="5" fill="#1c1f38"/>
+    <rect x="660" y="215" width="80" height="50" rx="3" fill="#1a1d35"/>
+    <rect x="660" y="275" width="35" height="25" rx="2" fill="#1e2140"/>
+    <rect x="705" y="275" width="35" height="25" rx="2" fill="#1e2140"/>
+    <circle cx="680" cy="330" r="15" fill="#1e2140"/>
+    <circle cx="720" cy="330" r="15" fill="#1e2140"/>
+    <rect x="665" y="355" width="70" height="15" rx="3" fill="#1a1d35"/>
+    
+    <!-- Valves on pipes -->
+    <ellipse cx="120" cy="95" rx="15" ry="20" fill="#1e2140"/>
+    <ellipse cx="400" cy="70" rx="18" ry="22" fill="#1e2140"/>
+    <ellipse cx="600" cy="295" rx="16" ry="20" fill="#1e2140"/>
+    <ellipse cx="250" cy="490" rx="14" ry="18" fill="#1e2140"/>
+    
+    <!-- Diagonal pipes/conduits -->
+    <rect x="0" y="350" width="200" height="15" rx="7" transform="rotate(-15 100 357)" fill="#1a1d35"/>
+    <rect x="600" y="400" width="250" height="18" rx="9" transform="rotate(12 725 409)" fill="#1a1d35"/>
+    
+    <!-- Small machinery bottom -->
+    <rect x="280" y="520" width="70" height="80" rx="5" fill="#1c1f38"/>
+    <circle cx="315" cy="545" r="18" fill="#1e2140"/>
+    <rect x="290" y="570" width="50" height="20" rx="3" fill="#1a1d35"/>
+    
+    <!-- Electrical boxes -->
+    <rect x="750" y="420" width="50" height="70" rx="3" fill="#1c1f38"/>
+    <rect x="758" y="430" width="34" height="20" rx="2" fill="#1a1d35"/>
+    <rect x="758" y="458" width="34" height="20" rx="2" fill="#1a1d35"/>
+  </g>
+</svg>
