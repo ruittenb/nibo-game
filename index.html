@@ -216,7 +216,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --ruby-color-2: #d84838;
             --ruby-color-3: #f06858;
             --ruby-color-4: #ffa090;
-            --battery-color: #e04040;
+            --battery-color: #ff69b4;
             --wrench-color: #708090;
             --idcard-color: #3090f0;
             --border-color: #4a4a6a;      /* Border color for UI elements */
@@ -879,7 +879,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly axe to inventory when picked up */
         #axe-pickup:checked ~ .game-world .axe-in-game {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) * 2 - 8px - 4px);
+            left: calc(var(--pos-width) * 18 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) * 3 - 16px - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -909,7 +909,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly id card to inventory when picked up */
         #idcard-pickup:checked ~ .game-world .idcard-in-game {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) * 3 - 16px - 4px);
+            left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) * 2 - 8px - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -1369,6 +1369,34 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .ladder-S3-L3-P5 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 16 + var(--ladder-offset));
+        }
+
+        /* Barrel at S3-L4-P3 */
+        .barrel-S3-L4-P3 {
+            position: absolute;
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 4px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 14 + var(--ladder-offset) + 8px);
+            width: 32px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+        }
+        .barrel-S3-L4-P3 svg {
+            width: 100%;
+            height: 32px;
+            margin-bottom: -6px;
+            color: #9acd32;
+        }
+        .barrel-S3-L4-P3 svg:first-child {
+            margin-left: 4px;
+        }
+        .barrel-S3-L4-P3 .tooltip {
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .barrel-S3-L4-P3:hover .tooltip {
+            opacity: 1;
         }
 
         /* Vines for stage 2 */
@@ -2980,6 +3008,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="level-2" class="nav-btn nav-up"></label>
                 <label for="level-3" class="nav-btn nav-up"></label>
                 <label for="level-4" class="nav-btn nav-up"></label>
+                <label for="stage-3-pos-φ" class="nav-btn nav-up"></label>
             </div>
             <!-- Left cell -->
             <div class="nav-cell nav-cell-left">
@@ -3273,6 +3302,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="tooltip tree-tooltip-axe">Chop down the tree</span>
         </div>
         <label for="tree-chopped" class="axe-at-tree"><svg><use href="#axe"/></svg></label>
+
+        <!-- Barrel blocking exit -->
+        <div class="barrel-S3-L4-P3">
+            <svg><use href="#barrel"/></svg>
+            <svg><use href="#barrel"/></svg>
+            <span class="tooltip">Barrels</span>
+        </div>
 
         <!-- ==================== STAGE 3 LAYOUT ==================== -->
         <!-- Spaceship background -->
