@@ -346,7 +346,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Stage 2 Platforms (positions 7-12) */
-        /* Grates at: L1P7, L1P11, L2P8, L3P10, L4P7 */
+        /* Grates at: S2-L1-P7, S2-L1-P11, S2-L2-P8, S2-L3-P10, S2-L4-P7 */
         /* S2 Level 1: gaps at P7 and P11 → pieces at P8-P10, P12 */
         .platform-S2-L1-left {
             bottom: var(--platform-height);
@@ -480,33 +480,25 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0.4;
             z-index: -1;
         }
-
-        /* Platform 1 gap: position 1 */
-        .grate-S1-L1P1 {
+        .grate-S1-L1-P1 {
             bottom: calc(var(--platform-height) + var(--platform-thickness) - 16px);
             left: 0;
         }
-
-        /* Platform 2 gap: position 5 */
-        .grate-S1-L2P5 {
+        .grate-S1-L2-P5 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 4);
         }
-
-        /* Platform 3 gap: position 3 */
-        .grate-S1-L3P3 {
+        .grate-S1-L3-P3 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 2);
         }
-
-        /* Platform 4 gap: position 6 */
-        .grate-S1-L4P6 {
+        .grate-S1-L4-P6 {
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 5);
         }
 
-        /* Stage 3 grate: L2P13 */
-        .grate-S3-L2P13 {
+        /* Stage 3 grate: S3-L2-P13 */
+        .grate-S3-L2-P13 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 12);
         }
@@ -541,24 +533,24 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 25px -1px 0 #6b3e0a,
                 50px 1px 0 #5d3a1a;
         }
-        .branch-S2-L1P7 {
+        .branch-S2-L1-P7 {
             bottom: calc(var(--platform-height) + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 6 + 12px);
             width: calc(var(--pos-width) - 12px);
         }
-        .branch-S2-L1P11 {
+        .branch-S2-L1-P11 {
             bottom: calc(var(--platform-height) + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 10);
         }
-        .branch-S2-L2P8 {
+        .branch-S2-L2-P8 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 7);
         }
-        .branch-S2-L3P10 {
+        .branch-S2-L3-P10 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 9);
         }
-        .branch-S2-L4P7 {
+        .branch-S2-L4-P7 {
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 6 + 12px);
             width: calc(var(--pos-width) - 12px);
@@ -609,17 +601,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-17 { top: 10px; left: 370px; }
         #pos-18 { top: 10px; left: 390px; }
         /* Debug positions - valuables (row 2) */
-        #valuable-L0P3-pickup { top: 30px; left: 30px; }
-        #valuable-L1P4-pickup { top: 30px; left: 50px; }
-        #valuable-L3P5-pickup { top: 30px; left: 70px; }
-        #valuable-L2P1-pickup { top: 30px; left: 90px; }
-        #valuable-L4P2-pickup { top: 30px; left: 110px; }
-        #valuable-L0P8-pickup { top: 30px; left: 160px; }
-        #valuable-L1P11-pickup { top: 30px; left: 180px; }
-        #valuable-L2P7-pickup { top: 30px; left: 200px; }
-        #valuable-L3P9-pickup { top: 30px; left: 220px; }
-        #valuable-L4P10-pickup { top: 30px; left: 240px; }
-        #valuable-L4P15-pickup { top: 30px; left: 290px; }
+        #valuable-S1-L0-P3-pickup { top: 30px; left: 30px; }
+        #valuable-S1-L1-P4-pickup { top: 30px; left: 50px; }
+        #valuable-S1-L3-P5-pickup { top: 30px; left: 70px; }
+        #valuable-S1-L2-P1-pickup { top: 30px; left: 90px; }
+        #valuable-S1-L4-P2-pickup { top: 30px; left: 110px; }
+        #valuable-S2-L0-P8-pickup { top: 30px; left: 160px; }
+        #valuable-S2-L1-P11-pickup { top: 30px; left: 180px; }
+        #valuable-S2-L2-P7-pickup { top: 30px; left: 200px; }
+        #valuable-S2-L3-P9-pickup { top: 30px; left: 220px; }
+        #valuable-S2-L4-P10-pickup { top: 30px; left: 240px; }
+        #valuable-S3-L4-P15-pickup { top: 30px; left: 290px; }
         /* Debug positions - items (row 3) */
         #key-pickup { top: 50px; left: 30px; }
         #toolbox-unlock { top: 50px; left: 50px; }
@@ -719,17 +711,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             padding-left: var(--item-box-padding);
             overflow: hidden;
             /* Valuable variables (0 = not collected, 1 = collected, 2 for gems) */
-            --valuable-L0P3: 0;
-            --valuable-L1P4: 0;
-            --valuable-L3P5: 0;
-            --valuable-L2P1: 0;
-            --valuable-L4P2: 0;
-            --valuable-L0P8: 0;
-            --valuable-L1P11: 0;
-            --valuable-L2P7: 0;
-            --valuable-L3P9: 0;
-            --valuable-L4P10: 0;
-            --valuable-L4P15: 0;
+            --valuable-S1-L0-P3: 0;
+            --valuable-S1-L1-P4: 0;
+            --valuable-S1-L3-P5: 0;
+            --valuable-S1-L2-P1: 0;
+            --valuable-S1-L4-P2: 0;
+            --valuable-S2-L0-P8: 0;
+            --valuable-S2-L1-P11: 0;
+            --valuable-S2-L2-P7: 0;
+            --valuable-S2-L3-P9: 0;
+            --valuable-S2-L4-P10: 0;
+            --valuable-S3-L4-P15: 0;
         }
         .valuable-counter .valuable-icon {
             width: 24px;
@@ -747,9 +739,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             align-items: center;
             transition: transform 0.5s ease-out;
             transform: translateY(calc(
-                (var(--valuable-L0P3) + var(--valuable-L1P4) + var(--valuable-L3P5) + var(--valuable-L2P1) + var(--valuable-L4P2) +
-                 var(--valuable-L0P8) + var(--valuable-L1P11) + var(--valuable-L2P7) + var(--valuable-L3P9) + var(--valuable-L4P10) +
-                 var(--valuable-L4P15))
+                (var(--valuable-S1-L0-P3) + var(--valuable-S1-L1-P4) + var(--valuable-S1-L3-P5) + var(--valuable-S1-L2-P1) + var(--valuable-S1-L4-P2) +
+                 var(--valuable-S2-L0-P8) + var(--valuable-S2-L1-P11) + var(--valuable-S2-L2-P7) + var(--valuable-S2-L3-P9) + var(--valuable-S2-L4-P10) +
+                 var(--valuable-S3-L4-P15))
                 * -24px
             ));
         }
@@ -761,17 +753,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--gold-color);
         }
         /* Valuable collection: 0 = not collected, 1 for coins, 2 for aquamarine */
-        #valuable-L0P3-pickup:checked ~ .valuable-counter { --valuable-L0P3: 1; }
-        #valuable-L1P4-pickup:checked ~ .valuable-counter { --valuable-L1P4: 1; }
-        #valuable-L3P5-pickup:checked ~ .valuable-counter { --valuable-L3P5: 1; }
-        #valuable-L2P1-pickup:checked ~ .valuable-counter { --valuable-L2P1: 1; }
-        #valuable-L4P2-pickup:checked ~ .valuable-counter { --valuable-L4P2: 1; }
-        #valuable-L0P8-pickup:checked ~ .valuable-counter { --valuable-L0P8: 1; }
-        #valuable-L1P11-pickup:checked ~ .valuable-counter { --valuable-L1P11: 2; }
-        #valuable-L2P7-pickup:checked ~ .valuable-counter { --valuable-L2P7: 1; }
-        #valuable-L3P9-pickup:checked ~ .valuable-counter { --valuable-L3P9: 2; }
-        #valuable-L4P10-pickup:checked ~ .valuable-counter { --valuable-L4P10: 1; }
-        #valuable-L4P15-pickup:checked ~ .valuable-counter { --valuable-L4P15: 3; }
+        #valuable-S1-L0-P3-pickup:checked ~ .valuable-counter { --valuable-S1-L0-P3: 1; }
+        #valuable-S1-L1-P4-pickup:checked ~ .valuable-counter { --valuable-S1-L1-P4: 1; }
+        #valuable-S1-L3-P5-pickup:checked ~ .valuable-counter { --valuable-S1-L3-P5: 1; }
+        #valuable-S1-L2-P1-pickup:checked ~ .valuable-counter { --valuable-S1-L2-P1: 1; }
+        #valuable-S1-L4-P2-pickup:checked ~ .valuable-counter { --valuable-S1-L4-P2: 1; }
+        #valuable-S2-L0-P8-pickup:checked ~ .valuable-counter { --valuable-S2-L0-P8: 1; }
+        #valuable-S2-L1-P11-pickup:checked ~ .valuable-counter { --valuable-S2-L1-P11: 2; }
+        #valuable-S2-L2-P7-pickup:checked ~ .valuable-counter { --valuable-S2-L2-P7: 1; }
+        #valuable-S2-L3-P9-pickup:checked ~ .valuable-counter { --valuable-S2-L3-P9: 2; }
+        #valuable-S2-L4-P10-pickup:checked ~ .valuable-counter { --valuable-S2-L4-P10: 1; }
+        #valuable-S3-L4-P15-pickup:checked ~ .valuable-counter { --valuable-S3-L4-P15: 3; }
 
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
@@ -1326,26 +1318,26 @@ AAAAAAAAAAAAAAAAAAAAAA==
             );
         }
 
-        /* Ladder at L0P5: ground to platform 1 */
-        .ladder-S1-L0P5 {
+        /* Ladder at S1-L0-P5: ground to platform 1 */
+        .ladder-S1-L0-P5 {
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 4 + var(--ladder-offset));
         }
 
-        /* Ladder at L1P3: platform 1 to platform 2 */
-        .ladder-S1-L1P3 {
+        /* Ladder at S1-L1-P3: platform 1 to platform 2 */
+        .ladder-S1-L1-P3 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 2 + var(--ladder-offset));
         }
 
-        /* Ladder at L2P1: platform 2 to platform 3 */
-        .ladder-S1-L2P1 {
+        /* Ladder at S1-L2-P1: platform 2 to platform 3 */
+        .ladder-S1-L2-P1 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--ladder-offset));
         }
 
-        /* Ladder at L3P4: platform 3 to platform 4 */
-        .ladder-S1-L3P4 {
+        /* Ladder at S1-L3-P4: platform 3 to platform 4 */
+        .ladder-S1-L3-P4 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 3 + var(--ladder-offset));
         }
@@ -1381,27 +1373,27 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Stage 2 Vines */
-        .vine-S2-L0P8 {
+        .vine-S2-L0-P8 {
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 7 + var(--ladder-offset));
         }
-        .vine-S2-L0P11 {
+        .vine-S2-L0-P11 {
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 10 + var(--ladder-offset));
         }
-        .vine-S2-L1P7 {
+        .vine-S2-L1-P7 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + var(--ladder-offset));
         }
-        .vine-S2-L1P10 {
+        .vine-S2-L1-P10 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 9 + var(--ladder-offset));
         }
-        .vine-S2-L2P12 {
+        .vine-S2-L2-P12 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset));
         }
-        .vine-S2-L3P9 {
+        .vine-S2-L3-P9 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 8 + var(--ladder-offset));
         }
@@ -1481,97 +1473,93 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         /* Up arrow positions (at ladder locations) */
         /* Ladder 1: position 5, level 0 -> 1 */
-        .arrow-up-L0P5 {
+        .arrow-up-S1-L0-P5 {
             left: calc(var(--pos-offset) + var(--pos-width) * 4 + 10px);
             bottom: calc(var(--ground-height) + 72.5px);
         }
         /* Ladder 2: position 3, level 1 -> 2 */
-        .arrow-up-L1P3 {
+        .arrow-up-S1-L1-P3 {
             left: calc(var(--pos-offset) + var(--pos-width) * 2 + 10px);
             bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px);
         }
         /* Ladder 3: position 1, level 2 -> 3 */
-        .arrow-up-L2P1 {
+        .arrow-up-S1-L2-P1 {
             left: calc(var(--pos-offset) + 10px);
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 72.5px);
         }
         /* Ladder 4: position 4, level 3 -> 4 */
-        .arrow-up-L3P4 {
+        .arrow-up-S1-L3-P4 {
             left: calc(var(--pos-offset) + var(--pos-width) * 3 + 10px);
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
         }
 
-        /* Stage 2 Up arrows: L0P8, L0P11, L1P7, L2P12, L3P9 */
-        .arrow-up-L0P8 {
+        /* Stage 2 Up arrows: S2-L0-P8, S2-L0-P11, S2-L1-P7, S2-L2-P12, S2-L3-P9 */
+        .arrow-up-S2-L0-P8 {
             left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px);
             bottom: calc(var(--ground-height) + 72.5px);
         }
-        .arrow-up-L0P11 {
+        .arrow-up-S2-L0-P11 {
             left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
             bottom: calc(var(--ground-height) + 72.5px);
         }
-        .arrow-up-L1P7 {
+        .arrow-up-S2-L1-P7 {
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
             bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px);
         }
-        .arrow-up-L1P10 {
+        .arrow-up-S2-L1-P10 {
             left: calc(var(--pos-offset) + var(--pos-width) * 9 + 10px);
             bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px);
         }
-        .arrow-up-L2P12 {
+        .arrow-up-S1-L2-P12 {
             left: calc(var(--pos-offset) + var(--pos-width) * 11 + 10px);
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 72.5px);
         }
-        .arrow-up-L3P9 {
+        .arrow-up-S2-L3-P9 {
             left: calc(var(--pos-offset) + var(--pos-width) * 8 + 10px);
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
         }
 
         /* Down arrow positions (at platform gaps) */
-        /* Platform 1 gap: position 1, level 1 -> 0 */
-        .arrow-down-L1P1 {
+        .arrow-down-S1-L1-P1 {
             left: calc(var(--pos-offset) + 10px);
             bottom: var(--platform-height);
         }
-        /* Platform 2 gap: position 5, level 2 -> 1 */
-        .arrow-down-L2P5 {
+        .arrow-down-S1-L2-P5 {
             left: calc(var(--pos-offset) + var(--pos-width) * 4 + 10px);
             bottom: calc(var(--platform-height) * 2);
         }
-        /* Platform 3 gap: position 3, level 3 -> 2 */
-        .arrow-down-L3P3 {
+        .arrow-down-S1-L3-P3 {
             left: calc(var(--pos-offset) + var(--pos-width) * 2 + 10px);
             bottom: calc(var(--platform-height) * 3);
         }
-        /* Platform 4 gap: position 6, level 4 -> 3 */
-        .arrow-down-L4P6 {
+        .arrow-down-S1-L4-P6 {
             left: calc(var(--pos-offset) + var(--pos-width) * 5 + 10px);
             bottom: calc(var(--platform-height) * 4);
         }
 
-        /* Stage 2 Down arrows: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
-        .arrow-down-L1P7 {
+        /* Stage 2 Down arrows: S2-L1-P7, S2-L1-P12, S2-L2-P8, S2-L2-P11, S2-L3-P10, S2-L4-P7 */
+        .arrow-down-S2-L1-P7 {
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
             bottom: var(--platform-height);
         }
-        .arrow-down-L1P11 {
+        .arrow-down-S1-L1-P11 {
             left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
             bottom: var(--platform-height);
         }
-        .arrow-down-L2P8 {
+        .arrow-down-S2-L2-P8 {
             left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px);
             bottom: calc(var(--platform-height) * 2);
         }
-        .arrow-down-L3P10 {
+        .arrow-down-S2-L3-P10 {
             left: calc(var(--pos-offset) + var(--pos-width) * 9 + 10px);
             bottom: calc(var(--platform-height) * 3);
         }
-        .arrow-down-L4P7 {
+        .arrow-down-S2-L4-P7 {
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
             bottom: calc(var(--platform-height) * 4);
         }
         /* Stage 3 down arrow */
-        .arrow-down-L2P13 {
+        .arrow-down-S3-L2-P13 {
             left: calc(var(--pos-offset) + var(--pos-width) * 12 + 10px);
             bottom: calc(var(--platform-height) * 2);
         }
@@ -1614,38 +1602,34 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         /* Show up arrow at ladder locations */
         /* Ladder 1: level 0, position 5 */
-        #level-0:checked ~ #pos-5:checked ~ .game-world .arrow-up-L0P5 { display: block; }
+        #level-0:checked ~ #pos-5:checked ~ .game-world .arrow-up-S1-L0-P5 { display: block; }
         /* Ladder 2: level 1, position 3 */
-        #level-1:checked ~ #pos-3:checked ~ .game-world .arrow-up-L1P3 { display: block; }
+        #level-1:checked ~ #pos-3:checked ~ .game-world .arrow-up-S1-L1-P3 { display: block; }
         /* Ladder 3: level 2, position 1 */
-        #level-2:checked ~ #pos-1:checked ~ .game-world .arrow-up-L2P1 { display: block; }
+        #level-2:checked ~ #pos-1:checked ~ .game-world .arrow-up-S1-L2-P1 { display: block; }
         /* Ladder 4: level 3, position 4 */
-        #level-3:checked ~ #pos-4:checked ~ .game-world .arrow-up-L3P4 { display: block; }
-        /* Stage 2 up arrows: L0P8, L0P11, L1P7, L2P12, L3P9 */
-        #level-0:checked ~ #pos-8:checked ~ .game-world .arrow-up-L0P8 { display: block; }
-        #level-0:checked ~ #pos-11:checked ~ .game-world .arrow-up-L0P11 { display: block; }
-        #level-1:checked ~ #pos-7:checked ~ .game-world .arrow-up-L1P7 { display: block; }
-        #level-1:checked ~ #pos-10:checked ~ .game-world .arrow-up-L1P10 { display: block; }
-        #level-2:checked ~ #pos-12:checked ~ .game-world .arrow-up-L2P12 { display: block; }
-        #level-3:checked ~ #pos-9:checked ~ .game-world .arrow-up-L3P9 { display: block; }
+        #level-3:checked ~ #pos-4:checked ~ .game-world .arrow-up-S1-L3-P4 { display: block; }
+        /* Stage 2 up arrows: S2-L0-P8, S2-L0-P11, S2-L1-P7, S2-L2-P12, S2-L3-P9 */
+        #level-0:checked ~ #pos-8:checked ~ .game-world .arrow-up-S2-L0-P8 { display: block; }
+        #level-0:checked ~ #pos-11:checked ~ .game-world .arrow-up-S2-L0-P11 { display: block; }
+        #level-1:checked ~ #pos-7:checked ~ .game-world .arrow-up-S2-L1-P7 { display: block; }
+        #level-1:checked ~ #pos-10:checked ~ .game-world .arrow-up-S2-L1-P10 { display: block; }
+        #level-2:checked ~ #pos-12:checked ~ .game-world .arrow-up-S1-L2-P12 { display: block; }
+        #level-3:checked ~ #pos-9:checked ~ .game-world .arrow-up-S2-L3-P9 { display: block; }
 
         /* Show down arrow at platform gaps */
-        /* Platform 1 gap: level 1, position 1 */
-        #level-1:checked ~ #pos-1:checked ~ .game-world .arrow-down-L1P1 { display: block; }
-        /* Platform 2 gap: level 2, position 5 */
-        #level-2:checked ~ #pos-5:checked ~ .game-world .arrow-down-L2P5 { display: block; }
-        /* Platform 3 gap: level 3, position 3 */
-        #level-3:checked ~ #pos-3:checked ~ .game-world .arrow-down-L3P3 { display: block; }
-        /* Platform 4 gap: level 4, position 6 */
-        #level-4:checked ~ #pos-6:checked ~ .game-world .arrow-down-L4P6 { display: block; }
-        /* Stage 2 down arrows: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
-        #level-1:checked ~ #pos-7:checked ~ .game-world .arrow-down-L1P7 { display: block; }
-        #level-1:checked ~ #pos-11:checked ~ .game-world .arrow-down-L1P11 { display: block; }
-        #level-2:checked ~ #pos-8:checked ~ .game-world .arrow-down-L2P8 { display: block; }
-        #level-3:checked ~ #pos-10:checked ~ .game-world .arrow-down-L3P10 { display: block; }
-        #level-4:checked ~ #pos-7:checked ~ .game-world .arrow-down-L4P7 { display: block; }
+        #level-1:checked ~ #pos-1:checked ~ .game-world .arrow-down-S1-L1-P1 { display: block; }
+        #level-2:checked ~ #pos-5:checked ~ .game-world .arrow-down-S1-L2-P5 { display: block; }
+        #level-3:checked ~ #pos-3:checked ~ .game-world .arrow-down-S1-L3-P3 { display: block; }
+        #level-4:checked ~ #pos-6:checked ~ .game-world .arrow-down-S1-L4-P6 { display: block; }
+        /* Stage 2 down arrows: S2-L1-P7, S2-L1-P12, S2-L2-P8, S2-L2-P11, S2-L3-P10, S2-L4-P7 */
+        #level-1:checked ~ #pos-7:checked ~ .game-world .arrow-down-S2-L1-P7 { display: block; }
+        #level-1:checked ~ #pos-11:checked ~ .game-world .arrow-down-S1-L1-P11 { display: block; }
+        #level-2:checked ~ #pos-8:checked ~ .game-world .arrow-down-S2-L2-P8 { display: block; }
+        #level-3:checked ~ #pos-10:checked ~ .game-world .arrow-down-S2-L3-P10 { display: block; }
+        #level-4:checked ~ #pos-7:checked ~ .game-world .arrow-down-S2-L4-P7 { display: block; }
         /* Stage 3 down arrow */
-        #level-2:checked ~ #pos-13:checked ~ .game-world .arrow-down-L2P13 { display: block; }
+        #level-2:checked ~ #pos-13:checked ~ .game-world .arrow-down-S3-L2-P13 { display: block; }
 
         /* Fixed navigation panel - 3x3 grid */
         .nav-panel {
@@ -1779,7 +1763,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-2:checked ~ #pos-1:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
         #level-3:checked ~ #pos-4:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
         /* Stage 2 up arrows */
-        /* Stage 2 nav up: L0P8, L0P11, L1P7, L2P12, L3P9 */
+        /* Stage 2 nav up: S2-L0-P8, S2-L0-P11, S2-L1-P7, S2-L2-P12, S2-L3-P9 */
         #level-0:checked ~ #pos-8:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
         #level-0:checked ~ #pos-11:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
         #level-1:checked ~ #pos-7:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
@@ -1793,7 +1777,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #pos-3:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
         #level-4:checked ~ #pos-6:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
         /* Stage 2 down arrows */
-        /* Stage 2 nav down: L1P7, L1P11, L2P8, L3P10, L4P7 */
+        /* Stage 2 nav down: S2-L1-P7, S2-L1-P11, S2-L2-P8, S2-L3-P10, S2-L4-P7 */
         #level-1:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
         #level-1:checked ~ #pos-11:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
         #level-2:checked ~ #pos-8:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
@@ -1844,51 +1828,51 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Valuable positions - on platforms */
-        .valuable-L0P3 {
+        .valuable-S1-L0-P3 {
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 2 - var(--item-offset));
         }
-        .valuable-L1P4 {
+        .valuable-S1-L1-P4 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--item-offset));
         }
-        .valuable-L3P5 {
+        .valuable-S1-L3-P5 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--item-offset));
         }
-        .valuable-L2P1 {
+        .valuable-S1-L2-P1 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) - var(--item-offset));
         }
-        .valuable-L4P2 {
+        .valuable-S1-L4-P2 {
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset));
         }
 
         /* Stage 2 valuable positions */
-        .valuable-L0P8 {
+        .valuable-S2-L0-P8 {
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 7 - var(--item-offset));
         }
-        .valuable-L1P11 {
+        .valuable-S2-L1-P11 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 10 - var(--item-offset));
         }
-        .valuable-L2P7 {
+        .valuable-S2-L2-P7 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 6 - var(--item-offset));
         }
-        .valuable-L3P9 {
+        .valuable-S2-L3-P9 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
         }
-        .valuable-L4P10 {
+        .valuable-S2-L4-P10 {
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset));
         }
 
         /* Stage 3 valuable positions */
-        .valuable-L4P15 {
+        .valuable-S3-L4-P15 {
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
         }
@@ -1925,87 +1909,87 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Enable clicking and pulsing when player is adjacent */
-        #level-0:checked ~ #pos-3:checked ~ #valuable-L0P3-pickup:not(:checked) ~ .game-world .valuable-L0P3 .valuable-in-game {
+        #level-0:checked ~ #pos-3:checked ~ #valuable-S1-L0-P3-pickup:not(:checked) ~ .game-world .valuable-S1-L0-P3 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        #level-1:checked ~ #pos-4:checked ~ #valuable-L1P4-pickup:not(:checked) ~ .game-world .valuable-L1P4 .valuable-in-game {
+        #level-1:checked ~ #pos-4:checked ~ #valuable-S1-L1-P4-pickup:not(:checked) ~ .game-world .valuable-S1-L1-P4 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        #level-3:checked ~ #pos-5:checked ~ #valuable-L3P5-pickup:not(:checked) ~ .game-world .valuable-L3P5 .valuable-in-game {
+        #level-3:checked ~ #pos-5:checked ~ #valuable-S1-L3-P5-pickup:not(:checked) ~ .game-world .valuable-S1-L3-P5 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        #level-2:checked ~ #pos-1:checked ~ #valuable-L2P1-pickup:not(:checked) ~ .game-world .valuable-L2P1 .valuable-in-game {
+        #level-2:checked ~ #pos-1:checked ~ #valuable-S1-L2-P1-pickup:not(:checked) ~ .game-world .valuable-S1-L2-P1 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        #level-4:checked ~ #pos-2:checked ~ #valuable-L4P2-pickup:not(:checked) ~ .game-world .valuable-L4P2 .valuable-in-game {
+        #level-4:checked ~ #pos-2:checked ~ #valuable-S1-L4-P2-pickup:not(:checked) ~ .game-world .valuable-S1-L4-P2 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
         /* Stage 2 valuable pulse/click */
-        #level-0:checked ~ #pos-8:checked ~ #valuable-L0P8-pickup:not(:checked) ~ .game-world .valuable-L0P8 .valuable-in-game {
+        #level-0:checked ~ #pos-8:checked ~ #valuable-S2-L0-P8-pickup:not(:checked) ~ .game-world .valuable-S2-L0-P8 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        #level-1:checked ~ #pos-11:checked ~ #valuable-L1P11-pickup:not(:checked) ~ .game-world .valuable-L1P11 .valuable-in-game {
+        #level-1:checked ~ #pos-11:checked ~ #valuable-S2-L1-P11-pickup:not(:checked) ~ .game-world .valuable-S2-L1-P11 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: aquamarine-pulse 1s ease-in-out infinite;
         }
-        #level-2:checked ~ #pos-7:checked ~ #valuable-L2P7-pickup:not(:checked) ~ .game-world .valuable-L2P7 .valuable-in-game {
+        #level-2:checked ~ #pos-7:checked ~ #valuable-S2-L2-P7-pickup:not(:checked) ~ .game-world .valuable-S2-L2-P7 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        #level-3:checked ~ #pos-9:checked ~ #valuable-L3P9-pickup:not(:checked) ~ .game-world .valuable-L3P9 .valuable-in-game {
+        #level-3:checked ~ #pos-9:checked ~ #valuable-S2-L3-P9-pickup:not(:checked) ~ .game-world .valuable-S2-L3-P9 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: aquamarine-pulse 1s ease-in-out infinite;
         }
-        #level-4:checked ~ #pos-10:checked ~ #valuable-L4P10-pickup:not(:checked) ~ .game-world .valuable-L4P10 .valuable-in-game {
+        #level-4:checked ~ #pos-10:checked ~ #valuable-S2-L4-P10-pickup:not(:checked) ~ .game-world .valuable-S2-L4-P10 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        #level-4:checked ~ #pos-15:checked ~ #valuable-L4P15-pickup:not(:checked) ~ .game-world .valuable-L4P15 .valuable-in-game {
+        #level-4:checked ~ #pos-15:checked ~ #valuable-S3-L4-P15-pickup:not(:checked) ~ .game-world .valuable-S3-L4-P15 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: ruby-pulse 1s ease-in-out infinite;
         }
 
         /* Move Stage 1 valuables to counter when picked up */
-        #valuable-L0P3-pickup:checked ~ .game-world .valuable-L0P3,
-        #valuable-L1P4-pickup:checked ~ .game-world .valuable-L1P4,
-        #valuable-L3P5-pickup:checked ~ .game-world .valuable-L3P5,
-        #valuable-L2P1-pickup:checked ~ .game-world .valuable-L2P1,
-        #valuable-L4P2-pickup:checked ~ .game-world .valuable-L4P2 {
+        #valuable-S1-L0-P3-pickup:checked ~ .game-world .valuable-S1-L0-P3,
+        #valuable-S1-L1-P4-pickup:checked ~ .game-world .valuable-S1-L1-P4,
+        #valuable-S1-L3-P5-pickup:checked ~ .game-world .valuable-S1-L3-P5,
+        #valuable-S1-L2-P1-pickup:checked ~ .game-world .valuable-S1-L2-P1,
+        #valuable-S1-L4-P2-pickup:checked ~ .game-world .valuable-S1-L4-P2 {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
             left: calc(var(--pos-width) * 6 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Move Stage 2 valuables to counter when picked up (add viewport offset) */
-        #valuable-L0P8-pickup:checked ~ .game-world .valuable-L0P8,
-        #valuable-L1P11-pickup:checked ~ .game-world .valuable-L1P11,
-        #valuable-L2P7-pickup:checked ~ .game-world .valuable-L2P7,
-        #valuable-L3P9-pickup:checked ~ .game-world .valuable-L3P9,
-        #valuable-L4P10-pickup:checked ~ .game-world .valuable-L4P10 {
+        #valuable-S2-L0-P8-pickup:checked ~ .game-world .valuable-S2-L0-P8,
+        #valuable-S2-L1-P11-pickup:checked ~ .game-world .valuable-S2-L1-P11,
+        #valuable-S2-L2-P7-pickup:checked ~ .game-world .valuable-S2-L2-P7,
+        #valuable-S2-L3-P9-pickup:checked ~ .game-world .valuable-S2-L3-P9,
+        #valuable-S2-L4-P10-pickup:checked ~ .game-world .valuable-S2-L4-P10 {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
             left: calc(var(--pos-width) * 12 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Move Stage 3 valuables to counter when picked up (add viewport offset) */
-        #valuable-L4P15-pickup:checked ~ .game-world .valuable-L4P15 {
+        #valuable-S3-L4-P15-pickup:checked ~ .game-world .valuable-S3-L4-P15 {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
             left: calc(var(--pos-width) * 18 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
             opacity: 0;
@@ -2026,7 +2010,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             border-radius: 6px;
             z-index: var(--z-items);
         }
-        .skull-L1P6 {
+        .skull-S1-L1-P6 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
         }
@@ -2060,11 +2044,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             border-radius: 6px;
             z-index: var(--z-items);
         }
-        .bacteria-L0P10 {
+        .bacteria-S2-L0-P10 {
             bottom: calc(var(--ground-height) + 2px);
             left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset));
         }
-        .bacteria-L1P9 {
+        .bacteria-S2-L1-P9 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
         }
@@ -2170,7 +2154,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 58px;
             z-index: var(--z-door);
         }
-        .door-container.door-L0P6 {
+        .door-container.door-S1-L0-P6 {
             bottom: calc(var(--ground-height) + 2px);
             left: calc(var(--pos-width) * 6 - 42px);
         }
@@ -2226,7 +2210,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: 16;
             pointer-events: none;
         }
-        .door-exit-L0P6 {
+        .door-exit-S1-L0-P6 {
             bottom: calc(var(--ground-height) + 2px);
             left: calc(var(--pos-width) * 6 - 42px);
         }
@@ -2407,29 +2391,29 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: 1;
         }
         /* Hide hover area when player is at valuable location (so pickup works) */
-        #level-0:checked ~ #pos-3:checked ~ .game-world .valuable-L0P3 .hover-area,
-        #level-1:checked ~ #pos-4:checked ~ .game-world .valuable-L1P4 .hover-area,
-        #level-3:checked ~ #pos-5:checked ~ .game-world .valuable-L3P5 .hover-area,
-        #level-2:checked ~ #pos-1:checked ~ .game-world .valuable-L2P1 .hover-area,
-        #level-4:checked ~ #pos-2:checked ~ .game-world .valuable-L4P2 .hover-area,
-        #level-0:checked ~ #pos-8:checked ~ .game-world .valuable-L0P8 .hover-area,
-        #level-1:checked ~ #pos-11:checked ~ .game-world .valuable-L1P11 .hover-area,
-        #level-2:checked ~ #pos-7:checked ~ .game-world .valuable-L2P7 .hover-area,
-        #level-3:checked ~ #pos-9:checked ~ .game-world .valuable-L3P9 .hover-area,
-        #level-4:checked ~ #pos-10:checked ~ .game-world .valuable-L4P10 .hover-area {
+        #level-0:checked ~ #pos-3:checked ~ .game-world .valuable-S1-L0-P3 .hover-area,
+        #level-1:checked ~ #pos-4:checked ~ .game-world .valuable-S1-L1-P4 .hover-area,
+        #level-3:checked ~ #pos-5:checked ~ .game-world .valuable-S1-L3-P5 .hover-area,
+        #level-2:checked ~ #pos-1:checked ~ .game-world .valuable-S1-L2-P1 .hover-area,
+        #level-4:checked ~ #pos-2:checked ~ .game-world .valuable-S1-L4-P2 .hover-area,
+        #level-0:checked ~ #pos-8:checked ~ .game-world .valuable-S2-L0-P8 .hover-area,
+        #level-1:checked ~ #pos-11:checked ~ .game-world .valuable-S2-L1-P11 .hover-area,
+        #level-2:checked ~ #pos-7:checked ~ .game-world .valuable-S2-L2-P7 .hover-area,
+        #level-3:checked ~ #pos-9:checked ~ .game-world .valuable-S2-L3-P9 .hover-area,
+        #level-4:checked ~ #pos-10:checked ~ .game-world .valuable-S2-L4-P10 .hover-area {
             display: none;
         }
         /* Show tooltip on hover */
-        #valuable-L0P3-pickup:not(:checked) ~ .game-world .valuable-L0P3 .hover-area:hover ~ .tooltip,
-        #valuable-L1P4-pickup:not(:checked) ~ .game-world .valuable-L1P4 .hover-area:hover ~ .tooltip,
-        #valuable-L3P5-pickup:not(:checked) ~ .game-world .valuable-L3P5 .hover-area:hover ~ .tooltip,
-        #valuable-L2P1-pickup:not(:checked) ~ .game-world .valuable-L2P1 .hover-area:hover ~ .tooltip,
-        #valuable-L4P2-pickup:not(:checked) ~ .game-world .valuable-L4P2 .hover-area:hover ~ .tooltip,
-        #valuable-L0P8-pickup:not(:checked) ~ .game-world .valuable-L0P8 .hover-area:hover ~ .tooltip,
-        #valuable-L1P11-pickup:not(:checked) ~ .game-world .valuable-L1P11 .hover-area:hover ~ .tooltip,
-        #valuable-L2P7-pickup:not(:checked) ~ .game-world .valuable-L2P7 .hover-area:hover ~ .tooltip,
-        #valuable-L3P9-pickup:not(:checked) ~ .game-world .valuable-L3P9 .hover-area:hover ~ .tooltip,
-        #valuable-L4P10-pickup:not(:checked) ~ .game-world .valuable-L4P10 .hover-area:hover ~ .tooltip {
+        #valuable-S1-L0-P3-pickup:not(:checked) ~ .game-world .valuable-S1-L0-P3 .hover-area:hover ~ .tooltip,
+        #valuable-S1-L1-P4-pickup:not(:checked) ~ .game-world .valuable-S1-L1-P4 .hover-area:hover ~ .tooltip,
+        #valuable-S1-L3-P5-pickup:not(:checked) ~ .game-world .valuable-S1-L3-P5 .hover-area:hover ~ .tooltip,
+        #valuable-S1-L2-P1-pickup:not(:checked) ~ .game-world .valuable-S1-L2-P1 .hover-area:hover ~ .tooltip,
+        #valuable-S1-L4-P2-pickup:not(:checked) ~ .game-world .valuable-S1-L4-P2 .hover-area:hover ~ .tooltip,
+        #valuable-S2-L0-P8-pickup:not(:checked) ~ .game-world .valuable-S2-L0-P8 .hover-area:hover ~ .tooltip,
+        #valuable-S2-L1-P11-pickup:not(:checked) ~ .game-world .valuable-S2-L1-P11 .hover-area:hover ~ .tooltip,
+        #valuable-S2-L2-P7-pickup:not(:checked) ~ .game-world .valuable-S2-L2-P7 .hover-area:hover ~ .tooltip,
+        #valuable-S2-L3-P9-pickup:not(:checked) ~ .game-world .valuable-S2-L3-P9 .hover-area:hover ~ .tooltip,
+        #valuable-S2-L4-P10-pickup:not(:checked) ~ .game-world .valuable-S2-L4-P10 .hover-area:hover ~ .tooltip {
             opacity: 1;
         }
     </style>
@@ -2826,19 +2810,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="door-unlocked" class="door-checkbox" title="door">
 
         <!-- Valuable pickup checkboxes -->
-        <input type="checkbox" id="valuable-L0P3-pickup" class="valuable-checkbox" title="valuable">
-        <input type="checkbox" id="valuable-L1P4-pickup" class="valuable-checkbox" title="valuable">
-        <input type="checkbox" id="valuable-L3P5-pickup" class="valuable-checkbox" title="valuable">
-        <input type="checkbox" id="valuable-L2P1-pickup" class="valuable-checkbox" title="valuable">
-        <input type="checkbox" id="valuable-L4P2-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-S1-L0-P3-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-S1-L1-P4-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-S1-L3-P5-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-S1-L2-P1-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-S1-L4-P2-pickup" class="valuable-checkbox" title="valuable">
         <!-- Stage 2 valuable pickup checkboxes -->
-        <input type="checkbox" id="valuable-L0P8-pickup" class="valuable-checkbox" title="valuable">
-        <input type="checkbox" id="valuable-L1P11-pickup" class="valuable-checkbox" title="gem">
-        <input type="checkbox" id="valuable-L2P7-pickup" class="valuable-checkbox" title="valuable">
-        <input type="checkbox" id="valuable-L3P9-pickup" class="valuable-checkbox" title="gem">
-        <input type="checkbox" id="valuable-L4P10-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-S2-L0-P8-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-S2-L1-P11-pickup" class="valuable-checkbox" title="gem">
+        <input type="checkbox" id="valuable-S2-L2-P7-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-S2-L3-P9-pickup" class="valuable-checkbox" title="gem">
+        <input type="checkbox" id="valuable-S2-L4-P10-pickup" class="valuable-checkbox" title="valuable">
         <!-- Stage 3 valuables -->
-        <input type="checkbox" id="valuable-L4P15-pickup" class="valuable-checkbox" title="ruby">
+        <input type="checkbox" id="valuable-S3-L4-P15-pickup" class="valuable-checkbox" title="ruby">
 
         <div class="subtitle subtitle-S1">The Factory</div>
         <div class="subtitle subtitle-S2">The Jungle</div>
@@ -2981,34 +2965,34 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="pos-12" class="arrow arrow-left arrow-h arrow-P13-P12"></label>
 
         <!-- Up arrow labels (at ladder positions) -->
-        <label for="level-1" class="arrow arrow-up arrow-up-L0P5"></label>
-        <label for="level-2" class="arrow arrow-up arrow-up-L1P3"></label>
-        <label for="level-3" class="arrow arrow-up arrow-up-L2P1"></label>
-        <label for="level-4" class="arrow arrow-up arrow-up-L3P4"></label>
+        <label for="level-1" class="arrow arrow-up arrow-up-S1-L0-P5"></label>
+        <label for="level-2" class="arrow arrow-up arrow-up-S1-L1-P3"></label>
+        <label for="level-3" class="arrow arrow-up arrow-up-S1-L2-P1"></label>
+        <label for="level-4" class="arrow arrow-up arrow-up-S1-L3-P4"></label>
 
         <!-- Down arrow labels (at platform gaps) -->
-        <label for="level-0" class="arrow arrow-down arrow-down-L1P1"></label>
-        <label for="level-1" class="arrow arrow-down arrow-down-L2P5"></label>
-        <label for="level-3" class="arrow arrow-down arrow-down-L4P6"></label>
-        <label for="level-2" class="arrow arrow-down arrow-down-L3P3"></label>
+        <label for="level-0" class="arrow arrow-down arrow-down-S1-L1-P1"></label>
+        <label for="level-1" class="arrow arrow-down arrow-down-S1-L2-P5"></label>
+        <label for="level-3" class="arrow arrow-down arrow-down-S1-L4-P6"></label>
+        <label for="level-2" class="arrow arrow-down arrow-down-S1-L3-P3"></label>
 
         <!-- Stage 2 Up arrow labels: L0P8, L0P11, L1P7, L1P10, L2P12, L3P9 -->
-        <label for="level-1" class="arrow arrow-up arrow-up-L0P8"></label>
-        <label for="level-1" class="arrow arrow-up arrow-up-L0P11"></label>
-        <label for="level-2" class="arrow arrow-up arrow-up-L1P7"></label>
-        <label for="level-2" class="arrow arrow-up arrow-up-L1P10"></label>
-        <label for="level-3" class="arrow arrow-up arrow-up-L2P12"></label>
-        <label for="level-4" class="arrow arrow-up arrow-up-L3P9"></label>
+        <label for="level-1" class="arrow arrow-up arrow-up-S2-L0-P8"></label>
+        <label for="level-1" class="arrow arrow-up arrow-up-S2-L0-P11"></label>
+        <label for="level-2" class="arrow arrow-up arrow-up-S2-L1-P7"></label>
+        <label for="level-2" class="arrow arrow-up arrow-up-S2-L1-P10"></label>
+        <label for="level-3" class="arrow arrow-up arrow-up-S1-L2-P12"></label>
+        <label for="level-4" class="arrow arrow-up arrow-up-S2-L3-P9"></label>
 
         <!-- Stage 2 Down arrow labels: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 -->
-        <label for="level-0" class="arrow arrow-down arrow-down-L1P7"></label>
-        <label for="level-0" class="arrow arrow-down arrow-down-L1P11"></label>
-        <label for="level-1" class="arrow arrow-down arrow-down-L2P8"></label>
-        <label for="level-2" class="arrow arrow-down arrow-down-L3P10"></label>
-        <label for="level-3" class="arrow arrow-down arrow-down-L4P7"></label>
+        <label for="level-0" class="arrow arrow-down arrow-down-S2-L1-P7"></label>
+        <label for="level-0" class="arrow arrow-down arrow-down-S1-L1-P11"></label>
+        <label for="level-1" class="arrow arrow-down arrow-down-S2-L2-P8"></label>
+        <label for="level-2" class="arrow arrow-down arrow-down-S2-L3-P10"></label>
+        <label for="level-3" class="arrow arrow-down arrow-down-S2-L4-P7"></label>
 
         <!-- Stage 3 Down arrow label: L2P13 -->
-        <label for="level-1" class="arrow arrow-down arrow-down-L2P13"></label>
+        <label for="level-1" class="arrow arrow-down arrow-down-S3-L2-P13"></label>
 
         <!-- Player character -->
         <div class="player">
@@ -3034,17 +3018,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="platform platform-S1-L3-right"></div>
         <div class="platform platform-S1-L4"></div>
         <!-- Ladders (up) -->
-        <div class="ladder ladder-S1-L0P5"></div>
-        <div class="ladder ladder-S1-L1P3"></div>
-        <div class="ladder ladder-S1-L2P1"></div>
-        <div class="ladder ladder-S1-L3P4"></div>
+        <div class="ladder ladder-S1-L0-P5"></div>
+        <div class="ladder ladder-S1-L1-P3"></div>
+        <div class="ladder ladder-S1-L2-P1"></div>
+        <div class="ladder ladder-S1-L3-P4"></div>
         <!-- Grates (down) -->
-        <div class="grate grate-S1-L1P1"></div>
-        <div class="grate grate-S1-L2P5"></div>
-        <div class="grate grate-S1-L3P3"></div>
-        <div class="grate grate-S1-L4P6"></div>
+        <div class="grate grate-S1-L1-P1"></div>
+        <div class="grate grate-S1-L2-P5"></div>
+        <div class="grate grate-S1-L3-P3"></div>
+        <div class="grate grate-S1-L4-P6"></div>
         <!-- Door -->
-        <div class="door-container door-L0P6">
+        <div class="door-container door-S1-L0-P6">
             <label for="door-unlocked" class="door">
                 <svg class="door-closed" preserveAspectRatio="none"><use href="#door-closed"/></svg>
                 <svg class="door-open" preserveAspectRatio="none"><use href="#door-open"/></svg>
@@ -3053,9 +3037,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="tooltip door-tooltip">The door handle is broken.<br>You need a wrench.</span>
             <span class="tooltip door-tooltip-wrench">Repair the door handle.</span>
         </div>
-        <label for="pos-7" class="door-exit door-exit-L0P6"></label>
+        <label for="pos-7" class="door-exit door-exit-S1-L0-P6"></label>
         <!-- Skull hazard -->
-        <div class="skull skull-L1P6">
+        <div class="skull skull-S1-L1-P6">
             <span class="tooltip skull-tooltip">Poison</span>
             <svg><use href="#skull"/></svg>
         </div>
@@ -3078,24 +3062,24 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="platform platform-S2-L3-right"></div>
         <div class="platform platform-S2-L4"></div>
         <!-- Vines (up) -->
-        <div class="vine vine-S2-L0P8"></div>
-        <div class="vine vine-S2-L0P11"></div>
-        <div class="vine vine-S2-L1P7"></div>
-        <div class="vine vine-S2-L1P10"></div>
-        <div class="vine vine-S2-L2P12"></div>
-        <div class="vine vine-S2-L3P9"></div>
+        <div class="vine vine-S2-L0-P8"></div>
+        <div class="vine vine-S2-L0-P11"></div>
+        <div class="vine vine-S2-L1-P7"></div>
+        <div class="vine vine-S2-L1-P10"></div>
+        <div class="vine vine-S2-L2-P12"></div>
+        <div class="vine vine-S2-L3-P9"></div>
         <!-- Branches (down) -->
-        <div class="branch branch-S2-L1P7"></div>
-        <div class="branch branch-S2-L1P11"></div>
-        <div class="branch branch-S2-L2P8"></div>
-        <div class="branch branch-S2-L3P10"></div>
-        <div class="branch branch-S2-L4P7"></div>
+        <div class="branch branch-S2-L1-P7"></div>
+        <div class="branch branch-S2-L1-P11"></div>
+        <div class="branch branch-S2-L2-P8"></div>
+        <div class="branch branch-S2-L3-P10"></div>
+        <div class="branch branch-S2-L4-P7"></div>
         <!-- Bacteria hazards -->
-        <div class="bacteria bacteria-L0P10">
+        <div class="bacteria bacteria-S2-L0-P10">
             <span class="tooltip bacteria-tooltip">Disease</span>
             <svg><use href="#bacteria"/></svg>
         </div>
-        <div class="bacteria bacteria-L1P9">
+        <div class="bacteria bacteria-S2-L1-P9">
             <span class="tooltip bacteria-tooltip">Disease</span>
             <svg><use href="#bacteria"/></svg>
         </div>
@@ -3124,57 +3108,57 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="platform platform-S3-L3"></div>
         <div class="platform platform-S3-L4"></div>
         <!-- Grate (down) -->
-        <div class="grate grate-S3-L2P13"></div>
+        <div class="grate grate-S3-L2-P13"></div>
 
         <!-- ==================== STAGE 1 VALUABLES ==================== -->
-        <div class="container coin valuable-L0P3">
-            <label for="valuable-L0P3-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+        <div class="container coin valuable-S1-L0-P3">
+            <label for="valuable-S1-L0-P3-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
         </div>
-        <div class="container coin valuable-L1P4">
-            <label for="valuable-L1P4-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+        <div class="container coin valuable-S1-L1-P4">
+            <label for="valuable-S1-L1-P4-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
         </div>
-        <div class="container coin valuable-L3P5">
-            <label for="valuable-L3P5-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+        <div class="container coin valuable-S1-L3-P5">
+            <label for="valuable-S1-L3-P5-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
         </div>
-        <div class="container coin valuable-L2P1">
-            <label for="valuable-L2P1-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+        <div class="container coin valuable-S1-L2-P1">
+            <label for="valuable-S1-L2-P1-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
         </div>
-        <div class="container coin valuable-L4P2">
-            <label for="valuable-L4P2-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+        <div class="container coin valuable-S1-L4-P2">
+            <label for="valuable-S1-L4-P2-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
         </div>
 
         <!-- ==================== STAGE 2 VALUABLES ==================== -->
-        <div class="container coin valuable-L0P8">
-            <label for="valuable-L0P8-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+        <div class="container coin valuable-S2-L0-P8">
+            <label for="valuable-S2-L0-P8-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
         </div>
-        <div class="container aquamarine valuable-L1P11">
-            <label for="valuable-L1P11-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
-            <span class="hover-area"></span>
-            <span class="tooltip">Aquamarine</span>
-        </div>
-        <div class="container coin valuable-L2P7">
-            <label for="valuable-L2P7-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-            <span class="hover-area"></span>
-        </div>
-        <div class="container aquamarine valuable-L3P9">
-            <label for="valuable-L3P9-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
+        <div class="container aquamarine valuable-S2-L1-P11">
+            <label for="valuable-S2-L1-P11-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
             <span class="hover-area"></span>
             <span class="tooltip">Aquamarine</span>
         </div>
-        <div class="container coin valuable-L4P10">
-            <label for="valuable-L4P10-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+        <div class="container coin valuable-S2-L2-P7">
+            <label for="valuable-S2-L2-P7-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="hover-area"></span>
+        </div>
+        <div class="container aquamarine valuable-S2-L3-P9">
+            <label for="valuable-S2-L3-P9-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Aquamarine</span>
+        </div>
+        <div class="container coin valuable-S2-L4-P10">
+            <label for="valuable-S2-L4-P10-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
         </div>
 
         <!-- ==================== STAGE 3 VALUABLES ==================== -->
-        <div class="container ruby valuable-L4P15">
-            <label for="valuable-L4P15-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
+        <div class="container ruby valuable-S3-L4-P15">
+            <label for="valuable-S3-L4-P15-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
             <span class="hover-area"></span>
             <span class="tooltip">Ruby</span>
         </div>
