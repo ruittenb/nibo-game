@@ -871,7 +871,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: var(--pickup-size);
             height: var(--pickup-size);
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 12 - var(--item-offset));
             z-index: 200;
             pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
@@ -881,8 +881,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
             color: var(--battery-color);
         }
-        /* Enable clicking battery only when player is at level 2, position 14 */
-        #level-2:checked ~ #pos-14:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game {
+        /* Enable clicking battery only when player is at level 2, position 13 */
+        #level-2:checked ~ #pos-13:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: battery-pulse 1s ease-in-out infinite;
@@ -1157,7 +1157,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             right: calc(var(--pos-width) * 18);
             left: calc(var(--pos-width) * 18 - 12px);
             width: 12px;
-            bottom: calc(var(--ground-height) + 60px);
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             top: 110px;
             background: repeating-linear-gradient(
                 -10deg,
