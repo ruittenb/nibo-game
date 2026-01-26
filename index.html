@@ -218,6 +218,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --ruby-color-4: #ffa090;
             --battery-color: #e04040;
             --wrench-color: #708090;
+            --idcard-color: #3090f0;
             --border-color: #4a4a6a;      /* Border color for UI elements */
 
             /* Z-index layers */
@@ -575,7 +576,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
         /* Hide radio buttons and checkboxes by default */
-        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .battery-checkbox, .tree-checkbox, .escaped-checkbox, .valuable-checkbox, .door-checkbox {
+        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .battery-checkbox, .idcard-checkbox, .tree-checkbox, .escaped-checkbox, .valuable-checkbox, .door-checkbox {
             display: none;
             /* When unhidden for debugging: */
             z-index: 9999;
@@ -626,8 +627,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #wrench-pickup { top: 50px; left: 70px; }
         #door-unlocked { top: 50px; left: 90px; }
         #axe-pickup { top: 50px; left: 160px; }
-        #tree-chopped { top: 50px; left: 180px; }
-        #escaped { top: 50px; left: 200px; }
+        #idcard-pickup { top: 50px; left: 180px; }
+        #tree-chopped { top: 50px; left: 200px; }
+        #escaped { top: 50px; left: 220px; }
         #battery-pickup { top: 50px; left: 290px; }
         /* Show inputs when debug is checked */
         #debug-toggle:checked ~ .game-container .position-radio,
@@ -636,6 +638,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ .game-container .toolbox-checkbox,
         #debug-toggle:checked ~ .game-container .wrench-checkbox,
         #debug-toggle:checked ~ .game-container .axe-checkbox,
+        #debug-toggle:checked ~ .game-container .idcard-checkbox,
         #debug-toggle:checked ~ .game-container .battery-checkbox,
         #debug-toggle:checked ~ .game-container .tree-checkbox,
         #debug-toggle:checked ~ .game-container .escaped-checkbox,
@@ -666,6 +669,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-key,
         .inventory-wrench,
         .inventory-axe,
+        .inventory-idcard,
         .inventory-battery {
             width: var(--pickup-size);
             height: var(--pickup-size);
@@ -678,6 +682,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-key svg,
         .inventory-wrench svg,
         .inventory-axe svg,
+        .inventory-idcard svg,
         .inventory-battery svg {
             width: 24px;
             height: 24px;
@@ -685,11 +690,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-key svg { color: var(--gold-color); }
         .inventory-wrench svg { color: var(--wrench-color); }
         .inventory-axe svg { color: var(--wrench-color); }
+        .inventory-idcard svg { color: var(--idcard-color); }
         .inventory-battery svg { color: var(--battery-color); }
         /* Show inventory items when picked up (delayed until flying animation completes) */
         #key-pickup:checked ~ .inventory .inventory-key,
         #wrench-pickup:checked ~ .inventory .inventory-wrench,
         #axe-pickup:checked ~ .inventory .inventory-axe,
+        #idcard-pickup:checked ~ .inventory .inventory-idcard,
         #battery-pickup:checked ~ .inventory .inventory-battery {
             opacity: 1;
             visibility: visible;
@@ -848,8 +855,37 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
 
-        /* Axe on stage 2, level 4, pos 6 */
+        /* Axe on stage 3, level 4, pos φ (floating platform) */
         .axe-in-game {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
+            z-index: 200;
+            pointer-events: none;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+        }
+        .axe-in-game svg {
+            width: 100%;
+            height: 100%;
+        }
+        /* Enable clicking axe only when player is at phantom position */
+        #level-3:checked ~ #stage-3-pos-φ:checked ~ #axe-pickup:not(:checked) ~ .game-world .axe-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
+        }
+        /* Fly axe to inventory when picked up */
+        #axe-pickup:checked ~ .game-world .axe-in-game {
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) * 2 - 8px - 4px);
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
+        }
+
+        /* ID card on stage 2, level 4, pos 6 */
+        .idcard-in-game {
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
@@ -859,20 +895,21 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
         }
-        .axe-in-game svg {
+        .idcard-in-game svg {
             width: 100%;
             height: 100%;
+            color: var(--idcard-color);
         }
-        /* Enable clicking axe only when player is next to it */
-        #level-4:checked ~ #stage-2-pos-6:checked ~ #axe-pickup:not(:checked) ~ .game-world .axe-in-game {
+        /* Enable clicking id card only when player is next to it */
+        #level-4:checked ~ #stage-2-pos-6:checked ~ #idcard-pickup:not(:checked) ~ .game-world .idcard-in-game {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: idcard-pulse 1s ease-in-out infinite;
         }
-        /* Fly axe to inventory when picked up */
-        #axe-pickup:checked ~ .game-world .axe-in-game {
+        /* Fly id card to inventory when picked up */
+        #idcard-pickup:checked ~ .game-world .idcard-in-game {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) * 2 - 8px - 4px);
+            left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) * 3 - 16px - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -1260,7 +1297,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #stage-3-pos-3:checked ~ .subtitle-S3,
         #stage-3-pos-4:checked ~ .subtitle-S3,
         #stage-3-pos-5:checked ~ .subtitle-S3,
-        #stage-3-pos-6:checked ~ .subtitle-S3 {
+        #stage-3-pos-6:checked ~ .subtitle-S3,
+        #stage-3-pos-φ:checked ~ .subtitle-S3 {
             display: block;
         }
 
@@ -1380,9 +1418,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 9 + var(--ladder-offset));
         }
-        .vine-S2-L2-P6 {
+        .vine-S2-L2-P5 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 10 + var(--ladder-offset));
         }
         .vine-S2-L3-P3 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
@@ -1489,7 +1527,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
         }
 
-        /* Stage 2 Up arrows: S2-L0-P2, S2-L0-P5, S2-L1-P1, S2-L1-P4, S2-L2-P6, S2-L3-P3 */
+        /* Stage 2 Up arrows: S2-L0-P2, S2-L0-P5, S2-L1-P1, S2-L1-P4, S2-L2-P5, S2-L3-P3 */
         .arrow-up-S2-L0-P2 {
             left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px);
             bottom: calc(var(--ground-height) + 72.5px);
@@ -1506,8 +1544,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 9 + 10px);
             bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px);
         }
-        .arrow-up-S2-L2-P6 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 11 + 10px);
+        .arrow-up-S2-L2-P5 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 72.5px);
         }
         .arrow-up-S2-L3-P3 {
@@ -1527,12 +1565,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         /* Stage 3 phantom position arrows (at visual L4-P5) */
         .arrow-left-S3-Pφ {
-            left: calc(var(--pos-offset) + var(--pos-width) * 15 + 10px);
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 15px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px);
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 19px);
         }
         .arrow-right-S3-Pφ {
-            left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px);
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 15px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px);
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 19px);
         }
 
         /* Down arrow positions (at platform gaps) */
@@ -1647,7 +1685,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-0:checked ~ #stage-2-pos-5:checked ~ .game-world .arrow-up-S2-L0-P5 { display: block; }
         #level-1:checked ~ #stage-2-pos-1:checked ~ .game-world .arrow-up-S2-L1-P1 { display: block; }
         #level-1:checked ~ #stage-2-pos-4:checked ~ .game-world .arrow-up-S2-L1-P4 { display: block; }
-        #level-2:checked ~ #stage-2-pos-6:checked ~ .game-world .arrow-up-S2-L2-P6 { display: block; }
+        #level-2:checked ~ #stage-2-pos-5:checked ~ .game-world .arrow-up-S2-L2-P5 { display: block; }
         #level-3:checked ~ #stage-2-pos-3:checked ~ .game-world .arrow-up-S2-L3-P3 { display: block; }
         /* Stage 3 up arrows */
         #level-0:checked ~ #stage-3-pos-4:checked ~ .game-world .arrow-up-S3-L0-P4 { display: block; }
@@ -1822,12 +1860,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-2:checked ~ #stage-1-pos-1:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
         #level-3:checked ~ #stage-1-pos-4:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
         /* Stage 2 up arrows */
-        /* Stage 2 nav up: S2-L0-P2, S2-L0-P5, S2-L1-P1, S2-L1-P4, S2-L2-P6, S2-L3-P3 */
+        /* Stage 2 nav up: S2-L0-P2, S2-L0-P5, S2-L1-P1, S2-L1-P4, S2-L2-P5, S2-L3-P3 */
         #level-0:checked ~ #stage-2-pos-2:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
         #level-0:checked ~ #stage-2-pos-5:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
         #level-1:checked ~ #stage-2-pos-1:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
         #level-1:checked ~ #stage-2-pos-4:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
-        #level-2:checked ~ #stage-2-pos-6:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
+        #level-2:checked ~ #stage-2-pos-5:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
         #level-3:checked ~ #stage-2-pos-3:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
         /* Stage 3 nav up */
         #level-0:checked ~ #stage-3-pos-4:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
@@ -1951,6 +1989,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         @keyframes battery-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--battery-color)); }
             50% { filter: drop-shadow(0 0 12px var(--battery-color)) drop-shadow(0 0 20px var(--battery-color)); }
+        }
+        @keyframes idcard-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--idcard-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--idcard-color)) drop-shadow(0 0 20px var(--idcard-color)); }
         }
         /* Gem pulsating glow when player is nearby */
         @keyframes aquamarine-pulse {
@@ -2501,7 +2543,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S2-L1-P5-pickup:not(:checked) ~ .game-world .valuable-S2-L1-P5 .hover-area:hover ~ .tooltip,
         #valuable-S2-L2-P1-pickup:not(:checked) ~ .game-world .valuable-S2-L2-P1 .hover-area:hover ~ .tooltip,
         #valuable-S2-L3-P3-pickup:not(:checked) ~ .game-world .valuable-S2-L3-P3 .hover-area:hover ~ .tooltip,
-        #valuable-S2-L4-P4-pickup:not(:checked) ~ .game-world .valuable-S2-L4-P4 .hover-area:hover ~ .tooltip {
+        #valuable-S2-L4-P4-pickup:not(:checked) ~ .game-world .valuable-S2-L4-P4 .hover-area:hover ~ .tooltip,
+        #valuable-S3-L4-P3-pickup:not(:checked) ~ .game-world .valuable-S3-L4-P3 .hover-area:hover ~ .tooltip {
             opacity: 1;
         }
     </style>
@@ -2895,6 +2938,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Axe pickup checkbox -->
         <input type="checkbox" id="axe-pickup" class="axe-checkbox" title="axe">
 
+        <!-- ID card pickup checkbox -->
+        <input type="checkbox" id="idcard-pickup" class="idcard-checkbox" title="idcard">
+
         <!-- Battery pickup checkbox -->
         <input type="checkbox" id="battery-pickup" class="battery-checkbox" title="battery">
 
@@ -2992,6 +3038,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="inventory-key"><svg><use href="#key"/></svg></span>
             <span class="inventory-wrench"><svg><use href="#wrench"/></svg></span>
             <span class="inventory-axe"><svg><use href="#axe"/></svg></span>
+            <span class="inventory-idcard"><svg><use href="#id-card"/></svg></span>
             <span class="inventory-battery"><svg><use href="#battery"/></svg></span>
         </div>
 
@@ -3032,8 +3079,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <svg><use href="#toolbox"/></svg>
         </div>
 
-        <!-- Axe on stage 2, level 4, pos 6 (clickable to pick up) -->
+        <!-- Axe on stage 3, level 4, pos φ (clickable to pick up) -->
         <label for="axe-pickup" class="axe-in-game"><svg><use href="#axe"/></svg></label>
+
+        <!-- ID card on stage 2, level 4, pos 6 (clickable to pick up) -->
+        <label for="idcard-pickup" class="idcard-in-game"><svg><use href="#id-card"/></svg></label>
 
         <!-- Battery on stage 3, level 2, pos 1 (clickable to pick up) -->
         <label for="battery-pickup" class="battery-in-game"><svg><use href="#battery"/></svg></label>
@@ -3102,7 +3152,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="level-1" class="arrow arrow-up arrow-up-S2-L0-P5"></label>
         <label for="level-2" class="arrow arrow-up arrow-up-S2-L1-P1"></label>
         <label for="level-2" class="arrow arrow-up arrow-up-S2-L1-P4"></label>
-        <label for="level-3" class="arrow arrow-up arrow-up-S2-L2-P6"></label>
+        <label for="level-3" class="arrow arrow-up arrow-up-S2-L2-P5"></label>
         <label for="level-4" class="arrow arrow-up arrow-up-S2-L3-P3"></label>
 
         <!-- Stage 2 Down arrow labels: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 -->
@@ -3196,7 +3246,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="vine vine-S2-L0-P5"></div>
         <div class="vine vine-S2-L1-P1"></div>
         <div class="vine vine-S2-L1-P4"></div>
-        <div class="vine vine-S2-L2-P6"></div>
+        <div class="vine vine-S2-L2-P5"></div>
         <div class="vine vine-S2-L3-P3"></div>
         <!-- Branches (down) -->
         <div class="branch branch-S2-L1-P1"></div>
