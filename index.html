@@ -346,28 +346,28 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Stage 2 Platforms (positions 7-12) */
-        /* Grates at: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
-        /* S2 Level 1: gaps at P7 and P12 → solid P8-P11 */
-        .platform-s2-1 {
+        /* Grates at: L1P7, L1P11, L2P8, L3P10, L4P7 */
+        /* S2 Level 1: gaps at P7 and P11 → pieces at P8-P10, P12 */
+        .platform-s2-1-left {
             bottom: var(--platform-height);
             left: calc(var(--pos-width) * 7);
-            width: calc(var(--pos-width) * 4);
+            width: calc(var(--pos-width) * 3);
         }
-        /* S2 Level 2: gaps at P8 and P11 → pieces at P7, P9-P10, P12 */
+        .platform-s2-1-right {
+            bottom: var(--platform-height);
+            left: calc(var(--pos-width) * 11);
+            width: var(--pos-width);
+        }
+        /* S2 Level 2: gap at P8 → pieces at P7, P9-P12 */
         .platform-s2-2-left {
             bottom: calc(var(--platform-height) * 2);
             left: calc(var(--pos-width) * 6 + 12px);
             width: calc(var(--pos-width) - 12px);
         }
-        .platform-s2-2-mid {
-            bottom: calc(var(--platform-height) * 2);
-            left: calc(var(--pos-width) * 8);
-            width: calc(var(--pos-width) * 2);
-        }
         .platform-s2-2-right {
             bottom: calc(var(--platform-height) * 2);
-            left: calc(var(--pos-width) * 11);
-            width: var(--pos-width);
+            left: calc(var(--pos-width) * 8);
+            width: calc(var(--pos-width) * 4);
         }
         /* S2 Level 3: gap at P10 → pieces at P7-P9, P11-P12 */
         .platform-s2-3-left {
@@ -388,9 +388,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Stage 2 platforms are green */
-        .platform-s2-1,
+        .platform-s2-1-left,
+        .platform-s2-1-right,
         .platform-s2-2-left,
-        .platform-s2-2-mid,
         .platform-s2-2-right,
         .platform-s2-3-left,
         .platform-s2-3-right,
@@ -546,17 +546,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 6 + 12px);
             width: calc(var(--pos-width) - 12px);
         }
-        .branch-s2-L1P12 {
+        .branch-s2-L1P11 {
             bottom: calc(var(--platform-height) + var(--platform-thickness) - 14px);
-            left: calc(var(--pos-width) * 11);
+            left: calc(var(--pos-width) * 10);
         }
         .branch-s2-L2P8 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 7);
-        }
-        .branch-s2-L2P11 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 14px);
-            left: calc(var(--pos-width) * 10);
         }
         .branch-s2-L3P10 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 14px);
@@ -1558,16 +1554,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
             bottom: var(--platform-height);
         }
-        .arrow-down-L1P12 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 11 + 10px);
+        .arrow-down-L1P11 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
             bottom: var(--platform-height);
         }
         .arrow-down-L2P8 {
             left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px);
-            bottom: calc(var(--platform-height) * 2);
-        }
-        .arrow-down-L2P11 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
             bottom: calc(var(--platform-height) * 2);
         }
         .arrow-down-L3P10 {
@@ -1648,9 +1640,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ #pos-6:checked ~ .game-world .arrow-down-L4P6 { display: block; }
         /* Stage 2 down arrows: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
         #level-1:checked ~ #pos-7:checked ~ .game-world .arrow-down-L1P7 { display: block; }
-        #level-1:checked ~ #pos-12:checked ~ .game-world .arrow-down-L1P12 { display: block; }
+        #level-1:checked ~ #pos-11:checked ~ .game-world .arrow-down-L1P11 { display: block; }
         #level-2:checked ~ #pos-8:checked ~ .game-world .arrow-down-L2P8 { display: block; }
-        #level-2:checked ~ #pos-11:checked ~ .game-world .arrow-down-L2P11 { display: block; }
         #level-3:checked ~ #pos-10:checked ~ .game-world .arrow-down-L3P10 { display: block; }
         #level-4:checked ~ #pos-7:checked ~ .game-world .arrow-down-L4P7 { display: block; }
         /* Stage 3 down arrow */
@@ -1802,11 +1793,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #pos-3:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
         #level-4:checked ~ #pos-6:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
         /* Stage 2 down arrows */
-        /* Stage 2 nav down: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 */
+        /* Stage 2 nav down: L1P7, L1P11, L2P8, L3P10, L4P7 */
         #level-1:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
-        #level-1:checked ~ #pos-12:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
+        #level-1:checked ~ #pos-11:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
         #level-2:checked ~ #pos-8:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
-        #level-2:checked ~ #pos-11:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
         #level-3:checked ~ #pos-10:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
         #level-4:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
         /* Stage 3 nav down */
@@ -3012,9 +3002,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         <!-- Stage 2 Down arrow labels: L1P7, L1P12, L2P8, L2P11, L3P10, L4P7 -->
         <label for="level-0" class="arrow arrow-down arrow-down-L1P7"></label>
-        <label for="level-0" class="arrow arrow-down arrow-down-L1P12"></label>
+        <label for="level-0" class="arrow arrow-down arrow-down-L1P11"></label>
         <label for="level-1" class="arrow arrow-down arrow-down-L2P8"></label>
-        <label for="level-1" class="arrow arrow-down arrow-down-L2P11"></label>
         <label for="level-2" class="arrow arrow-down arrow-down-L3P10"></label>
         <label for="level-3" class="arrow arrow-down arrow-down-L4P7"></label>
 
@@ -3081,9 +3070,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Rock strip on left edge -->
         <div class="rock-strip-s2"></div>
         <!-- Platforms -->
-        <div class="platform platform-s2-1"></div>
+        <div class="platform platform-s2-1-left"></div>
+        <div class="platform platform-s2-1-right"></div>
         <div class="platform platform-s2-2-left"></div>
-        <div class="platform platform-s2-2-mid"></div>
         <div class="platform platform-s2-2-right"></div>
         <div class="platform platform-s2-3-left"></div>
         <div class="platform platform-s2-3-right"></div>
@@ -3097,9 +3086,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="vine vine-s2-L3P9"></div>
         <!-- Branches (down) -->
         <div class="branch branch-s2-L1P7"></div>
-        <div class="branch branch-s2-L1P12"></div>
+        <div class="branch branch-s2-L1P11"></div>
         <div class="branch branch-s2-L2P8"></div>
-        <div class="branch branch-s2-L2P11"></div>
         <div class="branch branch-s2-L3P10"></div>
         <div class="branch branch-s2-L4P7"></div>
         <!-- Bacteria hazards -->
