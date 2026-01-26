@@ -397,11 +397,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Stage 3 Platforms */
-        .platform-S3-L1 {
-            bottom: var(--platform-height);
-            left: calc(var(--pos-width) * 12);
-            width: calc(var(--pos-width) * 3);
-        }
         .platform-S3-L4 {
             bottom: calc(var(--platform-height) * 4);
             left: calc(var(--pos-width) * 12);
@@ -409,7 +404,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Stage 3 platforms are cyan */
-        .platform-S3-L1,
         .platform-S3-L4 {
             background: #2e8b8b;
             border-color: #1a5c5c;
@@ -491,6 +485,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Stage 3 grates: S3-L2-P1, S3-L2-P2 */
         .grate-S3-L2-P1-P2 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
+            left: calc(var(--pos-width) * 12);
+            width: calc(var(--pos-width) * 2);
+        }
+        .grate-S3-L1-P1-P2 {
+            bottom: calc(var(--platform-height) + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 12);
             width: calc(var(--pos-width) * 2);
         }
@@ -1393,11 +1392,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .barrel-S3-L4-P3 svg {
             width: 100%;
             height: 32px;
-            margin-bottom: -6px;
             color: #9acd32;
         }
         .barrel-S3-L4-P3 svg:first-child {
-            margin-left: 4px;
+            transform: rotate(90deg);
+            position: absolute;
+            top: -8px;
+            left: -4px;
+            z-index: -1;
         }
         .barrel-S3-L4-P3 .tooltip {
             bottom: calc(100% + 6px);
@@ -1654,12 +1656,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) * 4);
         }
         /* Stage 3 down arrows */
+        .arrow-down-S3-L1-P4 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 15 + 10px);
+            bottom: var(--platform-height);
+        }
         .arrow-down-S3-L2-P1 {
             left: calc(var(--pos-offset) + var(--pos-width) * 12 + 10px);
             bottom: calc(var(--platform-height) * 2);
         }
         .arrow-down-S3-L2-P2 {
             left: calc(var(--pos-offset) + var(--pos-width) * 13 + 10px);
+            bottom: calc(var(--platform-height) * 2);
+        }
+        .arrow-down-S3-L2-P6 {
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px);
             bottom: calc(var(--platform-height) * 2);
         }
 
@@ -1716,7 +1726,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ #stage-3-pos-5:checked ~ .game-world .arrow-S3-P5-P6 { display: none; }
         #level-4:checked ~ #stage-3-pos-6:checked ~ .game-world .arrow-S3-P6-P5 { display: none; }
         /* Hide arrows at S3 platform ends */
-        #level-1:checked ~ #stage-3-pos-3:checked ~ .game-world .arrow-S3-P3-P4 { display: none; }
+        #level-1:checked ~ #stage-3-pos-2:checked ~ .game-world .arrow-S3-P2-P3 { display: none; }
+        #level-1:checked ~ #stage-3-pos-3:checked ~ .game-world .arrow-S3-P3-P2 { display: none; }
         #level-2:checked ~ #stage-3-pos-2:checked ~ .game-world .arrow-S3-P2-P3 { display: none; }
         #level-2:checked ~ #stage-3-pos-3:checked ~ .game-world .arrow-S3-P3-P2 { display: none; }
 
@@ -1756,8 +1767,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #stage-2-pos-4:checked ~ .game-world .arrow-down-S2-L3-P4 { display: block; }
         #level-4:checked ~ #stage-2-pos-1:checked ~ .game-world .arrow-down-S2-L4-P1 { display: block; }
         /* Stage 3 down arrow */
+        #level-1:checked ~ #stage-3-pos-4:checked ~ .game-world .arrow-down-S3-L1-P4 { display: block; }
         #level-2:checked ~ #stage-3-pos-1:checked ~ .game-world .arrow-down-S3-L2-P1 { display: block; }
         #level-2:checked ~ #stage-3-pos-2:checked ~ .game-world .arrow-down-S3-L2-P2 { display: block; }
+        #level-2:checked ~ #stage-3-pos-6:checked ~ .game-world .arrow-down-S3-L2-P6 { display: block; }
 
         /* Fixed navigation panel - 3x3 grid */
         .nav-panel {
@@ -1905,7 +1918,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ #stage-3-pos-5:checked ~ .nav-panel .nav-right[for="stage-3-pos-6"] { display: none; }
         #level-4:checked ~ #stage-3-pos-6:checked ~ .nav-panel .nav-left[for="stage-3-pos-5"] { display: none; }
         /* Hide nav arrows at S3 platform ends */
-        #level-1:checked ~ #stage-3-pos-3:checked ~ .nav-panel .nav-right[for="stage-3-pos-4"] { display: none; }
+        #level-1:checked ~ #stage-3-pos-2:checked ~ .nav-panel .nav-right[for="stage-3-pos-3"] { display: none; }
+        #level-1:checked ~ #stage-3-pos-3:checked ~ .nav-panel .nav-left[for="stage-3-pos-2"] { display: none; }
         #level-2:checked ~ #stage-3-pos-2:checked ~ .nav-panel .nav-right[for="stage-3-pos-3"] { display: none; }
         #level-2:checked ~ #stage-3-pos-3:checked ~ .nav-panel .nav-left[for="stage-3-pos-2"] { display: none; }
 
@@ -1940,8 +1954,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #stage-2-pos-4:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
         #level-4:checked ~ #stage-2-pos-1:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
         /* Stage 3 nav down */
+        #level-1:checked ~ #stage-3-pos-4:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
         #level-2:checked ~ #stage-3-pos-1:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
         #level-2:checked ~ #stage-3-pos-2:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
+        #level-2:checked ~ #stage-3-pos-6:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
 
         /* Valuables - animated elements that fly to counter when picked up */
         .valuable-in-game {
@@ -3233,8 +3249,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="level-3" class="arrow arrow-down arrow-down-S2-L4-P1"></label>
 
         <!-- Stage 3 Down arrow label: L2P1 -->
+        <label for="level-0" class="arrow arrow-down arrow-down-S3-L1-P4"></label>
         <label for="level-1" class="arrow arrow-down arrow-down-S3-L2-P1"></label>
         <label for="level-1" class="arrow arrow-down arrow-down-S3-L2-P2"></label>
+        <label for="level-1" class="arrow arrow-down arrow-down-S3-L2-P6"></label>
 
         <!-- Stage 3 Up arrow labels -->
         <label for="level-1" class="arrow arrow-up arrow-up-S3-L0-P4"></label>
@@ -3361,7 +3379,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Ground -->
         <div class="ground-S3"></div>
         <!-- Platforms -->
-        <div class="platform platform-S3-L1"></div>
+        <div class="grate grate-S3-L1-P1-P2"></div>
         <div class="grate grate-S3-L3-P1-P2"></div>
         <div class="platform platform-S3-L4"></div>
         <!-- Grate (down) -->

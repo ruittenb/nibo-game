@@ -1,8 +1,8 @@
 
 # Nibo's Way Out
 
-A simple platform game in HTML/CSS (no JavaScript) created in an interactive session
-with Claude Code.
+A simple platform game in HTML/CSS (no JavaScript), completely  created in an
+interactive session with [Claude Code](https://claude.com/product/claude-code).
 
 Help Nibo the little spaceman to find his way out of the level.
 
@@ -14,7 +14,7 @@ Help Nibo the little spaceman to find his way out of the level.
 
  - [Github](https://github.com/ruittenb/nibo-game)
 
-# More Examples
+# Similar work by others
 
  - [The Mine](https://codepen.io/jcoulterdesign/pen/NOMeEb) by Jamie Coulter
  - [CSScape room](https://csscape-room.iamdanielmarino.com/) by Daniel Marino
