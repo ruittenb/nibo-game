@@ -94,6 +94,22 @@ Items pulse/glow when the player can interact with them. This requires combining
 6. Use axe on **tree** (L0P12) → tree chopped, escape arrow appears
 7. Click escape arrow → victory
 
+## Phantom Positions
+
+**Challenge:** One label can only apply to one input element. This makes is non-trivial
+to make a player move horizontally and have them fall vertically as part of the same move:
+it would require two radio buttons to change state.
+
+**Solution: Phantom positions** - a state that differs from its visual location.
+
+Example: `stage-3-pos-φ`
+ - The player is at S3-L3-P5 and moves up
+ - This moves them to S3-L3-Pφ. This counts as *horizontal* movement only.
+ - This position is shown as if the player were at S3-L4-P5.
+ - As soon as the player moves left or right, they are moved back to the physical location (L3-P4 or L3-P6)
+
+Since all these transitions stay on L3, they only change the position radio - making them valid single-input operations.
+
 ## Debug Mode
 
 The `#debug-toggle` checkbox reveals all state inputs for testing. Each input has a `title` attribute describing its purpose.
