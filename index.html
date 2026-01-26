@@ -1594,7 +1594,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-0:checked ~ #pos-6:checked ~ #door-unlocked:checked ~ .game-world .arrow-6-7 { display: block; }
         #pos-6:checked ~ #door-unlocked:checked ~ .nav-panel .nav-right[for="pos-7"] { display: block; }
         /* Stage 2 arrows */
-        #level-0:checked ~ #pos-7:checked ~ .game-world .arrow-7-6 { display: block; }
+        #level-0:checked ~ #pos-7:checked ~ #door-unlocked:checked ~ .game-world .arrow-7-6 { display: block; }
         #pos-7:checked ~ .game-world .arrow-7-8 { display: block; }
         #pos-8:checked ~ .game-world .arrow-8-7 { display: block; }
         #pos-8:checked ~ .game-world .arrow-8-9 { display: block; }
@@ -1748,7 +1748,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-4:checked ~ .nav-panel .nav-right[for="pos-5"] { display: block; }
         #pos-5:checked ~ .nav-panel .nav-right[for="pos-6"] { display: block; }
         /* Stage 2 nav panel arrows */
-        #level-0:checked ~ #pos-7:checked ~ .nav-panel .nav-left[for="pos-6"] { display: block; }
+        #level-0:checked ~ #pos-7:checked ~ #door-unlocked:checked ~ .nav-panel .nav-left[for="pos-6"] { display: block; }
         #pos-7:checked ~ .nav-panel .nav-right[for="pos-8"] { display: block; }
         #pos-8:checked ~ .nav-panel .nav-left[for="pos-7"] { display: block; }
         #pos-8:checked ~ .nav-panel .nav-right[for="pos-9"] { display: block; }
@@ -3089,7 +3089,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <svg><use href="#tree"/></svg>
             </label>
             <span class="tree-hover-area"></span>
-            <span class="tooltip tree-tooltip">The way is blocked.<br>You need an axe.</span>
+            <span class="tooltip tree-tooltip">The tree blocks your way.<br>You need an axe.</span>
             <span class="tooltip tree-tooltip-axe">Chop down the tree</span>
         </div>
         <label for="tree-chopped" class="axe-at-tree"><svg><use href="#axe"/></svg></label>
