@@ -2,6 +2,9 @@
 
 A platform game implemented **entirely in HTML and CSS** with no JavaScript.
 
+This file is intended to help Claude Code get up-to-speed about the applied
+mechanics in this html/css file.
+
 ## Core Mechanism
 
 The game uses **CSS sibling selectors** (`~`) to create conditional logic:
@@ -126,3 +129,32 @@ Since all these transitions stay on L3, they only change the position radio - ma
 ## Debug Mode
 
 The `#debug-toggle` checkbox reveals all state inputs for testing. Each input has a `title` attribute describing its purpose.
+
+## Adding New Items and Valuables
+
+### Items (key, wrench, axe)
+
+1. **CSS variable** for the item color (e.g., `--wrench-color`)
+2. **Checkbox** in inputs section: `<input type="checkbox" id="item-pickup">`
+   - Must appear before `.game-world` in DOM order for sibling selectors to work
+3. **In-game element** (`.item-in-game`):
+   - Position at world location using `bottom` and `left` with CSS variables
+   - `display: none` / `pointer-events: none` by default
+   - Enable + pulse animation when player is adjacent and item not picked up
+   - Label targets the pickup checkbox
+4. **Fly-to-inventory rule**: when `#item-pickup:checked`, transition `bottom`/`left` to inventory position, fade `opacity` to 0
+   - Slot position uses `--inv-slot-width * (offset)` where offset accounts for other items already in inventory
+   - This rule must come after the base positioning rule (CSS cascade: later rules override)
+5. **Inventory icon** (`.inventory-item` inside `.inventory`): `visibility: hidden` by default, `visible` with transition-delay when picked up
+
+### Valuables (coins, gems)
+
+1. **Checkbox** for pickup state: `<input type="checkbox" id="valuable-SX-LY-PZ-pickup">`
+2. **Container** in `.game-world`:
+   - `.container` wrapper with location class (e.g., `.valuable-S1-L0-P3`)
+   - `.hover-area` span for tooltip hover detection
+   - `.tooltip` span with item name
+   - Label wrapping the icon, targeting the pickup checkbox
+3. **Fly-to-counter rule**: when checked, transition `bottom`/`left` to valuable counter position
+4. **Digit strip**: if max collectible count increases beyond current digits, add new frames to `@keyframes digit-roll`
+5. **Counter variable**: `--valuable-count` increments via `:checked` selectors counting picked-up valuables
