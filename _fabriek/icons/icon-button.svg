@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80">
+  <!-- Bottom rectangle with rounded sides -->
+  <rect
+    fill="currentColor"
+    x="5" y="50" width="90" height="25" rx="12" ry="12"
+  />
+  
+  <!-- Square top with rounded top -->
+  <path
+    fill="#777"
+    d="M 25 55 L 25 25 Q 25 15 35 15 L 65 15 Q 75 15 75 25 L 75 55 Z"
+  />
+</svg>
