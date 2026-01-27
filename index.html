@@ -1082,7 +1082,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: 100;
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 2);
-            transition: left 0.3s ease-out, bottom 0.3s ease-in-out;
+            transition: left 0.3s ease, bottom 0.3s ease;
         }
         .player svg {
             height: 100%;
@@ -1123,6 +1123,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-2:checked ~ .game-world .player { bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 2px); }
         #level-3:checked ~ .game-world .player { bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 2px); }
         #level-4:checked ~ .game-world .player { bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 2px); }
+
+        /* Landing after jump from phantom position */
+        #level-3:checked ~ #stage-3-pos-4:checked ~ .game-world .player,
+        #level-3:checked ~ #stage-3-pos-6:checked ~ .game-world .player {
+            transition: left 0.3s ease-out, bottom 0.3s ease-in;
+        }
 
         @keyframes idle {
             0%, 100% { transform: translateY(0); }
