@@ -71,9 +71,22 @@ All positioning derives from CSS variables (`--pos-width`, `--platform-height`, 
 
 ## Visual Styles per Stage
 
-- **Stage 1:** Industrial/factory aesthetic - rusted metal platforms with rivets
-- **Stage 2:** Jungle aesthetic - organic green platforms, rock formation on left edge
-- **Stage 3:** Spacecraft aesthetic - rock formation on right edge (mirrored from stage 2)
+- **Stage 1:** Industrial/factory aesthetic - rusted metal platforms with rivets, wooden ladders
+- **Stage 2:** Jungle aesthetic - organic green platforms, rock formation on left edge, vines for climbing
+- **Stage 3:** Hangar aesthetic - bluish-grey metallic platforms, concrete floor, spine ladders (central pole with alternating rungs)
+
+## Ladder Types
+
+- **`.ladder`** - Base class with shared positioning properties
+- **`.wooden-ladder`** - Traditional two-rail ladder with horizontal rungs (stage 1)
+- **`.spine-ladder`** - Central metal pole with alternating rungs on each side (stage 3)
+
+## Overlays
+
+Overlays share a base `.overlay` class with common styling. Specific types:
+- **`.title-screen-overlay`** - Shown on game start, hidden when `#title-screen-toggle` is checked
+- **`.death-screen-overlay`** - Shown when player reaches hazard locations
+- **`.escape-screen-overlay`** - Shown when `#escaped` checkbox is checked
 
 ## Conditional Animations
 
