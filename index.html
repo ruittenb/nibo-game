@@ -2463,13 +2463,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #axe-pickup:not(:checked) ~ #tree-chopped:not(:checked) ~ .game-world .tree-hover-area:hover ~ .tree-tooltip {
             opacity: 1;
         }
-        /* Show "chop" tooltip on hover (with axe, tree not chopped, not at P12) */
+        /* Show "chop" tooltip on hover (with axe, tree not chopped) */
         #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree-container:hover .tree-tooltip-axe {
             opacity: 1;
-        }
-        /* Hide chop tooltip when at P12 (clicking will work) */
-        #level-0:checked ~ #stage-2-pos-6:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree-container .tree-tooltip-axe {
-            display: none;
         }
 
         /* Door */
@@ -2710,14 +2706,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
 
-        /* Show "repair door" tooltip on hover (with wrench, door not unlocked, not at P6) */
+        /* Show "repair door" tooltip on hover (with wrench, door not unlocked) */
         #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .door-container:hover .door-tooltip-wrench {
             opacity: 1;
-        }
-
-        /* Hide repair tooltip when at P6 (clicking will work) */
-        #level-0:checked ~ #stage-1-pos-6:checked ~ #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .door-container .door-tooltip-wrench {
-            display: none;
         }
 
         /* Utility classes */
@@ -2779,7 +2770,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S3-L0-P3-pickup:not(:checked) ~ .game-world .valuable-S3-L0-P3 .hover-area:hover ~ .tooltip,
         #valuable-S3-L0-P6-pickup:not(:checked) ~ .game-world .valuable-S3-L0-P6 .hover-area:hover ~ .tooltip,
         #valuable-S3-L3-P6-pickup:not(:checked) ~ .game-world .valuable-S3-L3-P6 .hover-area:hover ~ .tooltip,
-        #valuable-S3-L4-P2-pickup:not(:checked) ~ .game-world .valuable-S3-L4-P2 .hover-area:hover ~ .tooltip {
+        #valuable-S3-L4-P2-pickup:not(:checked) ~ .game-world .valuable-S3-L4-P2 .hover-area:hover ~ .tooltip,
+        /* Show tooltip when player is at valuable location (hover-area hidden, so use container:hover) */
+        #level-1:checked ~ #stage-2-pos-5:checked ~ #valuable-S2-L1-P5-pickup:not(:checked) ~ .game-world .valuable-S2-L1-P5:hover .tooltip,
+        #level-3:checked ~ #stage-2-pos-3:checked ~ #valuable-S2-L3-P3-pickup:not(:checked) ~ .game-world .valuable-S2-L3-P3:hover .tooltip,
+        #level-0:checked ~ #stage-3-pos-6:checked ~ #valuable-S3-L0-P6-pickup:not(:checked) ~ .game-world .valuable-S3-L0-P6:hover .tooltip {
             opacity: 1;
         }
     </style>
