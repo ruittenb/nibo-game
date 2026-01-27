@@ -261,6 +261,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: calc(var(--pos-width) * 18);
             height: 100%;
             transition: transform 0.5s ease;
+            /* Inventory tracking variables (0 = not in inventory, 1 = in inventory) */
+            --inv-has-key: 0;
+            --inv-has-wrench: 0;
+            --inv-has-axe: 0;
+            --inv-has-idcard: 0;
+            --inv-has-battery: 0;
+            /* Inventory slot positioning */
+            --inv-slot-width: calc(var(--pickup-size) + 8px);  /* item width + gap */
         }
 
         /* Shift viewport when player is in Stage 2 */
@@ -283,6 +291,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #stage-3-pos-φ:checked ~ .game-world {
             transform: translateX(calc(var(--pos-width) * -12));
         }
+
+        /* Inventory state tracking: set variables when items picked up */
+        #key-pickup:checked ~ .game-world { --inv-has-key: 1; }
+        #wrench-pickup:checked ~ .game-world { --inv-has-wrench: 1; }
+        #axe-pickup:checked ~ .game-world { --inv-has-axe: 1; }
+        #idcard-pickup:checked ~ .game-world { --inv-has-idcard: 1; }
+        #battery-pickup:checked ~ .game-world { --inv-has-battery: 1; }
+        /* Reset when items consumed */
+        #toolbox-unlocked:checked ~ .game-world { --inv-has-key: 0; }
+        #door-unlocked:checked ~ .game-world { --inv-has-wrench: 0; }
+        #tree-chopped:checked ~ .game-world { --inv-has-axe: 0; }
 
         .platform {
             position: absolute;
@@ -633,14 +652,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S3-L4-P2-pickup { top: 30px; left: 350px; }
         /* Debug positions - items (row 3) */
         #key-pickup { top: 50px; left: 30px; }
-        #toolbox-unlock { top: 50px; left: 50px; }
+        #toolbox-unlocked { top: 50px; left: 50px; }
         #wrench-pickup { top: 50px; left: 70px; }
         #door-unlocked { top: 50px; left: 90px; }
-        #axe-pickup { top: 50px; left: 160px; }
-        #idcard-pickup { top: 50px; left: 180px; }
-        #tree-chopped { top: 50px; left: 200px; }
-        #battery-pickup { top: 50px; left: 290px; }
-        #escaped { top: 50px; left: 310px; }
+        #idcard-pickup { top: 50px; left: 160px; }
+        #tree-chopped { top: 50px; left: 180px; }
+        #axe-pickup { top: 50px; left: 290px; }
+        #battery-pickup { top: 50px; left: 310px; }
+        #escaped { top: 50px; left: 330px; }
         /* Show inputs when debug is checked */
         #debug-toggle:checked ~ .game-container .position-radio,
         #debug-toggle:checked ~ .game-container .level-radio,
@@ -675,7 +694,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             padding-right: var(--item-box-padding);
             gap: 8px;
         }
-        /* Inventory item icons - hidden by default */
+        /* Inventory item icons - hidden by default (display: none so they don't take space in flexbox) */
         .inventory-key,
         .inventory-wrench,
         .inventory-axe,
@@ -683,9 +702,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-battery {
             width: var(--pickup-size);
             height: var(--pickup-size);
-            display: flex;
-            opacity: 0;
-            visibility: hidden;
+            display: none;
             justify-content: center;
             align-items: center;
         }
@@ -702,18 +719,21 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-axe svg { color: var(--wrench-color); }
         .inventory-idcard svg { color: var(--idcard-color); }
         .inventory-battery svg { color: var(--battery-color); }
-        /* Show inventory items when picked up (delayed until flying animation completes) */
+        /* Show inventory items when picked up (delayed fade-in after fly animation) */
         #key-pickup:checked ~ .inventory .inventory-key,
         #wrench-pickup:checked ~ .inventory .inventory-wrench,
         #axe-pickup:checked ~ .inventory .inventory-axe,
         #idcard-pickup:checked ~ .inventory .inventory-idcard,
         #battery-pickup:checked ~ .inventory .inventory-battery {
-            opacity: 1;
-            visibility: visible;
-            transition: visibility 0s linear 0.5s;
+            display: flex;
+            opacity: 0;
+            animation: inventory-fade-in 0.2s ease-out 0.4s forwards;
+        }
+        @keyframes inventory-fade-in {
+            to { opacity: 1; }
         }
         /* Hide key from inventory when toolbox is unlocked (key used) */
-        #toolbox-unlock:checked ~ .inventory .inventory-key {
+        #toolbox-unlocked:checked ~ .inventory .inventory-key {
             display: none;
         }
         /* Hide axe from inventory when tree is chopped (axe used) */
@@ -820,7 +840,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--gold-color);
         }
         /* Hide key when toolbox is unlocked (key used) */
-        #toolbox-unlock:checked ~ .game-world .key-in-game {
+        #toolbox-unlocked:checked ~ .game-world .key-in-game {
             display: none;
         }
         /* Enable clicking key only when player is next to it */
@@ -829,9 +849,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        /* Move key to inventory when picked up */
-        /* Container height = ground-height + platform-height*5 + top-margin */
-        /* Fly key to inventory when picked up */
+        /* Fly key to inventory when picked up (Stage 1: viewport right = pos-width * 6) */
+        /* Key is always slot 0 (rightmost), no offset needed */
         #key-pickup:checked ~ .game-world .key-in-game {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 6 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px);
@@ -855,7 +874,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: scale(1.1);
         }
         /* Hide toolbox when unlocked */
-        #toolbox-unlock:checked ~ .game-world .toolbox {
+        #toolbox-unlocked:checked ~ .game-world .toolbox {
             display: none;
         }
         .toolbox-tooltip {
@@ -892,10 +911,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        /* Fly axe to inventory when picked up */
+        /* Fly axe to inventory when picked up (Stage 3: viewport right = pos-width * 18) */
+        /* Axe slot = slot 0 offset by key + wrench */
         #axe-pickup:checked ~ .game-world .axe-in-game {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 18 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) * 3 - 16px - 4px);
+            left: calc(var(--pos-width) * 18 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -922,10 +943,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: idcard-pulse 1s ease-in-out infinite;
         }
-        /* Fly id card to inventory when picked up */
+        /* Fly id card to inventory when picked up (Stage 2: viewport right = pos-width * 12) */
+        /* ID card slot = slot 0 offset by key + wrench + axe */
         #idcard-pickup:checked ~ .game-world .idcard-in-game {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) * 2 - 8px - 4px);
+            left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -953,10 +976,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: battery-pulse 1s ease-in-out infinite;
         }
-        /* Fly battery to inventory when picked up */
+        /* Fly battery to inventory when picked up (Stage 3: viewport right = pos-width * 18) */
+        /* Battery slot = slot 0 offset by key + wrench + axe + idcard */
         #battery-pickup:checked ~ .game-world .battery-in-game {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 18 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) * 3 - 16px - 4px);
+            left: calc(var(--pos-width) * 18 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -979,19 +1004,21 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--wrench-color);
         }
         /* Show wrench when toolbox is unlocked */
-        #toolbox-unlock:checked ~ .game-world .wrench-in-game {
+        #toolbox-unlocked:checked ~ .game-world .wrench-in-game {
             display: block;
         }
         /* Enable clicking wrench only when player is next to it */
-        #level-2:checked ~ #stage-1-pos-6:checked ~ #toolbox-unlock:checked ~ #wrench-pickup:not(:checked) ~ .game-world .wrench-in-game {
+        #level-2:checked ~ #stage-1-pos-6:checked ~ #toolbox-unlocked:checked ~ #wrench-pickup:not(:checked) ~ .game-world .wrench-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: wrench-pulse 1s ease-in-out infinite;
         }
-        /* Fly wrench to inventory when picked up */
-        #toolbox-unlock:checked ~ #wrench-pickup:checked ~ .game-world .wrench-in-game {
+        /* Fly wrench to inventory when picked up (Stage 1) */
+        /* Wrench slot = slot 0 offset by key (if in inventory) */
+        #toolbox-unlocked:checked ~ #wrench-pickup:checked ~ .game-world .wrench-in-game {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 6 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px);
+            left: calc(var(--pos-width) * 6 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
+                       - var(--inv-slot-width) * var(--inv-has-key));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -1028,7 +1055,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             }
         }
         /* Only show key at toolbox when player is next to it, has key, AND toolbox not yet unlocked */
-        #level-2:checked ~ #stage-1-pos-6:checked ~ #key-pickup:checked ~ #toolbox-unlock:not(:checked) ~ .game-world .key-at-toolbox {
+        #level-2:checked ~ #stage-1-pos-6:checked ~ #key-pickup:checked ~ #toolbox-unlocked:not(:checked) ~ .game-world .key-at-toolbox {
             display: block;
             animation: key-pulse 1s ease-in-out infinite;
         }
@@ -1478,7 +1505,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 32px;
             height: 32px;
-            color: #9acd32;
+            color: #c48b9f;
             transform: scaleY(1.5);
             filter: drop-shadow(2px -2px 2px rgba(0, 0, 0, 0.5));
         }
@@ -3138,18 +3165,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="key-pickup" class="key-checkbox" title="key">
 
         <!-- Safe unlock checkbox -->
-        <input type="checkbox" id="toolbox-unlock" class="toolbox-checkbox" title="toolbox">
+        <input type="checkbox" id="toolbox-unlocked" class="toolbox-checkbox" title="toolbox">
 
         <!-- Wrench pickup checkbox -->
         <input type="checkbox" id="wrench-pickup" class="wrench-checkbox" title="wrench">
 
-        <!-- Axe pickup checkbox -->
-        <input type="checkbox" id="axe-pickup" class="axe-checkbox" title="axe">
-
         <!-- ID card pickup checkbox -->
         <input type="checkbox" id="idcard-pickup" class="idcard-checkbox" title="idcard">
 
-        <!-- Battery pickup checkbox -->
+        <!-- Stage 3 item pickups -->
+        <input type="checkbox" id="axe-pickup" class="axe-checkbox" title="axe">
         <input type="checkbox" id="battery-pickup" class="battery-checkbox" title="battery">
 
         <!-- Sprout unlock checkbox -->
@@ -3309,7 +3334,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="wrench-pickup" class="wrench-in-game"><svg><use href="#wrench"/></svg></label>
 
         <!-- Key above toolbox (appears when user has key, clickable to unlock) -->
-        <label for="toolbox-unlock" class="key-at-toolbox"><svg><use href="#key"/></svg></label>
+        <label for="toolbox-unlocked" class="key-at-toolbox"><svg><use href="#key"/></svg></label>
 
 
         <!-- Horizontal arrow labels -->
