@@ -216,7 +216,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --ruby-color-2: #d84838;
             --ruby-color-3: #f06858;
             --ruby-color-4: #ffa090;
-            --battery-color: #2d6b2d;
+            --battery-color: #4a9f4a;
             --wrench-color: #708090;
             --idcard-color: #3090f0;
             --border-color: #4a4a6a;      /* Border color for UI elements */
@@ -403,10 +403,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: calc(var(--pos-width) * 3); /* P1-P3 only, gaps at P4 and P6 */
         }
 
-        /* Stage 3 platforms are cyan */
+        /* Stage 3 platforms are cool bluish grey metallic */
         .platform-S3-L4 {
-            background: #2e8b8b;
-            border-color: #1a5c5c;
+            background: #6a7b8c;
+            border-color: #4a5a6a;
         }
 
         /* Grate (diamond mesh pattern) */
@@ -504,8 +504,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 16);
             width: var(--pos-width);
             height: var(--platform-thickness);
-            background: #2e8b8b;
-            border: 3px solid #1a5c5c;
+            background: #6a7b8c;
+            border: 3px solid #4a5a6a;
             border-radius: 4px;
             box-shadow: inset 0 -5px 0 rgba(0,0,0,0.3);
         }
@@ -563,16 +563,24 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: calc(var(--pos-width) - 12px);
         }
 
-        /* Debug toggle - press Alt+D (or Alt+Shift+D on Mac) to toggle */
-        #debug-toggle {
+        /* Title screen toggle */
+        #title-screen-toggle {
+            display: none;
             position: fixed;
             top: 10px;
             left: 10px;
-            z-index: 9999;
-            opacity: 0;
+            z-index: 10000;
+        }
+        #debug-toggle:checked ~ #title-screen-toggle {
+            display: block;
+        }
+
+        /* Debug toggle - press Alt+D (or Alt+Shift+D on Mac) to toggle */
+        #debug-toggle {
+            display: none;
         }
         #debug-toggle:checked {
-            opacity: 1;
+            display: none;
         }
         /* Hide radio buttons and checkboxes by default */
         .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .battery-checkbox, .idcard-checkbox, .tree-checkbox, .escaped-checkbox, .valuable-checkbox, .door-checkbox {
@@ -621,7 +629,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S2-L4-P4-pickup { top: 30px; left: 240px; }
         #valuable-S3-L0-P3-pickup { top: 30px; left: 290px; }
         #valuable-S3-L0-P6-pickup { top: 30px; left: 310px; }
-        #valuable-S3-L4-P2-pickup { top: 30px; left: 330px; }
+        #valuable-S3-L3-P6-pickup { top: 30px; left: 330px; }
+        #valuable-S3-L4-P2-pickup { top: 30px; left: 350px; }
         /* Debug positions - items (row 3) */
         #key-pickup { top: 50px; left: 30px; }
         #toolbox-unlock { top: 50px; left: 50px; }
@@ -743,6 +752,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --valuable-S2-L4-P4: 0;
             --valuable-S3-L0-P3: 0;
             --valuable-S3-L0-P6: 0;
+            --valuable-S3-L3-P6: 0;
             --valuable-S3-L4-P2: 0;
         }
         .valuable-counter .valuable-icon {
@@ -763,7 +773,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: translateY(calc(
                 (var(--valuable-S1-L0-P3) + var(--valuable-S1-L1-P4) + var(--valuable-S1-L3-P5) + var(--valuable-S1-L2-P1) + var(--valuable-S1-L4-P2) +
                  var(--valuable-S2-L0-P2) + var(--valuable-S2-L1-P5) + var(--valuable-S2-L2-P1) + var(--valuable-S2-L3-P3) + var(--valuable-S2-L4-P4) +
-                 var(--valuable-S3-L0-P3) + var(--valuable-S3-L0-P6) + var(--valuable-S3-L4-P2))
+                 var(--valuable-S3-L0-P3) + var(--valuable-S3-L0-P6) + var(--valuable-S3-L3-P6) + var(--valuable-S3-L4-P2))
                 * -24px
             ));
         }
@@ -787,6 +797,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S2-L4-P4-pickup:checked ~ .valuable-counter { --valuable-S2-L4-P4: 1; }
         #valuable-S3-L0-P3-pickup:checked ~ .valuable-counter { --valuable-S3-L0-P3: 1; }
         #valuable-S3-L0-P6-pickup:checked ~ .valuable-counter { --valuable-S3-L0-P6: 3; }
+        #valuable-S3-L3-P6-pickup:checked ~ .valuable-counter { --valuable-S3-L3-P6: 1; }
         #valuable-S3-L4-P2-pickup:checked ~ .valuable-counter { --valuable-S3-L4-P2: 1; }
 
         /* Key - single element that animates from game world to inventory */
@@ -934,6 +945,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
             color: var(--battery-color);
+            filter: drop-shadow(2px -2px 2px rgba(0, 0, 0, 0.5));
         }
         /* Enable clicking battery only when player is next to it */
         #level-1:checked ~ #stage-3-pos-2:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game {
@@ -1148,8 +1160,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         .ground-S3 {
             left: calc(var(--pos-width) * 12);
-            background: linear-gradient(to bottom, #8b5a2b 0%, #5d3a1a 100%);
-            border-top: 3px solid #a0522d;
+            background: linear-gradient(to bottom, #6b6f73 0%, #4a4d50 100%);
+            border-top: 3px solid #7a7e82;
         }
 
         /* Warning strips - yellow/black diagonal stripes marking stage edges */
@@ -2060,6 +2072,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
         }
+        .valuable-S3-L3-P6 {
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset));
+        }
         .valuable-S3-L4-P2 {
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
@@ -2162,6 +2178,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
+        #level-3:checked ~ #stage-3-pos-6:checked ~ #valuable-S3-L3-P6-pickup:not(:checked) ~ .game-world .valuable-S3-L3-P6 .valuable-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
+        }
         #level-4:checked ~ #stage-3-pos-2:checked ~ #valuable-S3-L4-P2-pickup:not(:checked) ~ .game-world .valuable-S3-L4-P2 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
@@ -2193,6 +2214,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Move Stage 3 valuables to counter when picked up (add viewport offset) */
         #valuable-S3-L0-P3-pickup:checked ~ .game-world .valuable-S3-L0-P3,
         #valuable-S3-L0-P6-pickup:checked ~ .game-world .valuable-S3-L0-P6,
+        #valuable-S3-L3-P6-pickup:checked ~ .game-world .valuable-S3-L3-P6,
         #valuable-S3-L4-P2-pickup:checked ~ .game-world .valuable-S3-L4-P2 {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
             left: calc(var(--pos-width) * 18 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
@@ -2450,8 +2472,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
         }
 
-        /* Death overlay */
-        .death-overlay {
+        /* Overlay base styles */
+        .overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -2459,68 +2481,79 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: 0;
             background: rgba(0, 0, 0, 0.85);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
             z-index: var(--z-overlay);
             opacity: 0;
             pointer-events: none;
-            transition: opacity 1s ease-in;
+            transition: opacity 0.5s ease-out;
         }
-        .death-overlay .death-message {
-            color: #ff0000;
+        .overlay .message {
             font-size: 28px;
             font-weight: bold;
             text-shadow: 2px 2px 4px #000;
             text-align: center;
         }
-        .death-overlay .death-submessage {
+        .overlay .submessage {
             color: #888;
             font-size: 18px;
             margin-top: 10px;
         }
-        /* Show death overlay when player is at hazard locations */
-        #level-1:checked ~ #stage-1-pos-6:checked ~ .death-overlay-poison {
+
+        /* Title screen overlay */
+        .title-screen-overlay {
+            background: rgba(0, 0, 0, 0.9);
             opacity: 1;
             pointer-events: auto;
+            cursor: pointer;
         }
-        #level-0:checked ~ #stage-2-pos-4:checked ~ .death-overlay-disease,
-        #level-1:checked ~ #stage-2-pos-3:checked ~ .death-overlay-disease {
+        .title-screen-overlay .message {
+            color: #48d8d8;
+            font-size: 36px;
+        }
+        .title-screen-overlay .story {
+            color: #aaa;
+            font-size: 16px;
+            text-align: center;
+            line-height: 1.7;
+            margin-top: 25px;
+        }
+        .title-screen-overlay .submessage {
+            font-size: 16px;
+            margin-top: 30px;
+        }
+        /* Hide title screen when checkbox is checked */
+        #title-screen-toggle:checked ~ .game-container .title-screen-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+        /* When title screen is showing, move player to foreground */
+        #title-screen-toggle:not(:checked) ~ .game-container .game-world .player {
+            left: calc(var(--pos-offset) + var(--pos-width) * 2.5);
+            bottom: calc(65% + 20px);
+            transform: translateX(-50%);
+            z-index: calc(var(--z-overlay) + 1);
+        }
+
+        /* Death overlay */
+        .death-screen-overlay .message {
+            color: #ff0000;
+        }
+        /* Show death overlay when player is at hazard locations */
+        #level-1:checked ~ #stage-1-pos-6:checked ~ .death-screen-overlay-poison,
+        #level-0:checked ~ #stage-2-pos-4:checked ~ .death-screen-overlay-disease,
+        #level-1:checked ~ #stage-2-pos-3:checked ~ .death-screen-overlay-disease {
             opacity: 1;
             pointer-events: auto;
         }
 
         /* Escape overlay */
-        .escape-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: var(--z-overlay);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 1s ease-in;
-        }
-        .escape-overlay .escape-message {
+        .escape-screen-overlay .message {
             color: #4ade80;
-            font-size: 28px;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px #000;
-            text-align: center;
-        }
-        .escape-overlay .escape-submessage {
-            color: #888;
-            font-size: 18px;
-            margin-top: 10px;
         }
         /* Show escape overlay when escaped checkbox is checked */
-        #escaped:checked ~ .escape-overlay {
+        #escaped:checked ~ .escape-screen-overlay {
             opacity: 1;
             pointer-events: auto;
         }
@@ -2646,6 +2679,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S2-L4-P4-pickup:not(:checked) ~ .game-world .valuable-S2-L4-P4 .hover-area:hover ~ .tooltip,
         #valuable-S3-L0-P3-pickup:not(:checked) ~ .game-world .valuable-S3-L0-P3 .hover-area:hover ~ .tooltip,
         #valuable-S3-L0-P6-pickup:not(:checked) ~ .game-world .valuable-S3-L0-P6 .hover-area:hover ~ .tooltip,
+        #valuable-S3-L3-P6-pickup:not(:checked) ~ .game-world .valuable-S3-L3-P6 .hover-area:hover ~ .tooltip,
         #valuable-S3-L4-P2-pickup:not(:checked) ~ .game-world .valuable-S3-L4-P2 .hover-area:hover ~ .tooltip {
             opacity: 1;
         }
@@ -2992,6 +3026,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
     <!-- Debug toggle: Alt+D (Windows/Linux) or Ctrl+Alt+D (Mac) -->
     <input type="checkbox" id="debug-toggle" accesskey="d">
 
+    <!-- Title screen toggle -->
+    <input type="checkbox" id="title-screen-toggle" checked>
+
     <div class="game-container">
         <div class="title">NIBO'S WAY OUT</div>
 
@@ -3023,7 +3060,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="position" id="stage-3-pos-4" class="position-radio">
         <input type="radio" name="position" id="stage-3-pos-5" class="position-radio">
         <input type="radio" name="position" id="stage-3-pos-6" class="position-radio">
-        <input type="radio" name="position" id="stage-3-pos-φ" class="position-radio" title="S3 phantom platform">
+        <input type="radio" name="position" id="stage-3-pos-φ" class="position-radio" title="φ">
 
         <!-- Key pickup checkbox -->
         <input type="checkbox" id="key-pickup" class="key-checkbox" title="key">
@@ -3067,11 +3104,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Stage 3 valuables -->
         <input type="checkbox" id="valuable-S3-L0-P6-pickup" class="valuable-checkbox" title="ruby">
         <input type="checkbox" id="valuable-S3-L0-P3-pickup" class="valuable-checkbox" title="coin">
+        <input type="checkbox" id="valuable-S3-L3-P6-pickup" class="valuable-checkbox" title="coin">
         <input type="checkbox" id="valuable-S3-L4-P2-pickup" class="valuable-checkbox" title="coin">
 
         <div class="subtitle subtitle-S1">The Factory</div>
         <div class="subtitle subtitle-S2">The Jungle</div>
-        <div class="subtitle subtitle-S3">The Spacecraft</div>
+        <div class="subtitle subtitle-S3">The Hangar</div>
 
         <!-- Fixed navigation panel -->
         <div class="nav-panel">
@@ -3165,6 +3203,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
                     <div class="digit">13</div>
                     <div class="digit">14</div>
                     <div class="digit">15</div>
+                    <div class="digit">16</div>
+                    <div class="digit">17</div>
+                    <div class="digit">18</div>
+                    <div class="digit">19</div>
+                    <div class="digit">20</div>
                 </div>
             </div>
         </div>
@@ -3463,6 +3506,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <label for="valuable-S3-L0-P3-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
         </div>
+        <div class="container coin valuable-S3-L3-P6">
+            <label for="valuable-S3-L3-P6-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="hover-area"></span>
+        </div>
         <div class="container coin valuable-S3-L4-P2">
             <label for="valuable-S3-L4-P2-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
@@ -3470,24 +3517,31 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         </div><!-- end game-world -->
 
+        <!-- Title screen overlay -->
+        <label for="title-screen-toggle" class="overlay title-screen-overlay">
+            <div class="message">NIBO'S WAY OUT</div>
+            <p class="story">Nibo is lost on an alien planet.<br>He must find his ship.<br>Help him escape.</p>
+            <div class="submessage">Click to start</div>
+        </label>
+
         <!-- Death overlays -->
-        <div class="death-overlay death-overlay-poison">
-            <div class="death-message">You died from poison</div>
-            <div class="death-submessage">GAME OVER</div>
+        <div class="overlay death-screen-overlay death-screen-overlay-poison">
+            <div class="message">You died from poison</div>
+            <div class="submessage">GAME OVER</div>
         </div>
-        <div class="death-overlay death-overlay-disease">
-            <div class="death-message">You died from a deadly disease</div>
-            <div class="death-submessage">GAME OVER</div>
+        <div class="overlay death-screen-overlay death-screen-overlay-disease">
+            <div class="message">You died from a deadly disease</div>
+            <div class="submessage">GAME OVER</div>
         </div>
-        <div class="death-overlay death-overlay-chemical">
-            <div class="death-message">You died from chemical waste</div>
-            <div class="death-submessage">GAME OVER</div>
+        <div class="overlay death-screen-overlay death-screen-overlay-chemical">
+            <div class="message">You died from chemical waste</div>
+            <div class="submessage">GAME OVER</div>
         </div>
 
         <!-- Escape overlay -->
-        <div class="escape-overlay">
-            <div class="escape-message">You Escaped!</div>
-            <div class="escape-submessage">Well done</div>
+        <div class="overlay escape-screen-overlay">
+            <div class="message">You Escaped!</div>
+            <div class="submessage">Well done</div>
         </div>
     </div>
 </body>
