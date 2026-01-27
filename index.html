@@ -639,8 +639,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #axe-pickup { top: 50px; left: 160px; }
         #idcard-pickup { top: 50px; left: 180px; }
         #tree-chopped { top: 50px; left: 200px; }
-        #escaped { top: 50px; left: 220px; }
         #battery-pickup { top: 50px; left: 290px; }
+        #escaped { top: 50px; left: 310px; }
         /* Show inputs when debug is checked */
         #debug-toggle:checked ~ .game-container .position-radio,
         #debug-toggle:checked ~ .game-container .level-radio,
@@ -1325,11 +1325,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: block;
         }
 
+        /* Base ladder styles */
         .ladder {
             position: absolute;
             width: 24px;
             height: calc(var(--platform-height) - var(--platform-thickness));
             z-index: 10;
+        }
+
+        /* Wooden ladder - two vertical rails with horizontal rungs */
+        .wooden-ladder {
             /* Two vertical rails (4px each) */
             background:
                 linear-gradient(90deg,
@@ -1342,7 +1347,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 inset -1px 0 0 #8b5a2b;
         }
         /* Horizontal rungs using repeating gradient */
-        .ladder::after {
+        .wooden-ladder::after {
             content: '';
             position: absolute;
             top: 0;
@@ -1355,6 +1360,53 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 transparent 10px,
                 #cd853f 10px,
                 #cd853f 14px
+            );
+        }
+
+        /* Spine ladder - central pole with alternating rungs */
+        .spine-ladder {
+            /* Central vertical pole (4px wide, centered) */
+            background:
+                linear-gradient(90deg,
+                    transparent 0px, transparent 10px,
+                    #708090 10px, #708090 14px,
+                    transparent 14px, transparent 24px
+                );
+            filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));
+        }
+        /* Alternating rungs using two pseudo-elements */
+        .spine-ladder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 14px;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 10px,
+                #708090 10px,
+                #708090 14px,
+                transparent 14px,
+                transparent 28px
+            );
+        }
+        .spine-ladder::after {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 10px;
+            width: 14px;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 10px,
+                #708090 10px,
+                #708090 14px,
+                transparent 14px,
+                transparent 28px
             );
         }
 
@@ -3352,10 +3404,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="platform platform-S1-L3-right"></div>
         <div class="platform platform-S1-L4"></div>
         <!-- Ladders (up) -->
-        <div class="ladder ladder-S1-L0-P5"></div>
-        <div class="ladder ladder-S1-L1-P3"></div>
-        <div class="ladder ladder-S1-L2-P1"></div>
-        <div class="ladder ladder-S1-L3-P4"></div>
+        <div class="ladder wooden-ladder ladder-S1-L0-P5"></div>
+        <div class="ladder wooden-ladder ladder-S1-L1-P3"></div>
+        <div class="ladder wooden-ladder ladder-S1-L2-P1"></div>
+        <div class="ladder wooden-ladder ladder-S1-L3-P4"></div>
         <!-- Grates (down) -->
         <div class="grate grate-S1-L1-P1"></div>
         <div class="grate grate-S1-L2-P5"></div>
@@ -3452,9 +3504,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Floating platform (phantom position) -->
         <div class="platform-S3-L4-P5-floating"></div>
         <!-- Ladders -->
-        <div class="ladder ladder-S3-L0-P4"></div>
-        <div class="ladder ladder-S3-L1-P6"></div>
-        <div class="ladder ladder-S3-L3-P5"></div>
+        <div class="ladder spine-ladder ladder-S3-L0-P4"></div>
+        <div class="ladder spine-ladder ladder-S3-L1-P6"></div>
+        <div class="ladder spine-ladder ladder-S3-L3-P5"></div>
 
         <!-- ==================== STAGE 1 VALUABLES ==================== -->
         <div class="container coin valuable-S1-L0-P3">
