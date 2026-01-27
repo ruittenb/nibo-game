@@ -217,6 +217,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --ruby-color-3: #f06858;
             --ruby-color-4: #ffa090;
             --battery-color: #4a9f4a;
+            --bolt-color-1: #ffdd00;
+            --bolt-color-2: #ffaa00;
+            --barrel-color: #c48b9f;
             --wrench-color: #708090;
             --idcard-color: #3090f0;
             --border-color: #4a4a6a;      /* Border color for UI elements */
@@ -537,13 +540,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
             width: 20px;
             height: 24px;
-            color: #ffdd00;
+            color: var(--bolt-color-1);
         }
         .short-circuit-bolt svg {
             width: 100%;
             height: 100%;
-            filter: drop-shadow(0 0 4px #ffdd00);
-            animation: short-circuit 2s steps(1) infinite;
+            filter: drop-shadow(0 0 4px var(--bolt-color-1));
+            animation: short-circuit 3s steps(1) infinite;
         }
         .short-circuit-bolt .tooltip {
             bottom: 100%;
@@ -558,15 +561,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
         @keyframes short-circuit {
-            0%, 3% { opacity: 1; filter: drop-shadow(0 0 8px #ffdd00) drop-shadow(0 0 15px #ffaa00); }
-            4%, 5% { opacity: 0; }
-            6%, 10% { opacity: 1; filter: drop-shadow(0 0 6px #ffdd00); }
-            11%, 12% { opacity: 0; }
-            13%, 50% { opacity: 1; filter: drop-shadow(0 0 4px #ffdd00); }
-            51%, 52% { opacity: 0; }
-            53%, 56% { opacity: 1; filter: drop-shadow(0 0 10px #ffdd00) drop-shadow(0 0 20px #ffaa00); }
-            57%, 58% { opacity: 0; }
-            59%, 100% { opacity: 1; filter: drop-shadow(0 0 4px #ffdd00); }
+            0%, 3% { opacity: 1; filter: drop-shadow(0 0 8px var(--bolt-color-1)) drop-shadow(0 0 15px var(--bolt-color-2)); translate: 1px 0; }
+            4%, 5% { opacity: 0; translate: 0 0; }
+            6%, 10% { opacity: 1; filter: drop-shadow(0 0 6px var(--bolt-color-1)); translate: -1px 1px; }
+            11%, 12% { opacity: 0; translate: 0 0; }
+            13%, 25% { opacity: 1; filter: drop-shadow(0 0 4px var(--bolt-color-1)); translate: 0 -1px; }
+            26%, 35% { opacity: 1; filter: drop-shadow(0 0 4px var(--bolt-color-1)); translate: 1px 1px; }
+            36%, 50% { opacity: 1; filter: drop-shadow(0 0 4px var(--bolt-color-1)); translate: -1px 0; }
+            51%, 52% { opacity: 0; translate: 0 0; }
+            53%, 56% { opacity: 1; filter: drop-shadow(0 0 10px var(--bolt-color-1)) drop-shadow(0 0 20px var(--bolt-color-2)); translate: 2px -1px; }
+            57%, 58% { opacity: 0; translate: 0 0; }
+            59%, 70% { opacity: 1; filter: drop-shadow(0 0 4px var(--bolt-color-1)); translate: 0 1px; }
+            71%, 85% { opacity: 1; filter: drop-shadow(0 0 4px var(--bolt-color-1)); translate: -1px -1px; }
+            86%, 100% { opacity: 1; filter: drop-shadow(0 0 4px var(--bolt-color-1)); translate: 1px 0; }
         }
         /* Hide short-circuit when fixed */
         #circuit-fixed:checked ~ .game-world .short-circuit-bolt {
@@ -587,16 +594,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
             color: #50c050;
-        }
-        @keyframes battery-pulse {
-            0%, 100% {
-                transform: scale(1);
-                filter: drop-shadow(0 0 8px #50c050);
-            }
-            50% {
-                transform: scale(1.2);
-                filter: drop-shadow(0 0 15px #50c050) drop-shadow(0 0 25px #50c050);
-            }
         }
         /* Show battery at circuit when player is next to it, has battery, AND circuit not yet fixed */
         #level-1:checked ~ #stage-3-pos-3:checked ~ #battery-pickup:checked ~ #circuit-fixed:not(:checked) ~ .game-world .battery-at-circuit {
@@ -1614,9 +1611,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 32px;
             height: 32px;
-            color: #c48b9f;
+            color: var(--barrel-color);
             transform: scaleY(1.5);
-            filter: drop-shadow(2px -2px 2px rgba(0, 0, 0, 0.5));
+            filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.8));
         }
         .barrel-S3-L4-P3 svg:first-child {
             rotate: 90deg;
@@ -2299,8 +2296,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             50% { filter: drop-shadow(0 0 12px var(--wrench-color)) drop-shadow(0 0 20px var(--wrench-color)); }
         }
         @keyframes battery-pulse {
-            0%, 100% { filter: drop-shadow(0 0 4px var(--battery-color)); }
-            50% { filter: drop-shadow(0 0 12px var(--battery-color)) drop-shadow(0 0 20px var(--battery-color)); }
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px var(--battery-color)); }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 12px var(--battery-color)) drop-shadow(0 0 20px var(--battery-color)); }
         }
         @keyframes idcard-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--idcard-color)); }
@@ -2651,6 +2648,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
             color: var(--wrench-color);
+            filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));
         }
         #level-0:checked ~ #stage-1-pos-6:checked ~ #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .wrench-at-door {
             display: block;
@@ -2916,9 +2914,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <symbol id="bacteria" viewBox="0 -40 640 600">
             <path fill="currentColor" d="M 256 -32 c 13.3 0 24 10.7 24 24 l 0 11 c 8.6 2.2 16.9 5.6 24.8 10.3 L 311 7 c 9.4 -9.4 24.6 -9.4 33.9 0 s 9.4 24.6 0 33.9 l -6.3 6.3 c 4.6 7.8 8 16.2 10.3 24.8 l 11 0 c 13.3 0 24 10.7 24 24 s -10.7 24 -24 24 l -11 0 c -2.2 8.6 -5.6 16.9 -10.3 24.8 L 345 151 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 -30.1 30.1 4.1 4.1 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 c -10 10 -20 20 -30.1 30.1 L 217 279 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -6.3 -6.3 c -7.8 4.6 -16.2 8 -24.8 10.3 l 0 11 c 0 13.3 -10.7 24 -24 24 s -24 -10.7 -24 -24 l 0 -11 c -8.6 -2.2 -16.9 -5.6 -24.8 -10.3 L 73 313 c -9.4 9.4 -24.6 9.4 -33.9 0 s -9.4 -24.6 0 -33.9 l 6.3 -6.3 c -4.6 -7.8 -8 -16.2 -10.3 -24.8 l -11 0 c -13.3 0 -24 -10.7 -24 -24 s 10.7 -24 24 -24 l 11 0 c 2.2 -8.6 5.6 -16.9 10.3 -24.8 L 39 169 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 c 10 -10 20 -20 30.1 -30.1 L 103 105 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 30.1 -30.1 -4.1 -4.1 c -9.4 -9.4 -9.4 -24.6 0 -33.9 S 191.6 -2.3 201 7 l 6.3 6.3 c 7.8 -4.6 16.2 -8 24.8 -10.3 l 0 -11 c 0 -13.3 10.7 -24 24 -24 z M 128 256 a 32 32 0 1 0 0 -64 32 32 0 1 0 0 64 z M 240 144 a 32 32 0 1 0 -64 0 32 32 0 1 0 64 0 z m 296 40 l 0 11 c 8.6 2.2 16.9 5.6 24.8 10.3 L 567 199 c 9.4 -9.4 24.6 -9.4 33.9 0 s 9.4 24.6 0 33.9 l -6.3 6.3 c 4.6 7.8 8 16.2 10.3 24.8 l 11 0 c 13.3 0 24 10.7 24 24 s -10.7 24 -24 24 l -11 0 c -2.2 8.6 -5.6 16.9 -10.3 24.8 L 601 343 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 -30.1 30.1 4.1 4.1 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 c -10 10 -20 20 -30.1 30.1 L 473 471 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -6.3 -6.3 c -7.8 4.6 -16.2 8 -24.8 10.3 l 0 11 c 0 13.3 -10.7 24 -24 24 s -24 -10.7 -24 -24 l 0 -11 c -8.6 -2.2 -16.9 -5.6 -24.8 -10.3 L 329 505 c -9.4 9.4 -24.6 9.4 -33.9 0 s -9.4 -24.6 0 -33.9 l 6.3 -6.3 c -4.6 -7.8 -8 -16.2 -10.3 -24.8 l -11 0 c -13.3 0 -24 -10.7 -24 -24 s 10.7 -24 24 -24 l 11 0 c 2.2 -8.6 5.6 -16.9 10.3 -24.8 L 295 361 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 c 10 -10 20 -20 30.1 -30.1 L 359 297 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 30.1 -30.1 -4.1 -4.1 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 6.3 6.3 c 7.8 -4.6 16.2 -8 24.8 -10.3 l 0 -11 c 0 -13.3 10.7 -24 24 -24 s 24 10.7 24 24 z M 448 384 a 32 32 0 1 0 -64 0 32 32 0 1 0 64 0 z"/>
         </symbol>
-        <symbol id="axe" viewBox="0 0 24 24">
-            <path fill="#cc1010" d="M 12,2 L 22,8 C 22,12 20,14 16,15 L 13,10 L 9,6 L 12,2 z"/>
-            <path fill="#c4a484" d="M 4.11,19.84 L 2.12,18.33 L 9.19,9 L 11,10.81 L 4.11,19.84 Z"/>
+        <symbol id="axe" viewBox="21 20 199 179">
+            <path fill="#cc1010" d="M 120,20 L 220,80 C 220,120 200,140 160,150 L 130,100 L 90,60 L 120,20 z"/>
+            <path fill="#c4a484" d="M 41,198 L 21,183 L 92,90 L 110,108 L 41,198 Z"/>
         </symbol>
         <symbol id="battery" viewBox="0 0 512 512">
             <path fill="currentColor" d="M 80 64 c 0 -17.7 14.3 -32 32 -32 l 64 0 c 17.7 0 32 14.3 32 32 l 96 0 c 0 -17.7 14.3 -32 32 -32 l 64 0 c 17.7 0 32 14.3 32 32 l 16 0 c 35.3 0 64 28.7 64 64 l 0 256 c 0 35.3 -28.7 64 -64 64 L 64 448 c -35.3 0 -64 -28.7 -64 -64 L 0 128 C 0 92.7 28.7 64 64 64 l 16 0 z M 392 184 c 0 -13.3 -10.7 -24 -24 -24 s -24 10.7 -24 24 l 0 32 -32 0 c -13.3 0 -24 10.7 -24 24 s 10.7 24 24 24 l 32 0 0 32 c 0 13.3 10.7 24 24 24 s 24 -10.7 24 -24 l 0 -32 32 0 c 13.3 0 24 -10.7 24 -24 s -10.7 -24 -24 -24 l -32 0 0 -32 z M 64 240 c 0 13.3 10.7 24 24 24 l 112 0 c 13.3 0 24 -10.7 24 -24 s -10.7 -24 -24 -24 L 88 216 c -13.3 0 -24 10.7 -24 24 z"/>

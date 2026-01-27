@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-<path
-   fill="#cc1010"
-   d="M 12,2 L 22,8 C 22,12 20,14 16,15 L 13,10 L 9,6 L 12,2 z"
-/>
-<path
-   fill="currentColor"
-   d="M 4.11,19.84 L 2.12,18.33 L 9.19,9 L 11,10.81 L 4.11,19.84 Z"
-/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="21 20 199 179">
+   <path
+      fill="#cc1010"
+      d="M 120,20 L 220,80 C 220,120 200,140 160,150 L 130,100 L 90,60 L 120,20 z"
+   />
+   <path
+      fill="#c4a484"
+      d="M 41,198 L 21,183 L 92,90 L 110,108 L 41,198 Z"
+   />
 </svg>
