@@ -619,8 +619,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S2-L2-P1-pickup { top: 30px; left: 200px; }
         #valuable-S2-L3-P3-pickup { top: 30px; left: 220px; }
         #valuable-S2-L4-P4-pickup { top: 30px; left: 240px; }
-        #valuable-S3-L0-P6-pickup { top: 30px; left: 290px; }
-        #valuable-S3-L4-P3-pickup { top: 30px; left: 310px; }
+        #valuable-S3-L0-P3-pickup { top: 30px; left: 290px; }
+        #valuable-S3-L0-P6-pickup { top: 30px; left: 310px; }
+        #valuable-S3-L4-P2-pickup { top: 30px; left: 330px; }
         /* Debug positions - items (row 3) */
         #key-pickup { top: 50px; left: 30px; }
         #toolbox-unlock { top: 50px; left: 50px; }
@@ -740,8 +741,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --valuable-S2-L2-P1: 0;
             --valuable-S2-L3-P3: 0;
             --valuable-S2-L4-P4: 0;
+            --valuable-S3-L0-P3: 0;
             --valuable-S3-L0-P6: 0;
-            --valuable-S3-L4-P3: 0;
+            --valuable-S3-L4-P2: 0;
         }
         .valuable-counter .valuable-icon {
             width: 24px;
@@ -761,7 +763,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: translateY(calc(
                 (var(--valuable-S1-L0-P3) + var(--valuable-S1-L1-P4) + var(--valuable-S1-L3-P5) + var(--valuable-S1-L2-P1) + var(--valuable-S1-L4-P2) +
                  var(--valuable-S2-L0-P2) + var(--valuable-S2-L1-P5) + var(--valuable-S2-L2-P1) + var(--valuable-S2-L3-P3) + var(--valuable-S2-L4-P4) +
-                 var(--valuable-S3-L0-P6) + var(--valuable-S3-L4-P3))
+                 var(--valuable-S3-L0-P3) + var(--valuable-S3-L0-P6) + var(--valuable-S3-L4-P2))
                 * -24px
             ));
         }
@@ -783,8 +785,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S2-L2-P1-pickup:checked ~ .valuable-counter { --valuable-S2-L2-P1: 1; }
         #valuable-S2-L3-P3-pickup:checked ~ .valuable-counter { --valuable-S2-L3-P3: 2; }
         #valuable-S2-L4-P4-pickup:checked ~ .valuable-counter { --valuable-S2-L4-P4: 1; }
+        #valuable-S3-L0-P3-pickup:checked ~ .valuable-counter { --valuable-S3-L0-P3: 1; }
         #valuable-S3-L0-P6-pickup:checked ~ .valuable-counter { --valuable-S3-L0-P6: 3; }
-        #valuable-S3-L4-P3-pickup:checked ~ .valuable-counter { --valuable-S3-L4-P3: 1; }
+        #valuable-S3-L4-P2-pickup:checked ~ .valuable-counter { --valuable-S3-L4-P2: 1; }
 
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
@@ -1382,24 +1385,28 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Barrel at S3-L4-P3 */
         .barrel-S3-L4-P3 {
             position: absolute;
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 4px);
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) * 2 + 4px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 + var(--ladder-offset) + 8px);
             width: 32px;
             z-index: 10;
-            display: flex;
-            flex-direction: column;
         }
         .barrel-S3-L4-P3 svg {
-            width: 100%;
+            position: absolute;
+            width: 32px;
             height: 32px;
             color: #9acd32;
+            transform: scaleY(1.5);
+            filter: drop-shadow(2px -2px 2px rgba(0, 0, 0, 0.5));
         }
         .barrel-S3-L4-P3 svg:first-child {
-            transform: rotate(90deg);
-            position: absolute;
-            top: -8px;
+            rotate: 90deg;
+            top: 5px;
             left: -4px;
-            z-index: -1;
+            z-index: 1;
+        }
+        .barrel-S3-L4-P3 svg:nth-child(2) {
+            top: 0px;
+            left: 14px;
         }
         .barrel-S3-L4-P3 .tooltip {
             bottom: calc(100% + 6px);
@@ -2049,9 +2056,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset));
         }
-        .valuable-S3-L4-P3 {
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
+        .valuable-S3-L0-P3 {
+            bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
+        }
+        .valuable-S3-L4-P2 {
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
         }
 
         /* Coin pulsating glow when player is nearby */
@@ -2146,7 +2157,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: ruby-pulse 1s ease-in-out infinite;
         }
-        #level-4:checked ~ #stage-3-pos-3:checked ~ #valuable-S3-L4-P3-pickup:not(:checked) ~ .game-world .valuable-S3-L4-P3 .valuable-in-game {
+        #level-0:checked ~ #stage-3-pos-3:checked ~ #valuable-S3-L0-P3-pickup:not(:checked) ~ .game-world .valuable-S3-L0-P3 .valuable-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
+        }
+        #level-4:checked ~ #stage-3-pos-2:checked ~ #valuable-S3-L4-P2-pickup:not(:checked) ~ .game-world .valuable-S3-L4-P2 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
@@ -2175,8 +2191,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Move Stage 3 valuables to counter when picked up (add viewport offset) */
+        #valuable-S3-L0-P3-pickup:checked ~ .game-world .valuable-S3-L0-P3,
         #valuable-S3-L0-P6-pickup:checked ~ .game-world .valuable-S3-L0-P6,
-        #valuable-S3-L4-P3-pickup:checked ~ .game-world .valuable-S3-L4-P3 {
+        #valuable-S3-L4-P2-pickup:checked ~ .game-world .valuable-S3-L4-P2 {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
             left: calc(var(--pos-width) * 18 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
             opacity: 0;
@@ -2627,8 +2644,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S2-L2-P1-pickup:not(:checked) ~ .game-world .valuable-S2-L2-P1 .hover-area:hover ~ .tooltip,
         #valuable-S2-L3-P3-pickup:not(:checked) ~ .game-world .valuable-S2-L3-P3 .hover-area:hover ~ .tooltip,
         #valuable-S2-L4-P4-pickup:not(:checked) ~ .game-world .valuable-S2-L4-P4 .hover-area:hover ~ .tooltip,
+        #valuable-S3-L0-P3-pickup:not(:checked) ~ .game-world .valuable-S3-L0-P3 .hover-area:hover ~ .tooltip,
         #valuable-S3-L0-P6-pickup:not(:checked) ~ .game-world .valuable-S3-L0-P6 .hover-area:hover ~ .tooltip,
-        #valuable-S3-L4-P3-pickup:not(:checked) ~ .game-world .valuable-S3-L4-P3 .hover-area:hover ~ .tooltip {
+        #valuable-S3-L4-P2-pickup:not(:checked) ~ .game-world .valuable-S3-L4-P2 .hover-area:hover ~ .tooltip {
             opacity: 1;
         }
     </style>
@@ -2684,11 +2702,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <path fill="#4e9aa2" d="M1212 268h73q-9 21-21 41l-2 5-6 12h-2l-1 5q-3 10-13 14l-3 2q-11 5-21 12c-11 6-26 3-38 2l-38-3-11-1h-17l22 2h8l40 3 11 1 6 8 15 4h3l9 1 7 1 55 8c11 1 11 1 14 4l4 12h-215q-10 0-21 6l-13 1h-22q-18 2-34-7-15-7-31-6H854l-64-1-173-1H460a574 574 0 0 0-87 4l-1-4-2 6h-8l-4 1c-5 1-5 1-9 11l25 1v-5q5-2 11-1h31v5q-6 4-14 4h-9l16 1-6 24h-11q-4 0-7 5l-2 8-1 5v3l-9 1-6 2-1 4 3-1v-2q5-2 11-2l-7 5h59l3-6h3l1-3v6l-3 2h3l1-10 12-1h-12l-1-9-2-6h-12q-3-1-6 3l-2 7v4l-1 3-9 1q0-10 3-20l6-17 2-6 10-1h9l3-8h34l5 1v5h-4l1 55-8-1v10h-9l7 1v2l-20-1-1-4-1 5h-8l2-10h-38l5 2-2 8-6 1c-1-4-1-4 1-11h-39l-1 7-3 1-3-8h-9v-1h7l-3-10-1-3c-1-6-1-6-4-10h-5l2 5 2 10-4-1-2-6-4-2 3-12-25 58-4 9q-3 6-11 8l-5 2-8 3-1 2h-79l-5 1h-28v-2H65v4h2c2 4 2 4 3 13h204v6l-1-4h-92l-1 31-3 3 4 11q-9 2-18-1l-2 1-1-2-9-3-3-1-6-1-10-3-30-9-21-6-6-1-4-2q-4 0-7-5-7-18-11-38l-1-3-1-4-1-3 1-9q5-5 12-8l4-2 4-2 5-1 14-6 4-2 4-1q36-15 69-31c76-36 157-64 241-71q17-1 32-10 17-10 36-10v-2h5l23-1q30-3 61-3h24c20 0 20 0 29 4q15 6 31 7l11 1 5 1 12 1h4q13 3 25 9l14 1 6 1h43l55 1h17l73 1c20 1 20 1 38-7l6-6q6-5 13-5l4-1a473 473 0 0 1 101 0h5q10-2 17-11l8-6 4-3 16-11 16-12 7-3 9-6 2-2 36-25c9-6 9-6 16-6"/>
             <path fill="#666960" d="M372 392h1v5h3q64-8 128-5h190l4 1 102 1v49h-14l-1-40-1 21-12 1h-21q-2 6-1 11v6l-1 6v20h3v-40l27 1v39h-2v2h-28l1 41 36 1v-66h14v19l1 7v40l487 1v8H729l-442-1 9-4 4-2h3v-2l410-1c-6-17-6-17-15-19l-11 1h-5l-1-5-17-1 1-3h3v-2l-5 1-1-3 1 9 18 1v4l-12 1h-58l-4-1v-24h-6v18l-2 1-3-1h-15l-1-46v16l-1 1-1 8h-1l-1 43-16 1v-41h-2v41h-15l1-26v-4l-1-1v-10h-9v9h6v1l-5 1-1 4h-12l-6-1v16h-20q-2-8-2-17l18-1-4-1v-10l-16-1v10h-21v-9l-1-3 5-1v-3l-1-15v-5l1-31h4l-1-5-38-1-1 6-2 3-10 1h-9l-1 3-3 12-2 5-1 4-1 4-2 5-1 9 9-1v-5q1-7 4-12l9-1h8q5 7 3 16h2l16-1v1l-18 1 1 4q1 4-2 7l-4-1 3-2v-3h-3l-1 4-2 3h-60l6-5-9 1v2l2 1h-5l1-5q7-3 15-2v-3l1-5v-4q1-6 6-9h14l6-24h-17l1-2h9l5-1 8-2 1-5-42 1v5h-25l4-11 17-3z"/>
             <path fill="#4a5151" d="M426 370v1l-23 2-1 5-2 3q-4 6-4 13h-1v-6l-5 1-16 1-1 3h-1l-2 6h-8l-4 1c-5 1-5 1-9 11l25 1v-5q5-2 11-1h31v5q-6 4-14 4h-9l16 1-6 24h-10c-4 1-4 1-8 5l-2 8v5l-1 3-9 1-6 2-1 4 3-1v-2q5-2 11-2l-7 5h59l3-6h3l1-3v6l-3 2h3l1-10 12-1h-12l-1-9-2-6h-11q-4-1-7 3l-2 7v4l-1 3-9 1q0-10 3-20l6-17 2-6 10-1h9l3-8h34l5 1v5h-4l1 55-8-1v10h-9l7 1v2l-20-1-1-4-1 5h-8l2-10h-38l5 2-2 8-6 1c-1-4-1-4 1-11h-39l-1 7-3 1-3-8h-9v-1h7l-3-10-1-3c-1-6-1-6-4-10h-5l2 5 2 10-4-1-2-6-4-2 3-12-13 30-2 5-9 20-1 4-3 8q-4 6-12 8l-5 2-8 3-1 2h-79l-5 1h-28v-2H65v4h2c2 4 2 4 3 13h204v6l-1-4h-92l-1 31-3 3 4 11q-9 2-18-1l-2 1-1-2-9-3-3-1-6-1-10-3-30-9-12-3-9-3-6-1-4-2q-4 0-7-5-7-18-11-37l-1-4-1-4-1-3 1-9q5-5 12-8l4-2 4-2 5-1 14-6 4-2 4-1q36-15 69-31c78-36 171-74 259-72"/>
-            <path fill="#384041" d="m175 602 23 5 4 1 16 4 20 5 4 1 36 7 35 7 6 2 10 1 27 5 36 7-1 4c-11 7-22 4-34 1h-12c-8 6-8 6-11 15l2 1h-3v3h3l212-1 21-1h397v1h-3c-8 1-8 1-14 5l-1 3-3 1-1 7h4l32 2v4l10 2v1H782l-79-1H549l-208-1h-9l-110-3q-61-1-122-6h-3c-31-3-31-3-41-6 7-6 23-4 32-4l4-1h20l96-2h80l1-3 21-1h3q-3-5-9-7-7-4-11-12l-5 1-9-6c-5-3-5-3-11-4l-1 2q-8 1-16-2l-1-6h-4l-25-5-10-2-6-1-6-1-7-3v-2l-5-2-6-4-3-2z"/>
             <path fill="#292c2b" d="M335 436q1 5-1 10l-2 3-1 3 5 2 2 6 3 1-2-6-1-4-2-6h6q5 5 6 12l1 5 1 7 3 3 2 6 2-1 2-7h39l-1 9 6 1v-5l2-3h-5v-2h38l-2 10h8v-5l2-1v5h11l9 1v-2h-10q6-3 11-2l1-9h5l-3 1v2l2 1-1 9h21v-10h26v1h-10v10h8q-6 3-13 2h-9l1 2 1 8v7l5-1 15 1v-16l18 1 1-5-1-1v-9h9v5l2 7v7l-1 4v8l-1 10h15v-41h2v41l16-1v-44h1v-3l2-6v-11l1-9h1v51l2-1h10l7 1 1-18h5l1-4v4l3 1h-3l1 23h73v-4h-18l-2-16c2 3 2 3 2 8h5v2l-3 1-1 2h18v6h22l10 19H303l4-12 2-5 2-5 4-9 2-5z"/>
             <path fill="#137f92" d="M1212 268h73q-9 21-21 41l-2 5-6 12h-2l-1 5q-3 10-13 14l-3 2q-11 5-21 12c-11 6-26 3-38 2l-38-3-11-1h-10q-51 0-103-4v-1h38l5 1h10c13 1 13 1 23-5l6-6 8-6 4-3 16-11 16-12 7-3 9-6 2-2 36-25c9-6 9-6 16-6"/>
             <path fill="#37a9bc" d="m327 454-10 26-4 9-2 4-4 8-1 4-1 3-6 6-5 1-10 5h-84l-5 1h-19l-19-1h-4l-12-1h-27l-1-22v-9q1-8 8-11l17-3h6l16-2 12-1 22-3 34-4 36-4 24-2 3-1 13-1 9-1 6-1z"/>
-            <path fill="#c8c5bd" d="m396 649 4 1 25 1h33l12 3q7 4 16 3h37c9 0 9 0 12 3h18l6 1h56l4 1 20 1h6c11 0 17-1 27-6 12-8 24-7 38-7h212l8 1h16q6 0 11 3l7 1q7 1 11 6l4 2v1h-4l-8 2v3l-199 1H585l-43 1H333q0-9 6-15l3-3q7-5 15-2l6 1 9 2c9 0 16-5 24-5"/>
             <path fill="#7f9597" d="M786 446h14v19l1 7v40l487 1v8H729l-442-1 9-4 4-2h3v-2h483z"/>
             <path fill="#29a3b7" d="M1293 514h28v49l-26 8h-4l-14 4-30 7-26 6-31 7-4 1-18 4-1 26-6 1-3 1h-8v-91h143z"/>
             <path fill="#178699" d="m1349 300 27 2h43l1 3-4 4-5 5-3 3-14 15-7 7-10 11-15 15-13 15q-8 5-17 2l-20-4-6-1-80-16q-6-1-7-3c8-6 8-6 14-7v-2l5-2 17-9 8-4 43-22 15-8 3-1q12-7 25-3"/>
@@ -2713,7 +2729,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <path fill="#b2a38a" d="M1064 541h76v3l1 3v4l2 8v14l4-1v20l-6 1v-7h-25l-1 2-8 1-1 4q-2 6-4 6h-11v-8c-2 2-2 2-2 9h-25v-11l22-1v-33h2v-4h-3l-25-1v-8z"/>
             <path fill="#3698a8" d="M570 346h5c21 0 37 2 56 10l1 12q-1 3-7 2h-12l-92-1h-39l-1-12-1 1h-10q-14 0-26 7l-13 4c17-17 42-17 65-19l10-1z"/>
             <path fill="#6c807d" d="M478 415h2v42l-1 10h13v2h16v-7h26v7h9v-25h15v25h2v-11h16v52l-16 1v-41h-2v41h-15l1-26v-4l-1-1v-10h-9v9h6v1l-5 1-1 4h-12l-6-1v16h-20q-2-8-2-17l18-1-4-1v-10l-16-1v10h-21v-9l-1-3h6v-40q0-7 2-13"/>
-            <path fill="#505759" d="M304 667h4c4 0 4 0 9 3v2h-21l-1 2v-2l-8 3-9 1-1 3q0 3-4 5l-1 5 17 1v1l-54-1h-11q-63-2-124-6h-3c-31-3-31-3-41-6 6-6 23-4 32-4l4-1h20l96-2h80l1-3z"/>
             <path fill="#3caec1" d="M1355 301h4l8 2-12 8-10 7c-22 15-22 15-33 19-4 1-4 1-8 5l-11 6-6 4-3 1-23 14-34-6c-6-1-6-1-8-3 8-6 8-6 14-7v-2l5-2 17-9 8-4 58-30 3-1c12-6 19-5 31-2"/>
             <path fill="#1b99ae" d="M1150 570h139l-1 2-9 2-6 2-6 1-9 2-11 3-26 6-31 7-4 1-18 4-1 26-6 1-3 1h-8z"/>
             <path fill="#556569" d="M1298 405h23q6 19 5 39v15h-22l-2 10h5l12-1 2 2h-29l-18-1v-59h13l1 19 6-2h5v-3h2l-1-6v-4z"/>
@@ -3051,7 +3066,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="valuable-S2-L4-P4-pickup" class="valuable-checkbox" title="valuable">
         <!-- Stage 3 valuables -->
         <input type="checkbox" id="valuable-S3-L0-P6-pickup" class="valuable-checkbox" title="ruby">
-        <input type="checkbox" id="valuable-S3-L4-P3-pickup" class="valuable-checkbox" title="coin">
+        <input type="checkbox" id="valuable-S3-L0-P3-pickup" class="valuable-checkbox" title="coin">
+        <input type="checkbox" id="valuable-S3-L4-P2-pickup" class="valuable-checkbox" title="coin">
 
         <div class="subtitle subtitle-S1">The Factory</div>
         <div class="subtitle subtitle-S2">The Jungle</div>
@@ -3443,8 +3459,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="hover-area"></span>
             <span class="tooltip">Ruby</span>
         </div>
-        <div class="container coin valuable-S3-L4-P3">
-            <label for="valuable-S3-L4-P3-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+        <div class="container coin valuable-S3-L0-P3">
+            <label for="valuable-S3-L0-P3-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="hover-area"></span>
+        </div>
+        <div class="container coin valuable-S3-L4-P2">
+            <label for="valuable-S3-L4-P2-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
             <span class="hover-area"></span>
         </div>
 
