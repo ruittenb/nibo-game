@@ -12,7 +12,7 @@ Help Nibo the little spaceman to find his way out of the level.
 
 # Project location
 
- - [Github](https://github.com/ruittenb/nibo-game)
+ - [GitHub](https://github.com/ruittenb/nibo-game)
 
 # Similar work by others
 
