@@ -1,13 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80">
-  <!-- Bottom rectangle with rounded sides -->
-  <rect
-    fill="currentColor"
-    x="5" y="50" width="90" height="25" rx="12" ry="12"
-  />
-  
-  <!-- Square top with rounded top -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" >
+  <!-- base -->
+  <ellipse cx="256" cy="300" rx="200" ry="120" fill="black" />
+  <!-- side -->
   <path
-    fill="#777"
-    d="M 25 55 L 25 25 Q 25 15 35 15 L 65 15 Q 75 15 75 25 L 75 55 Z"
+    fill="var(--control-button-side-color)"
+    d="M 106 150 A 150 78 0 0 1 406 150 L 406 280 A 150 78 0 0 1 106 280 Z"
   />
+  <!-- rounded dome top -->
+  <path
+    fill="var(--control-button-dome-color)"
+    d="M 106 150 C 122 78 195 45 256 45 C 317 45 390 78 406 150 A 150 78 0 0 0 106 150 Z"
+  />
+  <!-- top rim -->
+  <ellipse cx="256" cy="150" rx="150" ry="78" fill="none" stroke="var(--control-button-rim-color)" stroke-width="10" />
 </svg>

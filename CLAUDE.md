@@ -130,6 +130,17 @@ Since all these transitions stay on L3, they only change the position radio - ma
 
 The `#debug-toggle` checkbox reveals all state inputs for testing. Each input has a `title` attribute describing its purpose.
 
+## Adding New Checkboxes
+
+When adding a new checkbox (for item pickups, unlocks, etc.), **three things** must be updated:
+
+1. **Add the checkbox input** in the HTML inputs section (before `.game-world`)
+2. **Add the class to the hidden inputs rule** - find the CSS rule that starts with `.position-radio, .level-radio, .key-checkbox, ...` and add your new class (e.g., `.my-new-checkbox`)
+3. **Add to debug visibility rule** - find the `#debug-toggle:checked ~ .game-container ...` rule and add your class
+4. **Add debug position** - add a rule like `#my-checkbox { top: 50px; left: XXXpx; }` with a unique left offset
+
+If you skip step 2, the checkbox will be visible in the top-left corner of the play area instead of hidden.
+
 ## Adding New Items and Valuables
 
 ### Items (key, wrench, axe)
