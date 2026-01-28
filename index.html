@@ -308,7 +308,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #toolbox-unlocked:checked ~ .game-world { --inv-has-key: 0; }
         #door-unlocked:checked ~ .game-world { --inv-has-wrench: 0; }
         #tree-chopped:checked ~ .game-world { --inv-has-axe: 0; }
-        #circuit-fixed:checked ~ .game-world { --inv-has-battery: 0; }
+        #bolt-fixed:checked ~ .game-world { --inv-has-battery: 0; }
 
         .platform {
             position: absolute;
@@ -536,8 +536,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             box-shadow: inset 0 -5px 0 rgba(0,0,0,0.3);
         }
 
-        /* Short-circuit bolt S3-L1-P3 */
-        .short-circuit-bolt {
+        /* Bolt S3-L1-P3 */
+        .bolt {
             position: absolute;
             bottom: calc(var(--platform-height) * 1 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
@@ -545,25 +545,25 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 24px;
             color: var(--bolt-color-1);
         }
-        .short-circuit-bolt svg {
+        .bolt svg {
             width: 100%;
             height: 100%;
             filter: drop-shadow(0 0 4px var(--bolt-color-1));
-            animation: short-circuit 3s steps(1) infinite;
+            animation: bolt-flicker 3s steps(1) infinite;
         }
-        .short-circuit-bolt .tooltip {
+        .bolt .tooltip {
             bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
-        .short-circuit-bolt:hover {
+        .bolt:hover {
             z-index: var(--z-tooltip);
         }
-        .short-circuit-bolt:hover .tooltip {
+        .bolt:hover .tooltip {
             opacity: 1;
         }
-        @keyframes short-circuit {
+        @keyframes bolt-flicker {
             0%, 3% { opacity: 1; filter: drop-shadow(0 0 8px var(--bolt-color-1)) drop-shadow(0 0 15px var(--bolt-color-2)); translate: 1px 0; }
             4%, 5% { opacity: 0; translate: 0 0; }
             6%, 10% { opacity: 1; filter: drop-shadow(0 0 6px var(--bolt-color-1)); translate: -1px 1px; }
@@ -578,12 +578,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             71%, 85% { opacity: 1; filter: drop-shadow(0 0 4px var(--bolt-color-1)); translate: -1px -1px; }
             86%, 100% { opacity: 1; filter: drop-shadow(0 0 4px var(--bolt-color-1)); translate: 1px 0; }
         }
-        /* Hide short-circuit when fixed */
-        #circuit-fixed:checked ~ .game-world .short-circuit-bolt {
+        /* Hide bolt when fixed */
+        #bolt-fixed:checked ~ .game-world .bolt {
             display: none;
         }
-        /* Battery floating above short-circuit */
-        .battery-at-circuit {
+        /* Battery floating above bolt */
+        .battery-at-bolt {
             position: absolute;
             width: 20px;
             height: 20px;
@@ -593,17 +593,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
             cursor: pointer;
         }
-        .battery-at-circuit svg {
+        .battery-at-bolt svg {
             width: 100%;
             height: 100%;
             color: #50c050;
         }
-        /* Show battery at circuit when player is next to it, has battery, AND circuit not yet fixed */
-        #level-1:checked ~ #stage-3-pos-3:checked ~ #battery-pickup:checked ~ #circuit-fixed:not(:checked) ~ .game-world .battery-at-circuit {
+        /* Show battery at bolt when player is next to it, has battery, AND bolt not yet fixed */
+        #level-1:checked ~ #stage-3-pos-3:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .battery-at-bolt {
             display: block;
             animation: battery-pulse 1s ease-in-out infinite;
         }
-        /* Installed battery (shown after circuit is fixed) */
+        /* Installed battery (shown after bolt is fixed) */
         .battery-installed {
             position: absolute;
             width: 20px;
@@ -629,7 +629,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .battery-installed:hover .tooltip {
             opacity: 1;
         }
-        #circuit-fixed:checked ~ .game-world .battery-installed {
+        #bolt-fixed:checked ~ .game-world .battery-installed {
             display: block;
         }
 
@@ -655,13 +655,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: auto;
             z-index: 1;
         }
-        /* Hide hover area when player is at button with ID card (so label click works) */
-        #level-2:checked ~ #stage-3-pos-3:checked ~ #idcard-pickup:checked ~ #control-button-pressed:not(:checked) ~ .game-world .control-button-hover-area {
+        /* Hide hover area when player is at button with ID card and bolt fixed (so label click works) */
+        #level-2:checked ~ #stage-3-pos-3:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #control-button-pressed:not(:checked) ~ .game-world .control-button-hover-area {
             display: none;
         }
-        /* Enable hover on control button when player is at position with ID card */
-        #level-2:checked ~ #stage-3-pos-3:checked ~ #idcard-pickup:checked ~ #control-button-pressed:not(:checked) ~ .game-world .control-button {
+        /* Enable hover on control button when player is at position with ID card and bolt fixed */
+        #level-2:checked ~ #stage-3-pos-3:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #control-button-pressed:not(:checked) ~ .game-world .control-button {
             pointer-events: auto;
+        }
+        /* Gray out button when bolt is not fixed */
+        #bolt-fixed:not(:checked) ~ .game-world .control-button {
+            filter: saturate(0);
         }
         /* ID card floating above control button */
         .idcard-at-button {
@@ -679,8 +683,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
             color: var(--idcard-color);
         }
-        /* Show ID card at button when player is next to it, has ID card, AND button not yet pressed */
-        #level-2:checked ~ #stage-3-pos-3:checked ~ #idcard-pickup:checked ~ #control-button-pressed:not(:checked) ~ .game-world .idcard-at-button {
+        /* Show ID card at button when player is next to it, has ID card, bolt fixed, AND button not yet pressed */
+        #level-2:checked ~ #stage-3-pos-3:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #control-button-pressed:not(:checked) ~ .game-world .idcard-at-button {
             display: block;
             animation: idcard-pulse 1s ease-in-out infinite;
         }
@@ -702,11 +706,48 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .control-button-hover-area:hover ~ .control-button .tooltip {
             opacity: 1;
         }
-        /* Control button turns green when pressed */
+        /* Hide red button when pressed, show green button */
         #control-button-pressed:checked ~ .game-world .control-button {
+            display: none;
+        }
+        #control-button-pressed:checked ~ .game-world .control-button-hover-area {
+            display: none;
+        }
+        /* Green button (shown when control-button-pressed is checked) */
+        .control-button-green {
+            position: absolute;
+            width: calc(var(--pickup-size) * 1.7);
+            height: calc(var(--pickup-size) * 2);
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 10px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 8px);
+            display: none;
+            cursor: pointer;
             --control-button-side-color: #1aa33a;
             --control-button-dome-color: #2ecc5a;
             --control-button-rim-color: #0f6f26;
+        }
+        .control-button-green svg {
+            width: 100%;
+            height: 100%;
+        }
+        .control-button-green .tooltip {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
+        .control-button-green:hover {
+            z-index: var(--z-tooltip);
+        }
+        .control-button-green:hover .tooltip {
+            opacity: 1;
+        }
+        #control-button-pressed:checked ~ .game-world .control-button-green {
+            display: block;
+        }
+        /* Enable clicking green button only when player is next to it */
+        #level-2:checked ~ #stage-3-pos-3:checked ~ #control-button-pressed:checked ~ .game-world .control-button-green {
+            pointer-events: auto;
         }
 
         /* Stage 2 Branches (replaces grates) */
@@ -839,7 +880,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #tree-chopped { top: 50px; left: 180px; }
         #axe-pickup { top: 50px; left: 290px; }
         #battery-pickup { top: 50px; left: 310px; }
-        #circuit-fixed { top: 50px; left: 330px; }
+        #bolt-fixed { top: 50px; left: 330px; }
         #control-button-pressed { top: 50px; left: 350px; }
         #escaped { top: 50px; left: 370px; }
         /* Show inputs when debug is checked */
@@ -927,8 +968,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #door-unlocked:checked ~ .inventory .inventory-wrench {
             display: none;
         }
-        /* Hide battery from inventory when circuit is fixed (battery used) */
-        #circuit-fixed:checked ~ .inventory .inventory-battery {
+        /* Hide battery from inventory when bolt is fixed (battery used) */
+        #bolt-fixed:checked ~ .inventory .inventory-battery {
             display: none;
         }
 
@@ -3007,8 +3048,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </symbol>
         <symbol id="id-card" viewBox="0 0 576 512">
             <rect x="0" y="32" width="576" height="448" rx="64" ry="64" fill="currentColor"/>
-            <rect x="0" y="96" width="576" height="48" fill="black"/>
-            <path fill="black" d="M 247.3 416 c 20.2 0 35.3 -19.4 22.4 -35 -14.7 -17.7 -36.9 -29 -61.7 -29 l -64 0 c -24.8 0 -47 11.3 -61.7 29 -12.9 15.6 2.2 35 22.4 35 l 142.5 0 z M 176 312 a 56 56 0 1 0 0 -112 56 56 0 1 0 0 112 z M 360 208 c -13.3 0 -24 10.7 -24 24 s 10.7 24 24 24 l 112 0 c 13.3 0 24 -10.7 24 -24 s -10.7 -24 -24 -24 l -112 0 z M 360 304 c -13.3 0 -24 10.7 -24 24 s 10.7 24 24 24 l 112 0 c 13.3 0 24 -10.7 24 -24 s -10.7 -24 -24 -24 l -112 0 z"/>
+            <rect x="0" y="96" width="576" height="48" fill="#444"/>
+            <path fill="#444" d="M 247.3 416 c 20.2 0 35.3 -19.4 22.4 -35 -14.7 -17.7 -36.9 -29 -61.7 -29 l -64 0 c -24.8 0 -47 11.3 -61.7 29 -12.9 15.6 2.2 35 22.4 35 l 142.5 0 z M 176 312 a 56 56 0 1 0 0 -112 56 56 0 1 0 0 112 z M 360 208 c -13.3 0 -24 10.7 -24 24 s 10.7 24 24 24 l 112 0 c 13.3 0 24 -10.7 24 -24 s -10.7 -24 -24 -24 l -112 0 z M 360 304 c -13.3 0 -24 10.7 -24 24 s 10.7 24 24 24 l 112 0 c 13.3 0 24 -10.7 24 -24 s -10.7 -24 -24 -24 l -112 0 z"/>
         </symbol>
         <symbol id="barrel" viewBox="0 0 24 24">
             <path fill="currentColor" d="M 20 13 C 20.55 13 21 12.55 21 12 S 20.55 11 20 11 H 19 V 5 H 20 C 20.55 5 21 4.55 21 4 S 20.55 3 20 3 H 4 C 3.45 3 3 3.45 3 4 S 3.45 5 4 5 H 5 V 11 H 4 C 3.45 11 3 11.45 3 12 S 3.45 13 4 13 H 5 V 19 H 4 C 3.45 19 3 19.45 3 20 S 3.45 21 4 21 H 20 C 20.55 21 21 20.55 21 20 S 20.55 19 20 19 H 19 V 13 H 20 M 5 11 h 14 v 2 h -14 Z"/>
@@ -3371,8 +3412,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="axe-pickup" class="axe-checkbox" title="axe">
         <input type="checkbox" id="battery-pickup" class="battery-checkbox" title="battery">
 
-        <!-- Circuit fixed checkbox -->
-        <input type="checkbox" id="circuit-fixed" class="battery-checkbox" title="circuit">
+        <!-- Bolt fixed checkbox -->
+        <input type="checkbox" id="bolt-fixed" class="battery-checkbox" title="bolt">
 
         <!-- Control button pressed checkbox -->
         <input type="checkbox" id="control-button-pressed" class="control-button-checkbox" title="control-button">
@@ -3746,12 +3787,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="ladder spine-ladder ladder-S3-L0-P4"></div>
         <div class="ladder spine-ladder ladder-S3-L1-P6"></div>
         <div class="ladder spine-ladder ladder-S3-L3-P5"></div>
-        <!-- Short-circuit bolt -->
-        <div class="short-circuit-bolt">
+        <!-- Bolt -->
+        <div class="bolt">
             <svg><use href="#bolt"/></svg>
             <span class="tooltip">A short-circuit.<br>You need a new battery.</span>
         </div>
-        <label for="circuit-fixed" class="battery-at-circuit"><svg><use href="#battery"/></svg></label>
+        <label for="bolt-fixed" class="battery-at-bolt"><svg><use href="#battery"/></svg></label>
         <div class="battery-installed">
             <svg><use href="#battery"/></svg>
             <span class="tooltip">The battery is<br>installed correctly.</span>
@@ -3762,6 +3803,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <svg><use href="#control-button"/></svg>
             <span class="tooltip">Controls are unavailable.<br>You need your ID card.</span>
         </div>
+        <label for="escaped" class="control-button-green">
+            <svg><use href="#control-button"/></svg>
+            <span class="tooltip">The flight controls<br>are now available.</span>
+        </label>
 
         <!-- ==================== STAGE 1 VALUABLES ==================== -->
         <div class="container coin valuable-S1-L0-P3">
