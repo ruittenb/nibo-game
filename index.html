@@ -697,13 +697,26 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .control-button:hover {
             z-index: var(--z-tooltip);
         }
-        .control-button:hover .tooltip {
-            opacity: 1;
-        }
         .control-button-hover-area:hover ~ .control-button {
             z-index: var(--z-tooltip);
         }
-        .control-button-hover-area:hover ~ .control-button .tooltip {
+        /* Show "no power" tooltip when bolt not fixed */
+        .control-button .tooltip-no-idcard {
+            display: none;
+        }
+        #bolt-fixed:not(:checked) ~ .game-world .control-button:hover .tooltip-no-power,
+        #bolt-fixed:not(:checked) ~ .game-world .control-button-hover-area:hover ~ .control-button .tooltip-no-power {
+            opacity: 1;
+        }
+        /* Show "no ID card" tooltip when bolt fixed */
+        #bolt-fixed:checked ~ .game-world .control-button .tooltip-no-power {
+            display: none;
+        }
+        #bolt-fixed:checked ~ .game-world .control-button .tooltip-no-idcard {
+            display: block;
+        }
+        #bolt-fixed:checked ~ .game-world .control-button:hover .tooltip-no-idcard,
+        #bolt-fixed:checked ~ .game-world .control-button-hover-area:hover ~ .control-button .tooltip-no-idcard {
             opacity: 1;
         }
         /* Hide red button when pressed, show green button */
@@ -3801,11 +3814,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="control-button-pressed" class="idcard-at-button"><svg><use href="#id-card"/></svg></label>
         <div class="control-button">
             <svg><use href="#control-button"/></svg>
-            <span class="tooltip">Controls are unavailable.<br>You need your ID card.</span>
+            <span class="tooltip tooltip-no-power">Flight controls are offline.<br>You need power.</span>
+            <span class="tooltip tooltip-no-idcard">Flight controls are unavailable.<br>You need your ID card.</span>
         </div>
         <label for="escaped" class="control-button-green">
             <svg><use href="#control-button"/></svg>
-            <span class="tooltip">The flight controls<br>are now available.</span>
+            <span class="tooltip">Flight controls<br>are now available.</span>
         </label>
 
         <!-- ==================== STAGE 1 VALUABLES ==================== -->
