@@ -2860,6 +2860,26 @@ AAAAAAAAAAAAAAAAAAAAAA==
             font-size: 16px;
             margin-top: 30px;
         }
+        .title-screen-overlay .copyright {
+            position: absolute;
+            bottom: 34px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            color: #666;
+            text-shadow: 2px 2px 4px black, 0 0 8px black;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 6px 12px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+        .title-screen-overlay .copyright a {
+            color: #888;
+            text-decoration: none;
+        }
+        .title-screen-overlay .copyright a:hover {
+            filter: brightness(1.3);
+        }
         /* Hide title screen when checkbox is checked */
         #title-screen-toggle:checked ~ .game-container .title-screen-overlay {
             opacity: 0;
@@ -3374,7 +3394,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
     <input type="checkbox" id="debug-toggle" accesskey="d">
 
     <!-- Title screen toggle -->
-    <input type="checkbox" id="title-screen-toggle" checked>
+    <input type="checkbox" id="title-screen-toggle">
 
     <div class="game-container">
         <div class="title">NIBO'S WAY OUT</div>
@@ -3387,21 +3407,21 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="level" id="level-4" class="level-radio">
 
         <!-- Radio buttons for position (horizontal) -->
-        <input type="radio" name="position" id="stage-1-pos-1" class="position-radio" accesskey="q" checked>
+        <input type="radio" name="position" id="stage-1-pos-1" class="position-radio" checked>
         <input type="radio" name="position" id="stage-1-pos-2" class="position-radio">
         <input type="radio" name="position" id="stage-1-pos-3" class="position-radio">
         <input type="radio" name="position" id="stage-1-pos-4" class="position-radio">
         <input type="radio" name="position" id="stage-1-pos-5" class="position-radio">
         <input type="radio" name="position" id="stage-1-pos-6" class="position-radio">
         <!-- Stage 2 positions -->
-        <input type="radio" name="position" id="stage-2-pos-1" class="position-radio" accesskey="w">
+        <input type="radio" name="position" id="stage-2-pos-1" class="position-radio">
         <input type="radio" name="position" id="stage-2-pos-2" class="position-radio">
         <input type="radio" name="position" id="stage-2-pos-3" class="position-radio">
         <input type="radio" name="position" id="stage-2-pos-4" class="position-radio">
         <input type="radio" name="position" id="stage-2-pos-5" class="position-radio">
         <input type="radio" name="position" id="stage-2-pos-6" class="position-radio">
         <!-- Stage 3 positions -->
-        <input type="radio" name="position" id="stage-3-pos-1" class="position-radio" accesskey="e">
+        <input type="radio" name="position" id="stage-3-pos-1" class="position-radio">
         <input type="radio" name="position" id="stage-3-pos-2" class="position-radio">
         <input type="radio" name="position" id="stage-3-pos-3" class="position-radio">
         <input type="radio" name="position" id="stage-3-pos-4" class="position-radio">
@@ -3894,6 +3914,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="message">NIBO'S WAY OUT</div>
             <p class="story">Nibo is lost on an alien planet.<br>He must find his ship.<br>Help him escape.</p>
             <div class="submessage">Click to start</div>
+            <div class="copyright">© 2026 René Uittenbogaard · <a href="https://github.com/ruittenb/nibo-game" target="_blank">View on GitHub</a></div>
         </label>
 
         <!-- Death overlays -->
