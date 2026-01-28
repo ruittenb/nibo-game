@@ -14,8 +14,8 @@ The game uses **CSS sibling selectors** (`~`) to create conditional logic:
 - All inputs must appear **before** the elements they control in the DOM
 
 ```css
-/* Example: Show escape arrow only when at correct position with tree chopped */
-#level-0:checked ~ #pos-12:checked ~ #tree-chopped:checked ~ .game-world .arrow-escape {
+/* Example: Show escape arrow only when at correct position with tree chopped (S2 uses level-5 for L0) */
+#level-5:checked ~ #pos-12:checked ~ #tree-chopped:checked ~ .game-world .arrow-S2-P6-S3-P1 {
     display: block;
 }
 ```
@@ -52,14 +52,55 @@ When items are picked up, they animate to the inventory box:
 
 The flight destination is calculated using CSS variables to match the inventory box position.
 
+## Stage Layout
+
+The game uses a branching layout where S2 and S4 share the same horizontal space but at different vertical levels:
+
+```
+        [S2] -> [S3]
+         ^
+[S1] -> [S4]
+```
+
+- **S1** (The Factory): Positions 1-6, levels 0-4
+- **S4** (The Unknown): Positions 7-12, levels 0-4 - placeholder stage, currently minimal content
+- **S2** (The Jungle): Positions 7-12, levels 5-9 (same heights as 0-4)
+- **S3** (The Hangar): Positions 13-18, levels 5-9
+
+**Stage transitions:**
+- S1 → S4: Door at P6 changes position only (6→7)
+- S4 → S2: Climb up at P7 changes level only (4→5)
+- S2 → S3: Exit at P12 changes position only (12→13)
+
 ## Stage Scrolling
 
-The viewport shows one stage at a time. When crossing stage boundaries, the entire `.game-world` translates:
-- Positions 1-6: no transform (stage 1 visible)
-- Positions 7-12: `translateX(-6 * pos-width)` (stage 2 visible)
-- Positions 13-18: `translateX(-12 * pos-width)` (stage 3 visible)
+The viewport shows one stage at a time. When crossing stage boundaries, the entire `.game-world` translates. Transform depends only on position, not level:
+- Positions 1-6: no transform (S1 visible)
+- Positions 7-12: `translateX(-6 * pos-width)` (S2/S4 visible - level determines which content shows)
+- Positions 13-18: `translateX(-12 * pos-width)` (S3 visible)
+
+## Stage Visibility
+
+S2 and S4 share the same horizontal space, so their visual elements are wrapped in containers:
+- `.stage-2-elements`: visible when levels 5-9 are checked
+- `.stage-4-elements`: visible when levels 0-4 are checked
+
+This prevents S4 platforms from showing when the player is in S2, and vice versa.
 
 ## Coordinate System
+
+**Radio button IDs** are pure coordinates with no stage semantics:
+- `pos-1` through `pos-18`, plus `pos-φ` (phantom position)
+- `level-0` through `level-9` (levels 5-9 display at same heights as 0-4)
+
+Stage is derived from the combination of position and level:
+
+| Positions | Levels | Stage |
+|-----------|--------|-------|
+| 1-6       | 0-4    | S1    |
+| 7-12      | 0-4    | S4    |
+| 7-12      | 5-9    | S2    |
+| 13-18     | 5-9    | S3    |
 
 All positioning derives from CSS variables (`--pos-width`, `--platform-height`, etc.). Player and element positions are calculated as:
 - X: `calc(var(--pos-offset) + var(--pos-width) * (pos - 1))`
@@ -67,16 +108,18 @@ All positioning derives from CSS variables (`--pos-width`, `--platform-height`, 
 
 ## Naming Conventions
 
-- **Location format:** `LxPy` (Level x, Position y)
-- **Stage prefixes:** `-s1-`, `-s2-`, `-s3-` in class names
-- **Vertical navigation:** "ladders" (stage 1), "vines" (stage 2) - same mechanic, different visuals
-- **Vertical down:** "grates" (stage 1), "branches" (stage 2)
+- **Location format:** `LxPy` (Level x, Position y) - levels in class names refer to visual height (0-4), not logical level
+- **Stage prefixes:** `-S1-`, `-S2-`, `-S3-`, `-S4-` in class names
+- **Vertical navigation:** "ladders" (S1), "vines" (S2), "spine-ladder" (S3)
+- **Vertical down:** "grates" (S1), "branches" (S2)
+- **Item/valuable naming:** Use stage prefix for readability but absolute position numbers that match radio IDs (e.g., `.valuable-S3-L5-P18` uses `pos-18`)
 
 ## Visual Styles per Stage
 
-- **Stage 1:** Industrial/factory aesthetic - rusted metal platforms with rivets, wooden ladders
-- **Stage 2:** Jungle aesthetic - organic green platforms, rock formation on left edge, vines for climbing
-- **Stage 3:** Hangar aesthetic - bluish-grey metallic platforms, concrete floor, spine ladders (central pole with alternating rungs)
+- **Stage 1 (The Factory):** Industrial/factory aesthetic - rusted metal platforms with rivets, wooden ladders
+- **Stage 4 (The Unknown):** Placeholder - minimal content (grey ground only), theme to be decided
+- **Stage 2 (The Jungle):** Jungle aesthetic - organic green platforms, rock formation on left edge, vines for climbing
+- **Stage 3 (The Hangar):** Hangar aesthetic - bluish-grey metallic platforms, concrete floor, spine ladders (central pole with alternating rungs)
 
 ## Ladder Types
 
@@ -95,36 +138,43 @@ Overlays share a base `.overlay` class with common styling. Specific types:
 
 Items pulse/glow when the player can interact with them. This requires combining position checks with item state:
 ```css
+/* Key is in S1 at level-4, so this selector is unchanged */
 #level-4:checked ~ #pos-1:checked ~ .game-world .key-in-game {
     animation: key-pulse 2s infinite;
+}
+/* But S2/S3 items use levels 5-9, e.g., axe at S2-L9-P12: */
+#level-9:checked ~ #pos-12:checked ~ .game-world .axe-in-game {
+    animation: axe-pulse 2s infinite;
 }
 ```
 
 ## Winning Route
 
-1. Pick up **key** (L4P1)
-2. Use key on **toolbox** (L2P6) → unlocks toolbox, key consumed
+1. Pick up **key** (S1-L4-P1)
+2. Use key on **toolbox** (S1-L2-P6) → unlocks toolbox, key consumed
 3. Pick up **wrench** from toolbox
-4. Use wrench on **door** (L0P6) → door opens, enter stage 2
-5. Pick up **axe** (L4P12)
-6. Use axe on **tree** (L0P12) → tree chopped, escape arrow appears
-7. Click escape arrow → victory
+4. Use wrench on **door** (S1-L0-P6) → door opens
+5. Enter S4 through door (S4-L0-P7)
+6. Climb up to S2 (S2-L5-P7)
+7. Pick up **axe** (S2-L9-P12)
+8. Use axe on **tree** (S2-L5-P12) → tree chopped
+9. Enter S3 → navigate to escape → victory
 
 ## Phantom Positions
 
-**Challenge:** One label can only apply to one input element. This makes is non-trivial
+**Challenge:** One label can only apply to one input element. This makes it non-trivial
 to make a player move horizontally and have them fall vertically as part of the same move:
 it would require two radio buttons to change state.
 
 **Solution: Phantom positions** - a state that differs from its visual location.
 
-Example: `stage-3-pos-φ`
- - The player is at S3-L3-P5 and moves up
- - This moves them to S3-L3-Pφ. This counts as *horizontal* movement only.
- - This position is shown as if the player were at S3-L4-P5.
- - As soon as the player moves left or right, they are moved back to the physical location (L3-P4 or L3-P6)
+Example: `pos-φ` (in S3)
+ - The player is at S3-L8-P17 and moves up
+ - This moves them to S3-L8-Pφ. This counts as *horizontal* movement only.
+ - This position is shown as if the player were at S3-L9-P17 (visually at L4 height).
+ - As soon as the player moves left or right, they are moved back to the physical location (L8-P16 or L8-P18)
 
-Since all these transitions stay on L3, they only change the position radio - making them valid single-input operations.
+Since all these transitions stay on L8, they only change the position radio - making them valid single-input operations.
 
 ## Debug Mode
 
