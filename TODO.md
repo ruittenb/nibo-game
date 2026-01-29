@@ -5,7 +5,7 @@
 
  - nav-panel, inventory and valuable-counter - standardized names?
 
-     reduce number of arrow selectors by registering exceptions
 
+ - display tooltip boven Key Wrench ID card etc
 
 

@@ -629,7 +629,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Bolt S3-L1-P3 */
         .bolt {
             position: absolute;
-            bottom: calc(var(--platform-height) * 1 + var(--platform-thickness) + 5px);
+            bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
             width: 20px;
             height: 24px;
@@ -1240,7 +1240,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly axe to inventory when picked up (Stage 3: viewport right = pos-width * 18) */
         /* Axe slot = slot 0 offset by key + wrench */
         #axe-pickup:checked ~ .game-world .axe-in-game {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 18 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench)));
             opacity: 0;
@@ -1272,7 +1272,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly id card to inventory when picked up (Stage 2: viewport right = pos-width * 12) */
         /* ID card slot = slot 0 offset by key + wrench + axe */
         #idcard-pickup:checked ~ .game-world .idcard-in-game {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe)));
             opacity: 0;
@@ -1305,7 +1305,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly battery to inventory when picked up (Stage 3: viewport right = pos-width * 18) */
         /* Battery slot = slot 0 offset by key + wrench + axe + idcard */
         #battery-pickup:checked ~ .game-world .battery-in-game {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 18 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard)));
             opacity: 0;
@@ -1660,7 +1660,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
         }
 
-        .title {
+        h2 {
             position: absolute;
             top: 15px;
             left: 50%;
@@ -2193,7 +2193,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* S2→S4 climb down arrow at L5-P7 (climb from S2 level 5 to S4 level 4) */
         .arrow-down-S2-L5-P7-to-S4 {
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
-            bottom: calc(var(--stage-height) + var(--ground-height));
+            bottom: calc(var(--stage-height) + var(--platform-thickness) / 2);
         }
         /* Stage 3 down arrows */
         .arrow-down-S3-L6-P16 {
@@ -2262,16 +2262,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-9:checked ~ #pos-12:checked ~ .game-world .arrow-S2-P12-S3-P13 { display: block; }
         #pos-13:checked ~ .game-world .arrow-S3-P13-S2-P12 { display: block; }
         /* Stage 3 horizontal arrows in game world (S3 uses levels 5-9) */
-        #level-5:checked ~ #pos-13:checked ~ .game-world .arrow-S3-P13-P14 { display: block; }
-        #level-5:checked ~ #pos-14:checked ~ .game-world .arrow-S3-P14-P13 { display: block; }
-        #level-5:checked ~ #pos-14:checked ~ .game-world .arrow-S3-P14-P15 { display: block; }
-        #level-5:checked ~ #pos-15:checked ~ .game-world .arrow-S3-P15-P14 { display: block; }
-        #level-5:checked ~ #pos-15:checked ~ .game-world .arrow-S3-P15-P16 { display: block; }
-        #level-5:checked ~ #pos-16:checked ~ .game-world .arrow-S3-P16-P15 { display: block; }
-        #level-5:checked ~ #pos-16:checked ~ .game-world .arrow-S3-P16-P17 { display: block; }
-        #level-5:checked ~ #pos-17:checked ~ .game-world .arrow-S3-P17-P16 { display: block; }
-        #level-5:checked ~ #pos-17:checked ~ .game-world .arrow-S3-P17-P18 { display: block; }
-        #level-5:checked ~ #pos-18:checked ~ .game-world .arrow-S3-P18-P17 { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-13:checked ~ .game-world .arrow-S3-P13-P14 { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-14:checked ~ .game-world .arrow-S3-P14-P13 { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-14:checked ~ .game-world .arrow-S3-P14-P15 { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-15:checked ~ .game-world .arrow-S3-P15-P14 { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-15:checked ~ .game-world .arrow-S3-P15-P16 { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-16:checked ~ .game-world .arrow-S3-P16-P15 { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-16:checked ~ .game-world .arrow-S3-P16-P17 { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-17:checked ~ .game-world .arrow-S3-P17-P16 { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-17:checked ~ .game-world .arrow-S3-P17-P18 { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-18:checked ~ .game-world .arrow-S3-P18-P17 { display: block; }
         /* Hide horizontal arrows at L9 platform gaps (P4, P5, P6 have no platform at L9) */
         #level-9:checked ~ #pos-15:checked ~ .game-world .arrow-S3-P15-P16 { display: none; }
         #level-9:checked ~ #pos-16:checked ~ .game-world .arrow-S3-P16-P15 { display: none; }
@@ -2756,23 +2756,23 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
-        /* Move Stage 2 valuables to counter when picked up (add viewport offset) */
+        /* Move Stage 2 valuables to counter when picked up (add stage-height for S2 vertical offset) */
         #valuable-S2-L5-P8-pickup:checked ~ .game-world .valuable-S2-L5-P8,
         #valuable-S2-L6-P11-pickup:checked ~ .game-world .valuable-S2-L6-P11,
         #valuable-S2-L7-P7-pickup:checked ~ .game-world .valuable-S2-L7-P7,
         #valuable-S2-L8-P9-pickup:checked ~ .game-world .valuable-S2-L8-P9,
         #valuable-S2-L9-P10-pickup:checked ~ .game-world .valuable-S2-L9-P10 {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
             left: calc(var(--pos-width) * 12 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
-        /* Move Stage 3 valuables to counter when picked up (add viewport offset) */
+        /* Move Stage 3 valuables to counter when picked up (add stage-height for S3 vertical offset) */
         #valuable-S3-L5-P15-pickup:checked ~ .game-world .valuable-S3-L5-P15,
         #valuable-S3-L5-P18-pickup:checked ~ .game-world .valuable-S3-L5-P18,
         #valuable-S3-L8-P18-pickup:checked ~ .game-world .valuable-S3-L8-P18,
         #valuable-S3-L9-P14-pickup:checked ~ .game-world .valuable-S3-L9-P14 {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
             left: calc(var(--pos-width) * 18 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
@@ -3061,9 +3061,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: auto;
             cursor: pointer;
         }
-        .title-screen-overlay .message {
+        .title-screen-overlay h1 {
             color: #48d8d8;
             font-size: 36px;
+            letter-spacing: 3px;
         }
         .title-screen-overlay .story {
             color: #aaa;
@@ -3616,7 +3617,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
     <input type="checkbox" id="title-screen-toggle">
 
     <div class="game-container">
-        <div class="title">NIBO'S WAY OUT</div>
+        <h2>NIBO'S WAY OUT</h2>
 
         <!-- Radio buttons for level (vertical) -->
         <input type="radio" name="level" id="level-0" class="level-radio" title="level-0" checked>
@@ -4167,7 +4168,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         <!-- Title screen overlay -->
         <label for="title-screen-toggle" class="overlay title-screen-overlay">
-            <div class="message">NIBO'S WAY OUT</div>
+            <h1>NIBO'S WAY OUT</h1>
             <p class="story">Nibo is lost on an alien planet.<br>He must find his ship.<br>Help him escape.</p>
             <div class="submessage">Click to start</div>
             <div class="copyright">© 2026 René Uittenbogaard · <a href="https://github.com/ruittenb/nibo-game" target="_blank">View on GitHub</a></div>
