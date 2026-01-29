@@ -1432,7 +1432,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: auto;
             height: 56px;
             animation: idle 1s ease-in-out infinite;
-            z-index: 100;
+            z-index: 1100;
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 2);
             transition: left 0.3s ease, bottom 0.3s ease;
@@ -2247,8 +2247,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-7:checked ~ .game-world .arrow-S2-P7-P8 { display: block; }
         :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-8:checked ~ .game-world .arrow-S2-P8-P7 { display: block; }
         :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-8:checked ~ .game-world .arrow-S2-P8-P9 { display: block; }
-        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-9:checked ~ .game-world .arrow-S2-P9-P8 { display: block; }
-        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-9:checked ~ .game-world .arrow-S2-P9-P10 { display: block; }
+        :is(#level-7, #level-8, #level-9):checked ~ #pos-9:checked ~ .game-world .arrow-S2-P9-P8 { display: block; }
+        :is(#level-7, #level-8, #level-9):checked ~ #pos-9:checked ~ .game-world .arrow-S2-P9-P10 { display: block; }
         :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-10:checked ~ .game-world .arrow-S2-P10-P9 { display: block; }
         :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-10:checked ~ .game-world .arrow-S2-P10-P11 { display: block; }
         :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-11:checked ~ .game-world .arrow-S2-P11-P10 { display: block; }
@@ -2454,8 +2454,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-7:checked ~ .nav-panel .nav-right[for="pos-8"] { display: block; }
         :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-8:checked ~ .nav-panel .nav-left[for="pos-7"] { display: block; }
         :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-8:checked ~ .nav-panel .nav-right[for="pos-9"] { display: block; }
-        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-9:checked ~ .nav-panel .nav-left[for="pos-8"] { display: block; }
-        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-9:checked ~ .nav-panel .nav-right[for="pos-10"] { display: block; }
+        :is(#level-7, #level-8, #level-9):checked ~ #pos-9:checked ~ .nav-panel .nav-left[for="pos-8"] { display: block; }
+        :is(#level-7, #level-8, #level-9):checked ~ #pos-9:checked ~ .nav-panel .nav-right[for="pos-10"] { display: block; }
         :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-10:checked ~ .nav-panel .nav-left[for="pos-9"] { display: block; }
         :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-10:checked ~ .nav-panel .nav-right[for="pos-11"] { display: block; }
         :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-11:checked ~ .nav-panel .nav-left[for="pos-10"] { display: block; }
@@ -3102,15 +3102,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             pointer-events: none;
         }
-        /* When title screen is showing, move player to foreground */
+        /* When title screen is showing, position player for title display */
         #title-screen-toggle:not(:checked) ~ .game-container .game-world .player {
             left: calc(var(--pos-offset) + var(--pos-width) * 2.5);
             bottom: calc(var(--stage-height) * 0.65 + 20px);
             transform: translateX(-50%);
-            z-index: calc(var(--z-overlay) + 1);
         }
 
         /* Death overlay */
+        .death-screen-overlay {
+            z-index: 2000;
+        }
         .death-screen-overlay .message {
             color: #ff0000;
         }
@@ -3124,6 +3126,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Escape overlay */
+        .escape-screen-overlay {
+            z-index: 2000;
+        }
         .escape-screen-overlay .message {
             color: #4ade80;
         }

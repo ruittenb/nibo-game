@@ -167,6 +167,8 @@ Overlay types:
 }
 ```
 
+**Important limitation:** To make the player appear above an overlay, you might think to give `.game-world` a higher z-index than the overlay. **Don't do this** - it would place the *entire* game world (platforms, items, hazards) above the overlay, defeating its purpose. The `translate: none` approach for S1 is specifically designed to avoid this problem by eliminating the stacking context entirely.
+
 ## Z-Index Layers
 
 Z-index layers (defined as CSS variables):
