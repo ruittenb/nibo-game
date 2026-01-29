@@ -225,6 +225,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --control-button-dome-color: #e02020;
             --control-button-rim-color: #9f1010;
             --wrench-color: #708090;
+            --axe-color: #cc1010;
             --idcard-color: #3090f0;
             --border-color: #4a4a6a;      /* Border color for UI elements */
 
@@ -653,24 +654,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .bolt:hover .tooltip {
             opacity: 1;
         }
-        @keyframes bolt-flicker {
-            0%, 5% { opacity: 1; filter: drop-shadow(0 0 8px var(--bolt-color-1)) drop-shadow(0 0 15px var(--bolt-color-2)); translate: 2px -1px; }
-            6%, 15% { opacity: 0; translate: 0 0; }
-            16%, 21% { opacity: 1; filter: drop-shadow(0 0 6px var(--bolt-color-1)); translate: -2px 2px; }
-            22%, 24% { opacity: 0; translate: 0 0; }
-            25%, 29% { opacity: 1; filter: drop-shadow(0 0 4px var(--bolt-color-1)); translate: 1px -2px; }
-            30%, 43% { opacity: 0; translate: 0 0; }
-            44%, 49% { opacity: 1; filter: drop-shadow(0 0 10px var(--bolt-color-1)) drop-shadow(0 0 20px var(--bolt-color-2)); translate: -1px 1px; }
-            50%, 63% { opacity: 0; translate: 0 0; }
-            64%, 65% { opacity: 1; filter: drop-shadow(0 0 4px var(--bolt-color-1)); translate: 2px 2px; }
-            66%, 70% { opacity: 0; translate: 0 0; }
-            71%, 76% { opacity: 1; filter: drop-shadow(0 0 8px var(--bolt-color-1)); translate: -2px -2px; }
-            77%, 85% { opacity: 0; translate: 0 0; }
-            86% { opacity: 1; filter: drop-shadow(0 0 3px var(--bolt-color-1)); translate: -1px 2px; }
-            87%, 90% { opacity: 0; translate: 0 0; }
-            91%, 93% { opacity: 1; filter: drop-shadow(0 0 6px var(--bolt-color-1)); translate: 2px -1px; }
-            94%, 100% { opacity: 0; translate: 0 0; }
-        }
         /* Hide bolt when fixed */
         #bolt-fixed:checked ~ .game-world .bolt {
             display: none;
@@ -694,7 +677,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Show battery at bolt when player is next to it, has battery, AND bolt not yet fixed (S3 uses levels 5-9) */
         #level-6:checked ~ #pos-15:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .battery-at-bolt {
             display: block;
-            animation: battery-pulse 1s ease-in-out infinite;
+            animation: battery-hovering-pulse 1s ease-in-out infinite;
         }
         /* Installed battery (shown after bolt is fixed) */
         .battery-installed {
@@ -779,7 +762,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Show ID card at button when player is next to it, has ID card, bolt fixed, AND button not yet pressed - S3 uses levels 5-9 */
         #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #control-button-pressed:not(:checked) ~ .game-world .idcard-at-button {
             display: block;
-            animation: idcard-pulse 1s ease-in-out infinite;
+            animation: idcard-hovering-pulse 1s ease-in-out infinite;
         }
         .control-button .tooltip {
             bottom: 100%;
@@ -1065,9 +1048,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             animation: inventory-fade-in 0.2s ease-out 0.4s forwards;
         }
-        @keyframes inventory-fade-in {
-            to { opacity: 1; }
-        }
         /* Hide key from inventory when toolbox is unlocked (key used) */
         #toolbox-unlocked:checked ~ .inventory .inventory-key {
             display: none;
@@ -1173,7 +1153,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ #pos-1:checked ~ #key-pickup:not(:checked) ~ .game-world .key-in-game {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: key-pulse 1s ease-in-out infinite;
         }
         /* Fly key to inventory when picked up (Stage 1: viewport right = pos-width * 6) */
         /* Key is always slot 0 (rightmost), no offset needed */
@@ -1235,7 +1215,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-8:checked ~ #pos-φ:checked ~ #axe-pickup:not(:checked) ~ .game-world .axe-in-game {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: axe-pulse 1s ease-in-out infinite;
         }
         /* Fly axe to inventory when picked up (Stage 3: viewport right = pos-width * 18) */
         /* Axe slot = slot 0 offset by key + wrench */
@@ -1366,24 +1346,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
             color: var(--gold-color);
         }
-        @keyframes hazard-roll {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 100%; }
-        }
-        @keyframes key-pulse {
-            0%, 100% {
-                transform: scale(1);
-                filter: drop-shadow(0 0 8px var(--gold-color));
-            }
-            50% {
-                transform: scale(1.2);
-                filter: drop-shadow(0 0 15px var(--gold-color)) drop-shadow(0 0 25px var(--gold-color));
-            }
-        }
         /* Only show key at toolbox when player is next to it, has key, AND toolbox not yet unlocked */
         #level-2:checked ~ #pos-6:checked ~ #key-pickup:checked ~ #toolbox-unlocked:not(:checked) ~ .game-world .key-at-toolbox {
             display: block;
-            animation: key-pulse 1s ease-in-out infinite;
+            animation: key-hovering-pulse 1s ease-in-out infinite;
         }
 
         /* Axe above tree - pulsates when user has axe, clickable to use */
@@ -1402,24 +1368,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
             transform-origin: bottom left;
-        }
-        @keyframes axe-pulse {
-            0%, 100% {
-                transform: scale(1);
-                filter: drop-shadow(0 0 8px #cc1010);
-            }
-            50% {
-                transform: scale(1.2);
-                filter: drop-shadow(0 0 15px #cc1010) drop-shadow(0 0 25px #cc1010);
-            }
-        }
-        @keyframes axe-chop {
-            0% {
-                transform: rotate(0deg);
-            }
-            50%, 100% {
-                transform: rotate(45deg);
-            }
         }
         /* Only show axe at tree when player is next to it, has axe, AND tree not yet chopped - S2 uses levels 5-9 */
         #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .axe-at-tree {
@@ -1488,11 +1436,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-8:checked ~ #pos-16:checked ~ .game-world .player,
         #level-8:checked ~ #pos-18:checked ~ .game-world .player {
             transition: left 0.3s ease-out, bottom 0.3s ease-in;
-        }
-
-        @keyframes idle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
         }
 
         /* Player tooltip */
@@ -2553,25 +2496,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             filter: drop-shadow(0 0 3px var(--aquamarine-color-1));
             animation: aquamarine-sparkle 1s ease-in-out infinite;
         }
-        @keyframes aquamarine-sparkle {
-            0%, 100% { color: var(--aquamarine-color-1); }
-            17% { color: var(--aquamarine-color-2); }
-            33% { color: var(--aquamarine-color-3); }
-            50% { color: var(--aquamarine-color-4); }
-            67% { color: var(--aquamarine-color-3); }
-            83% { color: var(--aquamarine-color-2); }
-        }
         .ruby .valuable-in-game {
             filter: drop-shadow(0 0 3px var(--ruby-color-1));
             animation: ruby-sparkle 1s ease-in-out infinite;
-        }
-        @keyframes ruby-sparkle {
-            0%, 100% { color: var(--ruby-color-1); }
-            17% { color: var(--ruby-color-2); }
-            33% { color: var(--ruby-color-3); }
-            50% { color: var(--ruby-color-4); }
-            67% { color: var(--ruby-color-3); }
-            83% { color: var(--ruby-color-2); }
         }
 
         /* Valuable positions - on platforms */
@@ -2636,24 +2563,48 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
         }
 
-        /* Coin pulsating glow when player is nearby */
+        /* ========== KEYFRAME ANIMATIONS ========== */
+        @keyframes idle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+        @keyframes inventory-fade-in {
+            to { opacity: 1; }
+        }
+        @keyframes hazard-roll {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+        @keyframes tree-pulse {
+            0%, 100% { filter: drop-shadow(0 0 8px #4a4); }
+            50% { filter: drop-shadow(0 0 15px #4a4) drop-shadow(0 0 25px #4a4); }
+        }
+        @keyframes door-pulse {
+            0%, 100% { filter: drop-shadow(1px 1px 0 #aaa) drop-shadow(-1px -1px 0 #444) drop-shadow(0 0 4px #6a6a6a); }
+            50% { filter: drop-shadow(1px 1px 0 #aaa) drop-shadow(-1px -1px 0 #444) drop-shadow(0 0 12px #9a9a9a) drop-shadow(0 0 20px #6a6a6a); }
+        }
+        @keyframes bolt-flicker {
+            0%, 5% { opacity: 1; filter: drop-shadow(0 0 8px var(--bolt-color-1)) drop-shadow(0 0 15px var(--bolt-color-2)); translate: 2px -1px; }
+            6%, 15% { opacity: 0; translate: 0 0; }
+            16%, 21% { opacity: 1; filter: drop-shadow(0 0 6px var(--bolt-color-1)); translate: -2px 2px; }
+            22%, 24% { opacity: 0; translate: 0 0; }
+            25%, 29% { opacity: 1; filter: drop-shadow(0 0 4px var(--bolt-color-1)); translate: 1px -2px; }
+            30%, 43% { opacity: 0; translate: 0 0; }
+            44%, 49% { opacity: 1; filter: drop-shadow(0 0 10px var(--bolt-color-1)) drop-shadow(0 0 20px var(--bolt-color-2)); translate: -1px 1px; }
+            50%, 63% { opacity: 0; translate: 0 0; }
+            64%, 65% { opacity: 1; filter: drop-shadow(0 0 4px var(--bolt-color-1)); translate: 2px 2px; }
+            66%, 70% { opacity: 0; translate: 0 0; }
+            71%, 76% { opacity: 1; filter: drop-shadow(0 0 8px var(--bolt-color-1)); translate: -2px -2px; }
+            77%, 85% { opacity: 0; translate: 0 0; }
+            86% { opacity: 1; filter: drop-shadow(0 0 3px var(--bolt-color-1)); translate: -1px 2px; }
+            87%, 90% { opacity: 0; translate: 0 0; }
+            91%, 93% { opacity: 1; filter: drop-shadow(0 0 6px var(--bolt-color-1)); translate: 2px -1px; }
+            94%, 100% { opacity: 0; translate: 0 0; }
+        }
         @keyframes coin-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--gold-color)); }
             50% { filter: drop-shadow(0 0 12px var(--gold-color)) drop-shadow(0 0 20px var(--gold-color)); }
         }
-        @keyframes wrench-pulse {
-            0%, 100% { filter: drop-shadow(0 0 4px var(--wrench-color)); }
-            50% { filter: drop-shadow(0 0 12px var(--wrench-color)) drop-shadow(0 0 20px var(--wrench-color)); }
-        }
-        @keyframes battery-pulse {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px var(--battery-color)); }
-            50% { transform: scale(1.2); filter: drop-shadow(0 0 12px var(--battery-color)) drop-shadow(0 0 20px var(--battery-color)); }
-        }
-        @keyframes idcard-pulse {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px var(--idcard-color)); }
-            50% { transform: scale(1.2); filter: drop-shadow(0 0 12px var(--idcard-color)) drop-shadow(0 0 20px var(--idcard-color)); }
-        }
-        /* Gem pulsating glow when player is nearby */
         @keyframes aquamarine-pulse {
             0%, 100% { color: var(--aquamarine-color-1); filter: drop-shadow(0 0 4px var(--aquamarine-color-1)); }
             17% { color: var(--aquamarine-color-2); filter: drop-shadow(0 0 8px var(--aquamarine-color-2)) drop-shadow(0 0 12px var(--aquamarine-color-1)); }
@@ -2662,6 +2613,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             67% { color: var(--aquamarine-color-3); filter: drop-shadow(0 0 12px var(--aquamarine-color-3)) drop-shadow(0 0 18px var(--aquamarine-color-2)); }
             83% { color: var(--aquamarine-color-2); filter: drop-shadow(0 0 8px var(--aquamarine-color-2)) drop-shadow(0 0 12px var(--aquamarine-color-1)); }
         }
+        @keyframes aquamarine-sparkle {
+            0%, 100% { color: var(--aquamarine-color-1); }
+            17% { color: var(--aquamarine-color-2); }
+            33% { color: var(--aquamarine-color-3); }
+            50% { color: var(--aquamarine-color-4); }
+            67% { color: var(--aquamarine-color-3); }
+            83% { color: var(--aquamarine-color-2); }
+        }
         @keyframes ruby-pulse {
             0%, 100% { color: var(--ruby-color-1); filter: drop-shadow(0 0 4px var(--ruby-color-1)); }
             17% { color: var(--ruby-color-2); filter: drop-shadow(0 0 8px var(--ruby-color-2)) drop-shadow(0 0 12px var(--ruby-color-1)); }
@@ -2669,6 +2628,54 @@ AAAAAAAAAAAAAAAAAAAAAA==
             50% { color: var(--ruby-color-4); filter: drop-shadow(0 0 16px var(--ruby-color-4)) drop-shadow(0 0 24px var(--ruby-color-3)); }
             67% { color: var(--ruby-color-3); filter: drop-shadow(0 0 12px var(--ruby-color-3)) drop-shadow(0 0 18px var(--ruby-color-2)); }
             83% { color: var(--ruby-color-2); filter: drop-shadow(0 0 8px var(--ruby-color-2)) drop-shadow(0 0 12px var(--ruby-color-1)); }
+        }
+        @keyframes ruby-sparkle {
+            0%, 100% { color: var(--ruby-color-1); }
+            17% { color: var(--ruby-color-2); }
+            33% { color: var(--ruby-color-3); }
+            50% { color: var(--ruby-color-4); }
+            67% { color: var(--ruby-color-3); }
+            83% { color: var(--ruby-color-2); }
+        }
+        @keyframes key-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--gold-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--gold-color)) drop-shadow(0 0 20px var(--gold-color)); }
+        }
+        @keyframes key-hovering-pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--gold-color)); }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--gold-color)) drop-shadow(0 0 25px var(--gold-color)); }
+        }
+        @keyframes wrench-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--wrench-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--wrench-color)) drop-shadow(0 0 20px var(--wrench-color)); }
+        }
+        @keyframes wrench-rotate {
+            0% { transform: rotate(65deg); }
+            80%, 100% { transform: rotate(0deg); }
+        }
+        @keyframes axe-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--axe-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--axe-color)) drop-shadow(0 0 20px var(--axe-color)); }
+        }
+        @keyframes axe-chop {
+            0% { transform: rotate(0deg); }
+            50%, 100% { transform: rotate(45deg); }
+        }
+        @keyframes battery-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--battery-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--battery-color)) drop-shadow(0 0 20px var(--battery-color)); }
+        }
+        @keyframes battery-hovering-pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--battery-color)); }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--battery-color)) drop-shadow(0 0 25px var(--battery-color)); }
+        }
+        @keyframes idcard-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--idcard-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--idcard-color)) drop-shadow(0 0 20px var(--idcard-color)); }
+        }
+        @keyframes idcard-hovering-pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--idcard-color)); }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--idcard-color)) drop-shadow(0 0 25px var(--idcard-color)); }
         }
 
         /* Enable clicking and pulsing when player is adjacent */
@@ -2870,14 +2877,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
         }
-        @keyframes tree-pulse {
-            0%, 100% {
-                filter: drop-shadow(0 0 8px #4a4);
-            }
-            50% {
-                filter: drop-shadow(0 0 15px #4a4) drop-shadow(0 0 25px #4a4);
-            }
-        }
         /* Tree pulsates when player is next to it, has axe, AND tree not yet chopped (S2 uses levels 5-9) */
         #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree svg {
             animation: tree-pulse 1s ease-in-out infinite;
@@ -2966,11 +2965,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #door-unlocked:checked ~ .game-world .door .door-open {
             display: block;
         }
-        /* Door pulse animation */
-        @keyframes door-pulse {
-            0%, 100% { filter: drop-shadow(1px 1px 0 #aaa) drop-shadow(-1px -1px 0 #444) drop-shadow(0 0 4px #6a6a6a); }
-            50% { filter: drop-shadow(1px 1px 0 #aaa) drop-shadow(-1px -1px 0 #444) drop-shadow(0 0 12px #9a9a9a) drop-shadow(0 0 20px #6a6a6a); }
-        }
         /* Pulse glow when player has wrench and is at door location */
         #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .door {
             pointer-events: auto;
@@ -2980,11 +2974,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             animation: door-pulse 1s ease-in-out infinite;
         }
 
-        /* Wrench at door animation */
-        @keyframes wrench-rotate {
-            0% { transform: rotate(65deg); }
-            80%, 100% { transform: rotate(0deg); }
-        }
         .wrench-at-door {
             display: none;
             position: absolute;
