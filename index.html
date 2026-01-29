@@ -268,7 +268,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: calc(var(--pos-width) * 18);
             /* Height for 2 vertical stages: S1/S4 at bottom, S2/S3 at top */
             height: calc(var(--stage-height) * 2);
-            transition: transform 0.5s ease;
+            transition: translate 0.5s ease;
+            translate: var(--world-translateX, 0) var(--world-translateY, 0);
             /* Inventory tracking variables (0 = not in inventory, 1 = in inventory) */
             --inv-has-key: 0;
             --inv-has-wrench: 0;
@@ -279,151 +280,46 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --inv-slot-width: calc(var(--pickup-size) + 8px);  /* item width + gap */
         }
 
-        /* Shift viewport when player is in S4 (pos 7-12, levels 0-4) - horizontal only */
-        #level-0:checked ~ #pos-7:checked ~ .game-world,
-        #level-0:checked ~ #pos-8:checked ~ .game-world,
-        #level-0:checked ~ #pos-9:checked ~ .game-world,
-        #level-0:checked ~ #pos-10:checked ~ .game-world,
-        #level-0:checked ~ #pos-11:checked ~ .game-world,
-        #level-0:checked ~ #pos-12:checked ~ .game-world,
-        #level-1:checked ~ #pos-7:checked ~ .game-world,
-        #level-1:checked ~ #pos-8:checked ~ .game-world,
-        #level-1:checked ~ #pos-9:checked ~ .game-world,
-        #level-1:checked ~ #pos-10:checked ~ .game-world,
-        #level-1:checked ~ #pos-11:checked ~ .game-world,
-        #level-1:checked ~ #pos-12:checked ~ .game-world,
-        #level-2:checked ~ #pos-7:checked ~ .game-world,
-        #level-2:checked ~ #pos-8:checked ~ .game-world,
-        #level-2:checked ~ #pos-9:checked ~ .game-world,
-        #level-2:checked ~ #pos-10:checked ~ .game-world,
-        #level-2:checked ~ #pos-11:checked ~ .game-world,
-        #level-2:checked ~ #pos-12:checked ~ .game-world,
-        #level-3:checked ~ #pos-7:checked ~ .game-world,
-        #level-3:checked ~ #pos-8:checked ~ .game-world,
-        #level-3:checked ~ #pos-9:checked ~ .game-world,
-        #level-3:checked ~ #pos-10:checked ~ .game-world,
-        #level-3:checked ~ #pos-11:checked ~ .game-world,
-        #level-3:checked ~ #pos-12:checked ~ .game-world,
-        #level-4:checked ~ #pos-7:checked ~ .game-world,
-        #level-4:checked ~ #pos-8:checked ~ .game-world,
-        #level-4:checked ~ #pos-9:checked ~ .game-world,
-        #level-4:checked ~ #pos-10:checked ~ .game-world,
-        #level-4:checked ~ #pos-11:checked ~ .game-world,
-        #level-4:checked ~ #pos-12:checked ~ .game-world {
-            transform: translateX(calc(var(--pos-width) * -6));
+        /*
+         * Viewport scrolling via CSS variables
+         * Stage layout:
+         *   S0 - S2 - S3
+         *   S1 - S4 - S6
+         * Levels 0-4 are bottom row (S1, S4, S6), levels 5-9 are top row (S0, S2, S3)
+         * Positions 1-6 are left column, 7-12 middle column, 13-18 right column
+         */
+
+        /* Vertical: levels 0-4 show bottom row (default top offset shows S1/S4/S6) */
+        /* Levels 5-9 show top row - need to scroll up by one stage-height */
+        #level-5:checked ~ .game-world,
+        #level-6:checked ~ .game-world,
+        #level-7:checked ~ .game-world,
+        #level-8:checked ~ .game-world,
+        #level-9:checked ~ .game-world {
+            --world-translateY: var(--stage-height);
         }
 
-        /* Shift viewport when player is in S2 (pos 7-12, levels 5-9) - horizontal and vertical */
-        #level-5:checked ~ #pos-7:checked ~ .game-world,
-        #level-5:checked ~ #pos-8:checked ~ .game-world,
-        #level-5:checked ~ #pos-9:checked ~ .game-world,
-        #level-5:checked ~ #pos-10:checked ~ .game-world,
-        #level-5:checked ~ #pos-11:checked ~ .game-world,
-        #level-5:checked ~ #pos-12:checked ~ .game-world,
-        #level-6:checked ~ #pos-7:checked ~ .game-world,
-        #level-6:checked ~ #pos-8:checked ~ .game-world,
-        #level-6:checked ~ #pos-9:checked ~ .game-world,
-        #level-6:checked ~ #pos-10:checked ~ .game-world,
-        #level-6:checked ~ #pos-11:checked ~ .game-world,
-        #level-6:checked ~ #pos-12:checked ~ .game-world,
-        #level-7:checked ~ #pos-7:checked ~ .game-world,
-        #level-7:checked ~ #pos-8:checked ~ .game-world,
-        #level-7:checked ~ #pos-9:checked ~ .game-world,
-        #level-7:checked ~ #pos-10:checked ~ .game-world,
-        #level-7:checked ~ #pos-11:checked ~ .game-world,
-        #level-7:checked ~ #pos-12:checked ~ .game-world,
-        #level-8:checked ~ #pos-7:checked ~ .game-world,
-        #level-8:checked ~ #pos-8:checked ~ .game-world,
-        #level-8:checked ~ #pos-9:checked ~ .game-world,
-        #level-8:checked ~ #pos-10:checked ~ .game-world,
-        #level-8:checked ~ #pos-11:checked ~ .game-world,
-        #level-8:checked ~ #pos-12:checked ~ .game-world,
-        #level-9:checked ~ #pos-7:checked ~ .game-world,
-        #level-9:checked ~ #pos-8:checked ~ .game-world,
-        #level-9:checked ~ #pos-9:checked ~ .game-world,
-        #level-9:checked ~ #pos-10:checked ~ .game-world,
-        #level-9:checked ~ #pos-11:checked ~ .game-world,
-        #level-9:checked ~ #pos-12:checked ~ .game-world {
-            transform: translate(calc(var(--pos-width) * -6), var(--stage-height));
+        /* Horizontal: positions 7-12 scroll left by 6 positions */
+        #pos-7:checked ~ .game-world,
+        #pos-8:checked ~ .game-world,
+        #pos-9:checked ~ .game-world,
+        #pos-10:checked ~ .game-world,
+        #pos-11:checked ~ .game-world,
+        #pos-12:checked ~ .game-world {
+            --world-translateX: calc(var(--pos-width) * -6);
         }
 
-        /* Shift viewport when player is in S3 (pos 13-18, φ, levels 5-9) - horizontal and vertical */
-        #level-5:checked ~ #pos-13:checked ~ .game-world,
-        #level-5:checked ~ #pos-14:checked ~ .game-world,
-        #level-5:checked ~ #pos-15:checked ~ .game-world,
-        #level-5:checked ~ #pos-16:checked ~ .game-world,
-        #level-5:checked ~ #pos-17:checked ~ .game-world,
-        #level-5:checked ~ #pos-18:checked ~ .game-world,
-        #level-5:checked ~ #pos-φ:checked ~ .game-world,
-        #level-6:checked ~ #pos-13:checked ~ .game-world,
-        #level-6:checked ~ #pos-14:checked ~ .game-world,
-        #level-6:checked ~ #pos-15:checked ~ .game-world,
-        #level-6:checked ~ #pos-16:checked ~ .game-world,
-        #level-6:checked ~ #pos-17:checked ~ .game-world,
-        #level-6:checked ~ #pos-18:checked ~ .game-world,
-        #level-6:checked ~ #pos-φ:checked ~ .game-world,
-        #level-7:checked ~ #pos-13:checked ~ .game-world,
-        #level-7:checked ~ #pos-14:checked ~ .game-world,
-        #level-7:checked ~ #pos-15:checked ~ .game-world,
-        #level-7:checked ~ #pos-16:checked ~ .game-world,
-        #level-7:checked ~ #pos-17:checked ~ .game-world,
-        #level-7:checked ~ #pos-18:checked ~ .game-world,
-        #level-7:checked ~ #pos-φ:checked ~ .game-world,
-        #level-8:checked ~ #pos-13:checked ~ .game-world,
-        #level-8:checked ~ #pos-14:checked ~ .game-world,
-        #level-8:checked ~ #pos-15:checked ~ .game-world,
-        #level-8:checked ~ #pos-16:checked ~ .game-world,
-        #level-8:checked ~ #pos-17:checked ~ .game-world,
-        #level-8:checked ~ #pos-18:checked ~ .game-world,
-        #level-8:checked ~ #pos-φ:checked ~ .game-world,
-        #level-9:checked ~ #pos-13:checked ~ .game-world,
-        #level-9:checked ~ #pos-14:checked ~ .game-world,
-        #level-9:checked ~ #pos-15:checked ~ .game-world,
-        #level-9:checked ~ #pos-16:checked ~ .game-world,
-        #level-9:checked ~ #pos-17:checked ~ .game-world,
-        #level-9:checked ~ #pos-18:checked ~ .game-world,
-        #level-9:checked ~ #pos-φ:checked ~ .game-world {
-            transform: translate(calc(var(--pos-width) * -12), var(--stage-height));
+        /* Horizontal: positions 13-18 and φ scroll left by 12 positions */
+        #pos-13:checked ~ .game-world,
+        #pos-14:checked ~ .game-world,
+        #pos-15:checked ~ .game-world,
+        #pos-16:checked ~ .game-world,
+        #pos-17:checked ~ .game-world,
+        #pos-18:checked ~ .game-world,
+        #pos-φ:checked ~ .game-world {
+            --world-translateX: calc(var(--pos-width) * -12);
         }
 
-        /* S3 at levels 0-4 (for completeness, though player shouldn't be there) */
-        #level-0:checked ~ #pos-13:checked ~ .game-world,
-        #level-0:checked ~ #pos-14:checked ~ .game-world,
-        #level-0:checked ~ #pos-15:checked ~ .game-world,
-        #level-0:checked ~ #pos-16:checked ~ .game-world,
-        #level-0:checked ~ #pos-17:checked ~ .game-world,
-        #level-0:checked ~ #pos-18:checked ~ .game-world,
-        #level-0:checked ~ #pos-φ:checked ~ .game-world,
-        #level-1:checked ~ #pos-13:checked ~ .game-world,
-        #level-1:checked ~ #pos-14:checked ~ .game-world,
-        #level-1:checked ~ #pos-15:checked ~ .game-world,
-        #level-1:checked ~ #pos-16:checked ~ .game-world,
-        #level-1:checked ~ #pos-17:checked ~ .game-world,
-        #level-1:checked ~ #pos-18:checked ~ .game-world,
-        #level-1:checked ~ #pos-φ:checked ~ .game-world,
-        #level-2:checked ~ #pos-13:checked ~ .game-world,
-        #level-2:checked ~ #pos-14:checked ~ .game-world,
-        #level-2:checked ~ #pos-15:checked ~ .game-world,
-        #level-2:checked ~ #pos-16:checked ~ .game-world,
-        #level-2:checked ~ #pos-17:checked ~ .game-world,
-        #level-2:checked ~ #pos-18:checked ~ .game-world,
-        #level-2:checked ~ #pos-φ:checked ~ .game-world,
-        #level-3:checked ~ #pos-13:checked ~ .game-world,
-        #level-3:checked ~ #pos-14:checked ~ .game-world,
-        #level-3:checked ~ #pos-15:checked ~ .game-world,
-        #level-3:checked ~ #pos-16:checked ~ .game-world,
-        #level-3:checked ~ #pos-17:checked ~ .game-world,
-        #level-3:checked ~ #pos-18:checked ~ .game-world,
-        #level-3:checked ~ #pos-φ:checked ~ .game-world,
-        #level-4:checked ~ #pos-13:checked ~ .game-world,
-        #level-4:checked ~ #pos-14:checked ~ .game-world,
-        #level-4:checked ~ #pos-15:checked ~ .game-world,
-        #level-4:checked ~ #pos-16:checked ~ .game-world,
-        #level-4:checked ~ #pos-17:checked ~ .game-world,
-        #level-4:checked ~ #pos-18:checked ~ .game-world,
-        #level-4:checked ~ #pos-φ:checked ~ .game-world {
-            transform: translateX(calc(var(--pos-width) * -12));
-        }
         /* Inventory state tracking: set variables when items picked up */
         #key-pickup:checked ~ .game-world { --inv-has-key: 1; }
         #wrench-pickup:checked ~ .game-world { --inv-has-wrench: 1; }
