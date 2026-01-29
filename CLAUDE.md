@@ -55,20 +55,25 @@ When items are picked up, they animate to the inventory box:
 
 The flight destination is calculated using CSS variables to match the inventory box position.
 
-## Stage Layout
+## Stage Layout and Coordinates
 
-The game uses a branching layout where S2 and S4 share the same horizontal space but at different vertical levels:
+The game world is a 3x2 grid of stages:
 
-```
-        [S2] -> [S3]
-         ^
-[S1] -> [S4]
-```
+|            | pos 1-6      | pos 7-12    | pos 13-18   |
+|------------|--------------|-------------|-------------|
+| levels 5-9 | S0           | S2 (jungle) | S3 (hangar) |
+| levels 0-4 | S1 (factory) | S4 (caves)  | S5          |
 
-- **S1** (The Factory): Positions 1-6, levels 0-4
-- **S4** (The Unknown): Positions 7-12, levels 0-4 - placeholder stage, currently minimal content
-- **S2** (The Jungle): Positions 7-12, levels 5-9 (same heights as 0-4)
-- **S3** (The Hangar): Positions 13-18, levels 5-9
+**Radio button IDs** are pure coordinates with no stage semantics:
+- `pos-1` through `pos-18` for horizontal position
+- `pos-φ` (phi) - a phantom position for special movement (see Phantom Positions)
+- `level-0` through `level-9` for vertical level (5-9 display at same heights as 0-4)
+
+Stage is derived from the combination of position and level as shown in the table above.
+
+**Position calculations** (using CSS variables):
+- X: `calc(var(--pos-offset) + var(--pos-width) * (pos - 1))`
+- Y: Based on level with `--platform-height` calculations
 
 **Stage transitions:**
 - S1 → S4: Door at P6 changes position only (6→7)
@@ -117,25 +122,6 @@ S2/S3 elements are positioned one `--stage-height` above S1/S4 elements in the g
 
 This physical separation means S2 elements are naturally hidden when viewing S1/S4 (they're above the viewport), eliminating the need for visibility hacks.
 
-## Coordinate System
-
-**Radio button IDs** are pure coordinates with no stage semantics:
-- `pos-1` through `pos-18`, plus `pos-φ` (phantom position)
-- `level-0` through `level-9` (levels 5-9 display at same heights as 0-4)
-
-Stage is derived from the combination of position and level:
-
-| Positions | Levels | Stage |
-|-----------|--------|-------|
-| 1-6       | 0-4    | S1    |
-| 7-12      | 0-4    | S4    |
-| 7-12      | 5-9    | S2    |
-| 13-18     | 5-9    | S3    |
-
-All positioning derives from CSS variables (`--pos-width`, `--platform-height`, etc.). Player and element positions are calculated as:
-- X: `calc(var(--pos-offset) + var(--pos-width) * (pos - 1))`
-- Y: Based on level with platform height calculations
-
 ## Naming Conventions
 
 - **Location format:** `LxPy` (Level x, Position y) - levels in class names refer to visual height (0-4), not logical level
@@ -147,7 +133,7 @@ All positioning derives from CSS variables (`--pos-width`, `--platform-height`, 
 ## Visual Styles per Stage
 
 - **Stage 1 (The Factory):** Industrial/factory aesthetic - rusted metal platforms with rivets, wooden ladders
-- **Stage 4 (The Unknown):** Placeholder - minimal content (grey ground only), theme to be decided
+- **Stage 4 (The Caves):** Caves with maze of stalactites and stalagmites
 - **Stage 2 (The Jungle):** Jungle aesthetic - organic green platforms, rock formation on left edge, vines for climbing
 - **Stage 3 (The Hangar):** Hangar aesthetic - bluish-grey metallic platforms, concrete floor, spine ladders (central pole with alternating rungs)
 
