@@ -3742,7 +3742,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="axe-pickup" class="axe-in-game"><svg><use href="#axe"/></svg></label>
 
         <!-- ID card on stage 2, level 4, pos 6 (clickable to pick up) -->
-        <label for="idcard-pickup" class="idcard-in-game"><svg><use href="#id-card"/></svg></label>
+        <div class="stage-2-elements">
+            <label for="idcard-pickup" class="idcard-in-game"><svg><use href="#id-card"/></svg></label>
+        </div>
 
         <!-- Battery on stage 3, level 2, pos 1 (clickable to pick up) -->
         <label for="battery-pickup" class="battery-in-game"><svg><use href="#battery"/></svg></label>
@@ -4021,28 +4023,30 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="hover-area"></span>
         </div>
 
-        <!-- ==================== STAGE 2 VALUABLES ==================== -->
-        <div class="container coin valuable-S2-L0-P2">
-            <label for="valuable-S2-L0-P2-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-            <span class="hover-area"></span>
-        </div>
-        <div class="container aquamarine valuable-S2-L1-P5">
-            <label for="valuable-S2-L1-P5-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
-            <span class="hover-area"></span>
-            <span class="tooltip">Aquamarine</span>
-        </div>
-        <div class="container coin valuable-S2-L2-P1">
-            <label for="valuable-S2-L2-P1-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-            <span class="hover-area"></span>
-        </div>
-        <div class="container aquamarine valuable-S2-L3-P3">
-            <label for="valuable-S2-L3-P3-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
-            <span class="hover-area"></span>
-            <span class="tooltip">Aquamarine</span>
-        </div>
-        <div class="container coin valuable-S2-L4-P4">
-            <label for="valuable-S2-L4-P4-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-            <span class="hover-area"></span>
+        <!-- ==================== STAGE 2 VALUABLES (visible at levels 5-9) ==================== -->
+        <div class="stage-2-elements">
+            <div class="container coin valuable-S2-L0-P2">
+                <label for="valuable-S2-L0-P2-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+                <span class="hover-area"></span>
+            </div>
+            <div class="container aquamarine valuable-S2-L1-P5">
+                <label for="valuable-S2-L1-P5-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
+                <span class="hover-area"></span>
+                <span class="tooltip">Aquamarine</span>
+            </div>
+            <div class="container coin valuable-S2-L2-P1">
+                <label for="valuable-S2-L2-P1-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+                <span class="hover-area"></span>
+            </div>
+            <div class="container aquamarine valuable-S2-L3-P3">
+                <label for="valuable-S2-L3-P3-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
+                <span class="hover-area"></span>
+                <span class="tooltip">Aquamarine</span>
+            </div>
+            <div class="container coin valuable-S2-L4-P4">
+                <label for="valuable-S2-L4-P4-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+                <span class="hover-area"></span>
+            </div>
         </div>
 
         <!-- ==================== STAGE 3 VALUABLES ==================== -->
