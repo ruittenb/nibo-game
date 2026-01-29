@@ -233,7 +233,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --z-items: 15;                /* Items, hazards */
             --z-door: 20;                 /* Door (above hazards for tooltip) */
             --z-ui: 300;                  /* UI elements (title, inventory, counter) */
-            --z-tooltip: 500;             /* Tooltips */
+            --z-tooltip: 1500;            /* Tooltips */
             --z-overlay: 1000;            /* Death and escape overlays */
         }
 
@@ -684,7 +684,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 20px;
             height: 24px;
-            bottom: calc(var(--platform-height) * 1 + var(--platform-thickness) + 5px);
+            bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
             color: #50c050;
             display: none;
@@ -1171,6 +1171,40 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 24px;
             color: var(--gold-color);
         }
+        .key-tooltip {
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + var(--pickup-size));
+            left: calc(var(--pos-offset) - var(--item-offset) + var(--pickup-size) / 2);
+            transform: translateX(-50%);
+        }
+        /* Hover area for key tooltip (when not adjacent) */
+        .key-hover-area {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) - var(--item-offset));
+            pointer-events: auto;
+            z-index: 1;
+        }
+        /* Hide key hover area when picked up or used */
+        #key-pickup:checked ~ .game-world .key-hover-area,
+        #toolbox-unlocked:checked ~ .game-world .key-hover-area,
+        #key-pickup:checked ~ .game-world .key-tooltip,
+        #toolbox-unlocked:checked ~ .game-world .key-tooltip {
+            display: none;
+        }
+        /* Hide hover area when player is at key (so label click works) */
+        #level-4:checked ~ #pos-1:checked ~ .game-world .key-hover-area {
+            display: none;
+        }
+        /* Show tooltip on hover area hover */
+        .key-hover-area:hover ~ .key-tooltip {
+            opacity: 1;
+        }
+        /* Show tooltip when player is at key and hovers */
+        #level-4:checked ~ #pos-1:checked ~ #key-pickup:not(:checked) ~ .game-world .key-in-game:hover ~ .key-tooltip {
+            opacity: 1;
+        }
         /* Hide key when toolbox is unlocked (key used) */
         #toolbox-unlocked:checked ~ .game-world .key-in-game {
             display: none;
@@ -1237,6 +1271,40 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
         }
+        .axe-tooltip {
+            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset) + var(--pickup-size) / 2);
+            transform: translateX(-50%);
+        }
+        /* Hover area for axe tooltip (when not adjacent) */
+        .axe-hover-area {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
+            pointer-events: auto;
+            z-index: 1;
+        }
+        /* Hide axe hover area and tooltip when picked up or tree chopped */
+        #axe-pickup:checked ~ .game-world .axe-hover-area,
+        #axe-pickup:checked ~ .game-world .axe-tooltip,
+        #tree-chopped:checked ~ .game-world .axe-hover-area,
+        #tree-chopped:checked ~ .game-world .axe-tooltip {
+            display: none;
+        }
+        /* Hide hover area when player is at axe (so label click works) */
+        #level-8:checked ~ #pos-φ:checked ~ .game-world .axe-hover-area {
+            display: none;
+        }
+        /* Show tooltip on hover area hover */
+        .axe-hover-area:hover ~ .axe-tooltip {
+            opacity: 1;
+        }
+        /* Show tooltip when player is at axe and hovers */
+        #level-8:checked ~ #pos-φ:checked ~ #axe-pickup:not(:checked) ~ .game-world .axe-in-game:hover ~ .axe-tooltip {
+            opacity: 1;
+        }
         /* Enable clicking axe only when player is at phantom position (S3 uses levels 5-9, level-8 = visual L3) */
         #level-8:checked ~ #pos-φ:checked ~ #axe-pickup:not(:checked) ~ .game-world .axe-in-game {
             pointer-events: auto;
@@ -1268,6 +1336,38 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
             color: var(--idcard-color);
+        }
+        .idcard-tooltip {
+            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset) + var(--pickup-size) / 2);
+            transform: translateX(-50%);
+        }
+        /* Hover area for ID card tooltip (when not adjacent) */
+        .idcard-hover-area {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
+            pointer-events: auto;
+            z-index: 1;
+        }
+        /* Hide ID card hover area and tooltip when picked up */
+        #idcard-pickup:checked ~ .game-world .idcard-hover-area,
+        #idcard-pickup:checked ~ .game-world .idcard-tooltip {
+            display: none;
+        }
+        /* Hide hover area when player is at ID card (so label click works) */
+        #level-9:checked ~ #pos-12:checked ~ .game-world .idcard-hover-area {
+            display: none;
+        }
+        /* Show tooltip on hover area hover */
+        .idcard-hover-area:hover ~ .idcard-tooltip {
+            opacity: 1;
+        }
+        /* Show tooltip when player is at ID card and hovers */
+        #level-9:checked ~ #pos-12:checked ~ #idcard-pickup:not(:checked) ~ .game-world .idcard-in-game:hover ~ .idcard-tooltip {
+            opacity: 1;
         }
         /* Enable clicking id card only when player is next to it - S2 uses levels 5-9, L4 -> L9 */
         #level-9:checked ~ #pos-12:checked ~ #idcard-pickup:not(:checked) ~ .game-world .idcard-in-game {
@@ -1302,6 +1402,40 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--battery-color);
             filter: drop-shadow(2px -2px 2px rgba(0, 0, 0, 0.5));
         }
+        .battery-tooltip {
+            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset) + var(--pickup-size) / 2);
+            transform: translateX(-50%);
+        }
+        /* Hover area for battery tooltip (when not adjacent) */
+        .battery-hover-area {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
+            pointer-events: auto;
+            z-index: 1;
+        }
+        /* Hide battery hover area and tooltip when picked up or bolt fixed */
+        #battery-pickup:checked ~ .game-world .battery-hover-area,
+        #battery-pickup:checked ~ .game-world .battery-tooltip,
+        #bolt-fixed:checked ~ .game-world .battery-hover-area,
+        #bolt-fixed:checked ~ .game-world .battery-tooltip {
+            display: none;
+        }
+        /* Hide hover area when player is at battery (so label click works) */
+        #level-6:checked ~ #pos-14:checked ~ .game-world .battery-hover-area {
+            display: none;
+        }
+        /* Show tooltip on hover area hover */
+        .battery-hover-area:hover ~ .battery-tooltip {
+            opacity: 1;
+        }
+        /* Show tooltip when player is at battery and hovers */
+        #level-6:checked ~ #pos-14:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game:hover ~ .battery-tooltip {
+            opacity: 1;
+        }
         /* Enable clicking battery only when player is next to it - S3 uses levels 5-9, L1 -> L6 */
         #level-6:checked ~ #pos-14:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game {
             pointer-events: auto;
@@ -1334,6 +1468,40 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
             color: var(--wrench-color);
+        }
+        .wrench-tooltip {
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + var(--pickup-size) + 25px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset) + var(--pickup-size) / 2);
+            transform: translateX(-50%);
+            display: none;
+        }
+        /* Hover area for wrench tooltip (when not adjacent) */
+        .wrench-hover-area {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 25px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
+            pointer-events: auto;
+            z-index: 1;
+            display: none;
+        }
+        /* Show wrench hover area and tooltip element when toolbox unlocked but wrench not picked up */
+        #toolbox-unlocked:checked ~ #wrench-pickup:not(:checked) ~ .game-world .wrench-hover-area,
+        #toolbox-unlocked:checked ~ #wrench-pickup:not(:checked) ~ .game-world .wrench-tooltip {
+            display: block;
+        }
+        /* Hide hover area when player is at wrench (so label click works) */
+        #level-2:checked ~ #pos-6:checked ~ #toolbox-unlocked:checked ~ .game-world .wrench-hover-area {
+            display: none;
+        }
+        /* Show tooltip on hover area hover */
+        .wrench-hover-area:hover ~ .wrench-tooltip {
+            opacity: 1;
+        }
+        /* Show tooltip when player is at wrench and hovers */
+        #level-2:checked ~ #pos-6:checked ~ #toolbox-unlocked:checked ~ #wrench-pickup:not(:checked) ~ .game-world .wrench-in-game:hover ~ .wrench-tooltip {
+            opacity: 1;
         }
         /* Show wrench when toolbox is unlocked */
         #toolbox-unlocked:checked ~ .game-world .wrench-in-game {
@@ -3846,7 +4014,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="game-world">
 
         <!-- Key in game world (clickable to pick up) -->
+        <span class="key-hover-area"></span>
         <label for="key-pickup" class="key-in-game"><svg><use href="#key"/></svg></label>
+        <span class="tooltip key-tooltip">Key</span>
 
         <!-- Toolbox on level 2, position 6 -->
         <div class="toolbox">
@@ -3855,18 +4025,26 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
 
         <!-- Axe on stage 3, level 4, pos φ (clickable to pick up) -->
+        <span class="axe-hover-area"></span>
         <label for="axe-pickup" class="axe-in-game"><svg><use href="#axe"/></svg></label>
+        <span class="tooltip axe-tooltip">Axe</span>
 
         <!-- ID card on stage 2, level 4, pos 6 (clickable to pick up) -->
         <div class="stage-2-elements">
+            <span class="idcard-hover-area"></span>
             <label for="idcard-pickup" class="idcard-in-game"><svg><use href="#id-card"/></svg></label>
+            <span class="tooltip idcard-tooltip">ID Card</span>
         </div>
 
         <!-- Battery on stage 3, level 2, pos 1 (clickable to pick up) -->
+        <span class="battery-hover-area"></span>
         <label for="battery-pickup" class="battery-in-game"><svg><use href="#battery"/></svg></label>
+        <span class="tooltip battery-tooltip">Battery</span>
 
         <!-- Wrench in game world (clickable to pick up) -->
+        <span class="wrench-hover-area"></span>
         <label for="wrench-pickup" class="wrench-in-game"><svg><use href="#wrench"/></svg></label>
+        <span class="tooltip wrench-tooltip">Wrench</span>
 
         <!-- Key above toolbox (appears when user has key, clickable to unlock) -->
         <label for="toolbox-unlocked" class="key-at-toolbox"><svg><use href="#key"/></svg></label>
