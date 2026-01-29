@@ -865,18 +865,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: 9999;
             position: fixed;
         }
-        /* Debug positions - levels (column 1, level 4 on top, then levels 5-9) */
-        #level-4 { top: 30px; left: 10px; }
-        #level-3 { top: 50px; left: 10px; }
-        #level-2 { top: 70px; left: 10px; }
-        #level-1 { top: 90px; left: 10px; }
-        #level-0 { top: 110px; left: 10px; }
-        /* Levels 5-9 in second column (for S2/S3) */
-        #level-9 { top: 30px; left: 450px; }
-        #level-8 { top: 50px; left: 450px; }
-        #level-7 { top: 70px; left: 450px; }
-        #level-6 { top: 90px; left: 450px; }
-        #level-5 { top: 110px; left: 450px; }
+        /* Debug positions - levels (single column on left, level-9 on top, level-0 on bottom) */
+        #level-9 { top: 30px; left: 10px; }
+        #level-8 { top: 50px; left: 10px; }
+        #level-7 { top: 70px; left: 10px; }
+        #level-6 { top: 90px; left: 10px; }
+        #level-5 { top: 110px; left: 10px; }
+        #level-4 { top: 140px; left: 10px; }
+        #level-3 { top: 160px; left: 10px; }
+        #level-2 { top: 180px; left: 10px; }
+        #level-1 { top: 200px; left: 10px; }
+        #level-0 { top: 220px; left: 10px; }
         /* Debug positions - positions (row 1) */
         #pos-1 { top: 10px; left: 30px; }
         #pos-2 { top: 10px; left: 50px; }
@@ -1175,8 +1174,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
         }
-        /* Enable clicking axe only when player is at phantom position */
-        #level-3:checked ~ #pos-φ:checked ~ #axe-pickup:not(:checked) ~ .game-world .axe-in-game {
+        /* Enable clicking axe only when player is at phantom position (S3 uses levels 5-9, level-8 = visual L3) */
+        #level-8:checked ~ #pos-φ:checked ~ #axe-pickup:not(:checked) ~ .game-world .axe-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
@@ -2784,12 +2783,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 filter: drop-shadow(0 0 15px #4a4) drop-shadow(0 0 25px #4a4);
             }
         }
-        /* Tree pulsates when player is next to it, has axe, AND tree not yet chopped */
-        #level-0:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree svg {
+        /* Tree pulsates when player is next to it, has axe, AND tree not yet chopped (S2 uses levels 5-9) */
+        #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree svg {
             animation: tree-pulse 1s ease-in-out infinite;
         }
-        /* Enable clicking tree only when player is next to it, has axe */
-        #level-0:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree {
+        /* Enable clicking tree only when player is next to it, has axe (S2 uses levels 5-9) */
+        #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree {
             pointer-events: auto;
             cursor: pointer;
         }
@@ -2818,8 +2817,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: auto;
             z-index: 1;
         }
-        /* Hide hover area when player has axe and is at tree (so label click works) */
-        #level-0:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ .game-world .tree-container .tree-hover-area {
+        /* Hide hover area when player has axe and is at tree (so label click works) (S2 uses levels 5-9) */
+        #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ .game-world .tree-container .tree-hover-area {
             display: none;
         }
         /* Show "blocked" tooltip on hover (without axe, tree not chopped) */
@@ -3525,40 +3524,40 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="title">NIBO'S WAY OUT</div>
 
         <!-- Radio buttons for level (vertical) -->
-        <input type="radio" name="level" id="level-0" class="level-radio" checked>
-        <input type="radio" name="level" id="level-1" class="level-radio">
-        <input type="radio" name="level" id="level-2" class="level-radio">
-        <input type="radio" name="level" id="level-3" class="level-radio">
-        <input type="radio" name="level" id="level-4" class="level-radio">
+        <input type="radio" name="level" id="level-0" class="level-radio" title="level-0" checked>
+        <input type="radio" name="level" id="level-1" class="level-radio" title="level-1">
+        <input type="radio" name="level" id="level-2" class="level-radio" title="level-2">
+        <input type="radio" name="level" id="level-3" class="level-radio" title="level-3">
+        <input type="radio" name="level" id="level-4" class="level-radio" title="level-4">
         <!-- Levels 5-9 for S2/S3 (display at same heights as 0-4) -->
-        <input type="radio" name="level" id="level-5" class="level-radio">
-        <input type="radio" name="level" id="level-6" class="level-radio">
-        <input type="radio" name="level" id="level-7" class="level-radio">
-        <input type="radio" name="level" id="level-8" class="level-radio">
-        <input type="radio" name="level" id="level-9" class="level-radio">
+        <input type="radio" name="level" id="level-5" class="level-radio" title="level-5">
+        <input type="radio" name="level" id="level-6" class="level-radio" title="level-6">
+        <input type="radio" name="level" id="level-7" class="level-radio" title="level-7">
+        <input type="radio" name="level" id="level-8" class="level-radio" title="level-8">
+        <input type="radio" name="level" id="level-9" class="level-radio" title="level-9">
 
         <!-- Radio buttons for position (horizontal) -->
-        <input type="radio" name="position" id="pos-1" class="position-radio" checked>
-        <input type="radio" name="position" id="pos-2" class="position-radio">
-        <input type="radio" name="position" id="pos-3" class="position-radio">
-        <input type="radio" name="position" id="pos-4" class="position-radio">
-        <input type="radio" name="position" id="pos-5" class="position-radio">
-        <input type="radio" name="position" id="pos-6" class="position-radio">
+        <input type="radio" name="position" id="pos-1" class="position-radio" title="pos-1" checked>
+        <input type="radio" name="position" id="pos-2" class="position-radio" title="pos-2">
+        <input type="radio" name="position" id="pos-3" class="position-radio" title="pos-3">
+        <input type="radio" name="position" id="pos-4" class="position-radio" title="pos-4">
+        <input type="radio" name="position" id="pos-5" class="position-radio" title="pos-5">
+        <input type="radio" name="position" id="pos-6" class="position-radio" title="pos-6">
         <!-- S2/S4 positions (same horizontal space, S4 at levels 0-4, S2 at levels 5-9) -->
-        <input type="radio" name="position" id="pos-7" class="position-radio">
-        <input type="radio" name="position" id="pos-8" class="position-radio">
-        <input type="radio" name="position" id="pos-9" class="position-radio">
-        <input type="radio" name="position" id="pos-10" class="position-radio">
-        <input type="radio" name="position" id="pos-11" class="position-radio">
-        <input type="radio" name="position" id="pos-12" class="position-radio">
+        <input type="radio" name="position" id="pos-7" class="position-radio" title="pos-7">
+        <input type="radio" name="position" id="pos-8" class="position-radio" title="pos-8">
+        <input type="radio" name="position" id="pos-9" class="position-radio" title="pos-9">
+        <input type="radio" name="position" id="pos-10" class="position-radio" title="pos-10">
+        <input type="radio" name="position" id="pos-11" class="position-radio" title="pos-11">
+        <input type="radio" name="position" id="pos-12" class="position-radio" title="pos-12">
         <!-- S3 positions -->
-        <input type="radio" name="position" id="pos-13" class="position-radio">
-        <input type="radio" name="position" id="pos-14" class="position-radio">
-        <input type="radio" name="position" id="pos-15" class="position-radio">
-        <input type="radio" name="position" id="pos-16" class="position-radio">
-        <input type="radio" name="position" id="pos-17" class="position-radio">
-        <input type="radio" name="position" id="pos-18" class="position-radio">
-        <input type="radio" name="position" id="pos-φ" class="position-radio" title="φ">
+        <input type="radio" name="position" id="pos-13" class="position-radio" title="pos-13">
+        <input type="radio" name="position" id="pos-14" class="position-radio" title="pos-14">
+        <input type="radio" name="position" id="pos-15" class="position-radio" title="pos-15">
+        <input type="radio" name="position" id="pos-16" class="position-radio" title="pos-16">
+        <input type="radio" name="position" id="pos-17" class="position-radio" title="pos-17">
+        <input type="radio" name="position" id="pos-18" class="position-radio" title="pos-18">
+        <input type="radio" name="position" id="pos-φ" class="position-radio" title="pos-φ">
 
         <!-- Key pickup checkbox -->
         <input type="checkbox" id="key-pickup" class="key-checkbox" title="key">
@@ -3612,7 +3611,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="subtitle subtitle-S1">The Factory</div>
         <div class="subtitle subtitle-S2">The Jungle</div>
         <div class="subtitle subtitle-S3">The Hangar</div>
-        <div class="subtitle subtitle-S4">The Unknown</div>
+        <div class="subtitle subtitle-S4">The Caves</div>
 
         <!-- Fixed navigation panel -->
         <div class="nav-panel">
