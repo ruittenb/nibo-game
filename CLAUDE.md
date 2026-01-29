@@ -176,19 +176,40 @@ Z-index layers (defined as CSS variables):
 - `--z-door: 20` - Door (above hazards for tooltip)
 - `--z-ui: 300` - UI elements (title, inventory, counter)
 - `--z-tooltip: 500` - Tooltips
-- `--z-overlay: 1000` - Death and escape overlays
+- `--z-overlay: 1000` - Title screen overlay
+- Player: 1100 (above title, below death/escape)
+- Death/escape overlays: 2000 (above player)
 
-## Conditional Animations
+This layering ensures:
+- Player appears in front of the title screen on game start
+- Player is hidden behind death/escape overlays when triggered
+
+## Item Animations
+
+Each pickupable item has two animation states:
+
+| Item    | Pickup animation (in-game)  | Hovering animation (at target) |
+|---------|----------------------------|-------------------------------|
+| Key     | `key-pulse`                | `key-hovering-pulse`          |
+| Wrench  | `wrench-pulse`             | `wrench-rotate`               |
+| Axe     | `axe-pulse`                | `axe-chop`                    |
+| Battery | `battery-pulse`            | `battery-hovering-pulse`      |
+| ID Card | `idcard-pulse`             | `idcard-hovering-pulse`       |
+
+- **Pickup animations**: Drop-shadow glow only, used when player is adjacent to the item
+- **Hovering animations**: Scale + drop-shadow (or rotation for wrench/axe), used when item floats above its target (e.g., key above toolbox)
+
+All `@keyframes` animations are consolidated in one section of the CSS for maintainability.
 
 Items pulse/glow when the player can interact with them. This requires combining position checks with item state:
 ```css
 /* Key is in S1 at level-4, so this selector is unchanged */
 #level-4:checked ~ #pos-1:checked ~ .game-world .key-in-game {
-    animation: key-pulse 2s infinite;
+    animation: key-pulse 1s ease-in-out infinite;
 }
 /* But S2/S3 items use levels 5-9, e.g., axe at S2-L9-P12: */
 #level-9:checked ~ #pos-12:checked ~ .game-world .axe-in-game {
-    animation: axe-pulse 2s infinite;
+    animation: axe-pulse 1s ease-in-out infinite;
 }
 ```
 

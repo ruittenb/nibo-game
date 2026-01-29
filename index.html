@@ -663,7 +663,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 20px;
             height: 20px;
-            bottom: calc(var(--platform-height) * 1 + var(--platform-thickness) + 35px);
+            bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 35px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 2px);
             z-index: 20;
             display: none;
@@ -833,6 +833,32 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         #control-button-pressed:checked ~ .game-world .control-button-green {
             display: block;
+            pointer-events: none;
+        }
+        /* Hover area for green button tooltip (when not adjacent) */
+        .control-button-green-hover-area {
+            position: absolute;
+            width: calc(var(--pickup-size) * 1.7);
+            height: calc(var(--pickup-size) * 2);
+            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 10px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 8px);
+            display: none;
+            pointer-events: auto;
+            z-index: 1;
+        }
+        #control-button-pressed:checked ~ .game-world .control-button-green-hover-area {
+            display: block;
+        }
+        /* Hide hover area when player is at L7-P15 (so label click works) */
+        #level-7:checked ~ #pos-15:checked ~ #control-button-pressed:checked ~ .game-world .control-button-green-hover-area {
+            display: none;
+        }
+        /* Show tooltip on hover area hover */
+        #control-button-pressed:checked ~ .game-world .control-button-green-hover-area:hover ~ .control-button-green .tooltip {
+            opacity: 1;
+        }
+        #control-button-pressed:checked ~ .game-world .control-button-green-hover-area:hover ~ .control-button-green {
+            z-index: var(--z-tooltip);
         }
         /* Enable clicking green button only when player is next to it - S3 uses levels 5-9 */
         #level-7:checked ~ #pos-15:checked ~ #control-button-pressed:checked ~ .game-world .control-button-green {
@@ -950,12 +976,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-17 { top: 10px; left: 370px; }
         #pos-18 { top: 10px; left: 390px; }
         #pos-φ { top: 10px; left: 420px; }
-        /* Debug positions - valuables (row 2) */
-        #valuable-S1-L0-P3-pickup { top: 30px; left: 30px; }
-        #valuable-S1-L1-P4-pickup { top: 30px; left: 50px; }
-        #valuable-S1-L3-P5-pickup { top: 30px; left: 70px; }
-        #valuable-S1-L2-P1-pickup { top: 30px; left: 90px; }
-        #valuable-S1-L4-P2-pickup { top: 30px; left: 110px; }
+        /* Debug positions - S1 valuables (next to L6) */
+        #valuable-S1-L0-P3-pickup { top: 90px; left: 30px; }
+        #valuable-S1-L1-P4-pickup { top: 90px; left: 50px; }
+        #valuable-S1-L3-P5-pickup { top: 90px; left: 70px; }
+        #valuable-S1-L2-P1-pickup { top: 90px; left: 90px; }
+        #valuable-S1-L4-P2-pickup { top: 90px; left: 110px; }
         #valuable-S2-L5-P8-pickup { top: 30px; left: 160px; }
         #valuable-S2-L6-P11-pickup { top: 30px; left: 180px; }
         #valuable-S2-L7-P7-pickup { top: 30px; left: 200px; }
@@ -965,11 +991,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S3-L5-P18-pickup { top: 30px; left: 310px; }
         #valuable-S3-L8-P18-pickup { top: 30px; left: 330px; }
         #valuable-S3-L9-P14-pickup { top: 30px; left: 350px; }
-        /* Debug positions - items (row 3) */
-        #key-pickup { top: 50px; left: 30px; }
-        #toolbox-unlocked { top: 50px; left: 50px; }
-        #wrench-pickup { top: 50px; left: 70px; }
-        #door-unlocked { top: 50px; left: 90px; }
+        /* Debug positions - S1 items (next to L5) */
+        #key-pickup { top: 110px; left: 30px; }
+        #toolbox-unlocked { top: 110px; left: 50px; }
+        #wrench-pickup { top: 110px; left: 70px; }
+        #door-unlocked { top: 110px; left: 90px; }
         #idcard-pickup { top: 50px; left: 160px; }
         #tree-chopped { top: 50px; left: 180px; }
         #axe-pickup { top: 50px; left: 290px; }
@@ -4086,6 +4112,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="tooltip tooltip-no-power">Flight controls are offline.<br>You need power.</span>
             <span class="tooltip tooltip-no-idcard">Flight controls are unavailable.<br>You need your ID card.</span>
         </div>
+        <span class="control-button-green-hover-area"></span>
         <label for="escaped" class="control-button-green">
             <svg><use href="#control-button"/></svg>
             <span class="tooltip">Flight controls<br>are now available.</span>
