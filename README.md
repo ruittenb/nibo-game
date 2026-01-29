@@ -14,6 +14,13 @@ Help Nibo the little spaceman to find his way out of the level.
 
  - [GitHub](https://github.com/ruittenb/nibo-game)
 
+# Icons
+
+Copied from and/or inspired by
+
+ - [Font Awesome](https://fontawesome.com/search?q=rock&ic=free-collection)
+ - [Material Design Icons](https://pictogrammers.com/library/mdi/)
+
 # Similar work by others
 
  - [The Mine](https://codepen.io/jcoulterdesign/pen/NOMeEb) by Jamie Coulter

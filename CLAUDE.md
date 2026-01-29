@@ -24,9 +24,12 @@ The game uses **CSS sibling selectors** (`~`) to create conditional logic:
 
 The HTML ordering is critical for sibling selectors to work:
 1. CSS styles (including all state-based selectors)
-2. State inputs (all radios and checkboxes)
-3. UI elements (nav-widget, inventory, subtitles)
-4. Game world (platforms, items, hazards, player, overlays)
+2. `#title-screen-toggle` checkbox (outside `.game-container`)
+3. `.game-container` containing:
+   - State inputs (level radios, position radios, item checkboxes)
+   - UI elements (nav-widget, inventory, subtitles)
+   - `.game-world` (platforms, items, hazards, player)
+   - Overlays (title, death, escape - siblings of `.game-world`)
 
 ## Navigation: Two Systems
 
@@ -74,18 +77,45 @@ The game uses a branching layout where S2 and S4 share the same horizontal space
 
 ## Stage Scrolling
 
-The viewport shows one stage at a time. When crossing stage boundaries, the entire `.game-world` translates. Transform depends only on position, not level:
-- Positions 1-6: no transform (S1 visible)
-- Positions 7-12: `translateX(-6 * pos-width)` (S2/S4 visible - level determines which content shows)
-- Positions 13-18: `translateX(-12 * pos-width)` (S3 visible)
+The game world is twice the viewport height, with S1/S4 at the bottom and S2/S3 at the top. The viewport scrolls via CSS `translate` property using CSS variables:
 
-## Stage Visibility
+```css
+.game-world {
+    top: calc(var(--stage-height) * -1);  /* Initial offset to show bottom row */
+    translate: var(--world-translateX, 0) var(--world-translateY, 0);
+}
 
-S2 and S4 share the same horizontal space, so their visual elements are wrapped in containers:
-- `.stage-2-elements`: visible when levels 5-9 are checked
-- `.stage-4-elements`: visible when levels 0-4 are checked
+/* Levels 5-9 scroll up to show top row (S0/S2/S3) */
+#level-5:checked ~ .game-world,
+#level-6:checked ~ .game-world, /* etc */ {
+    --world-translateY: var(--stage-height);
+}
 
-This prevents S4 platforms from showing when the player is in S2, and vice versa.
+/* Positions 7-12 scroll left */
+#pos-7:checked ~ .game-world, /* etc */ {
+    --world-translateX: calc(var(--pos-width) * -6);
+}
+```
+
+This approach uses **independent CSS variable rules** for X and Y translation, avoiding the combinatorial explosion of level×position selectors.
+
+## World Positioning
+
+S2/S3 elements are positioned one `--stage-height` above S1/S4 elements in the game world:
+
+```css
+/* S1 element */
+.platform-S1-L2-P3 {
+    bottom: calc(var(--platform-height) * 2);
+}
+
+/* S2 element at same visual height */
+.platform-S2-L2-P3 {
+    bottom: calc(var(--stage-height) + var(--platform-height) * 2);
+}
+```
+
+This physical separation means S2 elements are naturally hidden when viewing S1/S4 (they're above the viewport), eliminating the need for visibility hacks.
 
 ## Coordinate System
 
@@ -129,10 +159,36 @@ All positioning derives from CSS variables (`--pos-width`, `--platform-height`, 
 
 ## Overlays
 
-Overlays share a base `.overlay` class with common styling. Specific types:
+Overlays are positioned **outside** `.game-world` but inside `.game-container`. This is important because:
+- The `translate` property on `.game-world` creates a stacking context
+- Elements inside a stacking context can't z-index above elements outside it
+- By placing overlays as siblings of `.game-world`, they can properly layer
+
+Overlay types:
 - **`.title-screen-overlay`** - Shown on game start, hidden when `#title-screen-toggle` is checked
 - **`.death-screen-overlay`** - Shown when player reaches hazard locations
 - **`.escape-screen-overlay`** - Shown when `#escaped` checkbox is checked
+
+**Title screen special case:** The player appears *in front of* the title screen overlay. This works because S1 (positions 1-6) uses `translate: none` instead of CSS variable-based translation, avoiding the stacking context issue for the starting stage.
+
+```css
+/* S1 uses translate: none to avoid stacking context on title screen */
+#pos-1:checked ~ .game-world,
+#pos-2:checked ~ .game-world,
+/* ... */
+#pos-6:checked ~ .game-world {
+    translate: none;
+}
+```
+
+## Z-Index Layers
+
+Z-index layers (defined as CSS variables):
+- `--z-items: 15` - Items, hazards
+- `--z-door: 20` - Door (above hazards for tooltip)
+- `--z-ui: 300` - UI elements (title, inventory, counter)
+- `--z-tooltip: 500` - Tooltips
+- `--z-overlay: 1000` - Death and escape overlays
 
 ## Conditional Animations
 

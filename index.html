@@ -231,6 +231,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             /* Z-index layers */
             --z-items: 15;                /* Items, hazards */
             --z-door: 20;                 /* Door (above hazards for tooltip) */
+            --z-ui: 300;                  /* UI elements (title, inventory, counter) */
             --z-tooltip: 500;             /* Tooltips */
             --z-overlay: 1000;            /* Death and escape overlays */
         }
@@ -318,6 +319,42 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-18:checked ~ .game-world,
         #pos-φ:checked ~ .game-world {
             --world-translateX: calc(var(--pos-width) * -12);
+        }
+
+        /* S1 (pos 1-6, levels 0-4): no translate to avoid stacking context on title screen */
+        /* This rule must come AFTER the level-based translateY rules so it overrides them */
+        /* Level checks included to allow future S0 implementation (pos 1-6, levels 5-9) */
+        #level-0:checked ~ #pos-1:checked ~ .game-world,
+        #level-0:checked ~ #pos-2:checked ~ .game-world,
+        #level-0:checked ~ #pos-3:checked ~ .game-world,
+        #level-0:checked ~ #pos-4:checked ~ .game-world,
+        #level-0:checked ~ #pos-5:checked ~ .game-world,
+        #level-0:checked ~ #pos-6:checked ~ .game-world,
+        #level-1:checked ~ #pos-1:checked ~ .game-world,
+        #level-1:checked ~ #pos-2:checked ~ .game-world,
+        #level-1:checked ~ #pos-3:checked ~ .game-world,
+        #level-1:checked ~ #pos-4:checked ~ .game-world,
+        #level-1:checked ~ #pos-5:checked ~ .game-world,
+        #level-1:checked ~ #pos-6:checked ~ .game-world,
+        #level-2:checked ~ #pos-1:checked ~ .game-world,
+        #level-2:checked ~ #pos-2:checked ~ .game-world,
+        #level-2:checked ~ #pos-3:checked ~ .game-world,
+        #level-2:checked ~ #pos-4:checked ~ .game-world,
+        #level-2:checked ~ #pos-5:checked ~ .game-world,
+        #level-2:checked ~ #pos-6:checked ~ .game-world,
+        #level-3:checked ~ #pos-1:checked ~ .game-world,
+        #level-3:checked ~ #pos-2:checked ~ .game-world,
+        #level-3:checked ~ #pos-3:checked ~ .game-world,
+        #level-3:checked ~ #pos-4:checked ~ .game-world,
+        #level-3:checked ~ #pos-5:checked ~ .game-world,
+        #level-3:checked ~ #pos-6:checked ~ .game-world,
+        #level-4:checked ~ #pos-1:checked ~ .game-world,
+        #level-4:checked ~ #pos-2:checked ~ .game-world,
+        #level-4:checked ~ #pos-3:checked ~ .game-world,
+        #level-4:checked ~ #pos-4:checked ~ .game-world,
+        #level-4:checked ~ #pos-5:checked ~ .game-world,
+        #level-4:checked ~ #pos-6:checked ~ .game-world {
+            translate: none;
         }
 
         /* Inventory state tracking: set variables when items picked up */
@@ -960,6 +997,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             padding-left: var(--item-box-padding);
             padding-right: var(--item-box-padding);
             gap: 8px;
+            z-index: var(--z-ui);
         }
         /* Inventory item icons - hidden by default (display: none so they don't take space in flexbox) */
         .inventory-key,
@@ -1030,6 +1068,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             align-items: center;
             padding-left: var(--item-box-padding);
             overflow: hidden;
+            z-index: var(--z-ui);
             /* Valuable variables (0 = not collected, 1 = collected, 2 for gems) */
             --valuable-S1-L0-P3: 0;
             --valuable-S1-L1-P4: 0;
@@ -1512,12 +1551,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .warning-strip-left {
             left: 0;
             bottom: var(--ground-height);
-            top: 110px;
+            height: calc(var(--stage-height) - var(--ground-height) - var(--item-box-top) * 2 - var(--item-box-height) * 2 - 10px);
         }
         .warning-strip-right {
             left: calc(var(--pos-width) * 6 - var(--warning-strip-width) - 4px);
             bottom: calc(var(--ground-height) + 60px);
-            top: 110px;
+            height: calc(var(--stage-height) - var(--ground-height) - 60px - var(--item-box-top) * 2 - var(--item-box-height) * 2 - 10px);
         }
         /* Mountain strip on left side of Stage 2 */
         .rock-strip-S2 {
@@ -1610,12 +1649,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             font-size: 20px;
             text-shadow: 2px 2px 0 #b8860b;
             letter-spacing: 3px;
+            z-index: var(--z-ui);
         }
         .subtitle {
             position: absolute;
             top: 42px;
             left: 50%;
             transform: translateX(-50%);
+            z-index: var(--z-ui);
             color: var(--gold-color);
             font-size: 14px;
             font-style: italic;
@@ -4107,6 +4148,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="message">You Escaped!</div>
             <div class="submessage">Well done</div>
         </div>
+
     </div>
 </body>
 </html>
