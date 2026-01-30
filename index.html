@@ -1037,7 +1037,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Inventory area */
-        .inventory {
+        .inv-panel {
             position: absolute;
             top: var(--item-box-top);
             right: var(--item-box-right);
@@ -1081,34 +1081,34 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-idcard svg { color: var(--idcard-color); }
         .inventory-battery svg { color: var(--battery-color); }
         /* Show inventory items when picked up (delayed fade-in after fly animation) */
-        #key-pickup:checked ~ .inventory .inventory-key,
-        #wrench-pickup:checked ~ .inventory .inventory-wrench,
-        #axe-pickup:checked ~ .inventory .inventory-axe,
-        #idcard-pickup:checked ~ .inventory .inventory-idcard,
-        #battery-pickup:checked ~ .inventory .inventory-battery {
+        #key-pickup:checked ~ .inv-panel .inventory-key,
+        #wrench-pickup:checked ~ .inv-panel .inventory-wrench,
+        #axe-pickup:checked ~ .inv-panel .inventory-axe,
+        #idcard-pickup:checked ~ .inv-panel .inventory-idcard,
+        #battery-pickup:checked ~ .inv-panel .inventory-battery {
             display: flex;
             opacity: 0;
             animation: inventory-fade-in 0.2s ease-out 0.4s forwards;
         }
         /* Hide key from inventory when toolbox is unlocked (key used) */
-        #toolbox-unlocked:checked ~ .inventory .inventory-key {
+        #toolbox-unlocked:checked ~ .inv-panel .inventory-key {
             display: none;
         }
         /* Hide axe from inventory when tree is chopped (axe used) */
-        #tree-chopped:checked ~ .inventory .inventory-axe {
+        #tree-chopped:checked ~ .inv-panel .inventory-axe {
             display: none;
         }
         /* Hide wrench from inventory when door is unlocked (wrench used) */
-        #door-unlocked:checked ~ .inventory .inventory-wrench {
+        #door-unlocked:checked ~ .inv-panel .inventory-wrench {
             display: none;
         }
         /* Hide battery from inventory when bolt is fixed (battery used) */
-        #bolt-fixed:checked ~ .inventory .inventory-battery {
+        #bolt-fixed:checked ~ .inv-panel .inventory-battery {
             display: none;
         }
 
         /* Valuable counter box */
-        .valuable-counter {
+        .counter-panel {
             position: absolute;
             top: calc(var(--item-box-top) + var(--item-box-height) + var(--item-box-top));
             right: var(--item-box-right);
@@ -1123,17 +1123,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             overflow: hidden;
             z-index: var(--z-ui);
         }
-        .valuable-counter .valuable-icon {
+        .counter-panel .valuable-icon {
             width: 24px;
             height: 24px;
             color: var(--gold-color);
         }
-        .valuable-counter .digit-container {
+        .counter-panel .digit-container {
             height: 24px;
             overflow: hidden;
             margin-left: 14px;
         }
-        .valuable-counter .digit-strip {
+        .counter-panel .digit-strip {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1145,7 +1145,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 * -24px
             ));
         }
-        .valuable-counter .digit {
+        .counter-panel .digit {
             height: 24px;
             line-height: 24px;
             font-size: 20px;
@@ -1153,20 +1153,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--gold-color);
         }
         /* Valuable collection: 0 = not collected, 1 for coins, 2 for aquamarine */
-        #valuable-S1-L0-P3-pickup:checked ~ .valuable-counter { --valuable-S1-L0-P3: 1; }
-        #valuable-S1-L1-P4-pickup:checked ~ .valuable-counter { --valuable-S1-L1-P4: 1; }
-        #valuable-S1-L3-P5-pickup:checked ~ .valuable-counter { --valuable-S1-L3-P5: 1; }
-        #valuable-S1-L2-P1-pickup:checked ~ .valuable-counter { --valuable-S1-L2-P1: 1; }
-        #valuable-S1-L4-P2-pickup:checked ~ .valuable-counter { --valuable-S1-L4-P2: 1; }
-        #valuable-S2-L5-P8-pickup:checked ~ .valuable-counter { --valuable-S2-L5-P8: 1; }
-        #valuable-S2-L6-P11-pickup:checked ~ .valuable-counter { --valuable-S2-L6-P11: 2; }
-        #valuable-S2-L7-P7-pickup:checked ~ .valuable-counter { --valuable-S2-L7-P7: 1; }
-        #valuable-S2-L8-P9-pickup:checked ~ .valuable-counter { --valuable-S2-L8-P9: 2; }
-        #valuable-S2-L9-P10-pickup:checked ~ .valuable-counter { --valuable-S2-L9-P10: 1; }
-        #valuable-S3-L5-P15-pickup:checked ~ .valuable-counter { --valuable-S3-L5-P15: 1; }
-        #valuable-S3-L5-P18-pickup:checked ~ .valuable-counter { --valuable-S3-L5-P18: 3; }
-        #valuable-S3-L8-P18-pickup:checked ~ .valuable-counter { --valuable-S3-L8-P18: 1; }
-        #valuable-S3-L9-P14-pickup:checked ~ .valuable-counter { --valuable-S3-L9-P14: 1; }
+        #valuable-S1-L0-P3-pickup:checked ~ .counter-panel { --valuable-S1-L0-P3: 1; }
+        #valuable-S1-L1-P4-pickup:checked ~ .counter-panel { --valuable-S1-L1-P4: 1; }
+        #valuable-S1-L3-P5-pickup:checked ~ .counter-panel { --valuable-S1-L3-P5: 1; }
+        #valuable-S1-L2-P1-pickup:checked ~ .counter-panel { --valuable-S1-L2-P1: 1; }
+        #valuable-S1-L4-P2-pickup:checked ~ .counter-panel { --valuable-S1-L4-P2: 1; }
+        #valuable-S2-L5-P8-pickup:checked ~ .counter-panel { --valuable-S2-L5-P8: 1; }
+        #valuable-S2-L6-P11-pickup:checked ~ .counter-panel { --valuable-S2-L6-P11: 2; }
+        #valuable-S2-L7-P7-pickup:checked ~ .counter-panel { --valuable-S2-L7-P7: 1; }
+        #valuable-S2-L8-P9-pickup:checked ~ .counter-panel { --valuable-S2-L8-P9: 2; }
+        #valuable-S2-L9-P10-pickup:checked ~ .counter-panel { --valuable-S2-L9-P10: 1; }
+        #valuable-S3-L5-P15-pickup:checked ~ .counter-panel { --valuable-S3-L5-P15: 1; }
+        #valuable-S3-L5-P18-pickup:checked ~ .counter-panel { --valuable-S3-L5-P18: 3; }
+        #valuable-S3-L8-P18-pickup:checked ~ .counter-panel { --valuable-S3-L8-P18: 1; }
+        #valuable-S3-L9-P14-pickup:checked ~ .counter-panel { --valuable-S3-L9-P14: 1; }
 
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
@@ -4196,7 +4196,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
 
         <!-- Inventory -->
-        <div class="inventory">
+        <div class="inv-panel">
             <span class="inventory-key"><svg><use href="#key"/></svg></span>
             <span class="inventory-wrench"><svg><use href="#wrench"/></svg></span>
             <span class="inventory-axe"><svg><use href="#axe"/></svg></span>
@@ -4205,7 +4205,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
 
         <!-- Valuable counter -->
-        <div class="valuable-counter">
+        <div class="counter-panel">
             <svg class="valuable-icon"><use href="#coin"/></svg>
             <div class="digit-container">
                 <div class="digit-strip">
