@@ -6,11 +6,9 @@
 
  - central pick up icon in nav-panel?
 
- - torch : inv-panel += 1
  - disable torch fly to inv animation on S4
 
  - fix the z-indexes of everything
  - make a single table with all the z-indexes, both direct and through variables.
 
- - ladder visible from 1 pos away
 
