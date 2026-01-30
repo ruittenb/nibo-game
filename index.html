@@ -3807,102 +3807,82 @@ AAAAAAAAAAAAAAAAAAAAAA==
          * The hole allows clicking through.
          */
 
+        /* Single vision mask using radial-gradient for the hole */
         .vision-mask-S4 {
-            display: none;
             position: absolute;
-            background: #000;
-            z-index: var(--z-vision-mask);
-            pointer-events: none;
-        }
-
-        /* Top rectangle: from top to hole-top, full width */
-        .vision-mask-top {
             top: 0;
             left: 0;
             right: 0;
-            /* height set by level rules */
-            background: linear-gradient(to bottom, #000 0%, #000 calc(100% - var(--vision-mask-fuzzy-edge)), transparent 100%);
-        }
-
-        /* Bottom rectangle: from hole-bottom to bottom, full width */
-        .vision-mask-bottom {
             bottom: 0;
-            left: 0;
-            right: 0;
-            /* height set by level rules */
-            background: linear-gradient(to top, #000 0%, #000 calc(100% - var(--vision-mask-fuzzy-edge)), transparent 100%);
+            z-index: var(--z-vision-mask);
+            pointer-events: none;
+            /* Radial gradient: transparent in center, black outside */
+            background: radial-gradient(
+                ellipse var(--vision-mask-hole-width) var(--vision-mask-hole-height) at var(--vision-mask-x) var(--vision-mask-y),
+                transparent 0%,
+                transparent 50%,
+                rgba(0,0,0,0.5) 70%,
+                #000 100%
+            );
+            transition: --vision-mask-x 0.5s ease, --vision-mask-y 0.5s ease, --vision-mask-hole-width 0.5s ease, --vision-mask-hole-height 0.5s ease;
+            /* Default: huge hole (no darkness visible) */
+            --vision-mask-hole-width: 2000px;
+            --vision-mask-hole-height: 2000px;
+            --vision-mask-x: 50%;
+            --vision-mask-y: 50%;
         }
 
-        /* Left rectangle: from hole-top to hole-bottom, left edge to hole-left */
-        /* Height extended by fuzzy-edge on both sides to cover gradient gaps */
-        .vision-mask-left {
-            /* top set by level rules (adjusted for extended height) */
-            left: 0;
-            /* width set by position rules */
-            height: calc(var(--vision-mask-hole-height) + var(--vision-mask-fuzzy-edge) * 2);
-            background: linear-gradient(to right, #000 0%, #000 calc(100% - var(--vision-mask-fuzzy-edge)), transparent 100%);
+        /* Register custom properties for animation */
+        @property --vision-mask-x {
+            syntax: '<length-percentage>';
+            inherits: true;
+            initial-value: 50%;
+        }
+        @property --vision-mask-y {
+            syntax: '<length-percentage>';
+            inherits: true;
+            initial-value: 50%;
+        }
+        @property --vision-mask-hole-width {
+            syntax: '<length>';
+            inherits: true;
+            initial-value: 2000px;
+        }
+        @property --vision-mask-hole-height {
+            syntax: '<length>';
+            inherits: true;
+            initial-value: 2000px;
         }
 
-        /* Right rectangle: from hole-top to hole-bottom, hole-right to right edge */
-        /* Height extended by fuzzy-edge on both sides to cover gradient gaps */
-        .vision-mask-right {
-            /* top set by level rules (adjusted for extended height) */
-            right: 0;
-            /* width set by position rules */
-            height: calc(var(--vision-mask-hole-height) + var(--vision-mask-fuzzy-edge) * 2);
-            background: linear-gradient(to left, #000 0%, #000 calc(100% - var(--vision-mask-fuzzy-edge)), transparent 100%);
-        }
-
-        /* Show vision mask only in Stage 4 (positions 7-12, levels 0-4) */
-        /* Note: level radios come before position radios in DOM, so level must be first in selector */
+        /* In Stage 4: shrink hole to normal size */
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
         :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~
         .vision-mask-S4 {
-            display: block;
+            --vision-mask-hole-width: 180px;
+            --vision-mask-hole-height: 120px;
         }
 
-        /* Horizontal position rules - set width on left/right masks directly */
-        /* Hole is shifted right by --vision-mask-hole-offset so we don't look too far left */
-        #pos-7:checked ~ .vision-mask-left { width: calc(var(--pos-offset) + var(--pos-width) * 0 - var(--vision-mask-hole-width) / 2 + var(--vision-mask-hole-offset)); }
-        #pos-7:checked ~ .vision-mask-right { width: calc(100% - var(--pos-offset) - var(--pos-width) * 0 - var(--vision-mask-hole-width) / 2 - var(--vision-mask-hole-offset)); }
-        #pos-8:checked ~ .vision-mask-left { width: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--vision-mask-hole-width) / 2 + var(--vision-mask-hole-offset)); }
-        #pos-8:checked ~ .vision-mask-right { width: calc(100% - var(--pos-offset) - var(--pos-width) * 1 - var(--vision-mask-hole-width) / 2 - var(--vision-mask-hole-offset)); }
-        #pos-9:checked ~ .vision-mask-left { width: calc(var(--pos-offset) + var(--pos-width) * 2 - var(--vision-mask-hole-width) / 2 + var(--vision-mask-hole-offset)); }
-        #pos-9:checked ~ .vision-mask-right { width: calc(100% - var(--pos-offset) - var(--pos-width) * 2 - var(--vision-mask-hole-width) / 2 - var(--vision-mask-hole-offset)); }
-        #pos-10:checked ~ .vision-mask-left { width: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--vision-mask-hole-width) / 2 + var(--vision-mask-hole-offset)); }
-        #pos-10:checked ~ .vision-mask-right { width: calc(100% - var(--pos-offset) - var(--pos-width) * 3 - var(--vision-mask-hole-width) / 2 - var(--vision-mask-hole-offset)); }
-        #pos-11:checked ~ .vision-mask-left { width: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--vision-mask-hole-width) / 2 + var(--vision-mask-hole-offset)); }
-        #pos-11:checked ~ .vision-mask-right { width: calc(100% - var(--pos-offset) - var(--pos-width) * 4 - var(--vision-mask-hole-width) / 2 - var(--vision-mask-hole-offset)); }
-        #pos-12:checked ~ .vision-mask-left { width: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--vision-mask-hole-width) / 2 + var(--vision-mask-hole-offset)); }
-        #pos-12:checked ~ .vision-mask-right { width: calc(100% - var(--pos-offset) - var(--pos-width) * 5 - var(--vision-mask-hole-width) / 2 - var(--vision-mask-hole-offset)); }
+        /* Horizontal position rules */
+        #pos-7:checked ~ .vision-mask-S4 { --vision-mask-x: calc(var(--pos-offset) + var(--pos-width) * 0 + var(--vision-mask-hole-offset)); }
+        #pos-8:checked ~ .vision-mask-S4 { --vision-mask-x: calc(var(--pos-offset) + var(--pos-width) * 1 + var(--vision-mask-hole-offset)); }
+        #pos-9:checked ~ .vision-mask-S4 { --vision-mask-x: calc(var(--pos-offset) + var(--pos-width) * 2 + var(--vision-mask-hole-offset)); }
+        #pos-10:checked ~ .vision-mask-S4 { --vision-mask-x: calc(var(--pos-offset) + var(--pos-width) * 3 + var(--vision-mask-hole-offset)); }
+        #pos-11:checked ~ .vision-mask-S4 { --vision-mask-x: calc(var(--pos-offset) + var(--pos-width) * 4 + var(--vision-mask-hole-offset)); }
+        #pos-12:checked ~ .vision-mask-S4 { --vision-mask-x: calc(var(--pos-offset) + var(--pos-width) * 5 + var(--vision-mask-hole-offset)); }
 
-        /* Vertical position rules - set height on top/bottom masks, and top on left/right masks */
-        /* Player height = 56px, center at bottom + 28px */
-        /* Left/right top is shifted up by fuzzy-edge to account for extended height */
-        #level-0:checked ~ .vision-mask-top { height: calc(100% - var(--ground-height) - 26px - var(--vision-mask-hole-height) / 2); }
-        #level-0:checked ~ .vision-mask-bottom { height: calc(var(--ground-height) + 26px - var(--vision-mask-hole-height) / 2); }
-        #level-0:checked ~ .vision-mask-left, #level-0:checked ~ .vision-mask-right { top: calc(100% - var(--ground-height) - 26px - var(--vision-mask-hole-height) / 2 - var(--vision-mask-fuzzy-edge)); }
-
-        #level-1:checked ~ .vision-mask-top { height: calc(100% - var(--platform-height) - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2); }
-        #level-1:checked ~ .vision-mask-bottom { height: calc(var(--platform-height) + var(--platform-thickness) - 2px + 28px - var(--vision-mask-hole-height) / 2); }
-        #level-1:checked ~ .vision-mask-left, #level-1:checked ~ .vision-mask-right { top: calc(100% - var(--platform-height) - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2 - var(--vision-mask-fuzzy-edge)); }
-
-        #level-2:checked ~ .vision-mask-top { height: calc(100% - var(--platform-height) * 2 - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2); }
-        #level-2:checked ~ .vision-mask-bottom { height: calc(var(--platform-height) * 2 + var(--platform-thickness) - 2px + 28px - var(--vision-mask-hole-height) / 2); }
-        #level-2:checked ~ .vision-mask-left, #level-2:checked ~ .vision-mask-right { top: calc(100% - var(--platform-height) * 2 - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2 - var(--vision-mask-fuzzy-edge)); }
-
-        #level-3:checked ~ .vision-mask-top { height: calc(100% - var(--platform-height) * 3 - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2); }
-        #level-3:checked ~ .vision-mask-bottom { height: calc(var(--platform-height) * 3 + var(--platform-thickness) - 2px + 28px - var(--vision-mask-hole-height) / 2); }
-        #level-3:checked ~ .vision-mask-left, #level-3:checked ~ .vision-mask-right { top: calc(100% - var(--platform-height) * 3 - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2 - var(--vision-mask-fuzzy-edge)); }
-
-        #level-4:checked ~ .vision-mask-top { height: calc(100% - var(--platform-height) * 4 - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2); }
-        #level-4:checked ~ .vision-mask-bottom { height: calc(var(--platform-height) * 4 + var(--platform-thickness) - 2px + 28px - var(--vision-mask-hole-height) / 2); }
-        #level-4:checked ~ .vision-mask-left, #level-4:checked ~ .vision-mask-right { top: calc(100% - var(--platform-height) * 4 - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2 - var(--vision-mask-fuzzy-edge)); }
+        /* Vertical position rules */
+        #level-0:checked ~ .vision-mask-S4 { --vision-mask-y: calc(100% - var(--ground-height) - 26px); }
+        #level-1:checked ~ .vision-mask-S4 { --vision-mask-y: calc(100% - var(--platform-height) - var(--platform-thickness) + 2px - 28px); }
+        #level-2:checked ~ .vision-mask-S4 { --vision-mask-y: calc(100% - var(--platform-height) * 2 - var(--platform-thickness) + 2px - 28px); }
+        #level-3:checked ~ .vision-mask-S4 { --vision-mask-y: calc(100% - var(--platform-height) * 3 - var(--platform-thickness) + 2px - 28px); }
+        #level-4:checked ~ .vision-mask-S4 { --vision-mask-y: calc(100% - var(--platform-height) * 4 - var(--platform-thickness) + 2px - 28px); }
 
         /* With torch: enlarged vision (3 levels x 3 positions) */
-        .game-container:has(#torch-pickup:checked) {
-            --vision-mask-hole-width: calc(var(--pos-width) * 3);
-            --vision-mask-hole-height: calc(var(--platform-height) * 3);
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
+        :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~
+        #torch-pickup:checked ~ .vision-mask-S4 {
+            --vision-mask-hole-width: calc(var(--pos-width) * 2.5);
+            --vision-mask-hole-height: calc(var(--platform-height) * 2.5);
         }
 
         /* Overlay base styles */
@@ -5241,10 +5221,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div><!-- end game-world -->
 
         <!-- Vision mask for Stage 4 (Caves) - creates darkness with hole around player -->
-        <div class="vision-mask-S4 vision-mask-top"></div>
-        <div class="vision-mask-S4 vision-mask-bottom"></div>
-        <div class="vision-mask-S4 vision-mask-left"></div>
-        <div class="vision-mask-S4 vision-mask-right"></div>
+        <div class="vision-mask-S4"></div>
 
         <!-- Title screen overlay -->
         <label for="title-screen-toggle" class="overlay title-screen-overlay">
