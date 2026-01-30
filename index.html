@@ -332,6 +332,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --inv-has-axe: 0;
             --inv-has-idcard: 0;
             --inv-has-battery: 0;
+            --inv-has-torch: 0;
             /* Inventory slot positioning */
             --inv-slot-width: calc(var(--pickup-size) + 8px);  /* item width + gap */
         }
@@ -418,6 +419,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #axe-pickup:checked ~ .game-world { --inv-has-axe: 1; }
         #idcard-pickup:checked ~ .game-world { --inv-has-idcard: 1; }
         #battery-pickup:checked ~ .game-world { --inv-has-battery: 1; }
+        #torch-pickup:checked ~ .game-world { --inv-has-torch: 1; }
         /* Reset when items consumed */
         #toolbox-unlocked:checked ~ .game-world { --inv-has-key: 0; }
         #door-unlocked:checked ~ .game-world { --inv-has-wrench: 0; }
@@ -1021,7 +1023,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
         /* Hide radio buttons and checkboxes by default */
-        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .battery-checkbox, .idcard-checkbox, .tree-checkbox, .escaped-checkbox, .valuable-checkbox, .door-checkbox, .control-button-checkbox {
+        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .battery-checkbox, .idcard-checkbox, .torch-checkbox, .tree-checkbox, .escaped-checkbox, .valuable-checkbox, .door-checkbox, .control-button-checkbox {
             display: none;
             /* When unhidden for debugging: */
             z-index: 9999;
@@ -1078,7 +1080,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S4-L3-P7-pickup { top: 90px; left: 160px; }
         #valuable-S4-L3-P12-pickup { top: 90px; left: 180px; }
         #valuable-S4-L1-P10-pickup { top: 90px; left: 200px; }
-        #valuable-S4-L0-P12-pickup { top: 90px; left: 220px; }
+        #valuable-S4-L0-P9-pickup { top: 90px; left: 220px; }
         /* Debug positions - S1 items (next to L5) */
         #key-pickup { top: 110px; left: 30px; }
         #toolbox-unlocked { top: 110px; left: 50px; }
@@ -1091,6 +1093,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #bolt-fixed { top: 50px; left: 330px; }
         #control-button-pressed { top: 50px; left: 350px; }
         #escaped { top: 50px; left: 370px; }
+        #torch-pickup { top: 110px; left: 160px; }
         /* Show inputs when debug is checked */
         #debug-toggle:checked ~ .game-container .position-radio,
         #debug-toggle:checked ~ .game-container .level-radio,
@@ -1100,6 +1103,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ .game-container .axe-checkbox,
         #debug-toggle:checked ~ .game-container .idcard-checkbox,
         #debug-toggle:checked ~ .game-container .battery-checkbox,
+        #debug-toggle:checked ~ .game-container .torch-checkbox,
         #debug-toggle:checked ~ .game-container .tree-checkbox,
         #debug-toggle:checked ~ .game-container .escaped-checkbox,
         #debug-toggle:checked ~ .game-container .valuable-checkbox,
@@ -1132,7 +1136,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-wrench,
         .inventory-axe,
         .inventory-idcard,
-        .inventory-battery {
+        .inventory-battery,
+        .inventory-torch {
             width: var(--pickup-size);
             height: var(--pickup-size);
             display: none;
@@ -1143,7 +1148,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-wrench svg,
         .inventory-axe svg,
         .inventory-idcard svg,
-        .inventory-battery svg {
+        .inventory-battery svg,
+        .inventory-torch svg {
             width: 24px;
             height: 24px;
         }
@@ -1152,12 +1158,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-axe svg { color: var(--wrench-color); }
         .inventory-idcard svg { color: var(--idcard-color); }
         .inventory-battery svg { color: var(--battery-color); }
+        /* Torch has its own colors in the SVG */
         /* Show inventory items when picked up (delayed fade-in after fly animation) */
         #key-pickup:checked ~ .inv-panel .inventory-key,
         #wrench-pickup:checked ~ .inv-panel .inventory-wrench,
         #axe-pickup:checked ~ .inv-panel .inventory-axe,
         #idcard-pickup:checked ~ .inv-panel .inventory-idcard,
-        #battery-pickup:checked ~ .inv-panel .inventory-battery {
+        #battery-pickup:checked ~ .inv-panel .inventory-battery,
+        #torch-pickup:checked ~ .inv-panel .inventory-torch {
             display: flex;
             opacity: 0;
             animation: inventory-fade-in 0.2s ease-out 0.4s forwards;
@@ -1214,7 +1222,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 (var(--valuable-S1-L0-P3, 0) + var(--valuable-S1-L1-P4, 0) + var(--valuable-S1-L3-P5, 0) + var(--valuable-S1-L2-P1, 0) + var(--valuable-S1-L4-P2, 0) +
                  var(--valuable-S2-L5-P8, 0) + var(--valuable-S2-L6-P11, 0) + var(--valuable-S2-L7-P7, 0) + var(--valuable-S2-L8-P9, 0) + var(--valuable-S2-L9-P10, 0) +
                  var(--valuable-S3-L5-P15, 0) + var(--valuable-S3-L5-P18, 0) + var(--valuable-S3-L8-P18, 0) + var(--valuable-S3-L9-P14, 0) +
-                 var(--valuable-S4-L3-P7, 0) + var(--valuable-S4-L3-P12, 0) + var(--valuable-S4-L1-P10, 0) + var(--valuable-S4-L0-P12, 0))
+                 var(--valuable-S4-L3-P7, 0) + var(--valuable-S4-L3-P12, 0) + var(--valuable-S4-L1-P10, 0) + var(--valuable-S4-L0-P9, 0))
                 * -24px
             ));
         }
@@ -1243,7 +1251,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S4-L3-P7-pickup:checked ~ .counter-panel { --valuable-S4-L3-P7: 1; }
         #valuable-S4-L3-P12-pickup:checked ~ .counter-panel { --valuable-S4-L3-P12: 1; }
         #valuable-S4-L1-P10-pickup:checked ~ .counter-panel { --valuable-S4-L1-P10: 1; }
-        #valuable-S4-L0-P12-pickup:checked ~ .counter-panel { --valuable-S4-L0-P12: 1; }
+        #valuable-S4-L0-P9-pickup:checked ~ .counter-panel { --valuable-S4-L0-P9: 1; }
 
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
@@ -1541,6 +1549,71 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 18 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard)));
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
+        }
+
+        /* Torch - S4 (caves) L0-P12 */
+        .torch-in-game {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: var(--ground-height);
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
+            z-index: 200;
+            pointer-events: none;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .torch-in-game svg {
+            width: 24px;
+            height: 24px;
+        }
+        .torch-tooltip {
+            bottom: calc(var(--ground-height) + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset) + var(--pickup-size) / 2);
+            transform: translateX(-50%);
+        }
+        /* Hover area for torch tooltip (when not adjacent) */
+        .torch-hover-area {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: var(--ground-height);
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
+            pointer-events: auto;
+            z-index: 1;
+        }
+        /* Hide torch hover area and tooltip when picked up */
+        #torch-pickup:checked ~ .game-world .torch-hover-area,
+        #torch-pickup:checked ~ .game-world .torch-tooltip {
+            display: none;
+        }
+        /* Hide hover area when player is at torch (so label click works) */
+        #level-0:checked ~ #pos-12:checked ~ .game-world .torch-hover-area {
+            display: none;
+        }
+        /* Show tooltip on hover area hover */
+        .torch-hover-area:hover ~ .torch-tooltip {
+            opacity: 1;
+        }
+        /* Show tooltip when player is at torch and hovers */
+        #level-0:checked ~ #pos-12:checked ~ #torch-pickup:not(:checked) ~ .game-world .torch-in-game:hover ~ .torch-tooltip {
+            opacity: 1;
+        }
+        /* Enable clicking torch only when player is next to it - S4 uses levels 0-4 */
+        #level-0:checked ~ #pos-12:checked ~ #torch-pickup:not(:checked) ~ .game-world .torch-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: torch-pulse 1s ease-in-out infinite;
+        }
+        /* Fly torch to inventory when picked up (S4: viewport right = pos-width * 12) */
+        #torch-pickup:checked ~ .game-world .torch-in-game {
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -3216,7 +3289,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .container.valuable-S4-L3-P7,
         .container.valuable-S4-L3-P12,
         .container.valuable-S4-L1-P10,
-        .container.valuable-S4-L0-P12 {
+        .container.valuable-S4-L0-P9 {
             display: none;
         }
         .valuable-S4-L3-P7 {
@@ -3231,15 +3304,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset));
         }
-        .valuable-S4-L0-P12 {
+        .valuable-S4-L0-P9 {
             bottom: var(--ground-height);
-            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
         }
         /* Show S4 valuables only when player is at that position */
         #level-3:checked ~ #pos-7:checked ~ #valuable-S4-L3-P7-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P7 { display: block; }
         #level-3:checked ~ #pos-12:checked ~ #valuable-S4-L3-P12-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P12 { display: block; }
         #level-1:checked ~ #pos-10:checked ~ #valuable-S4-L1-P10-pickup:not(:checked) ~ .game-world .valuable-S4-L1-P10 { display: block; }
-        #level-0:checked ~ #pos-12:checked ~ #valuable-S4-L0-P12-pickup:not(:checked) ~ .game-world .valuable-S4-L0-P12 { display: block; }
+        #level-0:checked ~ #pos-9:checked ~ #valuable-S4-L0-P9-pickup:not(:checked) ~ .game-world .valuable-S4-L0-P9 { display: block; }
 
         /* ========== KEYFRAME ANIMATIONS ========== */
         @keyframes idle {
@@ -3347,6 +3420,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--battery-color)); }
             50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--battery-color)) drop-shadow(0 0 25px var(--battery-color)); }
         }
+        @keyframes torch-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px yellow); }
+            50% { filter: drop-shadow(0 0 12px yellow) drop-shadow(0 0 20px yellow); }
+        }
         @keyframes idcard-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--idcard-color)); }
             50% { filter: drop-shadow(0 0 12px var(--idcard-color)) drop-shadow(0 0 20px var(--idcard-color)); }
@@ -3445,7 +3522,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        #level-0:checked ~ #pos-12:checked ~ #valuable-S4-L0-P12-pickup:not(:checked) ~ .game-world .valuable-S4-L0-P12 .valuable-in-game {
+        #level-0:checked ~ #pos-9:checked ~ #valuable-S4-L0-P9-pickup:not(:checked) ~ .game-world .valuable-S4-L0-P9 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
@@ -3488,7 +3565,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S4-L3-P7-pickup:checked ~ .game-world .valuable-S4-L3-P7,
         #valuable-S4-L3-P12-pickup:checked ~ .game-world .valuable-S4-L3-P12,
         #valuable-S4-L1-P10-pickup:checked ~ .game-world .valuable-S4-L1-P10,
-        #valuable-S4-L0-P12-pickup:checked ~ .game-world .valuable-S4-L0-P12 {
+        #valuable-S4-L0-P9-pickup:checked ~ .game-world .valuable-S4-L0-P9 {
             bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
             left: calc(var(--pos-width) * 12 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
             opacity: 0;
@@ -3822,6 +3899,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ .vision-mask-bottom { height: calc(var(--platform-height) * 4 + var(--platform-thickness) - 2px + 28px - var(--vision-mask-hole-height) / 2); }
         #level-4:checked ~ .vision-mask-left, #level-4:checked ~ .vision-mask-right { top: calc(100% - var(--platform-height) * 4 - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2 - var(--vision-mask-fuzzy-edge)); }
 
+        /* With torch: enlarged vision (3 levels x 3 positions) */
+        .game-container:has(#torch-pickup:checked) {
+            --vision-mask-hole-width: calc(var(--pos-width) * 3);
+            --vision-mask-hole-height: calc(var(--platform-height) * 3);
+        }
+
         /* Overlay base styles */
         .overlay {
             position: absolute;
@@ -4067,6 +4150,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
     <!-- SVG symbols for reuse -->
     <!-- Icons from Font Awesome (https://fontawesome.com) and Material Design Icons (https://materialdesignicons.com) -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="torch" viewBox="40 40 160 160">
+            <g transform="rotate(45 120 120)">
+                <path fill="orange" d="M 86 96 C 90 102 95 107 102 110 H 142 C 145 109 147 107 149 105 C 159 95 163 80 158 67 L 157 65 C 156 62 154 60 152 58 C 151 56 149 55 148 53 C 144 50 140 47 136 43 C 127 34 126 20 131 10 C 126 11 121 14 117 18 C 102 30 96 51 103 70 V 72 C 103 73 102 74 101 75 C 100 76 98 75 97 74 L 96 73 C 90 65 89 53 93 43 C 84 51 79 64 80 77 C 80 80 81 83 82 86 C 82 89 84 93 86 96"/>
+                <path fill="red" d="M 123 81 C 124 76 122 72 121 68 C 120 64 120 60 122 56 L 125 62 C 129 68 136 70 138 78 V 81 C 138 86 136 91 133 94 C 131 95 129 97 127 97 C 121 99 114 96 110 92 C 118 92 122 86 123 81"/>
+                <path fill="#aa6418" d="M 150 120 V 140 H 140 L 130 220 H 110 L 100 140 H 90 V 120 H 150 Z"/>
+            </g>
+        </symbol>
         <symbol id="coin" viewBox="96 32 384 384">
             <path fill="currentColor" d="M 288 32 a 192 192 0 1 1 0 384 a 192 192 0 1 1 0 -384 z M 364.5 147.5 A 108 108 0 0 0 181.8 202.4 L 165.98 202.4 A 9 9 0 0 0 157.43 208.56 L 152.34 222.96 A 9 9 0 0 0 161.18 234.8 L 181.1 234.8 A 108 108 0 0 0 364.5 300.5 A 18 18 0 0 0 336.7 275.3 A 72 72 0 0 1 216.9 234.8 L 286.21 234.8 A 9 9 0 0 0 294.57 228.64 L 299.34 214.24 A 9 9 0 0 0 290.82 202.4 L 219.6 202.4 A 72 72 0 0 1 339.3 172.7 A 18 18 0 0 0 364.5 147.5 Z"/>
         </symbol>
@@ -4544,6 +4634,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Stage 3 item pickups -->
         <input type="checkbox" id="axe-pickup" class="axe-checkbox" title="axe">
         <input type="checkbox" id="battery-pickup" class="battery-checkbox" title="battery">
+        <input type="checkbox" id="torch-pickup" class="torch-checkbox" title="torch">
 
         <!-- Bolt fixed checkbox -->
         <input type="checkbox" id="bolt-fixed" class="battery-checkbox" title="bolt">
@@ -4561,17 +4652,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="door-unlocked" class="door-checkbox" title="door">
 
         <!-- Valuable pickup checkboxes -->
-        <input type="checkbox" id="valuable-S1-L0-P3-pickup" class="valuable-checkbox" title="valuable">
-        <input type="checkbox" id="valuable-S1-L1-P4-pickup" class="valuable-checkbox" title="valuable">
-        <input type="checkbox" id="valuable-S1-L3-P5-pickup" class="valuable-checkbox" title="valuable">
-        <input type="checkbox" id="valuable-S1-L2-P1-pickup" class="valuable-checkbox" title="valuable">
-        <input type="checkbox" id="valuable-S1-L4-P2-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-S1-L0-P3-pickup" class="valuable-checkbox" title="coin">
+        <input type="checkbox" id="valuable-S1-L1-P4-pickup" class="valuable-checkbox" title="coin">
+        <input type="checkbox" id="valuable-S1-L3-P5-pickup" class="valuable-checkbox" title="coin">
+        <input type="checkbox" id="valuable-S1-L2-P1-pickup" class="valuable-checkbox" title="coin">
+        <input type="checkbox" id="valuable-S1-L4-P2-pickup" class="valuable-checkbox" title="coin">
         <!-- Stage 2 valuable pickup checkboxes -->
-        <input type="checkbox" id="valuable-S2-L5-P8-pickup" class="valuable-checkbox" title="valuable">
-        <input type="checkbox" id="valuable-S2-L6-P11-pickup" class="valuable-checkbox" title="gem">
-        <input type="checkbox" id="valuable-S2-L7-P7-pickup" class="valuable-checkbox" title="valuable">
-        <input type="checkbox" id="valuable-S2-L8-P9-pickup" class="valuable-checkbox" title="gem">
-        <input type="checkbox" id="valuable-S2-L9-P10-pickup" class="valuable-checkbox" title="valuable">
+        <input type="checkbox" id="valuable-S2-L5-P8-pickup" class="valuable-checkbox" title="coin">
+        <input type="checkbox" id="valuable-S2-L6-P11-pickup" class="valuable-checkbox" title="aquamarine">
+        <input type="checkbox" id="valuable-S2-L7-P7-pickup" class="valuable-checkbox" title="coin">
+        <input type="checkbox" id="valuable-S2-L8-P9-pickup" class="valuable-checkbox" title="aquamarine">
+        <input type="checkbox" id="valuable-S2-L9-P10-pickup" class="valuable-checkbox" title="coin">
         <!-- Stage 3 valuables -->
         <input type="checkbox" id="valuable-S3-L5-P18-pickup" class="valuable-checkbox" title="ruby">
         <input type="checkbox" id="valuable-S3-L5-P15-pickup" class="valuable-checkbox" title="coin">
@@ -4581,7 +4672,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="valuable-S4-L3-P7-pickup" class="valuable-checkbox" title="coin">
         <input type="checkbox" id="valuable-S4-L3-P12-pickup" class="valuable-checkbox" title="coin">
         <input type="checkbox" id="valuable-S4-L1-P10-pickup" class="valuable-checkbox" title="coin">
-        <input type="checkbox" id="valuable-S4-L0-P12-pickup" class="valuable-checkbox" title="coin">
+        <input type="checkbox" id="valuable-S4-L0-P9-pickup" class="valuable-checkbox" title="coin">
 
         <div class="subtitle subtitle-S1">The Factory</div>
         <div class="subtitle subtitle-S2">The Jungle</div>
@@ -4669,6 +4760,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="inventory-axe"><svg><use href="#axe"/></svg></span>
             <span class="inventory-idcard"><svg><use href="#id-card"/></svg></span>
             <span class="inventory-battery"><svg><use href="#battery"/></svg></span>
+            <span class="inventory-torch"><svg><use href="#torch"/></svg></span>
         </div>
 
         <!-- Valuable counter -->
@@ -4731,6 +4823,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <span class="battery-hover-area"></span>
         <label for="battery-pickup" class="battery-in-game"><svg><use href="#battery"/></svg></label>
         <span class="tooltip battery-tooltip">Battery</span>
+
+        <!-- Torch on stage 4, level 0, pos 12 (clickable to pick up) -->
+        <span class="torch-hover-area"></span>
+        <label for="torch-pickup" class="torch-in-game"><svg><use href="#torch"/></svg></label>
+        <span class="tooltip torch-tooltip">Torch</span>
 
         <!-- Wrench in game world (clickable to pick up) -->
         <span class="wrench-hover-area"></span>
@@ -5092,8 +5189,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="container coin valuable-S4-L1-P10">
             <label for="valuable-S4-L1-P10-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
         </div>
-        <div class="container coin valuable-S4-L0-P12">
-            <label for="valuable-S4-L0-P12-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+        <div class="container coin valuable-S4-L0-P9">
+            <label for="valuable-S4-L0-P9-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
         </div>
 
         <!-- ==================== STAGE 2 VALUABLES (visible at levels 5-9) ==================== -->

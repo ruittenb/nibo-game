@@ -5,10 +5,13 @@
 
  - central pick up icon in nav-panel?
 
- - torch
+ - torch : inv-panel += 1 OR Nibo carries it?
 
- - limited vision
+ - animated coin still below mask : plan 'flying-coins' (problem: stacking context in sibling)
 
- - animated coin still below mask
+ - fix the z-indexes of everything
+ - make a single table with all the z-indexes, both direct and through variables.
+
+ - animate the vision mask
 
 
