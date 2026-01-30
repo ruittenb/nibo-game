@@ -232,9 +232,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
             /* Z-index layers */
             --z-items: 15;                /* Items, hazards */
             --z-door: 20;                 /* Door (above hazards for tooltip) */
-            --z-ui: 300;                  /* UI elements (title, inventory, counter) */
+            --z-vision-mask: 50;          /* Vision mask (caves darkness) */
+            --z-ui: 500;                  /* UI elements (title, inventory, counter) */
             --z-tooltip: 1500;            /* Tooltips */
             --z-overlay: 1000;            /* Death and escape overlays */
+
+            /* Vision mask settings */
+            --vision-mask-hole-width: 180px;     /* Width of the vision hole (wide enough for nav arrows) */
+            --vision-mask-hole-height: 120px;    /* Height of the vision hole */
+            --vision-mask-fuzzy-edge: 40px;      /* Fuzzy edge gradient size */
+            --vision-mask-hole-offset: 30px;     /* Shift hole right to not look too far left */
         }
 
         * {
@@ -561,7 +568,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .platform-S4-L3-P12 {
             bottom: calc(var(--platform-height) * 3);
             left: calc(var(--pos-width) * 11);
-            width: calc(var(--pos-width) - 4px);
+            width: calc(var(--pos-width) - 12px - 4px);
         }
         .platform-S4-L2-P8 {
             bottom: calc(var(--platform-height) * 2);
@@ -576,7 +583,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .platform-S4-L2-P12 {
             bottom: calc(var(--platform-height) * 2);
             left: calc(var(--pos-width) * 11);
-            width: calc(var(--pos-width) - 4px);
+            width: calc(var(--pos-width) - 12px - 4px);
         }
         .platform-S4-L1-P10-P11 {
             bottom: var(--platform-height);
@@ -1856,14 +1863,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             background-repeat: repeat-y;
         }
         /* Rock strip on left side of Stage 4 (starts above door) */
-        /* TODO: hidden for now */
+        /* Position at left edge of cave, visible through vision mask hole at P7 */
         .rock-strip-S4-left {
-            display: none;
             position: absolute;
             left: calc(var(--pos-width) * 6);
             width: 12px;
             bottom: calc(var(--ground-height) + 60px);
             height: calc(var(--stage-height) - var(--ground-height) - 60px - var(--item-box-top) * 2 - var(--item-box-height) * 2 - 10px);
+            z-index: 1;
             background: repeating-linear-gradient(
                 10deg,
                 #777 0px,
@@ -1894,14 +1901,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             background-repeat: repeat-y;
         }
         /* Rock strip on right side of Stage 4 */
-        /* TODO: hidden for now */
+        /* Position at right edge of cave, visible through vision mask hole at P12 */
         .rock-strip-S4-right {
-            display: none;
             position: absolute;
             left: calc(var(--pos-width) * 12 - 16px);
             width: 12px;
             bottom: var(--ground-height);
             height: calc(var(--stage-height) - var(--ground-height) - var(--item-box-top) * 2 - var(--item-box-height) * 2 - 10px);
+            z-index: 1;
             background: repeating-linear-gradient(
                 -10deg,
                 #777 0px,
@@ -3477,6 +3484,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Move Stage 4 valuables to counter when picked up (S4 is at bottom, no stage-height offset) */
+        /* z-index raised above vision mask so flying animation is visible */
         #valuable-S4-L3-P7-pickup:checked ~ .game-world .valuable-S4-L3-P7,
         #valuable-S4-L3-P12-pickup:checked ~ .game-world .valuable-S4-L3-P12,
         #valuable-S4-L1-P10-pickup:checked ~ .game-world .valuable-S4-L1-P10,
@@ -3485,6 +3493,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 12 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
+            z-index: calc(var(--z-vision-mask) + 10);
         }
 
         /* Skull */
@@ -3715,6 +3724,103 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: auto;
             cursor: pointer;
         }
+
+        /* On S4, we achieve a small FOV using four rectangles arranged
+         * around a central hole that follows the player position.
+         * The hole allows clicking through.
+         */
+
+        .vision-mask-S4 {
+            display: none;
+            position: absolute;
+            background: #000;
+            z-index: var(--z-vision-mask);
+            pointer-events: none;
+        }
+
+        /* Top rectangle: from top to hole-top, full width */
+        .vision-mask-top {
+            top: 0;
+            left: 0;
+            right: 0;
+            /* height set by level rules */
+            background: linear-gradient(to bottom, #000 0%, #000 calc(100% - var(--vision-mask-fuzzy-edge)), transparent 100%);
+        }
+
+        /* Bottom rectangle: from hole-bottom to bottom, full width */
+        .vision-mask-bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            /* height set by level rules */
+            background: linear-gradient(to top, #000 0%, #000 calc(100% - var(--vision-mask-fuzzy-edge)), transparent 100%);
+        }
+
+        /* Left rectangle: from hole-top to hole-bottom, left edge to hole-left */
+        /* Height extended by fuzzy-edge on both sides to cover gradient gaps */
+        .vision-mask-left {
+            /* top set by level rules (adjusted for extended height) */
+            left: 0;
+            /* width set by position rules */
+            height: calc(var(--vision-mask-hole-height) + var(--vision-mask-fuzzy-edge) * 2);
+            background: linear-gradient(to right, #000 0%, #000 calc(100% - var(--vision-mask-fuzzy-edge)), transparent 100%);
+        }
+
+        /* Right rectangle: from hole-top to hole-bottom, hole-right to right edge */
+        /* Height extended by fuzzy-edge on both sides to cover gradient gaps */
+        .vision-mask-right {
+            /* top set by level rules (adjusted for extended height) */
+            right: 0;
+            /* width set by position rules */
+            height: calc(var(--vision-mask-hole-height) + var(--vision-mask-fuzzy-edge) * 2);
+            background: linear-gradient(to left, #000 0%, #000 calc(100% - var(--vision-mask-fuzzy-edge)), transparent 100%);
+        }
+
+        /* Show vision mask only in Stage 4 (positions 7-12, levels 0-4) */
+        /* Note: level radios come before position radios in DOM, so level must be first in selector */
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
+        :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~
+        .vision-mask-S4 {
+            display: block;
+        }
+
+        /* Horizontal position rules - set width on left/right masks directly */
+        /* Hole is shifted right by --vision-mask-hole-offset so we don't look too far left */
+        #pos-7:checked ~ .vision-mask-left { width: calc(var(--pos-offset) + var(--pos-width) * 0 - var(--vision-mask-hole-width) / 2 + var(--vision-mask-hole-offset)); }
+        #pos-7:checked ~ .vision-mask-right { width: calc(100% - var(--pos-offset) - var(--pos-width) * 0 - var(--vision-mask-hole-width) / 2 - var(--vision-mask-hole-offset)); }
+        #pos-8:checked ~ .vision-mask-left { width: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--vision-mask-hole-width) / 2 + var(--vision-mask-hole-offset)); }
+        #pos-8:checked ~ .vision-mask-right { width: calc(100% - var(--pos-offset) - var(--pos-width) * 1 - var(--vision-mask-hole-width) / 2 - var(--vision-mask-hole-offset)); }
+        #pos-9:checked ~ .vision-mask-left { width: calc(var(--pos-offset) + var(--pos-width) * 2 - var(--vision-mask-hole-width) / 2 + var(--vision-mask-hole-offset)); }
+        #pos-9:checked ~ .vision-mask-right { width: calc(100% - var(--pos-offset) - var(--pos-width) * 2 - var(--vision-mask-hole-width) / 2 - var(--vision-mask-hole-offset)); }
+        #pos-10:checked ~ .vision-mask-left { width: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--vision-mask-hole-width) / 2 + var(--vision-mask-hole-offset)); }
+        #pos-10:checked ~ .vision-mask-right { width: calc(100% - var(--pos-offset) - var(--pos-width) * 3 - var(--vision-mask-hole-width) / 2 - var(--vision-mask-hole-offset)); }
+        #pos-11:checked ~ .vision-mask-left { width: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--vision-mask-hole-width) / 2 + var(--vision-mask-hole-offset)); }
+        #pos-11:checked ~ .vision-mask-right { width: calc(100% - var(--pos-offset) - var(--pos-width) * 4 - var(--vision-mask-hole-width) / 2 - var(--vision-mask-hole-offset)); }
+        #pos-12:checked ~ .vision-mask-left { width: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--vision-mask-hole-width) / 2 + var(--vision-mask-hole-offset)); }
+        #pos-12:checked ~ .vision-mask-right { width: calc(100% - var(--pos-offset) - var(--pos-width) * 5 - var(--vision-mask-hole-width) / 2 - var(--vision-mask-hole-offset)); }
+
+        /* Vertical position rules - set height on top/bottom masks, and top on left/right masks */
+        /* Player height = 56px, center at bottom + 28px */
+        /* Left/right top is shifted up by fuzzy-edge to account for extended height */
+        #level-0:checked ~ .vision-mask-top { height: calc(100% - var(--ground-height) - 26px - var(--vision-mask-hole-height) / 2); }
+        #level-0:checked ~ .vision-mask-bottom { height: calc(var(--ground-height) + 26px - var(--vision-mask-hole-height) / 2); }
+        #level-0:checked ~ .vision-mask-left, #level-0:checked ~ .vision-mask-right { top: calc(100% - var(--ground-height) - 26px - var(--vision-mask-hole-height) / 2 - var(--vision-mask-fuzzy-edge)); }
+
+        #level-1:checked ~ .vision-mask-top { height: calc(100% - var(--platform-height) - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2); }
+        #level-1:checked ~ .vision-mask-bottom { height: calc(var(--platform-height) + var(--platform-thickness) - 2px + 28px - var(--vision-mask-hole-height) / 2); }
+        #level-1:checked ~ .vision-mask-left, #level-1:checked ~ .vision-mask-right { top: calc(100% - var(--platform-height) - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2 - var(--vision-mask-fuzzy-edge)); }
+
+        #level-2:checked ~ .vision-mask-top { height: calc(100% - var(--platform-height) * 2 - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2); }
+        #level-2:checked ~ .vision-mask-bottom { height: calc(var(--platform-height) * 2 + var(--platform-thickness) - 2px + 28px - var(--vision-mask-hole-height) / 2); }
+        #level-2:checked ~ .vision-mask-left, #level-2:checked ~ .vision-mask-right { top: calc(100% - var(--platform-height) * 2 - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2 - var(--vision-mask-fuzzy-edge)); }
+
+        #level-3:checked ~ .vision-mask-top { height: calc(100% - var(--platform-height) * 3 - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2); }
+        #level-3:checked ~ .vision-mask-bottom { height: calc(var(--platform-height) * 3 + var(--platform-thickness) - 2px + 28px - var(--vision-mask-hole-height) / 2); }
+        #level-3:checked ~ .vision-mask-left, #level-3:checked ~ .vision-mask-right { top: calc(100% - var(--platform-height) * 3 - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2 - var(--vision-mask-fuzzy-edge)); }
+
+        #level-4:checked ~ .vision-mask-top { height: calc(100% - var(--platform-height) * 4 - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2); }
+        #level-4:checked ~ .vision-mask-bottom { height: calc(var(--platform-height) * 4 + var(--platform-thickness) - 2px + 28px - var(--vision-mask-hole-height) / 2); }
+        #level-4:checked ~ .vision-mask-left, #level-4:checked ~ .vision-mask-right { top: calc(100% - var(--platform-height) * 4 - var(--platform-thickness) + 2px - 28px - var(--vision-mask-hole-height) / 2 - var(--vision-mask-fuzzy-edge)); }
 
         /* Overlay base styles */
         .overlay {
@@ -5036,6 +5142,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
 
         </div><!-- end game-world -->
+
+        <!-- Vision mask for Stage 4 (Caves) - creates darkness with hole around player -->
+        <div class="vision-mask-S4 vision-mask-top"></div>
+        <div class="vision-mask-S4 vision-mask-bottom"></div>
+        <div class="vision-mask-S4 vision-mask-left"></div>
+        <div class="vision-mask-S4 vision-mask-right"></div>
 
         <!-- Title screen overlay -->
         <label for="title-screen-toggle" class="overlay title-screen-overlay">
