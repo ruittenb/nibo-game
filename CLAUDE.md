@@ -14,8 +14,8 @@ The game uses **CSS sibling selectors** (`~`) to create conditional logic:
 - All inputs must appear **before** the elements they control in the DOM
 
 ```css
-/* Example: Show escape arrow only when at correct position with tree chopped */
-#level-0:checked ~ #pos-12:checked ~ #tree-chopped:checked ~ .game-world .arrow-escape {
+/* Example: Show escape arrow only when at correct position with tree chopped (S2 uses level-5 for L0) */
+#level-5:checked ~ #pos-12:checked ~ #tree-chopped:checked ~ .game-world .arrow-S2-P6-S3-P1 {
     display: block;
 }
 ```
@@ -24,9 +24,12 @@ The game uses **CSS sibling selectors** (`~`) to create conditional logic:
 
 The HTML ordering is critical for sibling selectors to work:
 1. CSS styles (including all state-based selectors)
-2. State inputs (all radios and checkboxes)
-3. UI elements (nav-widget, inventory, subtitles)
-4. Game world (platforms, items, hazards, player, overlays)
+2. `#title-screen-toggle` checkbox (outside `.game-container`)
+3. `.game-container` containing:
+   - State inputs (level radios, position radios, item checkboxes)
+   - UI elements (nav-widget, inventory, subtitles)
+   - `.game-world` (platforms, items, hazards, player)
+   - Overlays (title, death, escape - siblings of `.game-world`)
 
 ## Navigation: Two Systems
 
@@ -52,31 +55,87 @@ When items are picked up, they animate to the inventory box:
 
 The flight destination is calculated using CSS variables to match the inventory box position.
 
+## Stage Layout and Coordinates
+
+The game world is a 3x2 grid of stages:
+
+|            | pos 1-6      | pos 7-12    | pos 13-18   |
+|------------|--------------|-------------|-------------|
+| levels 5-9 | S0           | S2 (jungle) | S3 (hangar) |
+| levels 0-4 | S1 (factory) | S4 (caves)  | S5          |
+
+**Radio button IDs** are pure coordinates with no stage semantics:
+- `pos-1` through `pos-18` for horizontal position
+- `pos-φ` (phi) - a phantom position for special movement (see Phantom Positions)
+- `level-0` through `level-9` for vertical level (5-9 display at same heights as 0-4)
+
+Stage is derived from the combination of position and level as shown in the table above.
+
+**Position calculations** (using CSS variables):
+- X: `calc(var(--pos-offset) + var(--pos-width) * (pos - 1))`
+- Y: Based on level with `--platform-height` calculations
+
+**Stage transitions:**
+- S1 → S4: Door at P6 changes position only (6→7)
+- S4 → S2: Climb up at P7 changes level only (4→5)
+- S2 → S3: Exit at P12 changes position only (12→13)
+
 ## Stage Scrolling
 
-The viewport shows one stage at a time. When crossing stage boundaries, the entire `.game-world` translates:
-- Positions 1-6: no transform (stage 1 visible)
-- Positions 7-12: `translateX(-6 * pos-width)` (stage 2 visible)
-- Positions 13-18: `translateX(-12 * pos-width)` (stage 3 visible)
+The game world is twice the viewport height, with S1/S4 at the bottom and S2/S3 at the top. The viewport scrolls via CSS `translate` property using CSS variables:
 
-## Coordinate System
+```css
+.game-world {
+    top: calc(var(--stage-height) * -1);  /* Initial offset to show bottom row */
+    translate: var(--world-translateX, 0) var(--world-translateY, 0);
+}
 
-All positioning derives from CSS variables (`--pos-width`, `--platform-height`, etc.). Player and element positions are calculated as:
-- X: `calc(var(--pos-offset) + var(--pos-width) * (pos - 1))`
-- Y: Based on level with platform height calculations
+/* Levels 5-9 scroll up to show top row (S0/S2/S3) */
+#level-5:checked ~ .game-world,
+#level-6:checked ~ .game-world, /* etc */ {
+    --world-translateY: var(--stage-height);
+}
+
+/* Positions 7-12 scroll left */
+#pos-7:checked ~ .game-world, /* etc */ {
+    --world-translateX: calc(var(--pos-width) * -6);
+}
+```
+
+This approach uses **independent CSS variable rules** for X and Y translation, avoiding the combinatorial explosion of level×position selectors.
+
+## World Positioning
+
+S2/S3 elements are positioned one `--stage-height` above S1/S4 elements in the game world:
+
+```css
+/* S1 element */
+.platform-S1-L2-P3 {
+    bottom: calc(var(--platform-height) * 2);
+}
+
+/* S2 element at same visual height */
+.platform-S2-L2-P3 {
+    bottom: calc(var(--stage-height) + var(--platform-height) * 2);
+}
+```
+
+This physical separation means S2 elements are naturally hidden when viewing S1/S4 (they're above the viewport), eliminating the need for visibility hacks.
 
 ## Naming Conventions
 
-- **Location format:** `LxPy` (Level x, Position y)
-- **Stage prefixes:** `-s1-`, `-s2-`, `-s3-` in class names
-- **Vertical navigation:** "ladders" (stage 1), "vines" (stage 2) - same mechanic, different visuals
-- **Vertical down:** "grates" (stage 1), "branches" (stage 2)
+- **Location format:** `LxPy` (Level x, Position y) - levels in class names refer to visual height (0-4), not logical level
+- **Stage prefixes:** `-S1-`, `-S2-`, `-S3-`, `-S4-` in class names
+- **Vertical navigation:** "ladders" (S1), "vines" (S2), "spine-ladder" (S3)
+- **Vertical down:** "grates" (S1), "branches" (S2)
+- **Item/valuable naming:** Use stage prefix for readability but absolute position numbers that match radio IDs (e.g., `.valuable-S3-L5-P18` uses `pos-18`)
 
 ## Visual Styles per Stage
 
-- **Stage 1:** Industrial/factory aesthetic - rusted metal platforms with rivets, wooden ladders
-- **Stage 2:** Jungle aesthetic - organic green platforms, rock formation on left edge, vines for climbing
-- **Stage 3:** Hangar aesthetic - bluish-grey metallic platforms, concrete floor, spine ladders (central pole with alternating rungs)
+- **Stage 1 (The Factory):** Industrial/factory aesthetic - rusted metal platforms with rivets, wooden ladders
+- **Stage 4 (The Caves):** Caves with maze of stalactites and stalagmites
+- **Stage 2 (The Jungle):** Jungle aesthetic - organic green platforms, rock formation on left edge, vines for climbing
+- **Stage 3 (The Hangar):** Hangar aesthetic - bluish-grey metallic platforms, concrete floor, spine ladders (central pole with alternating rungs)
 
 ## Ladder Types
 
@@ -86,45 +145,101 @@ All positioning derives from CSS variables (`--pos-width`, `--platform-height`, 
 
 ## Overlays
 
-Overlays share a base `.overlay` class with common styling. Specific types:
+Overlays are positioned **outside** `.game-world` but inside `.game-container`. This is important because:
+- The `translate` property on `.game-world` creates a stacking context
+- Elements inside a stacking context can't z-index above elements outside it
+- By placing overlays as siblings of `.game-world`, they can properly layer
+
+Overlay types:
 - **`.title-screen-overlay`** - Shown on game start, hidden when `#title-screen-toggle` is checked
 - **`.death-screen-overlay`** - Shown when player reaches hazard locations
 - **`.escape-screen-overlay`** - Shown when `#escaped` checkbox is checked
 
-## Conditional Animations
+**Title screen special case:** The player appears *in front of* the title screen overlay. This works because S1 (positions 1-6) uses `translate: none` instead of CSS variable-based translation, avoiding the stacking context issue for the starting stage.
+
+```css
+/* S1 uses translate: none to avoid stacking context on title screen */
+#pos-1:checked ~ .game-world,
+#pos-2:checked ~ .game-world,
+/* ... */
+#pos-6:checked ~ .game-world {
+    translate: none;
+}
+```
+
+**Important limitation:** To make the player appear above an overlay, you might think to give `.game-world` a higher z-index than the overlay. **Don't do this** - it would place the *entire* game world (platforms, items, hazards) above the overlay, defeating its purpose. The `translate: none` approach for S1 is specifically designed to avoid this problem by eliminating the stacking context entirely.
+
+## Z-Index Layers
+
+Z-index layers (defined as CSS variables):
+- `--z-items: 15` - Items, hazards
+- `--z-door: 20` - Door (above hazards for tooltip)
+- `--z-ui: 300` - UI elements (title, inventory, counter)
+- `--z-tooltip: 500` - Tooltips
+- `--z-overlay: 1000` - Title screen overlay
+- Player: 1100 (above title, below death/escape)
+- Death/escape overlays: 2000 (above player)
+
+This layering ensures:
+- Player appears in front of the title screen on game start
+- Player is hidden behind death/escape overlays when triggered
+
+## Item Animations
+
+Each pickupable item has two animation states:
+
+| Item    | Pickup animation (in-game)  | Hovering animation (at target) |
+|---------|----------------------------|-------------------------------|
+| Key     | `key-pulse`                | `key-hovering-pulse`          |
+| Wrench  | `wrench-pulse`             | `wrench-rotate`               |
+| Axe     | `axe-pulse`                | `axe-chop`                    |
+| Battery | `battery-pulse`            | `battery-hovering-pulse`      |
+| ID Card | `idcard-pulse`             | `idcard-hovering-pulse`       |
+
+- **Pickup animations**: Drop-shadow glow only, used when player is adjacent to the item
+- **Hovering animations**: Scale + drop-shadow (or rotation for wrench/axe), used when item floats above its target (e.g., key above toolbox)
+
+All `@keyframes` animations are consolidated in one section of the CSS for maintainability.
 
 Items pulse/glow when the player can interact with them. This requires combining position checks with item state:
 ```css
+/* Key is in S1 at level-4, so this selector is unchanged */
 #level-4:checked ~ #pos-1:checked ~ .game-world .key-in-game {
-    animation: key-pulse 2s infinite;
+    animation: key-pulse 1s ease-in-out infinite;
+}
+/* But S2/S3 items use levels 5-9, e.g., axe at S2-L9-P12: */
+#level-9:checked ~ #pos-12:checked ~ .game-world .axe-in-game {
+    animation: axe-pulse 1s ease-in-out infinite;
 }
 ```
 
 ## Winning Route
 
-1. Pick up **key** (L4P1)
-2. Use key on **toolbox** (L2P6) → unlocks toolbox, key consumed
+1. Pick up **key** (S1-L4-P1)
+2. Use key on **toolbox** (S1-L2-P6) → unlocks toolbox, key consumed
 3. Pick up **wrench** from toolbox
-4. Use wrench on **door** (L0P6) → door opens, enter stage 2
-5. Pick up **axe** (L4P12)
-6. Use axe on **tree** (L0P12) → tree chopped, escape arrow appears
-7. Click escape arrow → victory
+4. Use wrench on **door** (S1-L0-P6) → door opens
+5. Enter S4 through door (S4-L0-P7)
+6. Climb up to S2 (S2-L5-P7)
+7. Pick up **axe** (S2-L9-P12)
+8. Use axe on **tree** (S2-L5-P12) → tree chopped
+9. Enter S3 → navigate to escape → victory
 
 ## Phantom Positions
 
-**Challenge:** One label can only apply to one input element. This makes is non-trivial
+**Challenge:** One label can only apply to one input element. This makes it non-trivial
 to make a player move horizontally and have them fall vertically as part of the same move:
 it would require two radio buttons to change state.
 
 **Solution: Phantom positions** - a state that differs from its visual location.
 
-Example: `stage-3-pos-φ`
- - The player is at S3-L3-P5 and moves up
- - This moves them to S3-L3-Pφ. This counts as *horizontal* movement only.
- - This position is shown as if the player were at S3-L4-P5.
- - As soon as the player moves left or right, they are moved back to the physical location (L3-P4 or L3-P6)
+Example: `pos-φ` (in S3)
+ - The player is at S3-L8-P17 and moves up
+ - This moves them to S3-L8-Pφ. This counts as *horizontal* movement only.
+ - This position is shown as if the player were at S3-L9-P17 (visually at L4 height).
+ - As soon as the player moves left or right, they are moved back to the physical location (L8-P16 or L8-P18)
 
-Since all these transitions stay on L3, they only change the position radio - making them valid single-input operations.
+Since all these transitions stay on L8, they only change the position radio - making them valid single-input operations.
 
 ## Debug Mode
 
