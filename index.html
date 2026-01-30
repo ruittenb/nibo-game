@@ -2522,41 +2522,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Arrow back to S1 from S4-L0-P7 */
         #level-0:checked ~ #pos-7:checked ~ #door-unlocked:checked ~ .game-world .arrow-S2-P7-S1-P6 { display: block; }
         /* Stage 4 horizontal arrows (S4 uses levels 0-4, positions 7-12) */
-        /* L4: P7→P8, P8→P9 (right), P8→P7, P9→P8 (left), P10→P11, P11→P10, P11→P12, P12→P11 */
-        #level-4:checked ~ #pos-7:checked ~ .game-world .arrow-S4-P7-P8 { display: block; }
-        #level-4:checked ~ #pos-8:checked ~ .game-world .arrow-S4-P8-P7 { display: block; }
-        #level-4:checked ~ #pos-8:checked ~ .game-world .arrow-S4-P8-P9 { display: block; }
-        #level-4:checked ~ #pos-9:checked ~ .game-world .arrow-S4-P9-P8 { display: block; }
-        #level-4:checked ~ #pos-10:checked ~ .game-world .arrow-S4-P10-P11 { display: block; }
-        #level-4:checked ~ #pos-11:checked ~ .game-world .arrow-S4-P11-P10 { display: block; }
-        #level-4:checked ~ #pos-11:checked ~ .game-world .arrow-S4-P11-P12 { display: block; }
-        #level-4:checked ~ #pos-12:checked ~ .game-world .arrow-S4-P12-P11 { display: block; }
-        /* L3: P9→P10 (right), P10→P9 (left) */
-        #level-3:checked ~ #pos-9:checked ~ .game-world .arrow-S4-P9-P10 { display: block; }
-        #level-3:checked ~ #pos-10:checked ~ .game-world .arrow-S4-P10-P9 { display: block; }
-        /* L2: P7→P8, P9→P10, P11→P12 (right), P8→P7, P10→P9, P12→P11 (left) */
-        #level-2:checked ~ #pos-7:checked ~ .game-world .arrow-S4-P7-P8 { display: block; }
-        #level-2:checked ~ #pos-8:checked ~ .game-world .arrow-S4-P8-P7 { display: block; }
-        #level-2:checked ~ #pos-9:checked ~ .game-world .arrow-S4-P9-P10 { display: block; }
-        #level-2:checked ~ #pos-10:checked ~ .game-world .arrow-S4-P10-P9 { display: block; }
-        #level-2:checked ~ #pos-11:checked ~ .game-world .arrow-S4-P11-P12 { display: block; }
-        #level-2:checked ~ #pos-12:checked ~ .game-world .arrow-S4-P12-P11 { display: block; }
-        /* L1: P8→P9, P10→P11, P11→P12 (right), P9→P8, P11→P10, P12→P11 (left) */
-        #level-1:checked ~ #pos-8:checked ~ .game-world .arrow-S4-P8-P9 { display: block; }
-        #level-1:checked ~ #pos-9:checked ~ .game-world .arrow-S4-P9-P8 { display: block; }
-        #level-1:checked ~ #pos-10:checked ~ .game-world .arrow-S4-P10-P11 { display: block; }
-        #level-1:checked ~ #pos-11:checked ~ .game-world .arrow-S4-P11-P10 { display: block; }
-        #level-1:checked ~ #pos-11:checked ~ .game-world .arrow-S4-P11-P12 { display: block; }
-        #level-1:checked ~ #pos-12:checked ~ .game-world .arrow-S4-P12-P11 { display: block; }
-        /* L0: P7→P8, P9→P10, P10→P11, P11→P12 (right), P8→P7, P10→P9, P11→P10, P12→P11 (left) */
-        #level-0:checked ~ #pos-7:checked ~ .game-world .arrow-S4-P7-P8 { display: block; }
-        #level-0:checked ~ #pos-8:checked ~ .game-world .arrow-S4-P8-P7 { display: block; }
-        #level-0:checked ~ #pos-9:checked ~ .game-world .arrow-S4-P9-P10 { display: block; }
-        #level-0:checked ~ #pos-10:checked ~ .game-world .arrow-S4-P10-P9 { display: block; }
-        #level-0:checked ~ #pos-10:checked ~ .game-world .arrow-S4-P10-P11 { display: block; }
-        #level-0:checked ~ #pos-11:checked ~ .game-world .arrow-S4-P11-P10 { display: block; }
-        #level-0:checked ~ #pos-11:checked ~ .game-world .arrow-S4-P11-P12 { display: block; }
-        #level-0:checked ~ #pos-12:checked ~ .game-world .arrow-S4-P12-P11 { display: block; }
+        :is(#level-0, #level-2, #level-4):checked ~ #pos-7:checked ~ .game-world .arrow-S4-P7-P8 { display: block; }
+        :is(#level-0, #level-2, #level-4):checked ~ #pos-8:checked ~ .game-world .arrow-S4-P8-P7 { display: block; }
+        :is(#level-1, #level-4):checked ~ #pos-8:checked ~ .game-world .arrow-S4-P8-P9 { display: block; }
+        :is(#level-1, #level-4):checked ~ #pos-9:checked ~ .game-world .arrow-S4-P9-P8 { display: block; }
+        :is(#level-0, #level-2, #level-3):checked ~ #pos-9:checked ~ .game-world .arrow-S4-P9-P10 { display: block; }
+        :is(#level-0, #level-2, #level-3):checked ~ #pos-10:checked ~ .game-world .arrow-S4-P10-P9 { display: block; }
+        :is(#level-0, #level-1, #level-4):checked ~ #pos-10:checked ~ .game-world .arrow-S4-P10-P11 { display: block; }
+        :is(#level-0, #level-1, #level-4):checked ~ #pos-11:checked ~ .game-world .arrow-S4-P11-P10 { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-4):checked ~ #pos-11:checked ~ .game-world .arrow-S4-P11-P12 { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-4):checked ~ #pos-12:checked ~ .game-world .arrow-S4-P12-P11 { display: block; }
         /* Stage 2 arrows (S2 uses levels 5-9) */
         /* S2 horizontal arrows only show at levels 5-9 */
         #level-5:checked ~ #pos-7:checked ~ .game-world .arrow-S2-P7-P8 { display: block; }
@@ -2807,41 +2782,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Back to S1 from L0-P7 */
         #level-0:checked ~ #pos-7:checked ~ #door-unlocked:checked ~ .nav-panel .nav-left[for="pos-6"] { display: block; }
         /* S4 horizontal nav arrows */
-        /* L4: P7→P8, P8→P7, P8→P9, P9→P8, P10→P11, P11→P10, P11→P12, P12→P11 */
-        #level-4:checked ~ #pos-7:checked ~ .nav-panel .nav-right[for="pos-8"] { display: block; }
-        #level-4:checked ~ #pos-8:checked ~ .nav-panel .nav-left[for="pos-7"] { display: block; }
-        #level-4:checked ~ #pos-8:checked ~ .nav-panel .nav-right[for="pos-9"] { display: block; }
-        #level-4:checked ~ #pos-9:checked ~ .nav-panel .nav-left[for="pos-8"] { display: block; }
-        #level-4:checked ~ #pos-10:checked ~ .nav-panel .nav-right[for="pos-11"] { display: block; }
-        #level-4:checked ~ #pos-11:checked ~ .nav-panel .nav-left[for="pos-10"] { display: block; }
-        #level-4:checked ~ #pos-11:checked ~ .nav-panel .nav-right[for="pos-12"] { display: block; }
-        #level-4:checked ~ #pos-12:checked ~ .nav-panel .nav-left[for="pos-11"] { display: block; }
-        /* L3: P9→P10, P10→P9 */
-        #level-3:checked ~ #pos-9:checked ~ .nav-panel .nav-right[for="pos-10"] { display: block; }
-        #level-3:checked ~ #pos-10:checked ~ .nav-panel .nav-left[for="pos-9"] { display: block; }
-        /* L2: P7→P8, P8→P7, P9→P10, P10→P9, P11→P12, P12→P11 */
-        #level-2:checked ~ #pos-7:checked ~ .nav-panel .nav-right[for="pos-8"] { display: block; }
-        #level-2:checked ~ #pos-8:checked ~ .nav-panel .nav-left[for="pos-7"] { display: block; }
-        #level-2:checked ~ #pos-9:checked ~ .nav-panel .nav-right[for="pos-10"] { display: block; }
-        #level-2:checked ~ #pos-10:checked ~ .nav-panel .nav-left[for="pos-9"] { display: block; }
-        #level-2:checked ~ #pos-11:checked ~ .nav-panel .nav-right[for="pos-12"] { display: block; }
-        #level-2:checked ~ #pos-12:checked ~ .nav-panel .nav-left[for="pos-11"] { display: block; }
-        /* L1: P8→P9, P9→P8, P10→P11, P11→P10, P11→P12, P12→P11 */
-        #level-1:checked ~ #pos-8:checked ~ .nav-panel .nav-right[for="pos-9"] { display: block; }
-        #level-1:checked ~ #pos-9:checked ~ .nav-panel .nav-left[for="pos-8"] { display: block; }
-        #level-1:checked ~ #pos-10:checked ~ .nav-panel .nav-right[for="pos-11"] { display: block; }
-        #level-1:checked ~ #pos-11:checked ~ .nav-panel .nav-left[for="pos-10"] { display: block; }
-        #level-1:checked ~ #pos-11:checked ~ .nav-panel .nav-right[for="pos-12"] { display: block; }
-        #level-1:checked ~ #pos-12:checked ~ .nav-panel .nav-left[for="pos-11"] { display: block; }
-        /* L0: P7→P8, P8→P7, P9→P10, P10→P9, P10→P11, P11→P10, P11→P12, P12→P11 */
-        #level-0:checked ~ #pos-7:checked ~ .nav-panel .nav-right[for="pos-8"] { display: block; }
-        #level-0:checked ~ #pos-8:checked ~ .nav-panel .nav-left[for="pos-7"] { display: block; }
-        #level-0:checked ~ #pos-9:checked ~ .nav-panel .nav-right[for="pos-10"] { display: block; }
-        #level-0:checked ~ #pos-10:checked ~ .nav-panel .nav-left[for="pos-9"] { display: block; }
-        #level-0:checked ~ #pos-10:checked ~ .nav-panel .nav-right[for="pos-11"] { display: block; }
-        #level-0:checked ~ #pos-11:checked ~ .nav-panel .nav-left[for="pos-10"] { display: block; }
-        #level-0:checked ~ #pos-11:checked ~ .nav-panel .nav-right[for="pos-12"] { display: block; }
-        #level-0:checked ~ #pos-12:checked ~ .nav-panel .nav-left[for="pos-11"] { display: block; }
+        :is(#level-0, #level-2, #level-4):checked ~ #pos-7:checked ~ .nav-panel .nav-right[for="pos-8"] { display: block; }
+        :is(#level-0, #level-2, #level-4):checked ~ #pos-8:checked ~ .nav-panel .nav-left[for="pos-7"] { display: block; }
+        :is(#level-1, #level-4):checked ~ #pos-8:checked ~ .nav-panel .nav-right[for="pos-9"] { display: block; }
+        :is(#level-1, #level-4):checked ~ #pos-9:checked ~ .nav-panel .nav-left[for="pos-8"] { display: block; }
+        :is(#level-0, #level-2, #level-3):checked ~ #pos-9:checked ~ .nav-panel .nav-right[for="pos-10"] { display: block; }
+        :is(#level-0, #level-2, #level-3):checked ~ #pos-10:checked ~ .nav-panel .nav-left[for="pos-9"] { display: block; }
+        :is(#level-0, #level-1, #level-4):checked ~ #pos-10:checked ~ .nav-panel .nav-right[for="pos-11"] { display: block; }
+        :is(#level-0, #level-1, #level-4):checked ~ #pos-11:checked ~ .nav-panel .nav-left[for="pos-10"] { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-4):checked ~ #pos-11:checked ~ .nav-panel .nav-right[for="pos-12"] { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-4):checked ~ #pos-12:checked ~ .nav-panel .nav-left[for="pos-11"] { display: block; }
         /* S2 nav panel arrows (levels 5-9) */
         #level-5:checked ~ #pos-7:checked ~ .nav-panel .nav-right[for="pos-8"] { display: block; }
         #level-5:checked ~ #pos-8:checked ~ .nav-panel .nav-left[for="pos-7"] { display: block; }
@@ -2903,26 +2853,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-2:checked ~ #pos-1:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
         #level-3:checked ~ #pos-4:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
         /* Stage 4 up arrows (S4 uses levels 0-4) */
-        /* L0: P7, P8, P9, P12 */
-        #level-0:checked ~ #pos-7:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
-        #level-0:checked ~ #pos-8:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
-        #level-0:checked ~ #pos-9:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
-        #level-0:checked ~ #pos-12:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
-        /* L1: P7, P9, P11 */
-        #level-1:checked ~ #pos-7:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
-        #level-1:checked ~ #pos-9:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
-        #level-1:checked ~ #pos-11:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
-        /* L2: P8, P10, P11 */
-        #level-2:checked ~ #pos-8:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
-        #level-2:checked ~ #pos-10:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
-        #level-2:checked ~ #pos-11:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
-        /* L3: P7, P9, P10, P11, P12 */
-        #level-3:checked ~ #pos-7:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
-        #level-3:checked ~ #pos-9:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
-        #level-3:checked ~ #pos-10:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
-        #level-3:checked ~ #pos-11:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
-        #level-3:checked ~ #pos-12:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
-        /* L4: P7 (climb to S2) */
+        #level-0:checked ~ :is(#pos-7, #pos-8, #pos-9, #pos-12):checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
+        #level-1:checked ~ :is(#pos-7, #pos-9, #pos-11):checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
+        #level-2:checked ~ :is(#pos-8, #pos-10, #pos-11):checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
+        #level-3:checked ~ :is(#pos-7, #pos-9, #pos-10, #pos-11, #pos-12):checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
         #level-4:checked ~ #pos-7:checked ~ .nav-panel .nav-up[for="level-5"] { display: block; }
         /* Stage 2 up arrows (S2 uses levels 5-9) */
         #level-5:checked ~ #pos-8:checked ~ .nav-panel .nav-up[for="level-6"] { display: block; }
@@ -2944,25 +2878,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* S2→S4 climb down at P7 */
         #level-5:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-4"] { display: block; }
         /* Stage 4 down arrows (S4 uses levels 0-4) */
-        /* L4: P7, P9, P10, P11, P12 */
-        #level-4:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
-        #level-4:checked ~ #pos-9:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
-        #level-4:checked ~ #pos-10:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
-        #level-4:checked ~ #pos-11:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
-        #level-4:checked ~ #pos-12:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
-        /* L3: P8, P10, P11 */
-        #level-3:checked ~ #pos-8:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
-        #level-3:checked ~ #pos-10:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
-        #level-3:checked ~ #pos-11:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
-        /* L2: P7, P9, P11 */
-        #level-2:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
-        #level-2:checked ~ #pos-9:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
-        #level-2:checked ~ #pos-11:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
-        /* L1: P7, P8, P9, P12 */
-        #level-1:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
-        #level-1:checked ~ #pos-8:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
-        #level-1:checked ~ #pos-9:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
-        #level-1:checked ~ #pos-12:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
+        #level-4:checked ~ :is(#pos-7, #pos-9, #pos-10, #pos-11, #pos-12):checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
+        #level-3:checked ~ :is(#pos-8, #pos-10, #pos-11):checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
+        #level-2:checked ~ :is(#pos-7, #pos-9, #pos-11):checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
+        #level-1:checked ~ :is(#pos-7, #pos-8, #pos-9, #pos-12):checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
         /* Stage 2 down arrows (S2 uses levels 5-9) */
         #level-6:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-5"] { display: block; }
         #level-6:checked ~ #pos-11:checked ~ .nav-panel .nav-down[for="level-5"] { display: block; }
