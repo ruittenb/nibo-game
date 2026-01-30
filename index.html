@@ -1695,8 +1695,26 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         .ground-S4 {
             left: calc(var(--pos-width) * 6);
-            background: linear-gradient(to bottom, #5a5a6a 0%, #3a3a4a 100%);
-            border-top: 3px solid #6a6a7a;
+            background:
+                /* Bluish streaks scattered across (10:1 ratio, less fuzzy) */
+                radial-gradient(ellipse 80px 8px at 5% 55%, rgba(70,90,120,0.45) 0%, rgba(70,90,120,0.35) 70%, transparent 90%),
+                radial-gradient(ellipse 60px 6px at 18% 30%, rgba(60,80,110,0.4) 0%, rgba(60,80,110,0.3) 75%, transparent 92%),
+                radial-gradient(ellipse 100px 10px at 28% 72%, rgba(75,95,125,0.45) 0%, rgba(75,95,125,0.35) 70%, transparent 90%),
+                radial-gradient(ellipse 70px 7px at 40% 45%, rgba(65,85,115,0.4) 0%, rgba(65,85,115,0.3) 75%, transparent 92%),
+                radial-gradient(ellipse 90px 9px at 52% 80%, rgba(70,90,120,0.45) 0%, rgba(70,90,120,0.35) 70%, transparent 90%),
+                radial-gradient(ellipse 55px 5px at 62% 35%, rgba(60,80,110,0.4) 0%, rgba(60,80,110,0.3) 75%, transparent 92%),
+                radial-gradient(ellipse 85px 8px at 72% 60%, rgba(75,95,125,0.45) 0%, rgba(75,95,125,0.35) 70%, transparent 90%),
+                radial-gradient(ellipse 65px 6px at 82% 25%, rgba(65,85,115,0.4) 0%, rgba(65,85,115,0.3) 75%, transparent 92%),
+                radial-gradient(ellipse 75px 7px at 92% 68%, rgba(70,90,120,0.45) 0%, rgba(70,90,120,0.35) 70%, transparent 90%),
+                radial-gradient(ellipse 50px 5px at 12% 78%, rgba(60,80,110,0.4) 0%, rgba(60,80,110,0.3) 75%, transparent 92%),
+                radial-gradient(ellipse 95px 9px at 35% 20%, rgba(75,95,125,0.45) 0%, rgba(75,95,125,0.35) 70%, transparent 90%),
+                radial-gradient(ellipse 45px 4px at 48% 58%, rgba(65,85,115,0.4) 0%, rgba(65,85,115,0.3) 75%, transparent 92%),
+                radial-gradient(ellipse 70px 7px at 78% 42%, rgba(70,90,120,0.45) 0%, rgba(70,90,120,0.35) 70%, transparent 90%),
+                radial-gradient(ellipse 60px 6px at 88% 85%, rgba(60,80,110,0.4) 0%, rgba(60,80,110,0.3) 75%, transparent 92%),
+                radial-gradient(ellipse 80px 8px at 22% 50%, rgba(75,95,125,0.45) 0%, rgba(75,95,125,0.35) 70%, transparent 90%),
+                /* Base soil gradient */
+                linear-gradient(to bottom, #6b5344 0%, #4a3728 100%);
+            border-top: 3px solid #7d6252;
         }
         .ground-S3 {
             left: calc(var(--pos-width) * 12);
