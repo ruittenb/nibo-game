@@ -1188,9 +1188,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S3-L9-P14-pickup { top: 30px; left: 350px; }
         /* Debug positions - S4 valuables */
         #valuable-S4-L3-P7-pickup { top: 90px; left: 160px; }
-        #valuable-S4-L3-P12-pickup { top: 90px; left: 180px; }
-        #valuable-S4-L1-P10-pickup { top: 90px; left: 200px; }
-        #valuable-S4-L0-P9-pickup { top: 90px; left: 220px; }
+        #valuable-S4-L3-P8-pickup { top: 90px; left: 180px; }
+        #valuable-S4-L3-P12-pickup { top: 90px; left: 200px; }
+        #valuable-S4-L1-P10-pickup { top: 90px; left: 220px; }
+        #valuable-S4-L0-P9-pickup { top: 90px; left: 240px; }
         /* Debug positions - S1 items (next to L5) */
         #key-pickup { top: 110px; left: 30px; }
         #toolbox-unlocked { top: 110px; left: 50px; }
@@ -1340,7 +1341,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 (var(--valuable-S1-L0-P3, 0) + var(--valuable-S1-L1-P4, 0) + var(--valuable-S1-L3-P5, 0) + var(--valuable-S1-L2-P1, 0) + var(--valuable-S1-L4-P2, 0) +
                  var(--valuable-S2-L5-P8, 0) + var(--valuable-S2-L6-P11, 0) + var(--valuable-S2-L7-P7, 0) + var(--valuable-S2-L8-P9, 0) + var(--valuable-S2-L9-P10, 0) +
                  var(--valuable-S3-L5-P15, 0) + var(--valuable-S3-L5-P18, 0) + var(--valuable-S3-L8-P18, 0) + var(--valuable-S3-L9-P14, 0) +
-                 var(--valuable-S4-L3-P7, 0) + var(--valuable-S4-L3-P12, 0) + var(--valuable-S4-L1-P10, 0) + var(--valuable-S4-L0-P9, 0))
+                 var(--valuable-S4-L3-P7, 0) + var(--valuable-S4-L3-P8, 0) + var(--valuable-S4-L3-P12, 0) + var(--valuable-S4-L1-P10, 0) + var(--valuable-S4-L0-P9, 0))
                 * -24px
             ));
         }
@@ -1367,8 +1368,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S3-L8-P18-pickup:checked ~ .counter-panel { --valuable-S3-L8-P18: 1; }
         #valuable-S3-L9-P14-pickup:checked ~ .counter-panel { --valuable-S3-L9-P14: 1; }
         #valuable-S4-L3-P7-pickup:checked ~ .counter-panel { --valuable-S4-L3-P7: 1; }
+        #valuable-S4-L3-P8-pickup:checked ~ .counter-panel { --valuable-S4-L3-P8: 2; }
         #valuable-S4-L3-P12-pickup:checked ~ .counter-panel { --valuable-S4-L3-P12: 1; }
-        #valuable-S4-L1-P10-pickup:checked ~ .counter-panel { --valuable-S4-L1-P10: 1; }
+        #valuable-S4-L1-P10-pickup:checked ~ .counter-panel { --valuable-S4-L1-P10: 2; }
         #valuable-S4-L0-P9-pickup:checked ~ .counter-panel { --valuable-S4-L0-P9: 1; }
 
         /* Key - single element that animates from game world to inventory */
@@ -3429,6 +3431,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         /* Stage 4 valuable positions - hidden by default, only show when player adjacent */
         .container.valuable-S4-L3-P7,
+        .container.valuable-S4-L3-P8,
         .container.valuable-S4-L3-P12,
         .container.valuable-S4-L1-P10,
         .container.valuable-S4-L0-P9 {
@@ -3437,6 +3440,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .valuable-S4-L3-P7 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 6 - var(--item-offset));
+        }
+        .valuable-S4-L3-P8 {
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 7 - var(--item-offset));
         }
         .valuable-S4-L3-P12 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
@@ -3452,6 +3459,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Show S4 valuables only when player is at that position */
         #level-3:checked ~ #pos-7:checked ~ #valuable-S4-L3-P7-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P7 { display: block; }
+        #level-3:checked ~ #pos-8:checked ~ #valuable-S4-L3-P8-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P8 { display: block; }
         #level-3:checked ~ #pos-12:checked ~ #valuable-S4-L3-P12-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P12 { display: block; }
         #level-1:checked ~ #pos-10:checked ~ #valuable-S4-L1-P10-pickup:not(:checked) ~ .game-world .valuable-S4-L1-P10 { display: block; }
         #level-0:checked ~ #pos-9:checked ~ #valuable-S4-L0-P9-pickup:not(:checked) ~ .game-world .valuable-S4-L0-P9 { display: block; }
@@ -3654,6 +3662,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
+        #level-3:checked ~ #pos-8:checked ~ #valuable-S4-L3-P8-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P8 .valuable-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: aquamarine-pulse 1s ease-in-out infinite;
+        }
         #level-3:checked ~ #pos-12:checked ~ #valuable-S4-L3-P12-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P12 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
@@ -3705,6 +3718,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Move Stage 4 valuables to counter when picked up (S4 is at bottom, no stage-height offset) */
         /* z-index raised above vision mask so flying animation is visible */
         #valuable-S4-L3-P7-pickup:checked ~ .game-world .valuable-S4-L3-P7,
+        #valuable-S4-L3-P8-pickup:checked ~ .game-world .valuable-S4-L3-P8,
         #valuable-S4-L3-P12-pickup:checked ~ .game-world .valuable-S4-L3-P12,
         #valuable-S4-L1-P10-pickup:checked ~ .game-world .valuable-S4-L1-P10,
         #valuable-S4-L0-P9-pickup:checked ~ .game-world .valuable-S4-L0-P9 {
@@ -4859,8 +4873,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="valuable-S3-L9-P14-pickup" class="valuable-checkbox" title="coin">
         <!-- Stage 4 valuables -->
         <input type="checkbox" id="valuable-S4-L3-P7-pickup" class="valuable-checkbox" title="coin">
+        <input type="checkbox" id="valuable-S4-L3-P8-pickup" class="valuable-checkbox" title="aquamarine">
         <input type="checkbox" id="valuable-S4-L3-P12-pickup" class="valuable-checkbox" title="coin">
-        <input type="checkbox" id="valuable-S4-L1-P10-pickup" class="valuable-checkbox" title="coin">
+        <input type="checkbox" id="valuable-S4-L1-P10-pickup" class="valuable-checkbox" title="aquamarine">
         <input type="checkbox" id="valuable-S4-L0-P9-pickup" class="valuable-checkbox" title="coin">
 
         <div class="subtitle subtitle-S1">The Factory</div>
@@ -5390,11 +5405,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="container coin valuable-S4-L3-P7">
             <label for="valuable-S4-L3-P7-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
         </div>
+        <div class="container aquamarine valuable-S4-L3-P8">
+            <label for="valuable-S4-L3-P8-pickup" class="valuable-in-game"><svg><use href="#aquamarine"/></svg></label>
+        </div>
         <div class="container coin valuable-S4-L3-P12">
             <label for="valuable-S4-L3-P12-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
         </div>
-        <div class="container coin valuable-S4-L1-P10">
-            <label for="valuable-S4-L1-P10-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
+        <div class="container aquamarine valuable-S4-L1-P10">
+            <label for="valuable-S4-L1-P10-pickup" class="valuable-in-game"><svg><use href="#aquamarine"/></svg></label>
         </div>
         <div class="container coin valuable-S4-L0-P9">
             <label for="valuable-S4-L0-P9-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
