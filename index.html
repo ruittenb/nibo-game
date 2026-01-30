@@ -1023,7 +1023,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
         /* Hide radio buttons and checkboxes by default */
-        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .battery-checkbox, .idcard-checkbox, .torch-checkbox, .tree-checkbox, .escaped-checkbox, .valuable-checkbox, .door-checkbox, .control-button-checkbox {
+        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .battery-checkbox, .idcard-checkbox, .torch-checkbox, .tree-checkbox, .escaped-checkbox, .vision-checkbox, .valuable-checkbox, .door-checkbox, .control-button-checkbox {
             display: none;
             /* When unhidden for debugging: */
             z-index: 9999;
@@ -1093,7 +1093,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #bolt-fixed { top: 50px; left: 330px; }
         #control-button-pressed { top: 50px; left: 350px; }
         #escaped { top: 50px; left: 370px; }
-        #torch-pickup { top: 110px; left: 160px; }
+        #vision-toggle { top: 110px; left: 160px; }
+        #torch-pickup { top: 110px; left: 180px; }
         /* Show inputs when debug is checked */
         #debug-toggle:checked ~ .game-container .position-radio,
         #debug-toggle:checked ~ .game-container .level-radio,
@@ -1106,6 +1107,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ .game-container .torch-checkbox,
         #debug-toggle:checked ~ .game-container .tree-checkbox,
         #debug-toggle:checked ~ .game-container .escaped-checkbox,
+        #debug-toggle:checked ~ .game-container .vision-checkbox,
         #debug-toggle:checked ~ .game-container .valuable-checkbox,
         #debug-toggle:checked ~ .game-container .door-checkbox,
         #debug-toggle:checked ~ .game-container .control-button-checkbox {
@@ -3910,8 +3912,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
         :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~
         #torch-pickup:checked ~ .vision-mask-S4 {
-            --vision-mask-hole-width: calc(var(--pos-width) * 2.5);
-            --vision-mask-hole-height: calc(var(--platform-height) * 2.5);
+            --vision-mask-hole-width: calc(var(--pos-width) * 2.2);
+            --vision-mask-hole-height: calc(var(--platform-height) * 2.2);
+        }
+
+        /* Hide vision mask when vision toggle is checked */
+        #vision-toggle:checked ~ .vision-mask-S4 {
+            display: none;
         }
 
         /* Overlay base styles */
@@ -4656,6 +4663,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         <!-- Escaped checkbox -->
         <input type="checkbox" id="escaped" class="escaped-checkbox" title="escaped">
+
+        <!-- Vision mask toggle -->
+        <input type="checkbox" id="vision-toggle" class="vision-checkbox" title="vision">
 
         <!-- Door open checkbox -->
         <input type="checkbox" id="door-unlocked" class="door-checkbox" title="door">
