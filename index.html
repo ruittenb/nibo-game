@@ -3238,41 +3238,41 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
         /* Stage 2 Bacteria */
-        .bacteria {
+        .disease {
             position: absolute;
             width: 32px;
             height: 32px;
             padding: 3px;
-            --bacteria-bg-purple: #4a0050;
+            --disease-bg-purple: #4a0050;
             color: purple;
-            background: linear-gradient(to top, transparent 0%, var(--bacteria-bg-purple) 12.5%, transparent 25%, var(--bacteria-bg-purple) 37.5%, transparent 50%, var(--bacteria-bg-purple) 62.5%, transparent 75%, var(--bacteria-bg-purple) 87.5%, transparent 100%);
+            background: linear-gradient(to top, transparent 0%, var(--disease-bg-purple) 12.5%, transparent 25%, var(--disease-bg-purple) 37.5%, transparent 50%, var(--disease-bg-purple) 62.5%, transparent 75%, var(--disease-bg-purple) 87.5%, transparent 100%);
             background-size: 100% 200%;
             animation: hazard-roll 1s linear infinite;
             border-radius: 6px;
             z-index: var(--z-items);
         }
-        .bacteria-S2-L5-P10 {
+        .disease-S2-L5-P10 {
             bottom: calc(var(--stage-height) + var(--ground-height) + 2px);
             left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset));
         }
-        .bacteria-S2-L6-P9 {
+        .disease-S2-L6-P9 {
             bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
         }
-        .bacteria svg {
+        .disease svg {
             width: 100%;
             height: 100%;
         }
-        .bacteria-tooltip {
+        .disease-tooltip {
             bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
-        .bacteria:hover {
+        .disease:hover {
             z-index: var(--z-tooltip);
         }
-        .bacteria:hover .tooltip {
+        .disease:hover .tooltip {
             opacity: 1;
         }
 
@@ -3525,7 +3525,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Show death overlay when player is at hazard locations */
         #level-1:checked ~ #pos-6:checked ~ .death-screen-overlay-poison,
-        /* S2 bacteria use levels 5-9 (L0->L5, L1->L6) */
+        /* S2 disease use levels 5-9 (L0->L5, L1->L6) */
         #level-5:checked ~ #pos-10:checked ~ .death-screen-overlay-disease,
         #level-6:checked ~ #pos-9:checked ~ .death-screen-overlay-disease {
             opacity: 1;
@@ -3698,8 +3698,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <symbol id="door-open" viewBox="0 0 448 512">
             <path fill="currentColor" d="M 288 64 l 64 0 0 416 c 0 17.7 14.3 32 32 32 l 32 0 c 17.7 0 32 -14.3 32 -32 s -14.3 -32 -32 -32 l 0 -384 c 0 -35.3 -28.7 -64 -64 -64 l -96 0 0 0 -160 0 C 60.7 0 32 28.7 32 64 l 0 384 c -17.7 0 -32 14.3 -32 32 s 14.3 32 32 32 l 32 0 c 17.7 0 32 -14.3 32 -32 l 0 -416 z"/>
         </symbol>
-        <symbol id="bacteria" viewBox="0 -40 640 600">
-            <path fill="currentColor" d="M 256 -32 c 13.3 0 24 10.7 24 24 l 0 11 c 8.6 2.2 16.9 5.6 24.8 10.3 L 311 7 c 9.4 -9.4 24.6 -9.4 33.9 0 s 9.4 24.6 0 33.9 l -6.3 6.3 c 4.6 7.8 8 16.2 10.3 24.8 l 11 0 c 13.3 0 24 10.7 24 24 s -10.7 24 -24 24 l -11 0 c -2.2 8.6 -5.6 16.9 -10.3 24.8 L 345 151 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 -30.1 30.1 4.1 4.1 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 c -10 10 -20 20 -30.1 30.1 L 217 279 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -6.3 -6.3 c -7.8 4.6 -16.2 8 -24.8 10.3 l 0 11 c 0 13.3 -10.7 24 -24 24 s -24 -10.7 -24 -24 l 0 -11 c -8.6 -2.2 -16.9 -5.6 -24.8 -10.3 L 73 313 c -9.4 9.4 -24.6 9.4 -33.9 0 s -9.4 -24.6 0 -33.9 l 6.3 -6.3 c -4.6 -7.8 -8 -16.2 -10.3 -24.8 l -11 0 c -13.3 0 -24 -10.7 -24 -24 s 10.7 -24 24 -24 l 11 0 c 2.2 -8.6 5.6 -16.9 10.3 -24.8 L 39 169 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 c 10 -10 20 -20 30.1 -30.1 L 103 105 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 30.1 -30.1 -4.1 -4.1 c -9.4 -9.4 -9.4 -24.6 0 -33.9 S 191.6 -2.3 201 7 l 6.3 6.3 c 7.8 -4.6 16.2 -8 24.8 -10.3 l 0 -11 c 0 -13.3 10.7 -24 24 -24 z M 128 256 a 32 32 0 1 0 0 -64 32 32 0 1 0 0 64 z M 240 144 a 32 32 0 1 0 -64 0 32 32 0 1 0 64 0 z m 296 40 l 0 11 c 8.6 2.2 16.9 5.6 24.8 10.3 L 567 199 c 9.4 -9.4 24.6 -9.4 33.9 0 s 9.4 24.6 0 33.9 l -6.3 6.3 c 4.6 7.8 8 16.2 10.3 24.8 l 11 0 c 13.3 0 24 10.7 24 24 s -10.7 24 -24 24 l -11 0 c -2.2 8.6 -5.6 16.9 -10.3 24.8 L 601 343 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 -30.1 30.1 4.1 4.1 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -4.1 -4.1 c -10 10 -20 20 -30.1 30.1 L 473 471 c 9.4 9.4 9.4 24.6 0 33.9 s -24.6 9.4 -33.9 0 l -6.3 -6.3 c -7.8 4.6 -16.2 8 -24.8 10.3 l 0 11 c 0 13.3 -10.7 24 -24 24 s -24 -10.7 -24 -24 l 0 -11 c -8.6 -2.2 -16.9 -5.6 -24.8 -10.3 L 329 505 c -9.4 9.4 -24.6 9.4 -33.9 0 s -9.4 -24.6 0 -33.9 l 6.3 -6.3 c -4.6 -7.8 -8 -16.2 -10.3 -24.8 l -11 0 c -13.3 0 -24 -10.7 -24 -24 s 10.7 -24 24 -24 l 11 0 c 2.2 -8.6 5.6 -16.9 10.3 -24.8 L 295 361 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 c 10 -10 20 -20 30.1 -30.1 L 359 297 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 4.1 4.1 30.1 -30.1 -4.1 -4.1 c -9.4 -9.4 -9.4 -24.6 0 -33.9 s 24.6 -9.4 33.9 0 l 6.3 6.3 c 7.8 -4.6 16.2 -8 24.8 -10.3 l 0 -11 c 0 -13.3 10.7 -24 24 -24 s 24 10.7 24 24 z M 448 384 a 32 32 0 1 0 -64 0 32 32 0 1 0 64 0 z"/>
+        <symbol id="disease" viewBox="0 0 512 512">
+            <path fill="currentColor" d="M 236.5 29.4 L 224 48 c -20 30 -53.6 48 -89.7 48 L 68 96 c -37.5 0 -67.9 30.4 -67.9 67.9 0 18 7.2 35.2 19.9 47.9 l 27 27 c 11 11 17.2 25.9 17.2 41.5 0 15.8 -6.4 30.9 -17.7 42 L 33.4 335.1 c -11.1 10.8 -17.3 25.7 -17.3 41.2 0 36.8 34.1 64.2 70.1 56.2 l 62.3 -13.8 c 7.7 -1.7 15.7 -2.6 23.6 -2.6 32.8 0 64.2 14.6 85.2 39.8 l 30.5 36.6 c 10.4 12.4 25.7 19.6 41.9 19.6 30.1 0 54.5 -24.4 54.5 -54.5 l 0 -51.2 c 0 -41.4 25.4 -78.5 64 -93.5 l 22.2 -8.6 c 25.2 -9.8 41.8 -34.1 41.8 -61.1 0 -26.4 -15.9 -50.3 -40.3 -60.5 L 429 164.8 c -33.2 -13.9 -57.6 -43 -65.5 -78.1 l -7.9 -35.2 c -6.8 -30.1 -33.5 -51.5 -64.3 -51.5 -22 0 -42.6 11 -54.8 29.4 z M 160 192 a 32 32 0 1 1 0 64 32 32 0 1 1 0 -64 z m 96 0 a 32 32 0 1 1 64 0 32 32 0 1 1 -64 0 z m 32 96 a 32 32 0 1 1 0 64 32 32 0 1 1 0 -64 z"/>
         </symbol>
         <symbol id="axe" viewBox="21 20 199 179">
             <path fill="#cc1010" d="M 120,20 L 220,80 C 220,120 200,140 160,150 L 130,100 L 90,60 L 120,20 z"/>
@@ -4498,13 +4498,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="branch branch-S2-L8-P10"></div>
             <div class="branch branch-S2-L9-P7"></div>
             <!-- Bacteria hazards -->
-            <div class="bacteria bacteria-S2-L5-P10">
-                <span class="tooltip bacteria-tooltip">Disease</span>
-                <svg><use href="#bacteria"/></svg>
+            <div class="disease disease-S2-L5-P10">
+                <span class="tooltip disease-tooltip">Disease</span>
+                <svg><use href="#disease"/></svg>
             </div>
-            <div class="bacteria bacteria-S2-L6-P9">
-                <span class="tooltip bacteria-tooltip">Disease</span>
-                <svg><use href="#bacteria"/></svg>
+            <div class="disease disease-S2-L6-P9">
+                <span class="tooltip disease-tooltip">Disease</span>
+                <svg><use href="#disease"/></svg>
             </div>
             <!-- Tree blocking exit -->
             <div class="tree-container">
