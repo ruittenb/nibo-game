@@ -1,6 +1,5 @@
 
- - when flight controls come online - flicker? fade in?
- - different flight controls icon?
+ - fix landing gear of ship
 
  - animated coin still below mask: plan 'flying-coins' (problem: stacking context in sibling)
 
@@ -11,4 +10,4 @@
  - fix the z-indexes of everything
  - make a single table with all the z-indexes, both direct and through variables.
 
-
+ - give stalagmites and stalactites light blue drop-shadow?

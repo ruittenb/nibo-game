@@ -222,9 +222,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --bolt-color-1: #ffdd00;
             --bolt-color-2: #ffaa00;
             --barrel-color: #c48b9f;
-            --control-button-side-color: #c41616;
-            --control-button-dome-color: #e02020;
-            --control-button-rim-color: #9f1010;
+            --flight-controls-unavailable: #c41616;
+            --flight-controls-available: #1aa33a;
             --wrench-color: #708090;
             --axe-color: #cc1010;
             --idcard-color: #3090f0;
@@ -946,19 +945,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
 
         /* Control button S3-L2-P3 */
-        .control-button {
+        .flight-controls-unavailable {
             position: absolute;
             width: calc(var(--pickup-size) * 1.7);
             height: calc(var(--pickup-size) * 2);
             bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 10px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 8px);
             pointer-events: none;
+            color: var(--flight-controls-unavailable);
         }
-        .control-button svg {
+        .flight-controls-unavailable svg {
             width: 100%;
             height: 100%;
         }
-        .control-button-hover-area {
+        .flight-controls-hover-area {
             position: absolute;
             width: calc(var(--pickup-size) * 1.7);
             height: calc(var(--pickup-size) * 2);
@@ -968,16 +968,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: 1;
         }
         /* Hide hover area when player is at button with ID card and bolt fixed (so label click works) - S3 uses levels 5-9 */
-        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #control-button-pressed:not(:checked) ~ .game-world .control-button-hover-area {
+        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .flight-controls-hover-area {
             display: none;
         }
         /* Enable hover on control button when player is at position with ID card and bolt fixed */
-        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #control-button-pressed:not(:checked) ~ .game-world .control-button {
+        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .flight-controls-unavailable {
             pointer-events: auto;
         }
         /* Gray out button when bolt is not fixed */
-        #bolt-fixed:not(:checked) ~ .game-world .control-button {
-            filter: saturate(0);
+        #bolt-fixed:not(:checked) ~ .game-world .flight-controls-unavailable {
+            animation: flight-controls-offline 2s ease-in-out infinite;
         }
         /* ID card floating above control button */
         .idcard-at-button {
@@ -996,50 +996,50 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--idcard-color);
         }
         /* Show ID card at button when player is next to it, has ID card, bolt fixed, AND button not yet pressed - S3 uses levels 5-9 */
-        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #control-button-pressed:not(:checked) ~ .game-world .idcard-at-button {
+        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .idcard-at-button {
             display: block;
             animation: idcard-hovering-pulse 1s ease-in-out infinite;
         }
-        .control-button .tooltip {
+        .flight-controls-unavailable .tooltip {
             bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
-        .control-button:hover {
+        .flight-controls-unavailable:hover {
             z-index: var(--z-tooltip);
         }
-        .control-button-hover-area:hover ~ .control-button {
+        .flight-controls-hover-area:hover ~ .flight-controls-unavailable {
             z-index: var(--z-tooltip);
         }
         /* Show "no power" tooltip when bolt not fixed */
-        .control-button .tooltip-no-idcard {
+        .flight-controls-unavailable .tooltip-no-idcard {
             display: none;
         }
-        #bolt-fixed:not(:checked) ~ .game-world .control-button:hover .tooltip-no-power,
-        #bolt-fixed:not(:checked) ~ .game-world .control-button-hover-area:hover ~ .control-button .tooltip-no-power {
+        #bolt-fixed:not(:checked) ~ .game-world .flight-controls-unavailable:hover .tooltip-no-power,
+        #bolt-fixed:not(:checked) ~ .game-world .flight-controls-hover-area:hover ~ .flight-controls-unavailable .tooltip-no-power {
             opacity: 1;
         }
         /* Show "no ID card" tooltip when bolt fixed */
-        #bolt-fixed:checked ~ .game-world .control-button .tooltip-no-power {
+        #bolt-fixed:checked ~ .game-world .flight-controls-unavailable .tooltip-no-power {
             display: none;
         }
-        #bolt-fixed:checked ~ .game-world .control-button .tooltip-no-idcard {
+        #bolt-fixed:checked ~ .game-world .flight-controls-unavailable .tooltip-no-idcard {
             display: block;
         }
-        #bolt-fixed:checked ~ .game-world .control-button:hover .tooltip-no-idcard,
-        #bolt-fixed:checked ~ .game-world .control-button-hover-area:hover ~ .control-button .tooltip-no-idcard {
+        #bolt-fixed:checked ~ .game-world .flight-controls-unavailable:hover .tooltip-no-idcard,
+        #bolt-fixed:checked ~ .game-world .flight-controls-hover-area:hover ~ .flight-controls-unavailable .tooltip-no-idcard {
             opacity: 1;
         }
         /* Hide red button when pressed, show green button */
-        #control-button-pressed:checked ~ .game-world .control-button {
+        #flight-controls-used:checked ~ .game-world .flight-controls-unavailable {
             display: none;
         }
-        #control-button-pressed:checked ~ .game-world .control-button-hover-area {
+        #flight-controls-used:checked ~ .game-world .flight-controls-hover-area {
             display: none;
         }
-        /* Green button (shown when control-button-pressed is checked) */
-        .control-button-green {
+        /* Green button (shown when flight-controls-used is checked) */
+        .flight-controls-available {
             position: absolute;
             width: calc(var(--pickup-size) * 1.7);
             height: calc(var(--pickup-size) * 2);
@@ -1047,32 +1047,30 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 8px);
             display: none;
             cursor: pointer;
-            --control-button-side-color: #1aa33a;
-            --control-button-dome-color: #2ecc5a;
-            --control-button-rim-color: #0f6f26;
+            color: var(--flight-controls-available);
         }
-        .control-button-green svg {
+        .flight-controls-available svg {
             width: 100%;
             height: 100%;
         }
-        .control-button-green .tooltip {
+        .flight-controls-available .tooltip {
             bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
-        .control-button-green:hover {
+        .flight-controls-available:hover {
             z-index: var(--z-tooltip);
         }
-        .control-button-green:hover .tooltip {
+        .flight-controls-available:hover .tooltip {
             opacity: 1;
         }
-        #control-button-pressed:checked ~ .game-world .control-button-green {
+        #flight-controls-used:checked ~ .game-world .flight-controls-available {
             display: block;
             pointer-events: none;
         }
         /* Hover area for green button tooltip (when not adjacent) */
-        .control-button-green-hover-area {
+        .flight-controls-available-hover-area {
             position: absolute;
             width: calc(var(--pickup-size) * 1.7);
             height: calc(var(--pickup-size) * 2);
@@ -1082,22 +1080,22 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: auto;
             z-index: 1;
         }
-        #control-button-pressed:checked ~ .game-world .control-button-green-hover-area {
+        #flight-controls-used:checked ~ .game-world .flight-controls-available-hover-area {
             display: block;
         }
         /* Hide hover area when player is at L7-P15 (so label click works) */
-        #level-7:checked ~ #pos-15:checked ~ #control-button-pressed:checked ~ .game-world .control-button-green-hover-area {
+        #level-7:checked ~ #pos-15:checked ~ #flight-controls-used:checked ~ .game-world .flight-controls-available-hover-area {
             display: none;
         }
         /* Show tooltip on hover area hover */
-        #control-button-pressed:checked ~ .game-world .control-button-green-hover-area:hover ~ .control-button-green .tooltip {
+        #flight-controls-used:checked ~ .game-world .flight-controls-available-hover-area:hover ~ .flight-controls-available .tooltip {
             opacity: 1;
         }
-        #control-button-pressed:checked ~ .game-world .control-button-green-hover-area:hover ~ .control-button-green {
+        #flight-controls-used:checked ~ .game-world .flight-controls-available-hover-area:hover ~ .flight-controls-available {
             z-index: var(--z-tooltip);
         }
         /* Enable clicking green button only when player is next to it - S3 uses levels 5-9 */
-        #level-7:checked ~ #pos-15:checked ~ #control-button-pressed:checked ~ .game-world .control-button-green {
+        #level-7:checked ~ #pos-15:checked ~ #flight-controls-used:checked ~ .game-world .flight-controls-available {
             pointer-events: auto;
         }
 
@@ -1174,7 +1172,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
         /* Hide radio buttons and checkboxes by default */
-        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .battery-checkbox, .idcard-checkbox, .torch-checkbox, .tree-checkbox, .escaped-checkbox, .vision-checkbox, .valuable-checkbox, .door-checkbox, .control-button-checkbox {
+        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .battery-checkbox, .idcard-checkbox, .torch-checkbox, .tree-checkbox, .escaped-checkbox, .vision-checkbox, .valuable-checkbox, .door-checkbox, .flight-controls-checkbox {
             display: none;
             /* When unhidden for debugging: */
             z-index: 9999;
@@ -1243,7 +1241,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #axe-pickup { top: 50px; left: 290px; }
         #battery-pickup { top: 50px; left: 310px; }
         #bolt-fixed { top: 50px; left: 330px; }
-        #control-button-pressed { top: 50px; left: 350px; }
+        #flight-controls-used { top: 50px; left: 350px; }
         #escaped { top: 50px; left: 370px; }
         #vision-toggle { top: 110px; left: 160px; }
         #torch-pickup { top: 110px; left: 180px; }
@@ -1262,7 +1260,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ .game-container .vision-checkbox,
         #debug-toggle:checked ~ .game-container .valuable-checkbox,
         #debug-toggle:checked ~ .game-container .door-checkbox,
-        #debug-toggle:checked ~ .game-container .control-button-checkbox {
+        #debug-toggle:checked ~ .game-container .flight-controls-checkbox {
             display: block;
         }
 
@@ -3400,6 +3398,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--gold-color);
         }
         .aquamarine .valuable-in-game {
+            color: var(--aquamarine-color-1);
             filter: drop-shadow(0 0 3px var(--aquamarine-color-1));
             animation: aquamarine-sparkle 1s ease-in-out infinite;
         }
@@ -3546,6 +3545,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         @keyframes coin-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--gold-color)); }
             50% { filter: drop-shadow(0 0 12px var(--gold-color)) drop-shadow(0 0 20px var(--gold-color)); }
+        }
+        @keyframes flight-controls-offline {
+            0%, 100% { filter: saturate(0); }
+            50% { filter: saturate(0.2); }
         }
         @keyframes aquamarine-pulse {
             0%, 100% { color: var(--aquamarine-color-1); filter: drop-shadow(0 0 4px var(--aquamarine-color-1)); }
@@ -3716,7 +3719,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-1:checked ~ #pos-10:checked ~ #valuable-S4-L1-P10-pickup:not(:checked) ~ .game-world .valuable-S4-L1-P10 .valuable-in-game {
             pointer-events: auto;
             cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
+            animation: aquamarine-pulse 1s ease-in-out infinite;
         }
         #level-0:checked ~ #pos-9:checked ~ #valuable-S4-L0-P9-pickup:not(:checked) ~ .game-world .valuable-S4-L0-P9 .valuable-in-game {
             pointer-events: auto;
@@ -4301,7 +4304,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-6:checked ~ #pos-11:checked ~ .game-world .valuable-S2-L6-P11 .hover-area,
         #level-7:checked ~ #pos-7:checked ~ .game-world .valuable-S2-L7-P7 .hover-area,
         #level-8:checked ~ #pos-9:checked ~ .game-world .valuable-S2-L8-P9 .hover-area,
-        #level-9:checked ~ #pos-10:checked ~ .game-world .valuable-S2-L9-P10 .hover-area {
+        #level-9:checked ~ #pos-10:checked ~ .game-world .valuable-S2-L9-P10 .hover-area,
+        /* S4 uses levels 0-4 */
+        #level-3:checked ~ #pos-8:checked ~ .game-world .valuable-S4-L3-P8 .hover-area,
+        #level-1:checked ~ #pos-10:checked ~ .game-world .valuable-S4-L1-P10 .hover-area {
             display: none;
         }
         /* Show tooltip on hover */
@@ -4319,11 +4325,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S3-L5-P18-pickup:not(:checked) ~ .game-world .valuable-S3-L5-P18 .hover-area:hover ~ .tooltip,
         #valuable-S3-L8-P18-pickup:not(:checked) ~ .game-world .valuable-S3-L8-P18 .hover-area:hover ~ .tooltip,
         #valuable-S3-L9-P14-pickup:not(:checked) ~ .game-world .valuable-S3-L9-P14 .hover-area:hover ~ .tooltip,
+        #valuable-S4-L3-P8-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P8 .hover-area:hover ~ .tooltip,
+        #valuable-S4-L1-P10-pickup:not(:checked) ~ .game-world .valuable-S4-L1-P10 .hover-area:hover ~ .tooltip,
         /* Show tooltip when player is at valuable location (hover-area hidden, so use container:hover) */
         /* S2/S3 use levels 5-9 */
         #level-6:checked ~ #pos-11:checked ~ #valuable-S2-L6-P11-pickup:not(:checked) ~ .game-world .valuable-S2-L6-P11:hover .tooltip,
         #level-8:checked ~ #pos-9:checked ~ #valuable-S2-L8-P9-pickup:not(:checked) ~ .game-world .valuable-S2-L8-P9:hover .tooltip,
-        #level-5:checked ~ #pos-18:checked ~ #valuable-S3-L5-P18-pickup:not(:checked) ~ .game-world .valuable-S3-L5-P18:hover .tooltip {
+        #level-5:checked ~ #pos-18:checked ~ #valuable-S3-L5-P18-pickup:not(:checked) ~ .game-world .valuable-S3-L5-P18:hover .tooltip,
+        /* S4 uses levels 0-4 */
+        #level-3:checked ~ #pos-8:checked ~ #valuable-S4-L3-P8-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P8:hover .tooltip,
+        #level-1:checked ~ #pos-10:checked ~ #valuable-S4-L1-P10-pickup:not(:checked) ~ .game-world .valuable-S4-L1-P10:hover .tooltip {
             opacity: 1;
         }
     </style>
@@ -4389,11 +4400,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <symbol id="barrel" viewBox="0 0 24 24">
             <path fill="currentColor" d="M 20 13 C 20.55 13 21 12.55 21 12 S 20.55 11 20 11 H 19 V 5 H 20 C 20.55 5 21 4.55 21 4 S 20.55 3 20 3 H 4 C 3.45 3 3 3.45 3 4 S 3.45 5 4 5 H 5 V 11 H 4 C 3.45 11 3 11.45 3 12 S 3.45 13 4 13 H 5 V 19 H 4 C 3.45 19 3 19.45 3 20 S 3.45 21 4 21 H 20 C 20.55 21 21 20.55 21 20 S 20.55 19 20 19 H 19 V 13 H 20 M 5 11 h 14 v 2 h -14 Z"/>
         </symbol>
-        <symbol id="control-button" viewBox="0 0 512 512">
-            <ellipse cx="256" cy="300" rx="200" ry="120" fill="black"/>
-            <path fill="var(--control-button-side-color)" d="M 106 150 A 150 78 0 0 1 406 150 L 406 280 A 150 78 0 0 1 106 280 Z"/>
-            <path fill="var(--control-button-dome-color)" d="M 106 150 C 122 78 195 45 256 45 C 317 45 390 78 406 150 A 150 78 0 0 0 106 150 Z"/>
-            <ellipse cx="256" cy="150" rx="150" ry="78" fill="none" stroke="var(--control-button-rim-color)" stroke-width="10"/>
+        <symbol id="flight-controls" viewBox="0 0 24 24">
+            <rect x="1" y="2" width="22" height="16" rx="2" ry="2" fill="#444"/>
+            <path fill="currentColor" d="M 21,16 V 4 H 3 V 16 H 21 M 21,2 A 2,2 0 0,1 23,4 V 16 A 2,2 0 0,1 21,18 H 14 V 20 H 16 V 22 H 8 V 20 H 10 V 18 H 3 C 1.89,18 1,17.1 1,16 V 4 C 1,2.89 1.89,2 3,2 H 21 M 5,6 H 14 V 11 H 5 V 6 M 15,6 H 19 V 8 H 15 V 6 M 19,9 V 14 H 15 V 9 H 19 M 5,12 H 9 V 14 H 5 V 12 M 10,12 H 14 V 14 H 10 V 12 Z"/>
         </symbol>
         <symbol id="spacecraft" viewBox="0 252 1440 438">
             <path fill="#393d3a" d="m1294 252 1 2-6 11-4 8-2 4-15 29-17 32 11-5 11-6 3-1 6-3 18-10 30-15 6-3 8-4 5-3q12-4 23-5h15l53-1-8 10-10 11-15 15-20 21-10 11-15 15-10 11-7 7 2 3 1 6h3l32 3q14 2 27 6l7 2 8 3 8 6 8 1 17 3q6 1 9 7c6 15 5 36 0 51q-2 5-8 7l-5 1-11 3h-5c-6 1-7 2-12 6l-10 3v9l3 1 3 1 4 1 6 4q3 4 9 3c9 0 21 1 28 7 9 16 6 40 2 56q-7 8-18 8l-4 1-1 1h-5l-11 4c-14 10-31 10-47 10h-12c-9 0-9 0-12-3h-44v5q0 6-4 10-11 6-25 7c-13 1-13 1-25 6q-11 4-23 3h-5c-12 0-12 0-17-2l-26 4-7 1v12h-49l-21 4c-21 7-44 6-66 6l2 3 1 5 8-1v8h3l59-1h36l25 1v1l44 1v-2l4 1h32l35-1 45-1v1l-6 1h25l8-1h16l18 1v1h-12l-3 1-11 1h-13l-6 1h-18l18 1v2l33 2h20l62 2v1l-46 1 52 8q-8 3-16 2h-76l-84 1-26 1h-134l-235 1H792l-89-1H549l-208-1h-9l-110-3q-61-1-122-6h-3c-31-3-31-3-41-6 7-6 23-4 32-4l4-1h20l96-2h80l1-3 16-1h8q-3-5-9-7-7-4-11-12l-5 1-9-6c-5-3-5-3-11-4l-1 2q-8 1-16-2l-1-6h-4l-25-5-10-2-6-1-6-1-7-3v-2l-5-2-6-4-3-3q-2-1-2-6h-3q-6-4-7-11-4-11-16-14l-12-3-6-2-13-3-29-8-9-3-6-1-4-2q-4 0-7-5-7-18-11-37l-1-4-1-4-1-3 1-9q5-5 12-8l4-2 4-2 5-1 14-6 4-2 4-1q36-15 69-31c76-36 157-64 241-71q18-1 32-10 17-10 36-10v-2h5l23-1q30-3 61-3h24c20 0 20 0 29 4q15 6 31 7l12 1 5 1 11 1h4q13 3 25 9l14 2h50l54 1h17l63 1h10c20 1 20 1 38-7l6-6q7-4 13-5l4-1a460 460 0 0 1 106 1q11-2 17-12l8-6 4-3 34-24 13-9 17-13 26-18 5-3 4-3c22-15 60-12 85-11"/>
@@ -4889,7 +4898,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="bolt-fixed" class="battery-checkbox" title="bolt">
 
         <!-- Control button pressed checkbox -->
-        <input type="checkbox" id="control-button-pressed" class="control-button-checkbox" title="control-button">
+        <input type="checkbox" id="flight-controls-used" class="flight-controls-checkbox" title="flight-controls">
 
         <!-- Sprout unlock checkbox -->
         <input type="checkbox" id="tree-chopped" class="tree-checkbox" title="tree">
@@ -5415,16 +5424,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <svg><use href="#battery"/></svg>
             <span class="tooltip">The battery is<br>installed correctly.</span>
         </div>
-        <span class="control-button-hover-area"></span>
-        <label for="control-button-pressed" class="idcard-at-button"><svg><use href="#id-card"/></svg></label>
-        <div class="control-button">
-            <svg><use href="#control-button"/></svg>
+        <span class="flight-controls-hover-area"></span>
+        <label for="flight-controls-used" class="idcard-at-button"><svg><use href="#id-card"/></svg></label>
+        <div class="flight-controls-unavailable">
+            <svg><use href="#flight-controls"/></svg>
             <span class="tooltip tooltip-no-power">Flight controls are offline.<br>You need power.</span>
             <span class="tooltip tooltip-no-idcard">Flight controls are unavailable.<br>You need your ID card.</span>
         </div>
-        <span class="control-button-green-hover-area"></span>
-        <label for="escaped" class="control-button-green">
-            <svg><use href="#control-button"/></svg>
+        <span class="flight-controls-available-hover-area"></span>
+        <label for="escaped" class="flight-controls-available">
+            <svg><use href="#flight-controls"/></svg>
             <span class="tooltip">Flight controls<br>are now available.</span>
         </label>
 
@@ -5456,12 +5465,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
         <div class="container aquamarine valuable-S4-L3-P8">
             <label for="valuable-S4-L3-P8-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Aquamarine</span>
         </div>
         <div class="container coin valuable-S4-L3-P12">
             <label for="valuable-S4-L3-P12-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
         </div>
         <div class="container aquamarine valuable-S4-L1-P10">
             <label for="valuable-S4-L1-P10-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
+            <span class="hover-area"></span>
+            <span class="tooltip">Aquamarine</span>
         </div>
         <div class="container coin valuable-S4-L0-P9">
             <label for="valuable-S4-L0-P9-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
