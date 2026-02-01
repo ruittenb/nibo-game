@@ -3503,11 +3503,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
         }
         /* Show S4 valuables only when player is at that position */
-        #level-3:checked ~ #pos-7:checked ~ #valuable-S4-L3-P7-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P7 { display: block; }
-        #level-3:checked ~ #pos-8:checked ~ #valuable-S4-L3-P8-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P8 { display: block; }
-        #level-3:checked ~ #pos-12:checked ~ #valuable-S4-L3-P12-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P12 { display: block; }
-        #level-1:checked ~ #pos-10:checked ~ #valuable-S4-L1-P10-pickup:not(:checked) ~ .game-world .valuable-S4-L1-P10 { display: block; }
-        #level-0:checked ~ #pos-9:checked ~ #valuable-S4-L0-P9-pickup:not(:checked) ~ .game-world .valuable-S4-L0-P9 { display: block; }
+        #level-3:checked ~ #pos-7:checked ~ #valuable-S4-L3-P7-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P7,
+        :is(#level-2:checked ~ #pos-7:checked, #level-4:checked ~ #pos-7:checked, #level-3:checked ~ #pos-8:checked) ~ #torch-pickup:checked ~ #valuable-S4-L3-P7-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P7 { display: block; }
+        #level-3:checked ~ #pos-8:checked ~ #valuable-S4-L3-P8-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P8,
+        :is(#level-2:checked ~ #pos-8:checked, #level-3:checked ~ #pos-9:checked, #level-3:checked ~ #pos-7:checked, #level-4:checked ~ #pos-8:checked) ~ #torch-pickup:checked ~ #valuable-S4-L3-P8-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P8 { display: block; }
+        #level-3:checked ~ #pos-12:checked ~ #valuable-S4-L3-P12-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P12,
+        :is(#level-2:checked ~ #pos-12:checked, #level-4:checked ~ #pos-12:checked, #level-3:checked ~ #pos-11:checked) ~ #torch-pickup:checked ~ #valuable-S4-L3-P12-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P12 { display: block; }
+        #level-1:checked ~ #pos-10:checked ~ #valuable-S4-L1-P10-pickup:not(:checked) ~ .game-world .valuable-S4-L1-P10,
+        :is(#level-0:checked ~ #pos-10:checked, #level-2:checked ~ #pos-10:checked, #level-1:checked ~ #pos-9:checked, #level-1:checked ~ #pos-11:checked) ~ #torch-pickup:checked ~ #valuable-S4-L1-P10-pickup:not(:checked) ~ .game-world .valuable-S4-L1-P10 { display: block; }
+        #level-0:checked ~ #pos-9:checked ~ #valuable-S4-L0-P9-pickup:not(:checked) ~ .game-world .valuable-S4-L0-P9,
+        :is(#level-1:checked ~ #pos-9:checked, #level-0:checked ~ #pos-8:checked, #level-0:checked ~ #pos-10:checked) ~ #torch-pickup:checked ~ #valuable-S4-L0-P9-pickup:not(:checked) ~ .game-world .valuable-S4-L0-P9 { display: block; }
 
         /* ========== KEYFRAME ANIMATIONS ========== */
         @keyframes idle {
