@@ -10,4 +10,4 @@
  - fix the z-indexes of everything
  - make a single table with all the z-indexes, both direct and through variables.
 
- - give stalagmites and stalactites light blue drop-shadow?
+
