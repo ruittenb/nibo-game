@@ -3102,10 +3102,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fixed navigation panel - 3x3 grid */
         .nav-panel {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 70px;
-            height: 70px;
+            top: var(--item-box-top);
+            left: var(--item-box-top);
+            width: calc(var(--item-box-height) * 2 + var(--item-box-top));
+            height: calc(var(--item-box-height) * 2 + var(--item-box-top));
             z-index: var(--z-ui);
             border: 2px solid var(--border-color);
             border-radius: 4px;
@@ -3136,26 +3136,21 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 0;
             height: 0;
         }
-        .nav-cell-up::before {
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 14px solid var(--inactive-arrow-color);
+        /* Shared transparent borders for vertical arrows (up/down) */
+        .nav-cell-up::before, .nav-cell-down::before, .nav-up, .nav-down {
+            border-left: 13px solid transparent;
+            border-right: 13px solid transparent;
         }
-        .nav-cell-down::before {
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 14px solid var(--inactive-arrow-color);
+        /* Shared transparent borders for horizontal arrows (left/right) */
+        .nav-cell-left::before, .nav-cell-right::before, .nav-left, .nav-right {
+            border-top: 13px solid transparent;
+            border-bottom: 13px solid transparent;
         }
-        .nav-cell-left::before {
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-right: 14px solid var(--inactive-arrow-color);
-        }
-        .nav-cell-right::before {
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-left: 14px solid var(--inactive-arrow-color);
-        }
+        /* Inactive (gray) colored borders */
+        .nav-cell-up::before { border-bottom: 18px solid var(--inactive-arrow-color); }
+        .nav-cell-down::before { border-top: 18px solid var(--inactive-arrow-color); }
+        .nav-cell-left::before { border-right: 18px solid var(--inactive-arrow-color); }
+        .nav-cell-right::before { border-left: 18px solid var(--inactive-arrow-color); }
 
         .nav-btn {
             position: absolute;
@@ -3169,27 +3164,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             filter: drop-shadow(0 0 10px var(--nav-arrow-color)) drop-shadow(0 0 15px var(--nav-arrow-color));
         }
 
-        /* Arrow shapes */
-        .nav-up {
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 14px solid var(--nav-arrow-color);
-        }
-        .nav-down {
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 14px solid var(--nav-arrow-color);
-        }
-        .nav-left {
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-right: 14px solid var(--nav-arrow-color);
-        }
-        .nav-right {
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-left: 14px solid var(--nav-arrow-color);
-        }
+        /* Active (yellow) colored borders */
+        .nav-up { border-bottom: 18px solid var(--nav-arrow-color); }
+        .nav-down { border-top: 18px solid var(--nav-arrow-color); }
+        .nav-left { border-right: 18px solid var(--nav-arrow-color); }
+        .nav-right { border-left: 18px solid var(--nav-arrow-color); }
 
         /* Show correct left arrow based on current position */
         #pos-2:checked ~ .nav-panel .nav-left[for="pos-1"] { display: block; }
