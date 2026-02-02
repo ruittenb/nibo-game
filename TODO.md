@@ -5,31 +5,16 @@
 
  - central pick up icon in nav-panel?
 
- - I would like to re-order the game state checkboxes. Which ones need to be in a specific order?
-
-    - Required order (earlier → later in DOM):
-    1. level-* radios must come before pos-* radios (many rules use #level-X:checked ~ #pos-Y:checked)
-    2. pos-* radios must come before item checkboxes (rules like #pos-15:checked ~ #idcard-pickup:checked)
-    3. toolbox-unlocked must come before wrench-pickup (rule: #toolbox-unlocked:checked ~ #wrench-pickup:checked)
-    4. idcard-pickup must come before bolt-fixed (rule: #idcard-pickup:checked ~ #bolt-fixed:checked)
-    5. bolt-fixed must come before flight-controls-used (rule: #bolt-fixed:checked ~ #flight-controls-used:not(:checked))
-    6. All checkboxes must come before .game-world and UI elements they control
-
-    - Summary: You can reorder checkboxes freely as long as you maintain these dependencies:
-      - level radios → pos radios → item/state checkboxes → .game-world
-    - Within the item checkboxes, you need: toolbox-unlocked before wrench-pickup, and idcard-pickup before bolt-fixed
-       before flight-controls-used.
-
- - add video
-
  - afslanken met geneste regels?
+
+ - animation in torch
 
   ┌─────────┬──────────────────────┬─────────────────────────────────────────────────────────────────────────────────────┐
   │ Z-Index │        Source        │                               Elements                                              │
   ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
   │ -1      │ -1                   │ Grate grid pattern (:after pseudo)                                                  │
   ┝━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┥
-  │ 0       │ 0                    │ Stage backgrounds (spacecraft-bg, factory-bg, jungle-bg, caves-bg)                  │
+  │ 0       │ 0                    │ Stage backgrounds (factory, caves, jungle, spacecraft)                              │
   ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
   │ 50      │ --z-walls            │ Rock and warning walls                                                              │
   ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
