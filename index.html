@@ -1150,7 +1150,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
         /* Hide radio buttons and checkboxes by default */
-        .position-radio, .level-radio, .key-checkbox, .toolbox-checkbox, .wrench-checkbox, .axe-checkbox, .battery-checkbox, .idcard-checkbox, .torch-checkbox, .tree-checkbox, .escaped-checkbox, .darkness-checkbox, .loot-checkbox, .door-checkbox, .flight-controls-checkbox {
+        .position-radio, .level-radio, .loot-checkbox,
+        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup {
             display: none;
             /* When unhidden for debugging: */
             z-index: 9999;
@@ -1226,19 +1227,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Show inputs when debug is checked */
         #debug-toggle:checked ~ .game-container .position-radio,
         #debug-toggle:checked ~ .game-container .level-radio,
-        #debug-toggle:checked ~ .game-container .key-checkbox,
-        #debug-toggle:checked ~ .game-container .toolbox-checkbox,
-        #debug-toggle:checked ~ .game-container .wrench-checkbox,
-        #debug-toggle:checked ~ .game-container .axe-checkbox,
-        #debug-toggle:checked ~ .game-container .idcard-checkbox,
-        #debug-toggle:checked ~ .game-container .battery-checkbox,
-        #debug-toggle:checked ~ .game-container .torch-checkbox,
-        #debug-toggle:checked ~ .game-container .tree-checkbox,
-        #debug-toggle:checked ~ .game-container .escaped-checkbox,
-        #debug-toggle:checked ~ .game-container .darkness-checkbox,
         #debug-toggle:checked ~ .game-container .loot-checkbox,
-        #debug-toggle:checked ~ .game-container .door-checkbox,
-        #debug-toggle:checked ~ .game-container .flight-controls-checkbox {
+        #debug-toggle:checked ~ .game-container #key-pickup,
+        #debug-toggle:checked ~ .game-container #toolbox-unlocked,
+        #debug-toggle:checked ~ .game-container #wrench-pickup,
+        #debug-toggle:checked ~ .game-container #door-unlocked,
+        #debug-toggle:checked ~ .game-container #idcard-pickup,
+        #debug-toggle:checked ~ .game-container #axe-pickup,
+        #debug-toggle:checked ~ .game-container #tree-chopped,
+        #debug-toggle:checked ~ .game-container #battery-pickup,
+        #debug-toggle:checked ~ .game-container #bolt-fixed,
+        #debug-toggle:checked ~ .game-container #flight-controls-used,
+        #debug-toggle:checked ~ .game-container #escaped,
+        #debug-toggle:checked ~ .game-container #darkness-toggle,
+        #debug-toggle:checked ~ .game-container #torch-pickup {
             display: block;
         }
         /* Inventory area */
@@ -4626,26 +4628,26 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Title screen toggle -->
         <input type="checkbox" id="title-screen-toggle">
         <!-- Key pickup checkbox -->
-        <input type="checkbox" id="key-pickup" class="key-checkbox" title="key">
+        <input type="checkbox" id="key-pickup" title="key">
         <!-- Safe unlock checkbox -->
-        <input type="checkbox" id="toolbox-unlocked" class="toolbox-checkbox" title="toolbox">
+        <input type="checkbox" id="toolbox-unlocked" title="toolbox">
         <!-- S1 checkboxes -->
-        <input type="checkbox" id="wrench-pickup" class="wrench-checkbox" title="wrench">
-        <input type="checkbox" id="door-unlocked" class="door-checkbox" title="door">
+        <input type="checkbox" id="wrench-pickup" title="wrench">
+        <input type="checkbox" id="door-unlocked" title="door">
         <!-- S2 checkboxes -->
-        <input type="checkbox" id="idcard-pickup" class="idcard-checkbox" title="idcard">
+        <input type="checkbox" id="idcard-pickup" title="idcard">
         <!-- S3 checkboxes -->
-        <input type="checkbox" id="axe-pickup" class="axe-checkbox" title="axe">
+        <input type="checkbox" id="axe-pickup" title="axe">
         <!-- S2 checkboxes -->
-        <input type="checkbox" id="tree-chopped" class="tree-checkbox" title="tree">
+        <input type="checkbox" id="tree-chopped" title="tree">
         <!-- S3 checkboxes -->
-        <input type="checkbox" id="battery-pickup" class="battery-checkbox" title="battery">
-        <input type="checkbox" id="bolt-fixed" class="battery-checkbox" title="bolt">
-        <input type="checkbox" id="flight-controls-used" class="flight-controls-checkbox" title="flight-controls">
-        <input type="checkbox" id="escaped" class="escaped-checkbox" title="escaped">
+        <input type="checkbox" id="battery-pickup" title="battery">
+        <input type="checkbox" id="bolt-fixed" title="bolt">
+        <input type="checkbox" id="flight-controls-used" title="flight-controls">
+        <input type="checkbox" id="escaped" title="escaped">
         <!-- S4 checkboxes -->
-        <input type="checkbox" id="darkness-toggle" class="darkness-checkbox" title="darkness">
-        <input type="checkbox" id="torch-pickup" class="torch-checkbox" title="torch">
+        <input type="checkbox" id="darkness-toggle" title="darkness">
+        <input type="checkbox" id="torch-pickup" title="torch">
         <!-- loot pickup checkboxes -->
         <input type="checkbox" id="loot-S1-L0-P3-pickup" class="loot-checkbox" title="coin">
         <input type="checkbox" id="loot-S1-L1-P4-pickup" class="loot-checkbox" title="coin">
