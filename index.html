@@ -194,10 +194,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --item-offset: 34px;          /* Offset for items left of player position */
             --pickup-size: 28px;          /* Size of pick-uppable items and loot */
             --ladder-offset: 42px;        /* Horizontal offset for ladders */
-
             /* Warning walls */
             --warning-wall-width: 8px;   /* Width of warning walls */
-
             /* UI panels (inv-panel, counter-panel, nav-panel) */
             --panel-top: 10px;            /* Distance from top */
             --panel-left: 10px;           /* Distance from left (nav-panel) */
@@ -209,7 +207,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --counter-panel-width: 84px;  /* Counter panel width */
             --nav-panel-height: calc(var(--panel-height) * 2 + var(--panel-gap));
             --nav-panel-width: var(--nav-panel-height); /* square */
-
             /* Colors */
             --nav-arrow-color: #48d8d8;   /* Navigation arrow color */
             --inactive-arrow-color: #666; /* Inactive navigation arrow color */
@@ -232,7 +229,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --axe-color: #cc1010;
             --idcard-color: #3090f0;
             --border-color: #4a4a6a;      /* Border color for UI elements */
-
             /* Z-index layers */
             --z-walls: 50;               /* Warning walls, rock walls */
             --z-loot-hover: 100;          /* loot hover areas */
@@ -250,20 +246,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --z-player: 1100;             /* Player (above title screen) */
             --z-tooltip: 1500;            /* Tooltips */
             --z-endgame-overlay: 2000;    /* Death and escape overlays */
-
             /* Darkness settings */
             --darkness-hole-width: 180px;     /* Width of the darkness hole (wide enough for nav arrows) */
             --darkness-hole-height: 120px;    /* Height of the darkness hole */
             --darkness-fuzzy-edge: 40px;      /* Fuzzy edge gradient size */
             --darkness-hole-offset: 30px;     /* Shift hole right to not look too far left */
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 100%);
             min-height: 100vh;
@@ -272,7 +265,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             align-items: center;
             font-family: sans-serif;
         }
-
         .game-container {
             position: relative;
             width: calc(var(--pos-width) * 6);
@@ -283,7 +275,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             border-radius: 8px;
             overflow: hidden;
         }
-
         /* Prompt to rotate device when in portrait on mobile */
         .rotate-prompt {
             display: none;
@@ -323,7 +314,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 display: none;
             }
         }
-
         /* Scale to fit viewport on small screens (game height is 655px) */
         @media (max-height: 700px) {
             body {
@@ -339,7 +329,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 scale: min(var(--scale-x), var(--scale-y), 1);
             }
         }
-
         /* Level and position CSS variables for debug display */
         #level-0:checked ~ .game-world { --level: "L0"; }
         #level-1:checked ~ .game-world { --level: "L1"; }
@@ -370,7 +359,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-17:checked ~ .game-world { --pos: "P17"; }
         #pos-18:checked ~ .game-world { --pos: "P18"; }
         #pos-φ:checked ~ .game-world { --pos: "Pφ"; }
-
         .game-world {
             position: absolute;
             top: calc(var(--stage-height) * -1);
@@ -390,7 +378,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             /* Inventory slot positioning */
             --inv-slot-width: calc(var(--pickup-size) + 8px);  /* item width + gap */
         }
-
         /*
          * Viewport scrolling via CSS variables
          * Stage layout:
@@ -399,7 +386,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
          * Levels 0-4 are bottom row (S1, S4, S5), levels 5-9 are top row (S0, S2, S3)
          * Positions 1-6 are left column, 7-12 middle column, 13-18 right column
          */
-
         /* Vertical: levels 0-4 show bottom row (default top offset shows S1/S4/S5) */
         /* Levels 5-9 show top row - need to scroll up by one stage-height */
         #level-5:checked ~ .game-world,
@@ -409,7 +395,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-9:checked ~ .game-world {
             --world-translateY: var(--stage-height);
         }
-
         /* Horizontal: positions 7-12 scroll left by 6 positions */
         #pos-7:checked ~ .game-world,
         #pos-8:checked ~ .game-world,
@@ -419,7 +404,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-12:checked ~ .game-world {
             --world-translateX: calc(var(--pos-width) * -6);
         }
-
         /* Horizontal: positions 13-18 and φ scroll left by 12 positions */
         #pos-13:checked ~ .game-world,
         #pos-14:checked ~ .game-world,
@@ -430,7 +414,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-φ:checked ~ .game-world {
             --world-translateX: calc(var(--pos-width) * -12);
         }
-
         /* S1 (pos 1-6, levels 0-4): no translate to avoid stacking context on title screen */
         /* This rule must come AFTER the level-based translateY rules so it overrides them */
         /* Level checks included to allow future S0 implementation (pos 1-6, levels 5-9) */
@@ -466,7 +449,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ #pos-6:checked ~ .game-world {
             translate: none;
         }
-
         /* Inventory state tracking: set variables when items picked up */
         #key-pickup:checked ~ .game-world { --inv-has-key: 1; }
         #wrench-pickup:checked ~ .game-world { --inv-has-wrench: 1; }
@@ -479,7 +461,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #door-unlocked:checked ~ .game-world { --inv-has-wrench: 0; }
         #tree-chopped:checked ~ .game-world { --inv-has-axe: 0; }
         #bolt-fixed:checked ~ .game-world { --inv-has-battery: 0; }
-
         .platform {
             position: absolute;
             height: var(--platform-thickness);
@@ -488,47 +469,40 @@ AAAAAAAAAAAAAAAAAAAAAA==
             border-radius: 4px;
             box-shadow: inset 0 -5px 0 #0000004d;
         }
-
         /* Platform 1 (lowest): 5/6 width, aligned right in Stage 1 */
         .platform-S1-L1 {
             bottom: var(--platform-height);
             left: var(--pos-width);
             width: calc(var(--pos-width) * 5 - var(--warning-wall-width) - 4px);
         }
-
         /* Platform 2 (third from above): split in Stage 1 */
         .platform-S1-L2-left {
             bottom: calc(var(--platform-height) * 2);
             left: var(--warning-wall-width);
             width: calc(var(--pos-width) * 4 - var(--warning-wall-width));
         }
-
         .platform-S1-L2-right {
             bottom: calc(var(--platform-height) * 2);
             left: calc(var(--pos-width) * 5);
             width: calc(var(--pos-width) - var(--warning-wall-width) - 4px);
         }
-
         /* Platform 3 (second from above): split with gap at position 3 */
         .platform-S1-L3-left {
             bottom: calc(var(--platform-height) * 3);
             left: var(--warning-wall-width);
             width: calc(var(--pos-width) * 2 - var(--warning-wall-width));
         }
-
         .platform-S1-L3-right {
             bottom: calc(var(--platform-height) * 3);
             left: calc(var(--pos-width) * 3);
             width: calc(var(--pos-width) * 3 - var(--warning-wall-width) - 4px);
         }
-
         /* Platform 4 (top): 5/6 width, aligned left */
         .platform-S1-L4 {
             bottom: calc(var(--platform-height) * 4);
             left: var(--warning-wall-width);
             width: calc(var(--pos-width) * 5 - var(--warning-wall-width));
         }
-
         /* Stage 1 platforms are reddish-gray (rusted metal) with rivets */
         .platform-S1-L1,
         .platform-S1-L2-left,
@@ -542,7 +516,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 linear-gradient(to bottom, #6b5555 0%, #4a3c3c 100%);
             border-color: #5a4a4a;
         }
-
         /* Stage 2 Platforms (positioned above S4, offset by stage-height) */
         .platform-S2-L6-left {
             bottom: calc(var(--stage-height) + var(--platform-height));
@@ -579,7 +552,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 7);
             width: calc(var(--pos-width) * 5 - 6px);
         }
-
         /* Stage 2 platforms are green */
         .platform-S2-L6-left,
         .platform-S2-L6-right,
@@ -591,20 +563,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             background: #2e8b2e;
             border-color: #1a5c1a;
         }
-
         /* Stage 3 Platforms (same vertical level as S2) */
         .platform-S3-L4 {
             bottom: calc(var(--stage-height) + var(--platform-height) * 4);
             left: calc(var(--pos-width) * 12);
             width: calc(var(--pos-width) * 3); /* P1-P3 only, gaps at P4 and P6 */
         }
-
         /* Stage 3 platforms are cool bluish grey metallic */
         .platform-S3-L4 {
             background: #6a7b8c;
             border-color: #4a5a6a;
         }
-
         /* Stage 4 Platforms (caves, levels 0-4, positions 7-12) */
         .platform-S4-L4-P8 {
             bottom: calc(var(--platform-height) * 4);
@@ -646,7 +615,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 9);
             width: calc(var(--pos-width) * 2);
         }
-
         /* Stage 4 platforms are brown soil with bluish-grey fuzzy streaks */
         .platform-S4-L4-P8,
         .platform-S4-L3-P7,
@@ -664,7 +632,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 linear-gradient(to bottom, #6b5344 0%, #4a3728 100%);
             border-color: #3a2a1a;
         }
-
         /* Stage 4 stalagmites */
         .stalagmite-S4 {
             position: absolute;
@@ -693,7 +660,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 60px;
             height: 108px;
         }
-
         /* Stage 4 stalactites */
         .stalactite-S4 {
             position: absolute;
@@ -779,7 +745,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 89px;
             filter: none;
         }
-
         /* Grate (diamond mesh pattern) */
         .grate {
             position: absolute;
@@ -852,7 +817,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 5);
         }
-
         /* Stage 3 grates (positioned above S4, same height as S2) */
         .grate-S3-L7-P13-P14 {
             bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 16px);
@@ -880,7 +844,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             border-radius: 4px;
             box-shadow: inset 0 -5px 0 #0000004d;
         }
-
         /* Bolt S3-L1-P3 */
         .bolt {
             position: absolute;
@@ -928,7 +891,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
             color: #50c050;
         }
-        /* Show battery at bolt when player is next to it, has battery, AND bolt not yet fixed (S3 uses levels 5-9) */
+        /* Show battery at bolt when player is next to it, has battery, AND bolt not yet fixed */
         #level-6:checked ~ #pos-15:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .battery-at-bolt {
             display: block;
             animation: battery-hovering-pulse 1s ease-in-out infinite;
@@ -962,7 +925,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #bolt-fixed:checked ~ .game-world .battery-installed {
             display: block;
         }
-
         /* Control button S3-L2-P3 */
         .flight-controls-unavailable {
             position: absolute;
@@ -1117,7 +1079,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-7:checked ~ #pos-15:checked ~ #flight-controls-used:checked ~ .game-world .flight-controls-available {
             pointer-events: auto;
         }
-
         /* Stage 2 Branches (replaces grates) */
         .branch {
             position: absolute;
@@ -1170,7 +1131,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 6 + 12px);
             width: calc(var(--pos-width) - 12px);
         }
-
         /* Title screen toggle */
         #title-screen-toggle {
             display: none;
@@ -1182,7 +1142,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ #title-screen-toggle {
             display: block;
         }
-
         /* Debug toggle - press Alt+D (or Alt+Shift+D on Mac) to toggle */
         #debug-toggle {
             display: none;
@@ -1282,7 +1241,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ .game-container .flight-controls-checkbox {
             display: block;
         }
-
         /* Inventory area */
         .inv-panel {
             position: absolute;
@@ -1363,7 +1321,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inv-panel .inventory-torch {
             display: none !important;
         }
-
         /* loot counter box */
         .counter-panel {
             position: absolute;
@@ -1430,7 +1387,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S4-L3-P12-pickup:checked ~ .counter-panel { --loot-S4-L3-P12: 1; }
         #loot-S4-L1-P10-pickup:checked ~ .counter-panel { --loot-S4-L1-P10: 2; }
         #loot-S4-L0-P9-pickup:checked ~ .counter-panel { --loot-S4-L0-P9: 1; }
-
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
             position: absolute;
@@ -1502,7 +1458,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
-
         /* Toolbox on level 2, position 6 */
         .toolbox {
             position: absolute;
@@ -1534,7 +1489,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .toolbox:hover .tooltip {
             opacity: 1;
         }
-
         /* Axe on stage 3, level 4, pos φ (floating platform) */
         .axe-in-game {
             position: absolute;
@@ -1599,7 +1553,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
-
         /* ID card on stage 2, level 4, pos 6 */
         .idcard-in-game {
             position: absolute;
@@ -1663,7 +1616,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
-
         /* Battery on stage 3, level 1, pos 2 */
         .battery-in-game {
             position: absolute;
@@ -1730,7 +1682,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
-
         /* Torch - S4 (caves) L0-P12 */
         .torch-in-game {
             position: absolute;
@@ -1794,7 +1745,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             transition: none;
         }
-
         /* Wrench - single element that animates from game world to inventory */
         .wrench-in-game {
             position: absolute;
@@ -1865,8 +1815,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
-
-
         /* Key above toolbox - pulsates when user has key, clickable to unlock */
         .key-at-toolbox {
             position: absolute;
@@ -1888,7 +1836,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: block;
             animation: key-hovering-pulse 1s ease-in-out infinite;
         }
-
         /* Axe above tree - pulsates when user has axe, clickable to use */
         .axe-at-tree {
             position: absolute;
@@ -1911,7 +1858,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: block;
             animation: axe-chop 1s ease-in infinite;
         }
-
         .player {
             position: absolute;
             width: auto;
@@ -1926,7 +1872,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
             width: auto;
         }
-
         /* Player horizontal positions */
         /* S1: pos 1-6 */
         #pos-1:checked ~ .game-world .player { left: var(--pos-offset); }
@@ -1954,7 +1899,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 16); /* P17 X position */
             bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) - 2px); /* L9 height (same as L4) */
         }
-
         /* Player vertical levels (S1/S4: levels 0-4) */
         #level-0:checked ~ .game-world .player { bottom: calc(var(--ground-height) - 2px); }
         #level-1:checked ~ .game-world .player { bottom: calc(var(--platform-height) + var(--platform-thickness) - 2px); }
@@ -1968,13 +1912,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-7:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 2px); }
         #level-8:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) - 2px); }
         #level-9:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) - 2px); }
-
         /* Landing after jump from phantom position */
         #level-8:checked ~ #pos-16:checked ~ .game-world .player,
         #level-8:checked ~ #pos-18:checked ~ .game-world .player {
             transition: left 0.3s ease-out, bottom 0.3s ease-in;
         }
-
         /* Player tooltip */
         .player-tooltip {
             bottom: 100%;
@@ -1989,7 +1931,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ .game-container .game-world .player-tooltip::after {
             content: " (" var(--level) "-" var(--pos) ")";
         }
-
         /* Torch held by player in S4 */
         .torch-held {
             display: none;
@@ -2011,7 +1952,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: block;
             filter: drop-shadow(0 0 6px yellow);
         }
-
         .ground-S1,
         .ground-S2,
         .ground-S3,
@@ -2075,7 +2015,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 linear-gradient(to bottom, #6b6f73 0%, #4a4d50 100%);
             border-top: 3px solid #7a7e82;
         }
-
         /* Warning walls - yellow/black diagonal stripes marking stage edges */
         .warning-wall {
             position: absolute;
@@ -2172,7 +2111,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 15% 9%, 0% 7%, 28% 4%, 0% 2%
             );
         }
-        /* Manhole and cover at S2-L5-P7 (entry point from S4) */
+        /* Manhole and cover at S2-L5-P7 */
         .manhole-S2-L5-P7 {
             position: absolute;
             left: calc(var(--pos-offset) + var(--pos-width) * 6 - 10px);
@@ -2205,7 +2144,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             background: #2a2a2a;
             border-radius: 2px;
         }
-
         /* Spaceship background in Stage 3 */
         .spacecraft-bg {
             position: absolute;
@@ -2219,7 +2157,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: calc(var(--pos-width) * 12 * 438 / 1540 * 0.729);
             opacity: 0.85;
         }
-
         /* Factory background in Stage 1 */
         .factory-bg {
             position: absolute;
@@ -2234,7 +2171,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
         }
-
         /* Jungle background in Stage 2 */
         .jungle-bg {
             position: absolute;
@@ -2251,7 +2187,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
         }
-
         /* Caves background in Stage 4 */
         .caves-bg {
             position: absolute;
@@ -2268,7 +2203,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
         }
-
         h2 {
             position: absolute;
             top: 15px;
@@ -2313,7 +2247,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18, #pos-φ):checked ~ .subtitle-S3 {
             display: block;
         }
-
         /* Base ladder styles */
         .ladder {
             position: absolute;
@@ -2321,7 +2254,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: calc(var(--platform-height) - var(--platform-thickness));
             z-index: var(--z-climbables);
         }
-
         /* Wooden ladder - two vertical rails with horizontal rungs */
         .wooden-ladder {
             /* Two vertical rails (4px each) */
@@ -2351,7 +2283,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 #cd853f 14px
             );
         }
-
         /* Spine ladder - central pole with alternating rungs */
         .spine-ladder {
             /* Central vertical pole (4px wide, centered) */
@@ -2398,31 +2329,26 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 transparent 28px
             );
         }
-
         /* Ladder at S1-L0-P5: ground to platform 1 */
         .ladder-S1-L0-P5 {
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 4 + var(--ladder-offset));
         }
-
         /* Ladder at S1-L1-P3: platform 1 to platform 2 */
         .ladder-S1-L1-P3 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 2 + var(--ladder-offset));
         }
-
         /* Ladder at S1-L2-P1: platform 2 to platform 3 */
         .ladder-S1-L2-P1 {
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--ladder-offset));
         }
-
         /* Ladder at S1-L3-P4: platform 3 to platform 4 */
         .ladder-S1-L3-P4 {
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 3 + var(--ladder-offset));
         }
-
         /* Ladder at S4-L4-P7: platform 4 to S2 (only visible when player at position) */
         .ladder-S4-L4-P7 {
             display: none;
@@ -2433,13 +2359,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ #pos-8:checked ~ #torch-pickup:checked ~ .game-world .ladder-S4-L4-P7 {
             display: block;
         }
-
         /* Ladder at S3-L0-P4: ground to platform 1 */
         .ladder-S3-L5-P16 {
             bottom: calc(var(--stage-height) + var(--ground-height));
             left: calc(var(--pos-offset) + var(--pos-width) * 15 + var(--ladder-offset));
         }
-
         /* Ladder at S3-L3-P5: platform 3 to floating platform (phantom) */
         .ladder-S3-L8-P17 {
             bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness));
@@ -2451,7 +2375,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 17 + var(--ladder-offset));
             height: calc(var(--platform-height) - var(--platform-thickness) + 28px);
         }
-
         /* Barrel at S3-L4-P3 */
         .barrel-S3-L9-P15 {
             position: absolute;
@@ -2485,7 +2408,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .barrel-S3-L9-P15:hover .tooltip {
             opacity: 1;
         }
-
         /* Vines for stage 2 */
         .vine {
             position: absolute;
@@ -2515,7 +2437,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 radial-gradient(ellipse 10px 6px at 22px 85px, #32cd32 50%, transparent 50%),
                 radial-gradient(ellipse 10px 6px at 2px 105px, #32cd32 50%, transparent 50%);
         }
-
         /* Stage 2 Vines (positioned above S4) */
         .vine-S2-L5-P8 {
             bottom: calc(var(--stage-height) + var(--ground-height));
@@ -2541,7 +2462,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 8 + var(--ladder-offset));
         }
-
         /* Arrow labels (clickable) - CSS triangles */
         .arrow {
             position: absolute;
@@ -2553,39 +2473,33 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
             filter: drop-shadow(0 0 8px var(--nav-arrow-color));
         }
-
         .arrow:hover {
             filter: drop-shadow(0 0 15px var(--nav-arrow-color)) drop-shadow(0 0 25px var(--nav-arrow-color));
         }
-
         /* Right arrow */
         .arrow-right {
             border-top: 12px solid transparent;
             border-bottom: 12px solid transparent;
             border-left: 16px solid var(--nav-arrow-color);
         }
-
         /* Left arrow */
         .arrow-left {
             border-top: 12px solid transparent;
             border-bottom: 12px solid transparent;
             border-right: 16px solid var(--nav-arrow-color);
         }
-
         /* Up arrow */
         .arrow-up {
             border-left: 12px solid transparent;
             border-right: 12px solid transparent;
             border-bottom: 16px solid var(--nav-arrow-color);
         }
-
         /* Down arrow */
         .arrow-down {
             border-left: 12px solid transparent;
             border-right: 12px solid transparent;
             border-top: 16px solid var(--nav-arrow-color);
         }
-
         /* Horizontal arrow positions */
         .arrow-h {
             bottom: calc(var(--ground-height) - 10px);
@@ -2618,7 +2532,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .arrow-S4-P9-P10, .arrow-S4-P10-P9 { left: calc(var(--pos-offset) + var(--pos-width) * 8.5 + 12px); }
         .arrow-S4-P10-P11, .arrow-S4-P11-P10 { left: calc(var(--pos-offset) + var(--pos-width) * 9.5 + 12px); }
         .arrow-S4-P11-P12, .arrow-S4-P12-P11 { left: calc(var(--pos-offset) + var(--pos-width) * 10.5 + 12px); }
-
         /* Horizontal arrows move with level */
         #level-0:checked ~ .game-world .arrow-h { bottom: calc(var(--ground-height) + 19px); }
         #level-1:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) + var(--platform-thickness) + 19px); }
@@ -2630,7 +2543,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-7:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) + 19px); }
         #level-8:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) + 19px); }
         #level-9:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + 19px); }
-
         /* Up arrow positions (at ladder locations) */
         /* Ladder 1: position 5, level 0 -> 1 */
         .arrow-up-S1-L0-P5 {
@@ -2652,7 +2564,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 3 + 10px);
             bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
         }
-
         /* Stage 2 Up arrows: S2-L0-P2, S2-L0-P5, S2-L1-P1, S2-L1-P4, S2-L2-P5, S2-L3-P3 */
         .arrow-up-S2-L5-P8 {
             left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px);
@@ -2678,7 +2589,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 8 + 10px);
             bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
         }
-
         /* Stage 4 Up arrows */
         /* L0: P7, P8, P9, P12 */
         .arrow-up-S4-L0-P7 {
@@ -2749,7 +2659,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 72.5px);
         }
-
         /* Stage 3 Up arrows */
         .arrow-up-S3-L5-P16 {
             left: calc(var(--pos-offset) + var(--pos-width) * 15 + 10px);
@@ -2763,7 +2672,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px);
             bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) + 72.5px);
         }
-
         /* Stage 3 phantom position arrows (at visual L4-P5) */
         .arrow-left-S3-Pφ {
             left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px);
@@ -2773,8 +2681,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px);
             bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + 19px);
         }
-
-        /* Down arrow positions (at platform gaps) */
+        /* Down arrow positions */
         .arrow-down-S1-L1-P1 {
             left: calc(var(--pos-offset) + 10px);
             bottom: var(--platform-height);
@@ -2791,7 +2698,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 5 + 10px);
             bottom: calc(var(--platform-height) * 4);
         }
-
         /* Stage 2 Down arrows: S2-L1-P1, S2-L1-P5, S2-L2-P2, S2-L3-P4, S2-L4-P1 */
         .arrow-down-S2-L6-P7 {
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
@@ -2900,7 +2806,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px);
             bottom: calc(var(--stage-height) + var(--platform-height) * 2);
         }
-
         /* Show horizontal arrows based on position (all levels) */
         /* Stage 1 arrows */
         #pos-1:checked ~ .game-world .arrow-S1-P1-P2 { display: block; }
@@ -2931,7 +2836,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#level-0, #level-1, #level-4):checked ~ #pos-11:checked ~ .game-world .arrow-S4-P11-P10 { display: block; }
         :is(#level-0, #level-1, #level-2, #level-4):checked ~ #pos-11:checked ~ .game-world .arrow-S4-P11-P12 { display: block; }
         :is(#level-0, #level-1, #level-2, #level-4):checked ~ #pos-12:checked ~ .game-world .arrow-S4-P12-P11 { display: block; }
-        /* Stage 2 arrows (S2 uses levels 5-9) */
+        /* Stage 2 arrows */
         /* S2 horizontal arrows only show at levels 5-9 */
         #level-5:checked ~ #pos-7:checked ~ .game-world .arrow-S2-P7-P8 { display: block; }
         #level-5:checked ~ #pos-8:checked ~ .game-world .arrow-S2-P8-P7 { display: block; }
@@ -2960,7 +2865,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-8:checked ~ #pos-12:checked ~ .game-world .arrow-S2-P12-S3-P13 { display: block; }
         #level-9:checked ~ #pos-12:checked ~ .game-world .arrow-S2-P12-S3-P13 { display: block; }
         #pos-13:checked ~ .game-world .arrow-S3-P13-S2-P12 { display: block; }
-        /* Stage 3 horizontal arrows in game world (S3 uses levels 5-9) */
+        /* Stage 3 horizontal arrows in game world */
         :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-13:checked ~ .game-world .arrow-S3-P13-P14 { display: block; }
         :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-14:checked ~ .game-world .arrow-S3-P14-P13 { display: block; }
         :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-14:checked ~ .game-world .arrow-S3-P14-P15 { display: block; }
@@ -2983,7 +2888,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-6:checked ~ #pos-15:checked ~ .game-world .arrow-S3-P15-P14 { display: none; }
         #level-7:checked ~ #pos-14:checked ~ .game-world .arrow-S3-P14-P15 { display: none; }
         #level-7:checked ~ #pos-15:checked ~ .game-world .arrow-S3-P15-P14 { display: none; }
-
         /* Show up arrow at ladder locations */
         /* Ladder 1: level 0, position 5 */
         #level-0:checked ~ #pos-5:checked ~ .game-world .arrow-up-S1-L0-P5 { display: block; }
@@ -3001,7 +2905,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-6:checked ~ #pos-10:checked ~ .game-world .arrow-up-S2-L6-P10 { display: block; }
         #level-7:checked ~ #pos-11:checked ~ .game-world .arrow-up-S2-L7-P11 { display: block; }
         #level-8:checked ~ #pos-9:checked ~ .game-world .arrow-up-S2-L8-P9 { display: block; }
-        /* Stage 4 up arrows (S4 uses levels 0-4) */
+        /* Stage 4 up arrows */
         /* L0: P7, P8, P9, P12 */
         #level-0:checked ~ #pos-7:checked ~ .game-world .arrow-up-S4-L0-P7 { display: block; }
         #level-0:checked ~ #pos-8:checked ~ .game-world .arrow-up-S4-L0-P8 { display: block; }
@@ -3023,15 +2927,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #pos-12:checked ~ .game-world .arrow-up-S4-L3-P12 { display: block; }
         /* L4: P7 (climb to S2) */
         #level-4:checked ~ #pos-7:checked ~ .game-world .arrow-up-S4-L4-P7 { display: block; }
-        /* Stage 3 up arrows (S3 uses levels 5-9) */
+        /* Stage 3 up arrows */
         #level-5:checked ~ #pos-16:checked ~ .game-world .arrow-up-S3-L5-P16 { display: block; }
         #level-6:checked ~ #pos-18:checked ~ .game-world .arrow-up-S3-L6-P18 { display: block; }
         #level-8:checked ~ #pos-17:checked ~ .game-world .arrow-up-S3-L8-P17 { display: block; }
-        /* Stage 3 phantom position arrows (fall left/right from floating platform) */
+        /* Stage 3 phantom position arrows */
         #level-8:checked ~ #pos-φ:checked ~ .game-world .arrow-left-S3-Pφ { display: block; }
         #level-8:checked ~ #pos-φ:checked ~ .game-world .arrow-right-S3-Pφ { display: block; }
-
-        /* Show down arrow at platform gaps */
+        /* Show down arrow */
         #level-1:checked ~ #pos-1:checked ~ .game-world .arrow-down-S1-L1-P1 { display: block; }
         #level-2:checked ~ #pos-5:checked ~ .game-world .arrow-down-S1-L2-P5 { display: block; }
         #level-3:checked ~ #pos-3:checked ~ .game-world .arrow-down-S1-L3-P3 { display: block; }
@@ -3044,7 +2947,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-9:checked ~ #pos-7:checked ~ .game-world .arrow-down-S2-L9-P7 { display: block; }
         /* Climb down from S2-L5-P7 to S4-L4-P7 */
         #level-5:checked ~ #pos-7:checked ~ .game-world .arrow-down-S2-L5-P7-to-S4 { display: block; }
-        /* Stage 4 down arrows (S4 uses levels 0-4) */
+        /* Stage 4 down arrows */
         /* L4: P7, P9, P10, P11, P12 */
         #level-4:checked ~ #pos-7:checked ~ .game-world .arrow-down-S4-L4-P7 { display: block; }
         #level-4:checked ~ #pos-9:checked ~ .game-world .arrow-down-S4-L4-P9 { display: block; }
@@ -3064,12 +2967,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-1:checked ~ #pos-8:checked ~ .game-world .arrow-down-S4-L1-P8 { display: block; }
         #level-1:checked ~ #pos-9:checked ~ .game-world .arrow-down-S4-L1-P9 { display: block; }
         #level-1:checked ~ #pos-12:checked ~ .game-world .arrow-down-S4-L1-P12 { display: block; }
-        /* Stage 3 down arrows (S3 uses levels 5-9) */
+        /* Stage 3 down arrows */
         #level-6:checked ~ #pos-16:checked ~ .game-world .arrow-down-S3-L6-P16 { display: block; }
         #level-7:checked ~ #pos-13:checked ~ .game-world .arrow-down-S3-L7-P13 { display: block; }
         #level-7:checked ~ #pos-14:checked ~ .game-world .arrow-down-S3-L7-P14 { display: block; }
         #level-7:checked ~ #pos-18:checked ~ .game-world .arrow-down-S3-L7-P18 { display: block; }
-
         /* Fixed navigation panel - 3x3 grid */
         .nav-panel {
             position: absolute;
@@ -3086,7 +2988,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             grid-template-rows: 1fr 1fr 1fr;
             place-items: center;
         }
-
         .nav-cell {
             position: relative;
             width: 100%;
@@ -3099,7 +3000,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .nav-cell-down { grid-column: 2; grid-row: 3; }
         .nav-cell-left { grid-column: 1; grid-row: 2; }
         .nav-cell-right { grid-column: 3; grid-row: 2; }
-
         /* Arrow triangles (gray inactive shown via ::before, yellow active via ::after on labels) */
         .nav-cell::before {
             content: '';
@@ -3122,7 +3022,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .nav-cell-down::before { border-top: 18px solid var(--inactive-arrow-color); }
         .nav-cell-left::before { border-right: 18px solid var(--inactive-arrow-color); }
         .nav-cell-right::before { border-left: 18px solid var(--inactive-arrow-color); }
-
         .nav-btn {
             position: absolute;
             width: 0;
@@ -3134,13 +3033,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .nav-btn:hover {
             filter: drop-shadow(0 0 10px var(--nav-arrow-color)) drop-shadow(0 0 15px var(--nav-arrow-color));
         }
-
         /* Active (yellow) colored borders */
         .nav-up { border-bottom: 18px solid var(--nav-arrow-color); }
         .nav-down { border-top: 18px solid var(--nav-arrow-color); }
         .nav-left { border-right: 18px solid var(--nav-arrow-color); }
         .nav-right { border-left: 18px solid var(--nav-arrow-color); }
-
         /* Show correct left arrow based on current position */
         #pos-2:checked ~ .nav-panel .nav-left[for="pos-1"] { display: block; }
         #pos-3:checked ~ .nav-panel .nav-left[for="pos-2"] { display: block; }
@@ -3149,7 +3046,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-6:checked ~ .nav-panel .nav-left[for="pos-5"] { display: block; }
         /* Hide left arrow at poison location (S1-L1-P6) */
         #level-1:checked ~ #pos-6:checked ~ .nav-panel .nav-left[for="pos-5"] { display: none; }
-
         /* Show correct right arrow based on current position */
         #pos-1:checked ~ .nav-panel .nav-right[for="pos-2"] { display: block; }
         #pos-2:checked ~ .nav-panel .nav-right[for="pos-3"] { display: block; }
@@ -3209,7 +3105,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-17:checked ~ .nav-panel .nav-left[for="pos-16"] { display: block; }
         #pos-17:checked ~ .nav-panel .nav-right[for="pos-18"] { display: block; }
         #pos-18:checked ~ .nav-panel .nav-left[for="pos-17"] { display: block; }
-        /* Stage 3 phantom position nav arrows (fall left/right from floating platform) - S3 uses levels 5-9 */
+        /* Stage 3 phantom position nav arrows - S3 uses levels 5-9 */
         #level-8:checked ~ #pos-φ:checked ~ .nav-panel .nav-left[for="pos-16"] { display: block; }
         #level-8:checked ~ #pos-φ:checked ~ .nav-panel .nav-right[for="pos-18"] { display: block; }
         /* Hide nav arrows at L9 platform gaps (equivalent to L4 in display) */
@@ -3224,30 +3120,28 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-6:checked ~ #pos-15:checked ~ .nav-panel .nav-left[for="pos-14"] { display: none; }
         #level-7:checked ~ #pos-14:checked ~ .nav-panel .nav-right[for="pos-15"] { display: none; }
         #level-7:checked ~ #pos-15:checked ~ .nav-panel .nav-left[for="pos-14"] { display: none; }
-
         /* Show up arrow at ladder locations */
         #level-0:checked ~ #pos-5:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
         #level-1:checked ~ #pos-3:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
         #level-2:checked ~ #pos-1:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
         #level-3:checked ~ #pos-4:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
-        /* Stage 4 up arrows (S4 uses levels 0-4) */
+        /* Stage 4 up arrows */
         #level-0:checked ~ :is(#pos-7, #pos-8, #pos-9, #pos-12):checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
         #level-1:checked ~ :is(#pos-7, #pos-9, #pos-11):checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
         #level-2:checked ~ :is(#pos-8, #pos-10, #pos-11):checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
         #level-3:checked ~ :is(#pos-7, #pos-9, #pos-10, #pos-11, #pos-12):checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
         #level-4:checked ~ #pos-7:checked ~ .nav-panel .nav-up[for="level-5"] { display: block; }
-        /* Stage 2 up arrows (S2 uses levels 5-9) */
+        /* Stage 2 up arrows */
         #level-5:checked ~ #pos-8:checked ~ .nav-panel .nav-up[for="level-6"] { display: block; }
         #level-5:checked ~ #pos-11:checked ~ .nav-panel .nav-up[for="level-6"] { display: block; }
         #level-6:checked ~ #pos-7:checked ~ .nav-panel .nav-up[for="level-7"] { display: block; }
         #level-6:checked ~ #pos-10:checked ~ .nav-panel .nav-up[for="level-7"] { display: block; }
         #level-7:checked ~ #pos-11:checked ~ .nav-panel .nav-up[for="level-8"] { display: block; }
         #level-8:checked ~ #pos-9:checked ~ .nav-panel .nav-up[for="level-9"] { display: block; }
-        /* Stage 3 nav up (S3 uses levels 5-9) */
+        /* Stage 3 nav up */
         #level-5:checked ~ #pos-16:checked ~ .nav-panel .nav-up[for="level-6"] { display: block; }
         #level-6:checked ~ #pos-18:checked ~ .nav-panel .nav-up[for="level-7"] { display: block; }
         #level-8:checked ~ #pos-17:checked ~ .nav-panel .nav-up[for="pos-φ"] { display: block; }
-
         /* Show down arrow at grate locations */
         #level-1:checked ~ #pos-1:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
         #level-2:checked ~ #pos-5:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
@@ -3255,23 +3149,22 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-4:checked ~ #pos-6:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
         /* S2→S4 climb down at P7 */
         #level-5:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-4"] { display: block; }
-        /* Stage 4 down arrows (S4 uses levels 0-4) */
+        /* Stage 4 down arrows */
         #level-4:checked ~ :is(#pos-7, #pos-9, #pos-10, #pos-11, #pos-12):checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
         #level-3:checked ~ :is(#pos-8, #pos-10, #pos-11):checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
         #level-2:checked ~ :is(#pos-7, #pos-9, #pos-11):checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
         #level-1:checked ~ :is(#pos-7, #pos-8, #pos-9, #pos-12):checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
-        /* Stage 2 down arrows (S2 uses levels 5-9) */
+        /* Stage 2 down arrows */
         #level-6:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-5"] { display: block; }
         #level-6:checked ~ #pos-11:checked ~ .nav-panel .nav-down[for="level-5"] { display: block; }
         #level-7:checked ~ #pos-8:checked ~ .nav-panel .nav-down[for="level-6"] { display: block; }
         #level-8:checked ~ #pos-10:checked ~ .nav-panel .nav-down[for="level-7"] { display: block; }
         #level-9:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-8"] { display: block; }
-        /* Stage 3 nav down (S3 uses levels 5-9) */
+        /* Stage 3 nav down */
         #level-6:checked ~ #pos-16:checked ~ .nav-panel .nav-down[for="level-5"] { display: block; }
         #level-7:checked ~ #pos-13:checked ~ .nav-panel .nav-down[for="level-6"] { display: block; }
         #level-7:checked ~ #pos-14:checked ~ .nav-panel .nav-down[for="level-6"] { display: block; }
         #level-7:checked ~ #pos-18:checked ~ .nav-panel .nav-down[for="level-6"] { display: block; }
-
         /* loot - animated elements that fly to counter when picked up */
         .loot-in-game {
             position: absolute;
@@ -3297,7 +3190,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             filter: drop-shadow(0 0 3px var(--ruby-color-1));
             animation: ruby-sparkle 1s ease-in-out infinite;
         }
-
         /* loot positions - on platforms */
         .loot-S1-L0-P3 {
             bottom: var(--ground-height);
@@ -3319,7 +3211,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset));
         }
-
         /* Stage 2 loot positions */
         .loot-S2-L5-P8 {
             bottom: calc(var(--stage-height) + var(--ground-height));
@@ -3341,7 +3232,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset));
         }
-
         /* Stage 3 loot positions */
         .loot-S3-L5-P18 {
             bottom: calc(var(--stage-height) + var(--ground-height));
@@ -3359,7 +3249,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
         }
-
         /* Stage 4 loot positions - hidden by default, only show when player adjacent */
         .container.loot-S4-L3-P7,
         .container.loot-S4-L3-P8,
@@ -3399,7 +3288,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#level-0:checked ~ #pos-10:checked, #level-2:checked ~ #pos-10:checked, #level-1:checked ~ #pos-9:checked, #level-1:checked ~ #pos-11:checked) ~ #torch-pickup:checked ~ #loot-S4-L1-P10-pickup:not(:checked) ~ .game-world .loot-S4-L1-P10 { display: block; }
         #level-0:checked ~ #pos-9:checked ~ #loot-S4-L0-P9-pickup:not(:checked) ~ .game-world .loot-S4-L0-P9,
         :is(#level-1:checked ~ #pos-9:checked, #level-0:checked ~ #pos-8:checked, #level-0:checked ~ #pos-10:checked) ~ #torch-pickup:checked ~ #loot-S4-L0-P9-pickup:not(:checked) ~ .game-world .loot-S4-L0-P9 { display: block; }
-
         /* ========== KEYFRAME ANIMATIONS ========== */
         @keyframes idle {
             0%, 100% { transform: translateY(0); }
@@ -3522,7 +3410,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--idcard-color)); }
             50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--idcard-color)) drop-shadow(0 0 25px var(--idcard-color)); }
         }
-
         /* Enable clicking and pulsing when player is adjacent */
         #level-0:checked ~ #pos-3:checked ~ #loot-S1-L0-P3-pickup:not(:checked) ~ .game-world .loot-S1-L0-P3 .loot-in-game {
             pointer-events: auto;
@@ -3575,7 +3462,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        /* Stage 3 loot pulse/click (S3 uses levels 5-9) */
+        /* Stage 3 loot pulse/click */
         #level-5:checked ~ #pos-18:checked ~ #loot-S3-L5-P18-pickup:not(:checked) ~ .game-world .loot-S3-L5-P18 .loot-in-game {
             pointer-events: auto;
             cursor: pointer;
@@ -3596,7 +3483,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        /* Stage 4 loot pulse/click (S4 uses levels 0-4) */
+        /* Stage 4 loot pulse/click */
         #level-3:checked ~ #pos-7:checked ~ #loot-S4-L3-P7-pickup:not(:checked) ~ .game-world .loot-S4-L3-P7 .loot-in-game {
             pointer-events: auto;
             cursor: pointer;
@@ -3622,7 +3509,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-
         /* Move Stage 1 loot to counter when picked up */
         #loot-S1-L0-P3-pickup:checked ~ .game-world .loot-S1-L0-P3,
         #loot-S1-L1-P4-pickup:checked ~ .game-world .loot-S1-L1-P4,
@@ -3668,7 +3554,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
             z-index: auto;
         }
-
         /* Skull */
         .skull {
             position: absolute;
@@ -3741,7 +3626,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .disease:hover .tooltip {
             opacity: 1;
         }
-
         /* Sprout on stage 2, level 0, pos 6 */
         .tree-container {
             position: absolute;
@@ -3761,11 +3645,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
         }
-        /* Tree pulsates when player is next to it, has axe, AND tree not yet chopped (S2 uses levels 5-9) */
+        /* Tree pulsates when player is next to it, has axe, AND tree not yet chopped */
         #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree svg {
             animation: tree-pulse 1s ease-in-out infinite;
         }
-        /* Enable clicking tree only when player is next to it, has axe (S2 uses levels 5-9) */
+        /* Enable clicking tree only when player is next to it, has axe */
         #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree {
             pointer-events: auto;
             cursor: pointer;
@@ -3778,7 +3662,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #tree-chopped:checked ~ .game-world .axe-in-game {
             display: none;
         }
-
         /* Tree tooltip */
         .tree-tooltip, .tree-tooltip-axe {
             bottom: 100%;
@@ -3795,7 +3678,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: auto;
             z-index: 1;
         }
-        /* Hide hover area when player has axe and is at tree (so label click works) (S2 uses levels 5-9) */
+        /* Hide hover area when player has axe and is at tree (so label click works) */
         #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ .game-world .tree-container .tree-hover-area {
             display: none;
         }
@@ -3807,7 +3690,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree-container:hover .tree-tooltip-axe {
             opacity: 1;
         }
-
         /* Door */
         .door-container {
             position: absolute;
@@ -3857,7 +3739,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .door .door-closed {
             animation: door-pulse 1s ease-in-out infinite;
         }
-
         .wrench-at-door {
             display: none;
             position: absolute;
@@ -3879,12 +3760,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             animation: wrench-rotate 1s ease-in-out infinite;
             cursor: pointer;
         }
-
         /* On S4, we achieve a small FOV using four rectangles arranged
          * around a central hole that follows the player position.
          * The hole allows clicking through.
          */
-
         /* Single darkness using radial-gradient for the hole */
         .darkness-S4 {
             position: absolute;
@@ -3909,7 +3788,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --darkness-x: 50%;
             --darkness-y: 50%;
         }
-
         /* Register custom properties for animation */
         @property --darkness-x {
             syntax: '<length-percentage>';
@@ -3931,7 +3809,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             inherits: true;
             initial-value: 2000px;
         }
-
         /* In Stage 4: shrink hole to normal size */
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
         :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~
@@ -3939,7 +3816,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --darkness-hole-width: 180px;
             --darkness-hole-height: 120px;
         }
-
         /* Horizontal position rules */
         #pos-7:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 0 + var(--darkness-hole-offset)); }
         #pos-8:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 1 + var(--darkness-hole-offset)); }
@@ -3947,14 +3823,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-10:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 3 + var(--darkness-hole-offset)); }
         #pos-11:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 4 + var(--darkness-hole-offset)); }
         #pos-12:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 5 + var(--darkness-hole-offset)); }
-
         /* Vertical position rules */
         #level-0:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--ground-height) - 26px); }
         #level-1:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--platform-height) - var(--platform-thickness) + 2px - 28px); }
         #level-2:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--platform-height) * 2 - var(--platform-thickness) + 2px - 28px); }
         #level-3:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--platform-height) * 3 - var(--platform-thickness) + 2px - 28px); }
         #level-4:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--platform-height) * 4 - var(--platform-thickness) + 2px - 28px); }
-
         /* With torch: illuminate darkness (3 levels x 3 positions) */
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
         :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~
@@ -3962,12 +3836,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --darkness-hole-width: calc(var(--pos-width) * 2.2);
             --darkness-hole-height: calc(var(--platform-height) * 2.2);
         }
-
         /* Toggle darkness */
         #darkness-toggle:checked ~ .darkness-S4 {
             display: none;
         }
-
         /* Overlay base styles */
         .overlay {
             position: absolute;
@@ -3995,7 +3867,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             font-size: 18px;
             margin-top: 10px;
         }
-
         /* Title screen overlay */
         .title-screen-overlay {
             z-index: var(--z-title-overlay);
@@ -4051,7 +3922,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) * 0.65 + 20px);
             transform: translateX(-50%);
         }
-
         /* Death overlay */
         .death-screen-overlay {
             z-index: var(--z-endgame-overlay);
@@ -4067,7 +3937,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
             pointer-events: auto;
         }
-
         /* Escape overlay */
         .escape-screen-overlay.overlay {
             z-index: var(--z-endgame-overlay);
@@ -4097,7 +3966,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
             pointer-events: auto;
         }
-
         /* Tooltip styling */
         .tooltip {
             position: absolute;
@@ -4114,14 +3982,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: none;
             transition: opacity 0.3s ease-in-out;
         }
-
         .door-tooltip {
             bottom: 100%;
             left: 50%;
             transform: translateX(calc(-50% - 68px));
             margin-bottom: 8px;
         }
-
         /* Transparent hover area for door tooltip (doesn't trigger label click) */
         .door-hover-area {
             position: absolute;
@@ -4132,12 +3998,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: auto;
             z-index: 1;
         }
-
         /* Hide hover area when player has wrench and is at door (so label click works) */
         #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ .game-world .door-container .door-hover-area {
             display: none;
         }
-
         /* Second tooltip for when player has wrench */
         .door-tooltip-wrench {
             bottom: 100%;
@@ -4145,19 +4009,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: translateX(calc(-50% - 60px));
             margin-bottom: 8px;
         }
-
         /* Show "broken door" tooltip on hover (without wrench, door not unlocked) */
         #wrench-pickup:not(:checked) ~ #door-unlocked:not(:checked) ~ .game-world .door-hover-area:hover ~ .door-tooltip {
             opacity: 1;
         }
-
         /* Show "repair door" tooltip on hover (with wrench, door not unlocked) */
         #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .door-container:hover .door-tooltip-wrench {
             opacity: 1;
         }
-
         /* Utility classes */
-
         /* loot container */
         .container {
             position: absolute;
@@ -4233,7 +4093,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
     </style>
-<link rel="preload" as="video" href="intro.mp4" type="video/mp4">
+    <link rel="preload" as="video" href="images/spaceship.mp4" type="video/mp4">
 </head>
 <body>
     <!-- Rotate device prompt for mobile portrait -->
@@ -4243,7 +4103,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </svg>
         <p>Please rotate your device to landscape mode</p>
     </div>
-
     <!-- SVG symbols for reuse -->
     <!-- Icons inspired by Font Awesome (https://fontawesome.com) and Material Design (https://materialdesignicons.com) -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -4502,7 +4361,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <path d="M662,0 Q698,200 672,360 Q712,490 685,600 L752,600 Q718,410 748,195 Q702,55 735,0 Z" fill="#130b06"/>
                 <path d="M745,0 Q782,190 758,400 Q795,530 772,600 L820,600 Q798,390 825,180 Q785,50 812,0 Z" fill="#150c06"/>
             </g>
-            <!-- Foliage - 60 randomly placed blobs -->
+            <!-- Foliage -->
             <g filter="url(#jungle-blur)">
                 <path d="M225,407 Q256,391 288,413 Q313,404 321,434 Q306,458 272,454 Q238,463 221,438 Q209,422 225,407 Z" fill="#091f09"/>
                 <path d="M371,153 Q428,121 489,163 Q524,197 480,240 Q423,264 374,227 Q337,190 371,153 Z" fill="#0a210a"/>
@@ -4602,7 +4461,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             </defs>
             <!-- Background -->
             <rect width="800" height="600" fill="#06080c"/>
-            <!-- Pillars - far back, very blurry -->
+            <!-- Pillars -->
             <g filter="url(#caves-blur2)" mask="url(#caves-fadeMask)">
                 <path d="M 17.5 0 Q 27.5 150 22.5 300 Q 32.5 450 25 600 L 47.5 600 Q 40 420 50 200 Q 37.5 60 45 0 Z" fill="#0c0e14"/>
                 <path d="M 417.5 0 Q 427.5 150 422.5 300 Q 432.5 450 425 600 L 447.5 600 Q 440 420 450 200 Q 437.5 60 445 0 Z" fill="#0c0e14"/>
@@ -4698,7 +4557,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <rect x="0" y="0" width="100%" height="100%" fill="white" opacity="0.08"/>
         </symbol>
         <symbol id="tree" viewBox="-26 0 92 110">
-            <!-- Foliage - overlapping circles (drawn first, behind trunk/branches) -->
+            <!-- Foliage -->
             <circle fill="#2d5a2d" cx="-10" cy="38" r="16"/>
             <circle fill="#3a7a3a" cx="4" cy="30" r="18"/>
             <circle fill="#2d5a2d" cx="20" cy="24" r="20"/>
@@ -4727,29 +4586,23 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <path fill="currentColor" d="M 338.8 -9.9 c 11.9 8.6 16.3 24.2 10.9 37.8 L 271.3 224 416 224 c 13.5 0 25.5 8.4 30.1 21.1 s .7 26.9 -9.6 35.5 l -288 240 c -11.3 9.4 -27.4 9.9 -39.3 1.3 s -16.3 -24.2 -10.9 -37.8 L 176.7 288 32 288 c -13.5 0 -25.5 -8.4 -30.1 -21.1 s -.7 -26.9 9.6 -35.5 l 288 -240 c 11.3 -9.4 27.4 -9.9 39.3 -1.3 z"/>
         </symbol>
     </svg>
-
-    <!-- Debug toggle: Alt+D (Windows/Linux) or Ctrl+Alt+D (Mac) -->
     <input type="checkbox" id="debug-toggle" accesskey="d">
-
     <!-- Title screen toggle -->
     <input type="checkbox" id="title-screen-toggle">
-
     <div class="game-container">
         <h2>NIBO'S WAY OUT</h2>
-
         <!-- Radio buttons for level (vertical) -->
         <input type="radio" name="level" id="level-0" class="level-radio" title="level-0" checked>
         <input type="radio" name="level" id="level-1" class="level-radio" title="level-1">
         <input type="radio" name="level" id="level-2" class="level-radio" title="level-2">
         <input type="radio" name="level" id="level-3" class="level-radio" title="level-3">
         <input type="radio" name="level" id="level-4" class="level-radio" title="level-4">
-        <!-- Levels 5-9 for S2/S3 (display at same heights as 0-4) -->
+        <!-- Levels 5-9 for S2/S3 -->
         <input type="radio" name="level" id="level-5" class="level-radio" title="level-5">
         <input type="radio" name="level" id="level-6" class="level-radio" title="level-6">
         <input type="radio" name="level" id="level-7" class="level-radio" title="level-7">
         <input type="radio" name="level" id="level-8" class="level-radio" title="level-8">
         <input type="radio" name="level" id="level-9" class="level-radio" title="level-9">
-
         <!-- Radio buttons for position (horizontal) -->
         <input type="radio" name="position" id="pos-1" class="position-radio" title="pos-1" checked>
         <input type="radio" name="position" id="pos-2" class="position-radio" title="pos-2">
@@ -4757,7 +4610,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="position" id="pos-4" class="position-radio" title="pos-4">
         <input type="radio" name="position" id="pos-5" class="position-radio" title="pos-5">
         <input type="radio" name="position" id="pos-6" class="position-radio" title="pos-6">
-        <!-- S2/S4 positions (same horizontal space, S4 at levels 0-4, S2 at levels 5-9) -->
+        <!-- S2/S4 positions -->
         <input type="radio" name="position" id="pos-7" class="position-radio" title="pos-7">
         <input type="radio" name="position" id="pos-8" class="position-radio" title="pos-8">
         <input type="radio" name="position" id="pos-9" class="position-radio" title="pos-9">
@@ -4772,36 +4625,27 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="position" id="pos-17" class="position-radio" title="pos-17">
         <input type="radio" name="position" id="pos-18" class="position-radio" title="pos-18">
         <input type="radio" name="position" id="pos-φ" class="position-radio" title="pos-φ">
-
         <!-- Key pickup checkbox -->
         <input type="checkbox" id="key-pickup" class="key-checkbox" title="key">
-
         <!-- Safe unlock checkbox -->
         <input type="checkbox" id="toolbox-unlocked" class="toolbox-checkbox" title="toolbox">
-
         <!-- S1 checkboxes -->
         <input type="checkbox" id="wrench-pickup" class="wrench-checkbox" title="wrench">
         <input type="checkbox" id="door-unlocked" class="door-checkbox" title="door">
-
         <!-- S2 checkboxes -->
         <input type="checkbox" id="idcard-pickup" class="idcard-checkbox" title="idcard">
-
         <!-- S3 checkboxes -->
         <input type="checkbox" id="axe-pickup" class="axe-checkbox" title="axe">
-
-        <!-- S2 checkboxes (after S3 axe for sibling selector) -->
+        <!-- S2 checkboxes -->
         <input type="checkbox" id="tree-chopped" class="tree-checkbox" title="tree">
-
-        <!-- S3 checkboxes (continued) -->
+        <!-- S3 checkboxes -->
         <input type="checkbox" id="battery-pickup" class="battery-checkbox" title="battery">
         <input type="checkbox" id="bolt-fixed" class="battery-checkbox" title="bolt">
         <input type="checkbox" id="flight-controls-used" class="flight-controls-checkbox" title="flight-controls">
         <input type="checkbox" id="escaped" class="escaped-checkbox" title="escaped">
-
         <!-- S4 checkboxes -->
         <input type="checkbox" id="darkness-toggle" class="darkness-checkbox" title="darkness">
         <input type="checkbox" id="torch-pickup" class="torch-checkbox" title="torch">
-
         <!-- loot pickup checkboxes -->
         <input type="checkbox" id="loot-S1-L0-P3-pickup" class="loot-checkbox" title="coin">
         <input type="checkbox" id="loot-S1-L1-P4-pickup" class="loot-checkbox" title="coin">
@@ -4825,12 +4669,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="loot-S4-L3-P12-pickup" class="loot-checkbox" title="coin">
         <input type="checkbox" id="loot-S4-L1-P10-pickup" class="loot-checkbox" title="aquamarine">
         <input type="checkbox" id="loot-S4-L0-P9-pickup" class="loot-checkbox" title="coin">
-
         <div class="subtitle subtitle-S1">The Factory</div>
         <div class="subtitle subtitle-S2">The Jungle</div>
         <div class="subtitle subtitle-S3">The Hangar</div>
         <div class="subtitle subtitle-S4">The Caves</div>
-
         <!-- Fixed navigation panel -->
         <div class="nav-panel">
             <!-- Up cell -->
@@ -4904,7 +4746,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="level-8" class="nav-btn nav-down"></label>
             </div>
         </div>
-
         <!-- Inventory -->
         <div class="inv-panel">
             <span class="inventory-key"><svg><use href="#key"/></svg></span>
@@ -4914,7 +4755,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="inventory-battery"><svg><use href="#battery"/></svg></span>
             <span class="inventory-torch"><svg><use href="#torch"/></svg></span>
         </div>
-
         <!-- loot counter -->
         <div class="counter-panel">
             <svg class="loot-icon"><use href="#coin"/></svg>
@@ -4952,52 +4792,41 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 </div>
             </div>
         </div>
-
         <!-- Game world (scrollable content) -->
         <div class="game-world">
-
         <!-- Key in game world (clickable to pick up) -->
         <span class="key-hover-area"></span>
         <label for="key-pickup" class="key-in-game"><svg><use href="#key"/></svg></label>
         <span class="tooltip key-tooltip">Key</span>
-
         <!-- Toolbox on level 2, position 6 -->
         <div class="toolbox">
             <span class="tooltip toolbox-tooltip">A locked toolbox.<br>You need a key.</span>
             <svg><use href="#toolbox"/></svg>
         </div>
-
         <!-- Axe on stage 3, level 4, pos φ (clickable to pick up) -->
         <span class="axe-hover-area"></span>
         <label for="axe-pickup" class="axe-in-game"><svg><use href="#axe"/></svg></label>
         <span class="tooltip axe-tooltip">Axe</span>
-
         <!-- ID card on stage 2, level 4, pos 6 (clickable to pick up) -->
         <div class="stage-2-elements">
             <span class="idcard-hover-area"></span>
             <label for="idcard-pickup" class="idcard-in-game"><svg><use href="#id-card"/></svg></label>
             <span class="tooltip idcard-tooltip">ID Card</span>
         </div>
-
         <!-- Battery on stage 3, level 2, pos 1 (clickable to pick up) -->
         <span class="battery-hover-area"></span>
         <label for="battery-pickup" class="battery-in-game"><svg><use href="#battery"/></svg></label>
         <span class="tooltip battery-tooltip">Battery</span>
-
         <!-- Torch on stage 4, level 0, pos 12 (clickable to pick up) -->
         <span class="torch-hover-area"></span>
         <label for="torch-pickup" class="torch-in-game"><svg><use href="#torch"/></svg></label>
         <span class="tooltip torch-tooltip">Torch</span>
-
         <!-- Wrench in game world (clickable to pick up) -->
         <span class="wrench-hover-area"></span>
         <label for="wrench-pickup" class="wrench-in-game"><svg><use href="#wrench"/></svg></label>
         <span class="tooltip wrench-tooltip">Wrench</span>
-
-        <!-- Key above toolbox (appears when user has key, clickable to unlock) -->
+        <!-- Key above toolbox (clickable to unlock) -->
         <label for="toolbox-unlocked" class="key-at-toolbox"><svg><use href="#key"/></svg></label>
-
-
         <!-- Horizontal arrow labels -->
         <label for="pos-2" class="arrow arrow-right arrow-h arrow-S1-P1-P2"></label>
         <label for="pos-1" class="arrow arrow-left arrow-h arrow-S1-P2-P1"></label>
@@ -5010,7 +4839,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="pos-6" class="arrow arrow-right arrow-h arrow-S1-P5-P6"></label>
         <label for="pos-5" class="arrow arrow-left arrow-h arrow-S1-P6-P5"></label>
         <label for="pos-7" class="arrow arrow-right arrow-h arrow-S1-P6-S2-P7"></label>
-
         <!-- Stage 2 horizontal arrow labels -->
         <label for="pos-6" class="arrow arrow-left arrow-h arrow-S2-P7-S1-P6"></label>
         <label for="pos-8" class="arrow arrow-right arrow-h arrow-S2-P7-P8"></label>
@@ -5037,7 +4865,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="pos-16" class="arrow arrow-left arrow-h arrow-S3-P17-P16"></label>
         <label for="pos-18" class="arrow arrow-right arrow-h arrow-S3-P17-P18"></label>
         <label for="pos-17" class="arrow arrow-left arrow-h arrow-S3-P18-P17"></label>
-
         <!-- Stage 4 horizontal arrows -->
         <label for="pos-8" class="arrow arrow-right arrow-h arrow-S4-P7-P8"></label>
         <label for="pos-7" class="arrow arrow-left arrow-h arrow-S4-P8-P7"></label>
@@ -5049,35 +4876,30 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="pos-10" class="arrow arrow-left arrow-h arrow-S4-P11-P10"></label>
         <label for="pos-12" class="arrow arrow-right arrow-h arrow-S4-P11-P12"></label>
         <label for="pos-11" class="arrow arrow-left arrow-h arrow-S4-P12-P11"></label>
-
-        <!-- Up arrow labels (at ladder positions) -->
+        <!-- Up arrow labels -->
         <label for="level-1" class="arrow arrow-up arrow-up-S1-L0-P5"></label>
         <label for="level-2" class="arrow arrow-up arrow-up-S1-L1-P3"></label>
         <label for="level-3" class="arrow arrow-up arrow-up-S1-L2-P1"></label>
         <label for="level-4" class="arrow arrow-up arrow-up-S1-L3-P4"></label>
-
-        <!-- Down arrow labels (at platform gaps) -->
+        <!-- Down arrow labels -->
         <label for="level-0" class="arrow arrow-down arrow-down-S1-L1-P1"></label>
         <label for="level-1" class="arrow arrow-down arrow-down-S1-L2-P5"></label>
         <label for="level-3" class="arrow arrow-down arrow-down-S1-L4-P6"></label>
         <label for="level-2" class="arrow arrow-down arrow-down-S1-L3-P3"></label>
-
-        <!-- Stage 2 Up arrow labels (S2 uses levels 5-9) -->
+        <!-- Stage 2 Up arrow labels -->
         <label for="level-6" class="arrow arrow-up arrow-up-S2-L5-P8"></label>
         <label for="level-6" class="arrow arrow-up arrow-up-S2-L5-P11"></label>
         <label for="level-7" class="arrow arrow-up arrow-up-S2-L6-P7"></label>
         <label for="level-7" class="arrow arrow-up arrow-up-S2-L6-P10"></label>
         <label for="level-8" class="arrow arrow-up arrow-up-S2-L7-P11"></label>
         <label for="level-9" class="arrow arrow-up arrow-up-S2-L8-P9"></label>
-
-        <!-- Stage 2 Down arrow labels (S2 uses levels 5-9) -->
+        <!-- Stage 2 Down arrow labels -->
         <label for="level-5" class="arrow arrow-down arrow-down-S2-L6-P7"></label>
         <label for="level-5" class="arrow arrow-down arrow-down-S2-L6-P11"></label>
         <label for="level-6" class="arrow arrow-down arrow-down-S2-L7-P8"></label>
         <label for="level-7" class="arrow arrow-down arrow-down-S2-L8-P10"></label>
         <label for="level-8" class="arrow arrow-down arrow-down-S2-L9-P7"></label>
-
-        <!-- Stage 4 Up arrow labels (S4 uses levels 0-4) -->
+        <!-- Stage 4 Up arrow labels -->
         <!-- L0: P7, P8, P9, P12 -->
         <label for="level-1" class="arrow arrow-up arrow-up-S4-L0-P7"></label>
         <label for="level-1" class="arrow arrow-up arrow-up-S4-L0-P8"></label>
@@ -5099,8 +4921,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="level-4" class="arrow arrow-up arrow-up-S4-L3-P12"></label>
         <!-- L4: P7 (climb to S2) -->
         <label for="level-5" class="arrow arrow-up arrow-up-S4-L4-P7"></label>
-
-        <!-- Stage 4 Down arrow labels (S4 uses levels 0-4) -->
+        <!-- Stage 4 Down arrow labels -->
         <!-- L4: P7, P9, P10, P11, P12 -->
         <label for="level-3" class="arrow arrow-down arrow-down-S4-L4-P7"></label>
         <label for="level-3" class="arrow arrow-down arrow-down-S4-L4-P9"></label>
@@ -5120,32 +4941,26 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="level-0" class="arrow arrow-down arrow-down-S4-L1-P8"></label>
         <label for="level-0" class="arrow arrow-down arrow-down-S4-L1-P9"></label>
         <label for="level-0" class="arrow arrow-down arrow-down-S4-L1-P12"></label>
-
         <!-- S2→S4 climb arrow at P7 -->
         <label for="level-4" class="arrow arrow-down arrow-down-S2-L5-P7-to-S4"></label>
-
-        <!-- Stage 3 Down arrow labels (S3 uses levels 5-9) -->
+        <!-- Stage 3 Down arrow labels -->
         <label for="level-5" class="arrow arrow-down arrow-down-S3-L6-P16"></label>
         <label for="level-6" class="arrow arrow-down arrow-down-S3-L7-P13"></label>
         <label for="level-6" class="arrow arrow-down arrow-down-S3-L7-P14"></label>
         <label for="level-6" class="arrow arrow-down arrow-down-S3-L7-P18"></label>
-
-        <!-- Stage 3 Up arrow labels (S3 uses levels 5-9) -->
+        <!-- Stage 3 Up arrow labels -->
         <label for="level-6" class="arrow arrow-up arrow-up-S3-L5-P16"></label>
         <label for="level-7" class="arrow arrow-up arrow-up-S3-L6-P18"></label>
         <label for="pos-φ" class="arrow arrow-up arrow-up-S3-L8-P17"></label>
-
-        <!-- Stage 3 Phantom position arrows (fall left/right) -->
+        <!-- Stage 3 Phantom position arrows -->
         <label for="pos-16" class="arrow arrow-left arrow-left-S3-Pφ"></label>
         <label for="pos-18" class="arrow arrow-right arrow-right-S3-Pφ"></label>
-
         <!-- Player character -->
         <div class="player">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="170 300 750 930"><path fill="#ccd3e4" d="m536 311 4 1 13 1v-1h6v2l11 1 1 2 10 1 6 1 11 1 2 1v3l4-4 4 3-5 2h5q6 1 7 3l10 5q45 19 81 52l2 2q10 10 18 21l3 4q23 33 36 70 3 10 8 18c15 31 11 74-4 104l-6 15q-15 46-51 76h-2v2q-18 15-40 23l-6 2-15 5 11 5q26 9 50 23 16 8 34 2h4l28-7 4-1 26-8q9-5 20-3l3-1q22-4 36 14 3 5 3 12l2 1c11 3 17 14 19 24v7q0 10 3 20 4 22-11 37-11 9-23 5l-3-1q-5-1-9 3c-12 8-26 9-39 12l-4 1q-67 12-129-13v3c-6 65-23 121-80 158q-4 2-4 5l9 17 6 12 1 4 3 7 9 1h5c5 0 5 0 9-2v4l8 1q18 6 31 19v2h2q11 13 11 29l2 1h-2v4c-5 33-46 59-72 75l-5 3c-19 11-42 21-64 21h-5q-16-3-24-19l-2-2-19-30h-3l-1-3h2l-3-6-2-3-1-2-2 1-2-1 1-5-3-6-3-9-2-1-1-3-5-8-2-3-5-4-2-4-4-5q-9 0-17 5l-12 3v15q0 26-19 41-28 13-55-1l-3-1q-9-4-16-11l-3-2c-24-23-40-63-33-96 4-17 13-26 27-35l5-4 3-2 2-2h3l6-4 26-17 5-3h2l-5-10q-12-18-17-39l-1-3q-5-26-4-52v-9q1-3-2-4l2-1 1-10 4-22v-4q-16 3-27 14l-7 6-11 9-27 22c-5 3-5 3-4 8l2 10q4 15-5 28-8 6-17 4-10-6-12-16l-1-4-1-3-3 2-6 1 1 3q5 14-4 25-10 7-22 2l-10-8-5-2c-19-9-28-32-30-52v-15c1-31 17-59 38-81l3-3 23-20 3-2 22-14 4-2c38-22 91-48 137-39q6 2 11-3l-4-2a223 223 0 0 1-50-28q-20-16-34-38l-2 1v-2q-5-19-21-26c-17-9-25-34-29-51l-2-6v-21q-2-36 22-63l1 1 5-15q6-21 18-40l-1-4 2-1 1 2 3-5c24-37 24-37 32-37v-2q33-31 76-47l8-3-1-4 4 1 1-2h5l19-2 3-1 8-2v-3h4l31-1zm-63 2-1 2 4-1zm4 0v1h6v-1zm-37 8 4 1Zm-85 519 1 2Z"/><path fill="#dde3f0" d="m536 311 4 1 13 1v-1h6v2l11 1 1 2 10 1 6 1 11 1 2 1v3l4-4 4 3-5 2h5q6 1 7 3l10 5q45 19 81 52l2 2q10 10 18 21l3 4q23 33 36 70 3 10 8 18c15 31 11 74-4 104l-6 15q-15 46-51 76h-2v2c-28 22-28 22-42 23l-12 3c-14 5-14 5-21 5l-3 2q-30 8-62 6h-20l-14-2h-10l-17-1v-1l-14-1-5-1-11-1-3-1v-2h-5l-10-1-11-2-11-3v-2l-5 1-11-3-3-1-37-14q-24-10-43-30l-2-2q-12-11-20-25l-2 1v-2q-5-19-21-26c-17-9-25-34-29-51l-2-6v-21q-2-36 22-63l1 1 5-15q6-21 18-40l-1-4 2-1 1 2 3-5c24-37 24-37 32-37v-2q33-31 76-47l8-3-1-4 4 1 1-2h5l19-2 3-1 8-2v-3h4l31-1zm-63 2-1 2 4-1zm4 0v1h6v-1zm-37 8 4 1Z"/><path fill="#091629" d="m648 402 6 1c24 2 47 7 65 23l2 2c32 30 43 80 42 122v5q1 19-3 37l-1 3c-7 37-25 70-63 83-60 18-171 23-222-22l-2-2c-42-39-39-123-28-175q12-53 64-68c44-13 94-14 140-9"/><path fill="#dfe4ef" d="m403 717-1 1 2 1q23 10 25 35 2 29-18 50l-2 3c-14 14-41 34-62 34v2l-4 2q-13 7-23 17l-6 5-12 10c-14 12-14 12-21 16-5 5-2 11-1 18q4 16-5 28-7 6-17 4-10-6-12-16l-1-4-1-3-3 2-6 1 1 3q5 14-4 25-10 7-22 2l-10-8-5-2c-19-9-28-32-30-52v-15c1-31 17-59 38-81l3-3 23-20 3-2 22-14 4-2c39-23 99-52 145-37"/><path fill="#d8ddeb" d="M865 751q3 5 3 12l3 1c10 3 16 14 18 24v7q0 10 3 20 4 22-11 37-11 8-23 5l-3-1q-5-1-9 3c-11 8-26 9-39 12l-4 1q-41 8-82 1l1-2-2-2-7-10-1-3c-13-28-5-64 12-87l2-3 2-3q7-5 16-6l8-1 4-1 20-5 4-1c14-3 14-3 26-8q9-5 20-3l3-1q23-4 36 14"/><path fill="#e2e7f3" d="m548 976 3 2v2l4 2a124 124 0 0 1 23 26q7 8 11 18l-1 2-1-3c-25-8-50 5-69 20-21 19-44 46-46 75v7c-5-1-5-2-8-6l-3-2v-5l-2-1-2-4-5-3c-16-18-32-43-39-67l-1-3 1-2h-2c-7-19 0-37 11-52h2l2-4c35-31 85-29 122-2"/><path fill="#8b59c5" d="M629 791h10q13 1 18 12 3 10 2 22v38c0 35 0 35-12 44-21 9-46 8-69 8h-20q-16 2-26-9-2-6-2-14v-80q0-11 10-17l26-3h29l23-1z"/><path fill="#cdd5e8" d="M188 814v5c-2 27 15 51 36 66 14 9 33 18 49 12l3-2h3l-1 5 2 8c2 11 3 22-5 31q-7 6-17 4-10-6-12-16l-1-4-1-3-3 2-6 1 1 3q5 14-4 25-10 7-22 2l-10-8-5-2c-19-9-28-32-30-52v-15q2-35 23-62"/><path fill="#e5e9f4" d="M865 751q3 5 3 12l3 1c10 3 16 14 18 24v7q0 10 3 20 5 21-10 35-12 9-26 5-8-7-8-18v-4h3q16 1 28-11l-2 2c-8 6-18 11-28 7q-11-9-10-22l6-3q20-7 24-28v-11 6q-3 21-20 31-10 3-18-3l-4-7-1-2q-1-10 3-21l1-6-1 3q-3 18-19 26-13 3-22-8-7-20 6-36 13-15 32-12l3-1q23-4 36 14"/><path fill="#9beffc" d="M591 501q16 20 14 44v3q2 33-25 51-16 5-30-6c-16-16-19-39-16-61q5-26 27-39 17-4 30 8"/><path fill="#c9cfe0" d="m800 746-4 2-2 4-2 3q-10 15-3 31 8 9 21 7c13-5 16-16 19-29l1-3h1q1 7-2 14-6 14 2 25 7 6 15 4 18-9 21-28l1-4v-7q5 6 2 13-5 22-27 29-5 1-3 7 1 10 9 16 15 4 27-7l3-3c0 6-7 9-12 12q-9 4-19 1c1 9 1 9 5 18v2l4 1 3 1q12 2 21-6l2 1c-9 7-14 9-25 7l-3-1q-5-1-9 3c-22 14-57 16-82 16v-1l10-1q22 0 42-7l-5-2q-10-6-17-13l-4-4a81 81 0 0 1-10-79q4-10 13-18l1-1-4-2c7-2 7-2 10-1"/><path fill="#9ceffc" d="M716 502c17 20 16 50 9 74q-5 14-17 22-14 1-22-11a85 85 0 0 1 0-76c7-11 18-18 30-9"/><path fill="#7453b0" d="M308 500q21 20 18 49v4c0 14-2 30-14 39q-11 4-20-5a77 77 0 0 1-12-71c5-11 14-23 28-16"/><path fill="#adb6ce" d="M188 814v5c-2 27 15 51 36 66 14 9 33 18 49 12l3-2h3l-1 5 2 8c2 11 3 22-5 31q-7 6-17 4-10-6-12-16l-1-4-1-3-3 2h-6l3-2c15-7 15-7 26-18h-5c-25 0-51-20-64-41l-8-16-2-4q-4-14 3-27"/><path fill="#b3b9d0" d="m601 1015-8 5-3 5 3 6c3 6 3 6 2 8l-1-2c-9-9-22-8-33-6-39 11-71 50-83 87l-3 17-5-8h2v-6c0-26 19-49 36-67l3-3c17-18 41-31 67-29l9 3-2-5-1-4q4 3 3 5l3-2 3-2 3-2z"/><path fill="#d0d8e9" d="M886 781q5 8 3 17 0 8 3 17 5 21-10 35-12 9-26 5-8-7-8-18v-4h3q16 2 28-11 8-14 7-29z"/><path fill="#bec6db" d="m181 908 3 3q15 13 35 13h5l8-1h3q5 13 0 25-9 9-21 6-8-2-14-9l-5-2 3-1q1-6-3-6l-2-13q-1-7-9-10-4-3-3-5"/><path fill="#98a0bb" d="m800 746-4 2-2 4-2 3q-10 15-3 31 8 9 21 7c13-5 16-16 19-29l1-3h1l-2 16-1 5q-1 5-6 5l-3 3q-8 8-19 6c-10-4-13-8-17-18a85 85 0 0 0 4 48q8 21 27 33l3 2 15 3c-17 11-49 11-68 11v-1l10-1q22 0 42-7l-5-2q-10-6-17-13l-4-4a81 81 0 0 1-10-79q4-10 13-18l1-1-4-2c7-2 7-2 10-1"/><path fill="#8b98b8" d="m375 990 6 7-3 9c-8 26 2 55 19 75q18 18 42 23-17 7-32-5l-14-12-2-2a81 81 0 0 1-22-59v-3q-1-13 5-24l-3-1 5-2z"/><path fill="#a5adc6" d="M279 746v4c-3 33 19 70 45 89q9 5 20 4l-4 3-5 4q-4 4-7 3l2-3-2-1c-30-15-55-53-57-86q0-7 3-14h3z"/><path fill="#a6aec6" d="m732 762-3 2q-13 13-18 32l-1 3-2 25v4q-1 25 15 44l-15-3 4-1-2-2c-14-19-13-50-6-72l1-4c4-10 14-32 27-28"/><path fill="#4a2c80" d="M635 803h5c5 0 5 0 9 4l1 11v55q2 14-7 24-18 5-37 4v-1l7-1h4l9-1 4-1h4q9-1 12-9v-6l1-4v-47c1-13 1-13-3-25l-11-1-29 1-4 1h-33l-4 1h-8l-9 1-1 12v40l-1 17v15q0 6 6 7l6 1h6v1h-10q-7 0-10-6v-79q0-7 6-11l14-2h28l21-1z"/><path fill="#382962" d="M626 791h13q6 0 11 3h-22l-43 1h-27c-14 1-14 1-24 9q-2 5-1 11v83q0 8 7 11 11 4 22 3h21c34 1 34 1 65-9l2 1c-15 15-52 11-72 11h-20q-16 2-26-9-2-6-2-14v-80q0-11 10-17l26-3h29l23-1z"/><path fill="#e4e4f2" d="m368 1179 6 1-6 2z"/><path fill="#e1e7f2" d="m308 1131 2 3h-3z"/><path fill="#fdfefe" d="M299 1117h2v2l2 1h-3z"/><path fill="#b4b2df" d="m703 870 4 1-3 1z"/><path fill="#e7edf9" d="m500 1185 2 1-1 3z"/><path fill="#b2b0e3" d="m458 1115 2 1-1 2-2-2z"/><path fill="#f3fbfc" d="M611 1064h5v1h-5z"/><path fill="#f5fdfe" d="m606 1055 2 1-1 3z"/><path fill="#d2d7eb" d="m517 1210 2 3h-2z"/><path fill="#cfced8" d="m376 1181 4 1Z"/><path fill="#c8cfe0" d="m352 1175 4 1Z"/><path fill="#c4c7e1" d="m433 1117 4 1Z"/><path fill="#d4e7e8" d="m685 1112 1 4Z"/><path fill="#f8fbfb" d="m639 1066 2 1-1 2z"/><path fill="#f8fbfc" d="m598 1038 2 3h-2z"/><path fill="#c5f8f3" d="m605 1014 2 1h-3z"/><path fill="#e5fcfe" d="m355 957 2 1-1 2z"/><path fill="#dcdeeb" d="M395 709h3l-1 2z"/><path fill="#dcf8f8" d="m308 629 2 3h-2z"/><path fill="#fdfffe" d="m781 526 2 2-2 1z"/><path fill="#f4f9fb" d="m456 315 3 1-3 1z"/><path fill="#fafbfc" d="m467 313 2 2-3-1z"/><path fill="#b9bdd2" d="m336 1165 2 1-2 1z"/><path fill="#dadfef" d="m312 1138 2 2h-2z"/><path fill="#d1d3e2" d="m297 1102 1 2-2-1z"/><path d="m924 1090 3 1Z"/><path fill="#cde0df" d="M596 1019h2l-1 2z"/><path fill="#bdc1d4" d="m368 984 2 2h-2z"/><path fill="#fafefe" d="m191 942 1 2-2-1z"/><path fill="#96f1f7" d="m741 876 3 1Z"/><path fill="#fafdfd" d="m760 752 3 1Z"/><path fill="#fefefc" d="m776 748 2 1-2 1z"/><path fill="#c8d7f0" d="m352 715 3 1Z"/><path fill="#e6e5f1" d="m358 714 3 1Z"/><path fill="#e3e2f3" d="m354 685 1 2-2-1z"/><path fill="#fcfefc" d="m272 590 2 2h-2z"/><path fill="#e5e7ea" d="m336 383 2 1-2 1z"/><path fill="#fdfcff" d="M692 371h2l-1 2z"/><path fill="#e7e9ec" d="m399 336 3 1Z"/><path fill="#edeef6" d="m608 323 1 2-2-1z"/><path fill="#fdfdfd" d="m428 321 2 2h-2z"/><path fill="#e5fcfa" d="m574 315 3 1Z"/><path fill="#f7f7fb" d="m463 314 2 1-2 1z"/><path fill="#fbfbfd" d="m562 313 3 1Z"/><path fill="#c0bfe7" d="m581 1215 2 1Z"/><path fill="#9d96b2" d="m386 1181 2 1Z"/><path fill="#c6c2df" d="m320 1151 2 1Z"/><path d="m942 1119 2 1Z"/><path fill="#404040" d="m874 1117 2 1Z"/><path fill="#c1c0df" d="m452 1110 2 1Z"/><path d="m1004 1090 2 1Zm-48 0 2 1Z"/><path fill="#fafbfc" d="m622 1064 2 1Z"/><path fill="#fff" d="m619 1064 2 1Z"/><path fill="#f8fcfd" d="m601 1045 2 1Z"/><path fill="#dcdfe0" d="m350 1008 2 1Z"/><path fill="#d2cff8" d="m373 994 2 1Z"/><path fill="#c5c0da" d="m368 989 2 1Z"/><path fill="#fffefc" d="m759 877 2 1Z"/><path fill="#97a8c5" d="m738 876 2 1Z"/><path fill="#9b98c5" d="m821 870 2 1Z"/><path fill="#cbd3d2" d="m679 862 2 1Z"/><path fill="#fcffff" d="m340 846 2 1Zm533-83 2 1Z"/><path fill="#f7fbff" d="m783 747 2 1Z"/><path fill="#e9f9f8" d="m786 746 2 1Z"/><path fill="#f8fefe" d="m790 745 2 1Z"/><path fill="#fbfdff" d="m273 744 2 1Z"/><path fill="#fcffff" d="m653 728 2 1Z"/><path fill="#fefeff" d="m366 713 2 1Z"/><path fill="#fcffff" d="m381 702 2 1Z"/><path fill="#dddede" d="m362 691 2 1Z"/><path fill="#c4f9f9" d="m321 651 2 1Z"/><path fill="#fcfdfc" d="m780 518 2 1Z"/><path fill="#dbfdfc" d="m323 398 2 1Z"/><path fill="#f9fafb" d="m336 381 2 1Z"/><path fill="#fafaff" d="m697 376 2 1Z"/><path fill="#fffdff" d="m687 368 2 1Z"/><path fill="#f9fcfe" d="m385 344 2 1Z"/><path fill="#fdfdff" d="m620 329 2 1Z"/><path fill="#f9fbfe" d="m428 324 2 1Z"/><path fill="#f9ffff" d="m451 317 2 1Z"/></svg>
             <span class="torch-held"><svg><use href="#torch"/></svg></span>
             <span class="tooltip player-tooltip">Nibo</span>
         </div>
-
         <!-- ==================== STAGE 1 LAYOUT ==================== -->
         <!-- Factory background -->
         <div class="factory-bg">
@@ -5190,7 +5005,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="tooltip skull-tooltip">Poison</span>
             <svg><use href="#skull"/></svg>
         </div>
-
         <!-- ==================== STAGE 2 LAYOUT ==================== -->
         <div class="stage-2-elements">
             <!-- Jungle background -->
@@ -5199,7 +5013,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             </div>
             <!-- Ground -->
             <div class="ground-S2"></div>
-            <!-- Manhole at L5-P7 (entry point from S4) -->
+            <!-- Manhole at L5-P7 -->
             <div class="manhole-S2-L5-P7"></div>
             <div class="manhole-cover-S2-L5-P7"></div>
             <!-- Rock wall on left edge of S2 -->
@@ -5248,7 +5062,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             </div>
             <label for="tree-chopped" class="axe-at-tree"><svg><use href="#axe"/></svg></label>
         </div>
-
         <!-- ==================== STAGE 4 LAYOUT ==================== -->
         <div class="stage-4-elements">
             <!-- Caves background -->
@@ -5284,14 +5097,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="stalactite-S4 stalactite-S4-L2-P8-P9"><svg><use href="#stalactite-2"/></svg></div>
             <div class="stalagmite-S4 stalagmite-S4-L2-P8-P9"><svg><use href="#stalagmite-2"/></svg></div>
         </div>
-
         <!-- Barrel blocking exit -->
         <div class="barrel-S3-L9-P15">
             <svg><use href="#barrel"/></svg>
             <svg><use href="#barrel"/></svg>
             <span class="tooltip">Barrels</span>
         </div>
-
         <!-- ==================== STAGE 3 LAYOUT ==================== -->
         <!-- Spaceship background -->
         <div class="spacecraft-bg">
@@ -5333,7 +5144,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <svg><use href="#flight-controls"/></svg>
             <span class="tooltip">Flight controls<br>are now available.</span>
         </label>
-
         <!-- ==================== STAGE 1 LOOT ==================== -->
         <div class="container coin loot-S1-L0-P3">
             <label for="loot-S1-L0-P3-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
@@ -5355,7 +5165,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <label for="loot-S1-L4-P2-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
             <span class="loot-hover-area"></span>
         </div>
-
         <!-- ==================== STAGE 4 LOOT ==================== -->
         <div class="container coin loot-S4-L3-P7">
             <label for="loot-S4-L3-P7-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
@@ -5376,7 +5185,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="container coin loot-S4-L0-P9">
             <label for="loot-S4-L0-P9-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
         </div>
-
         <!-- ==================== STAGE 2 LOOT ==================== -->
         <div class="stage-2-elements">
             <div class="container coin loot-S2-L5-P8">
@@ -5402,7 +5210,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <span class="loot-hover-area"></span>
             </div>
         </div>
-
         <!-- ==================== STAGE 3 LOOT ==================== -->
         <div class="container ruby loot-S3-L5-P18">
             <label for="loot-S3-L5-P18-pickup" class="loot-in-game"><svg><use href="#gem"/></svg></label>
@@ -5421,12 +5228,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <label for="loot-S3-L9-P14-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
             <span class="loot-hover-area"></span>
         </div>
-
         </div><!-- end game-world -->
-
-        <!-- darkness for Stage 4 (Caves) - creates darkness with hole around player -->
+        <!-- darkness for Stage 4 -->
         <div class="darkness-S4"></div>
-
         <!-- Title screen overlay -->
         <label for="title-screen-toggle" class="overlay title-screen-overlay">
             <h1>NIBO'S WAY OUT</h1>
@@ -5434,7 +5238,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="submessage">Click to start</div>
             <div class="copyright">© 2026 René Uittenbogaard · <a href="https://github.com/ruittenb/nibo-game" target="_blank">View on GitHub</a></div>
         </label>
-
         <!-- Death overlays -->
         <div class="overlay death-screen-overlay death-screen-overlay-poison">
             <div class="message">You died from poison</div>
@@ -5448,7 +5251,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="message">You died from chemical waste</div>
             <div class="submessage">GAME OVER</div>
         </div>
-
         <!-- Escape overlay -->
         <div class="overlay escape-screen-overlay">
             <div class="message">You Escaped!</div>
@@ -5459,7 +5261,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 </video>
             </div>
         </div>
-
     </div>
 </body>
 </html>
