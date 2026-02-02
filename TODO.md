@@ -5,10 +5,10 @@
 
  - central pick up icon in nav-panel?
 
- - afslanken met geneste regels?
+ - tooltips in inventory
 
-    - background regels
+ - restart link
 
- - animation in torch
+ - show floating items only on hover
 
 
