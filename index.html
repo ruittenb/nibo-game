@@ -234,14 +234,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --border-color: #4a4a6a;      /* Border color for UI elements */
 
             /* Z-index layers */
-            --z-climbables: 50;           /* Ladders, vines */
-            --z-hazards: 100;             /* Hazards (poison, disease) */
-            --z-scenery: 200;             /* Scenery (toolbox, door, tree) */
-            --z-floating-item: 300;       /* Floating item icons when using items */
-            --z-arrows: 400;              /* In-game navigation arrows */
-            --z-vision-mask: 500;         /* Vision mask (caves darkness) */
-            --z-items: 600;               /* Pickupable items (key, wrench, axe, battery, idcard, torch) */
-            --z-valuables: 600;           /* Valuables (coins, gems) */
+            --z-valuable-hover: 50;       /* Valuable hover areas */
+            --z-item-hover: 50;           /* Item pickup hover areas */
+            --z-climbables: 100;          /* Ladders, vines */
+            --z-hazards: 200;             /* Hazards (poison, disease) */
+            --z-scenery: 300;             /* Scenery (toolbox, door, tree) */
+            --z-floating-item: 400;       /* Floating item icons when using items */
+            --z-arrows: 500;              /* In-game navigation arrows */
+            --z-vision-mask: 600;         /* Vision mask (caves darkness) */
+            --z-items: 700;               /* Pickupable items (key, wrench, axe, battery, idcard, torch) */
+            --z-valuables: 700;           /* Valuables (coins, gems) */
             --z-ui: 800;                  /* UI elements (title, inventory, counter) */
             --z-title-overlay: 1000;      /* Title screen overlay */
             --z-player: 1100;             /* Player (above title screen) */
@@ -1460,7 +1462,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) - var(--item-offset));
             pointer-events: auto;
-            z-index: 1;
+            z-index: var(--z-item-hover);
         }
         /* Hide key hover area when picked up or used */
         #key-pickup:checked ~ .game-world .key-hover-area,
@@ -1560,7 +1562,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
             pointer-events: auto;
-            z-index: 1;
+            z-index: var(--z-item-hover);
         }
         /* Hide axe hover area and tooltip when picked up or tree chopped */
         #axe-pickup:checked ~ .game-world .axe-hover-area,
@@ -1626,7 +1628,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             pointer-events: auto;
-            z-index: 1;
+            z-index: var(--z-item-hover);
         }
         /* Hide ID card hover area and tooltip when picked up */
         #idcard-pickup:checked ~ .game-world .idcard-hover-area,
@@ -1691,7 +1693,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
             pointer-events: auto;
-            z-index: 1;
+            z-index: var(--z-item-hover);
         }
         /* Hide battery hover area and tooltip when picked up or bolt fixed */
         #battery-pickup:checked ~ .game-world .battery-hover-area,
@@ -1758,7 +1760,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             pointer-events: auto;
-            z-index: 1;
+            z-index: var(--z-item-hover);
         }
         /* Hide torch hover area and tooltip when picked up */
         #torch-pickup:checked ~ .game-world .torch-hover-area,
@@ -1823,7 +1825,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 25px);
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
             pointer-events: auto;
-            z-index: 1;
+            z-index: var(--z-item-hover);
             display: none;
         }
         /* Show wrench hover area and tooltip element when toolbox unlocked but wrench not picked up */
@@ -2086,99 +2088,68 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 #222 8px
             );
         }
-        .warning-strip-left {
+        .strip-S1-left {
             left: 0;
             bottom: var(--ground-height);
             height: calc(var(--stage-height) - var(--ground-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px);
         }
-        .warning-strip-right {
+        .strip-S1-right {
             left: calc(var(--pos-width) * 6 - var(--warning-strip-width) - 4px);
             bottom: calc(var(--ground-height) + 60px);
             height: calc(var(--stage-height) - var(--ground-height) - 60px - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px);
         }
-        /* Mountain strip on left side of Stage 2 */
-        .rock-strip-S2 {
+        /* Rock strips - shared base styles */
+        .rock-strip {
             position: absolute;
-            left: calc(var(--pos-width) * 6);
             width: 12px;
+        }
+        .rock-strip::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='400'%3E%3Cdefs%3E%3Cfilter id='f' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur stdDeviation='0.4'/%3E%3C/filter%3E%3C/defs%3E%3Cpolygon points='2,5 8,7 10,13 5,15 1,11' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,35 11,39 9,47 4,45 2,40' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='1,58 7,56 10,62 8,68 3,66' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='4,105 9,103 11,108 7,114 2,110' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='2,122 6,119 10,124 8,132 3,129' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='5,168 10,171 8,179 3,177 1,172' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='3,195 8,192 11,198 6,205 1,200' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,212 10,215 8,222 3,220 2,216' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='1,265 7,263 10,270 5,277 2,272' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='4,295 9,292 11,299 7,305 2,301' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='2,310 8,308 10,315 6,322 1,317' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='5,352 10,355 8,363 3,360 1,356' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='3,368 7,365 11,371 8,378 2,374' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,390 10,394 7,402 2,399 3,393' fill='%232a2a2a' filter='url(%23f)'/%3E%3C/svg%3E");
+            background-repeat: repeat-y;
+        }
+        /* Rock strip positions - left edge variant (jagged right edge) */
+        .strip-S2-left,
+        .strip-S4-left {
+            background: repeating-linear-gradient(
+                10deg,
+                #777 0px,
+                #777 8px,
+                #666 8px,
+                #666 10px,
+                #777 10px,
+                #777 22px,
+                #333 22px,
+                #333 24px
+            );
+            box-shadow: inset -2px 0 3px #00000066;
+            clip-path: polygon(
+                0% 0%, 100% 0%, 100% 2%, 72% 4%, 100% 7%, 85% 9%, 68% 13%,
+                100% 16%, 78% 21%, 100% 23%, 65% 27%, 88% 31%, 100% 34%,
+                70% 38%, 100% 41%, 82% 46%, 100% 48%, 68% 53%, 90% 56%,
+                100% 59%, 75% 64%, 100% 67%, 65% 72%, 85% 75%, 100% 78%,
+                72% 83%, 100% 86%, 80% 91%, 68% 94%, 100% 97%, 100% 100%,
+                0% 100%
+            );
+        }
+        .strip-S2-left {
+            left: calc(var(--pos-width) * 6);
             bottom: calc(var(--stage-height) + var(--ground-height));
             height: calc(var(--stage-height) - var(--ground-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px);
-            background: repeating-linear-gradient(
-                10deg,
-                #777 0px,
-                #777 8px,
-                #666 8px,
-                #666 10px,
-                #777 10px,
-                #777 22px,
-                #333 22px,
-                #333 24px
-            );
-            box-shadow: inset -2px 0 3px #00000066;
-            clip-path: polygon(
-                0% 0%, 100% 0%, 100% 2%, 72% 4%, 100% 7%, 85% 9%, 68% 13%,
-                100% 16%, 78% 21%, 100% 23%, 65% 27%, 88% 31%, 100% 34%,
-                70% 38%, 100% 41%, 82% 46%, 100% 48%, 68% 53%, 90% 56%,
-                100% 59%, 75% 64%, 100% 67%, 65% 72%, 85% 75%, 100% 78%,
-                72% 83%, 100% 86%, 80% 91%, 68% 94%, 100% 97%, 100% 100%,
-                0% 100%
-            );
         }
-        .rock-strip-S2::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='400'%3E%3Cdefs%3E%3Cfilter id='f' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur stdDeviation='0.4'/%3E%3C/filter%3E%3C/defs%3E%3Cpolygon points='2,5 8,7 10,13 5,15 1,11' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,35 11,39 9,47 4,45 2,40' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='1,58 7,56 10,62 8,68 3,66' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='4,105 9,103 11,108 7,114 2,110' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='2,122 6,119 10,124 8,132 3,129' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='5,168 10,171 8,179 3,177 1,172' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='3,195 8,192 11,198 6,205 1,200' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,212 10,215 8,222 3,220 2,216' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='1,265 7,263 10,270 5,277 2,272' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='4,295 9,292 11,299 7,305 2,301' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='2,310 8,308 10,315 6,322 1,317' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='5,352 10,355 8,363 3,360 1,356' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='3,368 7,365 11,371 8,378 2,374' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,390 10,394 7,402 2,399 3,393' fill='%232a2a2a' filter='url(%23f)'/%3E%3C/svg%3E");
-            background-repeat: repeat-y;
-        }
-        /* Rock strip on left side of Stage 4 (starts above door) */
-        /* Position at left edge of cave, visible through vision mask hole at P7 */
-        .rock-strip-S4-left {
-            position: absolute;
+        .strip-S4-left {
             left: calc(var(--pos-width) * 6);
-            width: 12px;
             bottom: calc(var(--ground-height) + 60px);
             height: calc(var(--stage-height) - var(--ground-height) - 60px - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px);
-            z-index: 1;
-            background: repeating-linear-gradient(
-                10deg,
-                #777 0px,
-                #777 8px,
-                #666 8px,
-                #666 10px,
-                #777 10px,
-                #777 22px,
-                #333 22px,
-                #333 24px
-            );
-            box-shadow: inset -2px 0 3px #00000066;
-            clip-path: polygon(
-                0% 0%, 100% 0%, 100% 2%, 72% 4%, 100% 7%, 85% 9%, 68% 13%,
-                100% 16%, 78% 21%, 100% 23%, 65% 27%, 88% 31%, 100% 34%,
-                70% 38%, 100% 41%, 82% 46%, 100% 48%, 68% 53%, 90% 56%,
-                100% 59%, 75% 64%, 100% 67%, 65% 72%, 85% 75%, 100% 78%,
-                72% 83%, 100% 86%, 80% 91%, 68% 94%, 100% 97%, 100% 100%,
-                0% 100%
-            );
         }
-        .rock-strip-S4-left::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='400'%3E%3Cdefs%3E%3Cfilter id='f' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur stdDeviation='0.4'/%3E%3C/filter%3E%3C/defs%3E%3Cpolygon points='2,5 8,7 10,13 5,15 1,11' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,35 11,39 9,47 4,45 2,40' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='1,58 7,56 10,62 8,68 3,66' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='4,105 9,103 11,108 7,114 2,110' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='2,122 6,119 10,124 8,132 3,129' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='5,168 10,171 8,179 3,177 1,172' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='3,195 8,192 11,198 6,205 1,200' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,212 10,215 8,222 3,220 2,216' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='1,265 7,263 10,270 5,277 2,272' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='4,295 9,292 11,299 7,305 2,301' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='2,310 8,308 10,315 6,322 1,317' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='5,352 10,355 8,363 3,360 1,356' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='3,368 7,365 11,371 8,378 2,374' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,390 10,394 7,402 2,399 3,393' fill='%232a2a2a' filter='url(%23f)'/%3E%3C/svg%3E");
-            background-repeat: repeat-y;
-        }
-        /* Rock strip on right side of Stage 4 */
-        /* Position at right edge of cave, visible through vision mask hole at P12 */
-        .rock-strip-S4-right {
-            position: absolute;
+        /* Rock strip position - right edge variant (jagged left edge) */
+        .strip-S4-right {
             left: calc(var(--pos-width) * 12 - 16px);
-            width: 12px;
             bottom: var(--ground-height);
             height: calc(var(--stage-height) - var(--ground-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px);
-            z-index: 1;
             background: repeating-linear-gradient(
                 -10deg,
                 #777 0px,
@@ -2198,14 +2169,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 0% 34%, 12% 31%, 35% 27%, 0% 23%, 22% 21%, 0% 16%, 32% 13%,
                 15% 9%, 0% 7%, 28% 4%, 0% 2%
             );
-        }
-        .rock-strip-S4-right::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='400'%3E%3Cdefs%3E%3Cfilter id='f' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur stdDeviation='0.4'/%3E%3C/filter%3E%3C/defs%3E%3Cpolygon points='2,5 8,7 10,13 5,15 1,11' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,35 11,39 9,47 4,45 2,40' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='1,58 7,56 10,62 8,68 3,66' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='4,105 9,103 11,108 7,114 2,110' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='2,122 6,119 10,124 8,132 3,129' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='5,168 10,171 8,179 3,177 1,172' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='3,195 8,192 11,198 6,205 1,200' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,212 10,215 8,222 3,220 2,216' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='1,265 7,263 10,270 5,277 2,272' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='4,295 9,292 11,299 7,305 2,301' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='2,310 8,308 10,315 6,322 1,317' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='5,352 10,355 8,363 3,360 1,356' fill='%232a2a2a' filter='url(%23f)'/%3E%3Cpolygon points='3,368 7,365 11,371 8,378 2,374' fill='%23333' filter='url(%23f)'/%3E%3Cpolygon points='6,390 10,394 7,402 2,399 3,393' fill='%232a2a2a' filter='url(%23f)'/%3E%3C/svg%3E");
-            background-repeat: repeat-y;
         }
         /* Manhole and cover at S2-L5-P7 (entry point from S4) */
         .manhole-S2-L5-P7 {
@@ -2504,14 +2467,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             filter: drop-shadow(0 0 2px #000000cc);
         }
         .barrel-S3-L9-P15 svg:first-child {
+            top: 0px;
+            left: 14px;
+        }
+        .barrel-S3-L9-P15 svg:nth-child(2) {
             rotate: 90deg;
             top: 5px;
             left: -4px;
-            z-index: 1;
-        }
-        .barrel-S3-L9-P15 svg:nth-child(2) {
-            top: 0px;
-            left: 14px;
         }
         .barrel-S3-L9-P15 .tooltip {
             bottom: calc(100% + 6px);
@@ -4198,49 +4160,49 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
-        .hover-area {
+        .valuable-hover-area {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: auto;
-            z-index: 1;
+            z-index: var(--z-valuable-hover);
         }
         /* Hide hover area when player is at valuable location (so pickup works) */
-        #level-0:checked ~ #pos-3:checked ~ .game-world .valuable-S1-L0-P3 .hover-area,
-        #level-1:checked ~ #pos-4:checked ~ .game-world .valuable-S1-L1-P4 .hover-area,
-        #level-3:checked ~ #pos-5:checked ~ .game-world .valuable-S1-L3-P5 .hover-area,
-        #level-2:checked ~ #pos-1:checked ~ .game-world .valuable-S1-L2-P1 .hover-area,
-        #level-4:checked ~ #pos-2:checked ~ .game-world .valuable-S1-L4-P2 .hover-area,
+        #level-0:checked ~ #pos-3:checked ~ .game-world .valuable-S1-L0-P3 .valuable-hover-area,
+        #level-1:checked ~ #pos-4:checked ~ .game-world .valuable-S1-L1-P4 .valuable-hover-area,
+        #level-3:checked ~ #pos-5:checked ~ .game-world .valuable-S1-L3-P5 .valuable-hover-area,
+        #level-2:checked ~ #pos-1:checked ~ .game-world .valuable-S1-L2-P1 .valuable-hover-area,
+        #level-4:checked ~ #pos-2:checked ~ .game-world .valuable-S1-L4-P2 .valuable-hover-area,
         /* S2 uses levels 5-9 */
-        #level-5:checked ~ #pos-8:checked ~ .game-world .valuable-S2-L5-P8 .hover-area,
-        #level-6:checked ~ #pos-11:checked ~ .game-world .valuable-S2-L6-P11 .hover-area,
-        #level-7:checked ~ #pos-7:checked ~ .game-world .valuable-S2-L7-P7 .hover-area,
-        #level-8:checked ~ #pos-9:checked ~ .game-world .valuable-S2-L8-P9 .hover-area,
-        #level-9:checked ~ #pos-10:checked ~ .game-world .valuable-S2-L9-P10 .hover-area,
+        #level-5:checked ~ #pos-8:checked ~ .game-world .valuable-S2-L5-P8 .valuable-hover-area,
+        #level-6:checked ~ #pos-11:checked ~ .game-world .valuable-S2-L6-P11 .valuable-hover-area,
+        #level-7:checked ~ #pos-7:checked ~ .game-world .valuable-S2-L7-P7 .valuable-hover-area,
+        #level-8:checked ~ #pos-9:checked ~ .game-world .valuable-S2-L8-P9 .valuable-hover-area,
+        #level-9:checked ~ #pos-10:checked ~ .game-world .valuable-S2-L9-P10 .valuable-hover-area,
         /* S4 uses levels 0-4 */
-        #level-3:checked ~ #pos-8:checked ~ .game-world .valuable-S4-L3-P8 .hover-area,
-        #level-1:checked ~ #pos-10:checked ~ .game-world .valuable-S4-L1-P10 .hover-area {
+        #level-3:checked ~ #pos-8:checked ~ .game-world .valuable-S4-L3-P8 .valuable-hover-area,
+        #level-1:checked ~ #pos-10:checked ~ .game-world .valuable-S4-L1-P10 .valuable-hover-area {
             display: none;
         }
         /* Show tooltip on hover */
-        #valuable-S1-L0-P3-pickup:not(:checked) ~ .game-world .valuable-S1-L0-P3 .hover-area:hover ~ .tooltip,
-        #valuable-S1-L1-P4-pickup:not(:checked) ~ .game-world .valuable-S1-L1-P4 .hover-area:hover ~ .tooltip,
-        #valuable-S1-L3-P5-pickup:not(:checked) ~ .game-world .valuable-S1-L3-P5 .hover-area:hover ~ .tooltip,
-        #valuable-S1-L2-P1-pickup:not(:checked) ~ .game-world .valuable-S1-L2-P1 .hover-area:hover ~ .tooltip,
-        #valuable-S1-L4-P2-pickup:not(:checked) ~ .game-world .valuable-S1-L4-P2 .hover-area:hover ~ .tooltip,
-        #valuable-S2-L5-P8-pickup:not(:checked) ~ .game-world .valuable-S2-L5-P8 .hover-area:hover ~ .tooltip,
-        #valuable-S2-L6-P11-pickup:not(:checked) ~ .game-world .valuable-S2-L6-P11 .hover-area:hover ~ .tooltip,
-        #valuable-S2-L7-P7-pickup:not(:checked) ~ .game-world .valuable-S2-L7-P7 .hover-area:hover ~ .tooltip,
-        #valuable-S2-L8-P9-pickup:not(:checked) ~ .game-world .valuable-S2-L8-P9 .hover-area:hover ~ .tooltip,
-        #valuable-S2-L9-P10-pickup:not(:checked) ~ .game-world .valuable-S2-L9-P10 .hover-area:hover ~ .tooltip,
-        #valuable-S3-L5-P15-pickup:not(:checked) ~ .game-world .valuable-S3-L5-P15 .hover-area:hover ~ .tooltip,
-        #valuable-S3-L5-P18-pickup:not(:checked) ~ .game-world .valuable-S3-L5-P18 .hover-area:hover ~ .tooltip,
-        #valuable-S3-L8-P18-pickup:not(:checked) ~ .game-world .valuable-S3-L8-P18 .hover-area:hover ~ .tooltip,
-        #valuable-S3-L9-P14-pickup:not(:checked) ~ .game-world .valuable-S3-L9-P14 .hover-area:hover ~ .tooltip,
-        #valuable-S4-L3-P8-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P8 .hover-area:hover ~ .tooltip,
-        #valuable-S4-L1-P10-pickup:not(:checked) ~ .game-world .valuable-S4-L1-P10 .hover-area:hover ~ .tooltip,
+        #valuable-S1-L0-P3-pickup:not(:checked) ~ .game-world .valuable-S1-L0-P3 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S1-L1-P4-pickup:not(:checked) ~ .game-world .valuable-S1-L1-P4 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S1-L3-P5-pickup:not(:checked) ~ .game-world .valuable-S1-L3-P5 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S1-L2-P1-pickup:not(:checked) ~ .game-world .valuable-S1-L2-P1 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S1-L4-P2-pickup:not(:checked) ~ .game-world .valuable-S1-L4-P2 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S2-L5-P8-pickup:not(:checked) ~ .game-world .valuable-S2-L5-P8 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S2-L6-P11-pickup:not(:checked) ~ .game-world .valuable-S2-L6-P11 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S2-L7-P7-pickup:not(:checked) ~ .game-world .valuable-S2-L7-P7 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S2-L8-P9-pickup:not(:checked) ~ .game-world .valuable-S2-L8-P9 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S2-L9-P10-pickup:not(:checked) ~ .game-world .valuable-S2-L9-P10 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S3-L5-P15-pickup:not(:checked) ~ .game-world .valuable-S3-L5-P15 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S3-L5-P18-pickup:not(:checked) ~ .game-world .valuable-S3-L5-P18 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S3-L8-P18-pickup:not(:checked) ~ .game-world .valuable-S3-L8-P18 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S3-L9-P14-pickup:not(:checked) ~ .game-world .valuable-S3-L9-P14 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S4-L3-P8-pickup:not(:checked) ~ .game-world .valuable-S4-L3-P8 .valuable-hover-area:hover ~ .tooltip,
+        #valuable-S4-L1-P10-pickup:not(:checked) ~ .game-world .valuable-S4-L1-P10 .valuable-hover-area:hover ~ .tooltip,
         /* Show tooltip when player is at valuable location (hover-area hidden, so use container:hover) */
         /* S2/S3 use levels 5-9 */
         #level-6:checked ~ #pos-11:checked ~ #valuable-S2-L6-P11-pickup:not(:checked) ~ .game-world .valuable-S2-L6-P11:hover .tooltip,
@@ -5178,8 +5140,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Ground -->
         <div class="ground-S1"></div>
         <!-- Warning strips -->
-        <div class="warning-strip warning-strip-left"></div>
-        <div class="warning-strip warning-strip-right"></div>
+        <div class="warning-strip strip-S1-left"></div>
+        <div class="warning-strip strip-S1-right"></div>
         <!-- Platforms -->
         <div class="platform platform-S1-L1"></div>
         <div class="platform platform-S1-L2-left"></div>
@@ -5227,10 +5189,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="manhole-S2-L5-P7"></div>
             <div class="manhole-cover-S2-L5-P7"></div>
             <!-- Rock strip on left edge of S2 -->
-            <div class="rock-strip-S2"></div>
+            <div class="rock-strip strip-S2-left"></div>
             <!-- Rock strips on edges of S4 -->
-            <div class="rock-strip-S4-left"></div>
-            <div class="rock-strip-S4-right"></div>
+            <div class="rock-strip strip-S4-left"></div>
+            <div class="rock-strip strip-S4-right"></div>
             <!-- Platforms -->
             <div class="platform platform-S2-L6-left"></div>
             <div class="platform platform-S2-L6-right"></div>
@@ -5361,23 +5323,23 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- ==================== STAGE 1 VALUABLES ==================== -->
         <div class="container coin valuable-S1-L0-P3">
             <label for="valuable-S1-L0-P3-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-            <span class="hover-area"></span>
+            <span class="valuable-hover-area"></span>
         </div>
         <div class="container coin valuable-S1-L1-P4">
             <label for="valuable-S1-L1-P4-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-            <span class="hover-area"></span>
+            <span class="valuable-hover-area"></span>
         </div>
         <div class="container coin valuable-S1-L3-P5">
             <label for="valuable-S1-L3-P5-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-            <span class="hover-area"></span>
+            <span class="valuable-hover-area"></span>
         </div>
         <div class="container coin valuable-S1-L2-P1">
             <label for="valuable-S1-L2-P1-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-            <span class="hover-area"></span>
+            <span class="valuable-hover-area"></span>
         </div>
         <div class="container coin valuable-S1-L4-P2">
             <label for="valuable-S1-L4-P2-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-            <span class="hover-area"></span>
+            <span class="valuable-hover-area"></span>
         </div>
 
         <!-- ==================== STAGE 4 VALUABLES (visible only when player at position) ==================== -->
@@ -5386,7 +5348,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
         <div class="container aquamarine valuable-S4-L3-P8">
             <label for="valuable-S4-L3-P8-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
-            <span class="hover-area"></span>
+            <span class="valuable-hover-area"></span>
             <span class="tooltip">Aquamarine</span>
         </div>
         <div class="container coin valuable-S4-L3-P12">
@@ -5394,7 +5356,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
         <div class="container aquamarine valuable-S4-L1-P10">
             <label for="valuable-S4-L1-P10-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
-            <span class="hover-area"></span>
+            <span class="valuable-hover-area"></span>
             <span class="tooltip">Aquamarine</span>
         </div>
         <div class="container coin valuable-S4-L0-P9">
@@ -5405,45 +5367,45 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="stage-2-elements">
             <div class="container coin valuable-S2-L5-P8">
                 <label for="valuable-S2-L5-P8-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-                <span class="hover-area"></span>
+                <span class="valuable-hover-area"></span>
             </div>
             <div class="container aquamarine valuable-S2-L6-P11">
                 <label for="valuable-S2-L6-P11-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
-                <span class="hover-area"></span>
+                <span class="valuable-hover-area"></span>
                 <span class="tooltip">Aquamarine</span>
             </div>
             <div class="container coin valuable-S2-L7-P7">
                 <label for="valuable-S2-L7-P7-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-                <span class="hover-area"></span>
+                <span class="valuable-hover-area"></span>
             </div>
             <div class="container aquamarine valuable-S2-L8-P9">
                 <label for="valuable-S2-L8-P9-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
-                <span class="hover-area"></span>
+                <span class="valuable-hover-area"></span>
                 <span class="tooltip">Aquamarine</span>
             </div>
             <div class="container coin valuable-S2-L9-P10">
                 <label for="valuable-S2-L9-P10-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-                <span class="hover-area"></span>
+                <span class="valuable-hover-area"></span>
             </div>
         </div>
 
         <!-- ==================== STAGE 3 VALUABLES ==================== -->
         <div class="container ruby valuable-S3-L5-P18">
             <label for="valuable-S3-L5-P18-pickup" class="valuable-in-game"><svg><use href="#gem"/></svg></label>
-            <span class="hover-area"></span>
+            <span class="valuable-hover-area"></span>
             <span class="tooltip">Ruby</span>
         </div>
         <div class="container coin valuable-S3-L5-P15">
             <label for="valuable-S3-L5-P15-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-            <span class="hover-area"></span>
+            <span class="valuable-hover-area"></span>
         </div>
         <div class="container coin valuable-S3-L8-P18">
             <label for="valuable-S3-L8-P18-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-            <span class="hover-area"></span>
+            <span class="valuable-hover-area"></span>
         </div>
         <div class="container coin valuable-S3-L9-P14">
             <label for="valuable-S3-L9-P14-pickup" class="valuable-in-game"><svg><use href="#coin"/></svg></label>
-            <span class="hover-area"></span>
+            <span class="valuable-hover-area"></span>
         </div>
 
         </div><!-- end game-world -->
