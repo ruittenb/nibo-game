@@ -4110,8 +4110,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="torch" viewBox="40 40 160 160">
             <g transform="rotate(45 120 120)">
-                <path fill="orange" d="M 86 96 C 90 102 95 107 102 110 H 142 C 145 109 147 107 149 105 C 159 95 163 80 158 67 L 157 65 C 156 62 154 60 152 58 C 151 56 149 55 148 53 C 144 50 140 47 136 43 C 127 34 126 20 131 10 C 126 11 121 14 117 18 C 102 30 96 51 103 70 V 72 C 103 73 102 74 101 75 C 100 76 98 75 97 74 L 96 73 C 90 65 89 53 93 43 C 84 51 79 64 80 77 C 80 80 81 83 82 86 C 82 89 84 93 86 96"/>
-                <path fill="red" d="M 123 81 C 124 76 122 72 121 68 C 120 64 120 60 122 56 L 125 62 C 129 68 136 70 138 78 V 81 C 138 86 136 91 133 94 C 131 95 129 97 127 97 C 121 99 114 96 110 92 C 118 92 122 86 123 81"/>
+                <g>
+                    <path fill="orange" d="M 86 96 C 90 102 95 107 102 110 H 142 C 145 109 147 107 149 105 C 159 95 163 80 158 67 L 157 65 C 156 62 154 60 152 58 C 151 56 149 55 148 53 C 144 50 140 47 136 43 C 127 34 126 20 131 10 C 126 11 121 14 117 18 C 102 30 96 51 103 70 V 72 C 103 73 102 74 101 75 C 100 76 98 75 97 74 L 96 73 C 90 65 89 53 93 43 C 84 51 79 64 80 77 C 80 80 81 83 82 86 C 82 89 84 93 86 96"/>
+                    <path fill="#fc0" d="M 123 81 C 124 76 122 72 121 68 C 120 64 120 60 122 56 L 125 62 C 129 68 136 70 138 78 V 81 C 138 86 136 91 133 94 C 131 95 129 97 127 97 C 121 99 114 96 110 92 C 118 92 122 86 123 81">
+                        <animate attributeName="opacity" values="1;.7;1" dur=".3s" repeatCount="indefinite"/>
+                    </path>
+                    <path fill="red" d="M 123 81 C 124 76 122 72 121 68 C 120 64 120 60 122 56 L 125 62 C 129 68 136 70 138 78 V 81 C 138 86 136 91 133 94 C 131 95 129 97 127 97 C 121 99 114 96 110 92 C 118 92 122 86 123 81"/>
+                    <animateTransform attributeName="transform" type="scale" values="1 1;1.05 .94;1 1" dur=".4s" repeatCount="indefinite" additive="sum"/>
+                    <animateTransform attributeName="transform" type="translate" values="0 0;2 2;-2 0;0 0" dur=".3s" repeatCount="indefinite" additive="sum"/>
+                </g>
                 <path fill="#aa6418" d="M 150 120 V 140 H 140 L 130 220 H 110 L 100 140 H 90 V 120 H 150 Z"/>
             </g>
         </symbol>
