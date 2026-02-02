@@ -29,7 +29,7 @@
   │ 0       │ 0                          │ Stage backgrounds (spacecraft-bg, factory-bg, jungle-bg, caves-bg)                  │
   ├─────────┼────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
   │ 50      │ --z-item-hover             │ Tooltip hover areas for pickable items (key, wrench, axe, battery, idcard, torch)   │
-  │ 50      │ --z-valuable-hover         │ Tooltip hover areas valuables (coins, gems)                                         │
+  │ 50      │ --z-loot-hover             │ Tooltip hover areas loot (coins, gems)                                              │
   ├─────────┼────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
   │ 100     │ --z-climbables             │ Ladders and vines                                                                   │
   ├─────────┼────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
@@ -44,7 +44,7 @@
   │ 600     │ --z-vision-mask            │ Vision mask (caves darkness)                                                        │
   ├─────────┼────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
   │ 700     │ --z-items                  │ Pickable items (key, wrench, axe, battery, idcard, torch)                           │
-  │ 700     │ --z-valuables              │ Valuables (coins, gems) and containers                                              │
+  │ 700     │ --z-loot                   │ Loot (coins, gems) and containers                                                   │
   ┝━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┥
   │ 800     │ --z-ui                     │ UI elements (inv-panel, counter-panel, nav-panel, title, subtitle)                  │
   ├─────────┼────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
