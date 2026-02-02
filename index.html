@@ -2249,8 +2249,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .factory-bg {
             position: absolute;
             left: 0;
-            top: 110px;
             bottom: 0;
+            height: var(--stage-height);
             width: calc(var(--pos-width) * 6);
             z-index: 0;
         }
@@ -2322,87 +2322,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .subtitle-S4 {
             display: none;
         }
-        #pos-1:checked ~ .subtitle-S1,
-        #pos-2:checked ~ .subtitle-S1,
-        #pos-3:checked ~ .subtitle-S1,
-        #pos-4:checked ~ .subtitle-S1,
-        #pos-5:checked ~ .subtitle-S1,
-        #pos-6:checked ~ .subtitle-S1 {
+        /* S1: pos 1-6 + levels 0-4 */
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ :is(#pos-1, #pos-2, #pos-3, #pos-4, #pos-5, #pos-6):checked ~ .subtitle-S1 {
             display: block;
         }
         /* S4: pos 7-12 + levels 0-4 */
-        #level-0:checked ~ #pos-7:checked ~ .subtitle-S4,
-        #level-0:checked ~ #pos-8:checked ~ .subtitle-S4,
-        #level-0:checked ~ #pos-9:checked ~ .subtitle-S4,
-        #level-0:checked ~ #pos-10:checked ~ .subtitle-S4,
-        #level-0:checked ~ #pos-11:checked ~ .subtitle-S4,
-        #level-0:checked ~ #pos-12:checked ~ .subtitle-S4,
-        #level-1:checked ~ #pos-7:checked ~ .subtitle-S4,
-        #level-1:checked ~ #pos-8:checked ~ .subtitle-S4,
-        #level-1:checked ~ #pos-9:checked ~ .subtitle-S4,
-        #level-1:checked ~ #pos-10:checked ~ .subtitle-S4,
-        #level-1:checked ~ #pos-11:checked ~ .subtitle-S4,
-        #level-1:checked ~ #pos-12:checked ~ .subtitle-S4,
-        #level-2:checked ~ #pos-7:checked ~ .subtitle-S4,
-        #level-2:checked ~ #pos-8:checked ~ .subtitle-S4,
-        #level-2:checked ~ #pos-9:checked ~ .subtitle-S4,
-        #level-2:checked ~ #pos-10:checked ~ .subtitle-S4,
-        #level-2:checked ~ #pos-11:checked ~ .subtitle-S4,
-        #level-2:checked ~ #pos-12:checked ~ .subtitle-S4,
-        #level-3:checked ~ #pos-7:checked ~ .subtitle-S4,
-        #level-3:checked ~ #pos-8:checked ~ .subtitle-S4,
-        #level-3:checked ~ #pos-9:checked ~ .subtitle-S4,
-        #level-3:checked ~ #pos-10:checked ~ .subtitle-S4,
-        #level-3:checked ~ #pos-11:checked ~ .subtitle-S4,
-        #level-3:checked ~ #pos-12:checked ~ .subtitle-S4,
-        #level-4:checked ~ #pos-7:checked ~ .subtitle-S4,
-        #level-4:checked ~ #pos-8:checked ~ .subtitle-S4,
-        #level-4:checked ~ #pos-9:checked ~ .subtitle-S4,
-        #level-4:checked ~ #pos-10:checked ~ .subtitle-S4,
-        #level-4:checked ~ #pos-11:checked ~ .subtitle-S4,
-        #level-4:checked ~ #pos-12:checked ~ .subtitle-S4 {
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~ .subtitle-S4 {
             display: block;
         }
         /* S2: pos 7-12 + levels 5-9 */
-        #level-5:checked ~ #pos-7:checked ~ .subtitle-S2,
-        #level-5:checked ~ #pos-8:checked ~ .subtitle-S2,
-        #level-5:checked ~ #pos-9:checked ~ .subtitle-S2,
-        #level-5:checked ~ #pos-10:checked ~ .subtitle-S2,
-        #level-5:checked ~ #pos-11:checked ~ .subtitle-S2,
-        #level-5:checked ~ #pos-12:checked ~ .subtitle-S2,
-        #level-6:checked ~ #pos-7:checked ~ .subtitle-S2,
-        #level-6:checked ~ #pos-8:checked ~ .subtitle-S2,
-        #level-6:checked ~ #pos-9:checked ~ .subtitle-S2,
-        #level-6:checked ~ #pos-10:checked ~ .subtitle-S2,
-        #level-6:checked ~ #pos-11:checked ~ .subtitle-S2,
-        #level-6:checked ~ #pos-12:checked ~ .subtitle-S2,
-        #level-7:checked ~ #pos-7:checked ~ .subtitle-S2,
-        #level-7:checked ~ #pos-8:checked ~ .subtitle-S2,
-        #level-7:checked ~ #pos-9:checked ~ .subtitle-S2,
-        #level-7:checked ~ #pos-10:checked ~ .subtitle-S2,
-        #level-7:checked ~ #pos-11:checked ~ .subtitle-S2,
-        #level-7:checked ~ #pos-12:checked ~ .subtitle-S2,
-        #level-8:checked ~ #pos-7:checked ~ .subtitle-S2,
-        #level-8:checked ~ #pos-8:checked ~ .subtitle-S2,
-        #level-8:checked ~ #pos-9:checked ~ .subtitle-S2,
-        #level-8:checked ~ #pos-10:checked ~ .subtitle-S2,
-        #level-8:checked ~ #pos-11:checked ~ .subtitle-S2,
-        #level-8:checked ~ #pos-12:checked ~ .subtitle-S2,
-        #level-9:checked ~ #pos-7:checked ~ .subtitle-S2,
-        #level-9:checked ~ #pos-8:checked ~ .subtitle-S2,
-        #level-9:checked ~ #pos-9:checked ~ .subtitle-S2,
-        #level-9:checked ~ #pos-10:checked ~ .subtitle-S2,
-        #level-9:checked ~ #pos-11:checked ~ .subtitle-S2,
-        #level-9:checked ~ #pos-12:checked ~ .subtitle-S2 {
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~ .subtitle-S2 {
             display: block;
         }
-        #pos-13:checked ~ .subtitle-S3,
-        #pos-14:checked ~ .subtitle-S3,
-        #pos-15:checked ~ .subtitle-S3,
-        #pos-16:checked ~ .subtitle-S3,
-        #pos-17:checked ~ .subtitle-S3,
-        #pos-18:checked ~ .subtitle-S3,
-        #pos-φ:checked ~ .subtitle-S3 {
+        /* S3: pos 13-18 + levels 5-9 */
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18, #pos-φ):checked ~ .subtitle-S3 {
             display: block;
         }
 
