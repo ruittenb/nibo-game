@@ -169,21 +169,6 @@ Overlay types:
 
 **Important limitation:** To make the player appear above an overlay, you might think to give `.game-world` a higher z-index than the overlay. **Don't do this** - it would place the *entire* game world (platforms, items, hazards) above the overlay, defeating its purpose. The `translate: none` approach for S1 is specifically designed to avoid this problem by eliminating the stacking context entirely.
 
-## Z-Index Layers
-
-Z-index layers (defined as CSS variables):
-- `--z-items: 15` - Items, hazards
-- `--z-door: 20` - Door (above hazards for tooltip)
-- `--z-ui: 300` - UI elements (title, inventory, counter)
-- `--z-tooltip: 500` - Tooltips
-- `--z-overlay: 1000` - Title screen overlay
-- Player: 1100 (above title, below death/escape)
-- Death/escape overlays: 2000 (above player)
-
-This layering ensures:
-- Player appears in front of the title screen on game start
-- Player is hidden behind death/escape overlays when triggered
-
 ## Item Animations
 
 Each pickupable item has two animation states:
@@ -247,16 +232,20 @@ The `#debug-toggle` checkbox reveals all state inputs for testing. Each input ha
 
 ## Adding New Checkboxes
 
-When adding a new checkbox (for item pickups, unlocks, etc.), **three things** must be updated:
+When adding a new checkbox (for item pickups, unlocks, etc.), **four things** must be updated:
 
 1. **Add the checkbox input** in the HTML inputs section (before `.game-world`)
-2. **Add the class to the hidden inputs rule** - find the CSS rule that starts with `.position-radio, .level-radio, .key-checkbox, ...` and add your new class (e.g., `.my-new-checkbox`)
-3. **Add to debug visibility rule** - find the `#debug-toggle:checked ~ .game-container ...` rule and add your class
+   - Item/state checkboxes: `<input type="checkbox" id="my-checkbox" title="my-checkbox">`
+   - Loot checkboxes: `<input type="checkbox" id="loot-SX-LY-PZ-pickup" class="loot-checkbox" title="coin">`
+2. **Add the ID to the hidden inputs rule** - find the CSS rule that starts with `.position-radio, .level-radio, .loot-checkbox, #key-pickup, ...` and add your new ID (e.g., `#my-checkbox`)
+3. **Add to debug visibility rule** - find the `#debug-toggle:checked ~ .game-container ...` rule and add your ID
 4. **Add debug position** - add a rule like `#my-checkbox { top: 50px; left: XXXpx; }` with a unique left offset
 
 If you skip step 2, the checkbox will be visible in the top-left corner of the play area instead of hidden.
 
-## Adding New Items and Valuables
+**Note:** Level radios, position radios, and loot checkboxes use class selectors (`.level-radio`, `.position-radio`, `.loot-checkbox`) for bulk styling. Item and state checkboxes use individual ID selectors.
+
+## Adding New Items and Loot
 
 ### Items (key, wrench, axe)
 
@@ -273,9 +262,10 @@ If you skip step 2, the checkbox will be visible in the top-left corner of the p
    - This rule must come after the base positioning rule (CSS cascade: later rules override)
 5. **Inventory icon** (`.inventory-item` inside `.inventory`): `visibility: hidden` by default, `visible` with transition-delay when picked up
 
-### Valuables (coins, gems)
+### Loot (coins, gems)
 
-1. **Checkbox** for pickup state: `<input type="checkbox" id="valuable-SX-LY-PZ-pickup">`
+1. **Checkbox** for pickup state: `<input type="checkbox" id="loot-SX-LY-PZ-pickup" class="loot-checkbox" title="coin">`
+   - Must include `class="loot-checkbox"` for bulk hiding/showing in debug mode
 2. **Container** in `.game-world`:
    - `.container` wrapper with location class (e.g., `.valuable-S1-L0-P3`)
    - `.hover-area` span for tooltip hover detection
@@ -283,4 +273,54 @@ If you skip step 2, the checkbox will be visible in the top-left corner of the p
    - Label wrapping the icon, targeting the pickup checkbox
 3. **Fly-to-counter rule**: when checked, transition `bottom`/`left` to valuable counter position
 4. **Digit strip**: if max collectible count increases beyond current digits, add new frames to `@keyframes digit-roll`
-5. **Counter variable**: `--valuable-count` increments via `:checked` selectors counting picked-up valuables
+5. **Counter variable**: `--valuable-count` increments via `:checked` selectors counting picked-up loot
+
+## Z-Index Layers
+
+┌─────────┬──────────────────────┬─────────────────────────────────────────────────────────────────────────────────────┐
+│ Z-Index │        Source        │                               Elements                                              │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ -1      │ -1                   │ Grate grid pattern (:after pseudo)                                                  │
+┝━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┥
+│ 0       │ 0                    │ Stage backgrounds (factory, caves, jungle, spacecraft)                              │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ 50      │ --z-walls            │ Rock and warning walls                                                              │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ 100     │ --z-item-hover       │ Tooltip hover areas for pickable items (key, wrench, axe, battery, idcard, torch)   │
+│ 100     │ --z-loot-hover       │ Tooltip hover areas loot (coins, gems)                                              │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ 200     │ --z-climbables       │ Ladders and vines                                                                   │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ 300     │ --z-hazards          │ Poison, disease                                                                     │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ 400     │ --z-scenery          │ Toolbox, door-container, tree-container, barrels                                    │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ 500     │ --z-floating-item    │ Key-at-toolbox, wrench-at-door, axe-at-tree, battery-at-bolt, idcard-at-controls    │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ 600     │ --z-arrows           │ In-game navigation arrows                                                           │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ 700     │ --z-darkness         │ Darkness mask (caves)                                                               │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ 800     │ --z-items            │ Pickable items (key, wrench, axe, battery, idcard, torch)                           │
+│ 800     │ --z-loot             │ Loot (coins, gems) and containers                                                   │
+┝━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┥
+│ 900     │ --z-ui               │ UI elements (inv-panel, counter-panel, nav-panel, title, subtitle)                  │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ 1000    │ --z-title-overlay    │ Title screen overlay                                                                │
+┝━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┥
+│ 1100    │ --z-player           │ Player                                                                              │
+┝━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┥
+│ 1500    │ --z-tooltip          │ Tooltips                                                                            │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ 2000    │ --z-endgame-overlay  │ Death and escape overlays                                                           │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ 9999    │ 9999                 │ Debug inputs (when visible)                                                         │
+├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+│ 10000   │ 10000                │ Debug panel, title-screen-toggle                                                    │
+└─────────┴──────────────────────┴─────────────────────────────────────────────────────────────────────────────────────┘
+
+
+This layering ensures:
+- Player appears in front of the title screen on game start
+- Player is hidden behind death/escape overlays when triggered
+
