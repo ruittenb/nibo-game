@@ -1726,7 +1726,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             z-index: 200;
             pointer-events: none;
-            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -1779,7 +1778,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery)));
             opacity: 0;
-            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
+            transition: none;
         }
 
         /* Wrench - single element that animates from game world to inventory */
