@@ -234,16 +234,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --border-color: #4a4a6a;      /* Border color for UI elements */
 
             /* Z-index layers */
-            --z-hazards: 15;              /* Hazards (poison, disease) */
-            --z-items: 400;               /* Pickupable items (key, wrench, axe, battery, idcard, torch) */
-            --z-valuables: 400;           /* Valuables (coins, gems) */
-            --z-door: 20;                 /* Door (above hazards for tooltip) */
-            --z-vision-mask: 50;          /* Vision mask (caves darkness) */
-            --z-ui: 500;                  /* UI elements (title, inventory, counter) */
-            --z-tooltip: 1500;            /* Tooltips */
+            --z-climbables: 50;           /* Ladders, vines */
+            --z-hazards: 100;             /* Hazards (poison, disease) */
+            --z-scenery: 200;             /* Scenery (toolbox, door, tree) */
+            --z-floating-item: 300;       /* Floating item icons when using items */
+            --z-arrows: 400;              /* In-game navigation arrows */
+            --z-vision-mask: 500;         /* Vision mask (caves darkness) */
+            --z-items: 600;               /* Pickupable items (key, wrench, axe, battery, idcard, torch) */
+            --z-valuables: 600;           /* Valuables (coins, gems) */
+            --z-ui: 800;                  /* UI elements (title, inventory, counter) */
             --z-title-overlay: 1000;      /* Title screen overlay */
             --z-player: 1100;             /* Player (above title screen) */
-            --z-endgame-overlay: 2000;        /* Death and escape overlays */
+            --z-tooltip: 1500;            /* Tooltips */
+            --z-endgame-overlay: 2000;    /* Death and escape overlays */
 
             /* Vision mask settings */
             --vision-mask-hole-width: 180px;     /* Width of the vision hole (wide enough for nav arrows) */
@@ -913,7 +916,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 20px;
             bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 35px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 2px);
-            z-index: 20;
+            z-index: var(--z-floating-item);
             display: none;
             cursor: pointer;
         }
@@ -993,23 +996,23 @@ AAAAAAAAAAAAAAAAAAAAAA==
             animation: flight-controls-offline 2s ease-in-out infinite;
         }
         /* ID card floating above control button */
-        .idcard-at-button {
+        .idcard-at-controls {
             position: absolute;
             width: 24px;
             height: 24px;
             bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) + 41px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) + 4px);
-            z-index: 20;
+            z-index: var(--z-floating-item);
             display: none;
             cursor: pointer;
         }
-        .idcard-at-button svg {
+        .idcard-at-controls svg {
             width: 100%;
             height: 100%;
             color: var(--idcard-color);
         }
         /* Show ID card at button when player is next to it, has ID card, bolt fixed, AND button not yet pressed - S3 uses levels 5-9 */
-        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .idcard-at-button {
+        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .idcard-at-controls {
             display: block;
             animation: idcard-hovering-pulse 1s ease-in-out infinite;
         }
@@ -1504,7 +1507,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: var(--pickup-size);
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
-            z-index: 20;
+            z-index: var(--z-scenery);
         }
         .toolbox svg {
             width: 100%;
@@ -1868,7 +1871,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 19px;
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 35px);
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - 28px);
-            z-index: 20;
+            z-index: var(--z-floating-item);
             display: none;
             cursor: pointer;
         }
@@ -1890,7 +1893,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 24px;
             bottom: calc(var(--stage-height) + var(--ground-height) + 13px);
             left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset) - 3px);
-            z-index: 20;
+            z-index: var(--z-floating-item);
             display: none;
             cursor: pointer;
             transform-origin: bottom left;
@@ -1990,7 +1993,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 20px;
             height: 20px;
-            z-index: calc(var(--z-player) + 1);
+            z-index: calc(var(--z-player) + 10);
             /* Position relative to player - offset to appear beside them */
             margin-left: 40px;
             margin-top: 10px;
@@ -2351,7 +2354,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 24px;
             height: calc(var(--platform-height) - var(--platform-thickness));
-            z-index: 10;
+            z-index: var(--z-climbables);
         }
 
         /* Wooden ladder - two vertical rails with horizontal rungs */
@@ -2490,7 +2493,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) * 2 + 4px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 + var(--ladder-offset) + 8px);
             width: 32px;
-            z-index: 10;
+            z-index: var(--z-scenery);
         }
         .barrel-S3-L9-P15 svg {
             position: absolute;
@@ -2524,7 +2527,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 24px;
             height: calc(var(--platform-height) - var(--platform-thickness));
-            z-index: 10;
+            z-index: var(--z-climbables);
             /* Wavy main stem */
             background:
                 radial-gradient(ellipse 8px 12px at 8px 10px, #228b22 50%, transparent 50%),
@@ -2580,7 +2583,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 0;
             height: 0;
-            z-index: 50;
+            z-index: var(--z-arrows);
             cursor: pointer;
             user-select: none;
             display: none;
@@ -3699,7 +3702,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 12 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
-            z-index: calc(var(--z-vision-mask) + 10);
+            z-index: auto;
         }
 
         /* Skull */
@@ -3782,7 +3785,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: calc(var(--platform-height) - var(--ground-height) + 10px);
             bottom: calc(var(--stage-height) + var(--ground-height));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset) - 5px - 26px);
-            z-index: var(--z-door);
+            z-index: var(--z-scenery);
         }
         .tree {
             position: absolute;
@@ -3846,7 +3849,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 32px;
             height: 58px;
-            z-index: var(--z-door);
+            z-index: var(--z-scenery);
         }
         .door-container.door-S1-L0-P6 {
             bottom: calc(var(--ground-height) + 2px);
@@ -3898,7 +3901,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 6 - 35px);
             width: 24px;
             height: 24px;
-            z-index: var(--z-door);
+            z-index: var(--z-floating-item);
             transform-origin: calc(100% - 6px) 8px;
         }
         .wrench-at-door svg {
@@ -3910,24 +3913,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .wrench-at-door {
             display: block;
             animation: wrench-rotate 1s ease-in-out infinite;
-            cursor: pointer;
-        }
-
-        /* Door exit - appears when door is open, takes player to Stage 2 */
-        .door-exit {
-            position: absolute;
-            width: 32px;
-            height: 58px;
-            z-index: 16;
-            pointer-events: none;
-        }
-        .door-exit-S1-L0-P6 {
-            bottom: calc(var(--ground-height) + 2px);
-            left: calc(var(--pos-width) * 6 - 42px);
-        }
-        /* Show door exit only when door is open and player is at door location */
-        #level-0:checked ~ #pos-6:checked ~ #door-unlocked:checked ~ .game-world .door-exit {
-            pointer-events: auto;
             cursor: pointer;
         }
 
@@ -5223,7 +5208,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="tooltip door-tooltip">The door handle is broken.<br>You need a wrench.</span>
             <span class="tooltip door-tooltip-wrench">Repair the door handle.</span>
         </div>
-        <label for="pos-7" class="door-exit door-exit-S1-L0-P6"></label>
         <label for="door-unlocked" class="wrench-at-door"><svg><use href="#wrench"/></svg></label>
         <!-- Skull hazard -->
         <div class="skull skull-S1-L1-P6">
@@ -5362,7 +5346,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="tooltip">The battery is<br>installed correctly.</span>
         </div>
         <span class="flight-controls-hover-area"></span>
-        <label for="flight-controls-used" class="idcard-at-button"><svg><use href="#id-card"/></svg></label>
+        <label for="flight-controls-used" class="idcard-at-controls"><svg><use href="#id-card"/></svg></label>
         <div class="flight-controls-unavailable">
             <svg><use href="#flight-controls"/></svg>
             <span class="tooltip tooltip-no-power">Flight controls are offline.<br>You need power.</span>
