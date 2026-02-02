@@ -17,7 +17,8 @@
 
     - Summary: You can reorder checkboxes freely as long as you maintain these dependencies:
       - level radios → pos radios → item/state checkboxes → .game-world
-    - Within the item checkboxes, you need: toolbox-unlocked before wrench-pickup, and idcard-pickup before bolt-fixed before flight-controls-used.
+    - Within the item checkboxes, you need: toolbox-unlocked before wrench-pickup, and idcard-pickup before bolt-fixed
+       before flight-controls-used.
 
  - add video
 
@@ -28,25 +29,27 @@
   ┝━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┥
   │ 0       │ 0                    │ Stage backgrounds (spacecraft-bg, factory-bg, jungle-bg, caves-bg)                  │
   ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
-  │ 50      │ --z-item-hover       │ Tooltip hover areas for pickable items (key, wrench, axe, battery, idcard, torch)   │
-  │ 50      │ --z-loot-hover       │ Tooltip hover areas loot (coins, gems)                                              │
+  │ 50      │ --z-walls            │ Rock and warning walls                                                              │
   ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
-  │ 100     │ --z-climbables       │ Ladders and vines                                                                   │
+  │ 100     │ --z-item-hover       │ Tooltip hover areas for pickable items (key, wrench, axe, battery, idcard, torch)   │
+  │ 100     │ --z-loot-hover       │ Tooltip hover areas loot (coins, gems)                                              │
   ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
-  │ 200     │ --z-hazards          │ Poison, disease                                                                     │
+  │ 200     │ --z-climbables       │ Ladders and vines                                                                   │
   ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
-  │ 300     │ --z-scenery          │ Toolbox, door-container, tree-container, barrels                                    │
+  │ 300     │ --z-hazards          │ Poison, disease                                                                     │
   ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
-  │ 400     │ --z-floating-item    │ Key-at-toolbox, wrench-at-door, axe-at-tree, battery-at-bolt, idcard-at-controls    │
+  │ 400     │ --z-scenery          │ Toolbox, door-container, tree-container, barrels                                    │
   ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
-  │ 500     │ --z-arrows           │ In-game navigation arrows                                                           │
+  │ 500     │ --z-floating-item    │ Key-at-toolbox, wrench-at-door, axe-at-tree, battery-at-bolt, idcard-at-controls    │
   ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
-  │ 600     │ --z-vision-mask      │ Vision mask (caves darkness)                                                        │
+  │ 600     │ --z-arrows           │ In-game navigation arrows                                                           │
   ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
-  │ 700     │ --z-items            │ Pickable items (key, wrench, axe, battery, idcard, torch)                           │
-  │ 700     │ --z-loot             │ Loot (coins, gems) and containers                                                   │
+  │ 700     │ --z-darkness         │ Darkness mask (caves)                                                               │
+  ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
+  │ 800     │ --z-items            │ Pickable items (key, wrench, axe, battery, idcard, torch)                           │
+  │ 800     │ --z-loot             │ Loot (coins, gems) and containers                                                   │
   ┝━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┥
-  │ 800     │ --z-ui               │ UI elements (inv-panel, counter-panel, nav-panel, title, subtitle)                  │
+  │ 900     │ --z-ui               │ UI elements (inv-panel, counter-panel, nav-panel, title, subtitle)                  │
   ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
   │ 1000    │ --z-title-overlay    │ Title screen overlay                                                                │
   ┝━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┥
