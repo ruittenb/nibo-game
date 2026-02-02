@@ -198,13 +198,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             /* Warning strips */
             --warning-strip-width: 8px;   /* Width of warning strips */
 
-            /* Item boxes (inventory and valuable counter) */
-            --item-box-top: 10px;         /* Distance from top */
-            --item-box-right: 10px;       /* Distance from right */
-            --item-box-height: 40px;      /* Box height */
-            --item-box-padding: 10px;     /* Box padding */
-            --inventory-width: 160px;     /* padding (10) + 3 gaps (24) + 4 items (112) + padding (10) + border (4) */
-            --valuable-counter-width: 84px; /* Valuable counter width */
+            /* UI panels (inv-panel, counter-panel, nav-panel) */
+            --panel-top: 10px;            /* Distance from top */
+            --panel-left: 10px;           /* Distance from left (nav-panel) */
+            --panel-right: 10px;          /* Distance from right */
+            --panel-height: 40px;         /* Panel height */
+            --panel-padding: 10px;        /* Panel padding */
+            --panel-gap: 10px;            /* Gap between panels */
+            --inv-panel-width: 160px;     /* padding (10) + 3 gaps (24) + 4 items (112) + padding (10) + border (4) */
+            --counter-panel-width: 84px;  /* Counter panel width */
+            --nav-panel-height: calc(var(--panel-height) * 2 + var(--panel-gap));
+            --nav-panel-width: var(--nav-panel-height); /* square */
 
             /* Colors */
             --nav-arrow-color: #48d8d8;   /* Navigation arrow color */
@@ -1276,10 +1280,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Inventory area */
         .inv-panel {
             position: absolute;
-            top: var(--item-box-top);
-            right: var(--item-box-right);
-            width: var(--inventory-width);
-            height: var(--item-box-height);
+            top: var(--panel-top);
+            right: var(--panel-right);
+            width: var(--inv-panel-width);
+            height: var(--panel-height);
             border: 2px solid var(--border-color);
             border-radius: 4px;
             background: #0000004d;
@@ -1287,8 +1291,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             flex-direction: row-reverse;
             align-items: center;
             justify-content: flex-start;
-            padding-left: var(--item-box-padding);
-            padding-right: var(--item-box-padding);
+            padding-left: var(--panel-padding);
+            padding-right: var(--panel-padding);
             gap: 8px;
             z-index: var(--z-ui);
         }
@@ -1357,16 +1361,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Valuable counter box */
         .counter-panel {
             position: absolute;
-            top: calc(var(--item-box-top) + var(--item-box-height) + var(--item-box-top));
-            right: var(--item-box-right);
-            width: var(--valuable-counter-width);
-            height: var(--item-box-height);
+            top: calc(var(--panel-top) + var(--panel-height) + var(--panel-gap));
+            right: var(--panel-right);
+            width: var(--counter-panel-width);
+            height: var(--panel-height);
             border: 2px solid var(--border-color);
             border-radius: 4px;
             background: #0000004d;
             display: flex;
             align-items: center;
-            padding-left: var(--item-box-padding);
+            padding-left: var(--panel-padding);
             overflow: hidden;
             z-index: var(--z-ui);
         }
@@ -1487,8 +1491,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly key to inventory when picked up (Stage 1: viewport right = pos-width * 6) */
         /* Key is always slot 0 (rightmost), no offset needed */
         #key-pickup:checked ~ .game-world .key-in-game {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 6 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px);
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 6 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -1583,8 +1587,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly axe to inventory when picked up (Stage 3: viewport right = pos-width * 18) */
         /* Axe slot = slot 0 offset by key + wrench */
         #axe-pickup:checked ~ .game-world .axe-in-game {
-            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 18 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 18 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
@@ -1647,8 +1651,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly id card to inventory when picked up (Stage 2: viewport right = pos-width * 12) */
         /* ID card slot = slot 0 offset by key + wrench + axe */
         #idcard-pickup:checked ~ .game-world .idcard-in-game {
-            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 12 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
@@ -1714,8 +1718,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly battery to inventory when picked up (Stage 3: viewport right = pos-width * 18) */
         /* Battery slot = slot 0 offset by key + wrench + axe + idcard */
         #battery-pickup:checked ~ .game-world .battery-in-game {
-            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 18 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 18 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
@@ -1778,8 +1782,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Fly torch to inventory when picked up (S4: viewport right = pos-width * 12) */
         #torch-pickup:checked ~ .game-world .torch-in-game {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 12 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 12 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery)));
             opacity: 0;
             transition: none;
@@ -1849,8 +1853,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly wrench to inventory when picked up (Stage 1) */
         /* Wrench slot = slot 0 offset by key (if in inventory) */
         #toolbox-unlocked:checked ~ #wrench-pickup:checked ~ .game-world .wrench-in-game {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 6 - var(--item-box-right) - 2px - var(--item-box-padding) - var(--pickup-size) - 4px
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 6 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * var(--inv-has-key));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
@@ -2082,12 +2086,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .warning-strip-left {
             left: 0;
             bottom: var(--ground-height);
-            height: calc(var(--stage-height) - var(--ground-height) - var(--item-box-top) * 2 - var(--item-box-height) * 2 - 10px);
+            height: calc(var(--stage-height) - var(--ground-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px);
         }
         .warning-strip-right {
             left: calc(var(--pos-width) * 6 - var(--warning-strip-width) - 4px);
             bottom: calc(var(--ground-height) + 60px);
-            height: calc(var(--stage-height) - var(--ground-height) - 60px - var(--item-box-top) * 2 - var(--item-box-height) * 2 - 10px);
+            height: calc(var(--stage-height) - var(--ground-height) - 60px - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px);
         }
         /* Mountain strip on left side of Stage 2 */
         .rock-strip-S2 {
@@ -2095,7 +2099,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 6);
             width: 12px;
             bottom: calc(var(--stage-height) + var(--ground-height));
-            height: calc(var(--stage-height) - var(--ground-height) - var(--item-box-top) * 2 - var(--item-box-height) * 2 - 10px);
+            height: calc(var(--stage-height) - var(--ground-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px);
             background: repeating-linear-gradient(
                 10deg,
                 #777 0px,
@@ -2132,7 +2136,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 6);
             width: 12px;
             bottom: calc(var(--ground-height) + 60px);
-            height: calc(var(--stage-height) - var(--ground-height) - 60px - var(--item-box-top) * 2 - var(--item-box-height) * 2 - 10px);
+            height: calc(var(--stage-height) - var(--ground-height) - 60px - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px);
             z-index: 1;
             background: repeating-linear-gradient(
                 10deg,
@@ -2170,7 +2174,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 12 - 16px);
             width: 12px;
             bottom: var(--ground-height);
-            height: calc(var(--stage-height) - var(--ground-height) - var(--item-box-top) * 2 - var(--item-box-height) * 2 - 10px);
+            height: calc(var(--stage-height) - var(--ground-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px);
             z-index: 1;
             background: repeating-linear-gradient(
                 -10deg,
@@ -3102,10 +3106,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fixed navigation panel - 3x3 grid */
         .nav-panel {
             position: absolute;
-            top: var(--item-box-top);
-            left: var(--item-box-top);
-            width: calc(var(--item-box-height) * 2 + var(--item-box-top));
-            height: calc(var(--item-box-height) * 2 + var(--item-box-top));
+            top: var(--panel-top);
+            left: var(--panel-left);
+            width: var(--nav-panel-width);
+            height: var(--nav-panel-height);
             z-index: var(--z-ui);
             border: 2px solid var(--border-color);
             border-radius: 4px;
@@ -3658,8 +3662,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S1-L3-P5-pickup:checked ~ .game-world .valuable-S1-L3-P5,
         #valuable-S1-L2-P1-pickup:checked ~ .game-world .valuable-S1-L2-P1,
         #valuable-S1-L4-P2-pickup:checked ~ .game-world .valuable-S1-L4-P2 {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
-            left: calc(var(--pos-width) * 6 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
+            left: calc(var(--pos-width) * 6 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -3669,8 +3673,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S2-L7-P7-pickup:checked ~ .game-world .valuable-S2-L7-P7,
         #valuable-S2-L8-P9-pickup:checked ~ .game-world .valuable-S2-L8-P9,
         #valuable-S2-L9-P10-pickup:checked ~ .game-world .valuable-S2-L9-P10 {
-            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
-            left: calc(var(--pos-width) * 12 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
+            left: calc(var(--pos-width) * 12 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -3679,8 +3683,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S3-L5-P18-pickup:checked ~ .game-world .valuable-S3-L5-P18,
         #valuable-S3-L8-P18-pickup:checked ~ .game-world .valuable-S3-L8-P18,
         #valuable-S3-L9-P14-pickup:checked ~ .game-world .valuable-S3-L9-P14 {
-            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
-            left: calc(var(--pos-width) * 18 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
+            left: calc(var(--pos-width) * 18 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -3691,8 +3695,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #valuable-S4-L3-P12-pickup:checked ~ .game-world .valuable-S4-L3-P12,
         #valuable-S4-L1-P10-pickup:checked ~ .game-world .valuable-S4-L1-P10,
         #valuable-S4-L0-P9-pickup:checked ~ .game-world .valuable-S4-L0-P9 {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--item-box-top) - var(--item-box-height) - var(--item-box-top) - var(--item-box-height) / 2 - 18px);
-            left: calc(var(--pos-width) * 12 - var(--item-box-right) - var(--valuable-counter-width) + var(--item-box-padding) - 4px);
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
+            left: calc(var(--pos-width) * 12 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
             z-index: calc(var(--z-vision-mask) + 10);

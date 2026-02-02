@@ -5,12 +5,10 @@
 
  - central pick up icon in nav-panel?
 
- - fix the z-indexes of everything
- - make a single table with all the z-indexes, both direct and through variables.
-
  - I would like to re-order the game state checkboxes. Which ones need to be in a specific order?
 
- - make nav-panel bigger
+ - fix the z-indexes of everything
+ - make a single table with all the z-indexes, both direct and through variables.
 
   ┌─────────┬────────────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ Z-Index │           Value            │                                                   Element(s)                                                    │
