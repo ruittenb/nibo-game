@@ -230,12 +230,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --border-color: #4a4a6a;      /* Border color for UI elements */
 
             /* Z-index layers */
-            --z-items: 15;                /* Items, hazards */
+            --z-hazards: 15;              /* Hazards (poison, disease) */
+            --z-items: 400;               /* Pickupable items (key, wrench, axe, battery, idcard, torch) */
+            --z-valuables: 400;           /* Valuables (coins, gems) */
             --z-door: 20;                 /* Door (above hazards for tooltip) */
             --z-vision-mask: 50;          /* Vision mask (caves darkness) */
             --z-ui: 500;                  /* UI elements (title, inventory, counter) */
             --z-tooltip: 1500;            /* Tooltips */
-            --z-overlay: 1000;            /* Death and escape overlays */
+            --z-title-overlay: 1000;      /* Title screen overlay */
+            --z-player: 1100;             /* Player (above title screen) */
+            --z-endgame-overlay: 2000;        /* Death and escape overlays */
 
             /* Vision mask settings */
             --vision-mask-hole-width: 180px;     /* Width of the vision hole (wide enough for nav arrows) */
@@ -1424,7 +1428,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: var(--pickup-size);
             bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) - var(--item-offset));
-            z-index: 200;
+            z-index: var(--z-items);
             pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
             display: flex;
@@ -1528,7 +1532,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: var(--pickup-size);
             bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
-            z-index: 200;
+            z-index: var(--z-items);
             pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
         }
@@ -1593,7 +1597,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: var(--pickup-size);
             bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
-            z-index: 200;
+            z-index: var(--z-items);
             pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
         }
@@ -1657,7 +1661,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: var(--pickup-size);
             bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
-            z-index: 200;
+            z-index: var(--z-items);
             pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
         }
@@ -1724,7 +1728,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: var(--pickup-size);
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
-            z-index: 200;
+            z-index: var(--z-items);
             pointer-events: none;
             display: flex;
             justify-content: center;
@@ -1788,7 +1792,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: var(--pickup-size);
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
-            z-index: 200;
+            z-index: var(--z-items);
             display: none;
             pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
@@ -1903,7 +1907,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: auto;
             height: 56px;
             animation: idle 1s ease-in-out infinite;
-            z-index: 1100;
+            z-index: var(--z-player);
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 2);
             transition: left 0.3s ease, bottom 0.3s ease;
@@ -1982,7 +1986,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 20px;
             height: 20px;
-            z-index: 1101;
+            z-index: calc(var(--z-player) + 1);
             /* Position relative to player - offset to appear beside them */
             margin-left: 40px;
             margin-top: 10px;
@@ -3102,7 +3106,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: 10px;
             width: 70px;
             height: 70px;
-            z-index: 200;
+            z-index: var(--z-ui);
             border: 2px solid var(--border-color);
             border-radius: 4px;
             background: #0000004d;
@@ -3323,7 +3327,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 24px;
             height: 24px;
-            z-index: 200;
+            z-index: var(--z-valuables);
             pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
         }
@@ -3727,7 +3731,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             background-size: 100% 200%;
             animation: hazard-roll 1s linear infinite;
             border-radius: 6px;
-            z-index: var(--z-items);
+            z-index: var(--z-hazards);
         }
         .skull-S1-L1-P6 {
             bottom: calc(var(--platform-height) + var(--platform-thickness));
@@ -3761,7 +3765,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             background-size: 100% 200%;
             animation: hazard-roll 1s linear infinite;
             border-radius: 6px;
-            z-index: var(--z-items);
+            z-index: var(--z-hazards);
         }
         .disease-S2-L5-P10 {
             bottom: calc(var(--stage-height) + var(--ground-height) + 2px);
@@ -4044,7 +4048,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: var(--z-overlay);
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.5s ease-out;
@@ -4063,6 +4066,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         /* Title screen overlay */
         .title-screen-overlay {
+            z-index: var(--z-title-overlay);
             background: #000000e6;
             opacity: 1;
             pointer-events: auto;
@@ -4118,7 +4122,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         /* Death overlay */
         .death-screen-overlay {
-            z-index: 2000;
+            z-index: var(--z-endgame-overlay);
         }
         .death-screen-overlay .message {
             color: #ff0000;
@@ -4134,7 +4138,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
         /* Escape overlay */
         .escape-screen-overlay {
-            z-index: 2000;
+            z-index: var(--z-endgame-overlay);
         }
         .escape-screen-overlay .message {
             color: #4ade80;
@@ -4210,7 +4214,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            z-index: 200;
+            z-index: var(--z-valuables);
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
             display: flex;
             justify-content: center;

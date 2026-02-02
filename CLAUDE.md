@@ -38,7 +38,7 @@ The HTML ordering is critical for sibling selectors to work:
 - Scroll with the stage when viewport shifts
 - Click target is the arrow itself
 
-**Nav-widget arrows** (inside `.nav-widget`):
+**Nav-panel arrows** (inside `.nav-panel`):
 - Fixed position in corner of screen
 - Always visible regardless of scroll position
 - Provides consistent navigation UI
