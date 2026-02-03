@@ -1269,11 +1269,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-idcard,
         .inventory-battery,
         .inventory-torch {
+            position: relative;
             width: var(--pickup-size);
             height: var(--pickup-size);
             display: none;
             justify-content: center;
             align-items: center;
+
+            .tooltip {
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                margin-top: 8px;
+            }
+            &:hover .tooltip { opacity: 1; }
         }
         .inventory-key svg,
         .inventory-wrench svg,
@@ -4766,12 +4775,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
         <!-- Inventory -->
         <div class="inv-panel">
-            <span class="inventory-key"><svg><use href="#key"/></svg></span>
-            <span class="inventory-wrench"><svg><use href="#wrench"/></svg></span>
-            <span class="inventory-axe"><svg><use href="#axe"/></svg></span>
-            <span class="inventory-idcard"><svg><use href="#id-card"/></svg></span>
-            <span class="inventory-battery"><svg><use href="#battery"/></svg></span>
-            <span class="inventory-torch"><svg><use href="#torch"/></svg></span>
+            <span class="inventory-key"><svg><use href="#key"/></svg><span class="tooltip">Key</span></span>
+            <span class="inventory-wrench"><svg><use href="#wrench"/></svg><span class="tooltip">Wrench</span></span>
+            <span class="inventory-axe"><svg><use href="#axe"/></svg><span class="tooltip">Axe</span></span>
+            <span class="inventory-idcard"><svg><use href="#id-card"/></svg><span class="tooltip">ID Card</span></span>
+            <span class="inventory-battery"><svg><use href="#battery"/></svg><span class="tooltip">Battery</span></span>
+            <span class="inventory-torch"><svg><use href="#torch"/></svg><span class="tooltip">Torch</span></span>
         </div>
         <!-- loot counter -->
         <div class="counter-panel">
