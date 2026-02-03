@@ -987,10 +987,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 24px;
             height: 24px;
-            /* Position above flight controls: controls bottom + controls height + gap */
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 10px + var(--pickup-size) * 2 + 10px);
-            /* Center over flight controls */
-            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 8px + (var(--pickup-size) * 1.7 - 24px) / 2);
+            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) + 41px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) + 4px);
             z-index: var(--z-floating-item);
             opacity: 0;
             pointer-events: none;
@@ -1002,7 +1000,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--idcard-color);
         }
         /* Show ID card at button when player is next to it, has ID card, bolt fixed, AND button not yet pressed - S3 uses levels 5-9 */
-        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .flight-controls-hover-area:hover ~ .idcard-at-controls,
+        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .flight-controls-unavailable:hover ~ .idcard-at-controls,
         #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .idcard-at-controls:hover {
             opacity: 1;
             pointer-events: auto;
@@ -1038,6 +1036,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #bolt-fixed:checked ~ .game-world .flight-controls-unavailable:hover .tooltip-no-idcard,
         #bolt-fixed:checked ~ .game-world .flight-controls-hover-area:hover ~ .flight-controls-unavailable .tooltip-no-idcard {
             opacity: 1;
+        }
+        /* Hide tooltip when player has ID card at controls */
+        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .flight-controls-unavailable .tooltip-no-idcard {
+            display: none;
         }
         /* Hide red button when pressed, show green button */
         #flight-controls-used:checked ~ .game-world .flight-controls-unavailable {
@@ -4181,6 +4183,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
     <!-- SVG symbols for reuse -->
     <!-- Icons inspired by Font Awesome (https://fontawesome.com) and Material Design (https://materialdesignicons.com) -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Wobble filter for wavy distortion effect -->
+        <defs>
+            <filter id="wobble" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="turbulence" baseFrequency="0.005 0.05" numOctaves="1" result="turbulence">
+                    <animate attributeName="baseFrequency" dur="1.2s"
+                             values="0.005 0.05; 0.01 0.07; 0.005 0.05" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="20"
+                                   xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+        </defs>
         <symbol id="torch" viewBox="40 40 160 160">
             <g transform="rotate(45 120 120)">
                 <g>
@@ -5217,12 +5230,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="tooltip">The battery is<br>installed correctly.</span>
         </div>
         <span class="flight-controls-hover-area"></span>
-        <label for="flight-controls-used" class="idcard-at-controls"><svg><use href="#id-card"/></svg></label>
         <label for="flight-controls-used" class="flight-controls-unavailable">
             <svg><use href="#flight-controls"/></svg>
             <span class="tooltip tooltip-no-power">Flight controls are offline.<br>You need power.</span>
             <span class="tooltip tooltip-no-idcard">Flight controls are unavailable.<br>You need your ID card.</span>
         </label>
+        <label for="flight-controls-used" class="idcard-at-controls"><svg><use href="#id-card"/></svg></label>
         <span class="flight-controls-available-hover-area"></span>
         <label for="escaped" class="flight-controls-available">
             <svg><use href="#flight-controls"/></svg>
