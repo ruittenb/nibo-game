@@ -1,14 +1,14 @@
 
  - fix landing gear of ship
 
- - animated coin still below mask: plan 'flying-coins' (problem: stacking context in sibling)
+ - central pick up icon in nav-panel
 
- - central pick up icon in nav-panel?
+ - animated items still below darkness mask: plan 'flying-coins' (css stacking context problem)
 
- - tooltips in inventory
+ - tooltips in inventory (css stacking context problem)
 
- - restart link
+ - disease verbranden met torch?
 
- - show floating items only on hover
+ - teleport?
 
 

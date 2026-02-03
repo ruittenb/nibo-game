@@ -845,6 +845,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             box-shadow: inset 0 -5px 0 #0000004d;
         }
         /* Bolt S3-L1-P3 */
+        .bolt-hover-area {
+            position: absolute;
+            bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
+            width: 20px;
+            height: 24px;
+            z-index: var(--z-item-hover);
+        }
         .bolt {
             position: absolute;
             bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 5px);
@@ -852,6 +860,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 20px;
             height: 24px;
             color: var(--bolt-color-1);
+            pointer-events: none;
 
             svg {
                 width: 100%;
@@ -859,20 +868,30 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 filter: drop-shadow(0 0 4px var(--bolt-color-1));
                 animation: bolt-flicker 2s steps(1) infinite;
             }
-            .tooltip {
-                bottom: 100%;
-                left: 50%;
-                transform: translateX(-50%);
-                margin-bottom: 8px;
-            }
-            &:hover {
-                z-index: var(--z-tooltip);
-
-                .tooltip { opacity: 1; }
-            }
         }
-        /* Hide bolt when fixed */
-        #bolt-fixed:checked ~ .game-world .bolt {
+        .bolt-tooltip {
+            bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 5px + 24px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) + 10px);
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
+        /* Show bolt tooltip on hover */
+        .bolt-hover-area:hover ~ .bolt-tooltip {
+            opacity: 1;
+        }
+        /* Hide bolt, hover area and tooltip when fixed */
+        #bolt-fixed:checked ~ .game-world .bolt,
+        #bolt-fixed:checked ~ .game-world .bolt-hover-area,
+        #bolt-fixed:checked ~ .game-world .bolt-tooltip {
+            display: none;
+        }
+        /* Only allow clicking bolt when player has battery and is at the right position */
+        #level-6:checked ~ #pos-15:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .bolt {
+            pointer-events: auto;
+            cursor: pointer;
+        }
+        /* Hide hover area when player can click bolt */
+        #level-6:checked ~ #pos-15:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .bolt-hover-area {
             display: none;
         }
         /* Battery floating above bolt */
@@ -883,7 +902,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 35px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 2px);
             z-index: var(--z-floating-item);
-            display: none;
+            opacity: 0;
+            pointer-events: none;
             cursor: pointer;
         }
         .battery-at-bolt svg {
@@ -892,8 +912,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: #50c050;
         }
         /* Show battery at bolt when player is next to it, has battery, AND bolt not yet fixed */
-        #level-6:checked ~ #pos-15:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .battery-at-bolt {
-            display: block;
+        #level-6:checked ~ #pos-15:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .bolt:hover ~ .battery-at-bolt,
+        #level-6:checked ~ #pos-15:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .battery-at-bolt:hover {
+            opacity: 1;
+            pointer-events: auto;
             animation: battery-hovering-pulse 1s ease-in-out infinite;
         }
         /* Installed battery (shown after bolt is fixed) */
@@ -965,10 +987,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 24px;
             height: 24px;
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) + 41px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) + 4px);
+            /* Position above flight controls: controls bottom + controls height + gap */
+            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 10px + var(--pickup-size) * 2 + 10px);
+            /* Center over flight controls */
+            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 8px + (var(--pickup-size) * 1.7 - 24px) / 2);
             z-index: var(--z-floating-item);
-            display: none;
+            opacity: 0;
+            pointer-events: none;
             cursor: pointer;
         }
         .idcard-at-controls svg {
@@ -977,8 +1002,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--idcard-color);
         }
         /* Show ID card at button when player is next to it, has ID card, bolt fixed, AND button not yet pressed - S3 uses levels 5-9 */
-        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .idcard-at-controls {
-            display: block;
+        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .flight-controls-hover-area:hover ~ .idcard-at-controls,
+        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .idcard-at-controls:hover {
+            opacity: 1;
+            pointer-events: auto;
             animation: idcard-hovering-pulse 1s ease-in-out infinite;
         }
         .flight-controls-unavailable .tooltip {
@@ -1470,6 +1497,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Toolbox on level 2, position 6 */
+        .toolbox-hover-area {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
+            z-index: var(--z-item-hover);
+        }
         .toolbox {
             position: absolute;
             width: var(--pickup-size);
@@ -1477,6 +1512,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
             z-index: var(--z-scenery);
+            pointer-events: none;
 
             svg {
                 width: 100%;
@@ -1484,19 +1520,29 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 color: #cc1010;
                 transform: scale(1.1);
             }
-            &:hover {
-                z-index: var(--z-tooltip);
-
-                .tooltip { opacity: 1; }
-            }
         }
-        /* Hide toolbox when unlocked */
-        #toolbox-unlocked:checked ~ .game-world .toolbox {
+        /* Only allow clicking toolbox when player has key and is at the right position */
+        #level-2:checked ~ #pos-6:checked ~ #key-pickup:checked ~ #toolbox-unlocked:not(:checked) ~ .game-world .toolbox {
+            pointer-events: auto;
+            cursor: pointer;
+        }
+        /* Hide hover area when player can click toolbox (so label receives clicks) */
+        #level-2:checked ~ #pos-6:checked ~ #key-pickup:checked ~ #toolbox-unlocked:not(:checked) ~ .game-world .toolbox-hover-area {
             display: none;
         }
+        /* Hide toolbox and hover area when unlocked */
+        #toolbox-unlocked:checked ~ .game-world .toolbox,
+        #toolbox-unlocked:checked ~ .game-world .toolbox-hover-area,
+        #toolbox-unlocked:checked ~ .game-world .toolbox-tooltip {
+            display: none;
+        }
+        /* Show tooltip on hover */
+        .toolbox-hover-area:hover ~ .toolbox-tooltip {
+            opacity: 1;
+        }
         .toolbox-tooltip {
-            bottom: 100%;
-            left: 50%;
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset) + var(--pickup-size) / 2);
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
@@ -1834,7 +1880,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 35px);
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - 28px);
             z-index: var(--z-floating-item);
-            display: none;
+            opacity: 0;
+            pointer-events: none;
             cursor: pointer;
         }
         .key-at-toolbox svg {
@@ -1843,8 +1890,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--gold-color);
         }
         /* Only show key at toolbox when player is next to it, has key, AND toolbox not yet unlocked */
-        #level-2:checked ~ #pos-6:checked ~ #key-pickup:checked ~ #toolbox-unlocked:not(:checked) ~ .game-world .key-at-toolbox {
-            display: block;
+        #level-2:checked ~ #pos-6:checked ~ #key-pickup:checked ~ #toolbox-unlocked:not(:checked) ~ .game-world .toolbox:hover ~ .key-at-toolbox,
+        #level-2:checked ~ #pos-6:checked ~ #key-pickup:checked ~ #toolbox-unlocked:not(:checked) ~ .game-world .key-at-toolbox:hover {
+            opacity: 1;
+            pointer-events: auto;
             animation: key-hovering-pulse 1s ease-in-out infinite;
         }
         /* Axe above tree - pulsates when user has axe, clickable to use */
@@ -1855,7 +1904,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--ground-height) + 13px);
             left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset) - 3px);
             z-index: var(--z-floating-item);
-            display: none;
+            opacity: 0;
+            pointer-events: none;
             cursor: pointer;
             transform-origin: bottom left;
         }
@@ -1865,8 +1915,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform-origin: bottom left;
         }
         /* Only show axe at tree when player is next to it, has axe, AND tree not yet chopped - S2 uses levels 5-9 */
-        #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .axe-at-tree {
-            display: block;
+        #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree-container:hover ~ .axe-at-tree,
+        #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .axe-at-tree:hover {
+            opacity: 1;
+            pointer-events: auto;
             animation: axe-chop 1s ease-in infinite;
         }
         .player {
@@ -3745,7 +3797,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             animation: door-pulse 1s ease-in-out infinite;
         }
         .wrench-at-door {
-            display: none;
             position: absolute;
             bottom: calc(var(--ground-height) + 13px);
             left: calc(var(--pos-width) * 6 - 35px);
@@ -3753,6 +3804,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 24px;
             z-index: var(--z-floating-item);
             transform-origin: calc(100% - 6px) 8px;
+            opacity: 0;
+            pointer-events: none;
+            cursor: pointer;
 
             svg {
                 width: 100%;
@@ -3761,10 +3815,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 filter: drop-shadow(2px 2px 2px #00000080);
             }
         }
-        #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .wrench-at-door {
-            display: block;
+        #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .door-container:hover ~ .wrench-at-door,
+        #level-0:checked ~ #pos-6:checked ~ #wrench-pickup:checked ~ #door-unlocked:not(:checked) ~ .game-world .wrench-at-door:hover {
+            opacity: 1;
+            pointer-events: auto;
             animation: wrench-rotate 1s ease-in-out infinite;
-            cursor: pointer;
         }
         /* On S4, we achieve a small FOV using four rectangles arranged
          * around a central hole that follows the player position.
@@ -4826,10 +4881,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="key-pickup" class="key-in-game"><svg><use href="#key"/></svg></label>
         <span class="tooltip key-tooltip">Key</span>
         <!-- Toolbox on level 2, position 6 -->
-        <div class="toolbox">
-            <span class="tooltip toolbox-tooltip">A locked toolbox.<br>You need a key.</span>
+        <span class="toolbox-hover-area"></span>
+        <label for="toolbox-unlocked" class="toolbox">
             <svg><use href="#toolbox"/></svg>
-        </div>
+        </label>
+        <span class="tooltip toolbox-tooltip">A locked toolbox.<br>You need a key.</span>
         <!-- Axe on stage 3, level 4, pos φ (clickable to pick up) -->
         <span class="axe-hover-area"></span>
         <label for="axe-pickup" class="axe-in-game"><svg><use href="#axe"/></svg></label>
@@ -5150,10 +5206,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="ladder spine-ladder ladder-S3-L6-P18"></div>
         <div class="ladder spine-ladder ladder-S3-L8-P17"></div>
         <!-- Bolt -->
-        <div class="bolt">
+        <span class="bolt-hover-area"></span>
+        <label for="bolt-fixed" class="bolt">
             <svg><use href="#bolt"/></svg>
-            <span class="tooltip">A short-circuit.<br>You need a new battery.</span>
-        </div>
+        </label>
+        <span class="tooltip bolt-tooltip">A short-circuit.<br>You need a new battery.</span>
         <label for="bolt-fixed" class="battery-at-bolt"><svg><use href="#battery"/></svg></label>
         <div class="battery-installed">
             <svg><use href="#battery"/></svg>
@@ -5161,11 +5218,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
         <span class="flight-controls-hover-area"></span>
         <label for="flight-controls-used" class="idcard-at-controls"><svg><use href="#id-card"/></svg></label>
-        <div class="flight-controls-unavailable">
+        <label for="flight-controls-used" class="flight-controls-unavailable">
             <svg><use href="#flight-controls"/></svg>
             <span class="tooltip tooltip-no-power">Flight controls are offline.<br>You need power.</span>
             <span class="tooltip tooltip-no-idcard">Flight controls are unavailable.<br>You need your ID card.</span>
-        </div>
+        </label>
         <span class="flight-controls-available-hover-area"></span>
         <label for="escaped" class="flight-controls-available">
             <svg><use href="#flight-controls"/></svg>
