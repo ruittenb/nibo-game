@@ -2664,34 +2664,76 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .arrow-h {
             bottom: calc(var(--ground-height) - 10px);
         }
-        .arrow-S1-P1-P2, .arrow-S1-P2-P1 { left: calc(var(--pos-offset) + var(--pos-width) * 0.5 + 12px); }
-        .arrow-S1-P2-P3, .arrow-S1-P3-P2 { left: calc(var(--pos-offset) + var(--pos-width) * 1.5 + 12px); }
-        .arrow-S1-P3-P4, .arrow-S1-P4-P3 { left: calc(var(--pos-offset) + var(--pos-width) * 2.5 + 12px); }
-        .arrow-S1-P4-P5, .arrow-S1-P5-P4 { left: calc(var(--pos-offset) + var(--pos-width) * 3.5 + 12px); }
-        .arrow-S1-P5-P6, .arrow-S1-P6-P5 { left: calc(var(--pos-offset) + var(--pos-width) * 4.5 + 12px); }
-        /* Stage 1 to Stage 2 transition arrows */
-        .arrow-S2-P7-S1-P6 { left: calc(var(--pos-offset) + var(--pos-width) * 5.5 + 33px); }
-        .arrow-S1-P6-S2-P7 { left: calc(var(--pos-offset) + var(--pos-width) * 5 + 60px); }
-        /* Stage 2 horizontal arrows */
-        .arrow-S2-P7-P8, .arrow-S2-P8-P7 { left: calc(var(--pos-offset) + var(--pos-width) * 6.5 + 12px); }
-        .arrow-S2-P8-P9, .arrow-S2-P9-P8 { left: calc(var(--pos-offset) + var(--pos-width) * 7.5 + 12px); }
-        .arrow-S2-P9-P10, .arrow-S2-P10-P9 { left: calc(var(--pos-offset) + var(--pos-width) * 8.5 + 12px); }
-        .arrow-S2-P10-P11, .arrow-S2-P11-P10 { left: calc(var(--pos-offset) + var(--pos-width) * 9.5 + 12px); }
-        .arrow-S2-P11-P12, .arrow-S2-P12-P11 { left: calc(var(--pos-offset) + var(--pos-width) * 10.5 + 12px); }
-        .arrow-S2-P12-S3-P13 { left: calc(var(--pos-offset) + var(--pos-width) * 11 + 60px); }
-        .arrow-S3-P13-S2-P12 { left: calc(var(--pos-offset) + var(--pos-width) * 11.5 + 33px); }
-        /* Stage 3 horizontal arrows */
-        .arrow-S3-P13-P14, .arrow-S3-P14-P13 { left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
-        .arrow-S3-P14-P15, .arrow-S3-P15-P14 { left: calc(var(--pos-offset) + var(--pos-width) * 13.5 + 12px); }
-        .arrow-S3-P15-P16, .arrow-S3-P16-P15 { left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
-        .arrow-S3-P16-P17, .arrow-S3-P17-P16 { left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px); }
-        .arrow-S3-P17-P18, .arrow-S3-P18-P17 { left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
-        /* Stage 4 horizontal arrows */
-        .arrow-S4-P7-P8, .arrow-S4-P8-P7 { left: calc(var(--pos-offset) + var(--pos-width) * 6.5 + 12px); }
-        .arrow-S4-P8-P9, .arrow-S4-P9-P8 { left: calc(var(--pos-offset) + var(--pos-width) * 7.5 + 12px); }
-        .arrow-S4-P9-P10, .arrow-S4-P10-P9 { left: calc(var(--pos-offset) + var(--pos-width) * 8.5 + 12px); }
-        .arrow-S4-P10-P11, .arrow-S4-P11-P10 { left: calc(var(--pos-offset) + var(--pos-width) * 9.5 + 12px); }
-        .arrow-S4-P11-P12, .arrow-S4-P12-P11 { left: calc(var(--pos-offset) + var(--pos-width) * 10.5 + 12px); }
+        /* Horizontal arrow left positions (paired: right from PN and left from P(N+1) share midpoint) */
+        .arrow-P1-right, .arrow-P2-left   { left: calc(var(--pos-offset) + var(--pos-width) * 0.5 + 12px); }
+        .arrow-P2-right, .arrow-P3-left   { left: calc(var(--pos-offset) + var(--pos-width) * 1.5 + 12px); }
+        .arrow-P3-right, .arrow-P4-left   { left: calc(var(--pos-offset) + var(--pos-width) * 2.5 + 12px); }
+        .arrow-P4-right, .arrow-P5-left   { left: calc(var(--pos-offset) + var(--pos-width) * 3.5 + 12px); }
+        .arrow-P5-right, .arrow-P6-left   { left: calc(var(--pos-offset) + var(--pos-width) * 4.5 + 12px); }
+        .arrow-P6-right, .arrow-P7-left   { left: calc(var(--pos-offset) + var(--pos-width) * 5.5 + 12px); }
+        .arrow-P7-right, .arrow-P8-left   { left: calc(var(--pos-offset) + var(--pos-width) * 6.5 + 12px); }
+        .arrow-P8-right, .arrow-P9-left   { left: calc(var(--pos-offset) + var(--pos-width) * 7.5 + 12px); }
+        .arrow-P9-right, .arrow-P10-left  { left: calc(var(--pos-offset) + var(--pos-width) * 8.5 + 12px); }
+        .arrow-P10-right, .arrow-P11-left { left: calc(var(--pos-offset) + var(--pos-width) * 9.5 + 12px); }
+        .arrow-P11-right, .arrow-P12-left { left: calc(var(--pos-offset) + var(--pos-width) * 10.5 + 12px); }
+        .arrow-P12-right, .arrow-P13-left { left: calc(var(--pos-offset) + var(--pos-width) * 11.5 + 12px); }
+        .arrow-P13-right, .arrow-P14-left { left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
+        .arrow-P14-right, .arrow-P15-left { left: calc(var(--pos-offset) + var(--pos-width) * 13.5 + 12px); }
+        .arrow-P15-right, .arrow-P16-left { left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
+        .arrow-P16-right, .arrow-P17-left { left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px); }
+        .arrow-P17-right, .arrow-P18-left { left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
+        /* Vertical arrow left positions (follow player position) */
+        #pos-1:checked  ~ .game-world .arrow-v { left: calc(var(--pos-offset) + 10px); }
+        #pos-2:checked  ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) + 10px); }
+        #pos-3:checked  ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 2 + 10px); }
+        #pos-4:checked  ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 3 + 10px); }
+        #pos-5:checked  ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 4 + 10px); }
+        #pos-6:checked  ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 5 + 10px); }
+        #pos-7:checked  ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px); }
+        #pos-8:checked  ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px); }
+        #pos-9:checked  ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 8 + 10px); }
+        #pos-10:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 9 + 10px); }
+        #pos-11:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px); }
+        #pos-12:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 11 + 10px); }
+        #pos-13:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 12 + 10px); }
+        #pos-14:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 13 + 10px); }
+        #pos-15:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 14 + 10px); }
+        #pos-16:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 15 + 10px); }
+        #pos-17:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 16 + 10px); }
+        #pos-18:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px); }
+        /* Up arrow bottom positions (one per departure level) */
+        .arrow-L0-up { bottom: calc(var(--ground-height) + 72.5px); }
+        .arrow-L1-up { bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px); }
+        .arrow-L2-up { bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 72.5px); }
+        .arrow-L3-up { bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px); }
+        .arrow-L4-up { bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 72.5px); }
+        .arrow-L5-up { bottom: calc(var(--stage-height) + var(--ground-height) + 72.5px); }
+        .arrow-L6-up { bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) + 72.5px); }
+        .arrow-L7-up { bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) + 72.5px); }
+        .arrow-L8-up { bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) + 72.5px); }
+        /* Down arrow bottom positions (one per departure level) */
+        .arrow-L1-down { bottom: var(--platform-height); }
+        .arrow-L2-down { bottom: calc(var(--platform-height) * 2); }
+        .arrow-L3-down { bottom: calc(var(--platform-height) * 3); }
+        .arrow-L4-down { bottom: calc(var(--platform-height) * 4); }
+        .arrow-L5-down { bottom: calc(var(--stage-height) + var(--platform-thickness) / 2); }
+        .arrow-L6-down { bottom: calc(var(--stage-height) + var(--platform-height)); }
+        .arrow-L7-down { bottom: calc(var(--stage-height) + var(--platform-height) * 2); }
+        .arrow-L8-down { bottom: calc(var(--stage-height) + var(--platform-height) * 3); }
+        .arrow-L9-down { bottom: calc(var(--stage-height) + var(--platform-height) * 4); }
+        /* Phantom position special arrows */
+        .arrow-phi-up {
+            left: calc(var(--pos-offset) + var(--pos-width) * 16 + 10px);
+            bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
+        }
+        .arrow-phi-left {
+            left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px);
+            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + 19px);
+        }
+        .arrow-phi-right {
+            left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px);
+            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + 19px);
+        }
         /* Horizontal arrows move with level */
         #level-0:checked ~ .game-world .arrow-h { bottom: calc(var(--ground-height) + 19px); }
         #level-1:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) + var(--platform-thickness) + 19px); }
@@ -2703,524 +2745,186 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-7:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) + 19px); }
         #level-8:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) + 19px); }
         #level-9:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + 19px); }
-        /* Up arrow positions (at ladder locations) */
-        /* Ladder 1: position 5, level 0 -> 1 */
-        .arrow-up-S1-L0-P5 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 4 + 10px);
-            bottom: calc(var(--ground-height) + 72.5px);
-        }
-        /* Ladder 2: position 3, level 1 -> 2 */
-        .arrow-up-S1-L1-P3 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 2 + 10px);
-            bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px);
-        }
-        /* Ladder 3: position 1, level 2 -> 3 */
-        .arrow-up-S1-L2-P1 {
-            left: calc(var(--pos-offset) + 10px);
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 72.5px);
-        }
-        /* Ladder 4: position 4, level 3 -> 4 */
-        .arrow-up-S1-L3-P4 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 3 + 10px);
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
-        }
-        /* Stage 2 Up arrows: S2-L0-P2, S2-L0-P5, S2-L1-P1, S2-L1-P4, S2-L2-P5, S2-L3-P3 */
-        .arrow-up-S2-L5-P8 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px);
-            bottom: calc(var(--stage-height) + var(--ground-height) + 72.5px);
-        }
-        .arrow-up-S2-L5-P11 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
-            bottom: calc(var(--stage-height) + var(--ground-height) + 72.5px);
-        }
-        .arrow-up-S2-L6-P7 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) + 72.5px);
-        }
-        .arrow-up-S2-L6-P10 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 9 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) + 72.5px);
-        }
-        .arrow-up-S2-L7-P11 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) + 72.5px);
-        }
-        .arrow-up-S2-L8-P9 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 8 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
-        }
-        /* Stage 4 Up arrows */
-        /* L0: P7, P8, P9, P12 */
-        .arrow-up-S4-L0-P7 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
-            bottom: calc(var(--ground-height) + 72.5px);
-        }
-        .arrow-up-S4-L0-P8 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px);
-            bottom: calc(var(--ground-height) + 72.5px);
-        }
-        .arrow-up-S4-L0-P9 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 8 + 10px);
-            bottom: calc(var(--ground-height) + 72.5px);
-        }
-        .arrow-up-S4-L0-P12 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 11 + 10px);
-            bottom: calc(var(--ground-height) + 72.5px);
-        }
-        /* L1: P7, P9, P11 */
-        .arrow-up-S4-L1-P7 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
-            bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px);
-        }
-        .arrow-up-S4-L1-P9 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 8 + 10px);
-            bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px);
-        }
-        .arrow-up-S4-L1-P11 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
-            bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px);
-        }
-        /* L2: P8, P10, P11 */
-        .arrow-up-S4-L2-P8 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px);
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 72.5px);
-        }
-        .arrow-up-S4-L2-P10 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 9 + 10px);
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 72.5px);
-        }
-        .arrow-up-S4-L2-P11 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 72.5px);
-        }
-        /* L3: P7, P9, P10, P11, P12 */
-        .arrow-up-S4-L3-P7 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
-        }
-        .arrow-up-S4-L3-P9 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 8 + 10px);
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
-        }
-        .arrow-up-S4-L3-P10 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 9 + 10px);
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
-        }
-        .arrow-up-S4-L3-P11 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
-        }
-        .arrow-up-S4-L3-P12 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 11 + 10px);
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
-        }
-        /* L4: P7→S2 (climb from S4 level 4 to S2 level 5) */
-        .arrow-up-S4-L4-P7 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 72.5px);
-        }
-        /* Stage 3 Up arrows */
-        .arrow-up-S3-L5-P16 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 15 + 10px);
-            bottom: calc(var(--stage-height) + var(--ground-height) + 72.5px);
-        }
-        .arrow-up-S3-L8-P17 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 16 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
-        }
-        .arrow-up-S3-L6-P18 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) + 72.5px);
-        }
-        /* Stage 3 phantom position arrows (at visual L4-P5) */
-        .arrow-left-S3-Pφ {
-            left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + 19px);
-        }
-        .arrow-right-S3-Pφ {
-            left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + 19px);
-        }
-        /* Down arrow positions */
-        .arrow-down-S1-L1-P1 {
-            left: calc(var(--pos-offset) + 10px);
-            bottom: var(--platform-height);
-        }
-        .arrow-down-S1-L2-P5 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 4 + 10px);
-            bottom: calc(var(--platform-height) * 2);
-        }
-        .arrow-down-S1-L3-P3 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 2 + 10px);
-            bottom: calc(var(--platform-height) * 3);
-        }
-        .arrow-down-S1-L4-P6 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 5 + 10px);
-            bottom: calc(var(--platform-height) * 4);
-        }
-        /* Stage 2 Down arrows: S2-L1-P1, S2-L1-P5, S2-L2-P2, S2-L3-P4, S2-L4-P1 */
-        .arrow-down-S2-L6-P7 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height));
-        }
-        .arrow-down-S2-L6-P11 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height));
-        }
-        .arrow-down-S2-L7-P8 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2);
-        }
-        .arrow-down-S2-L8-P10 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 9 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 3);
-        }
-        .arrow-down-S2-L9-P7 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4);
-        }
-        /* S2→S4 climb down arrow at L5-P7 (climb from S2 level 5 to S4 level 4) */
-        .arrow-down-S2-L5-P7-to-S4 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-thickness) / 2);
-        }
-        /* Stage 4 Down arrows */
-        /* L4: P7, P9, P10, P11, P12 */
-        .arrow-down-S4-L4-P7 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
-            bottom: calc(var(--platform-height) * 4);
-        }
-        .arrow-down-S4-L4-P9 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 8 + 10px);
-            bottom: calc(var(--platform-height) * 4);
-        }
-        .arrow-down-S4-L4-P10 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 9 + 10px);
-            bottom: calc(var(--platform-height) * 4);
-        }
-        .arrow-down-S4-L4-P11 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
-            bottom: calc(var(--platform-height) * 4);
-        }
-        .arrow-down-S4-L4-P12 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 11 + 10px);
-            bottom: calc(var(--platform-height) * 4);
-        }
-        /* L3: P8, P10, P11 */
-        .arrow-down-S4-L3-P8 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px);
-            bottom: calc(var(--platform-height) * 3);
-        }
-        .arrow-down-S4-L3-P10 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 9 + 10px);
-            bottom: calc(var(--platform-height) * 3);
-        }
-        .arrow-down-S4-L3-P11 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
-            bottom: calc(var(--platform-height) * 3);
-        }
-        /* L2: P7, P9, P11 */
-        .arrow-down-S4-L2-P7 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
-            bottom: calc(var(--platform-height) * 2);
-        }
-        .arrow-down-S4-L2-P9 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 8 + 10px);
-            bottom: calc(var(--platform-height) * 2);
-        }
-        .arrow-down-S4-L2-P11 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 10 + 10px);
-            bottom: calc(var(--platform-height) * 2);
-        }
-        /* L1: P7, P8, P9, P12 */
-        .arrow-down-S4-L1-P7 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 6 + 10px);
-            bottom: var(--platform-height);
-        }
-        .arrow-down-S4-L1-P8 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 7 + 10px);
-            bottom: var(--platform-height);
-        }
-        .arrow-down-S4-L1-P9 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 8 + 10px);
-            bottom: var(--platform-height);
-        }
-        .arrow-down-S4-L1-P12 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 11 + 10px);
-            bottom: var(--platform-height);
-        }
-        /* Stage 5 horizontal arrows */
-        .arrow-S5-P14-P13, .arrow-S5-P13-P14 { left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
-        .arrow-S5-P14-P15, .arrow-S5-P15-P14 { left: calc(var(--pos-offset) + var(--pos-width) * 13.5 + 12px); }
-        .arrow-S5-P15-P16, .arrow-S5-P16-P15 { left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
-        .arrow-S5-P16-P17, .arrow-S5-P17-P16 { left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px); }
-        .arrow-S5-P17-P18, .arrow-S5-P18-P17 { left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
-        /* Stage 5 up arrows (all positions, levels 0-3) */
-        .arrow-up-S5-P13 { left: calc(var(--pos-offset) + var(--pos-width) * 12 + 10px); }
-        .arrow-up-S5-P14 { left: calc(var(--pos-offset) + var(--pos-width) * 13 + 10px); }
-        .arrow-up-S5-P15 { left: calc(var(--pos-offset) + var(--pos-width) * 14 + 10px); }
-        .arrow-up-S5-P16 { left: calc(var(--pos-offset) + var(--pos-width) * 15 + 10px); }
-        .arrow-up-S5-P17 { left: calc(var(--pos-offset) + var(--pos-width) * 16 + 10px); }
-        .arrow-up-S5-P18 { left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px); }
-        .arrow-up-S5-L0 { bottom: calc(var(--ground-height) + 72.5px); }
-        .arrow-up-S5-L1 { bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px); }
-        .arrow-up-S5-L2 { bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 72.5px); }
-        .arrow-up-S5-L3 { bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px); }
-        /* Stage 5 down arrows (all positions, levels 1-4) */
-        .arrow-down-S5-P13 { left: calc(var(--pos-offset) + var(--pos-width) * 12 + 10px); }
-        .arrow-down-S5-P14 { left: calc(var(--pos-offset) + var(--pos-width) * 13 + 10px); }
-        .arrow-down-S5-P15 { left: calc(var(--pos-offset) + var(--pos-width) * 14 + 10px); }
-        .arrow-down-S5-P16 { left: calc(var(--pos-offset) + var(--pos-width) * 15 + 10px); }
-        .arrow-down-S5-P17 { left: calc(var(--pos-offset) + var(--pos-width) * 16 + 10px); }
-        .arrow-down-S5-P18 { left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px); }
-        .arrow-down-S5-L1 { bottom: var(--platform-height); }
-        .arrow-down-S5-L2 { bottom: calc(var(--platform-height) * 2); }
-        .arrow-down-S5-L3 { bottom: calc(var(--platform-height) * 3); }
-        .arrow-down-S5-L4 { bottom: calc(var(--platform-height) * 4); }
-        /* Stage 3 down arrows */
-        .arrow-down-S3-L6-P16 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 15 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height));
-        }
-        .arrow-down-S3-L7-P13 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 12 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2);
-        }
-        .arrow-down-S3-L7-P14 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 13 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2);
-        }
-        .arrow-down-S3-L7-P18 {
-            left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2);
-        }
-        /* Show horizontal arrows based on position (all levels) */
-        /* Stage 1 arrows */
-        #pos-1:checked ~ .game-world .arrow-S1-P1-P2 { display: block; }
-        #pos-2:checked ~ .game-world .arrow-S1-P2-P1 { display: block; }
-        #pos-2:checked ~ .game-world .arrow-S1-P2-P3 { display: block; }
-        #pos-3:checked ~ .game-world .arrow-S1-P3-P2 { display: block; }
-        #pos-3:checked ~ .game-world .arrow-S1-P3-P4 { display: block; }
-        #pos-4:checked ~ .game-world .arrow-S1-P4-P3 { display: block; }
-        #pos-4:checked ~ .game-world .arrow-S1-P4-P5 { display: block; }
-        #pos-5:checked ~ .game-world .arrow-S1-P5-P4 { display: block; }
-        #pos-5:checked ~ .game-world .arrow-S1-P5-P6 { display: block; }
-        #pos-6:checked ~ .game-world .arrow-S1-P6-P5 { display: block; }
+        /* Show horizontal arrows based on position */
+        /* Stage 1 arrows (positions 1-6, no level restriction) */
+        #pos-1:checked ~ .game-world .arrow-P1-right { display: block; }
+        #pos-2:checked ~ .game-world .arrow-P2-left { display: block; }
+        #pos-2:checked ~ .game-world .arrow-P2-right { display: block; }
+        #pos-3:checked ~ .game-world .arrow-P3-left { display: block; }
+        #pos-3:checked ~ .game-world .arrow-P3-right { display: block; }
+        #pos-4:checked ~ .game-world .arrow-P4-left { display: block; }
+        #pos-4:checked ~ .game-world .arrow-P4-right { display: block; }
+        #pos-5:checked ~ .game-world .arrow-P5-left { display: block; }
+        #pos-5:checked ~ .game-world .arrow-P5-right { display: block; }
+        #pos-6:checked ~ .game-world .arrow-P6-left { display: block; }
         /* Hide left arrow at poison location (S1-L1-P6) */
-        #level-1:checked ~ #pos-6:checked ~ .game-world .arrow-S1-P6-P5 { display: none; }
-        /* Arrow to S4/S2 area when door is open and player at S1-P6 (enters S4-L0-P7) */
-        #level-0:checked ~ #pos-6:checked ~ #door-unlocked:checked ~ .game-world .arrow-S1-P6-S2-P7 { display: block; }
+        #level-1:checked ~ #pos-6:checked ~ .game-world .arrow-P6-left { display: none; }
+        /* Arrow to S4 area when door is open and player at S1-P6 (enters S4-L0-P7) */
+        #level-0:checked ~ #pos-6:checked ~ #door-unlocked:checked ~ .game-world .arrow-P6-right { display: block; }
         #pos-6:checked ~ #door-unlocked:checked ~ .nav-panel .nav-right[for="pos-7"] { display: block; }
         /* Arrow back to S1 from S4-L0-P7 */
-        #level-0:checked ~ #pos-7:checked ~ #door-unlocked:checked ~ .game-world .arrow-S2-P7-S1-P6 { display: block; }
+        #level-0:checked ~ #pos-7:checked ~ #door-unlocked:checked ~ .game-world .arrow-P7-left { display: block; }
         /* Stage 4 horizontal arrows (S4 uses levels 0-4, positions 7-12) */
-        :is(#level-0, #level-2, #level-4):checked ~ #pos-7:checked ~ .game-world .arrow-S4-P7-P8 { display: block; }
-        :is(#level-0, #level-2, #level-4):checked ~ #pos-8:checked ~ .game-world .arrow-S4-P8-P7 { display: block; }
-        :is(#level-1, #level-4):checked ~ #pos-8:checked ~ .game-world .arrow-S4-P8-P9 { display: block; }
-        :is(#level-1, #level-4):checked ~ #pos-9:checked ~ .game-world .arrow-S4-P9-P8 { display: block; }
-        :is(#level-0, #level-2, #level-3):checked ~ #pos-9:checked ~ .game-world .arrow-S4-P9-P10 { display: block; }
-        :is(#level-0, #level-2, #level-3):checked ~ #pos-10:checked ~ .game-world .arrow-S4-P10-P9 { display: block; }
-        :is(#level-0, #level-1, #level-4):checked ~ #pos-10:checked ~ .game-world .arrow-S4-P10-P11 { display: block; }
-        :is(#level-0, #level-1, #level-4):checked ~ #pos-11:checked ~ .game-world .arrow-S4-P11-P10 { display: block; }
-        :is(#level-0, #level-1, #level-2, #level-4):checked ~ #pos-11:checked ~ .game-world .arrow-S4-P11-P12 { display: block; }
-        :is(#level-0, #level-1, #level-2, #level-4):checked ~ #pos-12:checked ~ .game-world .arrow-S4-P12-P11 { display: block; }
-        /* Stage 2 arrows */
-        /* S2 horizontal arrows only show at levels 5-9 */
-        #level-5:checked ~ #pos-7:checked ~ .game-world .arrow-S2-P7-P8 { display: block; }
-        #level-5:checked ~ #pos-8:checked ~ .game-world .arrow-S2-P8-P7 { display: block; }
-        #level-5:checked ~ #pos-8:checked ~ .game-world .arrow-S2-P8-P9 { display: block; }
-        #level-5:checked ~ #pos-9:checked ~ .game-world .arrow-S2-P9-P8 { display: block; }
-        #level-5:checked ~ #pos-9:checked ~ .game-world .arrow-S2-P9-P10 { display: block; }
+        :is(#level-0, #level-2, #level-4):checked ~ #pos-7:checked ~ .game-world .arrow-P7-right { display: block; }
+        :is(#level-0, #level-2, #level-4):checked ~ #pos-8:checked ~ .game-world .arrow-P8-left { display: block; }
+        :is(#level-1, #level-4):checked ~ #pos-8:checked ~ .game-world .arrow-P8-right { display: block; }
+        :is(#level-1, #level-4):checked ~ #pos-9:checked ~ .game-world .arrow-P9-left { display: block; }
+        :is(#level-0, #level-2, #level-3):checked ~ #pos-9:checked ~ .game-world .arrow-P9-right { display: block; }
+        :is(#level-0, #level-2, #level-3):checked ~ #pos-10:checked ~ .game-world .arrow-P10-left { display: block; }
+        :is(#level-0, #level-1, #level-4):checked ~ #pos-10:checked ~ .game-world .arrow-P10-right { display: block; }
+        :is(#level-0, #level-1, #level-4):checked ~ #pos-11:checked ~ .game-world .arrow-P11-left { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-4):checked ~ #pos-11:checked ~ .game-world .arrow-P11-right { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-4):checked ~ #pos-12:checked ~ .game-world .arrow-P12-left { display: block; }
+        /* Stage 2 arrows (S2 uses levels 5-9, positions 7-12) */
+        #level-5:checked ~ #pos-7:checked ~ .game-world .arrow-P7-right { display: block; }
+        #level-5:checked ~ #pos-8:checked ~ .game-world .arrow-P8-left { display: block; }
+        #level-5:checked ~ #pos-8:checked ~ .game-world .arrow-P8-right { display: block; }
+        #level-5:checked ~ #pos-9:checked ~ .game-world .arrow-P9-left { display: block; }
+        #level-5:checked ~ #pos-9:checked ~ .game-world .arrow-P9-right { display: block; }
         /* Disease location at S2-L0-P10 (level-5, pos-10) - no arrows from this position */
-        #level-5:checked ~ #pos-11:checked ~ .game-world .arrow-S2-P11-P10 { display: block; }
-        #level-5:checked ~ #pos-11:checked ~ .game-world .arrow-S2-P11-P12 { display: block; }
-        #level-5:checked ~ #pos-12:checked ~ .game-world .arrow-S2-P12-P11 { display: block; }
+        #level-5:checked ~ #pos-11:checked ~ .game-world .arrow-P11-left { display: block; }
+        #level-5:checked ~ #pos-11:checked ~ .game-world .arrow-P11-right { display: block; }
+        #level-5:checked ~ #pos-12:checked ~ .game-world .arrow-P12-left { display: block; }
         /* S2 levels 6-9 in-game arrows (P7-P12 all walkable via platforms+branches) */
-        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-7:checked ~ .game-world .arrow-S2-P7-P8 { display: block; }
-        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-8:checked ~ .game-world .arrow-S2-P8-P7 { display: block; }
-        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-8:checked ~ .game-world .arrow-S2-P8-P9 { display: block; }
-        :is(#level-7, #level-8, #level-9):checked ~ #pos-9:checked ~ .game-world .arrow-S2-P9-P8 { display: block; }
-        :is(#level-7, #level-8, #level-9):checked ~ #pos-9:checked ~ .game-world .arrow-S2-P9-P10 { display: block; }
-        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-10:checked ~ .game-world .arrow-S2-P10-P9 { display: block; }
-        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-10:checked ~ .game-world .arrow-S2-P10-P11 { display: block; }
-        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-11:checked ~ .game-world .arrow-S2-P11-P10 { display: block; }
-        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-11:checked ~ .game-world .arrow-S2-P11-P12 { display: block; }
-        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-12:checked ~ .game-world .arrow-S2-P12-P11 { display: block; }
+        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-7:checked ~ .game-world .arrow-P7-right { display: block; }
+        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-8:checked ~ .game-world .arrow-P8-left { display: block; }
+        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-8:checked ~ .game-world .arrow-P8-right { display: block; }
+        :is(#level-7, #level-8, #level-9):checked ~ #pos-9:checked ~ .game-world .arrow-P9-left { display: block; }
+        :is(#level-7, #level-8, #level-9):checked ~ #pos-9:checked ~ .game-world .arrow-P9-right { display: block; }
+        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-10:checked ~ .game-world .arrow-P10-left { display: block; }
+        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-10:checked ~ .game-world .arrow-P10-right { display: block; }
+        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-11:checked ~ .game-world .arrow-P11-left { display: block; }
+        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-11:checked ~ .game-world .arrow-P11-right { display: block; }
+        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-12:checked ~ .game-world .arrow-P12-left { display: block; }
         /* Arrows to/from Stage 3 (S3 also uses levels 5-9) */
-        #level-5:checked ~ #pos-12:checked ~ #tree-chopped:checked ~ .game-world .arrow-S2-P12-S3-P13 { display: block; }
-        #level-6:checked ~ #pos-12:checked ~ .game-world .arrow-S2-P12-S3-P13 { display: block; }
-        #level-7:checked ~ #pos-12:checked ~ .game-world .arrow-S2-P12-S3-P13 { display: block; }
-        #level-8:checked ~ #pos-12:checked ~ .game-world .arrow-S2-P12-S3-P13 { display: block; }
-        #level-9:checked ~ #pos-12:checked ~ .game-world .arrow-S2-P12-S3-P13 { display: block; }
-        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-13:checked ~ .game-world .arrow-S3-P13-S2-P12 { display: block; }
+        #level-5:checked ~ #pos-12:checked ~ #tree-chopped:checked ~ .game-world .arrow-P12-right { display: block; }
+        :is(#level-6, #level-7, #level-8, #level-9):checked ~ #pos-12:checked ~ .game-world .arrow-P12-right { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-13:checked ~ .game-world .arrow-P13-left { display: block; }
         /* Stage 3 horizontal arrows in game world */
-        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-13:checked ~ .game-world .arrow-S3-P13-P14 { display: block; }
-        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-14:checked ~ .game-world .arrow-S3-P14-P13 { display: block; }
-        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-14:checked ~ .game-world .arrow-S3-P14-P15 { display: block; }
-        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-15:checked ~ .game-world .arrow-S3-P15-P14 { display: block; }
-        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-15:checked ~ .game-world .arrow-S3-P15-P16 { display: block; }
-        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-16:checked ~ .game-world .arrow-S3-P16-P15 { display: block; }
-        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-16:checked ~ .game-world .arrow-S3-P16-P17 { display: block; }
-        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-17:checked ~ .game-world .arrow-S3-P17-P16 { display: block; }
-        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-17:checked ~ .game-world .arrow-S3-P17-P18 { display: block; }
-        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-18:checked ~ .game-world .arrow-S3-P18-P17 { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-13:checked ~ .game-world .arrow-P13-right { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-14:checked ~ .game-world .arrow-P14-left { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-14:checked ~ .game-world .arrow-P14-right { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-15:checked ~ .game-world .arrow-P15-left { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-15:checked ~ .game-world .arrow-P15-right { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-16:checked ~ .game-world .arrow-P16-left { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-16:checked ~ .game-world .arrow-P16-right { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-17:checked ~ .game-world .arrow-P17-left { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-17:checked ~ .game-world .arrow-P17-right { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ #pos-18:checked ~ .game-world .arrow-P18-left { display: block; }
         /* Stage 5 horizontal arrows in game world */
-        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-13:checked ~ .game-world .arrow-S5-P13-P14 { display: block; }
-        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-14:checked ~ .game-world .arrow-S5-P14-P13 { display: block; }
-        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-14:checked ~ .game-world .arrow-S5-P14-P15 { display: block; }
-        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-15:checked ~ .game-world .arrow-S5-P15-P14 { display: block; }
-        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-15:checked ~ .game-world .arrow-S5-P15-P16 { display: block; }
-        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-16:checked ~ .game-world .arrow-S5-P16-P15 { display: block; }
-        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-16:checked ~ .game-world .arrow-S5-P16-P17 { display: block; }
-        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-17:checked ~ .game-world .arrow-S5-P17-P16 { display: block; }
-        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-17:checked ~ .game-world .arrow-S5-P17-P18 { display: block; }
-        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-18:checked ~ .game-world .arrow-S5-P18-P17 { display: block; }
-        /* Hide horizontal arrows at L9 platform gaps (P4, P5, P6 have no platform at L9) */
-        #level-9:checked ~ #pos-15:checked ~ .game-world .arrow-S3-P15-P16 { display: none; }
-        #level-9:checked ~ #pos-16:checked ~ .game-world .arrow-S3-P16-P15 { display: none; }
-        #level-9:checked ~ #pos-16:checked ~ .game-world .arrow-S3-P16-P17 { display: none; }
-        #level-9:checked ~ #pos-17:checked ~ .game-world .arrow-S3-P17-P16 { display: none; }
-        #level-9:checked ~ #pos-17:checked ~ .game-world .arrow-S3-P17-P18 { display: none; }
-        #level-9:checked ~ #pos-18:checked ~ .game-world .arrow-S3-P18-P17 { display: none; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-13:checked ~ .game-world .arrow-P13-right { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-14:checked ~ .game-world .arrow-P14-left { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-14:checked ~ .game-world .arrow-P14-right { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-15:checked ~ .game-world .arrow-P15-left { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-15:checked ~ .game-world .arrow-P15-right { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-16:checked ~ .game-world .arrow-P16-left { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-16:checked ~ .game-world .arrow-P16-right { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-17:checked ~ .game-world .arrow-P17-left { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-17:checked ~ .game-world .arrow-P17-right { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-18:checked ~ .game-world .arrow-P18-left { display: block; }
+        /* Hide horizontal arrows at L9 platform gaps (S3) */
+        #level-9:checked ~ #pos-15:checked ~ .game-world .arrow-P15-right { display: none; }
+        #level-9:checked ~ #pos-16:checked ~ .game-world .arrow-P16-left { display: none; }
+        #level-9:checked ~ #pos-16:checked ~ .game-world .arrow-P16-right { display: none; }
+        #level-9:checked ~ #pos-17:checked ~ .game-world .arrow-P17-left { display: none; }
+        #level-9:checked ~ #pos-17:checked ~ .game-world .arrow-P17-right { display: none; }
+        #level-9:checked ~ #pos-18:checked ~ .game-world .arrow-P18-left { display: none; }
         /* Hide arrows at S3 platform ends */
-        #level-6:checked ~ #pos-14:checked ~ .game-world .arrow-S3-P14-P15 { display: none; }
-        #level-6:checked ~ #pos-15:checked ~ .game-world .arrow-S3-P15-P14 { display: none; }
-        #level-7:checked ~ #pos-14:checked ~ .game-world .arrow-S3-P14-P15 { display: none; }
-        #level-7:checked ~ #pos-15:checked ~ .game-world .arrow-S3-P15-P14 { display: none; }
-        /* Show up arrow at ladder locations */
-        /* Ladder 1: level 0, position 5 */
-        #level-0:checked ~ #pos-5:checked ~ .game-world .arrow-up-S1-L0-P5 { display: block; }
-        /* Ladder 2: level 1, position 3 */
-        #level-1:checked ~ #pos-3:checked ~ .game-world .arrow-up-S1-L1-P3 { display: block; }
-        /* Ladder 3: level 2, position 1 */
-        #level-2:checked ~ #pos-1:checked ~ .game-world .arrow-up-S1-L2-P1 { display: block; }
-        /* Ladder 4: level 3, position 4 */
-        #level-3:checked ~ #pos-4:checked ~ .game-world .arrow-up-S1-L3-P4 { display: block; }
-        /* Stage 2 up arrows: S2-L5-P8, S2-L5-P11, S2-L6-P7, S2-L6-P10, S2-L7-P11, S2-L8-P9 */
-        /* S2 uses levels 5-9 (same heights as 0-4) */
-        #level-5:checked ~ #pos-8:checked ~ .game-world .arrow-up-S2-L5-P8 { display: block; }
-        #level-5:checked ~ #pos-11:checked ~ .game-world .arrow-up-S2-L5-P11 { display: block; }
-        #level-6:checked ~ #pos-7:checked ~ .game-world .arrow-up-S2-L6-P7 { display: block; }
-        #level-6:checked ~ #pos-10:checked ~ .game-world .arrow-up-S2-L6-P10 { display: block; }
-        #level-7:checked ~ #pos-11:checked ~ .game-world .arrow-up-S2-L7-P11 { display: block; }
-        #level-8:checked ~ #pos-9:checked ~ .game-world .arrow-up-S2-L8-P9 { display: block; }
+        #level-6:checked ~ #pos-14:checked ~ .game-world .arrow-P14-right { display: none; }
+        #level-6:checked ~ #pos-15:checked ~ .game-world .arrow-P15-left { display: none; }
+        #level-7:checked ~ #pos-14:checked ~ .game-world .arrow-P14-right { display: none; }
+        #level-7:checked ~ #pos-15:checked ~ .game-world .arrow-P15-left { display: none; }
+        /* Show up arrows at ladder/vine/climb locations */
+        /* Stage 1 up arrows */
+        #level-0:checked ~ #pos-5:checked ~ .game-world .arrow-L0-up { display: block; }
+        #level-1:checked ~ #pos-3:checked ~ .game-world .arrow-L1-up { display: block; }
+        #level-2:checked ~ #pos-1:checked ~ .game-world .arrow-L2-up { display: block; }
+        #level-3:checked ~ #pos-4:checked ~ .game-world .arrow-L3-up { display: block; }
+        /* Stage 2 up arrows */
+        #level-5:checked ~ #pos-8:checked ~ .game-world .arrow-L5-up { display: block; }
+        #level-5:checked ~ #pos-11:checked ~ .game-world .arrow-L5-up { display: block; }
+        #level-6:checked ~ #pos-7:checked ~ .game-world .arrow-L6-up { display: block; }
+        #level-6:checked ~ #pos-10:checked ~ .game-world .arrow-L6-up { display: block; }
+        #level-7:checked ~ #pos-11:checked ~ .game-world .arrow-L7-up { display: block; }
+        #level-8:checked ~ #pos-9:checked ~ .game-world .arrow-L8-up { display: block; }
         /* Stage 4 up arrows */
         /* L0: P7, P8, P9, P12 */
-        #level-0:checked ~ #pos-7:checked ~ .game-world .arrow-up-S4-L0-P7 { display: block; }
-        #level-0:checked ~ #pos-8:checked ~ .game-world .arrow-up-S4-L0-P8 { display: block; }
-        #level-0:checked ~ #pos-9:checked ~ .game-world .arrow-up-S4-L0-P9 { display: block; }
-        #level-0:checked ~ #pos-12:checked ~ .game-world .arrow-up-S4-L0-P12 { display: block; }
+        #level-0:checked ~ #pos-7:checked ~ .game-world .arrow-L0-up { display: block; }
+        #level-0:checked ~ #pos-8:checked ~ .game-world .arrow-L0-up { display: block; }
+        #level-0:checked ~ #pos-9:checked ~ .game-world .arrow-L0-up { display: block; }
+        #level-0:checked ~ #pos-12:checked ~ .game-world .arrow-L0-up { display: block; }
         /* L1: P7, P9, P11 */
-        #level-1:checked ~ #pos-7:checked ~ .game-world .arrow-up-S4-L1-P7 { display: block; }
-        #level-1:checked ~ #pos-9:checked ~ .game-world .arrow-up-S4-L1-P9 { display: block; }
-        #level-1:checked ~ #pos-11:checked ~ .game-world .arrow-up-S4-L1-P11 { display: block; }
+        #level-1:checked ~ #pos-7:checked ~ .game-world .arrow-L1-up { display: block; }
+        #level-1:checked ~ #pos-9:checked ~ .game-world .arrow-L1-up { display: block; }
+        #level-1:checked ~ #pos-11:checked ~ .game-world .arrow-L1-up { display: block; }
         /* L2: P8, P10, P11 */
-        #level-2:checked ~ #pos-8:checked ~ .game-world .arrow-up-S4-L2-P8 { display: block; }
-        #level-2:checked ~ #pos-10:checked ~ .game-world .arrow-up-S4-L2-P10 { display: block; }
-        #level-2:checked ~ #pos-11:checked ~ .game-world .arrow-up-S4-L2-P11 { display: block; }
+        #level-2:checked ~ #pos-8:checked ~ .game-world .arrow-L2-up { display: block; }
+        #level-2:checked ~ #pos-10:checked ~ .game-world .arrow-L2-up { display: block; }
+        #level-2:checked ~ #pos-11:checked ~ .game-world .arrow-L2-up { display: block; }
         /* L3: P7, P9, P10, P11, P12 */
-        #level-3:checked ~ #pos-7:checked ~ .game-world .arrow-up-S4-L3-P7 { display: block; }
-        #level-3:checked ~ #pos-9:checked ~ .game-world .arrow-up-S4-L3-P9 { display: block; }
-        #level-3:checked ~ #pos-10:checked ~ .game-world .arrow-up-S4-L3-P10 { display: block; }
-        #level-3:checked ~ #pos-11:checked ~ .game-world .arrow-up-S4-L3-P11 { display: block; }
-        #level-3:checked ~ #pos-12:checked ~ .game-world .arrow-up-S4-L3-P12 { display: block; }
+        #level-3:checked ~ #pos-7:checked ~ .game-world .arrow-L3-up { display: block; }
+        #level-3:checked ~ #pos-9:checked ~ .game-world .arrow-L3-up { display: block; }
+        #level-3:checked ~ #pos-10:checked ~ .game-world .arrow-L3-up { display: block; }
+        #level-3:checked ~ #pos-11:checked ~ .game-world .arrow-L3-up { display: block; }
+        #level-3:checked ~ #pos-12:checked ~ .game-world .arrow-L3-up { display: block; }
         /* L4: P7 (climb to S2) */
-        #level-4:checked ~ #pos-7:checked ~ .game-world .arrow-up-S4-L4-P7 { display: block; }
+        #level-4:checked ~ #pos-7:checked ~ .game-world .arrow-L4-up { display: block; }
         /* Stage 3 up arrows */
-        #level-5:checked ~ #pos-16:checked ~ .game-world .arrow-up-S3-L5-P16 { display: block; }
-        #level-6:checked ~ #pos-18:checked ~ .game-world .arrow-up-S3-L6-P18 { display: block; }
-        #level-8:checked ~ #pos-17:checked ~ .game-world .arrow-up-S3-L8-P17 { display: block; }
+        #level-5:checked ~ #pos-16:checked ~ .game-world .arrow-L5-up { display: block; }
+        #level-6:checked ~ #pos-18:checked ~ .game-world .arrow-L6-up { display: block; }
+        #level-8:checked ~ #pos-17:checked ~ .game-world .arrow-phi-up { display: block; }
         /* Stage 3 phantom position arrows */
-        #level-8:checked ~ #pos-φ:checked ~ .game-world .arrow-left-S3-Pφ { display: block; }
-        #level-8:checked ~ #pos-φ:checked ~ .game-world .arrow-right-S3-Pφ { display: block; }
-        /* Show down arrow */
-        #level-1:checked ~ #pos-1:checked ~ .game-world .arrow-down-S1-L1-P1 { display: block; }
-        #level-2:checked ~ #pos-5:checked ~ .game-world .arrow-down-S1-L2-P5 { display: block; }
-        #level-3:checked ~ #pos-3:checked ~ .game-world .arrow-down-S1-L3-P3 { display: block; }
-        #level-4:checked ~ #pos-6:checked ~ .game-world .arrow-down-S1-L4-P6 { display: block; }
-        /* Stage 2 down arrows (S2 uses levels 5-9, same heights as 0-4) */
-        #level-6:checked ~ #pos-7:checked ~ .game-world .arrow-down-S2-L6-P7 { display: block; }
-        #level-6:checked ~ #pos-11:checked ~ .game-world .arrow-down-S2-L6-P11 { display: block; }
-        #level-7:checked ~ #pos-8:checked ~ .game-world .arrow-down-S2-L7-P8 { display: block; }
-        #level-8:checked ~ #pos-10:checked ~ .game-world .arrow-down-S2-L8-P10 { display: block; }
-        #level-9:checked ~ #pos-7:checked ~ .game-world .arrow-down-S2-L9-P7 { display: block; }
+        #level-8:checked ~ #pos-φ:checked ~ .game-world .arrow-phi-left { display: block; }
+        #level-8:checked ~ #pos-φ:checked ~ .game-world .arrow-phi-right { display: block; }
+        /* Show down arrows */
+        /* Stage 1 down arrows */
+        #level-1:checked ~ #pos-1:checked ~ .game-world .arrow-L1-down { display: block; }
+        #level-2:checked ~ #pos-5:checked ~ .game-world .arrow-L2-down { display: block; }
+        #level-3:checked ~ #pos-3:checked ~ .game-world .arrow-L3-down { display: block; }
+        #level-4:checked ~ #pos-6:checked ~ .game-world .arrow-L4-down { display: block; }
+        /* Stage 2 down arrows */
+        #level-6:checked ~ #pos-7:checked ~ .game-world .arrow-L6-down { display: block; }
+        #level-6:checked ~ #pos-11:checked ~ .game-world .arrow-L6-down { display: block; }
+        #level-7:checked ~ #pos-8:checked ~ .game-world .arrow-L7-down { display: block; }
+        #level-8:checked ~ #pos-10:checked ~ .game-world .arrow-L8-down { display: block; }
+        #level-9:checked ~ #pos-7:checked ~ .game-world .arrow-L9-down { display: block; }
         /* Climb down from S2-L5-P7 to S4-L4-P7 */
-        #level-5:checked ~ #pos-7:checked ~ .game-world .arrow-down-S2-L5-P7-to-S4 { display: block; }
+        #level-5:checked ~ #pos-7:checked ~ .game-world .arrow-L5-down { display: block; }
         /* Stage 4 down arrows */
         /* L4: P7, P9, P10, P11, P12 */
-        #level-4:checked ~ #pos-7:checked ~ .game-world .arrow-down-S4-L4-P7 { display: block; }
-        #level-4:checked ~ #pos-9:checked ~ .game-world .arrow-down-S4-L4-P9 { display: block; }
-        #level-4:checked ~ #pos-10:checked ~ .game-world .arrow-down-S4-L4-P10 { display: block; }
-        #level-4:checked ~ #pos-11:checked ~ .game-world .arrow-down-S4-L4-P11 { display: block; }
-        #level-4:checked ~ #pos-12:checked ~ .game-world .arrow-down-S4-L4-P12 { display: block; }
+        #level-4:checked ~ #pos-7:checked ~ .game-world .arrow-L4-down { display: block; }
+        #level-4:checked ~ #pos-9:checked ~ .game-world .arrow-L4-down { display: block; }
+        #level-4:checked ~ #pos-10:checked ~ .game-world .arrow-L4-down { display: block; }
+        #level-4:checked ~ #pos-11:checked ~ .game-world .arrow-L4-down { display: block; }
+        #level-4:checked ~ #pos-12:checked ~ .game-world .arrow-L4-down { display: block; }
         /* L3: P8, P10, P11 */
-        #level-3:checked ~ #pos-8:checked ~ .game-world .arrow-down-S4-L3-P8 { display: block; }
-        #level-3:checked ~ #pos-10:checked ~ .game-world .arrow-down-S4-L3-P10 { display: block; }
-        #level-3:checked ~ #pos-11:checked ~ .game-world .arrow-down-S4-L3-P11 { display: block; }
+        #level-3:checked ~ #pos-8:checked ~ .game-world .arrow-L3-down { display: block; }
+        #level-3:checked ~ #pos-10:checked ~ .game-world .arrow-L3-down { display: block; }
+        #level-3:checked ~ #pos-11:checked ~ .game-world .arrow-L3-down { display: block; }
         /* L2: P7, P9, P11 */
-        #level-2:checked ~ #pos-7:checked ~ .game-world .arrow-down-S4-L2-P7 { display: block; }
-        #level-2:checked ~ #pos-9:checked ~ .game-world .arrow-down-S4-L2-P9 { display: block; }
-        #level-2:checked ~ #pos-11:checked ~ .game-world .arrow-down-S4-L2-P11 { display: block; }
+        #level-2:checked ~ #pos-7:checked ~ .game-world .arrow-L2-down { display: block; }
+        #level-2:checked ~ #pos-9:checked ~ .game-world .arrow-L2-down { display: block; }
+        #level-2:checked ~ #pos-11:checked ~ .game-world .arrow-L2-down { display: block; }
         /* L1: P7, P8, P9, P12 */
-        #level-1:checked ~ #pos-7:checked ~ .game-world .arrow-down-S4-L1-P7 { display: block; }
-        #level-1:checked ~ #pos-8:checked ~ .game-world .arrow-down-S4-L1-P8 { display: block; }
-        #level-1:checked ~ #pos-9:checked ~ .game-world .arrow-down-S4-L1-P9 { display: block; }
-        #level-1:checked ~ #pos-12:checked ~ .game-world .arrow-down-S4-L1-P12 { display: block; }
+        #level-1:checked ~ #pos-7:checked ~ .game-world .arrow-L1-down { display: block; }
+        #level-1:checked ~ #pos-8:checked ~ .game-world .arrow-L1-down { display: block; }
+        #level-1:checked ~ #pos-9:checked ~ .game-world .arrow-L1-down { display: block; }
+        #level-1:checked ~ #pos-12:checked ~ .game-world .arrow-L1-down { display: block; }
         /* Stage 3 down arrows */
-        #level-6:checked ~ #pos-16:checked ~ .game-world .arrow-down-S3-L6-P16 { display: block; }
-        #level-7:checked ~ #pos-13:checked ~ .game-world .arrow-down-S3-L7-P13 { display: block; }
-        #level-7:checked ~ #pos-14:checked ~ .game-world .arrow-down-S3-L7-P14 { display: block; }
-        #level-7:checked ~ #pos-18:checked ~ .game-world .arrow-down-S3-L7-P18 { display: block; }
-        /* Stage 5 up arrows (all positions P13-P18, levels 0-3) */
-        #level-0:checked ~ #pos-13:checked ~ .game-world .arrow-up-S5-L0.arrow-up-S5-P13 { display: block; }
-        #level-0:checked ~ #pos-14:checked ~ .game-world .arrow-up-S5-L0.arrow-up-S5-P14 { display: block; }
-        #level-0:checked ~ #pos-15:checked ~ .game-world .arrow-up-S5-L0.arrow-up-S5-P15 { display: block; }
-        #level-0:checked ~ #pos-16:checked ~ .game-world .arrow-up-S5-L0.arrow-up-S5-P16 { display: block; }
-        #level-0:checked ~ #pos-17:checked ~ .game-world .arrow-up-S5-L0.arrow-up-S5-P17 { display: block; }
-        #level-0:checked ~ #pos-18:checked ~ .game-world .arrow-up-S5-L0.arrow-up-S5-P18 { display: block; }
-        #level-1:checked ~ #pos-13:checked ~ .game-world .arrow-up-S5-L1.arrow-up-S5-P13 { display: block; }
-        #level-1:checked ~ #pos-14:checked ~ .game-world .arrow-up-S5-L1.arrow-up-S5-P14 { display: block; }
-        #level-1:checked ~ #pos-15:checked ~ .game-world .arrow-up-S5-L1.arrow-up-S5-P15 { display: block; }
-        #level-1:checked ~ #pos-16:checked ~ .game-world .arrow-up-S5-L1.arrow-up-S5-P16 { display: block; }
-        #level-1:checked ~ #pos-17:checked ~ .game-world .arrow-up-S5-L1.arrow-up-S5-P17 { display: block; }
-        #level-1:checked ~ #pos-18:checked ~ .game-world .arrow-up-S5-L1.arrow-up-S5-P18 { display: block; }
-        #level-2:checked ~ #pos-13:checked ~ .game-world .arrow-up-S5-L2.arrow-up-S5-P13 { display: block; }
-        #level-2:checked ~ #pos-14:checked ~ .game-world .arrow-up-S5-L2.arrow-up-S5-P14 { display: block; }
-        #level-2:checked ~ #pos-15:checked ~ .game-world .arrow-up-S5-L2.arrow-up-S5-P15 { display: block; }
-        #level-2:checked ~ #pos-16:checked ~ .game-world .arrow-up-S5-L2.arrow-up-S5-P16 { display: block; }
-        #level-2:checked ~ #pos-17:checked ~ .game-world .arrow-up-S5-L2.arrow-up-S5-P17 { display: block; }
-        #level-2:checked ~ #pos-18:checked ~ .game-world .arrow-up-S5-L2.arrow-up-S5-P18 { display: block; }
-        #level-3:checked ~ #pos-13:checked ~ .game-world .arrow-up-S5-L3.arrow-up-S5-P13 { display: block; }
-        #level-3:checked ~ #pos-14:checked ~ .game-world .arrow-up-S5-L3.arrow-up-S5-P14 { display: block; }
-        #level-3:checked ~ #pos-15:checked ~ .game-world .arrow-up-S5-L3.arrow-up-S5-P15 { display: block; }
-        #level-3:checked ~ #pos-16:checked ~ .game-world .arrow-up-S5-L3.arrow-up-S5-P16 { display: block; }
-        #level-3:checked ~ #pos-17:checked ~ .game-world .arrow-up-S5-L3.arrow-up-S5-P17 { display: block; }
-        #level-3:checked ~ #pos-18:checked ~ .game-world .arrow-up-S5-L3.arrow-up-S5-P18 { display: block; }
-        /* Stage 5 down arrows (all positions P13-P18, levels 1-4) */
-        #level-1:checked ~ #pos-13:checked ~ .game-world .arrow-down-S5-L1.arrow-down-S5-P13 { display: block; }
-        #level-1:checked ~ #pos-14:checked ~ .game-world .arrow-down-S5-L1.arrow-down-S5-P14 { display: block; }
-        #level-1:checked ~ #pos-15:checked ~ .game-world .arrow-down-S5-L1.arrow-down-S5-P15 { display: block; }
-        #level-1:checked ~ #pos-16:checked ~ .game-world .arrow-down-S5-L1.arrow-down-S5-P16 { display: block; }
-        #level-1:checked ~ #pos-17:checked ~ .game-world .arrow-down-S5-L1.arrow-down-S5-P17 { display: block; }
-        #level-1:checked ~ #pos-18:checked ~ .game-world .arrow-down-S5-L1.arrow-down-S5-P18 { display: block; }
-        #level-2:checked ~ #pos-13:checked ~ .game-world .arrow-down-S5-L2.arrow-down-S5-P13 { display: block; }
-        #level-2:checked ~ #pos-14:checked ~ .game-world .arrow-down-S5-L2.arrow-down-S5-P14 { display: block; }
-        #level-2:checked ~ #pos-15:checked ~ .game-world .arrow-down-S5-L2.arrow-down-S5-P15 { display: block; }
-        #level-2:checked ~ #pos-16:checked ~ .game-world .arrow-down-S5-L2.arrow-down-S5-P16 { display: block; }
-        #level-2:checked ~ #pos-17:checked ~ .game-world .arrow-down-S5-L2.arrow-down-S5-P17 { display: block; }
-        #level-2:checked ~ #pos-18:checked ~ .game-world .arrow-down-S5-L2.arrow-down-S5-P18 { display: block; }
-        #level-3:checked ~ #pos-13:checked ~ .game-world .arrow-down-S5-L3.arrow-down-S5-P13 { display: block; }
-        #level-3:checked ~ #pos-14:checked ~ .game-world .arrow-down-S5-L3.arrow-down-S5-P14 { display: block; }
-        #level-3:checked ~ #pos-15:checked ~ .game-world .arrow-down-S5-L3.arrow-down-S5-P15 { display: block; }
-        #level-3:checked ~ #pos-16:checked ~ .game-world .arrow-down-S5-L3.arrow-down-S5-P16 { display: block; }
-        #level-3:checked ~ #pos-17:checked ~ .game-world .arrow-down-S5-L3.arrow-down-S5-P17 { display: block; }
-        #level-3:checked ~ #pos-18:checked ~ .game-world .arrow-down-S5-L3.arrow-down-S5-P18 { display: block; }
-        #level-4:checked ~ #pos-13:checked ~ .game-world .arrow-down-S5-L4.arrow-down-S5-P13 { display: block; }
-        #level-4:checked ~ #pos-14:checked ~ .game-world .arrow-down-S5-L4.arrow-down-S5-P14 { display: block; }
-        #level-4:checked ~ #pos-15:checked ~ .game-world .arrow-down-S5-L4.arrow-down-S5-P15 { display: block; }
-        #level-4:checked ~ #pos-16:checked ~ .game-world .arrow-down-S5-L4.arrow-down-S5-P16 { display: block; }
-        #level-4:checked ~ #pos-17:checked ~ .game-world .arrow-down-S5-L4.arrow-down-S5-P17 { display: block; }
-        #level-4:checked ~ #pos-18:checked ~ .game-world .arrow-down-S5-L4.arrow-down-S5-P18 { display: block; }
+        #level-6:checked ~ #pos-16:checked ~ .game-world .arrow-L6-down { display: block; }
+        #level-7:checked ~ #pos-13:checked ~ .game-world .arrow-L7-down { display: block; }
+        #level-7:checked ~ #pos-14:checked ~ .game-world .arrow-L7-down { display: block; }
+        #level-7:checked ~ #pos-18:checked ~ .game-world .arrow-L7-down { display: block; }
+        /* Stage 5 up arrows (all positions P13-P18) */
+        #level-0:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L0-up { display: block; }
+        #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L1-up { display: block; }
+        #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L2-up { display: block; }
+        #level-3:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L3-up { display: block; }
+        /* Stage 5 down arrows (all positions P13-P18) */
+        #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L1-down { display: block; }
+        #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L2-down { display: block; }
+        #level-3:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L3-down { display: block; }
+        #level-4:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L4-down { display: block; }
         /* Fixed navigation panel - 3x3 grid */
         .nav-panel {
             position: absolute;
@@ -5157,201 +4861,66 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <span class="tooltip wrench-tooltip">Wrench</span>
         <!-- Key above toolbox (clickable to unlock) -->
         <label for="toolbox-unlocked" class="key-at-toolbox"><svg><use href="#key"/></svg></label>
-        <!-- Horizontal arrow labels -->
-        <label for="pos-2" class="arrow arrow-right arrow-h arrow-S1-P1-P2"></label>
-        <label for="pos-1" class="arrow arrow-left arrow-h arrow-S1-P2-P1"></label>
-        <label for="pos-3" class="arrow arrow-right arrow-h arrow-S1-P2-P3"></label>
-        <label for="pos-2" class="arrow arrow-left arrow-h arrow-S1-P3-P2"></label>
-        <label for="pos-4" class="arrow arrow-right arrow-h arrow-S1-P3-P4"></label>
-        <label for="pos-3" class="arrow arrow-left arrow-h arrow-S1-P4-P3"></label>
-        <label for="pos-5" class="arrow arrow-right arrow-h arrow-S1-P4-P5"></label>
-        <label for="pos-4" class="arrow arrow-left arrow-h arrow-S1-P5-P4"></label>
-        <label for="pos-6" class="arrow arrow-right arrow-h arrow-S1-P5-P6"></label>
-        <label for="pos-5" class="arrow arrow-left arrow-h arrow-S1-P6-P5"></label>
-        <label for="pos-7" class="arrow arrow-right arrow-h arrow-S1-P6-S2-P7"></label>
-        <!-- Stage 2 horizontal arrow labels -->
-        <label for="pos-6" class="arrow arrow-left arrow-h arrow-S2-P7-S1-P6"></label>
-        <label for="pos-8" class="arrow arrow-right arrow-h arrow-S2-P7-P8"></label>
-        <label for="pos-7" class="arrow arrow-left arrow-h arrow-S2-P8-P7"></label>
-        <label for="pos-9" class="arrow arrow-right arrow-h arrow-S2-P8-P9"></label>
-        <label for="pos-8" class="arrow arrow-left arrow-h arrow-S2-P9-P8"></label>
-        <label for="pos-10" class="arrow arrow-right arrow-h arrow-S2-P9-P10"></label>
-        <label for="pos-9" class="arrow arrow-left arrow-h arrow-S2-P10-P9"></label>
-        <label for="pos-11" class="arrow arrow-right arrow-h arrow-S2-P10-P11"></label>
-        <label for="pos-10" class="arrow arrow-left arrow-h arrow-S2-P11-P10"></label>
-        <label for="pos-12" class="arrow arrow-right arrow-h arrow-S2-P11-P12"></label>
-        <label for="pos-11" class="arrow arrow-left arrow-h arrow-S2-P12-P11"></label>
-        <!-- Stage 2 to Stage 3 arrows -->
-        <label for="pos-13" class="arrow arrow-right arrow-h arrow-S2-P12-S3-P13"></label>
-        <label for="pos-12" class="arrow arrow-left arrow-h arrow-S3-P13-S2-P12"></label>
-        <!-- Stage 3 horizontal arrows -->
-        <label for="pos-14" class="arrow arrow-right arrow-h arrow-S3-P13-P14"></label>
-        <label for="pos-13" class="arrow arrow-left arrow-h arrow-S3-P14-P13"></label>
-        <label for="pos-15" class="arrow arrow-right arrow-h arrow-S3-P14-P15"></label>
-        <label for="pos-14" class="arrow arrow-left arrow-h arrow-S3-P15-P14"></label>
-        <label for="pos-16" class="arrow arrow-right arrow-h arrow-S3-P15-P16"></label>
-        <label for="pos-15" class="arrow arrow-left arrow-h arrow-S3-P16-P15"></label>
-        <label for="pos-17" class="arrow arrow-right arrow-h arrow-S3-P16-P17"></label>
-        <label for="pos-16" class="arrow arrow-left arrow-h arrow-S3-P17-P16"></label>
-        <label for="pos-18" class="arrow arrow-right arrow-h arrow-S3-P17-P18"></label>
-        <label for="pos-17" class="arrow arrow-left arrow-h arrow-S3-P18-P17"></label>
-        <!-- Stage 4 horizontal arrows -->
-        <label for="pos-8" class="arrow arrow-right arrow-h arrow-S4-P7-P8"></label>
-        <label for="pos-7" class="arrow arrow-left arrow-h arrow-S4-P8-P7"></label>
-        <label for="pos-9" class="arrow arrow-right arrow-h arrow-S4-P8-P9"></label>
-        <label for="pos-8" class="arrow arrow-left arrow-h arrow-S4-P9-P8"></label>
-        <label for="pos-10" class="arrow arrow-right arrow-h arrow-S4-P9-P10"></label>
-        <label for="pos-9" class="arrow arrow-left arrow-h arrow-S4-P10-P9"></label>
-        <label for="pos-11" class="arrow arrow-right arrow-h arrow-S4-P10-P11"></label>
-        <label for="pos-10" class="arrow arrow-left arrow-h arrow-S4-P11-P10"></label>
-        <label for="pos-12" class="arrow arrow-right arrow-h arrow-S4-P11-P12"></label>
-        <label for="pos-11" class="arrow arrow-left arrow-h arrow-S4-P12-P11"></label>
-        <!-- Up arrow labels -->
-        <label for="level-1" class="arrow arrow-up arrow-up-S1-L0-P5"></label>
-        <label for="level-2" class="arrow arrow-up arrow-up-S1-L1-P3"></label>
-        <label for="level-3" class="arrow arrow-up arrow-up-S1-L2-P1"></label>
-        <label for="level-4" class="arrow arrow-up arrow-up-S1-L3-P4"></label>
-        <!-- Down arrow labels -->
-        <label for="level-0" class="arrow arrow-down arrow-down-S1-L1-P1"></label>
-        <label for="level-1" class="arrow arrow-down arrow-down-S1-L2-P5"></label>
-        <label for="level-3" class="arrow arrow-down arrow-down-S1-L4-P6"></label>
-        <label for="level-2" class="arrow arrow-down arrow-down-S1-L3-P3"></label>
-        <!-- Stage 2 Up arrow labels -->
-        <label for="level-6" class="arrow arrow-up arrow-up-S2-L5-P8"></label>
-        <label for="level-6" class="arrow arrow-up arrow-up-S2-L5-P11"></label>
-        <label for="level-7" class="arrow arrow-up arrow-up-S2-L6-P7"></label>
-        <label for="level-7" class="arrow arrow-up arrow-up-S2-L6-P10"></label>
-        <label for="level-8" class="arrow arrow-up arrow-up-S2-L7-P11"></label>
-        <label for="level-9" class="arrow arrow-up arrow-up-S2-L8-P9"></label>
-        <!-- Stage 2 Down arrow labels -->
-        <label for="level-5" class="arrow arrow-down arrow-down-S2-L6-P7"></label>
-        <label for="level-5" class="arrow arrow-down arrow-down-S2-L6-P11"></label>
-        <label for="level-6" class="arrow arrow-down arrow-down-S2-L7-P8"></label>
-        <label for="level-7" class="arrow arrow-down arrow-down-S2-L8-P10"></label>
-        <label for="level-8" class="arrow arrow-down arrow-down-S2-L9-P7"></label>
-        <!-- Stage 4 Up arrow labels -->
-        <!-- L0: P7, P8, P9, P12 -->
-        <label for="level-1" class="arrow arrow-up arrow-up-S4-L0-P7"></label>
-        <label for="level-1" class="arrow arrow-up arrow-up-S4-L0-P8"></label>
-        <label for="level-1" class="arrow arrow-up arrow-up-S4-L0-P9"></label>
-        <label for="level-1" class="arrow arrow-up arrow-up-S4-L0-P12"></label>
-        <!-- L1: P7, P9, P11 -->
-        <label for="level-2" class="arrow arrow-up arrow-up-S4-L1-P7"></label>
-        <label for="level-2" class="arrow arrow-up arrow-up-S4-L1-P9"></label>
-        <label for="level-2" class="arrow arrow-up arrow-up-S4-L1-P11"></label>
-        <!-- L2: P8, P10, P11 -->
-        <label for="level-3" class="arrow arrow-up arrow-up-S4-L2-P8"></label>
-        <label for="level-3" class="arrow arrow-up arrow-up-S4-L2-P10"></label>
-        <label for="level-3" class="arrow arrow-up arrow-up-S4-L2-P11"></label>
-        <!-- L3: P7, P9, P10, P11, P12 -->
-        <label for="level-4" class="arrow arrow-up arrow-up-S4-L3-P7"></label>
-        <label for="level-4" class="arrow arrow-up arrow-up-S4-L3-P9"></label>
-        <label for="level-4" class="arrow arrow-up arrow-up-S4-L3-P10"></label>
-        <label for="level-4" class="arrow arrow-up arrow-up-S4-L3-P11"></label>
-        <label for="level-4" class="arrow arrow-up arrow-up-S4-L3-P12"></label>
-        <!-- L4: P7 (climb to S2) -->
-        <label for="level-5" class="arrow arrow-up arrow-up-S4-L4-P7"></label>
-        <!-- Stage 4 Down arrow labels -->
-        <!-- L4: P7, P9, P10, P11, P12 -->
-        <label for="level-3" class="arrow arrow-down arrow-down-S4-L4-P7"></label>
-        <label for="level-3" class="arrow arrow-down arrow-down-S4-L4-P9"></label>
-        <label for="level-3" class="arrow arrow-down arrow-down-S4-L4-P10"></label>
-        <label for="level-3" class="arrow arrow-down arrow-down-S4-L4-P11"></label>
-        <label for="level-3" class="arrow arrow-down arrow-down-S4-L4-P12"></label>
-        <!-- L3: P8, P10, P11 -->
-        <label for="level-2" class="arrow arrow-down arrow-down-S4-L3-P8"></label>
-        <label for="level-2" class="arrow arrow-down arrow-down-S4-L3-P10"></label>
-        <label for="level-2" class="arrow arrow-down arrow-down-S4-L3-P11"></label>
-        <!-- L2: P7, P9, P11 -->
-        <label for="level-1" class="arrow arrow-down arrow-down-S4-L2-P7"></label>
-        <label for="level-1" class="arrow arrow-down arrow-down-S4-L2-P9"></label>
-        <label for="level-1" class="arrow arrow-down arrow-down-S4-L2-P11"></label>
-        <!-- L1: P7, P8, P9, P12 -->
-        <label for="level-0" class="arrow arrow-down arrow-down-S4-L1-P7"></label>
-        <label for="level-0" class="arrow arrow-down arrow-down-S4-L1-P8"></label>
-        <label for="level-0" class="arrow arrow-down arrow-down-S4-L1-P9"></label>
-        <label for="level-0" class="arrow arrow-down arrow-down-S4-L1-P12"></label>
-        <!-- S2→S4 climb arrow at P7 -->
-        <label for="level-4" class="arrow arrow-down arrow-down-S2-L5-P7-to-S4"></label>
-        <!-- Stage 3 Down arrow labels -->
-        <label for="level-5" class="arrow arrow-down arrow-down-S3-L6-P16"></label>
-        <label for="level-6" class="arrow arrow-down arrow-down-S3-L7-P13"></label>
-        <label for="level-6" class="arrow arrow-down arrow-down-S3-L7-P14"></label>
-        <label for="level-6" class="arrow arrow-down arrow-down-S3-L7-P18"></label>
-        <!-- Stage 3 Up arrow labels -->
-        <label for="level-6" class="arrow arrow-up arrow-up-S3-L5-P16"></label>
-        <label for="level-7" class="arrow arrow-up arrow-up-S3-L6-P18"></label>
-        <label for="pos-φ" class="arrow arrow-up arrow-up-S3-L8-P17"></label>
-        <!-- Stage 3 Phantom position arrows -->
-        <label for="pos-16" class="arrow arrow-left arrow-left-S3-Pφ"></label>
-        <label for="pos-18" class="arrow arrow-right arrow-right-S3-Pφ"></label>
-        <!-- Stage 5 horizontal arrows -->
-        <label for="pos-14" class="arrow arrow-right arrow-h arrow-S5-P13-P14"></label>
-        <label for="pos-13" class="arrow arrow-left arrow-h arrow-S5-P14-P13"></label>
-        <label for="pos-15" class="arrow arrow-right arrow-h arrow-S5-P14-P15"></label>
-        <label for="pos-14" class="arrow arrow-left arrow-h arrow-S5-P15-P14"></label>
-        <label for="pos-16" class="arrow arrow-right arrow-h arrow-S5-P15-P16"></label>
-        <label for="pos-15" class="arrow arrow-left arrow-h arrow-S5-P16-P15"></label>
-        <label for="pos-17" class="arrow arrow-right arrow-h arrow-S5-P16-P17"></label>
-        <label for="pos-16" class="arrow arrow-left arrow-h arrow-S5-P17-P16"></label>
-        <label for="pos-18" class="arrow arrow-right arrow-h arrow-S5-P17-P18"></label>
-        <label for="pos-17" class="arrow arrow-left arrow-h arrow-S5-P18-P17"></label>
-        <!-- Stage 5 Up arrow labels (L0→L1, all positions P13-P18) -->
-        <label for="level-1" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L0 arrow-up-S5-P13"></label>
-        <label for="level-1" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L0 arrow-up-S5-P14"></label>
-        <label for="level-1" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L0 arrow-up-S5-P15"></label>
-        <label for="level-1" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L0 arrow-up-S5-P16"></label>
-        <label for="level-1" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L0 arrow-up-S5-P17"></label>
-        <label for="level-1" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L0 arrow-up-S5-P18"></label>
-        <!-- Stage 5 Up arrow labels (L1→L2, all positions P13-P18) -->
-        <label for="level-2" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L1 arrow-up-S5-P13"></label>
-        <label for="level-2" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L1 arrow-up-S5-P14"></label>
-        <label for="level-2" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L1 arrow-up-S5-P15"></label>
-        <label for="level-2" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L1 arrow-up-S5-P16"></label>
-        <label for="level-2" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L1 arrow-up-S5-P17"></label>
-        <label for="level-2" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L1 arrow-up-S5-P18"></label>
-        <!-- Stage 5 Up arrow labels (L2→L3, all positions P13-P18) -->
-        <label for="level-3" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L2 arrow-up-S5-P13"></label>
-        <label for="level-3" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L2 arrow-up-S5-P14"></label>
-        <label for="level-3" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L2 arrow-up-S5-P15"></label>
-        <label for="level-3" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L2 arrow-up-S5-P16"></label>
-        <label for="level-3" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L2 arrow-up-S5-P17"></label>
-        <label for="level-3" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L2 arrow-up-S5-P18"></label>
-        <!-- Stage 5 Up arrow labels (L3→L4, all positions P13-P18) -->
-        <label for="level-4" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L3 arrow-up-S5-P13"></label>
-        <label for="level-4" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L3 arrow-up-S5-P14"></label>
-        <label for="level-4" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L3 arrow-up-S5-P15"></label>
-        <label for="level-4" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L3 arrow-up-S5-P16"></label>
-        <label for="level-4" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L3 arrow-up-S5-P17"></label>
-        <label for="level-4" class="arrow arrow-up arrow-up-S5 arrow-up-S5-L3 arrow-up-S5-P18"></label>
-        <!-- Stage 5 Down arrow labels (L1→L0, all positions P13-P18) -->
-        <label for="level-0" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L1 arrow-down-S5-P13"></label>
-        <label for="level-0" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L1 arrow-down-S5-P14"></label>
-        <label for="level-0" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L1 arrow-down-S5-P15"></label>
-        <label for="level-0" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L1 arrow-down-S5-P16"></label>
-        <label for="level-0" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L1 arrow-down-S5-P17"></label>
-        <label for="level-0" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L1 arrow-down-S5-P18"></label>
-        <!-- Stage 5 Down arrow labels (L2→L1, all positions P13-P18) -->
-        <label for="level-1" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L2 arrow-down-S5-P13"></label>
-        <label for="level-1" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L2 arrow-down-S5-P14"></label>
-        <label for="level-1" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L2 arrow-down-S5-P15"></label>
-        <label for="level-1" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L2 arrow-down-S5-P16"></label>
-        <label for="level-1" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L2 arrow-down-S5-P17"></label>
-        <label for="level-1" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L2 arrow-down-S5-P18"></label>
-        <!-- Stage 5 Down arrow labels (L3→L2, all positions P13-P18) -->
-        <label for="level-2" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L3 arrow-down-S5-P13"></label>
-        <label for="level-2" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L3 arrow-down-S5-P14"></label>
-        <label for="level-2" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L3 arrow-down-S5-P15"></label>
-        <label for="level-2" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L3 arrow-down-S5-P16"></label>
-        <label for="level-2" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L3 arrow-down-S5-P17"></label>
-        <label for="level-2" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L3 arrow-down-S5-P18"></label>
-        <!-- Stage 5 Down arrow labels (L4→L3, all positions P13-P18) -->
-        <label for="level-3" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L4 arrow-down-S5-P13"></label>
-        <label for="level-3" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L4 arrow-down-S5-P14"></label>
-        <label for="level-3" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L4 arrow-down-S5-P15"></label>
-        <label for="level-3" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L4 arrow-down-S5-P16"></label>
-        <label for="level-3" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L4 arrow-down-S5-P17"></label>
-        <label for="level-3" class="arrow arrow-down arrow-down-S5 arrow-down-S5-L4 arrow-down-S5-P18"></label>
+        <!-- Horizontal arrow labels (right) -->
+        <label for="pos-2" class="arrow arrow-right arrow-h arrow-P1-right"></label>
+        <label for="pos-3" class="arrow arrow-right arrow-h arrow-P2-right"></label>
+        <label for="pos-4" class="arrow arrow-right arrow-h arrow-P3-right"></label>
+        <label for="pos-5" class="arrow arrow-right arrow-h arrow-P4-right"></label>
+        <label for="pos-6" class="arrow arrow-right arrow-h arrow-P5-right"></label>
+        <label for="pos-7" class="arrow arrow-right arrow-h arrow-P6-right"></label>
+        <label for="pos-8" class="arrow arrow-right arrow-h arrow-P7-right"></label>
+        <label for="pos-9" class="arrow arrow-right arrow-h arrow-P8-right"></label>
+        <label for="pos-10" class="arrow arrow-right arrow-h arrow-P9-right"></label>
+        <label for="pos-11" class="arrow arrow-right arrow-h arrow-P10-right"></label>
+        <label for="pos-12" class="arrow arrow-right arrow-h arrow-P11-right"></label>
+        <label for="pos-13" class="arrow arrow-right arrow-h arrow-P12-right"></label>
+        <label for="pos-14" class="arrow arrow-right arrow-h arrow-P13-right"></label>
+        <label for="pos-15" class="arrow arrow-right arrow-h arrow-P14-right"></label>
+        <label for="pos-16" class="arrow arrow-right arrow-h arrow-P15-right"></label>
+        <label for="pos-17" class="arrow arrow-right arrow-h arrow-P16-right"></label>
+        <label for="pos-18" class="arrow arrow-right arrow-h arrow-P17-right"></label>
+        <!-- Horizontal arrow labels (left) -->
+        <label for="pos-1" class="arrow arrow-left arrow-h arrow-P2-left"></label>
+        <label for="pos-2" class="arrow arrow-left arrow-h arrow-P3-left"></label>
+        <label for="pos-3" class="arrow arrow-left arrow-h arrow-P4-left"></label>
+        <label for="pos-4" class="arrow arrow-left arrow-h arrow-P5-left"></label>
+        <label for="pos-5" class="arrow arrow-left arrow-h arrow-P6-left"></label>
+        <label for="pos-6" class="arrow arrow-left arrow-h arrow-P7-left"></label>
+        <label for="pos-7" class="arrow arrow-left arrow-h arrow-P8-left"></label>
+        <label for="pos-8" class="arrow arrow-left arrow-h arrow-P9-left"></label>
+        <label for="pos-9" class="arrow arrow-left arrow-h arrow-P10-left"></label>
+        <label for="pos-10" class="arrow arrow-left arrow-h arrow-P11-left"></label>
+        <label for="pos-11" class="arrow arrow-left arrow-h arrow-P12-left"></label>
+        <label for="pos-12" class="arrow arrow-left arrow-h arrow-P13-left"></label>
+        <label for="pos-13" class="arrow arrow-left arrow-h arrow-P14-left"></label>
+        <label for="pos-14" class="arrow arrow-left arrow-h arrow-P15-left"></label>
+        <label for="pos-15" class="arrow arrow-left arrow-h arrow-P16-left"></label>
+        <label for="pos-16" class="arrow arrow-left arrow-h arrow-P17-left"></label>
+        <label for="pos-17" class="arrow arrow-left arrow-h arrow-P18-left"></label>
+        <!-- Vertical arrow labels (up) -->
+        <label for="level-1" class="arrow arrow-up arrow-v arrow-L0-up"></label>
+        <label for="level-2" class="arrow arrow-up arrow-v arrow-L1-up"></label>
+        <label for="level-3" class="arrow arrow-up arrow-v arrow-L2-up"></label>
+        <label for="level-4" class="arrow arrow-up arrow-v arrow-L3-up"></label>
+        <label for="level-5" class="arrow arrow-up arrow-v arrow-L4-up"></label>
+        <label for="level-6" class="arrow arrow-up arrow-v arrow-L5-up"></label>
+        <label for="level-7" class="arrow arrow-up arrow-v arrow-L6-up"></label>
+        <label for="level-8" class="arrow arrow-up arrow-v arrow-L7-up"></label>
+        <label for="level-9" class="arrow arrow-up arrow-v arrow-L8-up"></label>
+        <!-- Vertical arrow labels (down) -->
+        <label for="level-0" class="arrow arrow-down arrow-v arrow-L1-down"></label>
+        <label for="level-1" class="arrow arrow-down arrow-v arrow-L2-down"></label>
+        <label for="level-2" class="arrow arrow-down arrow-v arrow-L3-down"></label>
+        <label for="level-3" class="arrow arrow-down arrow-v arrow-L4-down"></label>
+        <label for="level-4" class="arrow arrow-down arrow-v arrow-L5-down"></label>
+        <label for="level-5" class="arrow arrow-down arrow-v arrow-L6-down"></label>
+        <label for="level-6" class="arrow arrow-down arrow-v arrow-L7-down"></label>
+        <label for="level-7" class="arrow arrow-down arrow-v arrow-L8-down"></label>
+        <label for="level-8" class="arrow arrow-down arrow-v arrow-L9-down"></label>
+        <!-- Phantom position arrows -->
+        <label for="pos-φ" class="arrow arrow-up arrow-v arrow-phi-up"></label>
+        <label for="pos-16" class="arrow arrow-left arrow-h arrow-phi-left"></label>
+        <label for="pos-18" class="arrow arrow-right arrow-h arrow-phi-right"></label>
         <!-- Player character -->
         <div class="player">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="170 300 750 930"><path fill="#ccd3e4" d="m536 311 4 1 13 1v-1h6v2l11 1 1 2 10 1 6 1 11 1 2 1v3l4-4 4 3-5 2h5q6 1 7 3l10 5q45 19 81 52l2 2q10 10 18 21l3 4q23 33 36 70 3 10 8 18c15 31 11 74-4 104l-6 15q-15 46-51 76h-2v2q-18 15-40 23l-6 2-15 5 11 5q26 9 50 23 16 8 34 2h4l28-7 4-1 26-8q9-5 20-3l3-1q22-4 36 14 3 5 3 12l2 1c11 3 17 14 19 24v7q0 10 3 20 4 22-11 37-11 9-23 5l-3-1q-5-1-9 3c-12 8-26 9-39 12l-4 1q-67 12-129-13v3c-6 65-23 121-80 158q-4 2-4 5l9 17 6 12 1 4 3 7 9 1h5c5 0 5 0 9-2v4l8 1q18 6 31 19v2h2q11 13 11 29l2 1h-2v4c-5 33-46 59-72 75l-5 3c-19 11-42 21-64 21h-5q-16-3-24-19l-2-2-19-30h-3l-1-3h2l-3-6-2-3-1-2-2 1-2-1 1-5-3-6-3-9-2-1-1-3-5-8-2-3-5-4-2-4-4-5q-9 0-17 5l-12 3v15q0 26-19 41-28 13-55-1l-3-1q-9-4-16-11l-3-2c-24-23-40-63-33-96 4-17 13-26 27-35l5-4 3-2 2-2h3l6-4 26-17 5-3h2l-5-10q-12-18-17-39l-1-3q-5-26-4-52v-9q1-3-2-4l2-1 1-10 4-22v-4q-16 3-27 14l-7 6-11 9-27 22c-5 3-5 3-4 8l2 10q4 15-5 28-8 6-17 4-10-6-12-16l-1-4-1-3-3 2-6 1 1 3q5 14-4 25-10 7-22 2l-10-8-5-2c-19-9-28-32-30-52v-15c1-31 17-59 38-81l3-3 23-20 3-2 22-14 4-2c38-22 91-48 137-39q6 2 11-3l-4-2a223 223 0 0 1-50-28q-20-16-34-38l-2 1v-2q-5-19-21-26c-17-9-25-34-29-51l-2-6v-21q-2-36 22-63l1 1 5-15q6-21 18-40l-1-4 2-1 1 2 3-5c24-37 24-37 32-37v-2q33-31 76-47l8-3-1-4 4 1 1-2h5l19-2 3-1 8-2v-3h4l31-1zm-63 2-1 2 4-1zm4 0v1h6v-1zm-37 8 4 1Zm-85 519 1 2Z"/><path fill="#dde3f0" d="m536 311 4 1 13 1v-1h6v2l11 1 1 2 10 1 6 1 11 1 2 1v3l4-4 4 3-5 2h5q6 1 7 3l10 5q45 19 81 52l2 2q10 10 18 21l3 4q23 33 36 70 3 10 8 18c15 31 11 74-4 104l-6 15q-15 46-51 76h-2v2c-28 22-28 22-42 23l-12 3c-14 5-14 5-21 5l-3 2q-30 8-62 6h-20l-14-2h-10l-17-1v-1l-14-1-5-1-11-1-3-1v-2h-5l-10-1-11-2-11-3v-2l-5 1-11-3-3-1-37-14q-24-10-43-30l-2-2q-12-11-20-25l-2 1v-2q-5-19-21-26c-17-9-25-34-29-51l-2-6v-21q-2-36 22-63l1 1 5-15q6-21 18-40l-1-4 2-1 1 2 3-5c24-37 24-37 32-37v-2q33-31 76-47l8-3-1-4 4 1 1-2h5l19-2 3-1 8-2v-3h4l31-1zm-63 2-1 2 4-1zm4 0v1h6v-1zm-37 8 4 1Z"/><path fill="#091629" d="m648 402 6 1c24 2 47 7 65 23l2 2c32 30 43 80 42 122v5q1 19-3 37l-1 3c-7 37-25 70-63 83-60 18-171 23-222-22l-2-2c-42-39-39-123-28-175q12-53 64-68c44-13 94-14 140-9"/><path fill="#dfe4ef" d="m403 717-1 1 2 1q23 10 25 35 2 29-18 50l-2 3c-14 14-41 34-62 34v2l-4 2q-13 7-23 17l-6 5-12 10c-14 12-14 12-21 16-5 5-2 11-1 18q4 16-5 28-7 6-17 4-10-6-12-16l-1-4-1-3-3 2-6 1 1 3q5 14-4 25-10 7-22 2l-10-8-5-2c-19-9-28-32-30-52v-15c1-31 17-59 38-81l3-3 23-20 3-2 22-14 4-2c39-23 99-52 145-37"/><path fill="#d8ddeb" d="M865 751q3 5 3 12l3 1c10 3 16 14 18 24v7q0 10 3 20 4 22-11 37-11 8-23 5l-3-1q-5-1-9 3c-11 8-26 9-39 12l-4 1q-41 8-82 1l1-2-2-2-7-10-1-3c-13-28-5-64 12-87l2-3 2-3q7-5 16-6l8-1 4-1 20-5 4-1c14-3 14-3 26-8q9-5 20-3l3-1q23-4 36 14"/><path fill="#e2e7f3" d="m548 976 3 2v2l4 2a124 124 0 0 1 23 26q7 8 11 18l-1 2-1-3c-25-8-50 5-69 20-21 19-44 46-46 75v7c-5-1-5-2-8-6l-3-2v-5l-2-1-2-4-5-3c-16-18-32-43-39-67l-1-3 1-2h-2c-7-19 0-37 11-52h2l2-4c35-31 85-29 122-2"/><path fill="#8b59c5" d="M629 791h10q13 1 18 12 3 10 2 22v38c0 35 0 35-12 44-21 9-46 8-69 8h-20q-16 2-26-9-2-6-2-14v-80q0-11 10-17l26-3h29l23-1z"/><path fill="#cdd5e8" d="M188 814v5c-2 27 15 51 36 66 14 9 33 18 49 12l3-2h3l-1 5 2 8c2 11 3 22-5 31q-7 6-17 4-10-6-12-16l-1-4-1-3-3 2-6 1 1 3q5 14-4 25-10 7-22 2l-10-8-5-2c-19-9-28-32-30-52v-15q2-35 23-62"/><path fill="#e5e9f4" d="M865 751q3 5 3 12l3 1c10 3 16 14 18 24v7q0 10 3 20 5 21-10 35-12 9-26 5-8-7-8-18v-4h3q16 1 28-11l-2 2c-8 6-18 11-28 7q-11-9-10-22l6-3q20-7 24-28v-11 6q-3 21-20 31-10 3-18-3l-4-7-1-2q-1-10 3-21l1-6-1 3q-3 18-19 26-13 3-22-8-7-20 6-36 13-15 32-12l3-1q23-4 36 14"/><path fill="#9beffc" d="M591 501q16 20 14 44v3q2 33-25 51-16 5-30-6c-16-16-19-39-16-61q5-26 27-39 17-4 30 8"/><path fill="#c9cfe0" d="m800 746-4 2-2 4-2 3q-10 15-3 31 8 9 21 7c13-5 16-16 19-29l1-3h1q1 7-2 14-6 14 2 25 7 6 15 4 18-9 21-28l1-4v-7q5 6 2 13-5 22-27 29-5 1-3 7 1 10 9 16 15 4 27-7l3-3c0 6-7 9-12 12q-9 4-19 1c1 9 1 9 5 18v2l4 1 3 1q12 2 21-6l2 1c-9 7-14 9-25 7l-3-1q-5-1-9 3c-22 14-57 16-82 16v-1l10-1q22 0 42-7l-5-2q-10-6-17-13l-4-4a81 81 0 0 1-10-79q4-10 13-18l1-1-4-2c7-2 7-2 10-1"/><path fill="#9ceffc" d="M716 502c17 20 16 50 9 74q-5 14-17 22-14 1-22-11a85 85 0 0 1 0-76c7-11 18-18 30-9"/><path fill="#7453b0" d="M308 500q21 20 18 49v4c0 14-2 30-14 39q-11 4-20-5a77 77 0 0 1-12-71c5-11 14-23 28-16"/><path fill="#adb6ce" d="M188 814v5c-2 27 15 51 36 66 14 9 33 18 49 12l3-2h3l-1 5 2 8c2 11 3 22-5 31q-7 6-17 4-10-6-12-16l-1-4-1-3-3 2h-6l3-2c15-7 15-7 26-18h-5c-25 0-51-20-64-41l-8-16-2-4q-4-14 3-27"/><path fill="#b3b9d0" d="m601 1015-8 5-3 5 3 6c3 6 3 6 2 8l-1-2c-9-9-22-8-33-6-39 11-71 50-83 87l-3 17-5-8h2v-6c0-26 19-49 36-67l3-3c17-18 41-31 67-29l9 3-2-5-1-4q4 3 3 5l3-2 3-2 3-2z"/><path fill="#d0d8e9" d="M886 781q5 8 3 17 0 8 3 17 5 21-10 35-12 9-26 5-8-7-8-18v-4h3q16 2 28-11 8-14 7-29z"/><path fill="#bec6db" d="m181 908 3 3q15 13 35 13h5l8-1h3q5 13 0 25-9 9-21 6-8-2-14-9l-5-2 3-1q1-6-3-6l-2-13q-1-7-9-10-4-3-3-5"/><path fill="#98a0bb" d="m800 746-4 2-2 4-2 3q-10 15-3 31 8 9 21 7c13-5 16-16 19-29l1-3h1l-2 16-1 5q-1 5-6 5l-3 3q-8 8-19 6c-10-4-13-8-17-18a85 85 0 0 0 4 48q8 21 27 33l3 2 15 3c-17 11-49 11-68 11v-1l10-1q22 0 42-7l-5-2q-10-6-17-13l-4-4a81 81 0 0 1-10-79q4-10 13-18l1-1-4-2c7-2 7-2 10-1"/><path fill="#8b98b8" d="m375 990 6 7-3 9c-8 26 2 55 19 75q18 18 42 23-17 7-32-5l-14-12-2-2a81 81 0 0 1-22-59v-3q-1-13 5-24l-3-1 5-2z"/><path fill="#a5adc6" d="M279 746v4c-3 33 19 70 45 89q9 5 20 4l-4 3-5 4q-4 4-7 3l2-3-2-1c-30-15-55-53-57-86q0-7 3-14h3z"/><path fill="#a6aec6" d="m732 762-3 2q-13 13-18 32l-1 3-2 25v4q-1 25 15 44l-15-3 4-1-2-2c-14-19-13-50-6-72l1-4c4-10 14-32 27-28"/><path fill="#4a2c80" d="M635 803h5c5 0 5 0 9 4l1 11v55q2 14-7 24-18 5-37 4v-1l7-1h4l9-1 4-1h4q9-1 12-9v-6l1-4v-47c1-13 1-13-3-25l-11-1-29 1-4 1h-33l-4 1h-8l-9 1-1 12v40l-1 17v15q0 6 6 7l6 1h6v1h-10q-7 0-10-6v-79q0-7 6-11l14-2h28l21-1z"/><path fill="#382962" d="M626 791h13q6 0 11 3h-22l-43 1h-27c-14 1-14 1-24 9q-2 5-1 11v83q0 8 7 11 11 4 22 3h21c34 1 34 1 65-9l2 1c-15 15-52 11-72 11h-20q-16 2-26-9-2-6-2-14v-80q0-11 10-17l26-3h29l23-1z"/><path fill="#e4e4f2" d="m368 1179 6 1-6 2z"/><path fill="#e1e7f2" d="m308 1131 2 3h-3z"/><path fill="#fdfefe" d="M299 1117h2v2l2 1h-3z"/><path fill="#b4b2df" d="m703 870 4 1-3 1z"/><path fill="#e7edf9" d="m500 1185 2 1-1 3z"/><path fill="#b2b0e3" d="m458 1115 2 1-1 2-2-2z"/><path fill="#f3fbfc" d="M611 1064h5v1h-5z"/><path fill="#f5fdfe" d="m606 1055 2 1-1 3z"/><path fill="#d2d7eb" d="m517 1210 2 3h-2z"/><path fill="#cfced8" d="m376 1181 4 1Z"/><path fill="#c8cfe0" d="m352 1175 4 1Z"/><path fill="#c4c7e1" d="m433 1117 4 1Z"/><path fill="#d4e7e8" d="m685 1112 1 4Z"/><path fill="#f8fbfb" d="m639 1066 2 1-1 2z"/><path fill="#f8fbfc" d="m598 1038 2 3h-2z"/><path fill="#c5f8f3" d="m605 1014 2 1h-3z"/><path fill="#e5fcfe" d="m355 957 2 1-1 2z"/><path fill="#dcdeeb" d="M395 709h3l-1 2z"/><path fill="#dcf8f8" d="m308 629 2 3h-2z"/><path fill="#fdfffe" d="m781 526 2 2-2 1z"/><path fill="#f4f9fb" d="m456 315 3 1-3 1z"/><path fill="#fafbfc" d="m467 313 2 2-3-1z"/><path fill="#b9bdd2" d="m336 1165 2 1-2 1z"/><path fill="#dadfef" d="m312 1138 2 2h-2z"/><path fill="#d1d3e2" d="m297 1102 1 2-2-1z"/><path d="m924 1090 3 1Z"/><path fill="#cde0df" d="M596 1019h2l-1 2z"/><path fill="#bdc1d4" d="m368 984 2 2h-2z"/><path fill="#fafefe" d="m191 942 1 2-2-1z"/><path fill="#96f1f7" d="m741 876 3 1Z"/><path fill="#fafdfd" d="m760 752 3 1Z"/><path fill="#fefefc" d="m776 748 2 1-2 1z"/><path fill="#c8d7f0" d="m352 715 3 1Z"/><path fill="#e6e5f1" d="m358 714 3 1Z"/><path fill="#e3e2f3" d="m354 685 1 2-2-1z"/><path fill="#fcfefc" d="m272 590 2 2h-2z"/><path fill="#e5e7ea" d="m336 383 2 1-2 1z"/><path fill="#fdfcff" d="M692 371h2l-1 2z"/><path fill="#e7e9ec" d="m399 336 3 1Z"/><path fill="#edeef6" d="m608 323 1 2-2-1z"/><path fill="#fdfdfd" d="m428 321 2 2h-2z"/><path fill="#e5fcfa" d="m574 315 3 1Z"/><path fill="#f7f7fb" d="m463 314 2 1-2 1z"/><path fill="#fbfbfd" d="m562 313 3 1Z"/><path fill="#c0bfe7" d="m581 1215 2 1Z"/><path fill="#9d96b2" d="m386 1181 2 1Z"/><path fill="#c6c2df" d="m320 1151 2 1Z"/><path d="m942 1119 2 1Z"/><path fill="#404040" d="m874 1117 2 1Z"/><path fill="#c1c0df" d="m452 1110 2 1Z"/><path d="m1004 1090 2 1Zm-48 0 2 1Z"/><path fill="#fafbfc" d="m622 1064 2 1Z"/><path fill="#fff" d="m619 1064 2 1Z"/><path fill="#f8fcfd" d="m601 1045 2 1Z"/><path fill="#dcdfe0" d="m350 1008 2 1Z"/><path fill="#d2cff8" d="m373 994 2 1Z"/><path fill="#c5c0da" d="m368 989 2 1Z"/><path fill="#fffefc" d="m759 877 2 1Z"/><path fill="#97a8c5" d="m738 876 2 1Z"/><path fill="#9b98c5" d="m821 870 2 1Z"/><path fill="#cbd3d2" d="m679 862 2 1Z"/><path fill="#fcffff" d="m340 846 2 1Zm533-83 2 1Z"/><path fill="#f7fbff" d="m783 747 2 1Z"/><path fill="#e9f9f8" d="m786 746 2 1Z"/><path fill="#f8fefe" d="m790 745 2 1Z"/><path fill="#fbfdff" d="m273 744 2 1Z"/><path fill="#fcffff" d="m653 728 2 1Z"/><path fill="#fefeff" d="m366 713 2 1Z"/><path fill="#fcffff" d="m381 702 2 1Z"/><path fill="#dddede" d="m362 691 2 1Z"/><path fill="#c4f9f9" d="m321 651 2 1Z"/><path fill="#fcfdfc" d="m780 518 2 1Z"/><path fill="#dbfdfc" d="m323 398 2 1Z"/><path fill="#f9fafb" d="m336 381 2 1Z"/><path fill="#fafaff" d="m697 376 2 1Z"/><path fill="#fffdff" d="m687 368 2 1Z"/><path fill="#f9fcfe" d="m385 344 2 1Z"/><path fill="#fdfdff" d="m620 329 2 1Z"/><path fill="#f9fbfe" d="m428 324 2 1Z"/><path fill="#f9ffff" d="m451 317 2 1Z"/></svg>
