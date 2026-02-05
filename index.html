@@ -219,7 +219,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --ruby-color-2: #d84838;
             --ruby-color-3: #f06858;
             --ruby-color-4: #ffa090;
-            --battery-color: #4a9f4a;
+            --battery-color: #3090f0;
             --bolt-color-1: #ffdd00;
             --bolt-color-2: #ffaa00;
             --barrel-color: #c48b9f;
@@ -227,7 +227,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --flight-controls-available: #1aa33a;
             --wrench-color: #708090;
             --axe-color: #cc1010;
-            --idcard-color: #3090f0;
+            --idcard-color: #4a9f4a;
             --border-color: #4a4a6a;      /* Border color for UI elements */
             /* Z-index layers */
             --z-walls: 50;               /* Warning walls, rock walls */
@@ -918,7 +918,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .battery-at-bolt svg {
             width: 100%;
             height: 100%;
-            color: #50c050;
+            color: var(--battery-color);
         }
         /* Show battery at bolt when player is next to it, has battery, AND bolt not yet fixed */
         #level-6:checked ~ #pos-17:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .bolt:hover ~ .battery-at-bolt,
@@ -1372,10 +1372,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #toolbox-unlocked { top: 110px; left: 50px; }
         #wrench-pickup { top: 110px; left: 70px; }
         #door-unlocked { top: 110px; left: 90px; }
-        #idcard-pickup { top: 50px; left: 160px; }
+        #idcard-pickup { top: 50px; left: 310px; }
         #tree-chopped { top: 50px; left: 180px; }
         #axe-pickup { top: 50px; left: 290px; }
-        #battery-pickup { top: 50px; left: 310px; }
+        #battery-pickup { top: 50px; left: 160px; }
         #bolt-fixed { top: 50px; left: 330px; }
         #flight-controls-used { top: 50px; left: 350px; }
         #escaped { top: 50px; left: 370px; }
@@ -1740,13 +1740,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
-        /* ID card on stage 2, level 4, pos 6 */
+        /* ID card on stage 5, level 0, pos 18 */
         .idcard-in-game {
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
+            bottom: var(--ground-height);
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset));
             z-index: var(--z-items);
             pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
@@ -1757,8 +1757,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--idcard-color);
         }
         .idcard-tooltip {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + var(--pickup-size));
-            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset) + var(--pickup-size) / 2);
+            bottom: calc(var(--ground-height) + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset) + var(--pickup-size) / 2);
             transform: translateX(-50%);
         }
         /* Hover area for ID card tooltip (when not adjacent) */
@@ -1766,8 +1766,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
+            bottom: var(--ground-height);
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset));
             pointer-events: auto;
             z-index: var(--z-item-hover);
         }
@@ -1777,7 +1777,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
         /* Hide hover area when player is at ID card (so label click works) */
-        #level-9:checked ~ #pos-12:checked ~ .game-world .idcard-hover-area {
+        #level-0:checked ~ #pos-18:checked ~ .game-world .idcard-hover-area {
             display: none;
         }
         /* Show tooltip on hover area hover */
@@ -1785,31 +1785,31 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
         /* Show tooltip when player is at ID card and hovers */
-        #level-9:checked ~ #pos-12:checked ~ #idcard-pickup:not(:checked) ~ .game-world .idcard-in-game:hover ~ .idcard-tooltip {
+        #level-0:checked ~ #pos-18:checked ~ #idcard-pickup:not(:checked) ~ .game-world .idcard-in-game:hover ~ .idcard-tooltip {
             opacity: 1;
         }
-        /* Enable clicking id card only when player is next to it - S2 uses levels 5-9, L4 -> L9 */
-        #level-9:checked ~ #pos-12:checked ~ #idcard-pickup:not(:checked) ~ .game-world .idcard-in-game {
+        /* Enable clicking id card only when player is next to it - S5 uses levels 0-4 */
+        #level-0:checked ~ #pos-18:checked ~ #idcard-pickup:not(:checked) ~ .game-world .idcard-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: idcard-pulse 1s ease-in-out infinite;
         }
-        /* Fly id card to inventory when picked up (Stage 2: viewport right = pos-width * 12) */
+        /* Fly id card to inventory when picked up (Stage 5: viewport right = pos-width * 18) */
         /* ID card slot = slot 0 offset by key + wrench + axe */
         #idcard-pickup:checked ~ .game-world .idcard-in-game {
-            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 12 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 18 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
-        /* Battery on stage 3, level 1, pos 2 */
+        /* Battery on stage 2, level 4, pos 12 (where ID card was) */
         .battery-in-game {
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
+            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             z-index: var(--z-items);
             pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
@@ -1821,8 +1821,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             filter: drop-shadow(2px -2px 2px #00000080);
         }
         .battery-tooltip {
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) + var(--pickup-size));
-            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset) + var(--pickup-size) / 2);
+            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset) + var(--pickup-size) / 2);
             transform: translateX(-50%);
         }
         /* Hover area for battery tooltip (when not adjacent) */
@@ -1830,8 +1830,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
+            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             pointer-events: auto;
             z-index: var(--z-item-hover);
         }
@@ -1843,7 +1843,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
         /* Hide hover area when player is at battery (so label click works) */
-        #level-6:checked ~ #pos-14:checked ~ .game-world .battery-hover-area {
+        #level-9:checked ~ #pos-12:checked ~ .game-world .battery-hover-area {
             display: none;
         }
         /* Show tooltip on hover area hover */
@@ -1851,20 +1851,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
         /* Show tooltip when player is at battery and hovers */
-        #level-6:checked ~ #pos-14:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game:hover ~ .battery-tooltip {
+        #level-9:checked ~ #pos-12:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game:hover ~ .battery-tooltip {
             opacity: 1;
         }
-        /* Enable clicking battery only when player is next to it - S3 uses levels 5-9, L1 -> L6 */
-        #level-6:checked ~ #pos-14:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game {
+        /* Enable clicking battery only when player is next to it - S2 uses levels 5-9, L4 -> L9 */
+        #level-9:checked ~ #pos-12:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: battery-pulse 1s ease-in-out infinite;
         }
-        /* Fly battery to inventory when picked up (Stage 3: viewport right = pos-width * 18) */
+        /* Fly battery to inventory when picked up (Stage 2: viewport right = pos-width * 12) */
         /* Battery slot = slot 0 offset by key + wrench + axe + idcard */
         #battery-pickup:checked ~ .game-world .battery-in-game {
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
-            left: calc(var(--pos-width) * 18 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
+            left: calc(var(--pos-width) * 12 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
@@ -2557,7 +2557,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             top: 14px;
             left: 10px;
             width: 14px;
-            height: 100%;
+            height: 95%;
             background: repeating-linear-gradient(
                 to bottom,
                 transparent 0px,
@@ -2606,14 +2606,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Ladder at S3-L3-P5: platform 3 to floating platform (phantom) */
         .ladder-S3-L8-P17 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) + 4px);
             left: calc(var(--pos-offset) + var(--pos-width) * 16 + var(--ladder-offset));
         }
-        /* Ladder at S3-L1-P6: platform 1 to platform 2 (extended) */
+        /* Ladder at S3-L1-P4: platform 1 to platform 2 */
         .ladder-S3-L6-P16 {
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) - 14px);
+            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) - 2px);
             left: calc(var(--pos-offset) + var(--pos-width) * 15 + var(--ladder-offset));
-            height: calc(var(--platform-height) - var(--platform-thickness) + 28px);
+            height: calc(var(--platform-height) - var(--platform-thickness) + 18px);
         }
         /* Barrel at S3-L4-P3 */
         .barrel-S3-L9-P15 {
@@ -4734,9 +4734,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <circle cx="60" cy="120" r="1.6" fill="rgba(255,255,255,0.7)"/>
             <circle cx="290" cy="220" r="1.8" fill="rgba(255,255,255,0.75)"/>
             <circle cx="580" cy="260" r="2" fill="rgba(255,255,255,0.7)"/>
-            <circle cx="150" cy="300" r="1.5" fill="rgba(255,255,255,0.65)"/>
+            <circle cx="150" cy="290" r="1.5" fill="rgba(255,255,255,0.65)"/>
             <circle cx="720" cy="240" r="2.2" fill="rgba(255,255,255,0.8)"/>
-            <circle cx="470" cy="330" r="1.3" fill="rgba(255,255,255,0.6)"/>
             <circle cx="830" cy="290" r="1.7" fill="rgba(255,255,255,0.7)"/>
         </symbol>
     </svg>
