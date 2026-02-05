@@ -1118,31 +1118,50 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: auto;
         }
         /* Teleporter at S3-L7-P18 */
-        .teleporter-S3-L7-P18 {
+        .teleporter-hover-area {
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
             bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset));
+            z-index: var(--z-item-hover);
+        }
+        .teleporter-S3-L7-P18 {
+            position: absolute;
+            width: calc(var(--pickup-size) * 2);
+            height: var(--pickup-size);
+            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 10px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset) + 18px);
             z-index: var(--z-scenery);
-            display: none;
             pointer-events: none;
             cursor: pointer;
-            color: #00ffff;
         }
         .teleporter-S3-L7-P18 svg {
             width: 100%;
             height: 100%;
         }
-        /* Show teleporter when player is at S3-L7-P18 */
+        /* Enable clicking teleporter when player is at S3-L7-P18 */
         #level-7:checked ~ #pos-18:checked ~ .game-world .teleporter-S3-L7-P18 {
-            display: block;
             pointer-events: auto;
             animation: teleporter-pulse 1s ease-in-out infinite;
         }
+        /* Hide hover area when player can click teleporter */
+        #level-7:checked ~ #pos-18:checked ~ .game-world .teleporter-hover-area {
+            display: none;
+        }
+        /* Teleporter tooltip */
+        .teleporter-hover-area:hover ~ .teleporter-tooltip {
+            opacity: 1;
+        }
+        .teleporter-tooltip {
+            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset) + var(--pickup-size) / 2);
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
         @keyframes teleporter-pulse {
-            0%, 100% { filter: drop-shadow(0 0 4px #00ffff); }
-            50% { filter: drop-shadow(0 0 12px #00ffff) drop-shadow(0 0 20px #00ffff); }
+            0%, 100% { filter: drop-shadow(0 0 4px #f90); }
+            50% { filter: drop-shadow(0 0 12px #f90) drop-shadow(0 0 20px #fc8); }
         }
         /* Teleport flash overlay - uses clip-path for animatable circles */
         .teleport-flash-overlay {
@@ -2335,6 +2354,28 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 width: 100%;
                 height: 100%;
             }
+        }
+        /* Stars background for S3 and S5 */
+        .stars-bg {
+            position: absolute;
+            z-index: 0;
+            width: calc(var(--pos-width) * 6);
+
+            svg {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .stars-bg-S3 {
+            left: calc(var(--pos-width) * 12);
+            bottom: var(--stage-height);
+            height: var(--stage-height);
+        }
+        .stars-bg-S5 {
+            left: calc(var(--pos-width) * 12);
+            bottom: 0;
+            height: var(--stage-height);
         }
         /* Spaceship background in Stage 3 (doesn't use stage-bg) */
         .spacecraft-bg {
@@ -4143,39 +4184,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
     <!-- SVG symbols for reuse -->
     <!-- Icons inspired by Font Awesome (https://fontawesome.com) and Material Design (https://materialdesignicons.com) -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <defs>
-            <!-- Rainbow gradient for teleporter cylinder -->
-            <linearGradient id="rainbow-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ff0000">
-                    <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                             values="#ff0000;#ff8800;#ffff00;#00ff00;#00ffff;#0088ff;#8800ff;#ff00ff;#ff0000"/>
-                </stop>
-                <stop offset="16.67%" stop-color="#ff8800">
-                    <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                             values="#ff8800;#ffff00;#00ff00;#00ffff;#0088ff;#8800ff;#ff00ff;#ff0000;#ff8800"/>
-                </stop>
-                <stop offset="33.33%" stop-color="#ffff00">
-                    <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                             values="#ffff00;#00ff00;#00ffff;#0088ff;#8800ff;#ff00ff;#ff0000;#ff8800;#ffff00"/>
-                </stop>
-                <stop offset="50%" stop-color="#00ff00">
-                    <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                             values="#00ff00;#00ffff;#0088ff;#8800ff;#ff00ff;#ff0000;#ff8800;#ffff00;#00ff00"/>
-                </stop>
-                <stop offset="66.67%" stop-color="#00ffff">
-                    <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                             values="#00ffff;#0088ff;#8800ff;#ff00ff;#ff0000;#ff8800;#ffff00;#00ff00;#00ffff"/>
-                </stop>
-                <stop offset="83.33%" stop-color="#0088ff">
-                    <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                             values="#0088ff;#8800ff;#ff00ff;#ff0000;#ff8800;#ffff00;#00ff00;#00ffff;#0088ff"/>
-                </stop>
-                <stop offset="100%" stop-color="#8800ff">
-                    <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                             values="#8800ff;#ff00ff;#ff0000;#ff8800;#ffff00;#00ff00;#00ffff;#0088ff;#8800ff"/>
-                </stop>
-            </linearGradient>
-        </defs>
         <symbol id="water-ripples" viewBox="0 0 600 300" preserveAspectRatio="none">
             <g fill="none" stroke="#ffffff18" stroke-width="1.5">
                 <path d="M0 40 Q75 32 150 40 T300 40 T450 40 T600 40">
@@ -4702,8 +4710,33 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <symbol id="bolt" viewBox="0 0 448 512">
             <path fill="currentColor" d="M 338.8 -9.9 c 11.9 8.6 16.3 24.2 10.9 37.8 L 271.3 224 416 224 c 13.5 0 25.5 8.4 30.1 21.1 s .7 26.9 -9.6 35.5 l -288 240 c -11.3 9.4 -27.4 9.9 -39.3 1.3 s -16.3 -24.2 -10.9 -37.8 L 176.7 288 32 288 c -13.5 0 -25.5 -8.4 -30.1 -21.1 s -.7 -26.9 9.6 -35.5 l 288 -240 c 11.3 -9.4 27.4 -9.9 39.3 -1.3 z"/>
         </symbol>
-        <symbol id="cylinder" viewBox="0 0 24 24">
-            <path fill="url(#rainbow-gradient)" d="M 12 2 C 9.89 2 3 2.29 3 6 V 18 C 3 21.71 9.89 22 12 22 C 14.11 22 21 21.71 21 18 V 6 C 21 2.29 14.11 2 12 2 M 12 10 C 13.38 10 16.8 9.87 19 8.75 V 15.25 C 16.8 14.13 13.38 14 12 14 S 7.2 14.13 5 15.25 V 8.75 C 7.2 9.87 10.62 10 12 10 M 12 4 C 15.87 4 19 4.89 19 6 C 19 7.11 15.87 8 12 8 C 8.13 8 5 7.11 5 6 C 5 4.89 8.13 4 12 4 M 12 20 C 8.13 20 5 19.11 5 18 C 5 16.9 8.13 16 12 16 C 15.87 16 19 16.9 19 18 C 19 19.11 15.87 20 12 20 Z"/>
+        <symbol id="teleporter-platform" viewBox="0 0 512 512">
+            <path fill="#f90" d="M 232.5 5.2 c 14.9 -6.9 32.1 -6.9 47 0 l 218.6 101 c 8.5 3.9 13.9 12.4 13.9 21.8 s -5.4 17.9 -13.9 21.8 l -218.6 101 c -14.9 6.9 -32.1 6.9 -47 0 L 13.9 149.8 C 5.4 145.8 0 137.3 0 128 s 5.4 -17.9 13.9 -21.8 L 232.5 5.2 z">
+                <animate attributeName="fill" dur="1.5s" repeatCount="indefinite" values="#f90;#fc8;#eee;#f90"/>
+            </path>
+            <path fill="#fc8" d="M 48.1 218.4 l 164.3 75.9 c 27.7 12.8 59.6 12.8 87.3 0 l 164.3 -75.9 34.1 15.8 c 8.5 3.9 13.9 12.4 13.9 21.8 s -5.4 17.9 -13.9 21.8 l -218.6 101 c -14.9 6.9 -32.1 6.9 -47 0 L 13.9 277.8 C 5.4 273.8 0 265.3 0 256 s 5.4 -17.9 13.9 -21.8 l 34.1 -15.8 z">
+                <animate attributeName="fill" dur="1.5s" repeatCount="indefinite" values="#fc8;#eee;#f90;#fc8"/>
+            </path>
+            <path fill="#eee" d="M 13.9 362.2 l 34.1 -15.8 164.3 75.9 c 27.7 12.8 59.6 12.8 87.3 0 l 164.3 -75.9 34.1 15.8 c 8.5 3.9 13.9 12.4 13.9 21.8 s -5.4 17.9 -13.9 21.8 l -218.6 101 c -14.9 6.9 -32.1 6.9 -47 0 L 13.9 405.8 C 5.4 401.8 0 393.3 0 384 s 5.4 -17.9 13.9 -21.8 z">
+                <animate attributeName="fill" dur="1.5s" repeatCount="indefinite" values="#eee;#f90;#fc8;#eee"/>
+            </path>
+        </symbol>
+        <symbol id="stars" viewBox="0 0 900 500">
+            <!-- Scattered stars for space background (covers top 2 levels of stage) -->
+            <circle cx="120" cy="45" r="2" fill="rgba(255,255,255,0.9)"/>
+            <circle cx="340" cy="80" r="1.5" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="510" cy="30" r="2.5" fill="rgba(255,255,255,0.85)"/>
+            <circle cx="670" cy="95" r="1.8" fill="rgba(255,255,255,0.75)"/>
+            <circle cx="200" cy="140" r="1.2" fill="rgba(255,255,255,0.6)"/>
+            <circle cx="780" cy="55" r="2.2" fill="rgba(255,255,255,0.8)"/>
+            <circle cx="440" cy="160" r="1.4" fill="rgba(255,255,255,0.65)"/>
+            <circle cx="60" cy="120" r="1.6" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="290" cy="220" r="1.8" fill="rgba(255,255,255,0.75)"/>
+            <circle cx="580" cy="260" r="2" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="150" cy="300" r="1.5" fill="rgba(255,255,255,0.65)"/>
+            <circle cx="720" cy="240" r="2.2" fill="rgba(255,255,255,0.8)"/>
+            <circle cx="470" cy="330" r="1.3" fill="rgba(255,255,255,0.6)"/>
+            <circle cx="830" cy="290" r="1.7" fill="rgba(255,255,255,0.7)"/>
         </symbol>
     </svg>
     <input type="checkbox" id="debug-toggle" accesskey="d">
@@ -5132,42 +5165,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="platform platform-S2-L8-left"></div>
             <div class="platform platform-S2-L8-right"></div>
             <div class="platform platform-S2-L9"></div>
-            <!-- Teleporter at L7-P18 -->
-            <label for="level-3" class="teleporter-S3-L7-P18"><svg viewBox="0 0 24 24">
-                <defs>
-                    <linearGradient id="teleporter-rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#ff0000">
-                            <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                                     values="#ff0000;#ff8800;#ffff00;#00ff00;#00ffff;#0088ff;#8800ff;#ff00ff;#ff0000"/>
-                        </stop>
-                        <stop offset="16.67%" stop-color="#ff8800">
-                            <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                                     values="#ff8800;#ffff00;#00ff00;#00ffff;#0088ff;#8800ff;#ff00ff;#ff0000;#ff8800"/>
-                        </stop>
-                        <stop offset="33.33%" stop-color="#ffff00">
-                            <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                                     values="#ffff00;#00ff00;#00ffff;#0088ff;#8800ff;#ff00ff;#ff0000;#ff8800;#ffff00"/>
-                        </stop>
-                        <stop offset="50%" stop-color="#00ff00">
-                            <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                                     values="#00ff00;#00ffff;#0088ff;#8800ff;#ff00ff;#ff0000;#ff8800;#ffff00;#00ff00"/>
-                        </stop>
-                        <stop offset="66.67%" stop-color="#00ffff">
-                            <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                                     values="#00ffff;#0088ff;#8800ff;#ff00ff;#ff0000;#ff8800;#ffff00;#00ff00;#00ffff"/>
-                        </stop>
-                        <stop offset="83.33%" stop-color="#0088ff">
-                            <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                                     values="#0088ff;#8800ff;#ff00ff;#ff0000;#ff8800;#ffff00;#00ff00;#00ffff;#0088ff"/>
-                        </stop>
-                        <stop offset="100%" stop-color="#8800ff">
-                            <animate attributeName="stop-color" dur="2s" repeatCount="indefinite"
-                                     values="#8800ff;#ff00ff;#ff0000;#ff8800;#ffff00;#00ff00;#00ffff;#0088ff;#8800ff"/>
-                        </stop>
-                    </linearGradient>
-                </defs>
-                <path fill="url(#teleporter-rainbow)" d="M 12 2 C 9.89 2 3 2.29 3 6 V 18 C 3 21.71 9.89 22 12 22 C 14.11 22 21 21.71 21 18 V 6 C 21 2.29 14.11 2 12 2 M 12 10 C 13.38 10 16.8 9.87 19 8.75 V 15.25 C 16.8 14.13 13.38 14 12 14 S 7.2 14.13 5 15.25 V 8.75 C 7.2 9.87 10.62 10 12 10 M 12 4 C 15.87 4 19 4.89 19 6 C 19 7.11 15.87 8 12 8 C 8.13 8 5 7.11 5 6 C 5 4.89 8.13 4 12 4 M 12 20 C 8.13 20 5 19.11 5 18 C 5 16.9 8.13 16 12 16 C 15.87 16 19 16.9 19 18 C 19 19.11 15.87 20 12 20 Z"/>
-            </svg></label>
             <!-- Vines (up) -->
             <div class="vine vine-S2-L5-P8"></div>
             <div class="vine vine-S2-L5-P11"></div>
@@ -5238,6 +5235,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
         <!-- Water background in Stage 5 -->
         <!-- ==================== STAGE 5 LAYOUT ==================== -->
+        <div class="stars-bg stars-bg-S5"><svg><use href="#stars"/></svg></div>
         <div class="beach-bg"></div>
         <div class="water-bg"><svg><use href="#water-ripples"/></svg></div>
         <div class="platform platform-S5-L4-P18"></div>
@@ -5249,6 +5247,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
         <!-- ==================== STAGE 3 LAYOUT ==================== -->
         <!-- Spaceship background -->
+        <div class="stars-bg stars-bg-S3"><svg><use href="#stars"/></svg></div>
         <div class="spacecraft-bg">
             <svg><use href="#spacecraft"/></svg>
         </div>
@@ -5266,6 +5265,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="ladder spine-ladder ladder-S3-L5-P16"></div>
         <div class="ladder spine-ladder ladder-S3-L6-P18"></div>
         <div class="ladder spine-ladder ladder-S3-L8-P17"></div>
+        <!-- Teleporter at L7-P18 -->
+        <span class="teleporter-hover-area"></span>
+        <label for="level-3" class="teleporter-S3-L7-P18">
+            <svg><use href="#teleporter-platform"/></svg>
+        </label>
+        <span class="tooltip teleporter-tooltip">Teleporter</span>
         <!-- Bolt -->
         <span class="bolt-hover-area"></span>
         <label for="bolt-fixed" class="bolt">

@@ -10,4 +10,3 @@
 
  - use :is() selectors
 
- - please rename arrow arrow-κ-left to arrow-L4P18-left
