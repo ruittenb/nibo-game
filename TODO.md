@@ -8,8 +8,6 @@
 
  - disease verbranden met torch?
 
- - teleport?
+ - use :is() selectors
 
-     rename arrow-phi-up etc
-use :is() selectors
-
+ - please rename arrow arrow-κ-left to arrow-L4P18-left
