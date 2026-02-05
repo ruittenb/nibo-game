@@ -857,7 +857,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .bolt-hover-area {
             position: absolute;
             bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 5px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
             width: 20px;
             height: 24px;
             z-index: var(--z-item-hover);
@@ -865,7 +865,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .bolt {
             position: absolute;
             bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 5px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
             width: 20px;
             height: 24px;
             color: var(--bolt-color-1);
@@ -880,7 +880,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         .bolt-tooltip {
             bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 5px + 24px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) + 10px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset) + 10px);
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
@@ -895,12 +895,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
         /* Only allow clicking bolt when player has battery and is at the right position */
-        #level-6:checked ~ #pos-15:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .bolt {
+        #level-6:checked ~ #pos-17:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .bolt {
             pointer-events: auto;
             cursor: pointer;
         }
         /* Hide hover area when player can click bolt */
-        #level-6:checked ~ #pos-15:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .bolt-hover-area {
+        #level-6:checked ~ #pos-17:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .bolt-hover-area {
             display: none;
         }
         /* Battery floating above bolt */
@@ -909,7 +909,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 20px;
             height: 20px;
             bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 35px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 2px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset) - 2px);
             z-index: var(--z-floating-item);
             opacity: 0;
             pointer-events: none;
@@ -921,8 +921,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: #50c050;
         }
         /* Show battery at bolt when player is next to it, has battery, AND bolt not yet fixed */
-        #level-6:checked ~ #pos-15:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .bolt:hover ~ .battery-at-bolt,
-        #level-6:checked ~ #pos-15:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .battery-at-bolt:hover {
+        #level-6:checked ~ #pos-17:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .bolt:hover ~ .battery-at-bolt,
+        #level-6:checked ~ #pos-17:checked ~ #battery-pickup:checked ~ #bolt-fixed:not(:checked) ~ .game-world .battery-at-bolt:hover {
             opacity: 1;
             pointer-events: auto;
             animation: battery-hovering-pulse 1s ease-in-out infinite;
@@ -933,7 +933,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 20px;
             height: 24px;
             bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 5px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
             color: #50c050;
             display: none;
 
@@ -2599,9 +2599,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: block;
         }
         /* Ladder at S3-L0-P4: ground to platform 1 */
-        .ladder-S3-L5-P16 {
+        .ladder-S3-L5-P15 {
             bottom: calc(var(--stage-height) + var(--ground-height));
-            left: calc(var(--pos-offset) + var(--pos-width) * 15 + var(--ladder-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 14 + var(--ladder-offset));
+            height: calc(var(--platform-height) - var(--platform-thickness) + 14px);
         }
         /* Ladder at S3-L3-P5: platform 3 to floating platform (phantom) */
         .ladder-S3-L8-P17 {
@@ -2609,9 +2610,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 16 + var(--ladder-offset));
         }
         /* Ladder at S3-L1-P6: platform 1 to platform 2 (extended) */
-        .ladder-S3-L6-P18 {
+        .ladder-S3-L6-P16 {
             bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) - 14px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 17 + var(--ladder-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 15 + var(--ladder-offset));
             height: calc(var(--platform-height) - var(--platform-thickness) + 28px);
         }
         /* Barrel at S3-L4-P3 */
@@ -2956,8 +2957,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* L4: P7 (climb to S2) */
         #level-4:checked ~ #pos-7:checked ~ .game-world .arrow-L4-up { display: block; }
         /* Stage 3 up arrows */
-        #level-5:checked ~ #pos-16:checked ~ .game-world .arrow-L5-up { display: block; }
-        #level-6:checked ~ #pos-18:checked ~ .game-world .arrow-L6-up { display: block; }
+        #level-5:checked ~ #pos-15:checked ~ .game-world .arrow-L5-up { display: block; }
+        #level-6:checked ~ #pos-16:checked ~ .game-world .arrow-L6-up { display: block; }
         #level-8:checked ~ #pos-17:checked ~ .game-world .arrow-φ-up { display: block; }
         /* Stage 3 phantom position arrows */
         #level-8:checked ~ #pos-φ:checked ~ .game-world .arrow-φ-left { display: block; }
@@ -2997,10 +2998,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-1:checked ~ #pos-9:checked ~ .game-world .arrow-L1-down { display: block; }
         #level-1:checked ~ #pos-12:checked ~ .game-world .arrow-L1-down { display: block; }
         /* Stage 3 down arrows */
-        #level-6:checked ~ #pos-16:checked ~ .game-world .arrow-L6-down { display: block; }
+        #level-6:checked ~ #pos-15:checked ~ .game-world .arrow-L6-down { display: block; }
         #level-7:checked ~ #pos-13:checked ~ .game-world .arrow-L7-down { display: block; }
         #level-7:checked ~ #pos-14:checked ~ .game-world .arrow-L7-down { display: block; }
-        #level-7:checked ~ #pos-18:checked ~ .game-world .arrow-L7-down { display: block; }
+        #level-7:checked ~ #pos-16:checked ~ .game-world .arrow-L7-down { display: block; }
         /* Stage 5 up arrows (all positions P13-P18) */
         #level-0:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L0-up { display: block; }
         #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L1-up { display: block; }
@@ -3182,8 +3183,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-7:checked ~ #pos-11:checked ~ .nav-panel .nav-up[for="level-8"] { display: block; }
         #level-8:checked ~ #pos-9:checked ~ .nav-panel .nav-up[for="level-9"] { display: block; }
         /* Stage 3 nav up */
-        #level-5:checked ~ #pos-16:checked ~ .nav-panel .nav-up[for="level-6"] { display: block; }
-        #level-6:checked ~ #pos-18:checked ~ .nav-panel .nav-up[for="level-7"] { display: block; }
+        #level-5:checked ~ #pos-15:checked ~ .nav-panel .nav-up[for="level-6"] { display: block; }
+        #level-6:checked ~ #pos-16:checked ~ .nav-panel .nav-up[for="level-7"] { display: block; }
         #level-8:checked ~ #pos-17:checked ~ .nav-panel .nav-up[for="pos-φ"] { display: block; }
         /* Show down arrow at grate locations */
         #level-1:checked ~ #pos-1:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
@@ -3204,10 +3205,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-8:checked ~ #pos-10:checked ~ .nav-panel .nav-down[for="level-7"] { display: block; }
         #level-9:checked ~ #pos-7:checked ~ .nav-panel .nav-down[for="level-8"] { display: block; }
         /* Stage 3 nav down */
-        #level-6:checked ~ #pos-16:checked ~ .nav-panel .nav-down[for="level-5"] { display: block; }
+        #level-6:checked ~ #pos-15:checked ~ .nav-panel .nav-down[for="level-5"] { display: block; }
         #level-7:checked ~ #pos-13:checked ~ .nav-panel .nav-down[for="level-6"] { display: block; }
         #level-7:checked ~ #pos-14:checked ~ .nav-panel .nav-down[for="level-6"] { display: block; }
-        #level-7:checked ~ #pos-18:checked ~ .nav-panel .nav-down[for="level-6"] { display: block; }
+        #level-7:checked ~ #pos-16:checked ~ .nav-panel .nav-down[for="level-6"] { display: block; }
         /* Stage 5 nav up (all positions P13-P18, levels 0-3) */
         #level-0:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
         #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
@@ -5262,8 +5263,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Floating platform (phantom position) -->
         <div class="platform-S3-L9-P17-floating"></div>
         <!-- Ladders -->
-        <div class="ladder spine-ladder ladder-S3-L5-P16"></div>
-        <div class="ladder spine-ladder ladder-S3-L6-P18"></div>
+        <div class="ladder spine-ladder ladder-S3-L5-P15"></div>
+        <div class="ladder spine-ladder ladder-S3-L6-P16"></div>
         <div class="ladder spine-ladder ladder-S3-L8-P17"></div>
         <!-- Teleporter at L7-P18 -->
         <span class="teleporter-hover-area"></span>
