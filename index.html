@@ -2451,12 +2451,24 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .sunken-ruins-bg {
             position: absolute;
             z-index: 0;
-            right: -10px;
-            bottom: -10px;
-            width: 300px;
-            height: 180px;
+            right: -26px;
+            bottom: -26px;
+            width: 330px;
+            height: 198px;
         }
         .sunken-ruins-bg svg {
+            width: 100%;
+            height: 100%;
+        }
+        .seaweed-shell-bg {
+            position: absolute;
+            z-index: 0;
+            left: calc(var(--pos-width) * 12 + 5px);
+            bottom: 10px;
+            width: 264px;
+            height: 158px;
+        }
+        .seaweed-shell-bg svg {
             width: 100%;
             height: 100%;
         }
@@ -4342,6 +4354,40 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <rect x="95" y="50" width="16" height="25" fill="#5a6578"/>
             <rect x="93" y="48" width="20" height="5" fill="#4a5568"/>
         </symbol>
+        <symbol id="seaweed-shell" viewBox="0 0 200 120">
+            <!-- Seaweed left -->
+            <path d="M 20 120 Q 12 90 22 60 Q 14 40 24 15" fill="none" stroke="#3a6a4a" stroke-width="5" stroke-linecap="round"/>
+            <path d="M 22 70 Q 10 55 5 40" fill="none" stroke="#3a6a4a" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 20 50 Q 8 45 12 30" fill="none" stroke="#3a6a4a" stroke-width="2" stroke-linecap="round"/>
+            <path d="M 32 120 Q 42 85 32 55 Q 40 30 30 10" fill="none" stroke="#4a8a5a" stroke-width="4" stroke-linecap="round"/>
+            <path d="M 35 75 Q 50 65 55 50" fill="none" stroke="#4a8a5a" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M 33 45 Q 45 35 42 20" fill="none" stroke="#4a8a5a" stroke-width="2" stroke-linecap="round"/>
+            <path d="M 12 120 Q 5 100 10 80 Q 3 65 8 50" fill="none" stroke="#5a9a6a" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 9 70 Q 0 60 2 45" fill="none" stroke="#5a9a6a" stroke-width="2" stroke-linecap="round"/>
+            <!-- Seaweed right -->
+            <path d="M 180 120 Q 188 88 178 55 Q 186 35 176 12" fill="none" stroke="#3a6a4a" stroke-width="5" stroke-linecap="round"/>
+            <path d="M 180 65 Q 192 50 195 35" fill="none" stroke="#3a6a4a" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 182 45 Q 195 40 192 25" fill="none" stroke="#3a6a4a" stroke-width="2" stroke-linecap="round"/>
+            <path d="M 168 120 Q 158 90 168 60 Q 160 35 170 8" fill="none" stroke="#4a8a5a" stroke-width="4" stroke-linecap="round"/>
+            <path d="M 166 80 Q 150 70 148 55" fill="none" stroke="#4a8a5a" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M 168 50 Q 155 42 158 25" fill="none" stroke="#4a8a5a" stroke-width="2" stroke-linecap="round"/>
+            <path d="M 188 120 Q 195 95 190 75 Q 198 60 193 45" fill="none" stroke="#5a9a6a" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 191 65 Q 200 55 198 42" fill="none" stroke="#5a9a6a" stroke-width="2" stroke-linecap="round"/>
+            <!-- Shell -->
+            <ellipse cx="100" cy="118.5" rx="8" ry="5" fill="#d4a060"/>
+            <path d="M 100 118.5 Q 55 108.5 45 73.5 Q 50 48.5 100 43.5 Q 150 48.5 155 73.5 Q 145 108.5 100 118.5 Z" fill="#f5d8a8"/>
+            <path d="M 100 118.5 Q 55 108.5 45 73.5 Q 50 48.5 100 43.5 Q 150 48.5 155 73.5 Q 145 108.5 100 118.5 Z" fill="none" stroke="#e8c078" stroke-width="3"/>
+            <g stroke="#e8c488" stroke-width="2" fill="none" opacity="0.6">
+                <path d="M 100 115.5 Q 100 78.5 100 47.5"/>
+                <path d="M 100 115.5 Q 85 83.5 70 55.5"/>
+                <path d="M 100 115.5 Q 115 83.5 130 55.5"/>
+                <path d="M 100 115.5 Q 70 88.5 52 65.5"/>
+                <path d="M 100 115.5 Q 130 88.5 148 65.5"/>
+                <path d="M 100 115.5 Q 60 95.5 48 78.5"/>
+                <path d="M 100 115.5 Q 140 95.5 152 78.5"/>
+            </g>
+            <path d="M 75 93.5 Q 90 68.5 100 58.5 Q 110 68.5 125 93.5" fill="none" stroke="#fff8e8" stroke-width="4" opacity="0.4" stroke-linecap="round"/>
+        </symbol>
         <symbol id="torch" viewBox="40 40 160 160">
             <g transform="rotate(45 120 120)">
                 <g>
@@ -5357,6 +5403,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- ==================== STAGE 5 LAYOUT ==================== -->
         <div class="stars-bg stars-bg-S5"><svg><use href="#stars"/></svg></div>
         <div class="beach-bg"></div>
+        <div class="seaweed-shell-bg"><svg><use href="#seaweed-shell"/></svg></div>
         <div class="sunken-ruins-bg"><svg><use href="#sunken-ruins"/></svg></div>
         <div class="water-bg"><svg><use href="#water-ripples"/></svg></div>
         <div class="platform platform-S5-L4-P18"></div>
