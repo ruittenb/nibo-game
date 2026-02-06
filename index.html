@@ -1347,12 +1347,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-17 { top: 10px; left: 370px; }
         #pos-18 { top: 10px; left: 390px; }
         #pos-φ { top: 10px; left: 420px; }
-        /* Debug positions - S1 loot (next to L6) */
-        #loot-S1-L0-P3-pickup { top: 90px; left: 30px; }
-        #loot-S1-L1-P4-pickup { top: 90px; left: 50px; }
-        #loot-S1-L3-P5-pickup { top: 90px; left: 70px; }
-        #loot-S1-L2-P1-pickup { top: 90px; left: 90px; }
-        #loot-S1-L4-P2-pickup { top: 90px; left: 110px; }
+        /* Debug positions - S1 loot */
+        #loot-S1-L0-P3-pickup { top: 140px; left: 30px; }
+        #loot-S1-L1-P4-pickup { top: 140px; left: 50px; }
+        #loot-S1-L3-P5-pickup { top: 140px; left: 70px; }
+        #loot-S1-L2-P1-pickup { top: 140px; left: 90px; }
+        #loot-S1-L4-P2-pickup { top: 140px; left: 110px; }
+        /* Debug positions - S2/S3 loot */
         #loot-S2-L5-P8-pickup { top: 30px; left: 160px; }
         #loot-S2-L6-P11-pickup { top: 30px; left: 180px; }
         #loot-S2-L7-P7-pickup { top: 30px; left: 200px; }
@@ -1363,17 +1364,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S3-L8-P18-pickup { top: 30px; left: 330px; }
         #loot-S3-L9-P14-pickup { top: 30px; left: 350px; }
         /* Debug positions - S4 loot */
-        #loot-S4-L3-P7-pickup { top: 90px; left: 160px; }
-        #loot-S4-L3-P8-pickup { top: 90px; left: 180px; }
-        #loot-S4-L3-P12-pickup { top: 90px; left: 200px; }
-        #loot-S4-L1-P10-pickup { top: 90px; left: 220px; }
-        #loot-S4-L0-P9-pickup { top: 90px; left: 240px; }
-        /* Debug positions - S1 items (next to L5) */
-        #key-pickup { top: 110px; left: 30px; }
-        #toolbox-unlocked { top: 110px; left: 50px; }
-        #wrench-pickup { top: 110px; left: 70px; }
-        #door-unlocked { top: 110px; left: 90px; }
-        #idcard-pickup { top: 110px; left: 290px; }
+        #loot-S4-L3-P7-pickup { top: 140px; left: 160px; }
+        #loot-S4-L3-P8-pickup { top: 140px; left: 180px; }
+        #loot-S4-L3-P12-pickup { top: 140px; left: 200px; }
+        #loot-S4-L1-P10-pickup { top: 140px; left: 220px; }
+        #loot-S4-L0-P9-pickup { top: 140px; left: 240px; }
+        /* Debug positions - S1 items */
+        #key-pickup { top: 160px; left: 30px; }
+        #toolbox-unlocked { top: 160px; left: 50px; }
+        #wrench-pickup { top: 160px; left: 70px; }
+        #door-unlocked { top: 160px; left: 90px; }
+        /* Debug positions - S2/S3 items */
         #tree-chopped { top: 50px; left: 180px; }
         #axe-pickup { top: 50px; left: 290px; }
         #battery-pickup { top: 50px; left: 160px; }
@@ -1381,8 +1382,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #bolt-fixed { top: 50px; left: 330px; }
         #flight-controls-used { top: 50px; left: 350px; }
         #escaped { top: 50px; left: 370px; }
-        #torch-pickup { top: 110px; left: 160px; }
-        #darkness-toggle { top: 130px; left: 160px; }
+        /* Debug positions - S4 items */
+        #torch-pickup { top: 160px; left: 160px; }
+        #darkness-toggle { top: 180px; left: 160px; }
+        /* Debug positions - S5 items */
+        #idcard-pickup { top: 160px; left: 290px; }
         /* Show inputs when debug is checked */
         #debug-toggle:checked ~ .game-container .position-radio,
         #debug-toggle:checked ~ .game-container .level-radio,
@@ -3089,7 +3093,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #pos-18:checked ~ .game-world .arrow-κ-left { display: block; }
         /* Stage 5 down arrows (all positions P13-P18) */
         #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L1-down { display: block; }
-        #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L2-down { display: block; }
+        #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ #scuba-pickup:checked ~ .game-world .arrow-L2-down { display: block; }
         #level-3:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L3-down { display: block; }
         #level-3:checked ~ #pos-18:checked ~ .game-world .arrow-L3-down { display: none; }
         #level-4:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L4-down { display: block; }
@@ -3294,7 +3298,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
         /* Stage 5 nav down (all positions P13-P18, levels 1-4) */
         #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
-        #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
+        #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ #scuba-pickup:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
         #level-3:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
         #level-3:checked ~ #pos-18:checked ~ .nav-panel .nav-down[for="level-2"] { display: none; }
         #level-4:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
