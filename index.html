@@ -229,6 +229,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --axe-color: #cc1010;
             --idcard-color: #4a9f4a;
             --scuba-color: #F0A500;
+            --seashell-color: #ff69b4;
             --border-color: #4a4a6a;      /* Border color for UI elements */
             /* Z-index layers */
             --z-walls: 50;               /* Warning walls, rock walls */
@@ -1380,6 +1381,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S4-L3-P12-pickup { top: 100px; left: 220px; }
         #loot-S4-L1-P10-pickup { top: 100px; left: 240px; }
         #loot-S4-L0-P9-pickup { top: 100px; left: 260px; }
+        /* Debug positions - S5 loot */
+        #loot-S5-L3-P13-pickup { top: 100px; left: 310px; }
+        #loot-S5-L2-P17-pickup { top: 100px; left: 330px; }
+        #loot-S5-L0-P18-pickup { top: 100px; left: 350px; }
         /* Debug positions - S1 items */
         #key-pickup { top: 120px; left: 90px; }
         #toolbox-unlocked { top: 120px; left: 110px; }
@@ -1547,7 +1552,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 (var(--loot-S1-L0-P3, 0) + var(--loot-S1-L1-P4, 0) + var(--loot-S1-L3-P5, 0) + var(--loot-S1-L2-P1, 0) + var(--loot-S1-L4-P2, 0) +
                  var(--loot-S2-L5-P8, 0) + var(--loot-S2-L6-P11, 0) + var(--loot-S2-L7-P7, 0) + var(--loot-S2-L8-P9, 0) + var(--loot-S2-L9-P10, 0) +
                  var(--loot-S3-L5-P15, 0) + var(--loot-S3-L5-P18, 0) + var(--loot-S3-L8-P18, 0) + var(--loot-S3-L9-P14, 0) +
-                 var(--loot-S4-L3-P7, 0) + var(--loot-S4-L3-P8, 0) + var(--loot-S4-L3-P12, 0) + var(--loot-S4-L1-P10, 0) + var(--loot-S4-L0-P9, 0))
+                 var(--loot-S4-L3-P7, 0) + var(--loot-S4-L3-P8, 0) + var(--loot-S4-L3-P12, 0) + var(--loot-S4-L1-P10, 0) + var(--loot-S4-L0-P9, 0) +
+                 var(--loot-S5-L3-P13, 0) + var(--loot-S5-L2-P17, 0) + var(--loot-S5-L0-P18, 0))
                 * -24px
             ));
         }
@@ -1578,6 +1584,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S4-L3-P12-pickup:checked ~ .counter-panel { --loot-S4-L3-P12: 1; }
         #loot-S4-L1-P10-pickup:checked ~ .counter-panel { --loot-S4-L1-P10: 2; }
         #loot-S4-L0-P9-pickup:checked ~ .counter-panel { --loot-S4-L0-P9: 1; }
+        #loot-S5-L3-P13-pickup:checked ~ .counter-panel { --loot-S5-L3-P13: 2; }
+        #loot-S5-L2-P17-pickup:checked ~ .counter-panel { --loot-S5-L2-P17: 2; }
+        #loot-S5-L0-P18-pickup:checked ~ .counter-panel { --loot-S5-L0-P18: 1; }
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
             position: absolute;
@@ -3347,6 +3356,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             filter: drop-shadow(0 0 3px var(--aquamarine-color-1));
             animation: aquamarine-sparkle 1s ease-in-out infinite;
         }
+        .seashell .loot-in-game {
+            color: var(--seashell-color);
+        }
         .ruby .loot-in-game {
             filter: drop-shadow(0 0 3px var(--ruby-color-1));
             animation: ruby-sparkle 1s ease-in-out infinite;
@@ -3409,6 +3421,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .loot-S3-L9-P14 {
             bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
+        }
+        /* Stage 5 loot positions */
+        .loot-S5-L3-P13 {
+            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 12 - var(--item-offset));
+        }
+        .loot-S5-L2-P17 {
+            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
+        }
+        .loot-S5-L0-P18 {
+            bottom: calc(var(--ground-height));
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset));
         }
         /* Stage 4 loot positions - hidden by default, only show when player adjacent */
         .container.loot-S4-L3-P7,
@@ -3490,6 +3515,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         @keyframes coin-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--gold-color)); }
             50% { filter: drop-shadow(0 0 12px var(--gold-color)) drop-shadow(0 0 20px var(--gold-color)); }
+        }
+        @keyframes seashell-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--seashell-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--seashell-color)) drop-shadow(0 0 20px var(--seashell-color)); }
         }
         @keyframes flight-controls-offline {
             0%, 100% { filter: saturate(0); }
@@ -3674,6 +3703,22 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
+        /* Stage 5 loot pulse/click */
+        #level-3:checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13 .loot-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: seashell-pulse 1s ease-in-out infinite;
+        }
+        #level-2:checked ~ #pos-17:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .game-world .loot-S5-L2-P17 .loot-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: seashell-pulse 1s ease-in-out infinite;
+        }
+        #level-0:checked ~ #pos-18:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .game-world .loot-S5-L0-P18 .loot-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
+        }
         /* Move Stage 1 loot to counter when picked up */
         #loot-S1-L0-P3-pickup:checked ~ .game-world .loot-S1-L0-P3,
         #loot-S1-L1-P4-pickup:checked ~ .game-world .loot-S1-L1-P4,
@@ -3718,6 +3763,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
             z-index: auto;
+        }
+        /* Move Stage 5 loot to counter when picked up (S5 is at bottom, no stage-height offset) */
+        #loot-S5-L3-P13-pickup:checked ~ .game-world .loot-S5-L3-P13,
+        #loot-S5-L2-P17-pickup:checked ~ .game-world .loot-S5-L2-P17,
+        #loot-S5-L0-P18-pickup:checked ~ .game-world .loot-S5-L0-P18 {
+            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
+            left: calc(var(--pos-width) * 18 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Skull */
         .skull {
@@ -4272,6 +4326,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S3-L9-P14-pickup:not(:checked) ~ .game-world .loot-S3-L9-P14 .loot-hover-area:hover ~ .tooltip,
         #loot-S4-L3-P8-pickup:not(:checked) ~ .game-world .loot-S4-L3-P8 .loot-hover-area:hover ~ .tooltip,
         #loot-S4-L1-P10-pickup:not(:checked) ~ .game-world .loot-S4-L1-P10 .loot-hover-area:hover ~ .tooltip,
+        #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13 .loot-hover-area:hover ~ .tooltip,
+        #loot-S5-L2-P17-pickup:not(:checked) ~ .game-world .loot-S5-L2-P17 .loot-hover-area:hover ~ .tooltip,
+        #loot-S5-L0-P18-pickup:not(:checked) ~ .game-world .loot-S5-L0-P18 .loot-hover-area:hover ~ .tooltip,
         /* Show tooltip when player is at loot location (hover-area hidden, so use container:hover) */
         /* S2/S3 use levels 5-9 */
         #level-6:checked ~ #pos-11:checked ~ #loot-S2-L6-P11-pickup:not(:checked) ~ .game-world .loot-S2-L6-P11:hover .tooltip,
@@ -4279,7 +4336,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-5:checked ~ #pos-18:checked ~ #loot-S3-L5-P18-pickup:not(:checked) ~ .game-world .loot-S3-L5-P18:hover .tooltip,
         /* S4 uses levels 0-4 */
         #level-3:checked ~ #pos-8:checked ~ #loot-S4-L3-P8-pickup:not(:checked) ~ .game-world .loot-S4-L3-P8:hover .tooltip,
-        #level-1:checked ~ #pos-10:checked ~ #loot-S4-L1-P10-pickup:not(:checked) ~ .game-world .loot-S4-L1-P10:hover .tooltip {
+        #level-1:checked ~ #pos-10:checked ~ #loot-S4-L1-P10-pickup:not(:checked) ~ .game-world .loot-S4-L1-P10:hover .tooltip,
+        /* S5 uses levels 0-4 */
+        #level-3:checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13:hover .tooltip,
+        #level-2:checked ~ #pos-17:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .game-world .loot-S5-L2-P17:hover .tooltip {
             opacity: 1;
         }
     </style>
@@ -4883,6 +4943,75 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <symbol id="gem" viewBox="0 0 512 512">
             <path fill="currentColor" d="M 168.5 72 l 87.5 93 87.5 -93 -175 0 z M 383.9 99.1 l -72.3 76.9 129 0 -56.6 -76.9 z m 50 124.9 L 78.1 224 256 420.3 433.9 224 z M 71.5 176 l 129 0 -72.3 -76.9 -56.6 76.9 z m 434.3 40.1 l -232 256 c -4.5 5 -11 7.9 -17.8 7.9 s -13.2 -2.9 -17.8 -7.9 l -232 -256 c -7.7 -8.5 -8.3 -21.2 -1.5 -30.4 l 112 -152 c 4.5 -6.1 11.7 -9.8 19.3 -9.8 l 240 0 c 7.6 0 14.8 3.6 19.3 9.8 l 112 152 c 6.8 9.2 6.1 21.9 -1.5 30.4 z"/>
         </symbol>
+        <symbol id="seashell" viewBox="353 397 881 794">
+            <g transform="translate(0,1588) scale(0.1,-0.1)" fill="currentColor" stroke="none">
+                <path d="M8616 11899 c-64 -15 -195 -81 -311 -157 -60 -40 -157 -96 -214 -124
+                    -94 -47 -111 -52 -185 -56 -97 -5 -172 17 -280 80 -120 71 -320 167 -382 183
+                    -70 18 -215 21 -276 5 -125 -34 -264 -132 -383 -270 -120 -139 -198 -207 -285
+                    -248 -101 -48 -197 -53 -400 -22 -255 39 -390 17 -556 -91 -124 -81 -186 -176
+                    -285 -439 -82 -218 -119 -289 -187 -352 -94 -87 -161 -120 -433 -213 -254 -87
+                    -365 -180 -425 -356 -36 -103 -42 -244 -19 -469 19 -186 16 -274 -11 -358 -15
+                    -44 -37 -71 -167 -199 -82 -81 -164 -170 -182 -198 -53 -83 -86 -195 -92 -316
+                    -10 -180 25 -309 130 -488 140 -237 170 -339 186 -631 11 -206 23 -263 78
+                    -353 41 -68 152 -190 238 -263 142 -119 423 -317 438 -307 5 3 7 2 4 -4 -4 -6
+                    55 -52 131 -104 75 -51 232 -159 347 -239 116 -80 262 -182 325 -225 263 -179
+                    348 -243 411 -306 80 -79 90 -105 119 -308 52 -369 120 -571 242 -726 76 -96
+                    209 -184 323 -214 135 -35 368 -31 610 10 66 11 158 22 205 26 92 6 149 -8
+                    315 -79 96 -41 257 -94 333 -108 39 -8 108 -11 180 -8 102 4 131 10 227 43
+                    116 39 210 84 335 157 150 88 153 89 337 69 156 -18 375 -10 500 18 291 64
+                    477 243 582 561 35 103 59 235 91 488 42 335 57 364 278 537 175 136 464 382
+                    732 624 107 97 274 246 370 332 389 347 452 467 480 909 16 263 40 366 140
+                    600 98 230 113 281 108 380 -9 164 -88 297 -321 534 -162 165 -191 205 -219
+                    305 -23 83 -22 133 2 301 32 220 26 305 -31 424 -34 71 -117 164 -186 210 -51
+                    34 -132 61 -284 96 -285 64 -365 151 -549 595 -165 398 -357 478 -831 346
+                    -129 -36 -257 -52 -326 -41 -67 11 -118 42 -218 130 -179 159 -307 242 -449
+                    291 -68 24 -96 29 -176 28 -52 -1 -112 -5 -134 -10z m888 -966 c11 -71 6 -558
+                    -9 -752 -52 -692 -183 -1537 -415 -2676 -17 -82 -43 -208 -59 -280 -16 -71
+                    -46 -206 -66 -300 -88 -407 -294 -1262 -410 -1700 -25 -93 -60 -227 -78 -297
+                    -52 -206 -59 -162 -21 122 29 215 137 897 209 1315 19 110 50 292 69 405 19
+                    113 53 313 76 445 80 469 110 643 144 850 109 655 153 908 232 1340 57 310
+                    191 997 239 1225 13 63 34 166 47 228 12 61 25 112 29 112 3 0 9 -17 13 -37z
+                    m-1531 -310 c16 -142 34 -348 42 -458 8 -110 20 -252 25 -315 21 -242 40 -524
+                    50 -750 5 -129 12 -269 15 -310 6 -86 31 -671 40 -925 3 -93 10 -674 15 -1290
+                    5 -616 12 -1261 15 -1433 5 -316 2 -343 -29 -268 -46 109 -102 518 -131 943
+                    -9 126 -20 275 -25 333 -12 130 -47 731 -55 940 -3 85 -12 295 -20 465 -50
+                    1051 -62 1714 -46 2410 17 703 24 832 44 878 9 20 20 37 24 37 5 0 21 -116 36
+                    -257z m-1520 -8 c60 -178 98 -299 152 -485 102 -350 248 -925 405 -1600 22
+                    -96 54 -229 70 -295 16 -66 47 -194 69 -285 22 -91 73 -302 115 -470 41 -168
+                    109 -444 151 -615 41 -170 91 -373 110 -450 172 -704 327 -1391 340 -1505 5
+                    -52 5 -54 -11 -35 -22 27 -109 212 -146 310 -54 146 -129 359 -143 405 -7 25
+                    -42 140 -78 255 -110 353 -178 594 -332 1175 -29 110 -129 512 -230 925 -112
+                    458 -268 1174 -369 1690 -103 532 -194 1176 -160 1142 2 -2 28 -75 57 -162z
+                    m4342 -552 c-9 -70 -27 -177 -41 -238 -14 -60 -32 -141 -40 -180 -41 -195
+                    -167 -609 -320 -1050 -117 -341 -152 -435 -286 -785 -22 -58 -51 -134 -65
+                    -170 -13 -36 -37 -99 -54 -140 -17 -41 -44 -106 -59 -145 -16 -38 -50 -122
+                    -75 -185 -26 -63 -62 -151 -80 -195 -19 -44 -55 -129 -80 -190 -48 -115 -54
+                    -128 -161 -370 -36 -82 -79 -181 -96 -220 -78 -186 -292 -595 -517 -985 -74
+                    -129 -150 -263 -169 -298 -19 -35 -36 -61 -39 -59 -11 12 138 382 306 762 21
+                    50 58 135 81 190 22 55 56 136 74 180 44 104 105 257 148 370 74 192 177 461
+                    233 605 18 47 48 126 67 175 19 50 54 140 77 200 23 61 55 144 71 185 16 41
+                    44 116 64 165 19 50 57 151 86 225 28 74 66 173 85 220 18 47 52 135 75 195
+                    22 61 55 144 72 185 17 41 34 86 38 100 5 14 36 97 70 185 34 88 74 196 90
+                    240 233 664 284 802 353 960 49 113 97 208 103 202 3 -3 -2 -63 -11 -134z
+                    m-5462 -465 c214 -432 289 -586 397 -818 40 -85 90 -191 112 -235 22 -44 292
+                    -618 600 -1275 308 -657 664 -1400 790 -1650 127 -250 248 -498 270 -550 50
+                    -120 79 -202 74 -207 -13 -13 -294 416 -518 792 -143 239 -156 262 -316 545
+                    -63 112 -346 640 -384 715 -8 17 -71 143 -140 280 -173 344 -293 592 -378 785
+                    -21 47 -70 157 -110 245 -40 88 -87 196 -105 240 -18 44 -54 132 -80 195 -131
+                    316 -251 652 -333 930 -28 95 -92 366 -92 390 0 38 42 -37 213 -382z m6282
+                    -510 c-11 -48 -92 -291 -127 -378 -98 -246 -163 -388 -276 -610 -135 -264
+                    -157 -304 -353 -640 -178 -307 -558 -897 -721 -1121 -152 -208 -272 -373 -359
+                    -491 -52 -69 -139 -188 -194 -263 -55 -76 -115 -156 -134 -179 -19 -22 -65
+                    -82 -103 -133 -37 -51 -77 -98 -88 -106 -11 -8 -56 -49 -101 -91 -44 -43 -83
+                    -75 -86 -72 -12 11 203 351 368 581 262 366 845 1285 1341 2115 191 320 317
+                    535 571 975 22 39 54 93 72 120 17 28 67 112 110 188 42 75 80 137 82 137 3 0
+                    1 -15 -2 -32z m-7170 -563 c86 -99 184 -225 490 -630 87 -115 220 -287 294
+                    -381 75 -94 166 -208 202 -255 36 -46 144 -183 239 -304 422 -535 656 -836
+                    1014 -1300 307 -399 551 -733 542 -743 -9 -8 -103 63 -180 137 -43 42 -144
+                    148 -225 236 -80 87 -195 211 -254 275 -117 123 -355 403 -636 744 -648 788
+                    -1090 1396 -1376 1891 -108 186 -248 485 -206 440 4 -6 48 -55 96 -110z"/>
+            </g>
+        </symbol>
         <symbol id="bolt" viewBox="0 0 448 512">
             <path fill="currentColor" d="M 338.8 -9.9 c 11.9 8.6 16.3 24.2 10.9 37.8 L 271.3 224 416 224 c 13.5 0 25.5 8.4 30.1 21.1 s .7 26.9 -9.6 35.5 l -288 240 c -11.3 9.4 -27.4 9.9 -39.3 1.3 s -16.3 -24.2 -10.9 -37.8 L 176.7 288 32 288 c -13.5 0 -25.5 -8.4 -30.1 -21.1 s -.7 -26.9 9.6 -35.5 l 288 -240 c 11.3 -9.4 27.4 -9.9 39.3 -1.3 z"/>
         </symbol>
@@ -5004,6 +5133,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="loot-S4-L3-P12-pickup" class="loot-checkbox" title="coin">
         <input type="checkbox" id="loot-S4-L1-P10-pickup" class="loot-checkbox" title="aquamarine">
         <input type="checkbox" id="loot-S4-L0-P9-pickup" class="loot-checkbox" title="coin">
+        <!-- Stage 5 loot -->
+        <input type="checkbox" id="loot-S5-L3-P13-pickup" class="loot-checkbox" title="seashell">
+        <input type="checkbox" id="loot-S5-L2-P17-pickup" class="loot-checkbox" title="seashell">
+        <input type="checkbox" id="loot-S5-L0-P18-pickup" class="loot-checkbox" title="coin">
         <div class="subtitle subtitle-S1">The Factory</div>
         <div class="subtitle subtitle-S2">The Jungle</div>
         <div class="subtitle subtitle-S3">The Hangar</div>
@@ -5126,6 +5259,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
                     <div class="digit">26</div>
                     <div class="digit">27</div>
                     <div class="digit">28</div>
+                    <div class="digit">29</div>
+                    <div class="digit">30</div>
+                    <div class="digit">31</div>
+                    <div class="digit">32</div>
                 </div>
             </div>
         </div>
@@ -5566,6 +5703,21 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="container coin loot-S3-L9-P14">
             <label for="loot-S3-L9-P14-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
             <span class="loot-hover-area"></span>
+        </div>
+        <!-- ==================== STAGE 5 LOOT ==================== -->
+        <div class="container coin loot-S5-L0-P18">
+            <label for="loot-S5-L0-P18-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="loot-hover-area"></span>
+        </div>
+        <div class="container seashell loot-S5-L2-P17">
+            <label for="loot-S5-L2-P17-pickup" class="loot-in-game"><svg><use href="#seashell"/></svg></label>
+            <span class="loot-hover-area"></span>
+            <span class="tooltip">Seashell</span>
+        </div>
+        <div class="container seashell loot-S5-L3-P13">
+            <label for="loot-S5-L3-P13-pickup" class="loot-in-game"><svg><use href="#seashell"/></svg></label>
+            <span class="loot-hover-area"></span>
+            <span class="tooltip">Seashell</span>
         </div>
         </div><!-- end game-world -->
         <!-- darkness for Stage 4 -->
