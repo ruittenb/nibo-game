@@ -6,7 +6,7 @@
  - animated items still below darkness mask: plan 'flying-coins' (css stacking context problem)
  - tooltips in inventory (css stacking context problem)
 
- - disease verbranden met torch?
+ - burn disease with torch?
 
- - use :is() selectors
+ - use more :is() selectors
 
