@@ -248,6 +248,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --z-player: 1100;             /* Player (above title screen) */
             --z-tooltip: 1500;            /* Tooltips */
             --z-endgame-overlay: 2000;    /* Death and escape overlays */
+            --z-state-controls: 9000;     /* Game state inputs (when visible via debug toggle) */
+            --z-rotate-prompt: 10000;     /* Rotate device prompt */
             /* Darkness settings */
             --darkness-hole-width: 180px;     /* Width of the darkness hole (wide enough for nav arrows) */
             --darkness-hole-height: 120px;    /* Height of the darkness hole */
@@ -287,7 +289,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: 0;
             background: #1a1a2e;
             color: white;
-            z-index: 10000;
+            z-index: var(--z-rotate-prompt);
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -1294,10 +1296,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
             position: fixed;
             top: 10px;
-            left: 10px;
-            z-index: 10000;
+            left: 30px;
+            z-index: var(--z-state-controls);
         }
-        #debug-toggle:checked ~ .game-container #title-screen-toggle {
+        #debug-toggle:checked ~ #title-screen-toggle {
             display: block;
         }
         /* Debug toggle - press Alt+D (or Alt+Shift+D on Mac) to toggle */
@@ -1305,106 +1307,110 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
         #debug-toggle:checked {
-            display: none;
+            display: block;
+            position: fixed;
+            z-index: var(--z-state-controls);
         }
         /* Hide radio buttons and checkboxes by default */
         .position-radio, .level-radio, .loot-checkbox,
         #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup {
             display: none;
             /* When unhidden for debugging: */
-            z-index: 9999;
+            z-index: var(--z-state-controls);
             position: fixed;
         }
+        /* Debug positions - debug toggle */
+        #debug-toggle { top: 10px; left: 10px; }
         /* Debug positions - levels (single column on left, level-9 on top, level-0 on bottom) */
-        #level-9 { top: 30px; left: 10px; }
-        #level-8 { top: 50px; left: 10px; }
-        #level-7 { top: 70px; left: 10px; }
-        #level-6 { top: 90px; left: 10px; }
-        #level-5 { top: 110px; left: 10px; }
-        #level-4 { top: 140px; left: 10px; }
-        #level-3 { top: 160px; left: 10px; }
-        #level-2 { top: 180px; left: 10px; }
-        #level-1 { top: 200px; left: 10px; }
-        #level-0 { top: 220px; left: 10px; }
+        #level-9 { top: 30px; left: 30px; }
+        #level-8 { top: 40px; left: 40px; }
+        #level-7 { top: 50px; left: 30px; }
+        #level-6 { top: 60px; left: 40px; }
+        #level-5 { top: 70px; left: 30px; }
+        #level-4 { top: 100px; left: 30px; }
+        #level-3 { top: 110px; left: 40px; }
+        #level-2 { top: 120px; left: 30px; }
+        #level-1 { top: 130px; left: 40px; }
+        #level-0 { top: 140px; left: 30px; }
         /* Debug positions - positions (row 1) */
-        #pos-1 { top: 10px; left: 30px; }
-        #pos-2 { top: 10px; left: 50px; }
-        #pos-3 { top: 10px; left: 70px; }
-        #pos-4 { top: 10px; left: 90px; }
-        #pos-5 { top: 10px; left: 110px; }
-        #pos-6 { top: 10px; left: 130px; }
-        #pos-7 { top: 10px; left: 160px; }
-        #pos-8 { top: 10px; left: 180px; }
-        #pos-9 { top: 10px; left: 200px; }
-        #pos-10 { top: 10px; left: 220px; }
-        #pos-11 { top: 10px; left: 240px; }
-        #pos-12 { top: 10px; left: 260px; }
+        #pos-1 { top: 10px; left: 50px; }
+        #pos-2 { top: 10px; left: 70px; }
+        #pos-3 { top: 10px; left: 90px; }
+        #pos-4 { top: 10px; left: 110px; }
+        #pos-5 { top: 10px; left: 130px; }
+        #pos-6 { top: 10px; left: 150px; }
+        #pos-7 { top: 10px; left: 180px; }
+        #pos-8 { top: 10px; left: 200px; }
+        #pos-9 { top: 10px; left: 220px; }
+        #pos-10 { top: 10px; left: 240px; }
+        #pos-11 { top: 10px; left: 260px; }
+        #pos-12 { top: 10px; left: 280px; }
         /* Debug positions - S3 */
-        #pos-13 { top: 10px; left: 290px; }
-        #pos-14 { top: 10px; left: 310px; }
-        #pos-15 { top: 10px; left: 330px; }
-        #pos-16 { top: 10px; left: 350px; }
-        #pos-17 { top: 10px; left: 370px; }
-        #pos-18 { top: 10px; left: 390px; }
-        #pos-φ { top: 10px; left: 420px; }
+        #pos-13 { top: 10px; left: 310px; }
+        #pos-14 { top: 10px; left: 330px; }
+        #pos-15 { top: 10px; left: 350px; }
+        #pos-16 { top: 10px; left: 370px; }
+        #pos-17 { top: 10px; left: 390px; }
+        #pos-18 { top: 10px; left: 410px; }
+        #pos-φ { top: 10px; left: 440px; }
         /* Debug positions - S1 loot */
-        #loot-S1-L0-P3-pickup { top: 140px; left: 30px; }
-        #loot-S1-L1-P4-pickup { top: 140px; left: 50px; }
-        #loot-S1-L3-P5-pickup { top: 140px; left: 70px; }
-        #loot-S1-L2-P1-pickup { top: 140px; left: 90px; }
-        #loot-S1-L4-P2-pickup { top: 140px; left: 110px; }
+        #loot-S1-L0-P3-pickup { top: 100px; left: 70px; }
+        #loot-S1-L1-P4-pickup { top: 100px; left: 90px; }
+        #loot-S1-L3-P5-pickup { top: 100px; left: 110px; }
+        #loot-S1-L2-P1-pickup { top: 100px; left: 130px; }
+        #loot-S1-L4-P2-pickup { top: 100px; left: 150px; }
         /* Debug positions - S2/S3 loot */
-        #loot-S2-L5-P8-pickup { top: 30px; left: 160px; }
-        #loot-S2-L6-P11-pickup { top: 30px; left: 180px; }
-        #loot-S2-L7-P7-pickup { top: 30px; left: 200px; }
-        #loot-S2-L8-P9-pickup { top: 30px; left: 220px; }
-        #loot-S2-L9-P10-pickup { top: 30px; left: 240px; }
-        #loot-S3-L5-P15-pickup { top: 30px; left: 290px; }
-        #loot-S3-L5-P18-pickup { top: 30px; left: 310px; }
-        #loot-S3-L8-P18-pickup { top: 30px; left: 330px; }
-        #loot-S3-L9-P14-pickup { top: 30px; left: 350px; }
+        #loot-S2-L5-P8-pickup { top: 30px; left: 180px; }
+        #loot-S2-L6-P11-pickup { top: 30px; left: 200px; }
+        #loot-S2-L7-P7-pickup { top: 30px; left: 220px; }
+        #loot-S2-L8-P9-pickup { top: 30px; left: 240px; }
+        #loot-S2-L9-P10-pickup { top: 30px; left: 260px; }
+        #loot-S3-L5-P15-pickup { top: 30px; left: 310px; }
+        #loot-S3-L5-P18-pickup { top: 30px; left: 330px; }
+        #loot-S3-L8-P18-pickup { top: 30px; left: 350px; }
+        #loot-S3-L9-P14-pickup { top: 30px; left: 370px; }
         /* Debug positions - S4 loot */
-        #loot-S4-L3-P7-pickup { top: 140px; left: 160px; }
-        #loot-S4-L3-P8-pickup { top: 140px; left: 180px; }
-        #loot-S4-L3-P12-pickup { top: 140px; left: 200px; }
-        #loot-S4-L1-P10-pickup { top: 140px; left: 220px; }
-        #loot-S4-L0-P9-pickup { top: 140px; left: 240px; }
+        #loot-S4-L3-P7-pickup { top: 100px; left: 180px; }
+        #loot-S4-L3-P8-pickup { top: 100px; left: 200px; }
+        #loot-S4-L3-P12-pickup { top: 100px; left: 220px; }
+        #loot-S4-L1-P10-pickup { top: 100px; left: 240px; }
+        #loot-S4-L0-P9-pickup { top: 100px; left: 260px; }
         /* Debug positions - S1 items */
-        #key-pickup { top: 160px; left: 30px; }
-        #toolbox-unlocked { top: 160px; left: 50px; }
-        #wrench-pickup { top: 160px; left: 70px; }
-        #door-unlocked { top: 160px; left: 90px; }
+        #key-pickup { top: 120px; left: 90px; }
+        #toolbox-unlocked { top: 120px; left: 110px; }
+        #wrench-pickup { top: 120px; left: 130px; }
+        #door-unlocked { top: 120px; left: 150px; }
         /* Debug positions - S2/S3 items */
-        #tree-chopped { top: 50px; left: 180px; }
-        #axe-pickup { top: 50px; left: 290px; }
-        #battery-pickup { top: 50px; left: 160px; }
-        #scuba-pickup { top: 50px; left: 310px; }
-        #bolt-fixed { top: 50px; left: 330px; }
-        #flight-controls-used { top: 50px; left: 350px; }
-        #escaped { top: 50px; left: 370px; }
+        #tree-chopped { top: 50px; left: 200px; }
+        #axe-pickup { top: 50px; left: 310px; }
+        #battery-pickup { top: 50px; left: 180px; }
+        #scuba-pickup { top: 50px; left: 330px; }
+        #bolt-fixed { top: 50px; left: 350px; }
+        #flight-controls-used { top: 50px; left: 370px; }
+        #escaped { top: 50px; left: 390px; }
         /* Debug positions - S4 items */
-        #torch-pickup { top: 160px; left: 160px; }
-        #darkness-toggle { top: 180px; left: 160px; }
+        #torch-pickup { top: 120px; left: 180px; }
+        #darkness-toggle { top: 140px; left: 180px; }
         /* Debug positions - S5 items */
-        #idcard-pickup { top: 160px; left: 290px; }
-        /* Show inputs when debug is checked */
-        #debug-toggle:checked ~ .game-container .position-radio,
-        #debug-toggle:checked ~ .game-container .level-radio,
-        #debug-toggle:checked ~ .game-container .loot-checkbox,
-        #debug-toggle:checked ~ .game-container #key-pickup,
-        #debug-toggle:checked ~ .game-container #toolbox-unlocked,
-        #debug-toggle:checked ~ .game-container #wrench-pickup,
-        #debug-toggle:checked ~ .game-container #door-unlocked,
-        #debug-toggle:checked ~ .game-container #idcard-pickup,
-        #debug-toggle:checked ~ .game-container #axe-pickup,
-        #debug-toggle:checked ~ .game-container #tree-chopped,
-        #debug-toggle:checked ~ .game-container #battery-pickup,
-        #debug-toggle:checked ~ .game-container #scuba-pickup,
-        #debug-toggle:checked ~ .game-container #bolt-fixed,
-        #debug-toggle:checked ~ .game-container #flight-controls-used,
-        #debug-toggle:checked ~ .game-container #escaped,
-        #debug-toggle:checked ~ .game-container #darkness-toggle,
-        #debug-toggle:checked ~ .game-container #torch-pickup {
+        #idcard-pickup { top: 120px; left: 310px; }
+        /* Show game state inputs when debug is checked */
+        #debug-toggle:checked ~ .position-radio,
+        #debug-toggle:checked ~ .level-radio,
+        #debug-toggle:checked ~ .loot-checkbox,
+        #debug-toggle:checked ~ #key-pickup,
+        #debug-toggle:checked ~ #toolbox-unlocked,
+        #debug-toggle:checked ~ #wrench-pickup,
+        #debug-toggle:checked ~ #door-unlocked,
+        #debug-toggle:checked ~ #idcard-pickup,
+        #debug-toggle:checked ~ #axe-pickup,
+        #debug-toggle:checked ~ #tree-chopped,
+        #debug-toggle:checked ~ #battery-pickup,
+        #debug-toggle:checked ~ #scuba-pickup,
+        #debug-toggle:checked ~ #bolt-fixed,
+        #debug-toggle:checked ~ #flight-controls-used,
+        #debug-toggle:checked ~ #escaped,
+        #debug-toggle:checked ~ #darkness-toggle,
+        #debug-toggle:checked ~ #torch-pickup {
             display: block;
         }
         /* Inventory area */
@@ -2137,7 +2143,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             margin-bottom: 12px;
         }
         /* Debug mode: show level and position in player tooltip */
-        #debug-toggle:checked ~ .game-container .game-world .player-tooltip::after {
+        #debug-toggle:checked ~ .game-world .player-tooltip::after {
             content: " (" var(--level) "-" var(--pos) ")";
         }
         /* Torch held by player in S4 */
@@ -4902,8 +4908,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <circle cx="830" cy="290" r="1.7" fill="rgba(255,255,255,0.7)"/>
         </symbol>
     </svg>
-    <input type="checkbox" id="debug-toggle" accesskey="d">
     <div class="game-container">
+        <input type="checkbox" id="debug-toggle" accesskey="d" title="debug">
         <h2>NIBO'S WAY OUT</h2>
         <!-- Radio buttons for level (vertical) -->
         <input type="radio" name="level" id="level-0" class="level-radio" title="level-0" checked>
@@ -4940,7 +4946,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="position" id="pos-18" class="position-radio" title="pos-18">
         <input type="radio" name="position" id="pos-φ" class="position-radio" title="pos-φ">
         <!-- Title screen toggle -->
-        <input type="checkbox" id="title-screen-toggle" autofocus>
+        <input type="checkbox" id="title-screen-toggle" autofocus title="title screen">
         <!-- Key pickup checkbox -->
         <input type="checkbox" id="key-pickup" title="key">
         <!-- Safe unlock checkbox -->

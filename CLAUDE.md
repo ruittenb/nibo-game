@@ -228,7 +228,7 @@ Since all these transitions stay on L8, they only change the position radio - ma
 
 ## Debug Mode
 
-The `#debug-toggle` checkbox reveals all state inputs for testing. Each input has a `title` attribute describing its purpose.
+The `#debug-toggle` checkbox reveals all game state inputs for testing. Each input has a `title` attribute describing its purpose.
 
 ## Adding New Checkboxes
 
@@ -238,8 +238,8 @@ When adding a new checkbox (for item pickups, unlocks, etc.), **four things** mu
    - Item/state checkboxes: `<input type="checkbox" id="my-checkbox" title="my-checkbox">`
    - Loot checkboxes: `<input type="checkbox" id="loot-SX-LY-PZ-pickup" class="loot-checkbox" title="coin">`
 2. **Add the ID to the hidden inputs rule** - find the CSS rule that starts with `.position-radio, .level-radio, .loot-checkbox, #key-pickup, ...` and add your new ID (e.g., `#my-checkbox`)
-3. **Add to debug visibility rule** - find the `#debug-toggle:checked ~ .game-container ...` rule and add your ID
-4. **Add debug position** - add a rule like `#my-checkbox { top: 50px; left: XXXpx; }` with a unique left offset
+3. **Add to game state visibility rule** - find the `#debug-toggle:checked ~ .game-container ...` rule and add your ID
+4. **Add game state position** - add a rule like `#my-checkbox { top: 50px; left: XXXpx; }` with a unique left offset
 
 If you skip step 2, the checkbox will be visible in the top-left corner of the play area instead of hidden.
 
@@ -265,7 +265,7 @@ If you skip step 2, the checkbox will be visible in the top-left corner of the p
 ### Loot (coins, gems)
 
 1. **Checkbox** for pickup state: `<input type="checkbox" id="loot-SX-LY-PZ-pickup" class="loot-checkbox" title="coin">`
-   - Must include `class="loot-checkbox"` for bulk hiding/showing in debug mode
+   - Must include `class="loot-checkbox"` for bulk hiding/showing of game state inputs
 2. **Container** in `.game-world`:
    - `.container` wrapper with location class (e.g., `.valuable-S1-L0-P3`)
    - `.hover-area` span for tooltip hover detection
@@ -315,9 +315,9 @@ If you skip step 2, the checkbox will be visible in the top-left corner of the p
 │ 2000    │ --z-endgame-overlay  │ Death and escape overlays                                                           │
 │ 2000    │ --z-flash-overlay    │ Teleport flash screen overlay                                                       │
 ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
-│ 9999    │ 9999                 │ Debug inputs (when visible)                                                         │
+│ 9000    │ --z-state-controls   │ Game state inputs (when visible via debug toggle)                                   │
 ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
-│ 10000   │ 10000                │ Debug panel, title-screen-toggle                                                    │
+│ 10000   │ --z-rotate-prompt    │ Rotate-prompt                                                                       │
 └─────────┴──────────────────────┴─────────────────────────────────────────────────────────────────────────────────────┘
 
 
