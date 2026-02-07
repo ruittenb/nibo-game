@@ -239,16 +239,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --z-hazards: 300;             /* Hazards (poison, disease) */
             --z-scenery: 400;             /* Scenery (toolbox, door, tree) */
             --z-floating-item: 500;       /* Floating item icons when using items */
+            --z-underwater: 550;          /* Underwater filter overlay */
             --z-arrows: 600;              /* In-game navigation arrows */
-            --z-darkness: 700;         /* Caves darkness */
+            --z-darkness: 700;            /* Caves darkness */
             --z-items: 800;               /* Pickupable items (key, wrench, axe, battery, idcard, torch) */
-            --z-loot: 800;            /* Loot (coins, gems) */
+            --z-loot: 800;               /* Loot (coins, gems) */
             --z-ui: 900;                  /* UI elements (title, inventory, counter) */
             --z-title-overlay: 1000;      /* Title screen overlay */
-            --z-flash-overlay: 2000;      /* Teleport flash overlay */
             --z-player: 1100;             /* Player (above title screen) */
             --z-tooltip: 1500;            /* Tooltips */
             --z-endgame-overlay: 2000;    /* Death and escape overlays */
+            --z-flash-overlay: 2000;      /* Teleport flash overlay */
             --z-state-controls: 9000;     /* Game state inputs (when visible via debug toggle) */
             --z-rotate-prompt: 10000;     /* Rotate device prompt */
             /* Darkness settings */
@@ -2468,6 +2469,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .water-bg svg {
             width: 100%;
             height: 100%;
+        }
+        .underwater-filter-S5 {
+            position: absolute;
+            z-index: var(--z-underwater);
+            left: calc(var(--pos-width) * 12);
+            bottom: 0;
+            width: calc(var(--pos-width) * 6);
+            height: calc(var(--platform-height) * 2 + var(--platform-thickness) + 28px);
+            backdrop-filter: url(#underwater);
+            -webkit-backdrop-filter: url(#underwater);
+            pointer-events: none;
         }
         .sunken-ruins-bg {
             position: absolute;
@@ -5560,6 +5572,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="seaweed-shell-bg"><svg><use href="#seaweed-shell"/></svg></div>
         <div class="sunken-ruins-bg"><svg><use href="#sunken-ruins"/></svg></div>
         <div class="water-bg"><svg><use href="#water-ripples"/></svg></div>
+        <div class="underwater-filter-S5"></div>
         <div class="platform platform-S5-L4-P18"></div>
         <!-- Barrel blocking exit -->
         <div class="barrel-S3-L9-P15">
