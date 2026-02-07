@@ -1312,7 +1312,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: var(--z-state-controls);
         }
         /* Hide radio buttons and checkboxes by default */
-        .position-radio, .level-radio, .loot-checkbox,
+        .position-radio, .level-radio, .layer-radio, .loot-checkbox,
         #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup {
             display: none;
             /* When unhidden for debugging: */
@@ -1321,6 +1321,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Debug positions - debug toggle */
         #debug-toggle { top: 10px; left: 10px; }
+        /* Debug positions - layers */
+        #layer-N { top: 30px; left: 10px; }
+        #layer-ζ { top: 50px; left: 10px; }
+        #layer-η { top: 70px; left: 10px; }
+        #layer-θ { top: 90px; left: 10px; }
         /* Debug positions - levels (single column on left, level-9 on top, level-0 on bottom) */
         #level-9 { top: 30px; left: 30px; }
         #level-8 { top: 40px; left: 40px; }
@@ -1396,6 +1401,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Show game state inputs when debug is checked */
         #debug-toggle:checked ~ .position-radio,
         #debug-toggle:checked ~ .level-radio,
+        #debug-toggle:checked ~ .layer-radio,
         #debug-toggle:checked ~ .loot-checkbox,
         #debug-toggle:checked ~ #key-pickup,
         #debug-toggle:checked ~ #toolbox-unlocked,
@@ -4923,6 +4929,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="level" id="level-7" class="level-radio" title="level-7">
         <input type="radio" name="level" id="level-8" class="level-radio" title="level-8">
         <input type="radio" name="level" id="level-9" class="level-radio" title="level-9">
+        <!-- Radio buttons for layer -->
+        <input type="radio" name="layer" id="layer-N" class="layer-radio" title="layer-N" checked>
+        <input type="radio" name="layer" id="layer-ζ" class="layer-radio" title="layer-ζ">
+        <input type="radio" name="layer" id="layer-η" class="layer-radio" title="layer-η">
+        <input type="radio" name="layer" id="layer-θ" class="layer-radio" title="layer-θ">
         <!-- Radio buttons for position (horizontal) -->
         <input type="radio" name="position" id="pos-1" class="position-radio" title="pos-1" checked>
         <input type="radio" name="position" id="pos-2" class="position-radio" title="pos-2">
