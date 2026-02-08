@@ -230,6 +230,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --idcard-color: #4a9f4a;
             --scuba-color: #F0A500;
             --seashell-color: #ff69b4;
+            --cave-rock-color: #4a3a2a;   /* Stalactite/stalagmite color */
+            --cave-rock-shadow: drop-shadow(2px 0 2px #66aaff80);
             --border-color: #4a4a6a;      /* Border color for UI elements */
             /* Z-index layers */
             --z-walls: 50;               /* Warning walls, rock walls */
@@ -649,8 +651,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Stage 4 stalagmites */
         .stalagmite-S4 {
             position: absolute;
-            color: #4a3a2a;
-            filter: drop-shadow(2px 0 2px #66aaff80);
+            color: var(--cave-rock-color);
+            filter: var(--cave-rock-shadow);
         }
         .stalagmite-S4 svg {
             width: 100%;
@@ -674,18 +676,34 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 60px;
             height: 108px;
         }
+        /* Stage 4 cave ceiling */
+        .cave-ceiling-S4 {
+            position: absolute;
+            filter: var(--cave-rock-shadow);
+            /* top of ceiling flush with top of rock wall */
+            bottom: calc(var(--stage-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px - 22px);
+            left: calc(var(--pos-width) * 7);
+            width: calc(var(--pos-width) * 5 + 16px);
+            height: 22px;
+            color: var(--cave-rock-color);
+        }
+        .cave-ceiling-S4 svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
         /* Stage 4 stalactites */
         .stalactite-S4 {
             position: absolute;
-            color: #4a3a2a;
-            filter: drop-shadow(2px 0 2px #66aaff80);
+            color: var(--cave-rock-color);
+            filter: var(--cave-rock-shadow);
         }
         .stalactite-S4 svg {
             width: 100%;
             height: 100%;
         }
         .stalactite-S4-L4-P9-P10 {
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 5px);
+            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 9px);
             left: calc(var(--pos-width) * 9 - 24px);
             width: 48px;
             height: 84px;
@@ -1387,10 +1405,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S5-L2-P17-pickup { top: 100px; left: 330px; }
         #loot-S5-L0-P18-pickup { top: 100px; left: 350px; }
         /* Debug positions - S1 items */
-        #key-pickup { top: 120px; left: 90px; }
-        #toolbox-unlocked { top: 120px; left: 110px; }
-        #wrench-pickup { top: 120px; left: 130px; }
-        #door-unlocked { top: 120px; left: 150px; }
+        #key-pickup { top: 120px; left: 70px; }
+        #toolbox-unlocked { top: 120px; left: 90px; }
+        #wrench-pickup { top: 120px; left: 110px; }
+        #door-unlocked { top: 120px; left: 130px; }
         /* Debug positions - S2/S3 items */
         #tree-chopped { top: 50px; left: 200px; }
         #axe-pickup { top: 50px; left: 310px; }
@@ -2726,7 +2744,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + var(--ladder-offset));
         }
         #level-4:checked ~ #pos-7:checked ~ .game-world .ladder-S4-L4-P7,
-        #level-4:checked ~ #pos-8:checked ~ #torch-pickup:checked ~ .game-world .ladder-S4-L4-P7 {
+        #level-4:checked ~ #pos-8:checked ~ #torch-pickup:checked ~ .game-world .ladder-S4-L4-P7,
+        #level-3:checked ~ #pos-7:checked ~ #torch-pickup:checked ~ .game-world .ladder-S4-L4-P7 {
             display: block;
         }
         /* Ladder at S3-L0-P4: ground to platform 1 */
@@ -4801,6 +4820,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <path d="M287,176 Q303,159 330,167 Q347,156 360,180 Q372,171 367,199 Q353,213 326,209 Q302,216 291,196 Q281,187 287,176 Z" fill="#0a210a"/>
             </g>
         </symbol>
+        <symbol id="cave-ceiling" viewBox="0 0 900 22" preserveAspectRatio="none">
+            <rect width="900" height="3" fill="currentColor"/>
+            <path fill="currentColor" d="M0 3 L2 12 L4 3 L7 19 L11 3 L13 7 L15 3 L19 22 L24 3 L26 9 L28 3 L30 16 L34 3 L37 21 L41 3 L43 8 L44 3 L48 18 L52 3 L54 6 L55 3 L58 14 L62 3 L65 22 L70 3 L72 10 L74 3 L77 17 L81 3 L83 7 L85 3 L88 20 L93 3 L95 11 L97 3 L101 22 L106 3 L108 6 L109 3 L112 15 L116 3 L119 19 L123 3 L125 8 L127 3 L131 21 L136 3 L138 10 L140 3 L143 16 L147 3 L150 22 L155 3 L157 7 L158 3 L162 13 L166 3 L168 20 L173 3 L175 9 L177 3 L181 17 L185 3 L187 6 L188 3 L192 22 L197 3 L199 11 L201 3 L204 15 L208 3 L211 21 L216 3 L218 8 L219 3 L223 18 L227 3 L229 7 L231 3 L235 14 L239 3 L241 22 L246 3 L248 10 L250 3 L254 19 L258 3 L260 6 L261 3 L264 16 L268 3 L271 21 L276 3 L278 9 L280 3 L284 17 L288 3 L290 8 L292 3 L296 22 L301 3 L303 11 L305 3 L308 15 L312 3 L315 20 L320 3 L322 7 L323 3 L327 18 L331 3 L333 10 L335 3 L339 22 L344 3 L346 6 L347 3 L351 14 L355 3 L358 21 L363 3 L365 8 L366 3 L370 19 L374 3 L376 9 L378 3 L382 16 L386 3 L389 22 L394 3 L396 7 L397 3 L401 13 L405 3 L407 20 L412 3 L414 10 L416 3 L420 17 L424 3 L426 6 L427 3 L431 22 L436 3 L438 11 L440 3 L443 15 L447 3 L450 21 L455 3 L457 8 L458 3 L462 18 L466 3 L468 7 L470 3 L474 14 L478 3 L481 22 L486 3 L488 9 L490 3 L494 19 L498 3 L500 6 L501 3 L505 16 L509 3 L512 20 L517 3 L519 10 L521 3 L525 22 L530 3 L532 7 L533 3 L537 13 L541 3 L544 21 L549 3 L551 8 L552 3 L556 17 L560 3 L562 11 L564 3 L568 22 L573 3 L575 6 L576 3 L580 15 L584 3 L587 19 L592 3 L594 9 L596 3 L600 14 L604 3 L607 22 L612 3 L614 7 L615 3 L619 18 L623 3 L625 10 L627 3 L631 21 L636 3 L638 8 L639 3 L643 16 L647 3 L650 20 L655 3 L657 6 L658 3 L662 13 L666 3 L669 22 L674 3 L676 9 L678 3 L682 17 L686 3 L688 11 L690 3 L694 22 L699 3 L701 7 L702 3 L706 15 L710 3 L713 19 L718 3 L720 8 L721 3 L725 14 L729 3 L732 21 L737 3 L739 10 L741 3 L745 18 L749 3 L751 6 L752 3 L756 22 L761 3 L763 9 L765 3 L769 16 L773 3 L776 20 L781 3 L783 7 L784 3 L788 13 L792 3 L795 22 L800 3 L802 11 L804 3 L808 17 L812 3 L814 8 L815 3 L819 19 L824 3 L826 6 L827 3 L831 15 L835 3 L838 21 L843 3 L845 10 L847 3 L851 22 L856 3 L858 7 L859 3 L863 14 L867 3 L870 20 L875 3 L877 9 L879 3 L883 18 L887 3 L889 6 L890 3 L894 22 L899 3 L900 3"/>
+        </symbol>
         <symbol id="stalactite-1" viewBox="0 4 64 60" preserveAspectRatio="none">
             <path fill="currentColor" d="M 18 4 H 46 L 40 18 L 42 28 L 36 40 L 34 52 L 32 62 L 30 52 L 28 40 L 22 28 L 24 18 Z"/>
         </symbol>
@@ -5554,6 +5577,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="stalagmite-S4 stalagmite-S4-L3-P10-P11"><svg><use href="#stalagmite-2"/></svg></div>
             <div class="stalagmite-S4 stalagmite-S4-L3-P11-P12"><svg><use href="#stalagmite-1"/></svg></div>
             <div class="stalagmite-S4 stalagmite-S4-L0-P8-P9"><svg><use href="#stalagmite-3"/></svg></div>
+            <!-- S4 Cave ceiling -->
+            <div class="cave-ceiling-S4"><svg><use href="#cave-ceiling"/></svg></div>
             <!-- S4 Stalactites -->
             <div class="stalactite-S4 stalactite-S4-L4-P9-P10"><svg><use href="#stalactite-1"/></svg></div>
             <div class="stalactite-S4 stalactite-S4-L1-P7-P8"><svg><use href="#stalactite-2"/></svg></div>
