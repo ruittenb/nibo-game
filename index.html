@@ -185,12 +185,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :root {
             /* Core layout variables */
             --pos-width: 150px;           /* Distance between horizontal positions */
-            --platform-height: 110px;     /* Distance between platforms */
+            --level-height: 110px;        /* Distance between levels */
             --ground-height: 35px;        /* Height of ground */
             --platform-thickness: 30px;   /* Thickness of platforms */
             --pos-offset: 55px;           /* Offset for position 1 from left edge */
-            --top-margin: 70px;           /* Extra space above topmost platform */
-            --stage-height: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin)); /* Height of one stage */
+            --top-margin: 100px;          /* Extra space above topmost platform */
+            --stage-height: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin)); /* Height of one stage */
             --item-offset: 34px;          /* Offset for items left of player position */
             --pickup-size: 28px;          /* Size of pick-uppable items and loot */
             --ladder-offset: 42px;        /* Horizontal offset for ladders */
@@ -276,7 +276,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: relative;
             width: calc(var(--pos-width) * 6);
             user-select: none;
-            height: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin));
+            height: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin));
             background: #0f0f23;
             border: 3px solid var(--border-color);
             border-radius: 8px;
@@ -321,8 +321,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 display: none;
             }
         }
-        /* Scale to fit viewport on small screens (game height is 655px) */
-        @media (max-height: 700px) {
+        /* Scale to fit viewport on small screens (game height is 685px) */
+        @media (max-height: 730px) {
             body {
                 height: 100vh;
                 min-height: auto;
@@ -330,7 +330,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             }
             .game-container {
                 --game-width: calc(var(--pos-width) * 6);
-                --game-height: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin));
+                --game-height: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin));
                 --scale-x: calc(100vw / var(--game-width));
                 --scale-y: calc(100vh / var(--game-height));
                 scale: min(var(--scale-x), var(--scale-y), 1);
@@ -478,35 +478,35 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Platform 1 (lowest): 5/6 width, aligned right in Stage 1 */
         .platform-S1-L1 {
-            bottom: var(--platform-height);
+            bottom: var(--level-height);
             left: var(--pos-width);
             width: calc(var(--pos-width) * 5 - var(--warning-wall-width) - 4px);
         }
         /* Platform 2 (third from above): split in Stage 1 */
         .platform-S1-L2-left {
-            bottom: calc(var(--platform-height) * 2);
+            bottom: calc(var(--level-height) * 2);
             left: var(--warning-wall-width);
             width: calc(var(--pos-width) * 4 - var(--warning-wall-width));
         }
         .platform-S1-L2-right {
-            bottom: calc(var(--platform-height) * 2);
+            bottom: calc(var(--level-height) * 2);
             left: calc(var(--pos-width) * 5);
             width: calc(var(--pos-width) - var(--warning-wall-width) - 4px);
         }
         /* Platform 3 (second from above): split with gap at position 3 */
         .platform-S1-L3-left {
-            bottom: calc(var(--platform-height) * 3);
+            bottom: calc(var(--level-height) * 3);
             left: var(--warning-wall-width);
             width: calc(var(--pos-width) * 2 - var(--warning-wall-width));
         }
         .platform-S1-L3-right {
-            bottom: calc(var(--platform-height) * 3);
+            bottom: calc(var(--level-height) * 3);
             left: calc(var(--pos-width) * 3);
             width: calc(var(--pos-width) * 3 - var(--warning-wall-width) - 4px);
         }
         /* Platform 4 (top): 5/6 width, aligned left */
         .platform-S1-L4 {
-            bottom: calc(var(--platform-height) * 4);
+            bottom: calc(var(--level-height) * 4);
             left: var(--warning-wall-width);
             width: calc(var(--pos-width) * 5 - var(--warning-wall-width));
         }
@@ -525,37 +525,37 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Stage 2 Platforms (positioned above S4, offset by stage-height) */
         .platform-S2-L6-left {
-            bottom: calc(var(--stage-height) + var(--platform-height));
+            bottom: calc(var(--stage-height) + var(--level-height));
             left: calc(var(--pos-width) * 7);
             width: calc(var(--pos-width) * 3);
         }
         .platform-S2-L6-right {
-            bottom: calc(var(--stage-height) + var(--platform-height));
+            bottom: calc(var(--stage-height) + var(--level-height));
             left: calc(var(--pos-width) * 11);
             width: calc(var(--pos-width) - 6px);
         }
         .platform-S2-L7-left {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2);
             left: calc(var(--pos-width) * 6 + 12px);
             width: calc(var(--pos-width) - 12px);
         }
         .platform-S2-L7-right {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2);
             left: calc(var(--pos-width) * 8);
             width: calc(var(--pos-width) * 4 - 6px);
         }
         .platform-S2-L8-left {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 3);
+            bottom: calc(var(--stage-height) + var(--level-height) * 3);
             left: calc(var(--pos-width) * 6 + 12px);
             width: calc(var(--pos-width) * 3 - 12px);
         }
         .platform-S2-L8-right {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 3);
+            bottom: calc(var(--stage-height) + var(--level-height) * 3);
             left: calc(var(--pos-width) * 10);
             width: calc(var(--pos-width) * 2 - 6px);
         }
         .platform-S2-L9 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4);
+            bottom: calc(var(--stage-height) + var(--level-height) * 4);
             left: calc(var(--pos-width) * 7);
             width: calc(var(--pos-width) * 5 - 6px);
         }
@@ -572,7 +572,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Stage 5 Platform */
         .platform-S5-L4-P18 {
-            bottom: calc(var(--platform-height) * 4);
+            bottom: calc(var(--level-height) * 4);
             left: calc(var(--pos-width) * 17);
             width: var(--pos-width);
             background: #2e8b2e;
@@ -580,7 +580,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Stage 3 Platforms (same vertical level as S2) */
         .platform-S3-L4 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4);
+            bottom: calc(var(--stage-height) + var(--level-height) * 4);
             left: calc(var(--pos-width) * 12);
             width: calc(var(--pos-width) * 3); /* P1-P3 only, gaps at P4 and P6 */
         }
@@ -591,42 +591,42 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Stage 4 Platforms (caves, levels 0-4, positions 7-12) */
         .platform-S4-L4-P8 {
-            bottom: calc(var(--platform-height) * 4);
+            bottom: calc(var(--level-height) * 4);
             left: calc(var(--pos-width) * 7 - 10px);
             width: calc(var(--pos-width) + 20px);
         }
         .platform-S4-L3-P7 {
-            bottom: calc(var(--platform-height) * 3);
+            bottom: calc(var(--level-height) * 3);
             left: calc(var(--pos-width) * 6 + 12px);
             width: calc(var(--pos-width) - 12px + 10px);
         }
         .platform-S4-L3-P9 {
-            bottom: calc(var(--platform-height) * 3);
+            bottom: calc(var(--level-height) * 3);
             left: calc(var(--pos-width) * 8 - 10px);
             width: calc(var(--pos-width) + 10px);
         }
         .platform-S4-L3-P12 {
-            bottom: calc(var(--platform-height) * 3);
+            bottom: calc(var(--level-height) * 3);
             left: calc(var(--pos-width) * 11);
             width: calc(var(--pos-width) - 12px - 4px);
         }
         .platform-S4-L2-P8 {
-            bottom: calc(var(--platform-height) * 2);
+            bottom: calc(var(--level-height) * 2);
             left: calc(var(--pos-width) * 7);
             width: calc(var(--pos-width) + 10px);
         }
         .platform-S4-L2-P10 {
-            bottom: calc(var(--platform-height) * 2);
+            bottom: calc(var(--level-height) * 2);
             left: calc(var(--pos-width) * 9);
             width: var(--pos-width);
         }
         .platform-S4-L2-P12 {
-            bottom: calc(var(--platform-height) * 2);
+            bottom: calc(var(--level-height) * 2);
             left: calc(var(--pos-width) * 11);
             width: calc(var(--pos-width) - 12px - 4px);
         }
         .platform-S4-L1-P10-P11 {
-            bottom: var(--platform-height);
+            bottom: var(--level-height);
             left: calc(var(--pos-width) * 9);
             width: calc(var(--pos-width) * 2);
         }
@@ -658,13 +658,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
         }
         .stalagmite-S4-L3-P10-P11 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 12px);
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 12px);
             left: calc(var(--pos-width) * 10 - 27px);
             width: 48px;
             height: 115px;
         }
         .stalagmite-S4-L3-P11-P12 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-width) * 11 - 7px);
             width: 40px;
             height: 84px;
@@ -681,8 +681,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             filter: var(--cave-rock-shadow);
             /* top of ceiling flush with top of rock wall */
             bottom: calc(var(--stage-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px - 22px);
-            left: calc(var(--pos-width) * 7);
-            width: calc(var(--pos-width) * 5 - 2px);
+            left: calc(var(--pos-width) * 7 - 10px);
+            width: calc(var(--pos-width) * 5 + 8px);
             height: 22px;
             color: var(--cave-rock-color);
         }
@@ -701,76 +701,82 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
         }
-        .stalactite-S4-L4-P9-P10 {
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 13px);
+        .stalactite-S4-L4-P9-P10b {
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness) - 13px);
             left: calc(var(--pos-width) * 9 - 24px);
+            width: 48px;
+            height: 114px;
+        }
+        .stalactite-S4-L4-P9-P10a {
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness) + 17px);
+            left: calc(var(--pos-width) * 9 - 36px);
             width: 48px;
             height: 84px;
         }
         .stalactite-S4-L1-P7-P8 {
-            bottom: calc(var(--platform-height) * 1 + var(--platform-thickness) - 3px);
+            bottom: calc(var(--level-height) * 1 + var(--platform-thickness) - 3px);
             left: calc(var(--pos-width) * 7 - 12px);
             width: 48px;
             height: 84px;
         }
         .stalactite-S4-L1-P9-P10 {
-            bottom: calc(var(--platform-height) * 1 + var(--platform-thickness) - 3px);
+            bottom: calc(var(--level-height) * 1 + var(--platform-thickness) - 3px);
             left: calc(var(--pos-width) * 9 - 12px);
             width: 48px;
             height: 84px;
         }
         .stalagmite-S4-L1-P9-P10 {
-            bottom: calc(var(--platform-height) * 1 + var(--platform-thickness) - 5px);
+            bottom: calc(var(--level-height) * 1 + var(--platform-thickness) - 5px);
             left: calc(var(--pos-width) * 9 - 6px);
             width: 48px;
             height: 86px;
         }
         .stalactite-S4-L2-P10-P11 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 20px);
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + 20px);
             left: calc(var(--pos-width) * 10 - 28px);
             width: 48px;
             height: 84px;
         }
         .stalagmite-S4-L2-P10-P11 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-width) * 10 - 39px);
             width: 50px;
             height: 96px;
             filter: none;
         }
         .stalactite-S4-L3-P7-P8 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 3px);
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 3px);
             left: calc(var(--pos-width) * 7 - 21px);
             width: 48px;
             height: 84px;
         }
         .stalagmite-S4-L3-P7-P8 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-width) * 7 - 30px);
             width: 44px;
             height: 84px;
             filter: none;
         }
         .stalactite-S4-L3-P8-P9 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 1px);
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 1px);
             left: calc(var(--pos-width) * 8 - 32px);
             width: 48px;
             height: 84px;
         }
         .stalagmite-S4-L3-P8-P9 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-width) * 8 - 16px);
             width: 40px;
             height: 70px;
         }
         .stalactite-S4-L2-P8-P9 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 3px);
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) - 3px);
             left: calc(var(--pos-width) * 8 - 22px);
             width: 48px;
             height: 84px;
         }
         .stalagmite-S4-L2-P8-P9 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-width) * 8 - 33px);
             width: 47px;
             height: 89px;
@@ -833,40 +839,40 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: -1;
         }
         .grate-S1-L1-P1 {
-            bottom: calc(var(--platform-height) + var(--platform-thickness) - 16px);
+            bottom: calc(var(--level-height) + var(--platform-thickness) - 16px);
             left: 0;
         }
         .grate-S1-L2-P5 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 16px);
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 4);
         }
         .grate-S1-L3-P3 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 16px);
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 2);
         }
         .grate-S1-L4-P6 {
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 16px);
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 5);
         }
         /* Stage 3 grates (positioned above S4, same height as S2) */
         .grate-S3-L7-P13-P14 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 16px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 12);
             width: calc(var(--pos-width) * 2);
         }
         .grate-S3-L6-P13-P14 {
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) - 16px);
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 12);
             width: calc(var(--pos-width) * 2);
         }
         .grate-S3-L8-P13-P14 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) - 16px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 3 + var(--platform-thickness) - 16px);
             left: calc(var(--pos-width) * 12);
             width: calc(var(--pos-width) * 2);
         }
         .platform-S3-L9-P17-floating {
             position: absolute;
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4);
+            bottom: calc(var(--stage-height) + var(--level-height) * 4);
             left: calc(var(--pos-width) * 16);
             width: var(--pos-width);
             height: var(--platform-thickness);
@@ -878,7 +884,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Bolt S3-L1-P3 */
         .bolt-hover-area {
             position: absolute;
-            bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 5px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 1 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
             width: 20px;
             height: 24px;
@@ -886,7 +892,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         .bolt {
             position: absolute;
-            bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 5px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 1 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
             width: 20px;
             height: 24px;
@@ -901,7 +907,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             }
         }
         .bolt-tooltip {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 5px + 24px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 1 + var(--platform-thickness) + 5px + 24px);
             left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset) + 10px);
             transform: translateX(-50%);
             margin-bottom: 8px;
@@ -930,7 +936,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 20px;
             height: 20px;
-            bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 35px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 1 + var(--platform-thickness) + 35px);
             left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset) - 2px);
             z-index: var(--z-floating-item);
             opacity: 0;
@@ -954,7 +960,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 20px;
             height: 24px;
-            bottom: calc(var(--stage-height) + var(--platform-height) * 1 + var(--platform-thickness) + 5px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 1 + var(--platform-thickness) + 5px);
             left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
             color: var(--battery-color);
             display: none;
@@ -983,7 +989,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: calc(var(--pickup-size) * 1.7);
             height: calc(var(--pickup-size) * 2);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 10px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) - 10px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 8px);
             pointer-events: none;
             color: var(--flight-controls-unavailable);
@@ -996,7 +1002,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: calc(var(--pickup-size) * 1.7);
             height: calc(var(--pickup-size) * 2);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 10px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) - 10px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 8px);
             pointer-events: auto;
             z-index: 1;
@@ -1018,7 +1024,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 24px;
             height: 24px;
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) + 41px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) + 41px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) + 4px);
             z-index: var(--z-floating-item);
             opacity: 0;
@@ -1084,7 +1090,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: calc(var(--pickup-size) * 1.7);
             height: calc(var(--pickup-size) * 2);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 10px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) - 10px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 8px);
             display: none;
             cursor: pointer;
@@ -1115,7 +1121,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: calc(var(--pickup-size) * 1.7);
             height: calc(var(--pickup-size) * 2);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 10px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) - 10px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 8px);
             display: none;
             pointer-events: auto;
@@ -1144,7 +1150,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: calc(var(--pickup-size) * 3);
             height: var(--pickup-size);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 20px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) - 20px);
             left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset) + 12px);
             z-index: var(--z-item-hover);
         }
@@ -1152,7 +1158,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: calc(var(--pickup-size) * 3);
             height: var(--pickup-size);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 20px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) - 20px);
             left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset) + 12px);
             z-index: var(--z-scenery);
             pointer-events: none;
@@ -1176,7 +1182,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
         .teleporter-tooltip {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 20px + var(--pickup-size));
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) - 20px + var(--pickup-size));
             left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset) + 12px + var(--pickup-size) * 1.5);
             transform: translateX(-50%);
             margin-bottom: 8px;
@@ -1203,7 +1209,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             /* Origin: player at P18 in S3 viewport (P18 is rightmost = pos-width * 5) */
             left: calc(var(--pos-offset) + var(--pos-width) * 5 + 20px);
             /* L7 height */
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 28px);
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + 28px);
             width: 0;
             height: 0;
             border-radius: 50%;
@@ -1214,7 +1220,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             /* Destination: player at P18 in S5 viewport, animation at L4 visual position */
             left: calc(var(--pos-offset) + var(--pos-width) * 5 + 20px);
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 28px);
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness) + 28px);
             width: 0;
             height: 0;
             border-radius: 50%;
@@ -1225,7 +1231,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             /* Same position as flash-out: player at L4-P18 */
             left: calc(var(--pos-offset) + var(--pos-width) * 5 + 20px);
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 28px);
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness) + 28px);
             width: 0;
             height: 0;
             border-radius: 50%;
@@ -1289,24 +1295,24 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 50px 1px 0 #5d3a1a;
         }
         .branch-S2-L6-P7 {
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) - 14px);
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 6 + 12px);
             width: calc(var(--pos-width) - 12px);
         }
         .branch-S2-L6-P11 {
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) - 14px);
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 10);
         }
         .branch-S2-L7-P8 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 14px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 7);
         }
         .branch-S2-L8-P10 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) - 14px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 3 + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 9);
         }
         .branch-S2-L9-P7 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) - 14px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) - 14px);
             left: calc(var(--pos-width) * 6 + 12px);
             width: calc(var(--pos-width) - 12px);
         }
@@ -1612,7 +1618,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) - var(--item-offset));
             z-index: var(--z-items);
             pointer-events: none;
@@ -1627,7 +1633,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--gold-color);
         }
         .key-tooltip {
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + var(--pickup-size));
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness) + var(--pickup-size));
             left: calc(var(--pos-offset) - var(--item-offset) + var(--pickup-size) / 2);
             transform: translateX(-50%);
         }
@@ -1636,7 +1642,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) - var(--item-offset));
             pointer-events: auto;
             z-index: var(--z-item-hover);
@@ -1673,7 +1679,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly key to inventory when picked up (Stage 1: viewport right = pos-width * 6) */
         /* Key is always slot 0 (rightmost), no offset needed */
         #key-pickup:checked ~ .game-world .key-in-game {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 6 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
@@ -1683,7 +1689,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
             z-index: var(--z-item-hover);
         }
@@ -1691,7 +1697,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
             z-index: var(--z-scenery);
             pointer-events: none;
@@ -1723,7 +1729,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
         .toolbox-tooltip {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + var(--pickup-size));
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + var(--pickup-size));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset) + var(--pickup-size) / 2);
             transform: translateX(-50%);
             margin-bottom: 8px;
@@ -1733,7 +1739,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
             z-index: var(--z-items);
             pointer-events: none;
@@ -1744,7 +1750,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
         }
         .axe-tooltip {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + var(--pickup-size));
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) + var(--pickup-size));
             left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset) + var(--pickup-size) / 2);
             transform: translateX(-50%);
         }
@@ -1753,7 +1759,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
             pointer-events: auto;
             z-index: var(--z-item-hover);
@@ -1786,7 +1792,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly axe to inventory when picked up (Stage 3: viewport right = pos-width * 18) */
         /* Axe slot = slot 0 offset by key + wrench */
         #axe-pickup:checked ~ .game-world .axe-in-game {
-            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 18 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench)));
             opacity: 0;
@@ -1849,7 +1855,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly id card to inventory when picked up (Stage 5: viewport right = pos-width * 18) */
         /* ID card slot = slot 0 offset by key + wrench + axe */
         #idcard-pickup:checked ~ .game-world .idcard-in-game {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 18 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe)));
             opacity: 0;
@@ -1860,7 +1866,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             z-index: var(--z-items);
             pointer-events: none;
@@ -1873,7 +1879,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             filter: drop-shadow(2px -2px 2px #00000080);
         }
         .battery-tooltip {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + var(--pickup-size));
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) + var(--pickup-size));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset) + var(--pickup-size) / 2);
             transform: translateX(-50%);
         }
@@ -1882,7 +1888,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             pointer-events: auto;
             z-index: var(--z-item-hover);
@@ -1915,7 +1921,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly battery to inventory when picked up (Stage 2: viewport right = pos-width * 12) */
         /* Battery slot = slot 0 offset by key + wrench + axe + idcard */
         #battery-pickup:checked ~ .game-world .battery-in-game {
-            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 12 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard)));
             opacity: 0;
@@ -1978,7 +1984,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Fly torch to inventory when picked up (S4: viewport right = pos-width * 12) */
         #torch-pickup:checked ~ .game-world .torch-in-game {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 12 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery)));
             opacity: 0;
@@ -1989,7 +1995,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
             z-index: var(--z-items);
             display: none;
@@ -2002,7 +2008,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--wrench-color);
         }
         .wrench-tooltip {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + var(--pickup-size) + 25px);
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + var(--pickup-size) + 25px);
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset) + var(--pickup-size) / 2);
             transform: translateX(-50%);
             display: none;
@@ -2012,7 +2018,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 25px);
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + 25px);
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
             pointer-events: auto;
             z-index: var(--z-item-hover);
@@ -2048,7 +2054,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly wrench to inventory when picked up (Stage 1) */
         /* Wrench slot = slot 0 offset by key (if in inventory) */
         #toolbox-unlocked:checked ~ #wrench-pickup:checked ~ .game-world .wrench-in-game {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 6 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * var(--inv-has-key));
             opacity: 0;
@@ -2059,7 +2065,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 19px;
             height: 19px;
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 35px);
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + 35px);
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - 28px);
             z-index: var(--z-floating-item);
             opacity: 0;
@@ -2144,25 +2150,25 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Phantom position: L8-Pφ displays at L9-P17 visual location */
         #level-8:checked ~ #pos-φ:checked ~ .game-world .player {
             left: calc(var(--pos-offset) + var(--pos-width) * 16); /* P17 X position */
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) - 2px); /* L9 height (same as L4) */
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) - 2px); /* L9 height (same as L4) */
         }
         /* Phantom position: L3-P18 displays at L4-P18 visual location (teleporter exit) */
         #level-3:checked ~ #pos-18:checked ~ .game-world .player {
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 2px);
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness) - 2px);
         }
         /* Player vertical levels (S1/S4: levels 0-4) */
         #level-0:checked ~ .game-world .player { bottom: calc(var(--ground-height) - 2px); }
-        #level-1:checked ~ .game-world .player { bottom: calc(var(--platform-height) + var(--platform-thickness) - 2px); }
-        #level-2:checked ~ .game-world .player { bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) - 2px); }
-        #level-3:checked ~ .game-world .player { bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) - 2px); }
-        #level-4:checked ~ .game-world .player { bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) - 2px); }
+        #level-1:checked ~ .game-world .player { bottom: calc(var(--level-height) + var(--platform-thickness) - 2px); }
+        #level-2:checked ~ .game-world .player { bottom: calc(var(--level-height) * 2 + var(--platform-thickness) - 2px); }
+        #level-3:checked ~ .game-world .player { bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 2px); }
+        #level-4:checked ~ .game-world .player { bottom: calc(var(--level-height) * 4 + var(--platform-thickness) - 2px); }
         /* Player vertical levels (S2/S3: levels 5-9, display at same heights as 0-4) */
         /* Player vertical levels (S2/S3: levels 5-9, positioned above S1/S4) */
         #level-5:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--ground-height) - 2px); }
-        #level-6:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) - 2px); }
-        #level-7:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) - 2px); }
-        #level-8:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) - 2px); }
-        #level-9:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) - 2px); }
+        #level-6:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) - 2px); }
+        #level-7:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) - 2px); }
+        #level-8:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--level-height) * 3 + var(--platform-thickness) - 2px); }
+        #level-9:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) - 2px); }
         /* Landing after jump from phantom position */
         #level-8:checked ~ #pos-16:checked ~ .game-world .player,
         #level-8:checked ~ #pos-18:checked ~ .game-world .player,
@@ -2467,9 +2473,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             z-index: 0;
             left: calc(var(--pos-width) * 12);
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 28px);
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + 28px);
             width: calc(var(--pos-width) * 6);
-            height: calc(var(--platform-height) * 1 - 12px);
+            height: calc(var(--level-height) * 1 - 12px);
             background: linear-gradient(to bottom, #d4c48a, #c4a868);
             mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 110' preserveAspectRatio='none'%3E%3Cpath d='M0 20 Q75 0 150 18 Q225 36 300 14 Q375 -4 450 16 Q525 34 600 12 Q675 -2 750 20 Q825 38 900 15 L900 110 L0 110Z' fill='black'/%3E%3C/svg%3E");
             mask-size: 100% 100%;
@@ -2482,7 +2488,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 12);
             bottom: 0;
             width: calc(var(--pos-width) * 6);
-            height: calc(var(--platform-height) * 2 + var(--platform-thickness) + 28px);
+            height: calc(var(--level-height) * 2 + var(--platform-thickness) + 28px);
             background: linear-gradient(to bottom, #1a5a8060 0%, #1a5a8080 25%, #1a6a7090 50%, #1a7a70a0 75%, #1a8a70b0 100%);
         }
         .water-bg svg {
@@ -2495,7 +2501,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 12);
             bottom: 0;
             width: calc(var(--pos-width) * 6);
-            height: calc(var(--platform-height) * 2 + var(--platform-thickness) + 28px);
+            height: calc(var(--level-height) * 2 + var(--platform-thickness) + 28px);
             backdrop-filter: url(#underwater);
             -webkit-backdrop-filter: url(#underwater);
             pointer-events: none;
@@ -2527,7 +2533,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Scuba gear S3-L6-P14 */
         .scuba-in-game {
             position: absolute;
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
             width: 28px;
             height: 28px;
@@ -2541,13 +2547,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
         }
         .scuba-tooltip {
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) + 24px);
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) + 24px);
             left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset) + 12px);
             transform: translateX(-50%);
         }
         .scuba-hover-area {
             position: absolute;
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
             width: 24px;
             height: 24px;
@@ -2578,7 +2584,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Fly scuba to inventory when picked up */
         #scuba-pickup:checked ~ .game-world .scuba-in-game {
-            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - 12px - 4px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - 12px - 4px);
             left: calc(var(--pos-width) * 18 - var(--panel-right) - 2px - var(--panel-padding) - 24px - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery) + var(--inv-has-torch)));
             opacity: 0;
@@ -2637,7 +2643,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .ladder {
             position: absolute;
             width: 24px;
-            height: calc(var(--platform-height) - var(--platform-thickness));
+            height: calc(var(--level-height) - var(--platform-thickness));
             z-index: var(--z-climbables);
         }
         /* Wooden ladder - two vertical rails with horizontal rungs */
@@ -2722,24 +2728,25 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Ladder at S1-L1-P3: platform 1 to platform 2 */
         .ladder-S1-L1-P3 {
-            bottom: calc(var(--platform-height) + var(--platform-thickness));
+            bottom: calc(var(--level-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 2 + var(--ladder-offset));
         }
         /* Ladder at S1-L2-P1: platform 2 to platform 3 */
         .ladder-S1-L2-P1 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--ladder-offset));
         }
         /* Ladder at S1-L3-P4: platform 3 to platform 4 */
         .ladder-S1-L3-P4 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 3 + var(--ladder-offset));
         }
         /* Ladder at S4-L4-P7: platform 4 to S2 (only visible when player at position) */
         .ladder-S4-L4-P7 {
             display: none;
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + var(--ladder-offset));
+            height: calc(var(--level-height) - var(--platform-thickness) + 27px);
         }
         #level-4:checked ~ #pos-7:checked ~ .game-world .ladder-S4-L4-P7,
         #level-4:checked ~ #pos-8:checked ~ #torch-pickup:checked ~ .game-world .ladder-S4-L4-P7,
@@ -2750,23 +2757,23 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .ladder-S3-L5-P15 {
             bottom: calc(var(--stage-height) + var(--ground-height));
             left: calc(var(--pos-offset) + var(--pos-width) * 14 + var(--ladder-offset));
-            height: calc(var(--platform-height) - var(--platform-thickness) + 14px);
+            height: calc(var(--level-height) - var(--platform-thickness) + 14px);
         }
         /* Ladder at S3-L3-P5: platform 3 to floating platform (phantom) */
         .ladder-S3-L8-P17 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) + 4px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 3 + var(--platform-thickness) + 4px);
             left: calc(var(--pos-offset) + var(--pos-width) * 16 + var(--ladder-offset));
         }
         /* Ladder at S3-L1-P4: platform 1 to platform 2 */
         .ladder-S3-L6-P16 {
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) - 2px);
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) - 2px);
             left: calc(var(--pos-offset) + var(--pos-width) * 15 + var(--ladder-offset));
-            height: calc(var(--platform-height) - var(--platform-thickness) + 18px);
+            height: calc(var(--level-height) - var(--platform-thickness) + 18px);
         }
         /* Barrel at S3-L4-P3 */
         .barrel-S3-L9-P15 {
             position: absolute;
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) * 2 + 4px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) * 2 + 4px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 + var(--ladder-offset) + 8px);
             width: 32px;
             z-index: var(--z-scenery);
@@ -2800,7 +2807,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .vine {
             position: absolute;
             width: 24px;
-            height: calc(var(--platform-height) - var(--platform-thickness));
+            height: calc(var(--level-height) - var(--platform-thickness));
             z-index: var(--z-climbables);
             /* Wavy main stem */
             background:
@@ -2835,19 +2842,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 10 + var(--ladder-offset));
         }
         .vine-S2-L6-P7 {
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + var(--ladder-offset));
         }
         .vine-S2-L6-P10 {
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 9 + var(--ladder-offset));
         }
         .vine-S2-L7-P11 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 10 + var(--ladder-offset));
         }
         .vine-S2-L8-P9 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 8 + var(--ladder-offset));
         }
         /* Arrow labels (clickable) - CSS triangles */
@@ -2933,52 +2940,52 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-18:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px); }
         /* Up arrow bottom positions (one per departure level) */
         .arrow-L0-up { bottom: calc(var(--ground-height) + 72.5px); }
-        .arrow-L1-up { bottom: calc(var(--platform-height) + var(--platform-thickness) + 72.5px); }
-        .arrow-L2-up { bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 72.5px); }
-        .arrow-L3-up { bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 72.5px); }
-        .arrow-L4-up { bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 72.5px); }
+        .arrow-L1-up { bottom: calc(var(--level-height) + var(--platform-thickness) + 72.5px); }
+        .arrow-L2-up { bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + 72.5px); }
+        .arrow-L3-up { bottom: calc(var(--level-height) * 3 + var(--platform-thickness) + 72.5px); }
+        .arrow-L4-up { bottom: calc(var(--level-height) * 4 + var(--platform-thickness) + 72.5px); }
         .arrow-L5-up { bottom: calc(var(--stage-height) + var(--ground-height) + 72.5px); }
-        .arrow-L6-up { bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) + 72.5px); }
-        .arrow-L7-up { bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) + 72.5px); }
-        .arrow-L8-up { bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) + 72.5px); }
+        .arrow-L6-up { bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) + 72.5px); }
+        .arrow-L7-up { bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) + 72.5px); }
+        .arrow-L8-up { bottom: calc(var(--stage-height) + var(--level-height) * 3 + var(--platform-thickness) + 72.5px); }
         /* Down arrow bottom positions (one per departure level) */
-        .arrow-L1-down { bottom: var(--platform-height); }
-        .arrow-L2-down { bottom: calc(var(--platform-height) * 2); }
-        .arrow-L3-down { bottom: calc(var(--platform-height) * 3); }
-        .arrow-L4-down { bottom: calc(var(--platform-height) * 4); }
+        .arrow-L1-down { bottom: var(--level-height); }
+        .arrow-L2-down { bottom: calc(var(--level-height) * 2); }
+        .arrow-L3-down { bottom: calc(var(--level-height) * 3); }
+        .arrow-L4-down { bottom: calc(var(--level-height) * 4); }
         .arrow-L5-down { bottom: calc(var(--stage-height) + var(--platform-thickness) / 2); }
-        .arrow-L6-down { bottom: calc(var(--stage-height) + var(--platform-height)); }
-        .arrow-L7-down { bottom: calc(var(--stage-height) + var(--platform-height) * 2); }
-        .arrow-L8-down { bottom: calc(var(--stage-height) + var(--platform-height) * 3); }
-        .arrow-L9-down { bottom: calc(var(--stage-height) + var(--platform-height) * 4); }
+        .arrow-L6-down { bottom: calc(var(--stage-height) + var(--level-height)); }
+        .arrow-L7-down { bottom: calc(var(--stage-height) + var(--level-height) * 2); }
+        .arrow-L8-down { bottom: calc(var(--stage-height) + var(--level-height) * 3); }
+        .arrow-L9-down { bottom: calc(var(--stage-height) + var(--level-height) * 4); }
         /* Phantom position special arrows */
         .arrow-φ-up {
             left: calc(var(--pos-offset) + var(--pos-width) * 16 + 10px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) + 72.5px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 3 + var(--platform-thickness) + 72.5px);
         }
         .arrow-φ-left {
             left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + 19px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) + 19px);
         }
         .arrow-φ-right {
             left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px);
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + 19px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) + 19px);
         }
         .arrow-κ-left {
             left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px);
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 19px);
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness) + 19px);
         }
         /* Horizontal arrows move with level */
         #level-0:checked ~ .game-world .arrow-h { bottom: calc(var(--ground-height) + 19px); }
-        #level-1:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) + var(--platform-thickness) + 19px); }
-        #level-2:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) * 2 + var(--platform-thickness) + 19px); }
-        #level-3:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) * 3 + var(--platform-thickness) + 19px); }
-        #level-4:checked ~ .game-world .arrow-h { bottom: calc(var(--platform-height) * 4 + var(--platform-thickness) + 19px); }
+        #level-1:checked ~ .game-world .arrow-h { bottom: calc(var(--level-height) + var(--platform-thickness) + 19px); }
+        #level-2:checked ~ .game-world .arrow-h { bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + 19px); }
+        #level-3:checked ~ .game-world .arrow-h { bottom: calc(var(--level-height) * 3 + var(--platform-thickness) + 19px); }
+        #level-4:checked ~ .game-world .arrow-h { bottom: calc(var(--level-height) * 4 + var(--platform-thickness) + 19px); }
         #level-5:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--ground-height) + 19px); }
-        #level-6:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness) + 19px); }
-        #level-7:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness) + 19px); }
-        #level-8:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness) + 19px); }
-        #level-9:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness) + 19px); }
+        #level-6:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) + 19px); }
+        #level-7:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) + 19px); }
+        #level-8:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--level-height) * 3 + var(--platform-thickness) + 19px); }
+        #level-9:checked ~ .game-world .arrow-h { bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) + 19px); }
 
         /* Show horizontal arrows based on position */
         /* Stage 1 arrows (positions 1-6, no level restriction) */
@@ -3401,19 +3408,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 2 - var(--item-offset));
         }
         .loot-S1-L1-P4 {
-            bottom: calc(var(--platform-height) + var(--platform-thickness));
+            bottom: calc(var(--level-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--item-offset));
         }
         .loot-S1-L3-P5 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--item-offset));
         }
         .loot-S1-L2-P1 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) - var(--item-offset));
         }
         .loot-S1-L4-P2 {
-            bottom: calc(var(--platform-height) * 4 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset));
         }
         /* Stage 2 loot positions */
@@ -3422,19 +3429,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 7 - var(--item-offset));
         }
         .loot-S2-L6-P11 {
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 10 - var(--item-offset));
         }
         .loot-S2-L7-P7 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 2 + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 6 - var(--item-offset));
         }
         .loot-S2-L8-P9 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
         }
         .loot-S2-L9-P10 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset));
         }
         /* Stage 3 loot positions */
@@ -3447,20 +3454,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset));
         }
         .loot-S3-L8-P18 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 3 + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset));
         }
         .loot-S3-L9-P14 {
-            bottom: calc(var(--stage-height) + var(--platform-height) * 4 + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
         }
         /* Stage 5 loot positions */
         .loot-S5-L3-P13 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 12 - var(--item-offset));
         }
         .loot-S5-L2-P17 {
-            bottom: calc(var(--platform-height) * 2 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
         }
         .loot-S5-L0-P18 {
@@ -3476,19 +3483,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
         .loot-S4-L3-P7 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 6 - var(--item-offset));
         }
         .loot-S4-L3-P8 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 7 - var(--item-offset));
         }
         .loot-S4-L3-P12 {
-            bottom: calc(var(--platform-height) * 3 + var(--platform-thickness));
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
         }
         .loot-S4-L1-P10 {
-            bottom: calc(var(--platform-height) + var(--platform-thickness));
+            bottom: calc(var(--level-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset));
         }
         .loot-S4-L0-P9 {
@@ -3757,7 +3764,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S1-L3-P5-pickup:checked ~ .game-world .loot-S1-L3-P5,
         #loot-S1-L2-P1-pickup:checked ~ .game-world .loot-S1-L2-P1,
         #loot-S1-L4-P2-pickup:checked ~ .game-world .loot-S1-L4-P2 {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
+            bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
             left: calc(var(--pos-width) * 6 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
@@ -3768,7 +3775,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S2-L7-P7-pickup:checked ~ .game-world .loot-S2-L7-P7,
         #loot-S2-L8-P9-pickup:checked ~ .game-world .loot-S2-L8-P9,
         #loot-S2-L9-P10-pickup:checked ~ .game-world .loot-S2-L9-P10 {
-            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
             left: calc(var(--pos-width) * 12 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
@@ -3778,7 +3785,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S3-L5-P18-pickup:checked ~ .game-world .loot-S3-L5-P18,
         #loot-S3-L8-P18-pickup:checked ~ .game-world .loot-S3-L8-P18,
         #loot-S3-L9-P14-pickup:checked ~ .game-world .loot-S3-L9-P14 {
-            bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
             left: calc(var(--pos-width) * 18 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
@@ -3790,7 +3797,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S4-L3-P12-pickup:checked ~ .game-world .loot-S4-L3-P12,
         #loot-S4-L1-P10-pickup:checked ~ .game-world .loot-S4-L1-P10,
         #loot-S4-L0-P9-pickup:checked ~ .game-world .loot-S4-L0-P9 {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
+            bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
             left: calc(var(--pos-width) * 12 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
@@ -3800,7 +3807,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S5-L3-P13-pickup:checked ~ .game-world .loot-S5-L3-P13,
         #loot-S5-L2-P17-pickup:checked ~ .game-world .loot-S5-L2-P17,
         #loot-S5-L0-P18-pickup:checked ~ .game-world .loot-S5-L0-P18 {
-            bottom: calc(var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
+            bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
             left: calc(var(--pos-width) * 18 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
@@ -3830,7 +3837,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             }
         }
         .skull-S1-L1-P6 {
-            bottom: calc(var(--platform-height) + var(--platform-thickness));
+            bottom: calc(var(--level-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
         }
         .skull-tooltip {
@@ -3868,7 +3875,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset));
         }
         .disease-S2-L6-P9 {
-            bottom: calc(var(--stage-height) + var(--platform-height) + var(--platform-thickness));
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
         }
         .disease-tooltip {
@@ -3881,7 +3888,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .tree-container {
             position: absolute;
             width: 92px;
-            height: calc(var(--platform-height) - var(--ground-height) + 10px);
+            height: calc(var(--level-height) - var(--ground-height) + 10px);
             bottom: calc(var(--stage-height) + var(--ground-height));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset) - 5px - 26px);
             z-index: var(--z-scenery);
@@ -4087,16 +4094,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-12:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 5 + var(--darkness-hole-offset)); }
         /* Vertical position rules */
         #level-0:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--ground-height) - 26px); }
-        #level-1:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--platform-height) - var(--platform-thickness) + 2px - 28px); }
-        #level-2:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--platform-height) * 2 - var(--platform-thickness) + 2px - 28px); }
-        #level-3:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--platform-height) * 3 - var(--platform-thickness) + 2px - 28px); }
-        #level-4:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--platform-height) * 4 - var(--platform-thickness) + 2px - 28px); }
+        #level-1:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--level-height) - var(--platform-thickness) + 2px - 28px); }
+        #level-2:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 2 - var(--platform-thickness) + 2px - 28px); }
+        #level-3:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 3 - var(--platform-thickness) + 2px - 28px); }
+        #level-4:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 4 - var(--platform-thickness) + 2px - 28px); }
         /* With torch: illuminate darkness (3 levels x 3 positions) */
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
         :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~
         #torch-pickup:checked ~ .darkness-S4 {
             --darkness-hole-width: calc(var(--pos-width) * 2.2);
-            --darkness-hole-height: calc(var(--platform-height) * 2.2);
+            --darkness-hole-height: calc(var(--level-height) * 2.2);
         }
         /* Toggle darkness */
         #darkness-toggle:checked ~ .darkness-S4 {
@@ -5576,7 +5583,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="stalagmite-S4 stalagmite-S4-L3-P11-P12"><svg><use href="#stalagmite-1"/></svg></div>
             <div class="stalagmite-S4 stalagmite-S4-L0-P8-P9"><svg><use href="#stalagmite-3"/></svg></div>
             <!-- S4 Stalactites -->
-            <div class="stalactite-S4 stalactite-S4-L4-P9-P10"><svg><use href="#stalactite-1"/></svg></div>
+            <div class="stalactite-S4 stalactite-S4-L4-P9-P10a"><svg><use href="#stalactite-2"/></svg></div>
+            <div class="stalactite-S4 stalactite-S4-L4-P9-P10b"><svg><use href="#stalactite-1"/></svg></div>
             <div class="stalactite-S4 stalactite-S4-L1-P7-P8"><svg><use href="#stalactite-2"/></svg></div>
             <div class="stalactite-S4 stalactite-S4-L1-P9-P10"><svg><use href="#stalactite-2"/></svg></div>
             <div class="stalagmite-S4 stalagmite-S4-L1-P9-P10"><svg><use href="#stalagmite-3"/></svg></div>
