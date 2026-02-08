@@ -681,8 +681,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             filter: var(--cave-rock-shadow);
             /* top of ceiling flush with top of rock wall */
             bottom: calc(var(--stage-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px - 22px);
-            left: calc(var(--pos-width) * 7);
-            width: calc(var(--pos-width) * 5 - 2px);
+            left: calc(var(--pos-width) * 7 - 10px);
+            width: calc(var(--pos-width) * 5 + 8px);
             height: 22px;
             color: var(--cave-rock-color);
         }
@@ -701,11 +701,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
         }
-        .stalactite-S4-L4-P9-P10 {
+        .stalactite-S4-L4-P9-P10b {
             bottom: calc(var(--level-height) * 4 + var(--platform-thickness) - 13px);
             left: calc(var(--pos-width) * 9 - 24px);
             width: 48px;
             height: 114px;
+        }
+        .stalactite-S4-L4-P9-P10a {
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness) + 17px);
+            left: calc(var(--pos-width) * 9 - 36px);
+            width: 48px;
+            height: 84px;
         }
         .stalactite-S4-L1-P7-P8 {
             bottom: calc(var(--level-height) * 1 + var(--platform-thickness) - 3px);
@@ -2740,6 +2746,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
             bottom: calc(var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 6 + var(--ladder-offset));
+            height: calc(var(--level-height) - var(--platform-thickness) + 27px);
         }
         #level-4:checked ~ #pos-7:checked ~ .game-world .ladder-S4-L4-P7,
         #level-4:checked ~ #pos-8:checked ~ #torch-pickup:checked ~ .game-world .ladder-S4-L4-P7,
@@ -5576,7 +5583,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="stalagmite-S4 stalagmite-S4-L3-P11-P12"><svg><use href="#stalagmite-1"/></svg></div>
             <div class="stalagmite-S4 stalagmite-S4-L0-P8-P9"><svg><use href="#stalagmite-3"/></svg></div>
             <!-- S4 Stalactites -->
-            <div class="stalactite-S4 stalactite-S4-L4-P9-P10"><svg><use href="#stalactite-1"/></svg></div>
+            <div class="stalactite-S4 stalactite-S4-L4-P9-P10a"><svg><use href="#stalactite-2"/></svg></div>
+            <div class="stalactite-S4 stalactite-S4-L4-P9-P10b"><svg><use href="#stalactite-1"/></svg></div>
             <div class="stalactite-S4 stalactite-S4-L1-P7-P8"><svg><use href="#stalactite-2"/></svg></div>
             <div class="stalactite-S4 stalactite-S4-L1-P9-P10"><svg><use href="#stalactite-2"/></svg></div>
             <div class="stalagmite-S4 stalagmite-S4-L1-P9-P10"><svg><use href="#stalagmite-3"/></svg></div>
