@@ -1008,11 +1008,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: 1;
         }
         /* Hide hover area when player is at button with ID card and bolt fixed (so label click works) - S3 uses levels 5-9 */
-        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .flight-controls-hover-area {
+        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ .game-world .flight-controls-hover-area {
             display: none;
         }
         /* Enable hover on control button when player is at position with ID card and bolt fixed */
-        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .flight-controls-unavailable {
+        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ .game-world .flight-controls-unavailable {
             pointer-events: auto;
         }
         /* Gray out button when bolt is not fixed */
@@ -1037,8 +1037,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--idcard-color);
         }
         /* Show ID card at button when player is next to it, has ID card, bolt fixed, AND button not yet pressed - S3 uses levels 5-9 */
-        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .flight-controls-unavailable:hover ~ .idcard-at-controls,
-        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .idcard-at-controls:hover {
+        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ .game-world .flight-controls-unavailable:hover ~ .idcard-at-controls,
+        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ .game-world .idcard-at-controls:hover {
             opacity: 1;
             pointer-events: auto;
             animation: idcard-hovering-pulse 1s ease-in-out infinite;
@@ -1075,7 +1075,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
         /* Hide tooltip when player has ID card at controls */
-        #level-7:checked ~ #pos-15:checked ~ #idcard-pickup:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ .game-world .flight-controls-unavailable .tooltip-no-idcard {
+        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ .game-world .flight-controls-unavailable .tooltip-no-idcard {
             display: none;
         }
         /* Hide red button when pressed, show green button */
