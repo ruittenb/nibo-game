@@ -73,7 +73,7 @@ Stage is derived from the combination of position and level as shown in the tabl
 
 **Position calculations** (using CSS variables):
 - X: `calc(var(--pos-offset) + var(--pos-width) * (pos - 1))`
-- Y: Based on level with `--platform-height` calculations
+- Y: Based on level with `--level-height` calculations
 
 **Stage transitions:**
 - S1 → S4: Door at P6 changes position only (6→7)
@@ -111,12 +111,12 @@ S2/S3 elements are positioned one `--stage-height` above S1/S4 elements in the g
 ```css
 /* S1 element */
 .platform-S1-L2-P3 {
-    bottom: calc(var(--platform-height) * 2);
+    bottom: calc(var(--level-height) * 2);
 }
 
 /* S2 element at same visual height */
 .platform-S2-L2-P3 {
-    bottom: calc(var(--stage-height) + var(--platform-height) * 2);
+    bottom: calc(var(--stage-height) + var(--level-height) * 2);
 }
 ```
 
