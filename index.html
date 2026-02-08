@@ -257,7 +257,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             /* Darkness settings */
             --darkness-hole-width: 180px;     /* Width of the darkness hole (wide enough for nav arrows) */
             --darkness-hole-height: 120px;    /* Height of the darkness hole */
-            --darkness-fuzzy-edge: 40px;      /* Fuzzy edge gradient size */
             --darkness-hole-offset: 30px;     /* Shift hole right to not look too far left */
         }
         * {
@@ -683,7 +682,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             /* top of ceiling flush with top of rock wall */
             bottom: calc(var(--stage-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px - 22px);
             left: calc(var(--pos-width) * 7);
-            width: calc(var(--pos-width) * 5 + 16px);
+            width: calc(var(--pos-width) * 5 - 2px);
             height: 22px;
             color: var(--cave-rock-color);
         }
@@ -1503,8 +1502,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-axe svg { color: var(--wrench-color); }
         .inventory-idcard svg { color: var(--idcard-color); }
         .inventory-battery svg { color: var(--battery-color); }
-        .inventory-scuba svg { color: #cc1010; }
-        /* Torch has its own colors in the SVG */
+        /* Scuba and torch have their own colors in the SVG */
         /* Show inventory items when picked up (delayed fade-in after fly animation) */
         #key-pickup:checked ~ .inv-panel .inventory-key,
         #wrench-pickup:checked ~ .inv-panel .inventory-wrench,
@@ -2582,7 +2580,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #scuba-pickup:checked ~ .game-world .scuba-in-game {
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--platform-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - 12px - 4px);
             left: calc(var(--pos-width) * 18 - var(--panel-right) - 2px - var(--panel-padding) - 24px - 4px
-                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery)));
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery) + var(--inv-has-torch)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -5260,8 +5258,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="inventory-axe"><svg><use href="#axe"/></svg><span class="tooltip">Axe</span></span>
             <span class="inventory-idcard"><svg><use href="#id-card"/></svg><span class="tooltip">ID Card</span></span>
             <span class="inventory-battery"><svg><use href="#battery"/></svg><span class="tooltip">Battery</span></span>
-            <span class="inventory-scuba"><svg><use href="#scuba"/></svg><span class="tooltip">Scuba Gear</span></span>
             <span class="inventory-torch"><svg><use href="#torch"/></svg><span class="tooltip">Torch</span></span>
+            <span class="inventory-scuba"><svg><use href="#scuba"/></svg><span class="tooltip">Scuba Gear</span></span>
         </div>
         <!-- loot counter -->
         <div class="counter-panel">
