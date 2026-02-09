@@ -226,6 +226,31 @@ Example: `pos-φ` (in S3)
 
 Since all these transitions stay on L8, they only change the position radio - making them valid single-input operations.
 
+## Layers (S5 L0-L3)
+
+S5 (The Sunken City) at levels 0-3 uses a **layer system** to create maze-like navigation within the same visual space. Four layer radio buttons (`layer-N`, `layer-ζ`, `layer-η`, `layer-θ`) control which horizontal arrows are available.
+
+### Layer cycle
+Horizontal movement at "layer-boundary" gaps (P13↔P14, P15↔P16, P17↔P18) cycles through layers: **N → ζ → θ → η → N**. Movement at "position-boundary" gaps (P14↔P15, P16↔P17) either moves normally (on N/θ) or jumps 3 positions (on ζ/η).
+
+### Visual position swaps
+- **N/θ**: visual position = logical position (P13→vis13, P14→vis14, ...)
+- **ζ/η**: positions are swapped in pairs (P13↔P14, P15↔P16, P17↔P18)
+
+CSS override rules swap the player and vertical arrow `left` values when ζ/η is active at L0-L3.
+
+### Scoping
+Layer-aware CSS rules are scoped to `:is(#level-0, #level-1, #level-2, #level-3)` + S5 positions. The layer state has no visual effect outside S5 L0-L3.
+
+### Arrow elements
+- **8 layer-change labels** in `.game-world` (one per target-layer × direction), dynamically positioned via CSS
+- **4 position-jump labels** in `.game-world` for the 3-position jumps on ζ/η
+- **8 layer-change labels** in `.nav-panel` (mirroring in-game arrows)
+- Existing position-change nav labels are reused for position-jumps on ζ/η
+
+### Transition spec
+The full transition table is in `_fabriek/doc/transitions.txt` (304 transitions).
+
 ## Debug Mode
 
 The `#debug-toggle` checkbox reveals all game state inputs for testing. Each input has a `title` attribute describing its purpose.
