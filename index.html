@@ -7,6 +7,7 @@
     <meta name="author" content="René Uittenbogaard">
     <meta name="creator" content="Claude Code">
     <title>Nibo's Way Out</title>
+    <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,
 AAABAAMAEBAAAAEAIABoBAAANgAAACAgAAABACAAKBEAAJ4EAAAwMAAAAQAgAGgmAADGFQAAKAAAABAAAAAgAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAEzZwULMWOiCzNnuAsyZ7gLMme4CzNnuAszZ7gKMme4CzJmuAsyZ7gLMma4CzJnuAoyZ7gKMma4CjBhoAAAVAMJLlscDzp2/xNFi/8TRYr/E0WK/xJF
@@ -1014,6 +1015,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Enable hover on control button when player is at position with ID card and bolt fixed */
         #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ .game-world .flight-controls-unavailable {
             pointer-events: auto;
+            cursor: pointer;
         }
         /* Gray out button when bolt is not fixed */
         #bolt-fixed:not(:checked) ~ .game-world .flight-controls-unavailable {
@@ -1144,6 +1146,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Enable clicking green button only when player is next to it - S3 uses levels 5-9 */
         #level-7:checked ~ #pos-15:checked ~ #flight-controls-used:checked ~ .game-world .flight-controls-available {
             pointer-events: auto;
+            cursor: pointer;
         }
         /* Teleporter at S3-L7-P18 */
         .teleporter-hover-area {
@@ -4382,7 +4385,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
     </style>
-    <link rel="preload" as="video" href="images/spaceship.mp4" type="video/mp4">
 </head>
 <body>
     <!-- Rotate device prompt for mobile portrait -->

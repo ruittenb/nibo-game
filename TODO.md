@@ -9,3 +9,16 @@
 
  - use more :is() selectors
 
+
+
+
+
+
+serviceworker
+
+// sw.js
+self.addEventListener('fetch', (e) => e.respondWith(fetch(e.request)));
+
+// In je main JS
+navigator.serviceWorker?.register('/sw.js');
+
