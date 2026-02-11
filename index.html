@@ -2197,6 +2197,31 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ .game-world .player-tooltip::after {
             content: " (" var(--level) "-" var(--pos) ")";
         }
+        /* Show layer letter in player tooltip (S5 only) */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~
+        #layer-N:checked ~
+        :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~
+        .game-world .player-tooltip::before {
+            content: "[N] ";
+        }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~
+        #layer-ζ:checked ~
+        :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~
+        .game-world .player-tooltip::before {
+            content: "[ζ] ";
+        }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~
+        #layer-η:checked ~
+        :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~
+        .game-world .player-tooltip::before {
+            content: "[η] ";
+        }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~
+        #layer-θ:checked ~
+        :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~
+        .game-world .player-tooltip::before {
+            content: "[θ] ";
+        }
         /* Torch held by player in S4 */
         .torch-held {
             display: none;
