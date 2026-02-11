@@ -1195,6 +1195,37 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
+        /* Teleporter platform at S5-L3-P13 (decorative) */
+        .teleporter-S5-L3-P13-hover-area {
+            position: absolute;
+            width: calc(var(--pickup-size) * 3);
+            height: var(--pickup-size);
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 20px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 12 - var(--item-offset) + 12px);
+            z-index: var(--z-item-hover);
+        }
+        .teleporter-S5-L3-P13 {
+            position: absolute;
+            width: calc(var(--pickup-size) * 3);
+            height: var(--pickup-size);
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 20px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 12 - var(--item-offset) + 12px);
+            z-index: var(--z-scenery);
+            pointer-events: none;
+        }
+        .teleporter-S5-L3-P13 svg {
+            width: 100%;
+            height: 100%;
+        }
+        .teleporter-S5-L3-P13-hover-area:hover ~ .teleporter-S5-L3-P13-tooltip {
+            opacity: 1;
+        }
+        .teleporter-S5-L3-P13-tooltip {
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 20px + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 12 - var(--item-offset) + 12px + var(--pickup-size) * 1.5);
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
         @keyframes teleporter-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px #f90); }
             50% { filter: drop-shadow(0 0 12px #f90) drop-shadow(0 0 20px #fc8); }
@@ -3277,6 +3308,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L1-down { display: block; }
         #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ #scuba-pickup:checked ~ .game-world .arrow-L2-down { display: block; }
         #level-3:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L3-down { display: block; }
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-13:checked ~ .game-world .arrow-L3-down { display: none; }
         #level-3:checked ~ #pos-18:checked ~ .game-world .arrow-L3-down { display: none; }
         #level-4:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L4-down { display: block; }
         #level-4:checked ~ #pos-18:checked ~ .game-world .arrow-L4-down { display: none; }
@@ -3519,6 +3551,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
         #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ #scuba-pickup:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
         #level-3:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-13:checked ~ .nav-panel .nav-down[for="level-2"] { display: none; }
         #level-3:checked ~ #pos-18:checked ~ .nav-panel .nav-down[for="level-2"] { display: none; }
         #level-4:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
         /* loot - animated elements that fly to counter when picked up */
@@ -3611,7 +3644,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Stage 5 loot positions */
         .loot-S5-L3-P13 {
             bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 12 - var(--item-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
         }
         .loot-S5-L2-P17 {
             bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
@@ -3890,7 +3923,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             animation: coin-pulse 1s ease-in-out infinite;
         }
         /* Stage 5 loot pulse/click */
-        #level-3:checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13 .loot-in-game {
+        #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13 .loot-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: seashell-pulse 1s ease-in-out infinite;
@@ -4525,7 +4558,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #pos-8:checked ~ #loot-S4-L3-P8-pickup:not(:checked) ~ .game-world .loot-S4-L3-P8:hover .tooltip,
         #level-1:checked ~ #pos-10:checked ~ #loot-S4-L1-P10-pickup:not(:checked) ~ .game-world .loot-S4-L1-P10:hover .tooltip,
         /* S5 uses levels 0-4 */
-        #level-3:checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13:hover .tooltip,
+        #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13:hover .tooltip,
         #level-2:checked ~ #pos-17:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .game-world .loot-S5-L2-P17:hover .tooltip {
             opacity: 1;
         }
@@ -5932,6 +5965,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="loot-hover-area"></span>
             <span class="tooltip">Seashell</span>
         </div>
+        <!-- Teleporter platform at S5-L3-P13 -->
+        <span class="teleporter-S5-L3-P13-hover-area"></span>
+        <div class="teleporter-S5-L3-P13">
+            <svg><use href="#teleporter-platform"/></svg>
+        </div>
+        <span class="tooltip teleporter-S5-L3-P13-tooltip">Teleporter</span>
         <div class="container seashell loot-S5-L3-P13">
             <label for="loot-S5-L3-P13-pickup" class="loot-in-game"><svg><use href="#seashell"/></svg></label>
             <span class="loot-hover-area"></span>
