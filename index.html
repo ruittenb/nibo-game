@@ -1222,6 +1222,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
         }
+        /* Enable clicking teleporter when player is at YN/Yθ-L3-P13 */
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-13:checked ~ .game-world .teleporter-S5-L3-P13 {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: teleporter-pulse-blue 1s ease-in-out infinite, teleporter-cycle-blue 1.5s linear infinite;
+        }
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-13:checked ~ .game-world .teleporter-S5-L3-P13-hover-area {
+            display: none;
+        }
         .teleporter-S5-L3-P13-hover-area:hover ~ .teleporter-S5-L3-P13-tooltip {
             opacity: 1;
         }
@@ -1234,6 +1243,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         @keyframes teleporter-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px #f90); }
             50% { filter: drop-shadow(0 0 12px #f90) drop-shadow(0 0 20px #fc8); }
+        }
+        @keyframes teleporter-pulse-blue {
+            0%, 100% { filter: drop-shadow(0 0 4px #48f); }
+            50% { filter: drop-shadow(0 0 12px #48f) drop-shadow(0 0 20px #8cf); }
         }
         @keyframes teleporter-cycle-orange {
             0%, 100% { --teleporter-color-1: #f90; --teleporter-color-2: #fc8; --teleporter-color-3: #eee; }
@@ -5976,9 +5989,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
         <!-- Teleporter platform at S5-L3-P13 -->
         <span class="teleporter-S5-L3-P13-hover-area"></span>
-        <div class="teleporter-S5-L3-P13">
+        <label for="level-6" class="teleporter-S5-L3-P13">
             <svg><use href="#teleporter-platform"/></svg>
-        </div>
+        </label>
         <span class="tooltip teleporter-S5-L3-P13-tooltip">Teleporter</span>
         <div class="container seashell loot-S5-L3-P13">
             <label for="loot-S5-L3-P13-pickup" class="loot-in-game"><svg><use href="#seashell"/></svg></label>
