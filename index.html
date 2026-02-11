@@ -367,6 +367,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-17:checked ~ .game-world { --pos: "P17"; }
         #pos-18:checked ~ .game-world { --pos: "P18"; }
         #pos-φ:checked ~ .game-world { --pos: "Pφ"; }
+        /* Layer variable scoped to S5 (L0-L3, P13-P18) — includes trailing dash for uniform tooltip formatting */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-N:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world { --layer: "YN-"; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-ζ:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world { --layer: "Yζ-"; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world { --layer: "Yη-"; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-θ:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world { --layer: "Yθ-"; }
         .game-world {
             position: absolute;
             top: calc(var(--stage-height) * -1);
@@ -2157,6 +2162,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-16:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 14); }
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 17); }
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 16); }
+        /* ζ/η at L3-P18: un-swap to L4-P18 visual (teleporter exit) */
+        #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 17); }
         /* Phantom position: L8-Pφ displays at L9-P17 visual location */
         #level-8:checked ~ #pos-φ:checked ~ .game-world .player {
             left: calc(var(--pos-offset) + var(--pos-width) * 16); /* P17 X position */
@@ -2193,34 +2200,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: translateX(-50%);
             margin-bottom: 12px;
         }
-        /* Debug mode: show level and position in player tooltip */
+        /* Debug mode: show coordinates in player tooltip */
         #debug-toggle:checked ~ .game-world .player-tooltip::after {
-            content: " (" var(--level) "-" var(--pos) ")";
+            content: " (" var(--layer, "") var(--level) "-" var(--pos) ")";
         }
-        /* Show layer letter in player tooltip (S5 only) */
+        /* S5: always show coordinates in player tooltip */
         :is(#level-0, #level-1, #level-2, #level-3):checked ~
-        #layer-N:checked ~
         :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~
-        .game-world .player-tooltip::before {
-            content: "[N] ";
-        }
-        :is(#level-0, #level-1, #level-2, #level-3):checked ~
-        #layer-ζ:checked ~
-        :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~
-        .game-world .player-tooltip::before {
-            content: "[ζ] ";
-        }
-        :is(#level-0, #level-1, #level-2, #level-3):checked ~
-        #layer-η:checked ~
-        :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~
-        .game-world .player-tooltip::before {
-            content: "[η] ";
-        }
-        :is(#level-0, #level-1, #level-2, #level-3):checked ~
-        #layer-θ:checked ~
-        :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~
-        .game-world .player-tooltip::before {
-            content: "[θ] ";
+        .game-world .player-tooltip::after {
+            content: " (" var(--layer, "") var(--level) "-" var(--pos) ")";
         }
         /* Torch held by player in S4 */
         .torch-held {
@@ -3129,14 +3117,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-N:checked ~ #pos-16:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-ζ"] {
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
-        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-N:checked ~ #pos-18:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-ζ"] {
+        :is(#level-0, #level-1, #level-2):checked ~ #layer-N:checked ~ #pos-18:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-ζ"] {
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
         /* ζ→θ: right from even P */
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-ζ:checked ~ #pos-14:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-θ"] {
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-ζ:checked ~ #pos-16:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-θ"] {
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
-        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-ζ:checked ~ #pos-18:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-θ"] {
+        :is(#level-0, #level-1, #level-2):checked ~ #layer-ζ:checked ~ #pos-18:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-θ"] {
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
         /* ζ→θ: left from odd P */
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-ζ:checked ~ #pos-13:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-θ"] {
@@ -3157,14 +3145,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-θ:checked ~ #pos-16:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-η"] {
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
-        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-θ:checked ~ #pos-18:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-η"] {
+        :is(#level-0, #level-1, #level-2):checked ~ #layer-θ:checked ~ #pos-18:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-η"] {
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
         /* η→N: right from even P */
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ #pos-14:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-N"] {
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ #pos-16:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-N"] {
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
-        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ #pos-18:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-N"] {
+        :is(#level-0, #level-1, #level-2):checked ~ #layer-η:checked ~ #pos-18:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-N"] {
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
         /* η→N: left from odd P */
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ #pos-13:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-N"] {
@@ -3184,7 +3172,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-15:checked ~ .game-world .arrow-layer-jump.arrow-right[for="pos-18"] {
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px); }
         /* P18→P15 left (at gap P16-P17, vis position 15.5) */
-        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ .game-world .arrow-layer-jump.arrow-left[for="pos-15"] {
+        :is(#level-0, #level-1, #level-2):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ .game-world .arrow-layer-jump.arrow-left[for="pos-15"] {
             display: block; left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px); }
         /* Hide horizontal arrows at L9 platform gaps (S3) */
         #level-9:checked ~ #pos-15:checked ~ .game-world .arrow-P15-right { display: none; }
@@ -3466,6 +3454,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* η→N: right from even P, left from odd P */
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ :is(#pos-14, #pos-16, #pos-18):checked ~ .nav-panel .nav-right[for="layer-N"] { display: block; }
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ :is(#pos-13, #pos-15, #pos-17):checked ~ .nav-panel .nav-left[for="layer-N"] { display: block; }
+        /* YN/Yθ-L3-P18: nav-left goes to pos-17 (κ), not layer-change */
+        #level-3:checked ~ #layer-N:checked ~ #pos-18:checked ~ .nav-panel .nav-left[for="layer-ζ"] { display: none; }
+        #level-3:checked ~ #layer-θ:checked ~ #pos-18:checked ~ .nav-panel .nav-left[for="layer-η"] { display: none; }
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-18:checked ~ .nav-panel .nav-left[for="pos-17"] { display: block; }
+        /* Yζ/Yη-L3-P18: no nav-right (teleporter exit) */
+        #level-3:checked ~ #layer-ζ:checked ~ #pos-18:checked ~ .nav-panel .nav-right[for="layer-θ"] { display: none; }
+        #level-3:checked ~ #layer-η:checked ~ #pos-18:checked ~ .nav-panel .nav-right[for="layer-N"] { display: none; }
         /* Nav-panel position-jump arrows (S5 L0-L3, ζ/η layers) */
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ .nav-panel .nav-right[for="pos-16"] { display: block; }
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-16:checked ~ .nav-panel .nav-left[for="pos-13"] { display: block; }
@@ -3905,7 +3900,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: seashell-pulse 1s ease-in-out infinite;
         }
-        #level-0:checked ~ #pos-18:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .game-world .loot-S5-L0-P18 .loot-in-game {
+        #level-0:checked ~ #pos-18:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .game-world .loot-S5-L0-P18 .loot-in-game,
+        #level-0:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .game-world .loot-S5-L0-P18 .loot-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;

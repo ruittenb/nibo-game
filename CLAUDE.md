@@ -230,6 +230,9 @@ Since all these transitions stay on L8, they only change the position radio - ma
 
 S5 (The Sunken City) at levels 0-3 uses a **layer system** to create maze-like navigation within the same visual space. Four layer radio buttons (`layer-N`, `layer-ζ`, `layer-η`, `layer-θ`) control which horizontal arrows are available.
 
+### Nomenclature
+Layer-qualified coordinates use the **Y** prefix: `YN`, `Yζ`, `Yη`, `Yθ`. Full format: `Yθ-L2-P14`. The player tooltip on S5 shows this format (e.g., "Nibo (Yθ-L2-P15)").
+
 ### Layer cycle
 Horizontal movement at "layer-boundary" gaps (P13↔P14, P15↔P16, P17↔P18) cycles through layers: **N → ζ → θ → η → N**. Movement at "position-boundary" gaps (P14↔P15, P16↔P17) either moves normally (on N/θ) or jumps 3 positions (on ζ/η).
 
