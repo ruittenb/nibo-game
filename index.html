@@ -183,6 +183,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAA==
     ">
     <style>
+        @property --teleporter-color-1 { syntax: '<color>'; initial-value: #f90; inherits: true; }
+        @property --teleporter-color-2 { syntax: '<color>'; initial-value: #fc8; inherits: true; }
+        @property --teleporter-color-3 { syntax: '<color>'; initial-value: #eee; inherits: true; }
         :root {
             /* Core layout variables */
             --pos-width: 150px;           /* Distance between horizontal positions */
@@ -348,6 +351,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-7:checked ~ .game-world { --level: "L7"; }
         #level-8:checked ~ .game-world { --level: "L8"; }
         #level-9:checked ~ .game-world { --level: "L9"; }
+        #level-ρ:checked ~ .game-world { --level: "Lρ"; }
         #pos-1:checked ~ .game-world { --pos: "P1"; }
         #pos-2:checked ~ .game-world { --pos: "P2"; }
         #pos-3:checked ~ .game-world { --pos: "P3"; }
@@ -367,6 +371,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-17:checked ~ .game-world { --pos: "P17"; }
         #pos-18:checked ~ .game-world { --pos: "P18"; }
         #pos-φ:checked ~ .game-world { --pos: "Pφ"; }
+        /* Layer variable scoped to S5 (L0-L3, P13-P18) — includes trailing dash for uniform tooltip formatting */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-N:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world { --layer: "YN-"; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-ζ:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world { --layer: "Yζ-"; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world { --layer: "Yη-"; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-θ:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world { --layer: "Yθ-"; }
         .game-world {
             position: absolute;
             top: calc(var(--stage-height) * -1);
@@ -400,7 +409,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-6:checked ~ .game-world,
         #level-7:checked ~ .game-world,
         #level-8:checked ~ .game-world,
-        #level-9:checked ~ .game-world {
+        #level-9:checked ~ .game-world,
+        #level-ρ:checked ~ .game-world {
             --world-translateY: var(--stage-height);
         }
         /* Horizontal: positions 7-12 scroll left by 6 positions */
@@ -1166,6 +1176,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: var(--z-scenery);
             pointer-events: none;
             cursor: pointer;
+            animation: teleporter-cycle-orange 1.5s linear infinite;
         }
         .teleporter-S3-L7-P18 svg {
             width: 100%;
@@ -1174,7 +1185,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Enable clicking teleporter when player is at S3-L7-P18 */
         #level-7:checked ~ #pos-18:checked ~ .game-world .teleporter-S3-L7-P18 {
             pointer-events: auto;
-            animation: teleporter-pulse 1s ease-in-out infinite;
+            animation: teleporter-pulse 1s ease-in-out infinite, teleporter-cycle-orange 1.5s linear infinite;
         }
         /* Hide hover area when player can click teleporter */
         #level-7:checked ~ #pos-18:checked ~ .game-world .teleporter-hover-area {
@@ -1190,9 +1201,64 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
+        /* Teleporter platform at S5-L3-P13 (decorative) */
+        .teleporter-S5-L3-P13-hover-area {
+            position: absolute;
+            width: calc(var(--pickup-size) * 3);
+            height: var(--pickup-size);
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 20px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 12 - var(--item-offset) + 12px);
+            z-index: var(--z-item-hover);
+        }
+        .teleporter-S5-L3-P13 {
+            position: absolute;
+            width: calc(var(--pickup-size) * 3);
+            height: var(--pickup-size);
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 20px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 12 - var(--item-offset) + 12px);
+            z-index: var(--z-scenery);
+            pointer-events: none;
+            animation: teleporter-cycle-blue 1.5s linear infinite;
+        }
+        .teleporter-S5-L3-P13 svg {
+            width: 100%;
+            height: 100%;
+        }
+        /* Enable clicking teleporter when player is at YN/Yθ-L3-P13 */
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-13:checked ~ .game-world .teleporter-S5-L3-P13 {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: teleporter-pulse-blue 1s ease-in-out infinite, teleporter-cycle-blue 1.5s linear infinite;
+        }
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-13:checked ~ .game-world .teleporter-S5-L3-P13-hover-area {
+            display: none;
+        }
+        .teleporter-S5-L3-P13-hover-area:hover ~ .teleporter-S5-L3-P13-tooltip {
+            opacity: 1;
+        }
+        .teleporter-S5-L3-P13-tooltip {
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 20px + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 12 - var(--item-offset) + 12px + var(--pickup-size) * 1.5);
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
         @keyframes teleporter-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px #f90); }
             50% { filter: drop-shadow(0 0 12px #f90) drop-shadow(0 0 20px #fc8); }
+        }
+        @keyframes teleporter-pulse-blue {
+            0%, 100% { filter: drop-shadow(0 0 4px #48f); }
+            50% { filter: drop-shadow(0 0 12px #48f) drop-shadow(0 0 20px #8cf); }
+        }
+        @keyframes teleporter-cycle-orange {
+            0%, 100% { --teleporter-color-1: #f90; --teleporter-color-2: #fc8; --teleporter-color-3: #eee; }
+            33.33% { --teleporter-color-1: #fc8; --teleporter-color-2: #eee; --teleporter-color-3: #f90; }
+            66.67% { --teleporter-color-1: #eee; --teleporter-color-2: #f90; --teleporter-color-3: #fc8; }
+        }
+        @keyframes teleporter-cycle-blue {
+            0%, 100% { --teleporter-color-1: #48f; --teleporter-color-2: #8cf; --teleporter-color-3: #def; }
+            33.33% { --teleporter-color-1: #8cf; --teleporter-color-2: #def; --teleporter-color-3: #48f; }
+            66.67% { --teleporter-color-1: #def; --teleporter-color-2: #48f; --teleporter-color-3: #8cf; }
         }
         /* Teleport flash overlay - uses clip-path for animatable circles */
         .teleport-flash-overlay {
@@ -1250,6 +1316,22 @@ AAAAAAAAAAAAAAAAAAAAAA==
             animation: teleport-hole-expand 0.6s ease-in 0.4s forwards;
         }
         #level-3:checked ~ #pos-18:checked ~ .teleport-flash-overlay .teleport-ring {
+            animation: teleport-ring-shrink 0.6s ease-in 0.4s forwards;
+        }
+        /* Animate when teleported from S5-L3-P13 to Lρ-P13 (visually at S3-L6-P14) */
+        #level-ρ:checked ~ #pos-13:checked ~ .teleport-flash-overlay .teleport-flash-in {
+            left: calc(var(--pos-offset) + var(--pos-width) + 20px);
+            bottom: 0;
+            animation: teleport-dot-expand 0.4s ease-out forwards;
+        }
+        #level-ρ:checked ~ #pos-13:checked ~ .teleport-flash-overlay .teleport-flash-out {
+            left: calc(var(--pos-offset) + var(--pos-width) + 20px);
+            bottom: calc(var(--level-height) + var(--platform-thickness) + 28px);
+            animation: teleport-hole-expand 0.6s ease-in 0.4s forwards;
+        }
+        #level-ρ:checked ~ #pos-13:checked ~ .teleport-flash-overlay .teleport-ring {
+            left: calc(var(--pos-offset) + var(--pos-width) + 20px);
+            bottom: calc(var(--level-height) + var(--platform-thickness) + 28px);
             animation: teleport-ring-shrink 0.6s ease-in 0.4s forwards;
         }
         @keyframes teleport-dot-expand {
@@ -1365,6 +1447,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-2 { top: 120px; left: 30px; }
         #level-1 { top: 130px; left: 40px; }
         #level-0 { top: 140px; left: 30px; }
+        #level-ρ { top: 170px; left: 30px; }
         /* Debug positions - positions (row 1) */
         #pos-1 { top: 10px; left: 50px; }
         #pos-2 { top: 10px; left: 70px; }
@@ -2150,6 +2233,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-16:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 15); }
         #pos-17:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 16); }
         #pos-18:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 17); }
+        /* Layer ζ/η visual position swaps (S5 L0-L3): P13↔P14, P15↔P16, P17↔P18 */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 13); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-14:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 12); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-15:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 15); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-16:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 14); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 17); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 16); }
+        /* ζ/η at L3-P18: un-swap to L4-P18 visual (teleporter exit) */
+        #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 17); }
         /* Phantom position: L8-Pφ displays at L9-P17 visual location */
         #level-8:checked ~ #pos-φ:checked ~ .game-world .player {
             left: calc(var(--pos-offset) + var(--pos-width) * 16); /* P17 X position */
@@ -2172,6 +2264,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-7:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) - 2px); }
         #level-8:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--level-height) * 3 + var(--platform-thickness) - 2px); }
         #level-9:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) - 2px); }
+        /* Phantom level: Lρ-P13 displays at L6-P14 visual location (S5 teleporter exit) */
+        #level-ρ:checked ~ #pos-13:checked ~ .game-world .player {
+            left: calc(var(--pos-offset) + var(--pos-width) * 13);
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) - 2px);
+        }
         /* Landing after jump from phantom position */
         #level-8:checked ~ #pos-16:checked ~ .game-world .player,
         #level-8:checked ~ #pos-18:checked ~ .game-world .player,
@@ -2186,9 +2283,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: translateX(-50%);
             margin-bottom: 12px;
         }
-        /* Debug mode: show level and position in player tooltip */
+        /* Debug mode: show coordinates in player tooltip */
         #debug-toggle:checked ~ .game-world .player-tooltip::after {
-            content: " (" var(--level) "-" var(--pos) ")";
+            content: " (" var(--layer, "") var(--level) "-" var(--pos) ")";
+        }
+        /* S5: always show coordinates in player tooltip */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~
+        :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~
+        .game-world .player-tooltip::after {
+            content: " (" var(--layer, "") var(--level) "-" var(--pos) ")";
         }
         /* Torch held by player in S4 */
         .torch-held {
@@ -2569,18 +2672,21 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
         /* Hide hover area when player is at scuba (so label click works) */
-        #level-6:checked ~ #pos-14:checked ~ .game-world .scuba-hover-area {
+        #level-6:checked ~ #pos-14:checked ~ .game-world .scuba-hover-area,
+        #level-ρ:checked ~ #pos-13:checked ~ .game-world .scuba-hover-area {
             display: none;
         }
         /* Show tooltip on hover */
         .scuba-hover-area:hover ~ .scuba-tooltip {
             opacity: 1;
         }
-        #level-6:checked ~ #pos-14:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game:hover ~ .scuba-tooltip {
+        #level-6:checked ~ #pos-14:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game:hover ~ .scuba-tooltip,
+        #level-ρ:checked ~ #pos-13:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game:hover ~ .scuba-tooltip {
             opacity: 1;
         }
         /* Enable clicking scuba only when player is next to it */
-        #level-6:checked ~ #pos-14:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game {
+        #level-6:checked ~ #pos-14:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game,
+        #level-ρ:checked ~ #pos-13:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: scuba-pulse 1s ease-in-out infinite;
@@ -2635,7 +2741,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: block;
         }
         /* S3: pos 13-18 + levels 5-9 */
-        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18, #pos-φ):checked ~ .subtitle-S3 {
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9, #level-ρ):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18, #pos-φ):checked ~ .subtitle-S3 {
             display: block;
         }
         /* S5: pos 13-18 + levels 0-4 */
@@ -2941,6 +3047,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-16:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 15 + 10px); }
         #pos-17:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 16 + 10px); }
         #pos-18:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px); }
+        /* Layer ζ/η vertical arrow position swaps (S5 L0-L3): P13↔P14, P15↔P16, P17↔P18 */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 13 + 10px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-14:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 12 + 10px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-15:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 15 + 10px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-16:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 14 + 10px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 16 + 10px); }
         /* Up arrow bottom positions (one per departure level) */
         .arrow-L0-up { bottom: calc(var(--ground-height) + 72.5px); }
         .arrow-L1-up { bottom: calc(var(--level-height) + var(--platform-thickness) + 72.5px); }
@@ -2977,6 +3090,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .arrow-κ-left {
             left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px);
             bottom: calc(var(--level-height) * 4 + var(--platform-thickness) + 19px);
+        }
+        .arrow-ρ-left {
+            left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px);
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) + 19px);
         }
         /* Horizontal arrows move with level */
         #level-0:checked ~ .game-world .arrow-h { bottom: calc(var(--ground-height) + 19px); }
@@ -3067,6 +3184,86 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-17:checked ~ .game-world .arrow-P17-left { display: block; }
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-17:checked ~ .game-world .arrow-P17-right { display: block; }
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-18:checked ~ .game-world .arrow-P18-left { display: block; }
+        /* Kill old S5 L0-L3 horizontal arrows (layer system replaces them) */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world :is(
+            .arrow-P13-right, .arrow-P14-left, .arrow-P14-right, .arrow-P15-left,
+            .arrow-P15-right, .arrow-P16-left, .arrow-P16-right, .arrow-P17-left,
+            .arrow-P17-right, .arrow-P18-left) { display: none; }
+        /* Revive position-change arrows correct on N/θ layers */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ .game-world .arrow-P14-right { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-15:checked ~ .game-world .arrow-P15-left { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-16:checked ~ .game-world .arrow-P16-right { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-17:checked ~ .game-world .arrow-P17-left { display: block; }
+        /* Layer-changing arrow display+positioning (S5 L0-L3) */
+        /* N→ζ: right from odd P */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-N:checked ~ #pos-13:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-ζ"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-ζ"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-N:checked ~ #pos-17:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-ζ"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
+        /* N→ζ: left from even P */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-ζ"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-N:checked ~ #pos-16:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-ζ"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
+        :is(#level-0, #level-1, #level-2):checked ~ #layer-N:checked ~ #pos-18:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-ζ"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
+        /* ζ→θ: right from even P */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-ζ:checked ~ #pos-14:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-θ"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-ζ:checked ~ #pos-16:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-θ"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
+        :is(#level-0, #level-1, #level-2):checked ~ #layer-ζ:checked ~ #pos-18:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-θ"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
+        /* ζ→θ: left from odd P */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-ζ:checked ~ #pos-13:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-θ"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-ζ:checked ~ #pos-15:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-θ"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-ζ:checked ~ #pos-17:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-θ"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
+        /* θ→η: right from odd P */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-θ:checked ~ #pos-13:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-η"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-θ:checked ~ #pos-15:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-η"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-θ:checked ~ #pos-17:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-η"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
+        /* θ→η: left from even P */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-θ:checked ~ #pos-14:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-η"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-θ:checked ~ #pos-16:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-η"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
+        :is(#level-0, #level-1, #level-2):checked ~ #layer-θ:checked ~ #pos-18:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-η"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
+        /* η→N: right from even P */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ #pos-14:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-N"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ #pos-16:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-N"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
+        :is(#level-0, #level-1, #level-2):checked ~ #layer-η:checked ~ #pos-18:checked ~ .game-world .arrow-layer-change.arrow-right[for="layer-N"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
+        /* η→N: left from odd P */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ #pos-13:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-N"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ #pos-15:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-N"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ #pos-17:checked ~ .game-world .arrow-layer-change.arrow-left[for="layer-N"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
+        /* Position-jump arrow display+positioning (S5 L0-L3, ζ/η layers) */
+        /* P13→P16 right (at gap P14-P15, vis position 13.5) */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ .game-world .arrow-layer-jump.arrow-right[for="pos-16"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 13.5 + 12px); }
+        /* P16→P13 left (at gap P14-P15, vis position 13.5) */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-16:checked ~ .game-world .arrow-layer-jump.arrow-left[for="pos-13"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 13.5 + 12px); }
+        /* P15→P18 right (at gap P16-P17, vis position 15.5) */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-15:checked ~ .game-world .arrow-layer-jump.arrow-right[for="pos-18"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px); }
+        /* P18→P15 left (at gap P16-P17, vis position 15.5) */
+        :is(#level-0, #level-1, #level-2):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ .game-world .arrow-layer-jump.arrow-left[for="pos-15"] {
+            display: block; left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px); }
         /* Hide horizontal arrows at L9 platform gaps (S3) */
         #level-9:checked ~ #pos-15:checked ~ .game-world .arrow-P15-right { display: none; }
         #level-9:checked ~ #pos-16:checked ~ .game-world .arrow-P16-left { display: none; }
@@ -3166,10 +3363,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L2-up { display: block; }
         #level-3:checked ~ #pos-18:checked ~ .game-world .arrow-P18-left { display: none; }
         #level-3:checked ~ #pos-18:checked ~ .game-world .arrow-κ-left { display: block; }
+        /* Phantom level ρ: arrow from Lρ-P13 to L6-P13 */
+        #level-ρ:checked ~ #pos-13:checked ~ .game-world .arrow-ρ-left { display: block; }
+        #level-ρ:checked ~ #pos-13:checked ~ .nav-panel .nav-left[for="level-6"] { display: block; }
         /* Stage 5 down arrows (all positions P13-P18) */
         #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L1-down { display: block; }
         #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ #scuba-pickup:checked ~ .game-world .arrow-L2-down { display: block; }
         #level-3:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L3-down { display: block; }
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-13:checked ~ .game-world .arrow-L3-down { display: none; }
         #level-3:checked ~ #pos-18:checked ~ .game-world .arrow-L3-down { display: none; }
         #level-4:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L4-down { display: block; }
         #level-4:checked ~ #pos-18:checked ~ .game-world .arrow-L4-down { display: none; }
@@ -3322,6 +3523,43 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-6:checked ~ #pos-15:checked ~ .nav-panel .nav-left[for="pos-14"] { display: none; }
         #level-7:checked ~ #pos-14:checked ~ .nav-panel .nav-right[for="pos-15"] { display: none; }
         #level-7:checked ~ #pos-15:checked ~ .nav-panel .nav-left[for="pos-14"] { display: none; }
+        /* Kill old S5 L0-L3 nav-panel horizontal arrows (layer system replaces them) */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel :is(
+            .nav-right[for="pos-14"], .nav-left[for="pos-13"],
+            .nav-right[for="pos-15"], .nav-left[for="pos-14"],
+            .nav-right[for="pos-16"], .nav-left[for="pos-15"],
+            .nav-right[for="pos-17"], .nav-left[for="pos-16"],
+            .nav-right[for="pos-18"], .nav-left[for="pos-17"]) { display: none; }
+        /* Revive nav-panel position-change arrows correct on N/θ layers */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ .nav-panel .nav-right[for="pos-15"] { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-15:checked ~ .nav-panel .nav-left[for="pos-14"] { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-16:checked ~ .nav-panel .nav-right[for="pos-17"] { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-17:checked ~ .nav-panel .nav-left[for="pos-16"] { display: block; }
+        /* Nav-panel layer-change arrows (S5 L0-L3) */
+        /* N→ζ: right from odd P, left from even P */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-N:checked ~ :is(#pos-13, #pos-15, #pos-17):checked ~ .nav-panel .nav-right[for="layer-ζ"] { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-N:checked ~ :is(#pos-14, #pos-16, #pos-18):checked ~ .nav-panel .nav-left[for="layer-ζ"] { display: block; }
+        /* ζ→θ: right from even P, left from odd P */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-ζ:checked ~ :is(#pos-14, #pos-16, #pos-18):checked ~ .nav-panel .nav-right[for="layer-θ"] { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-ζ:checked ~ :is(#pos-13, #pos-15, #pos-17):checked ~ .nav-panel .nav-left[for="layer-θ"] { display: block; }
+        /* θ→η: right from odd P, left from even P */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-θ:checked ~ :is(#pos-13, #pos-15, #pos-17):checked ~ .nav-panel .nav-right[for="layer-η"] { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-θ:checked ~ :is(#pos-14, #pos-16, #pos-18):checked ~ .nav-panel .nav-left[for="layer-η"] { display: block; }
+        /* η→N: right from even P, left from odd P */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ :is(#pos-14, #pos-16, #pos-18):checked ~ .nav-panel .nav-right[for="layer-N"] { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ :is(#pos-13, #pos-15, #pos-17):checked ~ .nav-panel .nav-left[for="layer-N"] { display: block; }
+        /* YN/Yθ-L3-P18: nav-left goes to pos-17 (κ), not layer-change */
+        #level-3:checked ~ #layer-N:checked ~ #pos-18:checked ~ .nav-panel .nav-left[for="layer-ζ"] { display: none; }
+        #level-3:checked ~ #layer-θ:checked ~ #pos-18:checked ~ .nav-panel .nav-left[for="layer-η"] { display: none; }
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-18:checked ~ .nav-panel .nav-left[for="pos-17"] { display: block; }
+        /* Yζ/Yη-L3-P18: no nav-right (teleporter exit) */
+        #level-3:checked ~ #layer-ζ:checked ~ #pos-18:checked ~ .nav-panel .nav-right[for="layer-θ"] { display: none; }
+        #level-3:checked ~ #layer-η:checked ~ #pos-18:checked ~ .nav-panel .nav-right[for="layer-N"] { display: none; }
+        /* Nav-panel position-jump arrows (S5 L0-L3, ζ/η layers) */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ .nav-panel .nav-right[for="pos-16"] { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-16:checked ~ .nav-panel .nav-left[for="pos-13"] { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-15:checked ~ .nav-panel .nav-right[for="pos-18"] { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ .nav-panel .nav-left[for="pos-15"] { display: block; }
         /* Show up arrow at ladder locations */
         #level-0:checked ~ #pos-5:checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
         #level-1:checked ~ #pos-3:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
@@ -3375,6 +3613,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
         #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ #scuba-pickup:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
         #level-3:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-13:checked ~ .nav-panel .nav-down[for="level-2"] { display: none; }
         #level-3:checked ~ #pos-18:checked ~ .nav-panel .nav-down[for="level-2"] { display: none; }
         #level-4:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
         /* loot - animated elements that fly to counter when picked up */
@@ -3467,7 +3706,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Stage 5 loot positions */
         .loot-S5-L3-P13 {
             bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 12 - var(--item-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
         }
         .loot-S5-L2-P17 {
             bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
@@ -3746,7 +3985,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             animation: coin-pulse 1s ease-in-out infinite;
         }
         /* Stage 5 loot pulse/click */
-        #level-3:checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13 .loot-in-game {
+        #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13 .loot-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: seashell-pulse 1s ease-in-out infinite;
@@ -3756,7 +3995,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: seashell-pulse 1s ease-in-out infinite;
         }
-        #level-0:checked ~ #pos-18:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .game-world .loot-S5-L0-P18 .loot-in-game {
+        #level-0:checked ~ #pos-18:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .game-world .loot-S5-L0-P18 .loot-in-game,
+        #level-0:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .game-world .loot-S5-L0-P18 .loot-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
@@ -4380,7 +4620,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #pos-8:checked ~ #loot-S4-L3-P8-pickup:not(:checked) ~ .game-world .loot-S4-L3-P8:hover .tooltip,
         #level-1:checked ~ #pos-10:checked ~ #loot-S4-L1-P10-pickup:not(:checked) ~ .game-world .loot-S4-L1-P10:hover .tooltip,
         /* S5 uses levels 0-4 */
-        #level-3:checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13:hover .tooltip,
+        #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13:hover .tooltip,
         #level-2:checked ~ #pos-17:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .game-world .loot-S5-L2-P17:hover .tooltip {
             opacity: 1;
         }
@@ -5061,31 +5301,25 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <path fill="currentColor" d="M 338.8 -9.9 c 11.9 8.6 16.3 24.2 10.9 37.8 L 271.3 224 416 224 c 13.5 0 25.5 8.4 30.1 21.1 s .7 26.9 -9.6 35.5 l -288 240 c -11.3 9.4 -27.4 9.9 -39.3 1.3 s -16.3 -24.2 -10.9 -37.8 L 176.7 288 32 288 c -13.5 0 -25.5 -8.4 -30.1 -21.1 s -.7 -26.9 9.6 -35.5 l 288 -240 c 11.3 -9.4 27.4 -9.9 39.3 -1.3 z"/>
         </symbol>
         <symbol id="teleporter-platform" viewBox="0 0 512 512" preserveAspectRatio="none">
-            <path fill="#f90" d="M 232.5 5.2 c 14.9 -6.9 32.1 -6.9 47 0 l 218.6 101 c 8.5 3.9 13.9 12.4 13.9 21.8 s -5.4 17.9 -13.9 21.8 l -218.6 101 c -14.9 6.9 -32.1 6.9 -47 0 L 13.9 149.8 C 5.4 145.8 0 137.3 0 128 s 5.4 -17.9 13.9 -21.8 L 232.5 5.2 z">
-                <animate attributeName="fill" dur="1.5s" repeatCount="indefinite" values="#f90;#fc8;#eee;#f90"/>
-            </path>
-            <path fill="#fc8" d="M 48.1 218.4 l 164.3 75.9 c 27.7 12.8 59.6 12.8 87.3 0 l 164.3 -75.9 34.1 15.8 c 8.5 3.9 13.9 12.4 13.9 21.8 s -5.4 17.9 -13.9 21.8 l -218.6 101 c -14.9 6.9 -32.1 6.9 -47 0 L 13.9 277.8 C 5.4 273.8 0 265.3 0 256 s 5.4 -17.9 13.9 -21.8 l 34.1 -15.8 z">
-                <animate attributeName="fill" dur="1.5s" repeatCount="indefinite" values="#fc8;#eee;#f90;#fc8"/>
-            </path>
-            <path fill="#eee" d="M 13.9 362.2 l 34.1 -15.8 164.3 75.9 c 27.7 12.8 59.6 12.8 87.3 0 l 164.3 -75.9 34.1 15.8 c 8.5 3.9 13.9 12.4 13.9 21.8 s -5.4 17.9 -13.9 21.8 l -218.6 101 c -14.9 6.9 -32.1 6.9 -47 0 L 13.9 405.8 C 5.4 401.8 0 393.3 0 384 s 5.4 -17.9 13.9 -21.8 z">
-                <animate attributeName="fill" dur="1.5s" repeatCount="indefinite" values="#eee;#f90;#fc8;#eee"/>
-            </path>
+            <path fill="var(--teleporter-color-1)" d="M 232.5 5.2 c 14.9 -6.9 32.1 -6.9 47 0 l 218.6 101 c 8.5 3.9 13.9 12.4 13.9 21.8 s -5.4 17.9 -13.9 21.8 l -218.6 101 c -14.9 6.9 -32.1 6.9 -47 0 L 13.9 149.8 C 5.4 145.8 0 137.3 0 128 s 5.4 -17.9 13.9 -21.8 L 232.5 5.2 z"/>
+            <path fill="var(--teleporter-color-2)" d="M 48.1 218.4 l 164.3 75.9 c 27.7 12.8 59.6 12.8 87.3 0 l 164.3 -75.9 34.1 15.8 c 8.5 3.9 13.9 12.4 13.9 21.8 s -5.4 17.9 -13.9 21.8 l -218.6 101 c -14.9 6.9 -32.1 6.9 -47 0 L 13.9 277.8 C 5.4 273.8 0 265.3 0 256 s 5.4 -17.9 13.9 -21.8 l 34.1 -15.8 z"/>
+            <path fill="var(--teleporter-color-3)" d="M 13.9 362.2 l 34.1 -15.8 164.3 75.9 c 27.7 12.8 59.6 12.8 87.3 0 l 164.3 -75.9 34.1 15.8 c 8.5 3.9 13.9 12.4 13.9 21.8 s -5.4 17.9 -13.9 21.8 l -218.6 101 c -14.9 6.9 -32.1 6.9 -47 0 L 13.9 405.8 C 5.4 401.8 0 393.3 0 384 s 5.4 -17.9 13.9 -21.8 z"/>
         </symbol>
         <symbol id="stars" viewBox="0 0 900 500">
             <!-- Scattered stars for space background (covers top 2 levels of stage) -->
-            <circle cx="120" cy="45" r="2" fill="rgba(255,255,255,0.9)"/>
-            <circle cx="340" cy="80" r="1.5" fill="rgba(255,255,255,0.7)"/>
-            <circle cx="510" cy="30" r="2.5" fill="rgba(255,255,255,0.85)"/>
-            <circle cx="670" cy="95" r="1.8" fill="rgba(255,255,255,0.75)"/>
-            <circle cx="200" cy="140" r="1.2" fill="rgba(255,255,255,0.6)"/>
-            <circle cx="780" cy="55" r="2.2" fill="rgba(255,255,255,0.8)"/>
-            <circle cx="440" cy="160" r="1.4" fill="rgba(255,255,255,0.65)"/>
-            <circle cx="60" cy="120" r="1.6" fill="rgba(255,255,255,0.7)"/>
-            <circle cx="290" cy="220" r="1.8" fill="rgba(255,255,255,0.75)"/>
-            <circle cx="580" cy="260" r="2" fill="rgba(255,255,255,0.7)"/>
-            <circle cx="150" cy="290" r="1.5" fill="rgba(255,255,255,0.65)"/>
-            <circle cx="720" cy="240" r="2.2" fill="rgba(255,255,255,0.8)"/>
-            <circle cx="830" cy="290" r="1.7" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="120" cy="45" r="2" fill="#ffffffe6"/>
+            <circle cx="340" cy="80" r="1.5" fill="#ffffffb3"/>
+            <circle cx="510" cy="30" r="2.5" fill="#ffffffd9"/>
+            <circle cx="670" cy="95" r="1.8" fill="#ffffffbf"/>
+            <circle cx="200" cy="140" r="1.2" fill="#ffffff99"/>
+            <circle cx="780" cy="55" r="2.2" fill="#ffffffcc"/>
+            <circle cx="440" cy="160" r="1.4" fill="#ffffffa6"/>
+            <circle cx="60" cy="120" r="1.6" fill="#ffffffb3"/>
+            <circle cx="290" cy="220" r="1.8" fill="#ffffffbf"/>
+            <circle cx="580" cy="260" r="2" fill="#ffffffb3"/>
+            <circle cx="150" cy="290" r="1.5" fill="#ffffffa6"/>
+            <circle cx="720" cy="240" r="2.2" fill="#ffffffcc"/>
+            <circle cx="830" cy="290" r="1.7" fill="#ffffffb3"/>
         </symbol>
     </svg>
     <div class="game-container">
@@ -5103,6 +5337,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="level" id="level-7" class="level-radio" title="level-7">
         <input type="radio" name="level" id="level-8" class="level-radio" title="level-8">
         <input type="radio" name="level" id="level-9" class="level-radio" title="level-9">
+        <input type="radio" name="level" id="level-ρ" class="level-radio" title="level-ρ">
         <!-- Radio buttons for layer -->
         <input type="radio" name="layer" id="layer-N" class="layer-radio" title="layer-N" checked>
         <input type="radio" name="layer" id="layer-ζ" class="layer-radio" title="layer-ζ">
@@ -5224,6 +5459,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="pos-15" class="nav-btn nav-left"></label>
                 <label for="pos-16" class="nav-btn nav-left"></label>
                 <label for="pos-17" class="nav-btn nav-left"></label>
+                <!-- Layer-change nav (S5 L0-L3) -->
+                <label for="layer-ζ" class="nav-btn nav-left"></label>
+                <label for="layer-θ" class="nav-btn nav-left"></label>
+                <label for="layer-η" class="nav-btn nav-left"></label>
+                <label for="layer-N" class="nav-btn nav-left"></label>
+                <!-- Phantom level ρ exit -->
+                <label for="level-6" class="nav-btn nav-left"></label>
             </div>
             <!-- Right cell -->
             <div class="nav-cell nav-cell-right">
@@ -5245,6 +5487,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="pos-16" class="nav-btn nav-right"></label>
                 <label for="pos-17" class="nav-btn nav-right"></label>
                 <label for="pos-18" class="nav-btn nav-right"></label>
+                <!-- Layer-change nav (S5 L0-L3) -->
+                <label for="layer-ζ" class="nav-btn nav-right"></label>
+                <label for="layer-θ" class="nav-btn nav-right"></label>
+                <label for="layer-η" class="nav-btn nav-right"></label>
+                <label for="layer-N" class="nav-btn nav-right"></label>
             </div>
             <!-- Down cell -->
             <div class="nav-cell nav-cell-down">
@@ -5409,6 +5656,22 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="pos-18" class="arrow arrow-right arrow-φ-right"></label>
         <!-- Phantom position: L3-P18 (teleporter exit, visually L4-P18) -->
         <label for="pos-17" class="arrow arrow-left arrow-κ-left"></label>
+        <!-- Phantom level: Lρ-P13 (teleporter exit, visually L6-P14) -->
+        <label for="level-6" class="arrow arrow-left arrow-ρ-left"></label>
+        <!-- Layer-changing arrows (S5 L0-L3) -->
+        <label for="layer-ζ" class="arrow arrow-right arrow-h arrow-layer-change"></label>
+        <label for="layer-ζ" class="arrow arrow-left arrow-h arrow-layer-change"></label>
+        <label for="layer-θ" class="arrow arrow-right arrow-h arrow-layer-change"></label>
+        <label for="layer-θ" class="arrow arrow-left arrow-h arrow-layer-change"></label>
+        <label for="layer-η" class="arrow arrow-right arrow-h arrow-layer-change"></label>
+        <label for="layer-η" class="arrow arrow-left arrow-h arrow-layer-change"></label>
+        <label for="layer-N" class="arrow arrow-right arrow-h arrow-layer-change"></label>
+        <label for="layer-N" class="arrow arrow-left arrow-h arrow-layer-change"></label>
+        <!-- Position-jump arrows (S5 L0-L3, ζ/η layers) -->
+        <label for="pos-16" class="arrow arrow-right arrow-h arrow-layer-jump"></label>
+        <label for="pos-13" class="arrow arrow-left arrow-h arrow-layer-jump"></label>
+        <label for="pos-18" class="arrow arrow-right arrow-h arrow-layer-jump"></label>
+        <label for="pos-15" class="arrow arrow-left arrow-h arrow-layer-jump"></label>
         <!-- Player character -->
         <div class="player">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="170 300 750 930">
@@ -5763,6 +6026,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="loot-hover-area"></span>
             <span class="tooltip">Seashell</span>
         </div>
+        <!-- Teleporter platform at S5-L3-P13 -->
+        <span class="teleporter-S5-L3-P13-hover-area"></span>
+        <label for="level-ρ" class="teleporter-S5-L3-P13">
+            <svg><use href="#teleporter-platform"/></svg>
+        </label>
+        <span class="tooltip teleporter-S5-L3-P13-tooltip">Teleporter</span>
         <div class="container seashell loot-S5-L3-P13">
             <label for="loot-S5-L3-P13-pickup" class="loot-in-game"><svg><use href="#seashell"/></svg></label>
             <span class="loot-hover-area"></span>

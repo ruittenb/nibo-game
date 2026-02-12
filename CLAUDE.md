@@ -64,10 +64,13 @@ The game world is a 3x2 grid of stages:
 | levels 5-9 | S0           | S2 (jungle) | S3 (hangar) |
 | levels 0-4 | S1 (factory) | S4 (caves)  | S5          |
 
+**Terminology:** A **position** is the horizontal coordinate (`pos-*` radio), a **level** is the vertical coordinate (`level-*` radio), a **layer** is the S5 maze dimension (`layer-*` radio), and a **location** is a place in the game world (the combination of position + level + layer). Two locations can look the same visually but differ by layer or by being phantom.
+
 **Radio button IDs** are pure coordinates with no stage semantics:
 - `pos-1` through `pos-18` for horizontal position
-- `pos-φ` (phi) - a phantom position for special movement (see Phantom Positions)
+- `pos-φ` (phi) - a phantom position (see Phantom Locations)
 - `level-0` through `level-9` for vertical level (5-9 display at same heights as 0-4)
+- `level-ρ` (rho) - a phantom level (see Phantom Locations)
 
 Stage is derived from the combination of position and level as shown in the table above.
 
@@ -210,70 +213,57 @@ Items pulse/glow when the player can interact with them. This requires combining
 8. Use axe on **tree** (S2-L5-P12) → tree chopped
 9. Enter S3 → navigate to escape → victory
 
-## Phantom Positions
+## Phantom Locations
 
-**Challenge:** One label can only apply to one input element. This makes it non-trivial
-to make a player move horizontally and have them fall vertically as part of the same move:
-it would require two radio buttons to change state.
+A phantom location is a radio button state whose logical coordinates differ from where the player visually appears. This works around the CSS constraint that one label can only change one radio button. For implementation details, see `.claude/phantom-locations.md`.
 
-**Solution: Phantom positions** - a state that differs from its visual location.
+Current phantom locations:
 
-Example: `pos-φ` (in S3)
- - The player is at S3-L8-P17 and moves up
- - This moves them to S3-L8-Pφ. This counts as *horizontal* movement only.
- - This position is shown as if the player were at S3-L9-P17 (visually at L4 height).
- - As soon as the player moves left or right, they are moved back to the physical location (L8-P16 or L8-P18)
+| Name | Logical state | Visual location | Purpose |
+|------|--------------|-----------------|---------|
+| φ (phi) | L8-Pφ | S3-L9-P17 | Floating platform — up from L8-P17, exits left/right back to L8 |
+| κ (kappa) | L3-P18 | S5-L4-P18 | Teleporter exit S3→S5 — level stays L3, displays at L4 |
+| ρ (rho) | Lρ-P13 | S3-L6-P14 | Teleporter exit S5→S3 — position stays P13, displays at P14 |
 
-Since all these transitions stay on L8, they only change the position radio - making them valid single-input operations.
+## Layers (S5 L0-L3)
+
+S5 (The Sunken City) at levels 0-3 uses a **layer system** to create maze-like navigation within the same visual space. Four layer radio buttons (`layer-N`, `layer-ζ`, `layer-η`, `layer-θ`) control which horizontal arrows are available.
+
+### Nomenclature
+Layer-qualified coordinates use the **Y** prefix: `YN`, `Yζ`, `Yη`, `Yθ`. Full format: `Yθ-L2-P14`. The player tooltip on S5 shows this format (e.g., "Nibo (Yθ-L2-P15)").
+
+### Layer cycle
+Horizontal movement at "layer-boundary" gaps (P13↔P14, P15↔P16, P17↔P18) cycles through layers: **N → ζ → θ → η → N**. Movement at "position-boundary" gaps (P14↔P15, P16↔P17) either moves normally (on N/θ) or jumps 3 positions (on ζ/η).
+
+### Visual position swaps
+- **N/θ**: visual position = logical position (P13→vis13, P14→vis14, ...)
+- **ζ/η**: positions are swapped in pairs (P13↔P14, P15↔P16, P17↔P18)
+
+CSS override rules swap the player and vertical arrow `left` values when ζ/η is active at L0-L3.
+
+### Scoping
+Layer-aware CSS rules are scoped to `:is(#level-0, #level-1, #level-2, #level-3)` + S5 positions. The layer state has no visual effect outside S5 L0-L3.
+
+### Arrow elements
+- **8 layer-change labels** in `.game-world` (one per target-layer × direction), dynamically positioned via CSS
+- **4 position-jump labels** in `.game-world` for the 3-position jumps on ζ/η
+- **8 layer-change labels** in `.nav-panel` (mirroring in-game arrows)
+- Existing position-change nav labels are reused for position-jumps on ζ/η
+
+### Transition spec
+The full transition table is in `_fabriek/doc/transitions.txt` (304 transitions).
 
 ## Debug Mode
 
 The `#debug-toggle` checkbox reveals all game state inputs for testing. Each input has a `title` attribute describing its purpose.
 
-## Adding New Checkboxes
+## Adding New Checkboxes, Items, and Loot
 
-When adding a new checkbox (for item pickups, unlocks, etc.), **four things** must be updated:
+For implementation checklists on adding checkboxes, items, and loot, see `.claude/adding-items-and-loot.md`.
 
-1. **Add the checkbox input** in the HTML inputs section (before `.game-world`)
-   - Item/state checkboxes: `<input type="checkbox" id="my-checkbox" title="my-checkbox">`
-   - Loot checkboxes: `<input type="checkbox" id="loot-SX-LY-PZ-pickup" class="loot-checkbox" title="coin">`
-2. **Add the ID to the hidden inputs rule** - find the CSS rule that starts with `.position-radio, .level-radio, .loot-checkbox, #key-pickup, ...` and add your new ID (e.g., `#my-checkbox`)
-3. **Add to game state visibility rule** - find the `#debug-toggle:checked ~ .game-container ...` rule and add your ID
-4. **Add game state position** - add a rule like `#my-checkbox { top: 50px; left: XXXpx; }` with a unique left offset
-
-If you skip step 2, the checkbox will be visible in the top-left corner of the play area instead of hidden.
-
-**Note:** Level radios, position radios, and loot checkboxes use class selectors (`.level-radio`, `.position-radio`, `.loot-checkbox`) for bulk styling. Item and state checkboxes use individual ID selectors.
-
-## Adding New Items and Loot
-
-### Items (key, wrench, axe)
-
-1. **CSS variable** for the item color (e.g., `--wrench-color`)
-2. **Checkbox** in inputs section: `<input type="checkbox" id="item-pickup">`
-   - Must appear before `.game-world` in DOM order for sibling selectors to work
-3. **In-game element** (`.item-in-game`):
-   - Position at world location using `bottom` and `left` with CSS variables
-   - `display: none` / `pointer-events: none` by default
-   - Enable + pulse animation when player is adjacent and item not picked up
-   - Label targets the pickup checkbox
-4. **Fly-to-inventory rule**: when `#item-pickup:checked`, transition `bottom`/`left` to inventory position, fade `opacity` to 0
-   - Slot position uses `--inv-slot-width * (offset)` where offset accounts for other items already in inventory
-   - This rule must come after the base positioning rule (CSS cascade: later rules override)
-5. **Inventory icon** (`.inventory-item` inside `.inventory`): `visibility: hidden` by default, `visible` with transition-delay when picked up
-
-### Loot (coins, gems)
-
-1. **Checkbox** for pickup state: `<input type="checkbox" id="loot-SX-LY-PZ-pickup" class="loot-checkbox" title="coin">`
-   - Must include `class="loot-checkbox"` for bulk hiding/showing of game state inputs
-2. **Container** in `.game-world`:
-   - `.container` wrapper with location class (e.g., `.valuable-S1-L0-P3`)
-   - `.hover-area` span for tooltip hover detection
-   - `.tooltip` span with item name
-   - Label wrapping the icon, targeting the pickup checkbox
-3. **Fly-to-counter rule**: when checked, transition `bottom`/`left` to valuable counter position
-4. **Digit strip**: if max collectible count increases beyond current digits, add new frames to `@keyframes digit-roll`
-5. **Counter variable**: `--valuable-count` increments via `:checked` selectors counting picked-up loot
+Key distinction between the two checkbox types:
+- **Class-based** (`class="loot-checkbox"`): hiding and debug visibility handled automatically by class selectors
+- **ID-based** (item/state checkboxes): must be individually added to the hidden inputs rule and debug toggle rule
 
 ## Z-Index Layers
 

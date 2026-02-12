@@ -1,6 +1,3 @@
-# VALIDATION: All transitions OK ✓
-# Total transitions: 304
-
 N L0P13(vis P13);right;ζ L0P13(vis P14)
 N L0P13(vis P13);up;N L1P13(vis P13)
 N L0P14(vis P14);left;ζ L0P14(vis P13)
