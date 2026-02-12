@@ -351,6 +351,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-7:checked ~ .game-world { --level: "L7"; }
         #level-8:checked ~ .game-world { --level: "L8"; }
         #level-9:checked ~ .game-world { --level: "L9"; }
+        #level-ρ:checked ~ .game-world { --level: "Lρ"; }
         #pos-1:checked ~ .game-world { --pos: "P1"; }
         #pos-2:checked ~ .game-world { --pos: "P2"; }
         #pos-3:checked ~ .game-world { --pos: "P3"; }
@@ -408,7 +409,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-6:checked ~ .game-world,
         #level-7:checked ~ .game-world,
         #level-8:checked ~ .game-world,
-        #level-9:checked ~ .game-world {
+        #level-9:checked ~ .game-world,
+        #level-ρ:checked ~ .game-world {
             --world-translateY: var(--stage-height);
         }
         /* Horizontal: positions 7-12 scroll left by 6 positions */
@@ -1316,19 +1318,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #pos-18:checked ~ .teleport-flash-overlay .teleport-ring {
             animation: teleport-ring-shrink 0.6s ease-in 0.4s forwards;
         }
-        /* Animate when teleported from S5-L3-P13 to S3-L6-P13 */
-        #level-6:checked ~ #pos-13:checked ~ .teleport-flash-overlay .teleport-flash-in {
-            left: calc(var(--pos-offset) + 20px);
+        /* Animate when teleported from S5-L3-P13 to Lρ-P13 (visually at S3-L6-P14) */
+        #level-ρ:checked ~ #pos-13:checked ~ .teleport-flash-overlay .teleport-flash-in {
+            left: calc(var(--pos-offset) + var(--pos-width) + 20px);
             bottom: 0;
             animation: teleport-dot-expand 0.4s ease-out forwards;
         }
-        #level-6:checked ~ #pos-13:checked ~ .teleport-flash-overlay .teleport-flash-out {
-            left: calc(var(--pos-offset) + 20px);
+        #level-ρ:checked ~ #pos-13:checked ~ .teleport-flash-overlay .teleport-flash-out {
+            left: calc(var(--pos-offset) + var(--pos-width) + 20px);
             bottom: calc(var(--level-height) + var(--platform-thickness) + 28px);
             animation: teleport-hole-expand 0.6s ease-in 0.4s forwards;
         }
-        #level-6:checked ~ #pos-13:checked ~ .teleport-flash-overlay .teleport-ring {
-            left: calc(var(--pos-offset) + 20px);
+        #level-ρ:checked ~ #pos-13:checked ~ .teleport-flash-overlay .teleport-ring {
+            left: calc(var(--pos-offset) + var(--pos-width) + 20px);
             bottom: calc(var(--level-height) + var(--platform-thickness) + 28px);
             animation: teleport-ring-shrink 0.6s ease-in 0.4s forwards;
         }
@@ -1445,6 +1447,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-2 { top: 120px; left: 30px; }
         #level-1 { top: 130px; left: 40px; }
         #level-0 { top: 140px; left: 30px; }
+        #level-ρ { top: 170px; left: 30px; }
         /* Debug positions - positions (row 1) */
         #pos-1 { top: 10px; left: 50px; }
         #pos-2 { top: 10px; left: 70px; }
@@ -2261,6 +2264,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-7:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) - 2px); }
         #level-8:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--level-height) * 3 + var(--platform-thickness) - 2px); }
         #level-9:checked ~ .game-world .player { bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) - 2px); }
+        /* Phantom level: Lρ-P13 displays at L6-P14 visual location (S5 teleporter exit) */
+        #level-ρ:checked ~ #pos-13:checked ~ .game-world .player {
+            left: calc(var(--pos-offset) + var(--pos-width) * 13);
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) - 2px);
+        }
         /* Landing after jump from phantom position */
         #level-8:checked ~ #pos-16:checked ~ .game-world .player,
         #level-8:checked ~ #pos-18:checked ~ .game-world .player,
@@ -2664,18 +2672,21 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
         /* Hide hover area when player is at scuba (so label click works) */
-        #level-6:checked ~ #pos-14:checked ~ .game-world .scuba-hover-area {
+        #level-6:checked ~ #pos-14:checked ~ .game-world .scuba-hover-area,
+        #level-ρ:checked ~ #pos-13:checked ~ .game-world .scuba-hover-area {
             display: none;
         }
         /* Show tooltip on hover */
         .scuba-hover-area:hover ~ .scuba-tooltip {
             opacity: 1;
         }
-        #level-6:checked ~ #pos-14:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game:hover ~ .scuba-tooltip {
+        #level-6:checked ~ #pos-14:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game:hover ~ .scuba-tooltip,
+        #level-ρ:checked ~ #pos-13:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game:hover ~ .scuba-tooltip {
             opacity: 1;
         }
         /* Enable clicking scuba only when player is next to it */
-        #level-6:checked ~ #pos-14:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game {
+        #level-6:checked ~ #pos-14:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game,
+        #level-ρ:checked ~ #pos-13:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: scuba-pulse 1s ease-in-out infinite;
@@ -2730,7 +2741,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: block;
         }
         /* S3: pos 13-18 + levels 5-9 */
-        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18, #pos-φ):checked ~ .subtitle-S3 {
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9, #level-ρ):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18, #pos-φ):checked ~ .subtitle-S3 {
             display: block;
         }
         /* S5: pos 13-18 + levels 0-4 */
@@ -3080,6 +3091,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px);
             bottom: calc(var(--level-height) * 4 + var(--platform-thickness) + 19px);
         }
+        .arrow-ρ-left {
+            left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px);
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) + 19px);
+        }
         /* Horizontal arrows move with level */
         #level-0:checked ~ .game-world .arrow-h { bottom: calc(var(--ground-height) + 19px); }
         #level-1:checked ~ .game-world .arrow-h { bottom: calc(var(--level-height) + var(--platform-thickness) + 19px); }
@@ -3348,6 +3363,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L2-up { display: block; }
         #level-3:checked ~ #pos-18:checked ~ .game-world .arrow-P18-left { display: none; }
         #level-3:checked ~ #pos-18:checked ~ .game-world .arrow-κ-left { display: block; }
+        /* Phantom level ρ: arrow from Lρ-P13 to L6-P13 */
+        #level-ρ:checked ~ #pos-13:checked ~ .game-world .arrow-ρ-left { display: block; }
+        #level-ρ:checked ~ #pos-13:checked ~ .nav-panel .nav-left[for="level-6"] { display: block; }
         /* Stage 5 down arrows (all positions P13-P18) */
         #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L1-down { display: block; }
         #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ #scuba-pickup:checked ~ .game-world .arrow-L2-down { display: block; }
@@ -5319,6 +5337,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="level" id="level-7" class="level-radio" title="level-7">
         <input type="radio" name="level" id="level-8" class="level-radio" title="level-8">
         <input type="radio" name="level" id="level-9" class="level-radio" title="level-9">
+        <input type="radio" name="level" id="level-ρ" class="level-radio" title="level-ρ">
         <!-- Radio buttons for layer -->
         <input type="radio" name="layer" id="layer-N" class="layer-radio" title="layer-N" checked>
         <input type="radio" name="layer" id="layer-ζ" class="layer-radio" title="layer-ζ">
@@ -5445,6 +5464,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="layer-θ" class="nav-btn nav-left"></label>
                 <label for="layer-η" class="nav-btn nav-left"></label>
                 <label for="layer-N" class="nav-btn nav-left"></label>
+                <!-- Phantom level ρ exit -->
+                <label for="level-6" class="nav-btn nav-left"></label>
             </div>
             <!-- Right cell -->
             <div class="nav-cell nav-cell-right">
@@ -5635,6 +5656,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="pos-18" class="arrow arrow-right arrow-φ-right"></label>
         <!-- Phantom position: L3-P18 (teleporter exit, visually L4-P18) -->
         <label for="pos-17" class="arrow arrow-left arrow-κ-left"></label>
+        <!-- Phantom level: Lρ-P13 (teleporter exit, visually L6-P14) -->
+        <label for="level-6" class="arrow arrow-left arrow-ρ-left"></label>
         <!-- Layer-changing arrows (S5 L0-L3) -->
         <label for="layer-ζ" class="arrow arrow-right arrow-h arrow-layer-change"></label>
         <label for="layer-ζ" class="arrow arrow-left arrow-h arrow-layer-change"></label>
@@ -6005,7 +6028,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
         <!-- Teleporter platform at S5-L3-P13 -->
         <span class="teleporter-S5-L3-P13-hover-area"></span>
-        <label for="level-6" class="teleporter-S5-L3-P13">
+        <label for="level-ρ" class="teleporter-S5-L3-P13">
             <svg><use href="#teleporter-platform"/></svg>
         </label>
         <span class="tooltip teleporter-S5-L3-P13-tooltip">Teleporter</span>

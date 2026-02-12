@@ -9,13 +9,11 @@
 
  - use more :is() selectors
 
+ - NPC bird
 
-
-serviceworker
-
-// sw.js
-self.addEventListener('fetch', (e) => e.respondWith(fetch(e.request)));
-
-// In je main JS
-navigator.serviceWorker?.register('/sw.js');
+ - serviceworker?
+    // sw.js
+    self.addEventListener('fetch', (e) => e.respondWith(fetch(e.request)));
+    // main.js
+    navigator.serviceWorker?.register('/sw.js');
 
