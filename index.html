@@ -244,6 +244,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --z-climbables: 200;          /* Ladders, vines */
             --z-hazards: 300;             /* Hazards (poison, disease) */
             --z-scenery: 400;             /* Scenery (toolbox, door, tree) */
+            --z-bird: 450;                /* Bird character (S5) */
             --z-floating-item: 500;       /* Floating item icons when using items */
             --z-underwater: 550;          /* Underwater filter overlay */
             --z-arrows: 600;              /* In-game navigation arrows */
@@ -385,6 +386,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: calc(var(--stage-height) * 2);
             transition: translate 0.5s ease;
             translate: var(--world-translateX, 0) var(--world-translateY, 0);
+            /* Bird state variables (set by mapping rules) */
+            --bird-left: 0;
+            --bird-bottom: 0;
+            --bird-attacking: 0;
             /* Inventory tracking variables (0 = not in inventory, 1 = in inventory) */
             --inv-has-key: 0;
             --inv-has-wrench: 0;
@@ -2314,6 +2319,93 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: block;
             filter: drop-shadow(0 0 6px yellow);
         }
+        /* ========== BIRD CHARACTER (S5) ========== */
+        .bird {
+            position: absolute;
+            height: 40px;
+            width: auto;
+            left: var(--bird-left);
+            bottom: var(--bird-bottom);
+            z-index: var(--z-bird);
+            transition: left 0.4s ease, bottom 0.4s ease;
+            display: none;
+            pointer-events: none;
+        }
+        .bird svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: auto;
+        }
+        .bird-fly {
+            opacity: calc(1 - var(--bird-attacking, 0));
+            transition: opacity 0.3s ease;
+            animation: bird-bob 2s ease-in-out infinite;
+        }
+        .bird-attack {
+            opacity: var(--bird-attacking, 0);
+            transition: opacity 0.3s ease;
+            animation: bird-swoop 1s ease-in-out infinite;
+        }
+        /* Show bird on S5 only (levels 0-4, positions 13-18) */
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
+        :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~
+        .game-world .bird {
+            display: block;
+        }
+        /* ---- Bird mapping rules: player location → bird position + state ---- */
+        /* Default bird position: L4-P16 (flying) — used when no specific rule matches */
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
+        :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~
+        .game-world {
+            --bird-left: calc(var(--pos-offset) + var(--pos-width) * 15);
+            --bird-bottom: calc(var(--level-height) * 4 + var(--platform-thickness));
+        }
+        /* TODO: Add full mapping table (player location → bird position + attacking state) */
+        /* Example mapping rules below — replace with complete table */
+        /* Player at L0-P13 → bird at L2-P15 (flying) */
+        #level-0:checked ~ #pos-13:checked ~ .game-world {
+            --bird-left: calc(var(--pos-offset) + var(--pos-width) * 14);
+            --bird-bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
+        }
+        /* Player at L0-P14 → bird at L2-P16 (flying) */
+        #level-0:checked ~ #pos-14:checked ~ .game-world {
+            --bird-left: calc(var(--pos-offset) + var(--pos-width) * 15);
+            --bird-bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
+        }
+        /* Player at L0-P15 → bird at L2-P17 (flying) */
+        #level-0:checked ~ #pos-15:checked ~ .game-world {
+            --bird-left: calc(var(--pos-offset) + var(--pos-width) * 16);
+            --bird-bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
+        }
+        /* Player at L0-P16 → bird at L2-P14 (flying) */
+        #level-0:checked ~ #pos-16:checked ~ .game-world {
+            --bird-left: calc(var(--pos-offset) + var(--pos-width) * 13);
+            --bird-bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
+        }
+        /* Player at L0-P17 → bird at L1-P15 (flying) */
+        #level-0:checked ~ #pos-17:checked ~ .game-world {
+            --bird-left: calc(var(--pos-offset) + var(--pos-width) * 14);
+            --bird-bottom: calc(var(--level-height) + var(--platform-thickness));
+        }
+        /* Player at L0-P18 → bird at L1-P16 (flying) */
+        #level-0:checked ~ #pos-18:checked ~ .game-world {
+            --bird-left: calc(var(--pos-offset) + var(--pos-width) * 15);
+            --bird-bottom: calc(var(--level-height) + var(--platform-thickness));
+        }
+        /* Player at L2-P15 → bird at L2-P15 (attacking!) */
+        #level-2:checked ~ #pos-15:checked ~ .game-world {
+            --bird-left: calc(var(--pos-offset) + var(--pos-width) * 14);
+            --bird-bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
+            --bird-attacking: 1;
+        }
+        /* Player at L2-P16 → bird at L2-P16 (attacking!) */
+        #level-2:checked ~ #pos-16:checked ~ .game-world {
+            --bird-left: calc(var(--pos-offset) + var(--pos-width) * 15);
+            --bird-bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
+            --bird-attacking: 1;
+        }
         .ground-S1,
         .ground-S2,
         .ground-S3,
@@ -3884,6 +3976,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         @keyframes idcard-hovering-pulse {
             0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--idcard-color)); }
             50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--idcard-color)) drop-shadow(0 0 25px var(--idcard-color)); }
+        }
+        @keyframes bird-bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        @keyframes bird-swoop {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(8px) rotate(-10deg); }
         }
         /* Enable clicking and pulsing when player is adjacent */
         #level-0:checked ~ #pos-3:checked ~ #loot-S1-L0-P3-pickup:not(:checked) ~ .game-world .loot-S1-L0-P3 .loot-in-game {
@@ -5730,6 +5830,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             </svg>
             <span class="torch-held"><svg><use href="#torch"/></svg></span>
             <span class="tooltip player-tooltip">Nibo</span>
+        </div>
+        <!-- Bird character (S5) -->
+        <div class="bird">
+            <svg class="bird-fly"><use href="#bird-fly"/></svg>
+            <svg class="bird-attack"><use href="#bird-attack"/></svg>
         </div>
         <!-- ==================== STAGE 1 LAYOUT ==================== -->
         <!-- Factory background -->
