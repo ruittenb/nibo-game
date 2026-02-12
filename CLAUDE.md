@@ -64,10 +64,13 @@ The game world is a 3x2 grid of stages:
 | levels 5-9 | S0           | S2 (jungle) | S3 (hangar) |
 | levels 0-4 | S1 (factory) | S4 (caves)  | S5          |
 
+**Terminology:** A **position** is the horizontal coordinate (`pos-*` radio), a **level** is the vertical coordinate (`level-*` radio), a **layer** is the S5 maze dimension (`layer-*` radio), and a **location** is a place in the game world (the combination of position + level + layer). Two locations can look the same visually but differ by layer or by being phantom.
+
 **Radio button IDs** are pure coordinates with no stage semantics:
 - `pos-1` through `pos-18` for horizontal position
-- `pos-φ` (phi) - a phantom position for special movement (see Phantom Positions)
+- `pos-φ` (phi) - a phantom position (see Phantom Locations)
 - `level-0` through `level-9` for vertical level (5-9 display at same heights as 0-4)
+- `level-ρ` (rho) - a phantom level (see Phantom Locations)
 
 Stage is derived from the combination of position and level as shown in the table above.
 
@@ -210,21 +213,17 @@ Items pulse/glow when the player can interact with them. This requires combining
 8. Use axe on **tree** (S2-L5-P12) → tree chopped
 9. Enter S3 → navigate to escape → victory
 
-## Phantom Positions
+## Phantom Locations
 
-**Challenge:** One label can only apply to one input element. This makes it non-trivial
-to make a player move horizontally and have them fall vertically as part of the same move:
-it would require two radio buttons to change state.
+A phantom location is a radio button state whose logical coordinates differ from where the player visually appears. This works around the CSS constraint that one label can only change one radio button. For implementation details, see `.claude/phantom-locations.md`.
 
-**Solution: Phantom positions** - a state that differs from its visual location.
+Current phantom locations:
 
-Example: `pos-φ` (in S3)
- - The player is at S3-L8-P17 and moves up
- - This moves them to S3-L8-Pφ. This counts as *horizontal* movement only.
- - This position is shown as if the player were at S3-L9-P17 (visually at L4 height).
- - As soon as the player moves left or right, they are moved back to the physical location (L8-P16 or L8-P18)
-
-Since all these transitions stay on L8, they only change the position radio - making them valid single-input operations.
+| Name | Logical state | Visual location | Purpose |
+|------|--------------|-----------------|---------|
+| φ (phi) | L8-Pφ | S3-L9-P17 | Floating platform — up from L8-P17, exits left/right back to L8 |
+| κ (kappa) | L3-P18 | S5-L4-P18 | Teleporter exit S3→S5 — level stays L3, displays at L4 |
+| ρ (rho) | Lρ-P13 | S3-L6-P14 | Teleporter exit S5→S3 — position stays P13, displays at P14 |
 
 ## Layers (S5 L0-L3)
 
