@@ -257,50 +257,13 @@ The full transition table is in `_fabriek/doc/transitions.txt` (304 transitions)
 
 The `#debug-toggle` checkbox reveals all game state inputs for testing. Each input has a `title` attribute describing its purpose.
 
-## Adding New Checkboxes
+## Adding New Checkboxes, Items, and Loot
 
-When adding a new checkbox (for item pickups, unlocks, etc.), **four things** must be updated:
+For implementation checklists on adding checkboxes, items, and loot, see `.claude/adding-items-and-loot.md`.
 
-1. **Add the checkbox input** in the HTML inputs section (before `.game-world`)
-   - Item/state checkboxes: `<input type="checkbox" id="my-checkbox" title="my-checkbox">`
-   - Loot checkboxes: `<input type="checkbox" id="loot-SX-LY-PZ-pickup" class="loot-checkbox" title="coin">`
-2. **Add the ID to the hidden inputs rule** - find the CSS rule that starts with `.position-radio, .level-radio, .loot-checkbox, #key-pickup, ...` and add your new ID (e.g., `#my-checkbox`)
-3. **Add to game state visibility rule** - find the `#debug-toggle:checked ~ .game-container ...` rule and add your ID
-4. **Add game state position** - add a rule like `#my-checkbox { top: 50px; left: XXXpx; }` with a unique left offset
-
-If you skip step 2, the checkbox will be visible in the top-left corner of the play area instead of hidden.
-
-**Note:** Level radios, position radios, and loot checkboxes use class selectors (`.level-radio`, `.position-radio`, `.loot-checkbox`) for bulk styling. Item and state checkboxes use individual ID selectors.
-
-## Adding New Items and Loot
-
-### Items (key, wrench, axe)
-
-1. **CSS variable** for the item color (e.g., `--wrench-color`)
-2. **Checkbox** in inputs section: `<input type="checkbox" id="item-pickup">`
-   - Must appear before `.game-world` in DOM order for sibling selectors to work
-3. **In-game element** (`.item-in-game`):
-   - Position at world location using `bottom` and `left` with CSS variables
-   - `display: none` / `pointer-events: none` by default
-   - Enable + pulse animation when player is adjacent and item not picked up
-   - Label targets the pickup checkbox
-4. **Fly-to-inventory rule**: when `#item-pickup:checked`, transition `bottom`/`left` to inventory position, fade `opacity` to 0
-   - Slot position uses `--inv-slot-width * (offset)` where offset accounts for other items already in inventory
-   - This rule must come after the base positioning rule (CSS cascade: later rules override)
-5. **Inventory icon** (`.inventory-item` inside `.inventory`): `visibility: hidden` by default, `visible` with transition-delay when picked up
-
-### Loot (coins, gems)
-
-1. **Checkbox** for pickup state: `<input type="checkbox" id="loot-SX-LY-PZ-pickup" class="loot-checkbox" title="coin">`
-   - Must include `class="loot-checkbox"` for bulk hiding/showing of game state inputs
-2. **Container** in `.game-world`:
-   - `.container` wrapper with location class (e.g., `.valuable-S1-L0-P3`)
-   - `.hover-area` span for tooltip hover detection
-   - `.tooltip` span with item name
-   - Label wrapping the icon, targeting the pickup checkbox
-3. **Fly-to-counter rule**: when checked, transition `bottom`/`left` to valuable counter position
-4. **Digit strip**: if max collectible count increases beyond current digits, add new frames to `@keyframes digit-roll`
-5. **Counter variable**: `--valuable-count` increments via `:checked` selectors counting picked-up loot
+Key distinction between the two checkbox types:
+- **Class-based** (`class="loot-checkbox"`): hiding and debug visibility handled automatically by class selectors
+- **ID-based** (item/state checkboxes): must be individually added to the hidden inputs rule and debug toggle rule
 
 ## Z-Index Layers
 
