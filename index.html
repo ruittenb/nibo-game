@@ -325,8 +325,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 display: none;
             }
         }
-        /* Scale to fit viewport on small screens (game height is 685px) */
-        @media (max-height: 730px) {
+        /* Scale to fit viewport on small screens (game is 900px × 685px) */
+        @media (max-height: 730px), (max-width: 920px) {
             body {
                 height: 100vh;
                 min-height: auto;
@@ -337,7 +337,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 --game-height: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin));
                 --scale-x: calc(100vw / var(--game-width));
                 --scale-y: calc(100vh / var(--game-height));
-                scale: min(var(--scale-x), var(--scale-y), 1);
+                zoom: min(var(--scale-x), var(--scale-y), 1);
             }
         }
         /* Level and position CSS variables for debug display */
