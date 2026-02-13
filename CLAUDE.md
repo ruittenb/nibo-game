@@ -215,7 +215,7 @@ Items pulse/glow when the player can interact with them. This requires combining
 
 ## Phantom Locations
 
-A phantom location is a radio button state whose logical coordinates differ from where the player visually appears. This works around the CSS constraint that one label can only change one radio button. For implementation details, see `.claude/phantom-locations.md`.
+A phantom location is a radio button state whose logical coordinates differ from where the player visually appears. This works around the CSS constraint that one label can only change one radio button. For implementation details, see `.claude/skills/phantom-locations.md`.
 
 Current phantom locations:
 
@@ -259,7 +259,7 @@ The `#debug-toggle` checkbox reveals all game state inputs for testing. Each inp
 
 ## Adding New Checkboxes, Items, and Loot
 
-For implementation checklists on adding checkboxes, items, and loot, see `.claude/adding-items-and-loot.md`.
+For implementation checklists on adding checkboxes, items, and loot, see `.claude/skills/adding-items-and-loot.md`.
 
 Key distinction between the two checkbox types:
 - **Class-based** (`class="loot-checkbox"`): hiding and debug visibility handled automatically by class selectors
