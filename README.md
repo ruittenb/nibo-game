@@ -6,22 +6,26 @@ interactive session with [Claude Code](https://claude.com/product/claude-code).
 
 Help Nibo the little spaceman escape from the alien planet.
 
-## Stage 1:
+## Example Screenshot
 
 ![Stage 1](images/stage-1.png)
 
-# Project location
+## Project Location
 
- - [GitHub](https://github.com/ruittenb/nibo-game)
+ - [GitHub Repository](https://github.com/ruittenb/nibo-game)
 
-# Icons
+## Design Document
+
+ - [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1DU6q0lB_yoNIJKKpOgwZ7YOaq9Mpq2HoFjeaZPnaeE0/)
+
+## Icons
 
 Copied from and/or inspired by
 
  - [Font Awesome](https://fontawesome.com/search?q=rock&ic=free-collection)
  - [Material Design Icons](https://pictogrammers.com/library/mdi/)
 
-# Similar work by others
+## Similar work by others
 
  - [The Mine](https://codepen.io/jcoulterdesign/pen/NOMeEb) by Jamie Coulter
  - [CSScape room](https://csscape-room.iamdanielmarino.com/) by Daniel Marino
