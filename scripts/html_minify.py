@@ -243,33 +243,34 @@ def process(html_content):
     html_vars = set(re.findall(r'(--[\w-]+)', html_content))
     all_vars = css_vars | html_vars
 
-    # Build renaming maps
-    name_gen = generate_short_names()
+    # Build renaming maps (separate generators per namespace — they can't collide)
     reserved = {'a', 'b', 'i', 's', 'p', 'q', 'u'}
 
     class_map = {}
     id_map = {}
     var_map = {}
 
+    class_gen = generate_short_names()
     for cls in sorted(all_classes):
-        short = next(name_gen)
+        short = next(class_gen)
         while short in reserved:
-            short = next(name_gen)
+            short = next(class_gen)
         if len(short) < len(cls):
             class_map[cls] = short
 
+    id_gen = generate_short_names()
     for id_name in sorted(all_ids):
-        short = next(name_gen)
+        short = next(id_gen)
         while short in reserved:
-            short = next(name_gen)
+            short = next(id_gen)
         if len(short) < len(id_name):
             id_map[id_name] = short
 
+    var_gen = generate_short_names()
     for var_name in sorted(all_vars):
-        short = next(name_gen)
+        short = next(var_gen)
         while short in reserved:
-            short = next(name_gen)
-        # var_name includes the --, short name needs -- prefix too
+            short = next(var_gen)
         short_var = '--' + short
         if len(short_var) < len(var_name):
             var_map[var_name] = short_var
