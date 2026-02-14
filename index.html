@@ -2384,6 +2384,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .game-world .bird {
             display: block;
         }
+        /* Route-colored player tooltip border on S5 L0-L3 */
+        /* Red route: P13, P16, P17 */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~
+        :is(#pos-13, #pos-16, #pos-17):checked ~
+        .game-world .player-tooltip {
+            border-color: #8b0000;
+        }
+        /* Green route: P14, P15, P18 */
+        :is(#level-0, #level-1, #level-2, #level-3):checked ~
+        :is(#pos-14, #pos-15, #pos-18):checked ~
+        .game-world .player-tooltip {
+            border-color: #006400;
+        }
+
         /* ---- Bird mapping rules: player location → bird position + state ---- */
         /* Default: L4-P16 (flying) — set in .game-world variables above */
         /* One rule per layer × level × position (120 total) */
@@ -2406,9 +2420,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-0:checked ~ #layer-θ:checked ~ #pos-15:checked ~ .game-world { --bird-level: 0; --bird-pos: 13; }
         /* L0-P16: N at L3-P15 (attacking), ζ+η+θ at L3-P14 */
         #level-0:checked ~ #layer-N:checked ~ #pos-16:checked ~ .game-world { --bird-level: 3; --bird-pos: 15; --bird-attacking: 1; }
-        #level-0:checked ~ #layer-ζ:checked ~ #pos-16:checked ~ .game-world { --bird-level: 3; --bird-pos: 14; }
+        #level-0:checked ~ #layer-ζ:checked ~ #pos-16:checked ~ .game-world { --bird-level: 4; --bird-pos: 14; }
         #level-0:checked ~ #layer-η:checked ~ #pos-16:checked ~ .game-world { --bird-level: 3; --bird-pos: 14; }
-        #level-0:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .game-world { --bird-level: 3; --bird-pos: 14; }
+        #level-0:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .game-world { --bird-level: 3; --bird-pos: 15; }
         /* L0-P17: N at L4-P17 (attacking), ζ+η+θ at L4-P17 */
         #level-0:checked ~ #layer-N:checked ~ #pos-17:checked ~ .game-world { --bird-level: 4; --bird-pos: 17; --bird-attacking: 1; }
         #level-0:checked ~ :is(#layer-ζ, #layer-η, #layer-θ):checked ~ #pos-17:checked ~ .game-world { --bird-level: 4; --bird-pos: 17; }
@@ -2422,8 +2436,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* L1-P13: N at L4-P14, ζ+η+θ at L0-P13 */
         #level-1:checked ~ #layer-N:checked ~ #pos-13:checked ~ .game-world { --bird-level: 4; --bird-pos: 14; }
         #level-1:checked ~ #layer-ζ:checked ~ #pos-13:checked ~ .game-world { --bird-level: 3; --bird-pos: 14; }
-        #level-1:checked ~ #layer-η:checked ~ #pos-13:checked ~ .game-world { --bird-level: 0; --bird-pos: 13; }
-        #level-1:checked ~ #layer-θ:checked ~ #pos-13:checked ~ .game-world { --bird-level: 0; --bird-pos: 13; }
+        #level-1:checked ~ #layer-η:checked ~ #pos-13:checked ~ .game-world { --bird-level: 4; --bird-pos: 16; }
+        #level-1:checked ~ #layer-θ:checked ~ #pos-13:checked ~ .game-world { --bird-level: 4; --bird-pos: 13; }
         /* L1-P14: bird at L0-P13 (placeholder) */
         #level-1:checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world { --bird-level: 0; --bird-pos: 13; }
         #level-1:checked ~ #layer-ζ:checked ~ #pos-14:checked ~ .game-world { --bird-level: 0; --bird-pos: 13; }
