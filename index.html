@@ -2372,7 +2372,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             height: 120px;
             width: 120px;
-            left: calc(var(--pos-offset) + var(--pos-width) * var(--bird-pos) - var(--pos-width) - 20px);
+            left: calc(var(--pos-offset) + var(--pos-width) * var(--bird-pos) - var(--pos-width) - 40px);
             bottom: calc(var(--level-height) * var(--bird-level) + var(--platform-thickness));
             z-index: var(--z-bird);
             transition: left 0.4s ease, bottom 0.4s ease;
@@ -2407,6 +2407,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: 50%;
             transform: translateX(-50%);
             margin-bottom: 8px;
+            white-space: pre-line;
             counter-reset: bird-level var(--bird-level) bird-pos var(--bird-pos);
         }
         .bird:hover {
@@ -2415,9 +2416,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .bird:hover .bird-tooltip {
             opacity: 1;
         }
-        /* Debug mode: show coordinates in bird tooltip */
-        #debug-toggle:checked ~ .game-world .bird-tooltip::after {
-            content: " (L" counter(bird-level) "-P" counter(bird-pos) ")";
+        .bird-tooltip::before {
+            content: "Bird of Prey";
+        }
+        #debug-toggle:checked ~ .game-world .bird-tooltip::before {
+            content: "Bird of Prey (L" counter(bird-level) "-P" counter(bird-pos) ")";
+        }
+        .bird-tooltip::after {
+            content: "It is attacking!";
+            display: block;
+            opacity: var(--bird-attacking, 0);
+            font-size: calc(var(--bird-attacking, 0) * 12px);
+            line-height: calc(var(--bird-attacking, 0) * 1.4);
+            padding-top: calc(var(--bird-attacking, 0) * 4px);
         }
         /* Show bird on S5 only (levels 0-4, positions 13-18) */
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
@@ -6086,7 +6097,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="bird">
             <svg class="bird-fly"><use href="#bird-fly"/></svg>
             <svg class="bird-attack"><use href="#bird-attack"/></svg>
-            <span class="tooltip bird-tooltip">Bird of Prey</span>
+            <span class="tooltip bird-tooltip"></span>
         </div>
         <!-- ==================== STAGE 1 LAYOUT ==================== -->
         <!-- Factory background -->
