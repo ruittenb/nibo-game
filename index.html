@@ -2324,7 +2324,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Landing after jump from phantom position */
         #level-8:checked ~ #pos-16:checked ~ .game-world .player,
-        #level-8:checked ~ #pos-18:checked ~ .game-world .player {
+        #level-8:checked ~ #pos-18:checked ~ .game-world .player,
+        /* Landing at L3-P18 (from Lτ teleporter exit or normal movement) */
+        #level-3:checked ~ #pos-18:checked ~ .game-world .player {
             transition: left 0.3s ease-out, bottom 0.3s ease-in;
         }
         /* Player tooltip */
@@ -2555,8 +2557,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* L3-P14: N+η at L3-P14 (attacking), ζ+θ at L4-P15 */
         #level-3:checked ~ :is(#layer-N, #layer-η):checked ~ #pos-14:checked ~ .game-world { --bird-level: 3; --bird-pos: 14; --bird-attacking: 1; }
         #level-3:checked ~ :is(#layer-ζ, #layer-θ):checked ~ #pos-14:checked ~ .game-world { --bird-level: 4; --bird-pos: 15; }
-        /* L3-P15: layer-specific */
-        #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world { --bird-level: 4; --bird-pos: 15; }
+        /* L3-P15: N at L4-P14 (attacking), layer-specific */
+        #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world { --bird-level: 4; --bird-pos: 14; --bird-attacking: 1; }
         #level-3:checked ~ #layer-ζ:checked ~ #pos-15:checked ~ .game-world { --bird-level: 3; --bird-pos: 15; }
         #level-3:checked ~ #layer-η:checked ~ #pos-15:checked ~ .game-world { --bird-level: 4; --bird-pos: 14; }
         #level-3:checked ~ #layer-θ:checked ~ #pos-15:checked ~ .game-world { --bird-level: 3; --bird-pos: 14; }
@@ -4771,7 +4773,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-1:checked ~ #pos-6:checked ~ .death-screen-overlay-poison,
         /* S2 disease use levels 5-9 (L0->L5, L1->L6) */
         #level-5:checked ~ #pos-10:checked ~ .death-screen-overlay-disease,
-        #level-6:checked ~ #pos-9:checked ~ .death-screen-overlay-disease {
+        #level-6:checked ~ #pos-9:checked ~ .death-screen-overlay-disease,
+        /* S5 bird kill */
+        #level-3:checked ~ #layer-N:checked ~ #pos-13:checked ~ .death-screen-overlay-bird,
+        #level-3:checked ~ #layer-N:checked ~ #pos-14:checked ~ .death-screen-overlay-bird,
+        #level-3:checked ~ #layer-θ:checked ~ #pos-17:checked ~ .death-screen-overlay-bird {
             opacity: 1;
             pointer-events: auto;
         }
@@ -6432,6 +6438,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
         <div class="overlay death-screen-overlay death-screen-overlay-chemical">
             <div class="message">You died from chemical waste</div>
+            <div class="submessage">GAME OVER</div>
+            <a href="" class="submessage">Start again</a>
+        </div>
+        <div class="overlay death-screen-overlay death-screen-overlay-bird">
+            <div class="message">You were killed by a bird of prey</div>
             <div class="submessage">GAME OVER</div>
             <a href="" class="submessage">Start again</a>
         </div>
