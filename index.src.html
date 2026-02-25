@@ -4855,8 +4855,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#death-1, #death-2, #death-3):checked ~ #level-5:checked ~
             :is(#pos-9, #pos-11):checked ~
             .death-screen-overlay,
-        /* Disease L6: approached from L6-P10 left */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-6:checked ~ #pos-10:checked ~
+        /* Disease L6: approached from L6-P8 right or L6-P10 left */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-6:checked ~
+            :is(#pos-8, #pos-10):checked ~
             .death-screen-overlay,
         /* Bird N-L3-P13: from N-L2-P13 up */
         :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
@@ -4900,8 +4901,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#death-1, #death-2, #death-3):checked ~ #level-5:checked ~
             :is(#pos-9, #pos-11):checked ~
             .death-screen-overlay .message::after { content: "You died from a deadly disease"; }
-        :is(#death-1, #death-2, #death-3):checked ~ #level-6:checked ~ #pos-10:checked ~
-            .death-screen-overlay .message::after { content: "You died from chemical waste"; }
+        :is(#death-1, #death-2, #death-3):checked ~ #level-6:checked ~
+            :is(#pos-8, #pos-10):checked ~
+            .death-screen-overlay .message::after { content: "You died from a deadly disease"; }
         :is(#death-1, #death-2, #death-3):checked ~ :is(#level-2, #level-3):checked ~
             :is(#layer-N, #layer-η, #layer-θ, #layer-ζ):checked ~
             :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17):checked ~
@@ -4915,8 +4917,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#death-1, #death-2, #death-3):checked ~ #level-5:checked ~
             :is(#pos-9, #pos-11):checked ~
             .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 9); }
-        /* Disease L6: player shown at P9 (approach from P10) */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-6:checked ~ #pos-10:checked ~
+        /* Disease L6: player shown at P9 (approach from P8 or P10) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-6:checked ~
+            :is(#pos-8, #pos-10):checked ~
             .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 8); }
         /* Bird N-L3-P13: player shown at P13 L3 (approach from N-L2-P13) */
         :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
@@ -5003,6 +5006,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #lives-3:checked ~ #level-5:checked ~ #pos-11:checked ~ .nav-panel .nav-death-left-1,
         #lives-2:checked ~ #level-5:checked ~ #pos-11:checked ~ .nav-panel .nav-death-left-2,
         #lives-1:checked ~ #level-5:checked ~ #pos-11:checked ~ .nav-panel .nav-death-left-3 { display: block; }
+
+        /* --- Disease L6-P9: from L6-P8 right --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-6:checked ~ #pos-8:checked ~ .game-world .arrow-P8-right { display: none; }
+        #lives-3:checked ~ #level-6:checked ~ #pos-8:checked ~ .game-world .death-right-1,
+        #lives-2:checked ~ #level-6:checked ~ #pos-8:checked ~ .game-world .death-right-2,
+        #lives-1:checked ~ #level-6:checked ~ #pos-8:checked ~ .game-world .death-right-3 {
+            display: block;
+            left: calc(var(--pos-offset) + var(--pos-width) * 7.5 + 12px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-6:checked ~ #pos-8:checked ~ .nav-panel .nav-right[for="pos-9"] { display: none; }
+        #lives-3:checked ~ #level-6:checked ~ #pos-8:checked ~ .nav-panel .nav-death-right-1,
+        #lives-2:checked ~ #level-6:checked ~ #pos-8:checked ~ .nav-panel .nav-death-right-2,
+        #lives-1:checked ~ #level-6:checked ~ #pos-8:checked ~ .nav-panel .nav-death-right-3 { display: block; }
 
         /* --- Disease L6-P9: from L6-P10 left --- */
         :is(#lives-3, #lives-2, #lives-1):checked ~ #level-6:checked ~ #pos-10:checked ~ .game-world .arrow-P10-left { display: none; }
