@@ -237,6 +237,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --seashell-color: #ff69b4;
             --cave-rock-color: #4a3a2a;   /* Stalactite/stalagmite color */
             --cave-rock-shadow: drop-shadow(2px 0 2px #66aaff80);
+            --heart-color: #ff3040;        /* Heart (lives) color */
+            --heart-lost-color: #444;      /* Lost heart color */
             --border-color: #4a4a6a;      /* Border color for UI elements */
             /* Z-index layers */
             --z-walls: 50;               /* Warning walls, rock walls */
@@ -1776,16 +1778,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .heart-icon {
             width: 20px;
             height: 20px;
-            color: #ff3040;
-            filter: drop-shadow(0 0 2px #ff304080);
-            transition: opacity 0.5s ease-out;
+            color: var(--heart-color);
+            filter: drop-shadow(0 0 2px color-mix(in srgb, var(--heart-color) 50%, transparent));
+            transition: color 1s ease-out 0.5s, filter 1s ease-out 0.5s;
         }
         /* Heart 3 fades after 1st death */
-        :is(#death-1, #lives-2, #death-2, #lives-1, #death-3):checked ~ .heart-panel .heart-icon-3 { opacity: 0.2; }
+        :is(#death-1, #lives-2, #death-2, #lives-1, #death-3):checked ~ .heart-panel .heart-icon-3 { color: var(--heart-lost-color); filter: none; }
         /* Heart 2 fades after 2nd death */
-        :is(#death-2, #lives-1, #death-3):checked ~ .heart-panel .heart-icon-2 { opacity: 0.2; }
+        :is(#death-2, #lives-1, #death-3):checked ~ .heart-panel .heart-icon-2 { color: var(--heart-lost-color); filter: none; }
         /* Heart 1 fades on game over */
-        #death-3:checked ~ .heart-panel .heart-icon-1 { opacity: 0.2; }
+        #death-3:checked ~ .heart-panel .heart-icon-1 { color: var(--heart-lost-color); filter: none; }
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
             position: absolute;
@@ -4820,9 +4822,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             .death-heart {
                 width: 32px;
                 height: 32px;
-                color: #ff3040;
-                filter: drop-shadow(0 0 4px #ff304080);
-                transition: opacity 0.5s ease-out;
+                color: var(--heart-color);
+                filter: drop-shadow(0 0 4px color-mix(in srgb, var(--heart-color) 50%, transparent));
+                transition: color 1s ease-out 0.5s, filter 1s ease-out 0.5s;
             }
             .resurrect-btn {
                 display: none;
@@ -4834,9 +4836,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             }
         }
         /* Death overlay hearts fade based on life state */
-        :is(#death-1, #lives-2, #death-2, #lives-1, #death-3):checked ~ .death-screen-overlay .dh-3 { opacity: 0.2; }
-        :is(#death-2, #lives-1, #death-3):checked ~ .death-screen-overlay .dh-2 { opacity: 0.2; }
-        #death-3:checked ~ .death-screen-overlay .dh-1 { opacity: 0.2; }
+        :is(#death-1, #lives-2, #death-2, #lives-1, #death-3):checked ~ .death-screen-overlay .dh-3 { color: var(--heart-lost-color); filter: none; }
+        :is(#death-2, #lives-1, #death-3):checked ~ .death-screen-overlay .dh-2 { color: var(--heart-lost-color); filter: none; }
+        #death-3:checked ~ .death-screen-overlay .dh-1 { color: var(--heart-lost-color); filter: none; }
         /* Resurrect buttons: show only during correct death state */
         #death-1:checked ~ .death-screen-overlay .resurrect-d1 { display: block; }
         #death-2:checked ~ .death-screen-overlay .resurrect-d2 { display: block; }
@@ -4846,49 +4848,62 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Show death overlay when player is at approach position during death state */
         /* Poison: approached from L1-P5 going right */
         :is(#death-1, #death-2, #death-3):checked ~ #level-1:checked ~ #pos-5:checked ~
-            .death-screen-overlay-poison,
+            .death-screen-overlay,
         /* Disease L5: approached from L5-P9 right or L5-P11 left */
         :is(#death-1, #death-2, #death-3):checked ~ #level-5:checked ~
             :is(#pos-9, #pos-11):checked ~
-            .death-screen-overlay-disease,
+            .death-screen-overlay,
         /* Disease L6: approached from L6-P10 left */
         :is(#death-1, #death-2, #death-3):checked ~ #level-6:checked ~ #pos-10:checked ~
-            .death-screen-overlay-disease,
+            .death-screen-overlay,
         /* Bird N-L3-P13: from N-L2-P13 up */
         :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
             #layer-N:checked ~ #pos-13:checked ~
-            .death-screen-overlay-bird,
+            .death-screen-overlay,
         /* Bird N-L3-P13: from η-L3-P13 left (vis P14) */
         :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
             #layer-η:checked ~ #pos-13:checked ~
-            .death-screen-overlay-bird,
+            .death-screen-overlay,
         /* Bird N-L3-P14: from N-L2-P14 up */
         :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
             #layer-N:checked ~ #pos-14:checked ~
-            .death-screen-overlay-bird,
+            .death-screen-overlay,
         /* Bird N-L3-P14: from η-L3-P14 right (vis P13) */
         :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
             #layer-η:checked ~ #pos-14:checked ~
-            .death-screen-overlay-bird,
+            .death-screen-overlay,
         /* Bird N-L3-P14: from N-L3-P15 left */
         :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
             #layer-N:checked ~ #pos-15:checked ~
-            .death-screen-overlay-bird,
+            .death-screen-overlay,
         /* Bird θ-L3-P17: from θ-L2-P17 up */
         :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
             #layer-θ:checked ~ #pos-17:checked ~
-            .death-screen-overlay-bird,
+            .death-screen-overlay,
         /* Bird θ-L3-P17: from ζ-L3-P17 left (vis P18) */
         :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
             #layer-ζ:checked ~ #pos-17:checked ~
-            .death-screen-overlay-bird,
+            .death-screen-overlay,
         /* Bird θ-L3-P17: from θ-L3-P16 right */
         :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
             #layer-θ:checked ~ #pos-16:checked ~
-            .death-screen-overlay-bird {
+            .death-screen-overlay {
             opacity: 1;
             pointer-events: auto;
         }
+
+        /* Death message text per hazard type */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-1:checked ~ #pos-5:checked ~
+            .death-screen-overlay .message::after { content: "You died from poison"; }
+        :is(#death-1, #death-2, #death-3):checked ~ #level-5:checked ~
+            :is(#pos-9, #pos-11):checked ~
+            .death-screen-overlay .message::after { content: "You died from a deadly disease"; }
+        :is(#death-1, #death-2, #death-3):checked ~ #level-6:checked ~ #pos-10:checked ~
+            .death-screen-overlay .message::after { content: "You died from chemical waste"; }
+        :is(#death-1, #death-2, #death-3):checked ~ :is(#level-2, #level-3):checked ~
+            :is(#layer-N, #layer-η, #layer-θ, #layer-ζ):checked ~
+            :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17):checked ~
+            .death-screen-overlay .message::after { content: "You were killed by a bird of prey"; }
 
         /* Player visual override during death — show player at hazard location */
         /* Poison: player shown at P6 (approach from P5) */
@@ -6792,52 +6807,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="submessage">Click to start</div>
             <div class="copyright">© 2026 René Uittenbogaard · <a href="https://github.com/ruittenb/nibo-game" target="_blank">View on GitHub</a></div>
         </label>
-        <!-- Death overlays -->
-        <div class="overlay death-screen-overlay death-screen-overlay-poison">
-            <div class="message">You died from poison</div>
+        <!-- Death overlay -->
+        <div class="overlay death-screen-overlay">
+            <div class="message"></div>
             <div class="death-hearts">
                 <svg class="death-heart dh-1"><use href="#heart"/></svg>
                 <svg class="death-heart dh-2"><use href="#heart"/></svg>
                 <svg class="death-heart dh-3"><use href="#heart"/></svg>
             </div>
-            <label for="lives-2" class="submessage resurrect-btn resurrect-d1">Click a heart to continue</label>
-            <label for="lives-1" class="submessage resurrect-btn resurrect-d2">Click a heart to continue</label>
-            <div class="submessage game-over-text">GAME OVER</div>
-            <a href="" class="submessage start-again-link">Start again</a>
-        </div>
-        <div class="overlay death-screen-overlay death-screen-overlay-disease">
-            <div class="message">You died from a deadly disease</div>
-            <div class="death-hearts">
-                <svg class="death-heart dh-1"><use href="#heart"/></svg>
-                <svg class="death-heart dh-2"><use href="#heart"/></svg>
-                <svg class="death-heart dh-3"><use href="#heart"/></svg>
-            </div>
-            <label for="lives-2" class="submessage resurrect-btn resurrect-d1">Click a heart to continue</label>
-            <label for="lives-1" class="submessage resurrect-btn resurrect-d2">Click a heart to continue</label>
-            <div class="submessage game-over-text">GAME OVER</div>
-            <a href="" class="submessage start-again-link">Start again</a>
-        </div>
-        <div class="overlay death-screen-overlay death-screen-overlay-chemical">
-            <div class="message">You died from chemical waste</div>
-            <div class="death-hearts">
-                <svg class="death-heart dh-1"><use href="#heart"/></svg>
-                <svg class="death-heart dh-2"><use href="#heart"/></svg>
-                <svg class="death-heart dh-3"><use href="#heart"/></svg>
-            </div>
-            <label for="lives-2" class="submessage resurrect-btn resurrect-d1">Click a heart to continue</label>
-            <label for="lives-1" class="submessage resurrect-btn resurrect-d2">Click a heart to continue</label>
-            <div class="submessage game-over-text">GAME OVER</div>
-            <a href="" class="submessage start-again-link">Start again</a>
-        </div>
-        <div class="overlay death-screen-overlay death-screen-overlay-bird">
-            <div class="message">You were killed by a bird of prey</div>
-            <div class="death-hearts">
-                <svg class="death-heart dh-1"><use href="#heart"/></svg>
-                <svg class="death-heart dh-2"><use href="#heart"/></svg>
-                <svg class="death-heart dh-3"><use href="#heart"/></svg>
-            </div>
-            <label for="lives-2" class="submessage resurrect-btn resurrect-d1">Click a heart to continue</label>
-            <label for="lives-1" class="submessage resurrect-btn resurrect-d2">Click a heart to continue</label>
+            <label for="lives-2" class="submessage resurrect-btn resurrect-d1">Click to retry</label>
+            <label for="lives-1" class="submessage resurrect-btn resurrect-d2">Click to retry</label>
             <div class="submessage game-over-text">GAME OVER</div>
             <a href="" class="submessage start-again-link">Start again</a>
         </div>
