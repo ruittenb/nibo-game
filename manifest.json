@@ -3,8 +3,8 @@
   "short_name": "Nibo",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "black",
-  "theme_color": "white",
+  "background_color": "#181e36",
+  "theme_color": "#181e36",
   "icons": [
     {
       "src": "/images/favicon-192.png",
