@@ -10,8 +10,3 @@ help: ## Print help for each target
 minify: ## Minify the html/css file
 	scripts/html_minify.py $(INPUT) -o $(OUTPUT)
 
-.PHONY: minify-more
-minify-more: ## Minify the html/css file, better effort
-	scripts/html_minify_more.py $(INPUT) -o $(OUTPUT)
-
-
