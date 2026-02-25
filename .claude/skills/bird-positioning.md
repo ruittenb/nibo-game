@@ -83,7 +83,7 @@ When multiple layers at the same level+position produce the **same** bird output
 #level-3:checked ~ #layer-θ:checked ~ #pos-13:checked ~ .game-world { --bird-level: 4; --bird-pos: 13; }
 ```
 
-## Organization in index.html
+## Organization in index.src.html
 
 The rules are located in the section starting with:
 ```css

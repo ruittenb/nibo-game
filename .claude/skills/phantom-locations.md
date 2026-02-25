@@ -15,8 +15,9 @@ Both follow the same pattern: the radio stays on its logical axis (position or l
 | Name | Logical state | Visual location | Purpose |
 |------|--------------|-----------------|---------|
 | φ (phi) | L8-Pφ | S3-L9-P17 | Floating platform in S3 — entering via up-arrow at L8-P17 |
-| κ (kappa) | L3-P18 | S5-L4-P18 | Teleporter exit from S3→S5 — level stays at L3, displays one level higher |
-| ρ (rho) | Lρ-P13 | S3-L6-P14 | Teleporter exit from S5→S3 — position stays at P13, displays one position right |
+| ρ (rho) | Lρ-P13 | S3-L6-P14 | Teleporter exit from S5→S3 (N/θ) — position stays at P13, displays one position right |
+| σ (sigma) | Lσ-P14 | S3-L9-P15 | Teleporter exit from S5→S3 (ζ/η) — position stays at P14, displays one position right |
+| τ (tau) | Lτ-P18 | S5-L4-P18 | Teleporter exit from S3→S5 — exits down to L3-P18 |
 
 ## Naming Convention
 
@@ -84,6 +85,7 @@ If the exit arrow leads to a position where the player "falls" (visual level cha
     transition: left 0.3s ease-out, bottom 0.3s ease-in;
 }
 ```
+**Warning:** Always transition both `left` and `bottom`. Omitting `left` causes jerky horizontal movement.
 
 #### 8. Add exit arrows — see [Adding Arrows from a Phantom Location](#adding-arrows-from-a-phantom-location) below
 
@@ -144,9 +146,12 @@ Subtitle display rules use `:is(...)` lists of level and position IDs (~line 273
 }
 ```
 
-#### 7. Add exit arrows — see [Adding Arrows from a Phantom Location](#adding-arrows-from-a-phantom-location) below
+#### 7. CSS: Bird visibility (S5 phantoms only)
+If the phantom level is in S5, add its ID to the bird visibility rule — the `:is(#level-0, ..., #level-τ):checked` selector that controls `display: block` on the bird. This rule is separate from the bird positioning rules and easy to forget.
 
-#### 8. Add entry mechanism
+#### 8. Add exit arrows — see [Adding Arrows from a Phantom Location](#adding-arrows-from-a-phantom-location) below
+
+#### 9. Add entry mechanism
 The entry point is a label that targets `level-X` (e.g., a teleporter `for="level-X"`).
 
 ---
