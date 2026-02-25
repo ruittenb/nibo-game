@@ -4806,18 +4806,18 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Death overlay */
         .death-screen-overlay {
             z-index: var(--z-endgame-overlay);
-            padding-bottom: 20%;
 
             .message {
                 color: #ff0000;
-            }
-            .submessage {
-                margin-top: 5%;
             }
             .death-hearts {
                 display: flex;
                 gap: 12px;
                 margin-top: 20px;
+                visibility: hidden;
+            }
+            .submessage {
+                margin-top: 5%;
             }
             .death-heart {
                 width: 32px;
@@ -4835,6 +4835,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 display: none;
             }
         }
+        /* Show death overlay hearts only during death states */
+        :is(#death-1, #death-2, #death-3):checked ~ .death-screen-overlay .death-hearts { visibility: visible; }
         /* Death overlay hearts fade based on life state */
         :is(#death-1, #lives-2, #death-2, #lives-1, #death-3):checked ~ .death-screen-overlay .dh-3 { color: var(--heart-lost-color); filter: none; }
         :is(#death-2, #lives-1, #death-3):checked ~ .death-screen-overlay .dh-2 { color: var(--heart-lost-color); filter: none; }
