@@ -237,6 +237,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --seashell-color: #ff69b4;
             --cave-rock-color: #4a3a2a;   /* Stalactite/stalagmite color */
             --cave-rock-shadow: drop-shadow(2px 0 2px #66aaff80);
+            --heart-color: #ff3040;        /* Heart (lives) color */
+            --heart-lost-color: #444;      /* Lost heart color */
             --border-color: #4a4a6a;      /* Border color for UI elements */
             /* Z-index layers */
             --z-walls: 50;               /* Warning walls, rock walls */
@@ -1465,7 +1467,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Hide radio buttons and checkboxes by default */
         .position-radio, .level-radio, .layer-radio, .loot-checkbox,
-        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup {
+        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup,
+        #lives-3, #death-1, #lives-2, #death-2, #lives-1, #death-3 {
             display: none;
             /* When unhidden for debugging: */
             z-index: var(--z-state-controls);
@@ -1557,6 +1560,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #darkness-toggle { top: 140px; left: 180px; }
         /* Debug positions - S5 items */
         #idcard-pickup { top: 120px; left: 310px; }
+        /* Debug positions - lives (left column, below layers, at phantom level height) */
+        #lives-3 { top: 170px; left: 10px; }
+        #death-1 { top: 190px; left: 10px; }
+        #lives-2 { top: 210px; left: 10px; }
+        #death-2 { top: 230px; left: 10px; }
+        #lives-1 { top: 250px; left: 10px; }
+        #death-3 { top: 270px; left: 10px; }
         /* Show game state inputs when debug is checked */
         #debug-toggle:checked ~ .position-radio,
         #debug-toggle:checked ~ .level-radio,
@@ -1575,7 +1585,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ #flight-controls-used,
         #debug-toggle:checked ~ #escaped,
         #debug-toggle:checked ~ #darkness-toggle,
-        #debug-toggle:checked ~ #torch-pickup {
+        #debug-toggle:checked ~ #torch-pickup,
+        #debug-toggle:checked ~ #lives-3,
+        #debug-toggle:checked ~ #death-1,
+        #debug-toggle:checked ~ #lives-2,
+        #debug-toggle:checked ~ #death-2,
+        #debug-toggle:checked ~ #lives-1,
+        #debug-toggle:checked ~ #death-3 {
             display: block;
         }
         /* Inventory area */
@@ -1743,6 +1759,35 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S5-L3-P13-pickup:checked ~ .counter-panel { --loot-S5-L3-P13: 2; }
         #loot-S5-L2-P17-pickup:checked ~ .counter-panel { --loot-S5-L2-P17: 2; }
         #loot-S5-L0-P18-pickup:checked ~ .counter-panel { --loot-S5-L0-P18: 1; }
+        /* Heart panel (lives) */
+        .heart-panel {
+            position: absolute;
+            top: calc(var(--panel-top) + var(--panel-height) + var(--panel-gap));
+            right: calc(var(--panel-right) + var(--counter-panel-width) + var(--panel-gap));
+            height: var(--panel-height);
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            background: #0000004d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 0 var(--panel-padding);
+            z-index: var(--z-ui);
+        }
+        .heart-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--heart-color);
+            filter: drop-shadow(0 0 2px color-mix(in srgb, var(--heart-color) 50%, transparent));
+            transition: color 1s ease-out 0.5s, filter 1s ease-out 0.5s;
+        }
+        /* Heart 3 fades after 1st death */
+        :is(#death-1, #lives-2, #death-2, #lives-1, #death-3):checked ~ .heart-panel .heart-icon-3 { color: var(--heart-lost-color); filter: none; }
+        /* Heart 2 fades after 2nd death */
+        :is(#death-2, #lives-1, #death-3):checked ~ .heart-panel .heart-icon-2 { color: var(--heart-lost-color); filter: none; }
+        /* Heart 1 fades on game over */
+        #death-3:checked ~ .heart-panel .heart-icon-1 { color: var(--heart-lost-color); filter: none; }
         /* Key - single element that animates from game world to inventory */
         .key-in-game {
             position: absolute;
@@ -2446,7 +2491,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Green route: P14, P15, P18 */
         #debug-toggle:checked ~
-        :is(#level-0, #level-1, #level-2, #level-3):checked ~
+        :is(#level-0, #level-1, #level-2, #level-3, #level-τ):checked ~
         :is(#pos-14, #pos-15, #pos-18):checked ~
         .game-world .player-tooltip {
             border-color: #228B22;
@@ -2555,8 +2600,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #layer-ζ:checked ~ #pos-13:checked ~ .game-world { --bird-level: 4; --bird-pos: 14; }
         #level-3:checked ~ #layer-η:checked ~ #pos-13:checked ~ .game-world { --bird-level: 4; --bird-pos: 13; --bird-attacking: 1; }
         #level-3:checked ~ #layer-θ:checked ~ #pos-13:checked ~ .game-world { --bird-level: 4; --bird-pos: 13; --bird-attacking: 1; }
-        /* L3-P14: N+η at L3-P14 (attacking), ζ+θ at L4-P15 */
-        #level-3:checked ~ :is(#layer-N, #layer-η):checked ~ #pos-14:checked ~ .game-world { --bird-level: 3; --bird-pos: 14; --bird-attacking: 1; }
+        /* L3-P14: N at L3-P14 (attacking), η at L3-P15 (attacking), ζ+θ at L4-P15 */
+        #level-3:checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world { --bird-level: 3; --bird-pos: 14; --bird-attacking: 1; }
+        #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .game-world { --bird-level: 4; --bird-pos: 14; --bird-attacking: 1; }
         #level-3:checked ~ :is(#layer-ζ, #layer-θ):checked ~ #pos-14:checked ~ .game-world { --bird-level: 4; --bird-pos: 15; }
         /* L3-P15: N at L4-P14 (attacking), layer-specific */
         #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world { --bird-level: 4; --bird-pos: 14; --bird-attacking: 1; }
@@ -3660,13 +3706,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-0:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L0-up { display: block; }
         #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L1-up { display: block; }
         #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L2-up { display: block; }
-        #level-τ:checked ~ #pos-18:checked ~ .game-world .arrow-τ-left { display: block; }
+        #level-τ:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-18:checked ~ .game-world .arrow-L4-down { display: block; }
+        #level-τ:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ .game-world .arrow-τ-left { display: block; }
         /* Phantom level ρ: arrow from Lρ-P13 to L6-P13 */
         #level-ρ:checked ~ #pos-13:checked ~ .game-world .arrow-ρ-left { display: block; }
         #level-ρ:checked ~ #pos-13:checked ~ .nav-panel .nav-left[for="level-6"] { display: block; }
+        #level-ρ:checked ~ #pos-13:checked ~ .nav-panel .nav-right[for="pos-14"] { display: none; }
         /* Phantom level σ: arrow from Lσ-P14 to L9-P14 */
         #level-σ:checked ~ #pos-14:checked ~ .game-world .arrow-σ-left { display: block; }
         #level-σ:checked ~ #pos-14:checked ~ .nav-panel .nav-left[for="level-9"] { display: block; }
+        #level-σ:checked ~ #pos-14:checked ~ .nav-panel .nav-right[for="pos-15"] { display: none; }
         /* Stage 5 down arrows (all positions P13-P18) */
         #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L1-down { display: block; }
         #level-2:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ #scuba-pickup:checked ~ .game-world .arrow-L2-down { display: block; }
@@ -3849,8 +3898,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* η→N: right from even P, left from odd P */
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ :is(#pos-14, #pos-16, #pos-18):checked ~ .nav-panel .nav-right[for="layer-N"] { display: block; }
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-η:checked ~ :is(#pos-13, #pos-15, #pos-17):checked ~ .nav-panel .nav-left[for="layer-N"] { display: block; }
-        /* Lτ-P18: nav-down to level-3 (teleporter exit) */
-        #level-τ:checked ~ #pos-18:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
+        /* Lτ-P18: hide generic nav-left to P17, show nav-down on N/θ, nav-left on ζ/η */
+        #level-τ:checked ~ #pos-18:checked ~ .nav-panel .nav-left[for="pos-17"] { display: none; }
+        #level-τ:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-18:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
+        #level-τ:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ .nav-panel .nav-left[for="level-3"] { display: block; }
         /* Nav-panel position-jump arrows (S5 L0-L3, ζ/η layers) */
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ .nav-panel .nav-right[for="pos-16"] { display: block; }
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-16:checked ~ .nav-panel .nav-left[for="pos-13"] { display: block; }
@@ -4761,27 +4812,355 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Death overlay */
         .death-screen-overlay {
             z-index: var(--z-endgame-overlay);
-            padding-bottom: 20%;
 
             .message {
                 color: #ff0000;
             }
+            .death-hearts {
+                display: flex;
+                gap: 12px;
+                margin-top: 20px;
+                visibility: hidden;
+            }
             .submessage {
                 margin-top: 5%;
             }
+            .death-heart {
+                width: 32px;
+                height: 32px;
+                color: var(--heart-color);
+                filter: drop-shadow(0 0 4px color-mix(in srgb, var(--heart-color) 50%, transparent));
+                transition: color 1s ease-out 0.5s, filter 1s ease-out 0.5s;
+            }
+            .resurrect-btn {
+                display: none;
+                cursor: pointer;
+                &:hover { color: #ccc; }
+            }
+            .game-over-text, .start-again-link {
+                display: none;
+            }
         }
-        /* Show death overlay when player is at hazard locations */
-        #level-1:checked ~ #pos-6:checked ~ .death-screen-overlay-poison,
-        /* S2 disease use levels 5-9 (L0->L5, L1->L6) */
-        #level-5:checked ~ #pos-10:checked ~ .death-screen-overlay-disease,
-        #level-6:checked ~ #pos-9:checked ~ .death-screen-overlay-disease,
-        /* S5 bird kill */
-        #level-3:checked ~ #layer-N:checked ~ #pos-13:checked ~ .death-screen-overlay-bird,
-        #level-3:checked ~ #layer-N:checked ~ #pos-14:checked ~ .death-screen-overlay-bird,
-        #level-3:checked ~ #layer-θ:checked ~ #pos-17:checked ~ .death-screen-overlay-bird {
+        /* Show death overlay hearts only during death states */
+        :is(#death-1, #death-2, #death-3):checked ~ .death-screen-overlay .death-hearts { visibility: visible; }
+        /* Death overlay hearts fade based on life state */
+        :is(#death-1, #lives-2, #death-2, #lives-1, #death-3):checked ~ .death-screen-overlay .dh-3 { color: var(--heart-lost-color); filter: none; }
+        :is(#death-2, #lives-1, #death-3):checked ~ .death-screen-overlay .dh-2 { color: var(--heart-lost-color); filter: none; }
+        #death-3:checked ~ .death-screen-overlay .dh-1 { color: var(--heart-lost-color); filter: none; }
+        /* Resurrect buttons: show only during correct death state */
+        #death-1:checked ~ .death-screen-overlay .resurrect-d1 { display: block; }
+        #death-2:checked ~ .death-screen-overlay .resurrect-d2 { display: block; }
+        /* Game over elements: show only during death-3 */
+        #death-3:checked ~ .death-screen-overlay .game-over-text { display: block; }
+        #death-3:checked ~ .death-screen-overlay .start-again-link { display: block; }
+        /* Show death overlay when player is at approach position during death state */
+        /* Poison: approached from L1-P5 going right */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-1:checked ~ #pos-5:checked ~
+            .death-screen-overlay,
+        /* Disease L5: approached from L5-P9 right or L5-P11 left */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-5:checked ~
+            :is(#pos-9, #pos-11):checked ~
+            .death-screen-overlay,
+        /* Disease L6: approached from L6-P8 right or L6-P10 left */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-6:checked ~
+            :is(#pos-8, #pos-10):checked ~
+            .death-screen-overlay,
+        /* Bird N-L3-P13: from N-L2-P13 up */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
+            #layer-N:checked ~ #pos-13:checked ~
+            .death-screen-overlay,
+        /* Bird N-L3-P13: from η-L3-P13 left (vis P14) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
+            #layer-η:checked ~ #pos-13:checked ~
+            .death-screen-overlay,
+        /* Bird N-L3-P14: from N-L2-P14 up */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
+            #layer-N:checked ~ #pos-14:checked ~
+            .death-screen-overlay,
+        /* Bird N-L3-P14: from η-L3-P14 right (vis P13) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
+            #layer-η:checked ~ #pos-14:checked ~
+            .death-screen-overlay,
+        /* Bird N-L3-P14: from N-L3-P15 left */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
+            #layer-N:checked ~ #pos-15:checked ~
+            .death-screen-overlay,
+        /* Bird θ-L3-P17: from θ-L2-P17 up */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
+            #layer-θ:checked ~ #pos-17:checked ~
+            .death-screen-overlay,
+        /* Bird θ-L3-P17: from ζ-L3-P17 left (vis P18) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
+            #layer-ζ:checked ~ #pos-17:checked ~
+            .death-screen-overlay,
+        /* Bird θ-L3-P17: from θ-L3-P16 right */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
+            #layer-θ:checked ~ #pos-16:checked ~
+            .death-screen-overlay {
             opacity: 1;
             pointer-events: auto;
         }
+
+        /* Death message text per hazard type */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-1:checked ~ #pos-5:checked ~
+            .death-screen-overlay .message::after { content: "You died from poison"; }
+        :is(#death-1, #death-2, #death-3):checked ~ #level-5:checked ~
+            :is(#pos-9, #pos-11):checked ~
+            .death-screen-overlay .message::after { content: "You died from a deadly disease"; }
+        :is(#death-1, #death-2, #death-3):checked ~ #level-6:checked ~
+            :is(#pos-8, #pos-10):checked ~
+            .death-screen-overlay .message::after { content: "You died from a deadly disease"; }
+        :is(#death-1, #death-2, #death-3):checked ~ :is(#level-2, #level-3):checked ~
+            :is(#layer-N, #layer-η, #layer-θ, #layer-ζ):checked ~
+            :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17):checked ~
+            .death-screen-overlay .message::after { content: "You were killed by a bird of prey"; }
+
+        /* Player visual override during death — show player at hazard location */
+        /* Poison: player shown at P6 (approach from P5) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-1:checked ~ #pos-5:checked ~
+            .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 5); }
+        /* Disease L5: player shown at P10 (approach from P9 or P11) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-5:checked ~
+            :is(#pos-9, #pos-11):checked ~
+            .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 9); }
+        /* Disease L6: player shown at P9 (approach from P8 or P10) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-6:checked ~
+            :is(#pos-8, #pos-10):checked ~
+            .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 8); }
+        /* Bird N-L3-P13: player shown at P13 L3 (approach from N-L2-P13) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
+            #layer-N:checked ~ #pos-13:checked ~
+            .game-world .player {
+                left: calc(var(--pos-offset) + var(--pos-width) * 12);
+                bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
+            }
+        /* Bird N-L3-P13: player shown at P13 L3 (approach from η-L3-P13, vis P14) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
+            #layer-η:checked ~ #pos-13:checked ~
+            .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 12); }
+        /* Bird N-L3-P14: player shown at P14 L3 (approach from N-L2-P14) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
+            #layer-N:checked ~ #pos-14:checked ~
+            .game-world .player {
+                left: calc(var(--pos-offset) + var(--pos-width) * 13);
+                bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
+            }
+        /* Bird N-L3-P14: player shown at P14 L3 (approach from η-L3-P14, vis P13) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
+            #layer-η:checked ~ #pos-14:checked ~
+            .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 13); }
+        /* Bird N-L3-P14: player shown at P14 L3 (approach from N-L3-P15) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
+            #layer-N:checked ~ #pos-15:checked ~
+            .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 13); }
+        /* Bird θ-L3-P17: player shown at P17 L3 (approach from θ-L2-P17) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
+            #layer-θ:checked ~ #pos-17:checked ~
+            .game-world .player {
+                left: calc(var(--pos-offset) + var(--pos-width) * 16);
+                bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
+            }
+        /* Bird θ-L3-P17: player shown at P17 L3 (approach from ζ-L3-P17, vis P18) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
+            #layer-ζ:checked ~ #pos-17:checked ~
+            .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 16); }
+        /* Bird θ-L3-P17: player shown at P17 L3 (approach from θ-L3-P16) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
+            #layer-θ:checked ~ #pos-16:checked ~
+            .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 16); }
+
+        /* Bird at player position during death — override bird-level/bird-pos to match hazard */
+        /* Bird at N-L3-P13 */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-13:checked ~ .game-world,
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-13:checked ~ .game-world {
+            --bird-level: 3; --bird-pos: 13;
+        }
+        /* Bird at N-L3-P14 */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world,
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .game-world,
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world {
+            --bird-level: 3; --bird-pos: 14;
+        }
+        /* Bird at θ-L3-P17 */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~ #layer-θ:checked ~ #pos-17:checked ~ .game-world,
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-17:checked ~ .game-world,
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .game-world {
+            --bird-level: 3; --bird-pos: 17;
+        }
+
+        /* === Death arrows: hide generic arrows at hazard approaches, show death arrows === */
+
+        /* --- Poison: L1-P5 right → P6 --- */
+        /* Hide generic right arrow from P5 at L1 when lives remain */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-1:checked ~ #pos-5:checked ~ .game-world .arrow-P5-right { display: none; }
+        /* Show death-right at P5-P6 midpoint */
+        #lives-3:checked ~ #level-1:checked ~ #pos-5:checked ~ .game-world .death-right-1,
+        #lives-2:checked ~ #level-1:checked ~ #pos-5:checked ~ .game-world .death-right-2,
+        #lives-1:checked ~ #level-1:checked ~ #pos-5:checked ~ .game-world .death-right-3 {
+            display: block;
+            left: calc(var(--pos-offset) + var(--pos-width) * 4.5 + 12px);
+        }
+        /* Nav: hide generic, show death */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-1:checked ~ #pos-5:checked ~ .nav-panel .nav-right[for="pos-6"] { display: none; }
+        #lives-3:checked ~ #level-1:checked ~ #pos-5:checked ~ .nav-panel .nav-death-right-1,
+        #lives-2:checked ~ #level-1:checked ~ #pos-5:checked ~ .nav-panel .nav-death-right-2,
+        #lives-1:checked ~ #level-1:checked ~ #pos-5:checked ~ .nav-panel .nav-death-right-3 { display: block; }
+
+        /* --- Disease L5-P10: from L5-P9 right --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-5:checked ~ #pos-9:checked ~ .game-world .arrow-P9-right { display: none; }
+        #lives-3:checked ~ #level-5:checked ~ #pos-9:checked ~ .game-world .death-right-1,
+        #lives-2:checked ~ #level-5:checked ~ #pos-9:checked ~ .game-world .death-right-2,
+        #lives-1:checked ~ #level-5:checked ~ #pos-9:checked ~ .game-world .death-right-3 {
+            display: block;
+            left: calc(var(--pos-offset) + var(--pos-width) * 8.5 + 12px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-5:checked ~ #pos-9:checked ~ .nav-panel .nav-right[for="pos-10"] { display: none; }
+        #lives-3:checked ~ #level-5:checked ~ #pos-9:checked ~ .nav-panel .nav-death-right-1,
+        #lives-2:checked ~ #level-5:checked ~ #pos-9:checked ~ .nav-panel .nav-death-right-2,
+        #lives-1:checked ~ #level-5:checked ~ #pos-9:checked ~ .nav-panel .nav-death-right-3 { display: block; }
+
+        /* --- Disease L5-P10: from L5-P11 left --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-5:checked ~ #pos-11:checked ~ .game-world .arrow-P11-left { display: none; }
+        #lives-3:checked ~ #level-5:checked ~ #pos-11:checked ~ .game-world .death-left-1,
+        #lives-2:checked ~ #level-5:checked ~ #pos-11:checked ~ .game-world .death-left-2,
+        #lives-1:checked ~ #level-5:checked ~ #pos-11:checked ~ .game-world .death-left-3 {
+            display: block;
+            left: calc(var(--pos-offset) + var(--pos-width) * 9.5 + 12px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-5:checked ~ #pos-11:checked ~ .nav-panel .nav-left[for="pos-10"] { display: none; }
+        #lives-3:checked ~ #level-5:checked ~ #pos-11:checked ~ .nav-panel .nav-death-left-1,
+        #lives-2:checked ~ #level-5:checked ~ #pos-11:checked ~ .nav-panel .nav-death-left-2,
+        #lives-1:checked ~ #level-5:checked ~ #pos-11:checked ~ .nav-panel .nav-death-left-3 { display: block; }
+
+        /* --- Disease L6-P9: from L6-P8 right --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-6:checked ~ #pos-8:checked ~ .game-world .arrow-P8-right { display: none; }
+        #lives-3:checked ~ #level-6:checked ~ #pos-8:checked ~ .game-world .death-right-1,
+        #lives-2:checked ~ #level-6:checked ~ #pos-8:checked ~ .game-world .death-right-2,
+        #lives-1:checked ~ #level-6:checked ~ #pos-8:checked ~ .game-world .death-right-3 {
+            display: block;
+            left: calc(var(--pos-offset) + var(--pos-width) * 7.5 + 12px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-6:checked ~ #pos-8:checked ~ .nav-panel .nav-right[for="pos-9"] { display: none; }
+        #lives-3:checked ~ #level-6:checked ~ #pos-8:checked ~ .nav-panel .nav-death-right-1,
+        #lives-2:checked ~ #level-6:checked ~ #pos-8:checked ~ .nav-panel .nav-death-right-2,
+        #lives-1:checked ~ #level-6:checked ~ #pos-8:checked ~ .nav-panel .nav-death-right-3 { display: block; }
+
+        /* --- Disease L6-P9: from L6-P10 left --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-6:checked ~ #pos-10:checked ~ .game-world .arrow-P10-left { display: none; }
+        #lives-3:checked ~ #level-6:checked ~ #pos-10:checked ~ .game-world .death-left-1,
+        #lives-2:checked ~ #level-6:checked ~ #pos-10:checked ~ .game-world .death-left-2,
+        #lives-1:checked ~ #level-6:checked ~ #pos-10:checked ~ .game-world .death-left-3 {
+            display: block;
+            left: calc(var(--pos-offset) + var(--pos-width) * 8.5 + 12px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-6:checked ~ #pos-10:checked ~ .nav-panel .nav-left[for="pos-9"] { display: none; }
+        #lives-3:checked ~ #level-6:checked ~ #pos-10:checked ~ .nav-panel .nav-death-left-1,
+        #lives-2:checked ~ #level-6:checked ~ #pos-10:checked ~ .nav-panel .nav-death-left-2,
+        #lives-1:checked ~ #level-6:checked ~ #pos-10:checked ~ .nav-panel .nav-death-left-3 { display: block; }
+
+        /* --- Bird N-L3-P13: from N-L2-P13 up --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-13:checked ~ .game-world .arrow-L2-up { display: none; }
+        #lives-3:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-13:checked ~ .game-world .death-up-1,
+        #lives-2:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-13:checked ~ .game-world .death-up-2,
+        #lives-1:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-13:checked ~ .game-world .death-up-3 {
+            display: block;
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + 72.5px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-13:checked ~ .nav-panel .nav-up[for="level-3"] { display: none; }
+        #lives-3:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-13:checked ~ .nav-panel .nav-death-up-1,
+        #lives-2:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-13:checked ~ .nav-panel .nav-death-up-2,
+        #lives-1:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-13:checked ~ .nav-panel .nav-death-up-3 { display: block; }
+
+        /* --- Bird N-L3-P13: from η-L3-P13 left (vis P14, layer change η→N) --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-13:checked ~ .game-world .arrow-left[for="layer-N"] { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-13:checked ~ .game-world .death-left-1,
+        #lives-2:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-13:checked ~ .game-world .death-left-2,
+        #lives-1:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-13:checked ~ .game-world .death-left-3 {
+            display: block;
+            left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-13:checked ~ .nav-panel .nav-left[for="layer-N"] { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-13:checked ~ .nav-panel .nav-death-left-1,
+        #lives-2:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-13:checked ~ .nav-panel .nav-death-left-2,
+        #lives-1:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-13:checked ~ .nav-panel .nav-death-left-3 { display: block; }
+
+        /* --- Bird N-L3-P14: from N-L2-P14 up --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world .arrow-L2-up { display: none; }
+        #lives-3:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world .death-up-1,
+        #lives-2:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world .death-up-2,
+        #lives-1:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world .death-up-3 {
+            display: block;
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + 72.5px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .nav-panel .nav-up[for="level-3"] { display: none; }
+        #lives-3:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .nav-panel .nav-death-up-1,
+        #lives-2:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .nav-panel .nav-death-up-2,
+        #lives-1:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .nav-panel .nav-death-up-3 { display: block; }
+
+        /* --- Bird N-L3-P14: from η-L3-P14 right (vis P13, layer change η→N) --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .game-world .arrow-right[for="layer-N"] { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .game-world .death-right-1,
+        #lives-2:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .game-world .death-right-2,
+        #lives-1:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .game-world .death-right-3 {
+            display: block;
+            left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .nav-panel .nav-right[for="layer-N"] { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .nav-panel .nav-death-right-1,
+        #lives-2:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .nav-panel .nav-death-right-2,
+        #lives-1:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .nav-panel .nav-death-right-3 { display: block; }
+
+        /* --- Bird N-L3-P14: from N-L3-P15 left (position change) --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world .arrow-P15-left { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world .death-left-1,
+        #lives-2:checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world .death-left-2,
+        #lives-1:checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world .death-left-3 {
+            display: block;
+            left: calc(var(--pos-offset) + var(--pos-width) * 13.5 + 12px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .nav-panel .nav-left[for="pos-14"] { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .nav-panel .nav-death-left-1,
+        #lives-2:checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .nav-panel .nav-death-left-2,
+        #lives-1:checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .nav-panel .nav-death-left-3 { display: block; }
+
+        /* --- Bird θ-L3-P17: from θ-L2-P17 up --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-2:checked ~ #layer-θ:checked ~ #pos-17:checked ~ .game-world .arrow-L2-up { display: none; }
+        #lives-3:checked ~ #level-2:checked ~ #layer-θ:checked ~ #pos-17:checked ~ .game-world .death-up-1,
+        #lives-2:checked ~ #level-2:checked ~ #layer-θ:checked ~ #pos-17:checked ~ .game-world .death-up-2,
+        #lives-1:checked ~ #level-2:checked ~ #layer-θ:checked ~ #pos-17:checked ~ .game-world .death-up-3 {
+            display: block;
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + 72.5px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-2:checked ~ #layer-θ:checked ~ #pos-17:checked ~ .nav-panel .nav-up[for="level-3"] { display: none; }
+        #lives-3:checked ~ #level-2:checked ~ #layer-θ:checked ~ #pos-17:checked ~ .nav-panel .nav-death-up-1,
+        #lives-2:checked ~ #level-2:checked ~ #layer-θ:checked ~ #pos-17:checked ~ .nav-panel .nav-death-up-2,
+        #lives-1:checked ~ #level-2:checked ~ #layer-θ:checked ~ #pos-17:checked ~ .nav-panel .nav-death-up-3 { display: block; }
+
+        /* --- Bird θ-L3-P17: from ζ-L3-P17 left (vis P18, layer change ζ→θ) --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-17:checked ~ .game-world .arrow-left[for="layer-θ"] { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-17:checked ~ .game-world .death-left-1,
+        #lives-2:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-17:checked ~ .game-world .death-left-2,
+        #lives-1:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-17:checked ~ .game-world .death-left-3 {
+            display: block;
+            left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-17:checked ~ .nav-panel .nav-left[for="layer-θ"] { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-17:checked ~ .nav-panel .nav-death-left-1,
+        #lives-2:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-17:checked ~ .nav-panel .nav-death-left-2,
+        #lives-1:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-17:checked ~ .nav-panel .nav-death-left-3 { display: block; }
+
+        /* --- Bird θ-L3-P17: from θ-L3-P16 right (position change) --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .game-world .arrow-P16-right { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .game-world .death-right-1,
+        #lives-2:checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .game-world .death-right-2,
+        #lives-1:checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .game-world .death-right-3 {
+            display: block;
+            left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .nav-panel .nav-right[for="pos-17"] { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .nav-panel .nav-death-right-1,
+        #lives-2:checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .nav-panel .nav-death-right-2,
+        #lives-1:checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .nav-panel .nav-death-right-3 { display: block; }
 
         /* Escape overlay */
         .escape-screen-overlay.overlay {
@@ -5125,6 +5504,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <symbol id="flight-controls" viewBox="0 0 24 24">
             <rect x="1" y="2" width="22" height="16" rx="2" ry="2" fill="#444"/>
             <path fill="currentColor" d="M 21,16 V 4 H 3 V 16 H 21 M 21,2 A 2,2 0 0,1 23,4 V 16 A 2,2 0 0,1 21,18 H 14 V 20 H 16 V 22 H 8 V 20 H 10 V 18 H 3 C 1.89,18 1,17.1 1,16 V 4 C 1,2.89 1.89,2 3,2 H 21 M 5,6 H 14 V 11 H 5 V 6 M 15,6 H 19 V 8 H 15 V 6 M 19,9 V 14 H 15 V 9 H 19 M 5,12 H 9 V 14 H 5 V 12 M 10,12 H 14 V 14 H 10 V 12 Z"/>
+        </symbol>
+        <symbol id="heart" viewBox="0 0 512 512">
+            <path fill="currentColor" d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
         </symbol>
         <symbol id="spacecraft" viewBox="0 252 1540 438">
             <path fill="#393d3a" d="M1294 252 L1295 254 L1289 265 L1285 273 L1283 277 L1268 306 L1251 338 L1262 333 L1273 327 L1276 326 L1282 323 L1300 313 L1330 298 L1336 295 L1344 291 L1349 288q12 -4 23 -5h15l53 -1l-8 10l-10 11l-15 15l-20 21l-10 11l-15 15l-10 11l-7 7l2 3l1 6h3l32 3q14 2 27 6l7 2l8 3l8 6l8 1l17 3q6 1 9 7c6 15 5 36 0 51q-2 5 -8 7l-5 1l-11 3h-5c-6 1 -7 2 -12 6l-10 3v9l3 1l3 1l4 1l6 4q3 4 9 3c9 0 21 1 28 7c9 16 6 40 2 56q-7 8 -18 8l-4 1l-1 1h-5l-11 4c-14 10 -31 10 -47 10h-12c-9 0 -9 0 -12 -3h-44v5q0 6 -4 10q-11 6 -25 7c-13 1 -13 1 -25 6q-11 4 -23 3h-5c-12 0 -12 0 -17 -2l-26 4l-7 1v12h-49l-21 4 L293 648 l-5 1l-9 -6c-5 -3 -5 -3 -11 -4l-1 2q-8 1 -16 -2l-1 -6h-4l-25 -5l-10 -2l-6 -1l-6 -1l-7 -3v-2l-5 -2l-6 -4l-3 -3q-2 -1 -2 -6h-3q-6 -4 -7 -11q-4 -11 -16 -14l-12 -3l-6 -2l-13 -3l-29 -8l-9 -3l-6 -1l-4 -2q-4 0 -7 -5q-7 -18 -11 -37l-1 -4l-1 -4l-1 -3l1 -9q5 -5 12 -8l4 -2l4 -2l5 -1l14 -6l4 -2l4 -1q36 -15 69 -31c76 -36 157 -64 241 -71q18 -1 32 -10q17 -10 36 -10v-2h5l23 -1q30 -3 61 -3h24c20 0 20 0 29 4q15 6 31 7l12 1l5 1l11 1h4q13 3 25 9l14 2h50l54 1h17l63 1h10c20 1 20 1 38 -7l6 -6q7 -4 13 -5l4 -1a460 460 0 0 1 106 1q11 -2 17 -12l8 -6l4 -3l34 -24l13 -9l17 -13l26 -18l5 -3l4 -3c22 -15 60 -12 85 -11"/>
@@ -5698,6 +6080,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
     <div class="game-container">
         <input type="checkbox" id="debug-toggle" accesskey="d" title="debug">
         <h2>NIBO'S WAY OUT</h2>
+        <!-- Lives radio group -->
+        <input type="radio" name="lives" id="lives-3" checked title="3 lives">
+        <input type="radio" name="lives" id="death-1" title="death 1">
+        <input type="radio" name="lives" id="lives-2" title="2 lives">
+        <input type="radio" name="lives" id="death-2" title="death 2">
+        <input type="radio" name="lives" id="lives-1" title="1 life">
+        <input type="radio" name="lives" id="death-3" title="death 3 (game over)">
         <!-- Radio buttons for level (vertical) -->
         <input type="radio" name="level" id="level-0" class="level-radio" title="level-0" checked>
         <input type="radio" name="level" id="level-1" class="level-radio" title="level-1">
@@ -5812,6 +6201,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="level-8" class="nav-btn nav-up"></label>
                 <label for="level-9" class="nav-btn nav-up"></label>
                 <label for="pos-φ" class="nav-btn nav-up"></label>
+                <!-- Death nav-up -->
+                <label for="death-1" class="nav-btn nav-up nav-death-up-1"></label>
+                <label for="death-2" class="nav-btn nav-up nav-death-up-2"></label>
+                <label for="death-3" class="nav-btn nav-up nav-death-up-3"></label>
             </div>
             <!-- Left cell -->
             <div class="nav-cell nav-cell-left">
@@ -5839,9 +6232,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="layer-θ" class="nav-btn nav-left"></label>
                 <label for="layer-η" class="nav-btn nav-left"></label>
                 <label for="layer-N" class="nav-btn nav-left"></label>
-                <!-- Phantom level ρ/σ exit -->
+                <!-- Phantom level τ/ρ/σ exit -->
+                <label for="level-3" class="nav-btn nav-left"></label>
                 <label for="level-6" class="nav-btn nav-left"></label>
                 <label for="level-9" class="nav-btn nav-left"></label>
+                <!-- Death nav-left -->
+                <label for="death-1" class="nav-btn nav-left nav-death-left-1"></label>
+                <label for="death-2" class="nav-btn nav-left nav-death-left-2"></label>
+                <label for="death-3" class="nav-btn nav-left nav-death-left-3"></label>
             </div>
             <!-- Right cell -->
             <div class="nav-cell nav-cell-right">
@@ -5868,6 +6266,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="layer-θ" class="nav-btn nav-right"></label>
                 <label for="layer-η" class="nav-btn nav-right"></label>
                 <label for="layer-N" class="nav-btn nav-right"></label>
+                <!-- Death nav-right -->
+                <label for="death-1" class="nav-btn nav-right nav-death-right-1"></label>
+                <label for="death-2" class="nav-btn nav-right nav-death-right-2"></label>
+                <label for="death-3" class="nav-btn nav-right nav-death-right-3"></label>
             </div>
             <!-- Down cell -->
             <div class="nav-cell nav-cell-down">
@@ -5881,6 +6283,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="level-6" class="nav-btn nav-down"></label>
                 <label for="level-7" class="nav-btn nav-down"></label>
                 <label for="level-8" class="nav-btn nav-down"></label>
+                <!-- Death nav-down -->
+                <label for="death-1" class="nav-btn nav-down nav-death-down-1"></label>
+                <label for="death-2" class="nav-btn nav-down nav-death-down-2"></label>
+                <label for="death-3" class="nav-btn nav-down nav-death-down-3"></label>
             </div>
         </div>
         <!-- Inventory -->
@@ -5933,6 +6339,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
                     <div class="digit">32</div>
                 </div>
             </div>
+        </div>
+        <!-- Heart panel (lives) -->
+        <div class="heart-panel">
+            <svg class="heart-icon heart-icon-1"><use href="#heart"/></svg>
+            <svg class="heart-icon heart-icon-2"><use href="#heart"/></svg>
+            <svg class="heart-icon heart-icon-3"><use href="#heart"/></svg>
         </div>
         <!-- Game world (scrollable content) -->
         <div class="game-world">
@@ -6035,6 +6447,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Phantom level: Lρ-P13 (teleporter exit, visually L6-P14) -->
         <label for="level-6" class="arrow arrow-left arrow-ρ-left"></label>
         <label for="level-9" class="arrow arrow-left arrow-σ-left"></label>
+        <!-- Death arrows (reusable, repositioned via CSS per approach path) -->
+        <label for="death-1" class="arrow arrow-right arrow-h death-right-1"></label>
+        <label for="death-2" class="arrow arrow-right arrow-h death-right-2"></label>
+        <label for="death-3" class="arrow arrow-right arrow-h death-right-3"></label>
+        <label for="death-1" class="arrow arrow-left arrow-h death-left-1"></label>
+        <label for="death-2" class="arrow arrow-left arrow-h death-left-2"></label>
+        <label for="death-3" class="arrow arrow-left arrow-h death-left-3"></label>
+        <label for="death-1" class="arrow arrow-up arrow-v death-up-1"></label>
+        <label for="death-2" class="arrow arrow-up arrow-v death-up-2"></label>
+        <label for="death-3" class="arrow arrow-up arrow-v death-up-3"></label>
+        <label for="death-1" class="arrow arrow-down arrow-v death-down-1"></label>
+        <label for="death-2" class="arrow arrow-down arrow-v death-down-2"></label>
+        <label for="death-3" class="arrow arrow-down arrow-v death-down-3"></label>
         <!-- Layer-changing arrows (S5 L0-L3) -->
         <label for="layer-ζ" class="arrow arrow-right arrow-h"></label>
         <label for="layer-ζ" class="arrow arrow-left arrow-h"></label>
@@ -6426,26 +6851,18 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="submessage">Click to start</div>
             <div class="copyright">© 2026 René Uittenbogaard · <a href="https://github.com/ruittenb/nibo-game" target="_blank">View on GitHub</a></div>
         </label>
-        <!-- Death overlays -->
-        <div class="overlay death-screen-overlay death-screen-overlay-poison">
-            <div class="message">You died from poison</div>
-            <div class="submessage">GAME OVER</div>
-            <a href="" class="submessage">Start again</a>
-        </div>
-        <div class="overlay death-screen-overlay death-screen-overlay-disease">
-            <div class="message">You died from a deadly disease</div>
-            <div class="submessage">GAME OVER</div>
-            <a href="" class="submessage">Start again</a>
-        </div>
-        <div class="overlay death-screen-overlay death-screen-overlay-chemical">
-            <div class="message">You died from chemical waste</div>
-            <div class="submessage">GAME OVER</div>
-            <a href="" class="submessage">Start again</a>
-        </div>
-        <div class="overlay death-screen-overlay death-screen-overlay-bird">
-            <div class="message">You were killed by a bird of prey</div>
-            <div class="submessage">GAME OVER</div>
-            <a href="" class="submessage">Start again</a>
+        <!-- Death overlay -->
+        <div class="overlay death-screen-overlay">
+            <div class="message"></div>
+            <div class="death-hearts">
+                <svg class="death-heart dh-1"><use href="#heart"/></svg>
+                <svg class="death-heart dh-2"><use href="#heart"/></svg>
+                <svg class="death-heart dh-3"><use href="#heart"/></svg>
+            </div>
+            <label for="lives-2" class="submessage resurrect-btn resurrect-d1">Click to retry</label>
+            <label for="lives-1" class="submessage resurrect-btn resurrect-d2">Click to retry</label>
+            <div class="submessage game-over-text">GAME OVER</div>
+            <a href="" class="submessage start-again-link">Start again</a>
         </div>
         <!-- Teleport flash overlay -->
         <div class="teleport-flash-overlay">
