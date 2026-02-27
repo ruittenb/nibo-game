@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120">
+  <!-- Back wall remnants -->
+  <rect x="25" y="30" width="18" height="45" fill="#4a5568" transform="rotate(-3 34 52)"/>
+  <rect x="40" y="20" width="22" height="55" fill="#5a6578"/>
+  <rect x="58" y="35" width="15" height="40" fill="#4a5568" transform="rotate(2 65 55)"/>
+  
+  <!-- Fallen stones -->
+  <rect x="75" y="65" width="20" height="12" fill="#5a6578" transform="rotate(-8 85 71)"/>
+  <rect x="90" y="70" width="15" height="10" fill="#4a5568" transform="rotate(5 97 75)"/>
+  
+  <!-- Right wall section (original) -->
+  <rect x="130" y="25" width="20" height="50" fill="#5a6578" transform="rotate(5 140 50)"/>
+  <rect x="145" y="40" width="16" height="35" fill="#4a5568" transform="rotate(-2 153 57)"/>
+  <rect x="158" y="45" width="14" height="28" fill="#5a6578"/>
+  
+  <!-- Scattered rubble (original) -->
+  <rect x="50" y="80" width="12" height="8" fill="#4a5568" transform="rotate(-15 56 84)"/>
+  <rect x="110" y="78" width="14" height="9" fill="#5a6578" transform="rotate(12 117 82)"/>
+  <rect x="140" y="82" width="10" height="7" fill="#4a5568" transform="rotate(-5 145 85)"/>
+  
+  <!-- Column base (original) -->
+  <rect x="95" y="50" width="16" height="25" fill="#5a6578"/>
+  <rect x="93" y="48" width="20" height="5" fill="#4a5568"/>
+
+  <!-- Extended section: back wall remnants -->
+  <rect x="210" y="28" width="20" height="48" fill="#5a6578" transform="rotate(3 220 52)"/>
+  <rect x="228" y="18" width="16" height="52" fill="#4a5568" transform="rotate(-2 236 44)"/>
+  <rect x="245" y="38" width="18" height="38" fill="#5a6578" transform="rotate(4 254 57)"/>
+
+  <!-- Extended section: tall crumbling wall -->
+  <rect x="300" y="22" width="22" height="55" fill="#5a6578" transform="rotate(-4 311 49)"/>
+  <rect x="318" y="32" width="15" height="44" fill="#4a5568" transform="rotate(2 325 54)"/>
+  <rect x="332" y="42" width="13" height="32" fill="#5a6578"/>
+
+  <!-- Extended section: fallen/scattered blocks -->
+  <rect x="270" y="68" width="22" height="11" fill="#4a5568" transform="rotate(9 281 73)"/>
+  <rect x="285" y="74" width="16" height="9" fill="#5a6578" transform="rotate(-6 293 78)"/>
+  <rect x="355" y="72" width="18" height="10" fill="#4a5568" transform="rotate(-10 364 77)"/>
+  <rect x="372" y="79" width="12" height="8" fill="#5a6578" transform="rotate(7 378 83)"/>
+
+  <!-- Extended section: rubble on ground -->
+  <rect x="215" y="82" width="13" height="8" fill="#5a6578" transform="rotate(14 221 86)"/>
+  <rect x="255" y="80" width="11" height="7" fill="#4a5568" transform="rotate(-8 260 83)"/>
+  <rect x="345" y="83" width="14" height="8" fill="#5a6578" transform="rotate(5 352 87)"/>
+
+  <!-- Extended section: broken column stump -->
+  <rect x="378" y="52" width="16" height="22" fill="#5a6578"/>
+  <rect x="376" y="50" width="20" height="5" fill="#4a5568"/>
+</svg>
