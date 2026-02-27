@@ -2461,6 +2461,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .bird:hover .bird-tooltip {
             opacity: 1;
         }
+        .game-container:has(.bird:hover) > .game-world {
+            z-index: calc(var(--z-ui) + 1);
+        }
         .bird-tooltip::before {
             content: "Bird of Prey";
         }
