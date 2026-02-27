@@ -2116,7 +2116,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             z-index: var(--z-items);
             pointer-events: none;
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
         }
@@ -2138,6 +2138,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             pointer-events: auto;
             z-index: var(--z-item-hover);
+            display: none;
         }
         /* Hide torch hover area and tooltip when picked up */
         #torch-pickup:checked ~ .game-world .torch-hover-area,
@@ -2156,6 +2157,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-0:checked ~ #pos-12:checked ~ #torch-pickup:not(:checked) ~ .game-world .torch-in-game:hover ~ .torch-tooltip {
             opacity: 1;
         }
+        /* Show torch when player is adjacent (hidden by darkness otherwise) */
+        :is(#level-0:checked ~ #pos-11:checked, #level-0:checked ~ #pos-12:checked, #level-1:checked ~ #pos-12:checked) ~
+        #torch-pickup:not(:checked) ~ .game-world .torch-in-game {
+            display: flex;
+        }
+        :is(#level-0:checked ~ #pos-11:checked, #level-1:checked ~ #pos-12:checked) ~
+        #torch-pickup:not(:checked) ~ .game-world .torch-hover-area {
+            display: block;
+        }
         /* Enable clicking torch only when player is next to it - S4 uses levels 0-4 */
         #level-0:checked ~ #pos-12:checked ~ #torch-pickup:not(:checked) ~ .game-world .torch-in-game {
             pointer-events: auto;
@@ -2164,6 +2174,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Fly torch to inventory when picked up (S4: viewport right = pos-width * 12) */
         #torch-pickup:checked ~ .game-world .torch-in-game {
+            display: flex;
             bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 12 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery)));
