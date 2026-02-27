@@ -1,7 +1,5 @@
 
  - fix landing gear of ship
- - animated items still below darkness mask: plan 'flying-coins' (css stacking context problem)
- - eagle tooltip above panels
 
  - burn disease with torch?
  - gold eating NPC / requiring payment

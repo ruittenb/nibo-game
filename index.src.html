@@ -239,6 +239,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --cave-rock-shadow: drop-shadow(2px 0 2px #66aaff80);
             --heart-color: #ff3040;        /* Heart (lives) color */
             --heart-lost-color: #444;      /* Lost heart color */
+            --escape-color: #4ade80;       /* Escape screen accent color */
             --border-color: #4a4a6a;      /* Border color for UI elements */
             /* Z-index layers */
             --z-walls: 50;               /* Warning walls, rock walls */
@@ -2116,7 +2117,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             z-index: var(--z-items);
             pointer-events: none;
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
         }
@@ -2138,6 +2139,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             pointer-events: auto;
             z-index: var(--z-item-hover);
+            display: none;
         }
         /* Hide torch hover area and tooltip when picked up */
         #torch-pickup:checked ~ .game-world .torch-hover-area,
@@ -2156,6 +2158,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-0:checked ~ #pos-12:checked ~ #torch-pickup:not(:checked) ~ .game-world .torch-in-game:hover ~ .torch-tooltip {
             opacity: 1;
         }
+        /* Show torch when player is adjacent (hidden by darkness otherwise) */
+        :is(#level-0:checked ~ #pos-11:checked, #level-0:checked ~ #pos-12:checked, #level-1:checked ~ #pos-12:checked) ~
+        #torch-pickup:not(:checked) ~ .game-world .torch-in-game {
+            display: flex;
+        }
+        :is(#level-0:checked ~ #pos-11:checked, #level-1:checked ~ #pos-12:checked) ~
+        #torch-pickup:not(:checked) ~ .game-world .torch-hover-area {
+            display: block;
+        }
         /* Enable clicking torch only when player is next to it - S4 uses levels 0-4 */
         #level-0:checked ~ #pos-12:checked ~ #torch-pickup:not(:checked) ~ .game-world .torch-in-game {
             pointer-events: auto;
@@ -2164,6 +2175,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Fly torch to inventory when picked up (S4: viewport right = pos-width * 12) */
         #torch-pickup:checked ~ .game-world .torch-in-game {
+            display: flex;
             bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 12 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery)));
@@ -2438,6 +2450,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: calc(1 - var(--bird-attacking, 0));
             transition: opacity 0.3s ease;
             animation: bird-bob 2s ease-in-out infinite;
+            scale: 1.3;
         }
         .bird-attack {
             opacity: var(--bird-attacking, 0);
@@ -2460,6 +2473,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         .bird:hover .bird-tooltip {
             opacity: 1;
+        }
+        .game-container:has(.bird:hover) > .game-world {
+            z-index: calc(var(--z-ui) + 1);
         }
         .bird-tooltip::before {
             content: "Bird of Prey";
@@ -4454,17 +4470,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Move Stage 4 loot to counter when picked up (S4 is at bottom, no stage-height offset) */
-        /* z-index raised above darkness so flying animation is visible */
+        /* display: flex overrides the S4 display: none so the flight transition plays */
         #loot-S4-L3-P7-pickup:checked ~ .game-world .loot-S4-L3-P7,
         #loot-S4-L3-P8-pickup:checked ~ .game-world .loot-S4-L3-P8,
         #loot-S4-L3-P12-pickup:checked ~ .game-world .loot-S4-L3-P12,
         #loot-S4-L1-P10-pickup:checked ~ .game-world .loot-S4-L1-P10,
         #loot-S4-L0-P9-pickup:checked ~ .game-world .loot-S4-L0-P9 {
+            display: flex;
             bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
             left: calc(var(--pos-width) * 12 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
-            z-index: auto;
         }
         /* Move Stage 5 loot to counter when picked up (S5 is at bottom, no stage-height offset) */
         #loot-S5-L3-P13-pickup:checked ~ .game-world .loot-S5-L3-P13,
@@ -4714,9 +4730,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 #000 100%
             );
             transition: --darkness-x 0.5s ease, --darkness-y 0.5s ease, --darkness-hole-width 0.5s ease, --darkness-hole-height 0.5s ease;
-            /* Default: huge hole (no darkness visible) */
-            --darkness-hole-width: 2000px;
-            --darkness-hole-height: 2000px;
+            /* Default: huge hole (no darkness visible) — must exceed game-world diagonal / 2 */
+            --darkness-hole-width: 4000px;
+            --darkness-hole-height: 4000px;
             --darkness-x: 50%;
             --darkness-y: 50%;
         }
@@ -4734,42 +4750,42 @@ AAAAAAAAAAAAAAAAAAAAAA==
         @property --darkness-hole-width {
             syntax: '<length>';
             inherits: true;
-            initial-value: 2000px;
+            initial-value: 4000px;
         }
         @property --darkness-hole-height {
             syntax: '<length>';
             inherits: true;
-            initial-value: 2000px;
+            initial-value: 4000px;
         }
         /* In Stage 4: shrink hole to normal size */
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
         :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~
-        .darkness-S4 {
+        .game-world .darkness-S4 {
             --darkness-hole-width: 180px;
             --darkness-hole-height: 120px;
         }
         /* Horizontal position rules */
-        #pos-7:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 0 + var(--darkness-hole-offset)); }
-        #pos-8:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 1 + var(--darkness-hole-offset)); }
-        #pos-9:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 2 + var(--darkness-hole-offset)); }
-        #pos-10:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 3 + var(--darkness-hole-offset)); }
-        #pos-11:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 4 + var(--darkness-hole-offset)); }
-        #pos-12:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 5 + var(--darkness-hole-offset)); }
+        #pos-7:checked ~ .game-world .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 6 + var(--darkness-hole-offset)); }
+        #pos-8:checked ~ .game-world .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 7 + var(--darkness-hole-offset)); }
+        #pos-9:checked ~ .game-world .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 8 + var(--darkness-hole-offset)); }
+        #pos-10:checked ~ .game-world .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 9 + var(--darkness-hole-offset)); }
+        #pos-11:checked ~ .game-world .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 10 + var(--darkness-hole-offset)); }
+        #pos-12:checked ~ .game-world .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--darkness-hole-offset)); }
         /* Vertical position rules */
-        #level-0:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--ground-height) - 26px); }
-        #level-1:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--level-height) - var(--platform-thickness) + 2px - 28px); }
-        #level-2:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 2 - var(--platform-thickness) + 2px - 28px); }
-        #level-3:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 3 - var(--platform-thickness) + 2px - 28px); }
-        #level-4:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 4 - var(--platform-thickness) + 2px - 28px); }
+        #level-0:checked ~ .game-world .darkness-S4 { --darkness-y: calc(100% - var(--ground-height) - 26px); }
+        #level-1:checked ~ .game-world .darkness-S4 { --darkness-y: calc(100% - var(--level-height) - var(--platform-thickness) + 2px - 28px); }
+        #level-2:checked ~ .game-world .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 2 - var(--platform-thickness) + 2px - 28px); }
+        #level-3:checked ~ .game-world .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 3 - var(--platform-thickness) + 2px - 28px); }
+        #level-4:checked ~ .game-world .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 4 - var(--platform-thickness) + 2px - 28px); }
         /* With torch: illuminate darkness (3 levels x 3 positions) */
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
         :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~
-        #torch-pickup:checked ~ .darkness-S4 {
+        #torch-pickup:checked ~ .game-world .darkness-S4 {
             --darkness-hole-width: calc(var(--pos-width) * 2.2);
             --darkness-hole-height: calc(var(--level-height) * 2.2);
         }
         /* Toggle darkness */
-        #darkness-toggle:checked ~ .darkness-S4 {
+        #darkness-toggle:checked ~ .game-world .darkness-S4 {
             display: none;
         }
         /* Overlay base styles */
@@ -5220,7 +5236,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             background: #000000f0;
 
             .message {
-                color: #4ade80;
+                color: var(--escape-color);
             }
             .submessage {
                 margin-top: 0;
@@ -5228,7 +5244,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             .video-box {
                 width: 600px;
                 height: 400px;
-                border: 3px solid #4ade80;
+                border: 3px solid var(--escape-color);
                 border-radius: 8px;
                 overflow: hidden;
 
@@ -6934,9 +6950,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="loot-hover-area"></span>
             <span class="tooltip">Seashell</span>
         </div>
-        </div><!-- end game-world -->
         <!-- darkness for Stage 4 -->
         <div class="darkness-S4"></div>
+        </div><!-- end game-world -->
         <!-- Title screen overlay -->
         <label for="title-screen-toggle" class="overlay title-screen-overlay">
             <h1>NIBO'S WAY OUT</h1>
