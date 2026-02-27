@@ -4840,6 +4840,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             .submessage {
                 font-size: 16px;
                 margin-top: 30px;
+                text-decoration: underline;
+                &:hover { color: #ccc; }
             }
             .copyright {
                 position: absolute;
@@ -4901,10 +4903,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
             .resurrect-btn {
                 display: none;
                 cursor: pointer;
+                text-decoration: underline;
                 &:hover { color: #ccc; }
             }
             .game-over-text, .start-again-link {
                 display: none;
+            }
+            .start-again-link {
+                color: #888;
+                text-decoration: underline;
+                &:hover { color: #ccc; }
             }
         }
         /* Show death overlay hearts only during death states */
@@ -4919,6 +4927,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Game over elements: show only during death-3 */
         #death-3:checked ~ .death-screen-overlay .game-over-text { display: block; }
         #death-3:checked ~ .death-screen-overlay .start-again-link { display: block; }
+        /* Hide in-game arrows during death state (glow bleeds through semi-transparent overlay) */
+        /* Repeated :is() boosts specificity to 4 IDs, overriding all arrow-show rules */
+        :is(#death-1, #death-2, #death-3):is(#death-1, #death-2, #death-3):is(#death-1, #death-2, #death-3):is(#death-1, #death-2, #death-3):checked ~ .game-world .arrow {
+            display: none;
+        }
         /* Show death overlay when player is at approach position during death state */
         /* Poison: approached from L1-P5 going right */
         :is(#death-1, #death-2, #death-3):checked ~ #level-1:checked ~ #pos-5:checked ~
