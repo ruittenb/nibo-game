@@ -4457,17 +4457,17 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Move Stage 4 loot to counter when picked up (S4 is at bottom, no stage-height offset) */
-        /* z-index raised above darkness so flying animation is visible */
+        /* display: flex overrides the S4 display: none so the flight transition plays */
         #loot-S4-L3-P7-pickup:checked ~ .game-world .loot-S4-L3-P7,
         #loot-S4-L3-P8-pickup:checked ~ .game-world .loot-S4-L3-P8,
         #loot-S4-L3-P12-pickup:checked ~ .game-world .loot-S4-L3-P12,
         #loot-S4-L1-P10-pickup:checked ~ .game-world .loot-S4-L1-P10,
         #loot-S4-L0-P9-pickup:checked ~ .game-world .loot-S4-L0-P9 {
+            display: flex;
             bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
             left: calc(var(--pos-width) * 12 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
-            z-index: auto;
         }
         /* Move Stage 5 loot to counter when picked up (S5 is at bottom, no stage-height offset) */
         #loot-S5-L3-P13-pickup:checked ~ .game-world .loot-S5-L3-P13,
@@ -4747,32 +4747,32 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* In Stage 4: shrink hole to normal size */
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
         :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~
-        .darkness-S4 {
+        .game-world .darkness-S4 {
             --darkness-hole-width: 180px;
             --darkness-hole-height: 120px;
         }
         /* Horizontal position rules */
-        #pos-7:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 0 + var(--darkness-hole-offset)); }
-        #pos-8:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 1 + var(--darkness-hole-offset)); }
-        #pos-9:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 2 + var(--darkness-hole-offset)); }
-        #pos-10:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 3 + var(--darkness-hole-offset)); }
-        #pos-11:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 4 + var(--darkness-hole-offset)); }
-        #pos-12:checked ~ .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 5 + var(--darkness-hole-offset)); }
+        #pos-7:checked ~ .game-world .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 6 + var(--darkness-hole-offset)); }
+        #pos-8:checked ~ .game-world .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 7 + var(--darkness-hole-offset)); }
+        #pos-9:checked ~ .game-world .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 8 + var(--darkness-hole-offset)); }
+        #pos-10:checked ~ .game-world .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 9 + var(--darkness-hole-offset)); }
+        #pos-11:checked ~ .game-world .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 10 + var(--darkness-hole-offset)); }
+        #pos-12:checked ~ .game-world .darkness-S4 { --darkness-x: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--darkness-hole-offset)); }
         /* Vertical position rules */
-        #level-0:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--ground-height) - 26px); }
-        #level-1:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--level-height) - var(--platform-thickness) + 2px - 28px); }
-        #level-2:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 2 - var(--platform-thickness) + 2px - 28px); }
-        #level-3:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 3 - var(--platform-thickness) + 2px - 28px); }
-        #level-4:checked ~ .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 4 - var(--platform-thickness) + 2px - 28px); }
+        #level-0:checked ~ .game-world .darkness-S4 { --darkness-y: calc(100% - var(--ground-height) - 26px); }
+        #level-1:checked ~ .game-world .darkness-S4 { --darkness-y: calc(100% - var(--level-height) - var(--platform-thickness) + 2px - 28px); }
+        #level-2:checked ~ .game-world .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 2 - var(--platform-thickness) + 2px - 28px); }
+        #level-3:checked ~ .game-world .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 3 - var(--platform-thickness) + 2px - 28px); }
+        #level-4:checked ~ .game-world .darkness-S4 { --darkness-y: calc(100% - var(--level-height) * 4 - var(--platform-thickness) + 2px - 28px); }
         /* With torch: illuminate darkness (3 levels x 3 positions) */
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
         :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~
-        #torch-pickup:checked ~ .darkness-S4 {
+        #torch-pickup:checked ~ .game-world .darkness-S4 {
             --darkness-hole-width: calc(var(--pos-width) * 2.2);
             --darkness-hole-height: calc(var(--level-height) * 2.2);
         }
         /* Toggle darkness */
-        #darkness-toggle:checked ~ .darkness-S4 {
+        #darkness-toggle:checked ~ .game-world .darkness-S4 {
             display: none;
         }
         /* Overlay base styles */
@@ -6937,9 +6937,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="loot-hover-area"></span>
             <span class="tooltip">Seashell</span>
         </div>
-        </div><!-- end game-world -->
         <!-- darkness for Stage 4 -->
         <div class="darkness-S4"></div>
+        </div><!-- end game-world -->
         <!-- Title screen overlay -->
         <label for="title-screen-toggle" class="overlay title-screen-overlay">
             <h1>NIBO'S WAY OUT</h1>
