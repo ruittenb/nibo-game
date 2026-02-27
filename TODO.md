@@ -3,8 +3,6 @@
  - animated items still below darkness mask: plan 'flying-coins' (css stacking context problem)
  - eagle tooltip above panels
 
- - central pick up icon in nav-panel
-
  - burn disease with torch?
  - gold eating NPC / requiring payment
 

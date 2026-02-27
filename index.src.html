@@ -3752,6 +3752,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .nav-cell-down { grid-column: 2; grid-row: 3; }
         .nav-cell-left { grid-column: 1; grid-row: 2; }
         .nav-cell-right { grid-column: 3; grid-row: 2; }
+        .nav-cell-center { grid-column: 2; grid-row: 2; }
         /* Arrow triangles (gray inactive shown via ::before, yellow active via ::after on labels) */
         .nav-cell::before {
             content: '';
@@ -3791,6 +3792,24 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .nav-down { border-top: 18px solid var(--nav-arrow-color); }
         .nav-left { border-right: 18px solid var(--nav-arrow-color); }
         .nav-right { border-left: 18px solid var(--nav-arrow-color); }
+        /* Nav-panel center loot pickup */
+        .nav-loot {
+            display: none;
+            cursor: pointer;
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: 20px;
+            height: 20px;
+        }
+        .nav-loot svg {
+            width: 20px;
+            height: 20px;
+        }
+        .nav-loot-coin { color: var(--gold-color); animation: coin-pulse 1s ease-in-out infinite; }
+        .nav-loot-aquamarine { color: var(--aquamarine-color-1); animation: aquamarine-pulse 1s ease-in-out infinite; }
+        .nav-loot-ruby { color: var(--ruby-color-1); animation: ruby-pulse 1s ease-in-out infinite; }
+        .nav-loot-seashell { color: var(--seashell-color); animation: seashell-pulse 1s ease-in-out infinite; }
         /* Show correct left arrow based on current position */
         #pos-2:checked ~ .nav-panel .nav-left[for="pos-1"] { display: block; }
         #pos-3:checked ~ .nav-panel .nav-left[for="pos-2"] { display: block; }
@@ -4371,6 +4390,37 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
+        /* Nav-panel center loot pickup activation */
+        /* S1 */
+        #level-0:checked ~ #pos-3:checked ~ #loot-S1-L0-P3-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L0-P3-pickup"] { display: block; }
+        #level-1:checked ~ #pos-4:checked ~ #loot-S1-L1-P4-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L1-P4-pickup"] { display: block; }
+        #level-3:checked ~ #pos-5:checked ~ #loot-S1-L3-P5-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L3-P5-pickup"] { display: block; }
+        #level-2:checked ~ #pos-1:checked ~ #loot-S1-L2-P1-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L2-P1-pickup"] { display: block; }
+        #level-4:checked ~ #pos-2:checked ~ #loot-S1-L4-P2-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L4-P2-pickup"] { display: block; }
+        /* S2 */
+        #level-5:checked ~ #pos-8:checked ~ #loot-S2-L5-P8-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L5-P8-pickup"] { display: block; }
+        #level-6:checked ~ #pos-11:checked ~ #loot-S2-L6-P11-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L6-P11-pickup"] { display: block; }
+        #level-7:checked ~ #pos-7:checked ~ #loot-S2-L7-P7-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L7-P7-pickup"] { display: block; }
+        #level-8:checked ~ #pos-9:checked ~ #loot-S2-L8-P9-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L8-P9-pickup"] { display: block; }
+        #level-9:checked ~ #pos-10:checked ~ #loot-S2-L9-P10-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L9-P10-pickup"] { display: block; }
+        /* S3 */
+        #level-5:checked ~ #pos-15:checked ~ #loot-S3-L5-P15-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S3-L5-P15-pickup"] { display: block; }
+        #level-5:checked ~ #pos-18:checked ~ #loot-S3-L5-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S3-L5-P18-pickup"] { display: block; }
+        #level-8:checked ~ #pos-18:checked ~ #loot-S3-L8-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S3-L8-P18-pickup"] { display: block; }
+        #level-9:checked ~ #pos-14:checked ~ #loot-S3-L9-P14-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S3-L9-P14-pickup"] { display: block; }
+        /* S4 */
+        #level-3:checked ~ #pos-7:checked ~ #loot-S4-L3-P7-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L3-P7-pickup"] { display: block; }
+        #level-3:checked ~ #pos-8:checked ~ #loot-S4-L3-P8-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L3-P8-pickup"] { display: block; }
+        #level-3:checked ~ #pos-12:checked ~ #loot-S4-L3-P12-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L3-P12-pickup"] { display: block; }
+        #level-1:checked ~ #pos-10:checked ~ #loot-S4-L1-P10-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L1-P10-pickup"] { display: block; }
+        #level-0:checked ~ #pos-9:checked ~ #loot-S4-L0-P9-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L0-P9-pickup"] { display: block; }
+        /* S5 (dual selectors for ζ/η visual swap) */
+        #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L3-P13-pickup"],
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L3-P13-pickup"] { display: block; }
+        #level-2:checked ~ #pos-17:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L2-P17-pickup"],
+        #level-2:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L2-P17-pickup"] { display: block; }
+        #level-0:checked ~ #pos-18:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L0-P18-pickup"],
+        #level-0:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L0-P18-pickup"] { display: block; }
         /* Move Stage 1 loot to counter when picked up */
         #loot-S1-L0-P3-pickup:checked ~ .game-world .loot-S1-L0-P3,
         #loot-S1-L1-P4-pickup:checked ~ .game-world .loot-S1-L1-P4,
@@ -6270,6 +6320,36 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="death-1" class="nav-btn nav-right nav-death-right-1"></label>
                 <label for="death-2" class="nav-btn nav-right nav-death-right-2"></label>
                 <label for="death-3" class="nav-btn nav-right nav-death-right-3"></label>
+            </div>
+            <!-- Center cell (loot pickup) -->
+            <div class="nav-cell nav-cell-center">
+                <!-- S1 coins -->
+                <label for="loot-S1-L0-P3-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <label for="loot-S1-L1-P4-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <label for="loot-S1-L3-P5-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <label for="loot-S1-L2-P1-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <label for="loot-S1-L4-P2-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <!-- S2 -->
+                <label for="loot-S2-L5-P8-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <label for="loot-S2-L6-P11-pickup" class="nav-loot nav-loot-aquamarine"><svg><use href="#gem"/></svg></label>
+                <label for="loot-S2-L7-P7-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <label for="loot-S2-L8-P9-pickup" class="nav-loot nav-loot-aquamarine"><svg><use href="#gem"/></svg></label>
+                <label for="loot-S2-L9-P10-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <!-- S3 -->
+                <label for="loot-S3-L5-P15-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <label for="loot-S3-L5-P18-pickup" class="nav-loot nav-loot-ruby"><svg><use href="#gem"/></svg></label>
+                <label for="loot-S3-L8-P18-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <label for="loot-S3-L9-P14-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <!-- S4 -->
+                <label for="loot-S4-L3-P7-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <label for="loot-S4-L3-P8-pickup" class="nav-loot nav-loot-aquamarine"><svg><use href="#gem"/></svg></label>
+                <label for="loot-S4-L3-P12-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <label for="loot-S4-L1-P10-pickup" class="nav-loot nav-loot-aquamarine"><svg><use href="#gem"/></svg></label>
+                <label for="loot-S4-L0-P9-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <!-- S5 -->
+                <label for="loot-S5-L3-P13-pickup" class="nav-loot nav-loot-seashell"><svg><use href="#seashell"/></svg></label>
+                <label for="loot-S5-L2-P17-pickup" class="nav-loot nav-loot-seashell"><svg><use href="#seashell"/></svg></label>
+                <label for="loot-S5-L0-P18-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
             </div>
             <!-- Down cell -->
             <div class="nav-cell nav-cell-down">
