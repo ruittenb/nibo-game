@@ -63,17 +63,17 @@ The flight destination is calculated using CSS variables to match the inventory 
 
 ## Stage Layout and Coordinates
 
-The game world is a 3x2 grid of stages:
+The game world is a 4x2 grid of stages:
 
-|            | pos 1-6      | pos 7-12    | pos 13-18   |
-|------------|--------------|-------------|-------------|
-| levels 5-9 | S0           | S2 (jungle) | S3 (hangar) |
-| levels 0-4 | S1 (factory) | S4 (caves)  | S5          |
+|            | pos 1-6      | pos 7-12    | pos 13-18   | pos 19-24 |
+|------------|--------------|-------------|-------------|-----------|
+| levels 5-9 | S0           | S2 (jungle) | S3 (hangar) | S6        |
+| levels 0-4 | S1 (factory) | S4 (caves)  | S5          | S7        |
 
 **Terminology:** A **position** is the horizontal coordinate (`pos-*` radio), a **level** is the vertical coordinate (`level-*` radio), a **layer** is the S5 maze dimension (`layer-*` radio), and a **location** is a place in the game world (the combination of position + level + layer). Two locations can look the same visually but differ by layer or by being phantom.
 
 **Radio button IDs** are pure coordinates with no stage semantics:
-- `pos-1` through `pos-18` for horizontal position
+- `pos-1` through `pos-24` for horizontal position
 - `pos-φ` (phi) - a phantom position (see Phantom Locations)
 - `level-0` through `level-9` for vertical level (5-9 display at same heights as 0-4)
 - `level-ρ` (rho), `level-σ` (sigma), `level-τ` (tau) - phantom levels (see Phantom Locations)

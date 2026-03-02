@@ -377,6 +377,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-16:checked ~ .game-world { --pos: "P16"; }
         #pos-17:checked ~ .game-world { --pos: "P17"; }
         #pos-18:checked ~ .game-world { --pos: "P18"; }
+        #pos-19:checked ~ .game-world { --pos: "P19"; }
+        #pos-20:checked ~ .game-world { --pos: "P20"; }
+        #pos-21:checked ~ .game-world { --pos: "P21"; }
+        #pos-22:checked ~ .game-world { --pos: "P22"; }
+        #pos-23:checked ~ .game-world { --pos: "P23"; }
+        #pos-24:checked ~ .game-world { --pos: "P24"; }
         #pos-φ:checked ~ .game-world { --pos: "Pφ"; }
         /* Layer variable scoped to S5 (L0-L3, P13-P18) — includes trailing dash for uniform tooltip formatting */
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ #layer-N:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world { --layer: "YN-"; }
@@ -387,7 +393,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             top: calc(var(--stage-height) * -1);
             left: 0;
-            width: calc(var(--pos-width) * 18);
+            width: calc(var(--pos-width) * 24);
             /* Height for 2 vertical stages: S1/S4 at bottom, S2/S3 at top */
             height: calc(var(--stage-height) * 2);
             transition: translate 0.5s ease;
@@ -409,10 +415,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /*
          * Viewport scrolling via CSS variables
          * Stage layout:
-         *   S0 - S2 - S3
-         *   S1 - S4 - S5
-         * Levels 0-4 are bottom row (S1, S4, S5), levels 5-9 are top row (S0, S2, S3)
-         * Positions 1-6 are left column, 7-12 middle column, 13-18 right column
+         *   S0 - S2 - S3 - S6
+         *   S1 - S4 - S5 - S7
+         * Levels 0-4 are bottom row (S1, S4, S5, S7), levels 5-9 are top row (S0, S2, S3, S6)
+         * Positions 1-6 left, 7-12 mid-left, 13-18 mid-right, 19-24 right
          */
         /* Vertical: levels 0-4 show bottom row (default top offset shows S1/S4/S5) */
         /* Levels 5-9 show top row - need to scroll up by one stage-height */
@@ -443,6 +449,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-18:checked ~ .game-world,
         #pos-φ:checked ~ .game-world {
             --world-translateX: calc(var(--pos-width) * -12);
+        }
+        /* Horizontal: positions 19-24 scroll left by 18 positions */
+        #pos-19:checked ~ .game-world,
+        #pos-20:checked ~ .game-world,
+        #pos-21:checked ~ .game-world,
+        #pos-22:checked ~ .game-world,
+        #pos-23:checked ~ .game-world,
+        #pos-24:checked ~ .game-world {
+            --world-translateX: calc(var(--pos-width) * -18);
         }
         /* S1 (pos 1-6, levels 0-4): no translate to avoid stacking context on title screen */
         /* This rule must come AFTER the level-based translateY rules so it overrides them */
@@ -1516,7 +1531,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-16 { top: 10px; left: 370px; }
         #pos-17 { top: 10px; left: 390px; }
         #pos-18 { top: 10px; left: 410px; }
-        #pos-φ { top: 10px; left: 440px; }
+        /* Debug positions - S6/S7 */
+        #pos-19 { top: 10px; left: 440px; }
+        #pos-20 { top: 10px; left: 460px; }
+        #pos-21 { top: 10px; left: 480px; }
+        #pos-22 { top: 10px; left: 500px; }
+        #pos-23 { top: 10px; left: 520px; }
+        #pos-24 { top: 10px; left: 540px; }
+        #pos-φ { top: 10px; left: 570px; }
         /* Debug positions - S1 loot */
         #loot-S1-L0-P3-pickup { top: 100px; left: 70px; }
         #loot-S1-L1-P4-pickup { top: 100px; left: 90px; }
@@ -2339,6 +2361,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-16:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 15); }
         #pos-17:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 16); }
         #pos-18:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 17); }
+        /* S6/S7: pos 19-24 */
+        #pos-19:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 18); }
+        #pos-20:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 19); }
+        #pos-21:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 20); }
+        #pos-22:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 21); }
+        #pos-23:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 22); }
+        #pos-24:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 23); }
         /* Layer ζ/η visual position swaps (S5 L0-L3): P13↔P14, P15↔P16, P17↔P18 */
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 13); }
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-14:checked ~ .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 12); }
@@ -2957,7 +2986,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .sunken-ruins-bg {
             position: absolute;
             z-index: 0;
-            right: 0;
+            right: calc(var(--pos-width) * 6);
             bottom: -26px;
             width: 571.725px;
             height: 217.8px;
@@ -6220,6 +6249,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="position" id="pos-16" class="position-radio" title="pos-16">
         <input type="radio" name="position" id="pos-17" class="position-radio" title="pos-17">
         <input type="radio" name="position" id="pos-18" class="position-radio" title="pos-18">
+        <!-- S6/S7 positions -->
+        <input type="radio" name="position" id="pos-19" class="position-radio" title="pos-19">
+        <input type="radio" name="position" id="pos-20" class="position-radio" title="pos-20">
+        <input type="radio" name="position" id="pos-21" class="position-radio" title="pos-21">
+        <input type="radio" name="position" id="pos-22" class="position-radio" title="pos-22">
+        <input type="radio" name="position" id="pos-23" class="position-radio" title="pos-23">
+        <input type="radio" name="position" id="pos-24" class="position-radio" title="pos-24">
         <input type="radio" name="position" id="pos-φ" class="position-radio" title="pos-φ">
         <!-- Title screen toggle -->
         <input type="checkbox" id="title-screen-toggle" autofocus title="title screen">
