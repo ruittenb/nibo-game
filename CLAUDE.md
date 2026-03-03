@@ -221,7 +221,7 @@ Items pulse/glow when the player can interact with them. This requires combining
 
 ## Phantom Locations
 
-A phantom location is a radio button state whose logical coordinates differ from where the player visually appears. This works around the CSS constraint that one label can only change one radio button. For implementation details, see `.claude/skills/phantom-locations.md`.
+A phantom location is a radio button state whose logical coordinates differ from where the player visually appears. This works around the CSS constraint that one label can only change one radio button. For implementation details, see `.claude/skills/phantom-locations`.
 
 Current phantom locations:
 
@@ -260,13 +260,17 @@ Layer-aware CSS rules are scoped to `:is(#level-0, #level-1, #level-2, #level-3)
 ### Transition spec
 The full transition table is in `_fabriek/doc/transitions.txt` (304 transitions).
 
+## Bird (S5)
+
+The bird in S5 tracks the player's location. For every reachable combination of layer + level + position in S5, a CSS rule sets `--bird-level`, `--bird-pos`, and optionally `--bird-attacking: 1` on `.game-world`. This covers all 96 regular S5 L0-L3 combinations (6 positions × 4 levels × 4 layers) plus phantom level τ. For the data format and CSS translation rules, see `.claude/skills/bird-positioning`.
+
 ## Debug Mode
 
 The `#debug-toggle` checkbox reveals all game state inputs for testing. Each input has a `title` attribute describing its purpose.
 
 ## Adding New Checkboxes, Items, and Loot
 
-For implementation checklists on adding checkboxes, items, and loot, see `.claude/skills/adding-items-and-loot.md`.
+For implementation checklists on adding checkboxes, items, and loot, see `.claude/skills/adding-items-and-loot`.
 
 Key distinction between the two checkbox types:
 - **Class-based** (`class="loot-checkbox"`): hiding and debug visibility handled automatically by class selectors
