@@ -1,0 +1,492 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <!-- Much lighter blur for distant background only -->
+    <filter id="blurFar" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+    <filter id="blurMid" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="0.5"/>
+    </filter>
+    <!-- Pipe highlight gradient -->
+    <linearGradient id="pipeH" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2e3255"/>
+      <stop offset="40%" stop-color="#3a3f6e"/>
+      <stop offset="100%" stop-color="#141628"/>
+    </linearGradient>
+    <linearGradient id="pipeV" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#141628"/>
+      <stop offset="40%" stop-color="#3a3f6e"/>
+      <stop offset="100%" stop-color="#1e2140"/>
+    </linearGradient>
+    <linearGradient id="tankGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#141628"/>
+      <stop offset="30%" stop-color="#252848"/>
+      <stop offset="70%" stop-color="#252848"/>
+      <stop offset="100%" stop-color="#141628"/>
+    </linearGradient>
+    <linearGradient id="kettleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#181b30"/>
+      <stop offset="35%" stop-color="#2e3255"/>
+      <stop offset="65%" stop-color="#2e3255"/>
+      <stop offset="100%" stop-color="#181b30"/>
+    </linearGradient>
+    <radialGradient id="gaugeGrad" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#2a2e50"/>
+      <stop offset="100%" stop-color="#0e0f23"/>
+    </radialGradient>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0b1a"/>
+      <stop offset="100%" stop-color="#0e0f23"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGrad)"/>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- FAR BACKGROUND — lightly blurred silhouettes -->
+  <!-- ═══════════════════════════════════════════ -->
+  <g filter="url(#blurFar)" opacity="0.7">
+    <!-- Huge central silo -->
+    <rect x="310" y="30" width="180" height="430" rx="6" fill="#151728"/>
+    <ellipse cx="400" cy="30" rx="90" ry="22" fill="#1a1d35"/>
+    <!-- Silo bands -->
+    <rect x="310" y="100" width="180" height="8" fill="#191c32"/>
+    <rect x="310" y="180" width="180" height="8" fill="#191c32"/>
+    <rect x="310" y="260" width="180" height="8" fill="#191c32"/>
+    <rect x="310" y="340" width="180" height="8" fill="#191c32"/>
+
+    <!-- Left tower -->
+    <rect x="20" y="60" width="90" height="450" rx="5" fill="#131525"/>
+    <ellipse cx="65" cy="60" rx="45" ry="18" fill="#191c32"/>
+    <rect x="20" y="150" width="90" height="10" fill="#181b2e"/>
+    <rect x="20" y="280" width="90" height="10" fill="#181b2e"/>
+    <rect x="20" y="380" width="90" height="10" fill="#181b2e"/>
+
+    <!-- Right tower -->
+    <rect x="690" y="40" width="110" height="470" rx="5" fill="#131525"/>
+    <ellipse cx="745" cy="40" rx="55" ry="20" fill="#191c32"/>
+    <rect x="690" y="130" width="110" height="10" fill="#181b2e"/>
+    <rect x="690" y="240" width="110" height="10" fill="#181b2e"/>
+    <rect x="690" y="360" width="110" height="10" fill="#181b2e"/>
+
+    <!-- Chimney stacks far back -->
+    <rect x="200" y="10" width="30" height="280" rx="4" fill="#121424"/>
+    <ellipse cx="215" cy="10" rx="18" ry="7" fill="#181b2e"/>
+    <rect x="570" y="0" width="35" height="250" rx="4" fill="#121424"/>
+    <ellipse cx="587" cy="0" rx="20" ry="8" fill="#181b2e"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- BACKGROUND PIPE RACK — horizontal          -->
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Pipe rack frame supports -->
+  <g opacity="0.55">
+    <rect x="80"  y="50" width="8"  height="180" fill="#1e2140"/>
+    <rect x="200" y="50" width="8"  height="180" fill="#1e2140"/>
+    <rect x="320" y="50" width="8"  height="180" fill="#1e2140"/>
+    <rect x="440" y="50" width="8"  height="180" fill="#1e2140"/>
+    <rect x="560" y="50" width="8"  height="180" fill="#1e2140"/>
+    <rect x="680" y="50" width="8"  height="180" fill="#1e2140"/>
+    <!-- Horizontal beam -->
+    <rect x="60" y="50" width="740" height="6" fill="#1c1f38"/>
+    <rect x="60" y="200" width="740" height="6" fill="#1c1f38"/>
+  </g>
+
+  <!-- Pipe bundle 1 — top rack -->
+  <rect x="0"   y="58"  width="800" height="14" rx="7"  fill="url(#pipeH)"/>
+  <rect x="0"   y="74"  width="800" height="10" rx="5"  fill="#1a1d35"/>
+  <rect x="0"   y="86"  width="800" height="16" rx="8"  fill="url(#pipeH)"/>
+  <rect x="0"   y="104" width="800" height="9"  rx="4"  fill="#161930"/>
+  <rect x="0"   y="115" width="800" height="18" rx="9"  fill="url(#pipeH)"/>
+  <rect x="0"   y="135" width="800" height="7"  rx="3"  fill="#1a1d35"/>
+
+  <!-- Pipe bundle 2 — mid rack -->
+  <rect x="0"   y="290" width="800" height="14" rx="7"  fill="url(#pipeH)"/>
+  <rect x="0"   y="306" width="800" height="9"  rx="4"  fill="#161930"/>
+  <rect x="0"   y="317" width="800" height="18" rx="9"  fill="url(#pipeH)"/>
+  <rect x="0"   y="337" width="800" height="10" rx="5"  fill="#1a1d35"/>
+
+  <!-- Pipe bundle 3 — lower rack -->
+  <rect x="0"   y="490" width="800" height="16" rx="8"  fill="url(#pipeH)"/>
+  <rect x="0"   y="508" width="800" height="10" rx="5"  fill="#161930"/>
+  <rect x="0"   y="520" width="800" height="14" rx="7"  fill="url(#pipeH)"/>
+
+  <!-- Diagonal branch pipes -->
+  <rect x="-10" y="140" width="210" height="12" rx="6" transform="rotate(-18 90 146)" fill="#1e2140"/>
+  <rect x="370"  y="280" width="160" height="10" rx="5" transform="rotate(14 450 285)" fill="#1e2140"/>
+  <rect x="580" y="115" width="220" height="11" rx="5" transform="rotate(-10 690 120)" fill="#1a1d35"/>
+  <rect x="0"   y="490" width="180" height="10" rx="5" transform="rotate(20 90 495)" fill="#1e2140"/>
+  <rect x="640" y="480" width="200" height="10" rx="5" transform="rotate(-16 740 485)" fill="#1e2140"/>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- VERTICAL PIPES                             -->
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Pipe column set — with highlights -->
+  <!-- Col 1 -->
+  <rect x="44"  y="0" width="22" height="600" rx="11" fill="url(#pipeV)"/>
+  <rect x="50"  y="0" width="6"  height="600" rx="3"  fill="#2e3255" opacity="0.5"/>
+  <!-- Col 2 -->
+  <rect x="148" y="0" width="16" height="600" rx="8"  fill="url(#pipeV)"/>
+  <rect x="152" y="0" width="4"  height="600" rx="2"  fill="#2e3255" opacity="0.5"/>
+  <!-- Col 3 -->
+  <rect x="248" y="0" width="20" height="600" rx="10" fill="url(#pipeV)"/>
+  <!-- Col 4 -->
+  <rect x="378" y="0" width="26" height="600" rx="13" fill="url(#pipeV)"/>
+  <rect x="385" y="0" width="6"  height="600" rx="3"  fill="#2e3255" opacity="0.4"/>
+  <!-- Col 5 -->
+  <rect x="476" y="0" width="18" height="600" rx="9"  fill="url(#pipeV)"/>
+  <!-- Col 6 -->
+  <rect x="574" y="0" width="24" height="600" rx="12" fill="url(#pipeV)"/>
+  <rect x="580" y="0" width="5"  height="600" rx="2"  fill="#2e3255" opacity="0.5"/>
+  <!-- Col 7 -->
+  <rect x="718" y="0" width="18" height="600" rx="9"  fill="url(#pipeV)"/>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PIPE JOINTS / FLANGES                      -->
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Flanges on horizontal pipes -->
+  <rect x="78"  y="55"  width="12" height="22" rx="2" fill="#252848"/>
+  <rect x="198" y="55"  width="12" height="22" rx="2" fill="#252848"/>
+  <rect x="318" y="55"  width="12" height="22" rx="2" fill="#252848"/>
+  <rect x="438" y="55"  width="12" height="22" rx="2" fill="#252848"/>
+  <rect x="558" y="55"  width="12" height="22" rx="2" fill="#252848"/>
+  <rect x="678" y="55"  width="12" height="22" rx="2" fill="#252848"/>
+
+  <rect x="78"  y="286" width="12" height="22" rx="2" fill="#252848"/>
+  <rect x="248" y="286" width="12" height="22" rx="2" fill="#252848"/>
+  <rect x="438" y="286" width="12" height="22" rx="2" fill="#252848"/>
+  <rect x="608" y="286" width="12" height="22" rx="2" fill="#252848"/>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- VALVES                                     -->
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Gate valve shapes: body + wheel -->
+  <!-- Valve 1 on top pipe -->
+  <rect x="112" y="61" width="20" height="16" rx="2" fill="#1e2140"/>
+  <rect x="119" y="52" width="6"  height="10" fill="#252848"/>
+  <ellipse cx="122" cy="51" rx="9" ry="4" fill="#2a2e50"/>
+  <!-- Valve 2 -->
+  <rect x="355" y="61" width="20" height="16" rx="2" fill="#1e2140"/>
+  <rect x="362" y="52" width="6"  height="10" fill="#252848"/>
+  <ellipse cx="365" cy="51" rx="9" ry="4" fill="#2a2e50"/>
+  <!-- Valve 3 on mid pipe -->
+  <rect x="520" y="293" width="20" height="16" rx="2" fill="#1e2140"/>
+  <rect x="527" y="284" width="6"  height="10" fill="#252848"/>
+  <ellipse cx="530" cy="283" rx="9" ry="4" fill="#2a2e50"/>
+  <!-- Valve 4 -->
+  <rect x="200" y="293" width="20" height="16" rx="2" fill="#1e2140"/>
+  <rect x="207" y="284" width="6"  height="10" fill="#252848"/>
+  <ellipse cx="210" cy="283" rx="9" ry="4" fill="#2a2e50"/>
+  <!-- Valve 5 on lower pipe -->
+  <rect x="340" y="493" width="20" height="16" rx="2" fill="#1e2140"/>
+  <rect x="347" y="484" width="6"  height="10" fill="#252848"/>
+  <ellipse cx="350" cy="483" rx="9" ry="4" fill="#2a2e50"/>
+  <!-- Valve 6 on col pipe -->
+  <rect x="44"  y="220" width="22" height="18" rx="2" fill="#1e2140"/>
+  <rect x="47"  y="213" width="16" height="8"  fill="#252848"/>
+  <ellipse cx="55" cy="213" rx="10" ry="4" fill="#2a2e50"/>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- KETTLES / BOILERS                          -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- KETTLE A — left side, large boiler -->
+  <g>
+    <!-- Boiler body -->
+    <rect x="68" y="165" width="100" height="130" rx="50" fill="url(#kettleGrad)"/>
+    <!-- Dome top -->
+    <ellipse cx="118" cy="165" rx="50" ry="18" fill="#252848"/>
+    <!-- Bottom dish -->
+    <ellipse cx="118" cy="295" rx="50" ry="16" fill="#1a1d35"/>
+    <!-- Band rings -->
+    <rect x="74" y="200" width="100" height="7" rx="2" fill="#1e2140"/>
+    <rect x="74" y="230" width="100" height="7" rx="2" fill="#1e2140"/>
+    <rect x="74" y="260" width="100" height="7" rx="2" fill="#1e2140"/>
+    <!-- Gauge on boiler -->
+    <circle cx="118" cy="183" r="11" fill="url(#gaugeGrad)"/>
+    <circle cx="118" cy="183" r="7"  fill="#0e0f23"/>
+    <line  x1="118" y1="183" x2="122" y2="178" stroke="#3a3f6e" stroke-width="1.5"/>
+    <!-- Pipe stub top -->
+    <rect x="112" y="148" width="12" height="20" rx="4" fill="#1e2140"/>
+    <!-- Pressure port -->
+    <rect x="162" y="220" width="20" height="10" rx="4" fill="#1e2140"/>
+    <rect x="180" y="218" width="16" height="14" rx="2" fill="#252848"/>
+    <!-- Safety valve on top -->
+    <rect x="110" y="140" width="16" height="12" rx="3" fill="#252848"/>
+    <rect x="114" y="132" width="8" height="10" fill="#1e2140"/>
+    <rect x="108" y="130" width="20" height="5" rx="2" fill="#2e3255"/>
+    <!-- Legs -->
+    <rect x="84"  y="290" width="10" height="30" rx="3" fill="#1a1d35"/>
+    <rect x="144" y="290" width="10" height="30" rx="3" fill="#1a1d35"/>
+  </g>
+
+  <!-- KETTLE B — center, tall cylindrical reactor -->
+  <g>
+    <!-- Main cylinder -->
+    <rect x="355" y="155" width="90" height="190" rx="8" fill="url(#kettleGrad)"/>
+    <!-- Domed top -->
+    <ellipse cx="400" cy="155" rx="45" ry="20" fill="#252848"/>
+    <!-- Domed bottom -->
+    <ellipse cx="400" cy="345" rx="45" ry="18" fill="#1a1d35"/>
+    <!-- Bands -->
+    <rect x="357" y="200" width="90" height="6" rx="2" fill="#1e2140"/>
+    <rect x="357" y="240" width="90" height="6" rx="2" fill="#1e2140"/>
+    <rect x="357" y="280" width="90" height="6" rx="2" fill="#1e2140"/>
+    <!-- Porthole window -->
+    <circle cx="400" cy="220" r="15" fill="#0e0f23"/>
+    <circle cx="400" cy="220" r="11" fill="#0a0b14"/>
+    <circle cx="400" cy="220" r="8"  fill="#0d0e20" opacity="0.7"/>
+    <!-- Ring bolts around porthole -->
+    <circle cx="400" cy="205" r="2.5" fill="#1e2140"/>
+    <circle cx="400" cy="235" r="2.5" fill="#1e2140"/>
+    <circle cx="385" cy="220" r="2.5" fill="#1e2140"/>
+    <circle cx="415" cy="220" r="2.5" fill="#1e2140"/>
+    <!-- Gauge cluster -->
+    <circle cx="388" cy="185" r="9" fill="url(#gaugeGrad)"/>
+    <circle cx="388" cy="185" r="6" fill="#0e0f23"/>
+    <line  x1="388" y1="185" x2="391" y2="180" stroke="#3a3f6e" stroke-width="1.5"/>
+    <circle cx="412" cy="185" r="9" fill="url(#gaugeGrad)"/>
+    <circle cx="412" cy="185" r="6" fill="#0e0f23"/>
+    <line  x1="412" y1="185" x2="415" y2="181" stroke="#3a3f6e" stroke-width="1.5"/>
+    <!-- Agitator shaft top -->
+    <rect x="396" y="130" width="8" height="28" rx="3" fill="#1e2140"/>
+    <rect x="386" y="125" width="28" height="8" rx="3" fill="#252848"/>
+    <!-- Inlet nozzle left -->
+    <rect x="330" y="258" width="28" height="10" rx="4" fill="#1e2140"/>
+    <rect x="320" y="254" width="12" height="18" rx="3" fill="#252848"/>
+    <!-- Outlet nozzle right -->
+    <rect x="443" y="300" width="28" height="10" rx="4" fill="#1e2140"/>
+    <rect x="469" y="296" width="12" height="18" rx="3" fill="#252848"/>
+    <!-- Support saddles -->
+    <rect x="355" y="340" width="20" height="40" rx="4" fill="#1a1d35"/>
+    <rect x="425" y="340" width="20" height="40" rx="4" fill="#1a1d35"/>
+  </g>
+
+  <!-- KETTLE C — right side, squat boiler drum -->
+  <g>
+    <!-- Main body -->
+    <rect x="620" y="185" width="110" height="110" rx="55" fill="url(#kettleGrad)"/>
+    <!-- Top ellipse -->
+    <ellipse cx="675" cy="185" rx="55" ry="20" fill="#252848"/>
+    <!-- Bottom ellipse -->
+    <ellipse cx="675" cy="295" rx="55" ry="18" fill="#1a1d35"/>
+    <!-- Bands -->
+    <rect x="624" y="215" width="110" height="6" rx="2" fill="#1e2140"/>
+    <rect x="624" y="255" width="110" height="6" rx="2" fill="#1e2140"/>
+    <!-- Gauge -->
+    <circle cx="660" cy="203" r="11" fill="url(#gaugeGrad)"/>
+    <circle cx="660" cy="203" r="7"  fill="#0e0f23"/>
+    <line  x1="660" y1="203" x2="663" y2="198" stroke="#3a3f6e" stroke-width="1.5"/>
+    <circle cx="692" cy="203" r="11" fill="url(#gaugeGrad)"/>
+    <circle cx="692" cy="203" r="7"  fill="#0e0f23"/>
+    <line  x1="692" y1="203" x2="695" y2="198" stroke="#3a3f6e" stroke-width="1.5"/>
+    <!-- Manhole cover on top -->
+    <ellipse cx="675" cy="183" rx="20" ry="9" fill="#1e2140"/>
+    <ellipse cx="675" cy="183" rx="14" ry="6" fill="#252848"/>
+    <!-- Bolts around manhole -->
+    <circle cx="660" cy="179" r="2" fill="#1a1d35"/>
+    <circle cx="690" cy="179" r="2" fill="#1a1d35"/>
+    <circle cx="675" cy="174" r="2" fill="#1a1d35"/>
+    <!-- Safety valve -->
+    <rect x="668" y="173" width="14" height="10" rx="2" fill="#252848"/>
+    <rect x="672" y="163" width="6"  height="12" fill="#1e2140"/>
+    <rect x="665" y="161" width="20" height="5" rx="2" fill="#2e3255"/>
+    <!-- Pipe stub left -->
+    <rect x="568" y="228" width="56" height="10" rx="4" fill="#1e2140"/>
+    <!-- Pipe stub right -->
+    <rect x="730" y="243" width="40" height="10" rx="4" fill="#1e2140"/>
+    <!-- Legs -->
+    <rect x="635" y="290" width="12" height="35" rx="3" fill="#1a1d35"/>
+    <rect x="703" y="290" width="12" height="35" rx="3" fill="#1a1d35"/>
+  </g>
+
+  <!-- KETTLE D — small kettle upper-right area -->
+  <g>
+    <!-- Body -->
+    <rect x="520" y="65" width="50" height="70" rx="25" fill="url(#kettleGrad)"/>
+    <ellipse cx="545" cy="65"  rx="25" ry="10" fill="#252848"/>
+    <ellipse cx="545" cy="135" rx="25" ry="9"  fill="#1a1d35"/>
+    <rect x="522" y="90" width="50" height="5" rx="1" fill="#1e2140"/>
+    <rect x="522" y="108" width="50" height="5" rx="1" fill="#1e2140"/>
+    <!-- Nozzle top -->
+    <rect x="540" y="50" width="10" height="18" rx="3" fill="#1e2140"/>
+    <!-- Mini gauge -->
+    <circle cx="545" cy="80" r="7" fill="url(#gaugeGrad)"/>
+    <circle cx="545" cy="80" r="4" fill="#0e0f23"/>
+    <line x1="545" y1="80" x2="548" y2="77" stroke="#3a3f6e" stroke-width="1.2"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- MACHINES / EQUIPMENT                       -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- Control panel — left -->
+  <g>
+    <rect x="72" y="380" width="100" height="140" rx="5" fill="#161930"/>
+    <rect x="72" y="380" width="100" height="8" rx="5" fill="#1e2140"/>
+    <!-- Screen -->
+    <rect x="82" y="396" width="80" height="45" rx="3" fill="#0b0c1c"/>
+    <rect x="85" y="399" width="74" height="39" rx="2" fill="#0d0e1f"/>
+    <!-- Screen scanlines hint -->
+    <rect x="85" y="406" width="74" height="2" fill="#1a1d35" opacity="0.4"/>
+    <rect x="85" y="414" width="74" height="2" fill="#1a1d35" opacity="0.4"/>
+    <rect x="85" y="422" width="74" height="2" fill="#1a1d35" opacity="0.4"/>
+    <!-- Dials row -->
+    <circle cx="94"  cy="462" r="11" fill="url(#gaugeGrad)"/>
+    <circle cx="94"  cy="462" r="7"  fill="#0e0f23"/>
+    <line  x1="94"  y1="462" x2="98"  y2="457" stroke="#3a3f6e" stroke-width="1.5"/>
+    <circle cx="122" cy="462" r="11" fill="url(#gaugeGrad)"/>
+    <circle cx="122" cy="462" r="7"  fill="#0e0f23"/>
+    <line  x1="122" y1="462" x2="118" y2="457" stroke="#3a3f6e" stroke-width="1.5"/>
+    <circle cx="150" cy="462" r="11" fill="url(#gaugeGrad)"/>
+    <circle cx="150" cy="462" r="7"  fill="#0e0f23"/>
+    <line  x1="150" y1="462" x2="154" y2="457" stroke="#3a3f6e" stroke-width="1.5"/>
+    <!-- Button rows -->
+    <rect x="82" y="480" width="22" height="14" rx="3" fill="#1c1f38"/>
+    <rect x="110" y="480" width="22" height="14" rx="3" fill="#1c1f38"/>
+    <rect x="138" y="480" width="22" height="14" rx="3" fill="#1c1f38"/>
+    <rect x="82" y="500" width="22" height="14" rx="3" fill="#1a1d35"/>
+    <rect x="110" y="500" width="22" height="14" rx="3" fill="#1a1d35"/>
+    <rect x="138" y="500" width="22" height="14" rx="3" fill="#1a1d35"/>
+  </g>
+
+  <!-- Pump / compressor unit — center-left floor -->
+  <g>
+    <rect x="160" y="420" width="130" height="80" rx="6" fill="#161930"/>
+    <!-- Motor housing -->
+    <rect x="165" y="425" width="60" height="70" rx="30" fill="url(#kettleGrad)"/>
+    <ellipse cx="195" cy="425" rx="30" ry="12" fill="#252848"/>
+    <!-- Fan blade hint -->
+    <circle cx="195" cy="455" r="18" fill="#0e0f23"/>
+    <circle cx="195" cy="455" r="13" fill="#111325"/>
+    <circle cx="195" cy="455" r="5"  fill="#1e2140"/>
+    <!-- Strokes for blades -->
+    <line x1="195" y1="442" x2="195" y2="435" stroke="#1e2140" stroke-width="3" stroke-linecap="round"/>
+    <line x1="208" y1="455" x2="215" y2="455" stroke="#1e2140" stroke-width="3" stroke-linecap="round"/>
+    <line x1="195" y1="468" x2="195" y2="475" stroke="#1e2140" stroke-width="3" stroke-linecap="round"/>
+    <line x1="182" y1="455" x2="175" y2="455" stroke="#1e2140" stroke-width="3" stroke-linecap="round"/>
+    <!-- Coupling -->
+    <rect x="226" y="448" width="30" height="14" rx="4" fill="#1e2140"/>
+    <!-- Pump body -->
+    <rect x="256" y="435" width="30" height="40" rx="5" fill="#1c1f38"/>
+    <!-- Inlet pipe from bottom -->
+    <rect x="266" y="472" width="10" height="30" rx="3" fill="#1e2140"/>
+    <!-- Outlet pipe to right -->
+    <rect x="282" y="447" width="14" height="10" rx="3" fill="#1e2140"/>
+    <!-- Gauge on pump -->
+    <circle cx="270" cy="450" r="8" fill="url(#gaugeGrad)"/>
+    <circle cx="270" cy="450" r="5" fill="#0e0f23"/>
+    <line x1="270" y1="450" x2="273" y2="446" stroke="#3a3f6e" stroke-width="1.2"/>
+  </g>
+
+  <!-- Heat exchanger — center-right -->
+  <g>
+    <!-- Shell -->
+    <rect x="480" y="385" width="160" height="55" rx="10" fill="url(#kettleGrad)"/>
+    <!-- End caps -->
+    <ellipse cx="480" cy="412" rx="18" ry="27" fill="#252848"/>
+    <ellipse cx="640" cy="412" rx="18" ry="27" fill="#252848"/>
+    <!-- Tube sheet bolts left -->
+    <circle cx="480" cy="393" r="3" fill="#1a1d35"/>
+    <circle cx="480" cy="431" r="3" fill="#1a1d35"/>
+    <circle cx="470" cy="412" r="3" fill="#1a1d35"/>
+    <!-- Tube sheet bolts right -->
+    <circle cx="640" cy="393" r="3" fill="#1a1d35"/>
+    <circle cx="640" cy="431" r="3" fill="#1a1d35"/>
+    <circle cx="650" cy="412" r="3" fill="#1a1d35"/>
+    <!-- Baffles hinted -->
+    <rect x="530" y="388" width="5" height="49" rx="1" fill="#1e2140" opacity="0.5"/>
+    <rect x="560" y="388" width="5" height="49" rx="1" fill="#1e2140" opacity="0.5"/>
+    <rect x="590" y="388" width="5" height="49" rx="1" fill="#1e2140" opacity="0.5"/>
+    <!-- Nozzles top -->
+    <rect x="510" y="370" width="12" height="18" rx="3" fill="#1e2140"/>
+    <rect x="600" y="370" width="12" height="18" rx="3" fill="#1e2140"/>
+    <!-- Support saddles -->
+    <rect x="495" y="436" width="18" height="30" rx="3" fill="#1a1d35"/>
+    <rect x="605" y="436" width="18" height="30" rx="3" fill="#1a1d35"/>
+    <!-- Gauge -->
+    <circle cx="558" cy="407" r="9" fill="url(#gaugeGrad)"/>
+    <circle cx="558" cy="407" r="6" fill="#0e0f23"/>
+    <line x1="558" y1="407" x2="561" y2="403" stroke="#3a3f6e" stroke-width="1.2"/>
+  </g>
+
+  <!-- Control station — right panel -->
+  <g>
+    <rect x="648" y="335" width="108" height="145" rx="5" fill="#161930"/>
+    <rect x="648" y="335" width="108" height="8" rx="5" fill="#1e2140"/>
+    <!-- Large screen -->
+    <rect x="658" y="352" width="88" height="50" rx="3" fill="#0b0c1c"/>
+    <rect x="661" y="355" width="82" height="44" rx="2" fill="#0d0e1f"/>
+    <rect x="661" y="362" width="82" height="2" fill="#1a1d35" opacity="0.4"/>
+    <rect x="661" y="370" width="82" height="2" fill="#1a1d35" opacity="0.4"/>
+    <rect x="661" y="378" width="82" height="2" fill="#1a1d35" opacity="0.4"/>
+    <!-- Dials -->
+    <circle cx="670" cy="422" r="12" fill="url(#gaugeGrad)"/>
+    <circle cx="670" cy="422" r="8"  fill="#0e0f23"/>
+    <line  x1="670" y1="422" x2="674" y2="417" stroke="#3a3f6e" stroke-width="1.5"/>
+    <circle cx="702" cy="422" r="12" fill="url(#gaugeGrad)"/>
+    <circle cx="702" cy="422" r="8"  fill="#0e0f23"/>
+    <line  x1="702" y1="422" x2="706" y2="418" stroke="#3a3f6e" stroke-width="1.5"/>
+    <circle cx="736" cy="422" r="12" fill="url(#gaugeGrad)"/>
+    <circle cx="736" cy="422" r="8"  fill="#0e0f23"/>
+    <line  x1="736" y1="422" x2="740" y2="418" stroke="#3a3f6e" stroke-width="1.5"/>
+    <!-- Toggle switches -->
+    <rect x="658" y="442" width="28" height="12" rx="3" fill="#1c1f38"/>
+    <rect x="694" y="442" width="28" height="12" rx="3" fill="#1c1f38"/>
+    <rect x="730" y="442" width="18" height="12" rx="3" fill="#1c1f38"/>
+    <!-- Lower buttons -->
+    <rect x="658" y="462" width="18" height="12" rx="3" fill="#1a1d35"/>
+    <rect x="682" y="462" width="18" height="12" rx="3" fill="#1a1d35"/>
+    <rect x="706" y="462" width="18" height="12" rx="3" fill="#1a1d35"/>
+    <rect x="730" y="462" width="18" height="12" rx="3" fill="#1a1d35"/>
+  </g>
+
+  <!-- Electrical box / junction box -->
+  <g>
+    <rect x="740" y="130" width="58" height="80" rx="4" fill="#161930"/>
+    <rect x="740" y="130" width="58" height="6"  rx="4" fill="#1e2140"/>
+    <rect x="748" y="143" width="42" height="25" rx="2" fill="#0b0c1c"/>
+    <rect x="748" y="175" width="18" height="12" rx="2" fill="#1c1f38"/>
+    <rect x="772" y="175" width="18" height="12" rx="2" fill="#1c1f38"/>
+    <rect x="748" y="193" width="42" height="8"  rx="2" fill="#1a1d35"/>
+    <!-- Conduit knockouts -->
+    <rect x="756" y="207" width="10" height="6" rx="2" fill="#1e2140"/>
+    <rect x="772" y="207" width="10" height="6" rx="2" fill="#1e2140"/>
+  </g>
+
+  <!-- Small pipe elbow connectors -->
+  <!-- Elbow 1: top-left col to horizontal pipe -->
+  <path d="M55,58 Q55,46 66,46 L148,46" stroke="#2a2e50" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M55,58 Q55,46 66,46 L148,46" stroke="#1e2140" stroke-width="8"  fill="none" stroke-linecap="round"/>
+  <!-- Elbow 2: center col to kettle B inlet -->
+  <path d="M391,290 Q370,290 358,302 L358,345" stroke="#2a2e50" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <path d="M391,290 Q370,290 358,302 L358,345" stroke="#1e2140" stroke-width="7"  fill="none" stroke-linecap="round"/>
+  <!-- Elbow 3: kettle C to right column -->
+  <path d="M730,248 Q737,248 737,258 L737,300" stroke="#2a2e50" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <path d="M730,248 Q737,248 737,258 L737,300" stroke="#1e2140" stroke-width="7"  fill="none" stroke-linecap="round"/>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- FLOOR / BASE LINE                          -->
+  <!-- ═══════════════════════════════════════════ -->
+  <rect x="0" y="558" width="800" height="42" fill="#0c0d1e"/>
+  <rect x="0" y="556" width="800" height="4"  fill="#1a1d35"/>
+  <!-- Floor grating lines -->
+  <line x1="0"   y1="563" x2="800" y2="563" stroke="#1e2140" stroke-width="1" opacity="0.5"/>
+  <line x1="0"   y1="572" x2="800" y2="572" stroke="#1e2140" stroke-width="1" opacity="0.5"/>
+  <line x1="50"  y1="556" x2="50"  y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="100" y1="556" x2="100" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="150" y1="556" x2="150" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="200" y1="556" x2="200" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="250" y1="556" x2="250" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="300" y1="556" x2="300" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="350" y1="556" x2="350" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="400" y1="556" x2="400" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="450" y1="556" x2="450" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="500" y1="556" x2="500" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="550" y1="556" x2="550" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="600" y1="556" x2="600" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="650" y1="556" x2="650" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="700" y1="556" x2="700" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+  <line x1="750" y1="556" x2="750" y2="600" stroke="#1e2140" stroke-width="1" opacity="0.4"/>
+</svg>
