@@ -2929,7 +2929,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Factory background in Stage 1 */
         .factory-bg {
             left: 0;
-            bottom: calc((var(--panel-top) * 2 + var(--panel-height) * 2 + 10px) * -1);
+            bottom: calc(var(--panel-top) * -2 - var(--panel-height) * 2 - 20px);
+            filter: brightness(1.6);
         }
         /* Jungle background in Stage 2 */
         .jungle-bg {
