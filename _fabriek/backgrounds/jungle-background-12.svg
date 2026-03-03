@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" style="filter:brightness(2)">
+  <defs>
+    <filter id="f7"><feGaussianBlur stdDeviation="7"/></filter>
+    <filter id="f4"><feGaussianBlur stdDeviation="4"/></filter>
+    <filter id="f2"><feGaussianBlur stdDeviation="2"/></filter>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#0a0c1e"/>
+      <stop offset="100%" stop-color="#080e0a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="800" height="600" fill="url(#sky)"/>
+
+  <!-- ── Layer 1: far canopy, full width, heavy blur ── -->
+  <!-- Fills bottom, top edge = bumpy canopy skyline -->
+  <path filter="url(#f7)" d="
+    M-10,600 L-10,230
+    Q15,218  28,205  Q42,192  55,202
+    Q68,188  82,175  Q96,162  110,172
+    Q124,158 138,145 Q152,132 166,143
+    Q180,129 194,116 Q208,104 222,115
+    Q236,102 250,89  Q264,77  278,88
+    Q292,75  306,63  Q320,51  334,62
+    Q348,49  362,37  Q376,25  390,36
+    Q404,23  418,12  Q432,1   446,13
+    Q460,1   474,14  Q488,2   502,15
+    Q516,3   530,17  Q544,5   558,19
+    Q572,7   586,22  Q600,10  614,25
+    Q628,13  642,28  Q656,16  670,31
+    Q684,19  698,34  Q712,22  726,38
+    Q740,26  754,42  Q768,30  782,46
+    Q796,34  810,50
+    L810,600 Z
+  " fill="#0b1a0b"/>
+
+  <!-- ── Layer 2: mid canopy, full width, medium blur ── -->
+  <path filter="url(#f4)" d="
+    M-10,600 L-10,310
+    Q12,296  26,280  Q40,264  54,276
+    Q68,260  84,244  Q98,230  114,243
+    Q128,228 144,212 Q160,197 175,210
+    Q190,195 205,179 Q220,163 236,177
+    Q252,161 268,145 Q284,130 300,144
+    Q316,128 332,113 Q348,98  364,112
+    Q380,97  396,82  Q412,68  428,82
+    Q444,67  460,53  Q476,40  492,54
+    Q508,40  524,27  Q540,14  556,28
+    Q572,15  588,3   Q604,18  620,5
+    Q636,20  652,8   Q668,23  684,11
+    Q700,26  716,14  Q732,30  748,18
+    Q764,34  780,22  Q796,38  810,26
+    L810,600 Z
+  " fill="#0a1c0a"/>
+
+  <!-- ── Layer 3: near canopy framing edges, slight blur ── -->
+  <!-- Left mass -->
+  <path filter="url(#f2)" d="
+    M-10,600 L-10,380
+    Q10,360  24,338  Q40,315  52,328
+    Q68,305  84,282  Q100,260 116,274
+    Q132,251 148,228 Q164,206 180,220
+    Q196,198 210,176 Q224,156 236,170
+    Q248,150 258,132 Q266,118 272,105
+    L272,600 Z
+  " fill="#091a09"/>
+  <!-- Right mass -->
+  <path filter="url(#f2)" d="
+    M810,600 L810,360
+    Q790,338  776,315 Q760,292  748,306
+    Q732,282  716,258 Q700,236  686,250
+    Q670,226  654,203 Q638,181  624,196
+    Q608,172  592,150 Q578,130  564,145
+    Q552,125  540,108 Q530,94   524,82
+    L524,600 Z
+  " fill="#091a09"/>
+
+  <!-- ── Trunks — dark verticals rooted at bottom ── -->
+  <!-- These go from bottom UP into the canopy mass, so they're always grounded -->
+  <g fill="#060f07" filter="url(#f2)">
+    <rect x="22"  y="260" width="18" height="340"/>
+    <rect x="80"  y="300" width="14" height="300"/>
+    <rect x="148" y="340" width="16" height="260"/>
+    <rect x="230" y="360" width="12" height="240"/>
+    <rect x="370" y="320" width="20" height="280"/>
+    <rect x="460" y="350" width="14" height="250"/>
+    <rect x="560" y="340" width="16" height="260"/>
+    <rect x="650" y="300" width="14" height="300"/>
+    <rect x="730" y="270" width="18" height="330"/>
+    <rect x="782" y="310" width="14" height="290"/>
+  </g>
+
+  <!-- ── Undergrowth: dense jagged bottom strip ── -->
+  <path d="
+    M-10,600 L-10,510
+    Q16,498  30,484  Q44,470  58,482
+    Q72,468  88,454  Q102,440 118,453
+    Q134,439 150,425 Q166,411 182,424
+    Q198,410 214,396 Q230,382 246,396
+    Q262,382 278,368 Q294,354 310,368
+    Q326,354 342,340 Q358,326 374,340
+    Q390,326 406,312 Q422,298 438,312
+    Q454,298 470,284 Q486,270 502,284
+    Q518,270 534,256 Q550,242 566,256
+    Q582,242 598,228 Q614,214 630,228
+    Q646,214 662,200 Q678,186 694,200
+    Q710,186 726,172 Q742,158 758,172
+    Q774,158 790,145 Q800,138 810,144
+    L810,600 Z
+  " fill="#081608"/>
+
+  <!-- ── Ground shadow ── -->
+  <rect x="0" y="555" width="800" height="45" fill="#050d06"/>
+</svg>
