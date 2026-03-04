@@ -1565,6 +1565,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S5-L3-P13-pickup { top: 100px; left: 310px; }
         #loot-S5-L2-P17-pickup { top: 100px; left: 330px; }
         #loot-S5-L0-P18-pickup { top: 100px; left: 350px; }
+        /* Debug positions - S6 loot */
+        #loot-S6-L9-P24-pickup { top: 30px; left: 440px; }
         /* Debug positions - S1 items */
         #key-pickup { top: 120px; left: 70px; }
         #toolbox-unlocked { top: 120px; left: 90px; }
@@ -1748,7 +1750,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
                  var(--loot-S2-L5-P8, 0) + var(--loot-S2-L6-P11, 0) + var(--loot-S2-L7-P7, 0) + var(--loot-S2-L8-P9, 0) + var(--loot-S2-L9-P10, 0) +
                  var(--loot-S3-L5-P15, 0) + var(--loot-S3-L5-P18, 0) + var(--loot-S3-L8-P18, 0) + var(--loot-S3-L9-P14, 0) +
                  var(--loot-S4-L3-P7, 0) + var(--loot-S4-L3-P8, 0) + var(--loot-S4-L3-P12, 0) + var(--loot-S4-L1-P10, 0) + var(--loot-S4-L0-P9, 0) +
-                 var(--loot-S5-L3-P13, 0) + var(--loot-S5-L2-P17, 0) + var(--loot-S5-L0-P18, 0))
+                 var(--loot-S5-L3-P13, 0) + var(--loot-S5-L2-P17, 0) + var(--loot-S5-L0-P18, 0) +
+                 var(--loot-S6-L9-P24, 0))
                 * -24px
             ));
         }
@@ -1782,6 +1785,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S5-L3-P13-pickup:checked ~ .counter-panel { --loot-S5-L3-P13: 2; }
         #loot-S5-L2-P17-pickup:checked ~ .counter-panel { --loot-S5-L2-P17: 2; }
         #loot-S5-L0-P18-pickup:checked ~ .counter-panel { --loot-S5-L0-P18: 1; }
+        #loot-S6-L9-P24-pickup:checked ~ .counter-panel { --loot-S6-L9-P24: 2; }
         /* Heart panel (lives) */
         .heart-panel {
             position: absolute;
@@ -2688,7 +2692,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .ground-S1,
         .ground-S2,
         .ground-S3,
-        .ground-S4 {
+        .ground-S4,
+        .ground-S6 {
             position: absolute;
             bottom: 0;
             width: calc(var(--pos-width) * 6);
@@ -2728,25 +2733,28 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 linear-gradient(to bottom, #6b5344 0%, #4a3728 100%);
             border-top: 3px solid #7d6252;
         }
-        .ground-S3 {
-            left: calc(var(--pos-width) * 12);
+        .ground-S3,
+        .ground-S6 {
             bottom: var(--stage-height);
             background:
-                radial-gradient(circle at 8% 25%, #00000066 0%, #00000066 1px, transparent 1px),
-                radial-gradient(circle at 22% 65%, #00000059 0%, #00000059 1px, transparent 1px),
-                radial-gradient(circle at 37% 40%, #0000004d 0%, #0000004d 2px, transparent 2px),
-                radial-gradient(circle at 52% 80%, #00000066 0%, #00000066 1px, transparent 1px),
-                radial-gradient(circle at 68% 35%, #00000059 0%, #00000059 1px, transparent 1px),
-                radial-gradient(circle at 78% 70%, #0000004d 0%, #0000004d 2px, transparent 2px),
-                radial-gradient(circle at 91% 50%, #00000066 0%, #00000066 1px, transparent 1px),
-                radial-gradient(circle at 15% 40%, #00000026 0%, transparent 8%),
-                radial-gradient(circle at 45% 70%, #0000001a 0%, transparent 6%),
-                radial-gradient(circle at 75% 30%, #0000001f 0%, transparent 7%),
-                radial-gradient(circle at 30% 80%, #00000014 0%, transparent 5%),
-                radial-gradient(circle at 85% 60%, #0000001a 0%, transparent 6%),
-                radial-gradient(circle at 60% 50%, #00000014 0%, transparent 4%),
+                radial-gradient(circle at 8% 25%, #344 0%, #344 1px, transparent 1px),
+                radial-gradient(circle at 22% 65%, #334 0%, #334 1px, transparent 1px),
+                radial-gradient(circle at 37% 40%, #444 0%, #444 2px, transparent 2px),
+                radial-gradient(circle at 52% 80%, #333 0%, #333 1px, transparent 1px),
+                radial-gradient(circle at 68% 35%, #444 0%, #444 1px, transparent 1px),
+                radial-gradient(circle at 78% 70%, #344 0%, #344 2px, transparent 2px),
+                radial-gradient(circle at 91% 50%, #333 0%, #333 1px, transparent 1px),
+                radial-gradient(circle at 15% 40%, #555 0%, transparent 8%),
+                radial-gradient(circle at 45% 70%, #455 0%, transparent 6%),
+                radial-gradient(circle at 75% 30%, #555 0%, transparent 7%),
+                radial-gradient(circle at 30% 80%, #455 0%, transparent 5%),
+                radial-gradient(circle at 85% 60%, #555 0%, transparent 6%),
+                radial-gradient(circle at 60% 50%, #555 0%, transparent 4%),
                 linear-gradient(to bottom, #6b6f73 0%, #4a4d50 100%);
             border-top: 3px solid #7a7e82;
+        }
+        .ground-S3 { left: calc(var(--pos-width) * 12); }
+        .ground-S6 { left: calc(var(--pos-width) * 18);
         }
         /* Warning walls - yellow/black diagonal stripes marking stage edges */
         .warning-wall {
@@ -2924,6 +2932,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 width: calc(var(--pos-width) * 12 * 0.744);
                 height: calc(var(--pos-width) * 12 * 438 / 1540 * 0.744);
                 opacity: 0.85;
+            }
+        }
+        /* Alien tower background in Stage 6 */
+        .alien-tower-bg {
+            --tower-scaling: 2.4;
+            position: absolute;
+            right: -55px;
+            bottom: calc(var(--stage-height) + var(--ground-height) - 64px);
+            z-index: 0;
+
+            svg {
+                display: block;
+                width: calc(var(--pos-width) * var(--tower-scaling));
+                height: calc(var(--pos-width) * var(--tower-scaling) * 520 / 320);
             }
         }
         /* Factory background in Stage 1 */
@@ -3403,6 +3425,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .arrow-P15-right, .arrow-P16-left { left: calc(var(--pos-offset) + var(--pos-width) * 14.5 + 12px); }
         .arrow-P16-right, .arrow-P17-left { left: calc(var(--pos-offset) + var(--pos-width) * 15.5 + 12px); }
         .arrow-P17-right, .arrow-P18-left { left: calc(var(--pos-offset) + var(--pos-width) * 16.5 + 12px); }
+        /* S6 arrow positions */
+        .arrow-P18-right { left: calc(var(--pos-offset) + var(--pos-width) * 17.5 - 6px); }
+        .arrow-P19-left  { left: calc(var(--pos-offset) + var(--pos-width) * 17.5 + 30px); }
+        .arrow-P19-right, .arrow-P20-left { left: calc(var(--pos-offset) + var(--pos-width) * 18.5 + 12px); }
+        .arrow-P20-right, .arrow-P21-left { left: calc(var(--pos-offset) + var(--pos-width) * 19.5 + 12px); }
+        .arrow-P21-right, .arrow-P22-left { left: calc(var(--pos-offset) + var(--pos-width) * 20.5 + 12px); }
+        .arrow-P22-right, .arrow-P23-left { left: calc(var(--pos-offset) + var(--pos-width) * 21.5 + 12px); }
+        .arrow-P23-right, .arrow-P24-left { left: calc(var(--pos-offset) + var(--pos-width) * 22.5 + 12px); }
         /* Vertical arrow left positions (follow player position) */
         #pos-1:checked  ~ .game-world .arrow-v { left: calc(var(--pos-offset) + 10px); }
         #pos-2:checked  ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) + 10px); }
@@ -3422,6 +3452,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-16:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 15 + 10px); }
         #pos-17:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 16 + 10px); }
         #pos-18:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 17 + 10px); }
+        #pos-19:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 18 + 10px); }
+        #pos-20:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 19 + 10px); }
+        #pos-21:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 20 + 10px); }
+        #pos-22:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 21 + 10px); }
+        #pos-23:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 22 + 10px); }
+        #pos-24:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 23 + 10px); }
         /* Layer ζ/η vertical arrow position swaps (S5 L0-L3): P13↔P14, P15↔P16, P17↔P18 */
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 13 + 10px); }
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-14:checked ~ .game-world .arrow-v { left: calc(var(--pos-offset) + var(--pos-width) * 12 + 10px); }
@@ -3709,6 +3745,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-5:checked ~ #pos-15:checked ~ .game-world .arrow-L5-up { display: block; }
         #level-6:checked ~ #pos-16:checked ~ .game-world .arrow-L6-up { display: block; }
         #level-8:checked ~ #pos-17:checked ~ .game-world .arrow-φ-up { display: block; }
+        /* Stage 6 up arrows */
+        #level-5:checked ~ #pos-24:checked ~ .game-world .arrow-L5-up { display: block; }
+        #level-6:checked ~ #pos-24:checked ~ .game-world .arrow-L6-up { display: block; }
+        #level-7:checked ~ #pos-24:checked ~ .game-world .arrow-L7-up { display: block; }
+        #level-8:checked ~ #pos-24:checked ~ .game-world .arrow-L8-up { display: block; }
         /* Stage 3 phantom position arrows */
         #level-8:checked ~ #pos-φ:checked ~ .game-world .arrow-φ-left { display: block; }
         #level-8:checked ~ #pos-φ:checked ~ .game-world .arrow-φ-right { display: block; }
@@ -3751,6 +3792,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-7:checked ~ #pos-13:checked ~ .game-world .arrow-L7-down { display: block; }
         #level-7:checked ~ #pos-14:checked ~ .game-world .arrow-L7-down { display: block; }
         #level-7:checked ~ #pos-16:checked ~ .game-world .arrow-L7-down { display: block; }
+        /* Stage 6 down arrows */
+        #level-6:checked ~ #pos-24:checked ~ .game-world .arrow-L6-down { display: block; }
+        #level-7:checked ~ #pos-24:checked ~ .game-world .arrow-L7-down { display: block; }
+        #level-8:checked ~ #pos-24:checked ~ .game-world .arrow-L8-down { display: block; }
+        #level-9:checked ~ #pos-24:checked ~ .game-world .arrow-L9-down { display: block; }
         /* Stage 5 up arrows (all positions P13-P18) */
         #level-0:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L0-up { display: block; }
         #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L1-up { display: block; }
@@ -3773,6 +3819,23 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-14:checked ~ .game-world .arrow-L3-down { display: none; }
         #level-4:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .game-world .arrow-L4-down { display: block; }
         #level-4:checked ~ #pos-18:checked ~ .game-world .arrow-L4-down { display: none; }
+        /* Stage 6 horizontal arrows in game world (L5) */
+        #level-5:checked ~ #pos-19:checked ~ .game-world .arrow-P19-right { display: block; }
+        #level-5:checked ~ #pos-20:checked ~ .game-world .arrow-P20-left { display: block; }
+        #level-5:checked ~ #pos-20:checked ~ .game-world .arrow-P20-right { display: block; }
+        #level-5:checked ~ #pos-21:checked ~ .game-world .arrow-P21-left { display: block; }
+        #level-5:checked ~ #pos-21:checked ~ .game-world .arrow-P21-right { display: block; }
+        #level-5:checked ~ #pos-22:checked ~ .game-world .arrow-P22-left { display: block; }
+        #level-5:checked ~ #pos-22:checked ~ .game-world .arrow-P22-right { display: block; }
+        #level-5:checked ~ #pos-23:checked ~ .game-world .arrow-P23-left { display: block; }
+        #level-5:checked ~ #pos-23:checked ~ .game-world .arrow-P23-right { display: block; }
+        #level-5:checked ~ #pos-24:checked ~ .game-world .arrow-P24-left { display: block; }
+        /* S6 L7-L8: P19 right, P20 left only */
+        :is(#level-7, #level-8):checked ~ #pos-19:checked ~ .game-world .arrow-P19-right { display: block; }
+        :is(#level-7, #level-8):checked ~ #pos-20:checked ~ .game-world .arrow-P20-left { display: block; }
+        /* S3↔S6 cross-stage arrows */
+        :is(#level-5, #level-6, #level-7, #level-8):checked ~ #pos-18:checked ~ .game-world .arrow-P18-right { display: block; }
+        #level-5:checked ~ #pos-19:checked ~ .game-world .arrow-P19-left { display: block; }
         /* Fixed navigation panel - 3x3 grid */
         .nav-panel {
             position: absolute;
@@ -3948,6 +4011,29 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-6:checked ~ #pos-15:checked ~ .nav-panel .nav-left[for="pos-14"] { display: none; }
         #level-7:checked ~ #pos-14:checked ~ .nav-panel .nav-right[for="pos-15"] { display: none; }
         #level-7:checked ~ #pos-15:checked ~ .nav-panel .nav-left[for="pos-14"] { display: none; }
+        /* Stage 6 nav panel horizontal arrows */
+        #pos-19:checked ~ .nav-panel .nav-right[for="pos-20"] { display: block; }
+        #pos-20:checked ~ .nav-panel .nav-left[for="pos-19"] { display: block; }
+        #pos-20:checked ~ .nav-panel .nav-right[for="pos-21"] { display: block; }
+        #pos-21:checked ~ .nav-panel .nav-left[for="pos-20"] { display: block; }
+        #pos-21:checked ~ .nav-panel .nav-right[for="pos-22"] { display: block; }
+        #pos-22:checked ~ .nav-panel .nav-left[for="pos-21"] { display: block; }
+        #pos-22:checked ~ .nav-panel .nav-right[for="pos-23"] { display: block; }
+        #pos-23:checked ~ .nav-panel .nav-left[for="pos-22"] { display: block; }
+        #pos-23:checked ~ .nav-panel .nav-right[for="pos-24"] { display: block; }
+        #pos-24:checked ~ .nav-panel .nav-left[for="pos-23"] { display: block; }
+        /* S3↔S6 cross-stage nav arrows (L5-L8) */
+        :is(#level-5, #level-6, #level-7, #level-8):checked ~ #pos-18:checked ~ .nav-panel .nav-right[for="pos-19"] { display: block; }
+        #level-5:checked ~ #pos-19:checked ~ .nav-panel .nav-left[for="pos-18"] { display: block; }
+        /* S6 nav hide: L6+ no left arrows (except cross-stage P19→P18 and L7-L8 P20→P19) */
+        :is(#level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-20, #pos-21, #pos-22, #pos-23, #pos-24):checked ~ .nav-panel :is(
+            .nav-left[for="pos-19"], .nav-left[for="pos-20"], .nav-left[for="pos-21"],
+            .nav-left[for="pos-22"], .nav-left[for="pos-23"]) { display: none; }
+        /* Revive L7-L8 P20 left */
+        :is(#level-7, #level-8):checked ~ #pos-20:checked ~ .nav-panel .nav-left[for="pos-19"] { display: block; }
+        /* S6 nav hide: L6 no right at P19, L7-L8 no right at P20 */
+        #level-6:checked ~ #pos-19:checked ~ .nav-panel .nav-right[for="pos-20"] { display: none; }
+        :is(#level-7, #level-8):checked ~ #pos-20:checked ~ .nav-panel .nav-right[for="pos-21"] { display: none; }
         /* Kill old S5 L0-L3 nav-panel horizontal arrows (layer system replaces them) */
         :is(#level-0, #level-1, #level-2, #level-3):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel :is(
             .nav-right[for="pos-14"], .nav-left[for="pos-13"],
@@ -4017,6 +4103,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-5:checked ~ #pos-15:checked ~ .nav-panel .nav-up[for="level-6"] { display: block; }
         #level-6:checked ~ #pos-16:checked ~ .nav-panel .nav-up[for="level-7"] { display: block; }
         #level-8:checked ~ #pos-17:checked ~ .nav-panel .nav-up[for="pos-φ"] { display: block; }
+        /* Stage 6 nav up */
+        #level-5:checked ~ #pos-24:checked ~ .nav-panel .nav-up[for="level-6"] { display: block; }
+        #level-6:checked ~ #pos-24:checked ~ .nav-panel .nav-up[for="level-7"] { display: block; }
+        #level-7:checked ~ #pos-24:checked ~ .nav-panel .nav-up[for="level-8"] { display: block; }
+        #level-8:checked ~ #pos-24:checked ~ .nav-panel .nav-up[for="level-9"] { display: block; }
         /* Show down arrow at grate locations */
         #level-1:checked ~ #pos-1:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
         #level-2:checked ~ #pos-5:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
@@ -4040,6 +4131,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-7:checked ~ #pos-13:checked ~ .nav-panel .nav-down[for="level-6"] { display: block; }
         #level-7:checked ~ #pos-14:checked ~ .nav-panel .nav-down[for="level-6"] { display: block; }
         #level-7:checked ~ #pos-16:checked ~ .nav-panel .nav-down[for="level-6"] { display: block; }
+        /* Stage 6 nav down */
+        #level-6:checked ~ #pos-24:checked ~ .nav-panel .nav-down[for="level-5"] { display: block; }
+        #level-7:checked ~ #pos-24:checked ~ .nav-panel .nav-down[for="level-6"] { display: block; }
+        #level-8:checked ~ #pos-24:checked ~ .nav-panel .nav-down[for="level-7"] { display: block; }
+        #level-9:checked ~ #pos-24:checked ~ .nav-panel .nav-down[for="level-8"] { display: block; }
         /* Stage 5 nav up (all positions P13-P18, levels 0-3) */
         #level-0:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-up[for="level-1"] { display: block; }
         #level-1:checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
@@ -4150,6 +4246,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .loot-S5-L0-P18 {
             bottom: calc(var(--ground-height));
             left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset));
+        }
+        /* Stage 6 loot positions */
+        .loot-S6-L9-P24 {
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
+            /* Exception: placed to the right of Nibo (ladder position) instead of the usual --item-offset left */
+            left: calc(var(--pos-offset) + var(--pos-width) * 23 + var(--ladder-offset));
         }
         /* Stage 4 loot positions - hidden by default, only show when player adjacent */
         .container.loot-S4-L3-P7,
@@ -4446,6 +4548,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
+        /* Stage 6 loot pulse/click */
+        #level-9:checked ~ #pos-24:checked ~ #loot-S6-L9-P24-pickup:not(:checked) ~ .game-world .loot-S6-L9-P24 .loot-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: aquamarine-pulse 1s ease-in-out infinite;
+        }
         /* Nav-panel center loot pickup activation */
         /* S1 */
         #level-0:checked ~ #pos-3:checked ~ #loot-S1-L0-P3-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L0-P3-pickup"] { display: block; }
@@ -4477,6 +4585,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-2:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L2-P17-pickup"] { display: block; }
         #level-0:checked ~ #pos-18:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L0-P18-pickup"],
         #level-0:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L0-P18-pickup"] { display: block; }
+        /* S6 */
+        #level-9:checked ~ #pos-24:checked ~ #loot-S6-L9-P24-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S6-L9-P24-pickup"] { display: block; }
         /* Move Stage 1 loot to counter when picked up */
         #loot-S1-L0-P3-pickup:checked ~ .game-world .loot-S1-L0-P3,
         #loot-S1-L1-P4-pickup:checked ~ .game-world .loot-S1-L1-P4,
@@ -4528,6 +4638,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S5-L0-P18-pickup:checked ~ .game-world .loot-S5-L0-P18 {
             bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
             left: calc(var(--pos-width) * 18 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
+        }
+        /* Move Stage 6 loot to counter when picked up (S6 is top row, add stage-height) */
+        #loot-S6-L9-P24-pickup:checked ~ .game-world .loot-S6-L9-P24 {
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
+            left: calc(var(--pos-width) * 24 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -5409,7 +5526,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-9:checked ~ #pos-10:checked ~ .game-world .loot-S2-L9-P10 .loot-hover-area,
         /* S4 uses levels 0-4 */
         #level-3:checked ~ #pos-8:checked ~ .game-world .loot-S4-L3-P8 .loot-hover-area,
-        #level-1:checked ~ #pos-10:checked ~ .game-world .loot-S4-L1-P10 .loot-hover-area {
+        #level-1:checked ~ #pos-10:checked ~ .game-world .loot-S4-L1-P10 .loot-hover-area,
+        /* S6 uses levels 5-9 */
+        #level-9:checked ~ #pos-24:checked ~ .game-world .loot-S6-L9-P24 .loot-hover-area {
             display: none;
         }
         /* Show tooltip on hover */
@@ -5432,6 +5551,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13 .loot-hover-area:hover ~ .tooltip,
         #loot-S5-L2-P17-pickup:not(:checked) ~ .game-world .loot-S5-L2-P17 .loot-hover-area:hover ~ .tooltip,
         #loot-S5-L0-P18-pickup:not(:checked) ~ .game-world .loot-S5-L0-P18 .loot-hover-area:hover ~ .tooltip,
+        #loot-S6-L9-P24-pickup:not(:checked) ~ .game-world .loot-S6-L9-P24 .loot-hover-area:hover ~ .tooltip,
         /* Show tooltip when player is at loot location (hover-area hidden, so use container:hover) */
         /* S2/S3 use levels 5-9 */
         #level-6:checked ~ #pos-11:checked ~ #loot-S2-L6-P11-pickup:not(:checked) ~ .game-world .loot-S2-L6-P11:hover .tooltip,
@@ -5444,7 +5564,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13:hover .tooltip,
         #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13:hover .tooltip,
         #level-2:checked ~ #pos-17:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .game-world .loot-S5-L2-P17:hover .tooltip,
-        #level-2:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .game-world .loot-S5-L2-P17:hover .tooltip {
+        #level-2:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .game-world .loot-S5-L2-P17:hover .tooltip,
+        /* S6 uses levels 5-9 */
+        #level-9:checked ~ #pos-24:checked ~ #loot-S6-L9-P24-pickup:not(:checked) ~ .game-world .loot-S6-L9-P24:hover .tooltip {
             opacity: 1;
         }
     </style>
@@ -6407,6 +6529,87 @@ AAAAAAAAAAAAAAAAAAAAAA==
             </g>
             <rect x="0" y="0" width="100%" height="100%" fill="white" opacity="0.08"/>
         </symbol>
+        <symbol id="alien-tower" viewBox="0 0 320 520">
+            <defs>
+                <filter id="alien-tower-glow">
+                    <feGaussianBlur stdDeviation="3" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+            </defs>
+            <!-- Tower walls -->
+            <rect x="80" y="60" width="160" height="430" fill="url(#alien-tower-concrete)" rx="3"/>
+            <rect x="80" y="60" width="12" height="430" fill="#1e2224" opacity="0.5" rx="2"/>
+            <rect x="228" y="60" width="12" height="430" fill="#1e2224" opacity="0.5" rx="2"/>
+            <!-- Floor slabs -->
+            <rect x="76" y="462" width="168" height="12" fill="url(#alien-tower-floorSlab)" rx="1"/>
+            <rect x="76" y="360" width="168" height="12" fill="url(#alien-tower-floorSlab)" rx="1"/>
+            <rect x="76" y="260" width="168" height="12" fill="url(#alien-tower-floorSlab)" rx="1"/>
+            <rect x="76" y="162" width="168" height="12" fill="url(#alien-tower-floorSlab)" rx="1"/>
+            <!-- Observation deck overhang -->
+            <rect x="60" y="70" width="200" height="14" fill="url(#alien-tower-floorSlab)" rx="2"/>
+            <rect x="60" y="82" width="200" height="3" fill="#151819" opacity="0.7"/>
+            <!-- Deck railing -->
+            <rect x="62" y="58" width="196" height="14" fill="#2a2d2f" rx="2"/>
+            <rect x="62" y="58" width="196" height="3" fill="#00e5cc" opacity="0.25" rx="1" filter="url(#alien-tower-glow)"/>
+            <rect x="70"  y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="95"  y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="120" y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="145" y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="170" y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="195" y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="220" y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="245" y="58" width="3" height="14" fill="#1a1c1e"/>
+            <!-- Antenna -->
+            <rect x="158" y="18" width="4" height="42" fill="#2a2d2f"/>
+            <circle cx="160" cy="16" r="5" fill="#00e5cc" opacity="0.9" filter="url(#alien-tower-glow)"/>
+            <circle cx="160" cy="16" r="9" fill="none" stroke="#00e5cc" stroke-width="0.8" opacity="0.4"/>
+            <!-- Ground floor -->
+            <rect x="92" y="412" width="40" height="50" rx="2" fill="#111315" stroke="#1e2a2a" stroke-width="1"/>
+            <rect x="92" y="412" width="40" height="4" fill="#00e5cc" opacity="0.4" filter="url(#alien-tower-glow)"/>
+            <circle cx="104" cy="437" r="2.5" fill="#00ff88" opacity="0.9" filter="url(#alien-tower-glow)"/>
+            <circle cx="113" cy="437" r="2.5" fill="#ff4400" opacity="0.8" filter="url(#alien-tower-glow)"/>
+            <rect x="155" y="413" width="70" height="3" fill="#00e5cc" opacity="0.3" filter="url(#alien-tower-glow)"/>
+            <rect x="155" y="415" width="70" height="36" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
+            <rect x="155" y="415" width="70" height="36" rx="2" fill="#00aaff" opacity="0.1"/>
+            <line x1="190" y1="415" x2="190" y2="451" stroke="#1a3040" stroke-width="1"/>
+            <line x1="155" y1="433" x2="225" y2="433" stroke="#1a3040" stroke-width="1"/>
+            <!-- 1st floor -->
+            <rect x="96" y="287" width="54" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
+            <rect x="170" y="287" width="54" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
+            <rect x="96"  y="287" width="54" height="42" rx="2" fill="#0044ff" opacity="0.07"/>
+            <rect x="170" y="287" width="54" height="42" rx="2" fill="#0044ff" opacity="0.07"/>
+            <line x1="123" y1="287" x2="123" y2="329" stroke="#1a3040" stroke-width="1"/>
+            <line x1="96"  y1="308" x2="150" y2="308" stroke="#1a3040" stroke-width="1"/>
+            <line x1="197" y1="287" x2="197" y2="329" stroke="#1a3040" stroke-width="1"/>
+            <line x1="170" y1="308" x2="224" y2="308" stroke="#1a3040" stroke-width="1"/>
+            <rect x="96"  y="285" width="54" height="3" fill="#00e5cc" opacity="0.3" filter="url(#alien-tower-glow)"/>
+            <rect x="170" y="285" width="54" height="3" fill="#00e5cc" opacity="0.3" filter="url(#alien-tower-glow)"/>
+            <!-- 2nd floor -->
+            <rect x="105" y="189" width="110" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
+            <rect x="105" y="189" width="110" height="42" rx="2" fill="#0055aa" opacity="0.08"/>
+            <line x1="160" y1="189" x2="160" y2="231" stroke="#1a3040" stroke-width="1"/>
+            <line x1="105" y1="210" x2="215" y2="210" stroke="#1a3040" stroke-width="1"/>
+            <text x="90" y="217" font-size="13" fill="#ff00ff" opacity="1" font-family="monospace">&#x2B21;</text>
+            <text x="225" y="217" font-size="13" fill="#ff00ff" opacity="1" font-family="monospace">&#x2B21;</text>
+            <rect x="100" y="187" width="120" height="2" fill="#00e5cc" opacity="0.35" filter="url(#alien-tower-glow)"/>
+            <!-- 3rd floor -->
+            <rect x="95"  y="96" width="48" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
+            <rect x="177" y="96" width="48" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
+            <rect x="95"  y="96" width="48" height="42" rx="2" fill="#440088" opacity="0.12"/>
+            <rect x="177" y="96" width="48" height="42" rx="2" fill="#440088" opacity="0.12"/>
+            <circle cx="103" cy="130" r="2" fill="#00e5cc" opacity="0.8" filter="url(#alien-tower-glow)"/>
+            <circle cx="112" cy="130" r="2" fill="#00e5cc" opacity="0.6" filter="url(#alien-tower-glow)"/>
+            <circle cx="121" cy="130" r="2" fill="#007777" opacity="0.6"/>
+            <circle cx="185" cy="130" r="2" fill="#00e5cc" opacity="0.8" filter="url(#alien-tower-glow)"/>
+            <circle cx="194" cy="130" r="2" fill="#00e5cc" opacity="0.5" filter="url(#alien-tower-glow)"/>
+            <circle cx="203" cy="130" r="2" fill="#007777" opacity="0.6"/>
+            <!-- Observation deck figures -->
+            <ellipse cx="100" cy="68" rx="4" ry="5" fill="#111416"/>
+            <ellipse cx="100" cy="79" rx="5" ry="7" fill="#111416"/>
+            <ellipse cx="220" cy="66" rx="5" ry="6" fill="#111416"/>
+            <ellipse cx="220" cy="79" rx="4" ry="7" fill="#111416"/>
+            <rect x="64" y="83" width="192" height="2" fill="#00e5cc" opacity="0.4" filter="url(#alien-tower-glow)"/>
+        </symbol>
         <symbol id="tree" viewBox="-26 0 92 110">
             <!-- Foliage -->
             <circle fill="#2d5a2d" cx="-10" cy="38" r="16"/>
@@ -6686,6 +6889,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="loot-S5-L3-P13-pickup" class="loot-checkbox" title="seashell">
         <input type="checkbox" id="loot-S5-L2-P17-pickup" class="loot-checkbox" title="seashell">
         <input type="checkbox" id="loot-S5-L0-P18-pickup" class="loot-checkbox" title="coin">
+        <!-- Stage 6 loot -->
+        <input type="checkbox" id="loot-S6-L9-P24-pickup" class="loot-checkbox" title="aquamarine">
         <div class="subtitle subtitle-S1">The Factory</div>
         <div class="subtitle subtitle-S2">The Jungle</div>
         <div class="subtitle subtitle-S3">The Hangar</div>
@@ -6732,6 +6937,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="pos-15" class="nav-btn nav-left"></label>
                 <label for="pos-16" class="nav-btn nav-left"></label>
                 <label for="pos-17" class="nav-btn nav-left"></label>
+                <!-- Stage 6 -->
+                <label for="pos-18" class="nav-btn nav-left"></label>
+                <label for="pos-19" class="nav-btn nav-left"></label>
+                <label for="pos-20" class="nav-btn nav-left"></label>
+                <label for="pos-21" class="nav-btn nav-left"></label>
+                <label for="pos-22" class="nav-btn nav-left"></label>
+                <label for="pos-23" class="nav-btn nav-left"></label>
                 <!-- Layer-change nav (S5 L0-L3) -->
                 <label for="layer-ζ" class="nav-btn nav-left"></label>
                 <label for="layer-θ" class="nav-btn nav-left"></label>
@@ -6766,6 +6978,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="pos-16" class="nav-btn nav-right"></label>
                 <label for="pos-17" class="nav-btn nav-right"></label>
                 <label for="pos-18" class="nav-btn nav-right"></label>
+                <!-- Stage 6 -->
+                <label for="pos-19" class="nav-btn nav-right"></label>
+                <label for="pos-20" class="nav-btn nav-right"></label>
+                <label for="pos-21" class="nav-btn nav-right"></label>
+                <label for="pos-22" class="nav-btn nav-right"></label>
+                <label for="pos-23" class="nav-btn nav-right"></label>
+                <label for="pos-24" class="nav-btn nav-right"></label>
                 <!-- Layer-change nav (S5 L0-L3) -->
                 <label for="layer-ζ" class="nav-btn nav-right"></label>
                 <label for="layer-θ" class="nav-btn nav-right"></label>
@@ -6805,6 +7024,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="loot-S5-L3-P13-pickup" class="nav-loot nav-loot-seashell"><svg><use href="#seashell"/></svg></label>
                 <label for="loot-S5-L2-P17-pickup" class="nav-loot nav-loot-seashell"><svg><use href="#seashell"/></svg></label>
                 <label for="loot-S5-L0-P18-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <!-- S6 -->
+                <label for="loot-S6-L9-P24-pickup" class="nav-loot nav-loot-aquamarine"><svg><use href="#gem"/></svg></label>
                 <span class="tooltip nav-loot-tooltip">Pick Up</span>
             </div>
             <!-- Down cell -->
@@ -6873,6 +7094,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
                     <div class="digit">30</div>
                     <div class="digit">31</div>
                     <div class="digit">32</div>
+                    <div class="digit">33</div>
+                    <div class="digit">34</div>
+                    <div class="digit">35</div>
+                    <div class="digit">36</div>
                 </div>
             </div>
         </div>
@@ -7281,6 +7506,33 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <svg><use href="#flight-controls"/></svg>
             <span class="tooltip">Flight controls<br>are now available.</span>
         </label>
+        <!-- ==================== STAGE 6 LAYOUT ==================== -->
+        <!-- Alien tower -->
+        <div class="alien-tower-bg">
+            <svg>
+                <defs>
+                    <linearGradient id="alien-tower-concrete" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2a2d2f"/><stop offset="50%" stop-color="#383c3e"/><stop offset="100%" stop-color="#2a2d2f"/></linearGradient>
+                    <linearGradient id="alien-tower-floorSlab" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1e2224"/><stop offset="50%" stop-color="#2c3133"/><stop offset="100%" stop-color="#1e2224"/></linearGradient>
+                </defs>
+                <use href="#alien-tower"/>
+            </svg>
+        </div>
+        <!-- Ground -->
+        <div class="ground-S6"></div>
+        <!-- S6 horizontal arrows -->
+        <label for="pos-20" class="arrow arrow-right arrow-h arrow-P19-right"></label>
+        <label for="pos-21" class="arrow arrow-right arrow-h arrow-P20-right"></label>
+        <label for="pos-22" class="arrow arrow-right arrow-h arrow-P21-right"></label>
+        <label for="pos-23" class="arrow arrow-right arrow-h arrow-P22-right"></label>
+        <label for="pos-24" class="arrow arrow-right arrow-h arrow-P23-right"></label>
+        <label for="pos-19" class="arrow arrow-left arrow-h arrow-P20-left"></label>
+        <label for="pos-20" class="arrow arrow-left arrow-h arrow-P21-left"></label>
+        <label for="pos-21" class="arrow arrow-left arrow-h arrow-P22-left"></label>
+        <label for="pos-22" class="arrow arrow-left arrow-h arrow-P23-left"></label>
+        <label for="pos-23" class="arrow arrow-left arrow-h arrow-P24-left"></label>
+        <!-- S3↔S6 cross-stage arrows -->
+        <label for="pos-19" class="arrow arrow-right arrow-h arrow-P18-right"></label>
+        <label for="pos-18" class="arrow arrow-left arrow-h arrow-P19-left"></label>
         <!-- ==================== STAGE 1 LOOT ==================== -->
         <div class="container coin loot-S1-L0-P3">
             <label for="loot-S1-L0-P3-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
@@ -7386,6 +7638,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <label for="loot-S5-L3-P13-pickup" class="loot-in-game"><svg><use href="#seashell"/></svg></label>
             <span class="loot-hover-area"></span>
             <span class="tooltip">Seashell</span>
+        </div>
+        <!-- ==================== STAGE 6 LOOT ==================== -->
+        <div class="container aquamarine loot-S6-L9-P24">
+            <label for="loot-S6-L9-P24-pickup" class="loot-in-game"><svg><use href="#gem"/></svg></label>
+            <span class="loot-hover-area"></span>
+            <span class="tooltip">Aquamarine</span>
         </div>
         <!-- darkness for Stage 4 -->
         <div class="darkness-S4"></div>
