@@ -2965,7 +2965,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .aurora-bg {
             position: absolute;
             left: calc(var(--pos-width) * 18);
-            bottom: var(--stage-height);
+            bottom: calc(var(--stage-height) + 100px);
             width: calc(var(--pos-width) * 6);
             height: var(--stage-height);
             z-index: 0;
@@ -2974,7 +2974,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
             svg {
                 position: absolute;
-                left: 450px;
+                left: 300px;
                 width: 360px;
                 height: 720px;
                 transform: rotate(30deg);
@@ -7666,6 +7666,56 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <svg><use href="#barrel"/></svg>
             <span class="tooltip">Barrels</span>
         </div>
+        <!-- ==================== STAGE 6 LAYOUT ==================== -->
+        <!-- S6 is listed before S3 so the spacecraft (which visually extends
+             into S6 territory) renders on top of the aurora by DOM order. -->
+        <!-- Aurora -->
+        <div class="aurora-bg">
+            <svg>
+                <defs>
+                    <linearGradient id="aurora-grad" gradientUnits="userSpaceOnUse" x1="80" y1="0" x2="120" y2="400">
+                        <stop offset="0%" stop-color="#c8ff00" stop-opacity="0.9"/>
+                        <stop offset="45%" stop-color="#00e640" stop-opacity="0.75"/>
+                        <stop offset="100%" stop-color="#00cc44" stop-opacity="0"/>
+                    </linearGradient>
+                    <filter id="aurora-blur" x="-40%" y="-40%" width="180%" height="180%">
+                        <feGaussianBlur stdDeviation="5 14"/>
+                    </filter>
+                </defs>
+                <use href="#aurora"/>
+            </svg>
+        </div>
+        <!-- Alien tower -->
+        <div class="alien-tower-bg">
+            <svg>
+                <defs>
+                    <linearGradient id="alien-tower-concrete" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2a2d2f"/><stop offset="50%" stop-color="#383c3e"/><stop offset="100%" stop-color="#2a2d2f"/></linearGradient>
+                    <linearGradient id="alien-tower-floorSlab" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1e2224"/><stop offset="50%" stop-color="#2c3133"/><stop offset="100%" stop-color="#1e2224"/></linearGradient>
+                </defs>
+                <use href="#alien-tower"/>
+            </svg>
+        </div>
+        <!-- Ground -->
+        <div class="ground-S6"></div>
+        <!-- S6 horizontal arrows -->
+        <label for="pos-20" class="arrow arrow-right arrow-h arrow-P19-right"></label>
+        <label for="pos-21" class="arrow arrow-right arrow-h arrow-P20-right"></label>
+        <label for="pos-22" class="arrow arrow-right arrow-h arrow-P21-right"></label>
+        <label for="pos-23" class="arrow arrow-right arrow-h arrow-P22-right"></label>
+        <label for="pos-24" class="arrow arrow-right arrow-h arrow-P23-right"></label>
+        <label for="pos-19" class="arrow arrow-left arrow-h arrow-P20-left"></label>
+        <label for="pos-20" class="arrow arrow-left arrow-h arrow-P21-left"></label>
+        <label for="pos-21" class="arrow arrow-left arrow-h arrow-P22-left"></label>
+        <label for="pos-22" class="arrow arrow-left arrow-h arrow-P23-left"></label>
+        <label for="pos-23" class="arrow arrow-left arrow-h arrow-P24-left"></label>
+        <!-- S6 radiation hazard -->
+        <div class="radiation radiation-S6-L7-P24">
+            <span class="tooltip radiation-tooltip">Radioactive source</span>
+            <svg><use href="#radiation"/></svg>
+        </div>
+        <!-- S3↔S6 cross-stage arrows -->
+        <label for="pos-19" class="arrow arrow-right arrow-h arrow-P18-right"></label>
+        <label for="pos-18" class="arrow arrow-left arrow-h arrow-P19-left"></label>
         <!-- ==================== STAGE 3 LAYOUT ==================== -->
         <!-- Spaceship background -->
         <div class="stars-bg stars-bg-S3"><svg><use href="#stars"/></svg></div>
@@ -7723,54 +7773,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <svg><use href="#flight-controls"/></svg>
             <span class="tooltip">Flight controls<br>are now available.</span>
         </label>
-        <!-- ==================== STAGE 6 LAYOUT ==================== -->
-        <!-- Aurora -->
-        <div class="aurora-bg">
-            <svg>
-                <defs>
-                    <linearGradient id="aurora-grad" gradientUnits="userSpaceOnUse" x1="80" y1="0" x2="120" y2="400">
-                        <stop offset="0%" stop-color="#c8ff00" stop-opacity="0.9"/>
-                        <stop offset="45%" stop-color="#00e640" stop-opacity="0.75"/>
-                        <stop offset="100%" stop-color="#00cc44" stop-opacity="0"/>
-                    </linearGradient>
-                    <filter id="aurora-blur" x="-40%" y="-40%" width="180%" height="180%">
-                        <feGaussianBlur stdDeviation="5 14"/>
-                    </filter>
-                </defs>
-                <use href="#aurora"/>
-            </svg>
-        </div>
-        <!-- Alien tower -->
-        <div class="alien-tower-bg">
-            <svg>
-                <defs>
-                    <linearGradient id="alien-tower-concrete" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2a2d2f"/><stop offset="50%" stop-color="#383c3e"/><stop offset="100%" stop-color="#2a2d2f"/></linearGradient>
-                    <linearGradient id="alien-tower-floorSlab" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1e2224"/><stop offset="50%" stop-color="#2c3133"/><stop offset="100%" stop-color="#1e2224"/></linearGradient>
-                </defs>
-                <use href="#alien-tower"/>
-            </svg>
-        </div>
-        <!-- Ground -->
-        <div class="ground-S6"></div>
-        <!-- S6 horizontal arrows -->
-        <label for="pos-20" class="arrow arrow-right arrow-h arrow-P19-right"></label>
-        <label for="pos-21" class="arrow arrow-right arrow-h arrow-P20-right"></label>
-        <label for="pos-22" class="arrow arrow-right arrow-h arrow-P21-right"></label>
-        <label for="pos-23" class="arrow arrow-right arrow-h arrow-P22-right"></label>
-        <label for="pos-24" class="arrow arrow-right arrow-h arrow-P23-right"></label>
-        <label for="pos-19" class="arrow arrow-left arrow-h arrow-P20-left"></label>
-        <label for="pos-20" class="arrow arrow-left arrow-h arrow-P21-left"></label>
-        <label for="pos-21" class="arrow arrow-left arrow-h arrow-P22-left"></label>
-        <label for="pos-22" class="arrow arrow-left arrow-h arrow-P23-left"></label>
-        <label for="pos-23" class="arrow arrow-left arrow-h arrow-P24-left"></label>
-        <!-- S6 radiation hazard -->
-        <div class="radiation radiation-S6-L7-P24">
-            <span class="tooltip radiation-tooltip">Radioactive source</span>
-            <svg><use href="#radiation"/></svg>
-        </div>
-        <!-- S3↔S6 cross-stage arrows -->
-        <label for="pos-19" class="arrow arrow-right arrow-h arrow-P18-right"></label>
-        <label for="pos-18" class="arrow arrow-left arrow-h arrow-P19-left"></label>
         <!-- ==================== STAGE 1 LOOT ==================== -->
         <div class="container coin loot-S1-L0-P3">
             <label for="loot-S1-L0-P3-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
