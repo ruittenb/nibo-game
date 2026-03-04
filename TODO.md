@@ -6,6 +6,9 @@
  - fly item to in-game location when applied
 
 
+ - move scuba state box to S6 in debug section
+ - move alien id card state box to the previous location of the scuba state box
+
 S6: I would like to combine Rear of the Spaceship + Alien Outpost / Signal Tower.
     Contains an important part for reparation. Or fuel/oxygen.
     But requires a special radioactivity suit.
