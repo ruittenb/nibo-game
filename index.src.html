@@ -1572,6 +1572,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S5-L0-P18-pickup { top: 100px; left: 350px; }
         /* Debug positions - S6 loot */
         #loot-S6-L9-P24-pickup { top: 30px; left: 440px; }
+        #loot-S6-L5-P24-pickup { top: 30px; left: 460px; }
         /* Debug positions - S1 items */
         #key-pickup { top: 120px; left: 70px; }
         #toolbox-unlocked { top: 120px; left: 90px; }
@@ -1762,7 +1763,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                  var(--loot-S3-L5-P15, 0) + var(--loot-S3-L5-P18, 0) + var(--loot-S3-L8-P18, 0) + var(--loot-S3-L9-P14, 0) +
                  var(--loot-S4-L3-P7, 0) + var(--loot-S4-L3-P8, 0) + var(--loot-S4-L3-P12, 0) + var(--loot-S4-L1-P10, 0) + var(--loot-S4-L0-P9, 0) +
                  var(--loot-S5-L3-P13, 0) + var(--loot-S5-L2-P17, 0) + var(--loot-S5-L0-P18, 0) +
-                 var(--loot-S6-L9-P24, 0))
+                 var(--loot-S6-L9-P24, 0) + var(--loot-S6-L5-P24, 0))
                 * -24px
             ));
         }
@@ -1797,6 +1798,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S5-L2-P17-pickup:checked ~ .counter-panel { --loot-S5-L2-P17: 2; }
         #loot-S5-L0-P18-pickup:checked ~ .counter-panel { --loot-S5-L0-P18: 1; }
         #loot-S6-L9-P24-pickup:checked ~ .counter-panel { --loot-S6-L9-P24: 2; }
+        #loot-S6-L5-P24-pickup:checked ~ .counter-panel { --loot-S6-L5-P24: 1; }
         /* Heart panel (lives) */
         .heart-panel {
             position: absolute;
@@ -4324,6 +4326,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             /* Exception: placed to the right of Nibo (ladder position) instead of the usual --item-offset left */
             left: calc(var(--pos-offset) + var(--pos-width) * 23 + var(--ladder-offset));
         }
+        .loot-S6-L5-P24 {
+            bottom: calc(var(--stage-height) + var(--ground-height));
+            left: calc(var(--pos-offset) + var(--pos-width) * 23 - var(--item-offset));
+        }
         /* Stage 4 loot positions - hidden by default, only show when player adjacent */
         .container.loot-S4-L3-P7,
         .container.loot-S4-L3-P8,
@@ -4629,6 +4635,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: aquamarine-pulse 1s ease-in-out infinite;
         }
+        #level-5:checked ~ #pos-24:checked ~ #loot-S6-L5-P24-pickup:not(:checked) ~ .game-world .loot-S6-L5-P24 .loot-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
+        }
         /* Nav-panel center loot pickup activation */
         /* S1 */
         #level-0:checked ~ #pos-3:checked ~ #loot-S1-L0-P3-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L0-P3-pickup"] { display: block; }
@@ -4662,6 +4673,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-0:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L0-P18-pickup"] { display: block; }
         /* S6 */
         #level-9:checked ~ #pos-24:checked ~ #loot-S6-L9-P24-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S6-L9-P24-pickup"] { display: block; }
+        #level-5:checked ~ #pos-24:checked ~ #loot-S6-L5-P24-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S6-L5-P24-pickup"] { display: block; }
         /* Move Stage 1 loot to counter when picked up */
         #loot-S1-L0-P3-pickup:checked ~ .game-world .loot-S1-L0-P3,
         #loot-S1-L1-P4-pickup:checked ~ .game-world .loot-S1-L1-P4,
@@ -4717,7 +4729,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Move Stage 6 loot to counter when picked up (S6 is top row, add stage-height) */
-        #loot-S6-L9-P24-pickup:checked ~ .game-world .loot-S6-L9-P24 {
+        #loot-S6-L9-P24-pickup:checked ~ .game-world .loot-S6-L9-P24,
+        #loot-S6-L5-P24-pickup:checked ~ .game-world .loot-S6-L5-P24 {
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
             left: calc(var(--pos-width) * 24 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
@@ -5686,7 +5699,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #pos-8:checked ~ .game-world .loot-S4-L3-P8 .loot-hover-area,
         #level-1:checked ~ #pos-10:checked ~ .game-world .loot-S4-L1-P10 .loot-hover-area,
         /* S6 uses levels 5-9 */
-        #level-9:checked ~ #pos-24:checked ~ .game-world .loot-S6-L9-P24 .loot-hover-area {
+        #level-9:checked ~ #pos-24:checked ~ .game-world .loot-S6-L9-P24 .loot-hover-area,
+        #level-5:checked ~ #pos-24:checked ~ .game-world .loot-S6-L5-P24 .loot-hover-area {
             display: none;
         }
         /* Show tooltip on hover */
@@ -7059,6 +7073,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="loot-S5-L0-P18-pickup" class="loot-checkbox" title="coin">
         <!-- Stage 6 loot -->
         <input type="checkbox" id="loot-S6-L9-P24-pickup" class="loot-checkbox" title="aquamarine">
+        <input type="checkbox" id="loot-S6-L5-P24-pickup" class="loot-checkbox" title="coin">
         <div class="subtitle subtitle-S1">The Factory</div>
         <div class="subtitle subtitle-S2">The Jungle</div>
         <div class="subtitle subtitle-S3">The Hangar</div>
@@ -7194,6 +7209,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="loot-S5-L0-P18-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
                 <!-- S6 -->
                 <label for="loot-S6-L9-P24-pickup" class="nav-loot nav-loot-aquamarine"><svg><use href="#gem"/></svg></label>
+                <label for="loot-S6-L5-P24-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
                 <span class="tooltip nav-loot-tooltip">Pick Up</span>
             </div>
             <!-- Down cell -->
@@ -7705,7 +7721,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="pos-23" class="arrow arrow-left arrow-h arrow-P24-left"></label>
         <!-- S6 radiation hazard -->
         <div class="radiation radiation-S6-L7-P24">
-            <span class="tooltip radiation-tooltip">Radiation</span>
+            <span class="tooltip radiation-tooltip">Radioactive source</span>
             <svg><use href="#radiation"/></svg>
         </div>
         <!-- S3↔S6 cross-stage arrows -->
@@ -7822,6 +7838,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <label for="loot-S6-L9-P24-pickup" class="loot-in-game"><svg><use href="#gem"/></svg></label>
             <span class="loot-hover-area"></span>
             <span class="tooltip">Aquamarine</span>
+        </div>
+        <div class="container coin loot-S6-L5-P24">
+            <label for="loot-S6-L5-P24-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
+            <span class="loot-hover-area"></span>
         </div>
         <!-- darkness for Stage 4 -->
         <div class="darkness-S4"></div>
