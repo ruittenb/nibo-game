@@ -233,6 +233,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --wrench-color: #708090;
             --axe-color: #cc1010;
             --idcard-color: #4a9f4a;
+            --alien-idcard-color: #9acd32;
             --scuba-color: #F0A500;
             --seashell-color: #ff69b4;
             --cave-rock-color: #4a3a2a;   /* Stalactite/stalagmite color */
@@ -409,6 +410,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --inv-has-idcard: 0;
             --inv-has-battery: 0;
             --inv-has-torch: 0;
+            --inv-has-scuba: 0;
+            --inv-has-alien-idcard: 0;
             /* Inventory slot positioning */
             --inv-slot-width: calc(var(--pickup-size) + 8px);  /* item width + gap */
         }
@@ -501,6 +504,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #idcard-pickup:checked ~ .game-world { --inv-has-idcard: 1; }
         #battery-pickup:checked ~ .game-world { --inv-has-battery: 1; }
         #torch-pickup:checked ~ .game-world { --inv-has-torch: 1; }
+        #scuba-pickup:checked ~ .game-world { --inv-has-scuba: 1; }
+        #alien-idcard-pickup:checked ~ .game-world { --inv-has-alien-idcard: 1; }
         /* Reset when items consumed */
         #toolbox-unlocked:checked ~ .game-world { --inv-has-key: 0; }
         #door-unlocked:checked ~ .game-world { --inv-has-wrench: 0; }
@@ -1483,7 +1488,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Hide radio buttons and checkboxes by default */
         .position-radio, .level-radio, .layer-radio, .loot-checkbox,
-        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup,
+        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #alien-idcard-pickup,
         #lives-3, #death-1, #lives-2, #death-2, #lives-1, #death-3 {
             display: none;
             /* When unhidden for debugging: */
@@ -1580,6 +1585,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #bolt-fixed { top: 50px; left: 350px; }
         #flight-controls-used { top: 50px; left: 370px; }
         #escaped { top: 50px; left: 390px; }
+        #alien-idcard-pickup { top: 50px; left: 410px; }
         /* Debug positions - S4 items */
         #torch-pickup { top: 120px; left: 180px; }
         #darkness-toggle { top: 140px; left: 180px; }
@@ -1611,6 +1617,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ #escaped,
         #debug-toggle:checked ~ #darkness-toggle,
         #debug-toggle:checked ~ #torch-pickup,
+        #debug-toggle:checked ~ #alien-idcard-pickup,
         #debug-toggle:checked ~ #lives-3,
         #debug-toggle:checked ~ #death-1,
         #debug-toggle:checked ~ #lives-2,
@@ -1648,7 +1655,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-idcard,
         .inventory-battery,
         .inventory-scuba,
-        .inventory-torch {
+        .inventory-torch,
+        .inventory-alien-idcard {
             position: relative;
             width: var(--pickup-size);
             height: var(--pickup-size);
@@ -1670,7 +1678,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-idcard svg,
         .inventory-battery svg,
         .inventory-scuba svg,
-        .inventory-torch svg {
+        .inventory-torch svg,
+        .inventory-alien-idcard svg {
             width: 24px;
             height: 24px;
         }
@@ -1679,6 +1688,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-axe svg { color: var(--wrench-color); }
         .inventory-idcard svg { color: var(--idcard-color); }
         .inventory-battery svg { color: var(--battery-color); }
+        .inventory-alien-idcard svg { color: var(--alien-idcard-color); }
         /* Scuba and torch have their own colors in the SVG */
         /* Show inventory items when picked up (delayed fade-in after fly animation) */
         #key-pickup:checked ~ .inv-panel .inventory-key,
@@ -1687,7 +1697,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #idcard-pickup:checked ~ .inv-panel .inventory-idcard,
         #battery-pickup:checked ~ .inv-panel .inventory-battery,
         #scuba-pickup:checked ~ .inv-panel .inventory-scuba,
-        #torch-pickup:checked ~ .inv-panel .inventory-torch {
+        #torch-pickup:checked ~ .inv-panel .inventory-torch,
+        #alien-idcard-pickup:checked ~ .inv-panel .inventory-alien-idcard {
             display: flex;
             opacity: 0;
             animation: inventory-fade-in 0.2s ease-out 0.4s forwards;
@@ -3037,7 +3048,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .scuba-in-game {
             position: absolute;
             bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 18 - var(--item-offset));
             width: 28px;
             height: 28px;
             color: #cc1010;
@@ -3051,13 +3062,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         .scuba-tooltip {
             bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) + 24px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset) + 12px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 18 - var(--item-offset) + 12px);
             transform: translateX(-50%);
         }
         .scuba-hover-area {
             position: absolute;
             bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness));
-            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
+            left: calc(var(--pos-offset) + var(--pos-width) * 18 - var(--item-offset));
             width: 24px;
             height: 24px;
             pointer-events: auto;
@@ -3069,21 +3080,18 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
         /* Hide hover area when player is at scuba (so label click works) */
-        #level-6:checked ~ #pos-14:checked ~ .game-world .scuba-hover-area,
-        #level-ρ:checked ~ #pos-13:checked ~ .game-world .scuba-hover-area {
+        #level-6:checked ~ #pos-19:checked ~ .game-world .scuba-hover-area {
             display: none;
         }
         /* Show tooltip on hover */
         .scuba-hover-area:hover ~ .scuba-tooltip {
             opacity: 1;
         }
-        #level-6:checked ~ #pos-14:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game:hover ~ .scuba-tooltip,
-        #level-ρ:checked ~ #pos-13:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game:hover ~ .scuba-tooltip {
+        #level-6:checked ~ #pos-19:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game:hover ~ .scuba-tooltip {
             opacity: 1;
         }
         /* Enable clicking scuba only when player is next to it */
-        #level-6:checked ~ #pos-14:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game,
-        #level-ρ:checked ~ #pos-13:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game {
+        #level-6:checked ~ #pos-19:checked ~ #scuba-pickup:not(:checked) ~ .game-world .scuba-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: scuba-pulse 1s ease-in-out infinite;
@@ -3091,8 +3099,71 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Fly scuba to inventory when picked up */
         #scuba-pickup:checked ~ .game-world .scuba-in-game {
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - 12px - 4px);
-            left: calc(var(--pos-width) * 18 - var(--panel-right) - 2px - var(--panel-padding) - 24px - 4px
+            left: calc(var(--pos-width) * 24 - var(--panel-right) - 2px - var(--panel-padding) - 24px - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery) + var(--inv-has-torch)));
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
+        }
+        /* Alien ID card on S3-L6-P14 */
+        .alien-idcard-in-game {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
+            z-index: var(--z-items);
+            pointer-events: none;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+        }
+        .alien-idcard-in-game svg {
+            width: 100%;
+            height: 100%;
+            color: var(--alien-idcard-color);
+        }
+        .alien-idcard-tooltip {
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset) + var(--pickup-size) / 2);
+            transform: translateX(-50%);
+        }
+        .alien-idcard-hover-area {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
+            pointer-events: auto;
+            z-index: var(--z-item-hover);
+        }
+        /* Hide alien ID card hover area and tooltip when picked up */
+        #alien-idcard-pickup:checked ~ .game-world .alien-idcard-hover-area,
+        #alien-idcard-pickup:checked ~ .game-world .alien-idcard-tooltip {
+            display: none;
+        }
+        /* Hide hover area when player is at alien ID card (so label click works) */
+        #level-6:checked ~ #pos-14:checked ~ .game-world .alien-idcard-hover-area,
+        #level-ρ:checked ~ #pos-13:checked ~ .game-world .alien-idcard-hover-area {
+            display: none;
+        }
+        /* Show tooltip on hover */
+        .alien-idcard-hover-area:hover ~ .alien-idcard-tooltip {
+            opacity: 1;
+        }
+        #level-6:checked ~ #pos-14:checked ~ #alien-idcard-pickup:not(:checked) ~ .game-world .alien-idcard-in-game:hover ~ .alien-idcard-tooltip,
+        #level-ρ:checked ~ #pos-13:checked ~ #alien-idcard-pickup:not(:checked) ~ .game-world .alien-idcard-in-game:hover ~ .alien-idcard-tooltip {
+            opacity: 1;
+        }
+        /* Enable clicking alien ID card only when player is next to it */
+        #level-6:checked ~ #pos-14:checked ~ #alien-idcard-pickup:not(:checked) ~ .game-world .alien-idcard-in-game,
+        #level-ρ:checked ~ #pos-13:checked ~ #alien-idcard-pickup:not(:checked) ~ .game-world .alien-idcard-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: alien-idcard-pulse 1s ease-in-out infinite;
+        }
+        /* Fly alien ID card to inventory when picked up */
+        #alien-idcard-pickup:checked ~ .game-world .alien-idcard-in-game {
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 18 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery) + var(--inv-has-torch) + var(--inv-has-scuba)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -3835,7 +3906,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#level-7, #level-8):checked ~ #pos-20:checked ~ .game-world .arrow-P20-left { display: block; }
         /* S3↔S6 cross-stage arrows */
         :is(#level-5, #level-6, #level-7, #level-8):checked ~ #pos-18:checked ~ .game-world .arrow-P18-right { display: block; }
-        #level-5:checked ~ #pos-19:checked ~ .game-world .arrow-P19-left { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8):checked ~ #pos-19:checked ~ .game-world .arrow-P19-left { display: block; }
         /* Fixed navigation panel - 3x3 grid */
         .nav-panel {
             position: absolute;
@@ -4024,7 +4095,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-24:checked ~ .nav-panel .nav-left[for="pos-23"] { display: block; }
         /* S3↔S6 cross-stage nav arrows (L5-L8) */
         :is(#level-5, #level-6, #level-7, #level-8):checked ~ #pos-18:checked ~ .nav-panel .nav-right[for="pos-19"] { display: block; }
-        #level-5:checked ~ #pos-19:checked ~ .nav-panel .nav-left[for="pos-18"] { display: block; }
+        :is(#level-5, #level-6, #level-7, #level-8):checked ~ #pos-19:checked ~ .nav-panel .nav-left[for="pos-18"] { display: block; }
         /* S6 nav hide: L6+ no left arrows (except cross-stage P19→P18 and L7-L8 P20→P19) */
         :is(#level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-20, #pos-21, #pos-22, #pos-23, #pos-24):checked ~ .nav-panel :is(
             .nav-left[for="pos-19"], .nav-left[for="pos-20"], .nav-left[for="pos-21"],
@@ -4417,6 +4488,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         @keyframes idcard-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--idcard-color)); }
             50% { filter: drop-shadow(0 0 12px var(--idcard-color)) drop-shadow(0 0 20px var(--idcard-color)); }
+        }
+        @keyframes alien-idcard-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--alien-idcard-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--alien-idcard-color)) drop-shadow(0 0 20px var(--alien-idcard-color)); }
         }
         @keyframes idcard-hovering-pulse {
             0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--idcard-color)); }
@@ -6950,6 +7025,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- S5 valuables -->
         <!-- S5 checkboxes -->
         <input type="checkbox" id="idcard-pickup" title="idcard">
+        <!-- S3 checkboxes -->
+        <input type="checkbox" id="alien-idcard-pickup" title="alien-idcard">
         <!-- loot pickup checkboxes -->
         <input type="checkbox" id="loot-S1-L0-P3-pickup" class="loot-checkbox" title="coin">
         <input type="checkbox" id="loot-S1-L1-P4-pickup" class="loot-checkbox" title="coin">
@@ -7143,6 +7220,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="inventory-battery"><svg><use href="#battery"/></svg><span class="tooltip">Battery</span></span>
             <span class="inventory-torch"><svg><use href="#torch"/></svg><span class="tooltip">Torch</span></span>
             <span class="inventory-scuba"><svg><use href="#scuba"/></svg><span class="tooltip">Scuba Gear</span></span>
+            <span class="inventory-alien-idcard"><svg><use href="#id-card-alien"/></svg><span class="tooltip">Alien ID Card</span></span>
         </div>
         <!-- loot counter -->
         <div class="counter-panel">
@@ -7565,6 +7643,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <span class="scuba-hover-area"></span>
         <label for="scuba-pickup" class="scuba-in-game"><svg><use href="#scuba"/></svg></label>
         <span class="tooltip scuba-tooltip">Scuba Gear</span>
+        <!-- Alien ID card at S3-L6-P14 -->
+        <span class="alien-idcard-hover-area"></span>
+        <label for="alien-idcard-pickup" class="alien-idcard-in-game"><svg><use href="#id-card-alien"/></svg></label>
+        <span class="tooltip alien-idcard-tooltip">Alien ID Card</span>
         <!-- Teleporter at L7-P18 -->
         <span class="teleporter-hover-area"></span>
         <label for="level-τ" class="teleporter-S3-L7-P18">
