@@ -3859,6 +3859,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .nav-loot-aquamarine { color: var(--aquamarine-color-1); animation: aquamarine-pulse 1s ease-in-out infinite; }
         .nav-loot-ruby { color: var(--ruby-color-1); animation: ruby-pulse 1s ease-in-out infinite; }
         .nav-loot-seashell { color: var(--seashell-color); animation: seashell-pulse 1s ease-in-out infinite; }
+        .nav-loot-tooltip {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 4px;
+        }
+        .nav-loot:hover ~ .nav-loot-tooltip { opacity: 1; }
         /* Show correct left arrow based on current position */
         #pos-2:checked ~ .nav-panel .nav-left[for="pos-1"] { display: block; }
         #pos-3:checked ~ .nav-panel .nav-left[for="pos-2"] { display: block; }
@@ -6743,6 +6750,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="loot-S5-L3-P13-pickup" class="nav-loot nav-loot-seashell"><svg><use href="#seashell"/></svg></label>
                 <label for="loot-S5-L2-P17-pickup" class="nav-loot nav-loot-seashell"><svg><use href="#seashell"/></svg></label>
                 <label for="loot-S5-L0-P18-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <span class="tooltip nav-loot-tooltip">Pick Up</span>
             </div>
             <!-- Down cell -->
             <div class="nav-cell nav-cell-down">
