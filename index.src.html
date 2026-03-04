@@ -228,8 +228,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --bolt-color-1: #ffdd00;
             --bolt-color-2: #ffaa00;
             --barrel-color: #c48b9f;
-            --flight-controls-unavailable: #c41616;
-            --flight-controls-available: #1aa33a;
+            --unavailable: #c41616;
+            --available: #1aa33a;
             --wrench-color: #708090;
             --axe-color: #cc1010;
             --idcard-color: #4a9f4a;
@@ -1035,7 +1035,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) - 10px);
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 8px);
             pointer-events: none;
-            color: var(--flight-controls-unavailable);
+            color: var(--unavailable);
         }
         .flight-controls-unavailable svg {
             width: 100%;
@@ -1138,7 +1138,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 14 - var(--item-offset) - 8px);
             display: none;
             cursor: pointer;
-            color: var(--flight-controls-available);
+            color: var(--available);
         }
         .flight-controls-available svg {
             width: 100%;
@@ -1488,7 +1488,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Hide radio buttons and checkboxes by default */
         .position-radio, .level-radio, .layer-radio, .loot-checkbox,
-        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #alien-idcard-pickup,
+        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #alien-idcard-pickup, #tower-open,
         #lives-3, #death-1, #lives-2, #death-2, #lives-1, #death-3 {
             display: none;
             /* When unhidden for debugging: */
@@ -1582,11 +1582,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #tree-chopped { top: 50px; left: 200px; }
         #axe-pickup { top: 50px; left: 310px; }
         #battery-pickup { top: 50px; left: 180px; }
-        #scuba-pickup { top: 50px; left: 330px; }
-        #bolt-fixed { top: 50px; left: 350px; }
-        #flight-controls-used { top: 50px; left: 370px; }
-        #escaped { top: 50px; left: 390px; }
-        #alien-idcard-pickup { top: 50px; left: 410px; }
+        #alien-idcard-pickup { top: 50px; left: 320px; }
+        #bolt-fixed { top: 50px; left: 330px; }
+        #flight-controls-used { top: 50px; left: 350px; }
+        #escaped { top: 50px; left: 370px; }
+        #scuba-pickup { top: 50px; left: 440px; }
+        #tower-open { top: 50px; left: 460px; }
         /* Debug positions - S4 items */
         #torch-pickup { top: 120px; left: 180px; }
         #darkness-toggle { top: 140px; left: 180px; }
@@ -1619,6 +1620,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ #darkness-toggle,
         #debug-toggle:checked ~ #torch-pickup,
         #debug-toggle:checked ~ #alien-idcard-pickup,
+        #debug-toggle:checked ~ #tower-open,
         #debug-toggle:checked ~ #lives-3,
         #debug-toggle:checked ~ #death-1,
         #debug-toggle:checked ~ #lives-2,
@@ -2968,6 +2970,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--pos-width) * 0.435 - 64px);
             width: calc(var(--pos-width) * 0.3);
             height: calc(var(--pos-width) * 0.375);
+            pointer-events: none;
+            color: var(--unavailable);
 
             svg {
                 position: absolute;
@@ -2976,7 +2980,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 transform: translate(-50%, -50%);
                 width: 25%;
                 height: 25%;
-                fill: #00e5cc;
                 opacity: 0.8;
             }
             .tooltip {
@@ -2985,11 +2988,70 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 transform: translateX(-50%);
                 margin-bottom: 8px;
             }
-            &:hover {
-                z-index: var(--z-tooltip);
-
-                .tooltip { opacity: 1; }
-            }
+        }
+        .alien-tower-door-hover-area {
+            position: absolute;
+            left: calc(var(--pos-offset) + var(--pos-width) * 22.29 - 10px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--pos-width) * 0.435 - 64px);
+            width: calc(var(--pos-width) * 0.3);
+            height: calc(var(--pos-width) * 0.375);
+            pointer-events: auto;
+            z-index: var(--z-item-hover);
+        }
+        .alien-tower-door-hover-area:hover ~ .alien-tower-door {
+            z-index: var(--z-tooltip);
+        }
+        .alien-tower-door-hover-area:hover ~ .alien-tower-door .alien-tower-door-locked-tooltip {
+            opacity: 1;
+        }
+        .alien-tower-door-unlocked-tooltip {
+            display: none;
+        }
+        /* When tower is open: green dots, switch tooltips */
+        #tower-open:checked ~ .game-world .alien-tower-door {
+            color: var(--available);
+        }
+        #tower-open:checked ~ .game-world .alien-tower-door-locked-tooltip {
+            display: none;
+        }
+        #tower-open:checked ~ .game-world .alien-tower-door-unlocked-tooltip {
+            display: block;
+        }
+        #tower-open:checked ~ .game-world .alien-tower-door-hover-area:hover ~ .alien-tower-door .alien-tower-door-unlocked-tooltip {
+            opacity: 1;
+        }
+        /* Hide hover area when player has alien ID card at door (so label click works) */
+        #level-5:checked ~ #pos-23:checked ~ #tower-open:not(:checked) ~ #alien-idcard-pickup:checked ~ .game-world .alien-tower-door-hover-area {
+            display: none;
+        }
+        /* Enable clicking on door label when player has alien ID card */
+        #level-5:checked ~ #pos-23:checked ~ #tower-open:not(:checked) ~ #alien-idcard-pickup:checked ~ .game-world .alien-tower-door {
+            pointer-events: auto;
+            cursor: pointer;
+        }
+        /* Alien ID card floating above door */
+        .alien-idcard-at-door {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--pos-width) * 0.435 - 64px + var(--pos-width) * 0.375 + 8px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 22.29 - 10px + var(--pos-width) * 0.15 - 12px);
+            z-index: var(--z-floating-item);
+            opacity: 0;
+            pointer-events: none;
+            cursor: pointer;
+        }
+        .alien-idcard-at-door svg {
+            width: 100%;
+            height: 100%;
+            color: var(--alien-idcard-color);
+        }
+        /* Show alien ID card above door on hover */
+        #level-5:checked ~ #pos-23:checked ~ #tower-open:not(:checked) ~ #alien-idcard-pickup:checked ~ .game-world .alien-tower-door:hover ~ .alien-idcard-at-door,
+        #level-5:checked ~ #pos-23:checked ~ #tower-open:not(:checked) ~ #alien-idcard-pickup:checked ~ .game-world .alien-idcard-at-door:hover {
+            opacity: 1;
+            pointer-events: auto;
+            animation: alien-idcard-hovering-pulse 1s ease-in-out infinite;
         }
         /* Aurora background in Stage 6 */
         .aurora-bg {
@@ -3956,7 +4018,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-5:checked ~ #pos-22:checked ~ .game-world .arrow-P22-left { display: block; }
         #level-5:checked ~ #pos-22:checked ~ .game-world .arrow-P22-right { display: block; }
         #level-5:checked ~ #pos-23:checked ~ .game-world .arrow-P23-left { display: block; }
-        #level-5:checked ~ #pos-23:checked ~ .game-world .arrow-P23-right { display: block; }
+        #level-5:checked ~ #pos-23:checked ~ #tower-open:checked ~ .game-world .arrow-P23-right { display: block; }
         #level-5:checked ~ #pos-24:checked ~ .game-world .arrow-P24-left { display: block; }
         /* S6 L7-L8: P19 right, P20 left only */
         :is(#level-7, #level-8):checked ~ #pos-19:checked ~ .game-world .arrow-P19-right { display: block; }
@@ -4148,7 +4210,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-22:checked ~ .nav-panel .nav-left[for="pos-21"] { display: block; }
         #pos-22:checked ~ .nav-panel .nav-right[for="pos-23"] { display: block; }
         #pos-23:checked ~ .nav-panel .nav-left[for="pos-22"] { display: block; }
-        #pos-23:checked ~ .nav-panel .nav-right[for="pos-24"] { display: block; }
+        #pos-23:checked ~ #tower-open:checked ~ .nav-panel .nav-right[for="pos-24"] { display: block; }
         #pos-24:checked ~ .nav-panel .nav-left[for="pos-23"] { display: block; }
         /* S3↔S6 cross-stage nav arrows (L5-L8) */
         :is(#level-5, #level-6, #level-7, #level-8):checked ~ #pos-18:checked ~ .nav-panel .nav-right[for="pos-19"] { display: block; }
@@ -4557,6 +4619,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         @keyframes idcard-hovering-pulse {
             0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--idcard-color)); }
             50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--idcard-color)) drop-shadow(0 0 25px var(--idcard-color)); }
+        }
+        @keyframes alien-idcard-hovering-pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--alien-idcard-color)); }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--alien-idcard-color)) drop-shadow(0 0 25px var(--alien-idcard-color)); }
         }
         @keyframes bird-bob {
             0%, 100% { transform: translateY(0); }
@@ -7111,6 +7177,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- S5 valuables -->
         <!-- S5 checkboxes -->
         <input type="checkbox" id="idcard-pickup" title="idcard">
+        <!-- S6 checkboxes -->
+        <input type="checkbox" id="tower-open" title="tower-open">
         <!-- S3 checkboxes -->
         <input type="checkbox" id="alien-idcard-pickup" title="alien-idcard">
         <!-- loot pickup checkboxes -->
@@ -7738,10 +7806,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             </svg>
         </div>
         <!-- Door dots overlay at L5-P23 -->
-        <div class="alien-tower-door">
-            <svg><use href="#dots" color="red"/></svg>
-            <span class="tooltip">The door is locked.<br>You need a key card.</span>
-        </div>
+        <span class="alien-tower-door-hover-area"></span>
+        <label for="tower-open" class="alien-tower-door">
+            <svg><use href="#dots"/></svg>
+            <span class="tooltip alien-tower-door-locked-tooltip">The door is locked.<br>You need a key card.</span>
+            <span class="tooltip alien-tower-door-unlocked-tooltip">The door is unlocked.</span>
+        </label>
+        <label for="tower-open" class="alien-idcard-at-door"><svg><use href="#id-card-alien"/></svg></label>
         <!-- Ground -->
         <div class="ground-S6"></div>
         <!-- S6 horizontal arrows -->
