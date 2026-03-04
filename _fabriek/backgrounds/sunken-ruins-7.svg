@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 315 120">
+
+  <!-- Back wall remnants -->
+  <rect x="25" y="30" width="18" height="45" fill="#4a5568" transform="rotate(-3 34 52)"/>
+
+  <!-- Wall section with masonry courses -->
+  <rect x="40" y="20" width="22" height="55" fill="#5a6578"/>
+  <!-- Masonry horizontal joints -->
+  <line x1="40" y1="32" x2="62" y2="32" stroke="#3d4757" stroke-width="0.7" opacity="0.7"/>
+  <line x1="40" y1="44" x2="62" y2="44" stroke="#3d4757" stroke-width="0.7" opacity="0.7"/>
+  <line x1="40" y1="56" x2="62" y2="56" stroke="#3d4757" stroke-width="0.7" opacity="0.7"/>
+  <line x1="40" y1="63" x2="62" y2="63" stroke="#3d4757" stroke-width="0.5" opacity="0.5"/>
+  <!-- Vertical block joints (staggered) -->
+  <line x1="51" y1="20" x2="51" y2="32" stroke="#3d4757" stroke-width="0.5" opacity="0.5"/>
+  <line x1="47" y1="32" x2="47" y2="44" stroke="#3d4757" stroke-width="0.5" opacity="0.5"/>
+  <line x1="53" y1="44" x2="53" y2="56" stroke="#3d4757" stroke-width="0.5" opacity="0.5"/>
+
+  <rect x="58" y="35" width="15" height="40" fill="#4a5568" transform="rotate(2 65 55)"/>
+  
+  <!-- Fallen stones -->
+  <rect x="75" y="65" width="20" height="12" fill="#5a6578" transform="rotate(-8 85 71)"/>
+  <rect x="90" y="70" width="15" height="10" fill="#4a5568" transform="rotate(5 97 75)"/>
+  
+  <!-- Right wall section -->
+  <g transform="rotate(5 140 50)">
+    <rect x="130" y="25" width="20" height="50" fill="#5a6578"/>
+    <!-- Masonry horizontal joints -->
+    <line x1="130" y1="37" x2="150" y2="37" stroke="#3d4757" stroke-width="0.7" opacity="0.55"/>
+    <line x1="130" y1="49" x2="150" y2="49" stroke="#3d4757" stroke-width="0.7" opacity="0.55"/>
+    <line x1="130" y1="61" x2="150" y2="61" stroke="#3d4757" stroke-width="0.7" opacity="0.55"/>
+    <!-- Vertical block joints (staggered) -->
+    <line x1="140" y1="25" x2="140" y2="37" stroke="#3d4757" stroke-width="0.5" opacity="0.45"/>
+    <line x1="136" y1="37" x2="136" y2="49" stroke="#3d4757" stroke-width="0.5" opacity="0.45"/>
+    <line x1="143" y1="49" x2="143" y2="61" stroke="#3d4757" stroke-width="0.5" opacity="0.45"/>
+    <line x1="138" y1="61" x2="138" y2="75" stroke="#3d4757" stroke-width="0.5" opacity="0.45"/>
+  </g>
+  <rect x="145" y="40" width="16" height="35" fill="#4a5568" transform="rotate(-2 153 57)"/>
+  <rect x="158" y="45" width="14" height="28" fill="#5a6578"/>
+  
+  <!-- Scattered rubble -->
+  <rect x="50" y="80" width="12" height="8" fill="#4a5568" transform="rotate(-15 56 84)"/>
+  <rect x="110" y="78" width="14" height="9" fill="#5a6578" transform="rotate(12 117 82)"/>
+  <rect x="140" y="82" width="10" height="7" fill="#4a5568" transform="rotate(-5 145 85)"/>
+  
+  <!-- Column: shaft, echinus, abacus -->
+  <rect x="95" y="50" width="16" height="25" fill="#5a6578"/>
+  <!-- Fluting: subtle vertical grooves -->
+  <line x1="98.5" y1="50" x2="98.5" y2="75" stroke="#3d4757" stroke-width="0.8" opacity="0.55"/>
+  <line x1="103"  y1="50" x2="103"  y2="75" stroke="#3d4757" stroke-width="0.8" opacity="0.55"/>
+  <line x1="107.5" y1="50" x2="107.5" y2="75" stroke="#3d4757" stroke-width="0.8" opacity="0.55"/>
+  <!-- Echinus (rounded swell below abacus) -->
+  <rect x="93.5" y="46" width="19" height="4" fill="#516070" rx="1"/>
+  <!-- Abacus (flat slab on top) -->
+  <rect x="93" y="43" width="20" height="4" fill="#4a5568"/>
+
+  <!-- Extended section: back wall remnants -->
+  <g transform="rotate(3 195 52)">
+    <rect x="185" y="28" width="20" height="48" fill="#5a6578"/>
+    <!-- Masonry horizontal joints -->
+    <line x1="185" y1="40" x2="205" y2="40" stroke="#3d4757" stroke-width="0.7" opacity="0.65"/>
+    <line x1="185" y1="52" x2="205" y2="52" stroke="#3d4757" stroke-width="0.7" opacity="0.65"/>
+    <line x1="185" y1="64" x2="205" y2="64" stroke="#3d4757" stroke-width="0.7" opacity="0.65"/>
+    <!-- Vertical block joints (staggered) -->
+    <line x1="195" y1="28" x2="195" y2="40" stroke="#3d4757" stroke-width="0.5" opacity="0.45"/>
+    <line x1="191" y1="40" x2="191" y2="52" stroke="#3d4757" stroke-width="0.5" opacity="0.45"/>
+    <line x1="197" y1="52" x2="197" y2="64" stroke="#3d4757" stroke-width="0.5" opacity="0.45"/>
+  </g>
+
+  <!-- Tall wall with masonry detail -->
+  <g transform="rotate(-2 211 44)">
+    <rect x="203" y="18" width="16" height="52" fill="#4a5568"/>
+    <line x1="203" y1="30" x2="219" y2="30" stroke="#3d4757" stroke-width="0.7" opacity="0.65"/>
+    <line x1="203" y1="42" x2="219" y2="42" stroke="#3d4757" stroke-width="0.7" opacity="0.65"/>
+    <line x1="203" y1="54" x2="219" y2="54" stroke="#3d4757" stroke-width="0.7" opacity="0.65"/>
+    <line x1="211" y1="18" x2="211" y2="30" stroke="#3d4757" stroke-width="0.5" opacity="0.45"/>
+    <line x1="207" y1="30" x2="207" y2="42" stroke="#3d4757" stroke-width="0.5" opacity="0.45"/>
+  </g>
+
+  <rect x="220" y="38" width="18" height="38" fill="#5a6578" transform="rotate(4 229 57)"/>
+
+  <!-- Extended section: fallen/scattered blocks -->
+  <rect x="245" y="68" width="22" height="11" fill="#4a5568" transform="rotate(9 256 73)"/>
+  <rect x="260" y="74" width="16" height="9" fill="#5a6578" transform="rotate(-6 268 78)"/>
+
+  <!-- Extended section: rubble on ground -->
+  <rect x="190" y="82" width="13" height="8" fill="#5a6578" transform="rotate(14 196 86)"/>
+  <rect x="230" y="80" width="11" height="7" fill="#4a5568" transform="rotate(-8 235 83)"/>
+
+  <!-- Extended section: broken column stump with fluting -->
+  <g transform="rotate(-10 296 74)">
+    <rect x="288" y="41" width="16" height="33" fill="#5a6578"/>
+    <!-- Fluting on broken stump -->
+    <line x1="291.5" y1="41" x2="291.5" y2="74" stroke="#3d4757" stroke-width="0.8" opacity="0.5"/>
+    <line x1="296"   y1="41" x2="296"   y2="74" stroke="#3d4757" stroke-width="0.8" opacity="0.5"/>
+    <line x1="300.5" y1="41" x2="300.5" y2="74" stroke="#3d4757" stroke-width="0.8" opacity="0.5"/>
+    <!-- Abacus fragment atop stump -->
+    <rect x="286" y="38" width="20" height="4" fill="#4a5568"/>
+    <!-- Broken echinus -->
+    <rect x="287" y="42" width="18" height="3" fill="#516070" rx="1"/>
+  </g>
+
+</svg>

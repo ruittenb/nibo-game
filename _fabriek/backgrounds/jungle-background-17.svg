@@ -85,4 +85,63 @@
     <path d="M144,74 Q177,69 206,91 Q227,80 236,111 Q250,101 246,134 Q223,156 183,147 Q150,158 136,128 Q121,113 144,74 Z" fill="#0d2a0d"/>
     <path d="M287,176 Q303,159 330,167 Q347,156 360,180 Q372,171 367,199 Q353,213 326,209 Q302,216 291,196 Q281,187 287,176 Z" fill="#0e2c0e"/>
   </g>
+
+  <!-- Trunks — fuzzy brown verticals -->
+  <g filter="url(#blur2)">
+    <rect x="32"  y="0" width="22" height="600" rx="6" fill="#3b1f0a"/>
+    <rect x="124" y="0" width="18" height="600" rx="5" fill="#3a1e09"/>
+    <rect x="288" y="0" width="24" height="600" rx="6" fill="#3b1f0a"/>
+    <rect x="428" y="0" width="20" height="600" rx="5" fill="#391d09"/>
+    <rect x="560" y="0" width="23" height="600" rx="6" fill="#3a1e09"/>
+    <rect x="696" y="0" width="20" height="600" rx="5" fill="#3b1f0a"/>
+  </g>
+
+  <!-- Leaves: cubic bezier shape, bent so tip droops downward in local space.
+       Each leaf: base at (0,0), tip curves to (L, d) where d = ~0.35*L droop.
+       Top edge bows outward, bottom mirrors. Midrib follows the curve. -->
+  <g fill="#245e1e" stroke="none">
+
+    <!-- TRUNK 1  centre x=43 -->
+    <g transform="translate(54,55)  rotate(38)">  <path d="M0,0 C38,-42 98,27 150,53 C98,79 38,42 0,0 Z"/><path d="M0,0 C53,0 98,53 150,53" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(32,145) rotate(142)"> <path d="M0,0 C40,-45 104,28 160,56 C104,84 40,45 0,0 Z"/><path d="M0,0 C56,0 104,56 160,56" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(54,220) rotate(55)">  <path d="M0,0 C43,-48 111,30 170,60 C111,89 43,48 0,0 Z"/><path d="M0,0 C60,0 111,60 170,60" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(54,340) rotate(44)">  <path d="M0,0 C38,-42 98,27 150,53 C98,79 38,42 0,0 Z"/><path d="M0,0 C53,0 98,53 150,53" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(32,430) rotate(128)"> <path d="M0,0 C45,-50 117,32 180,63 C117,95 45,50 0,0 Z"/><path d="M0,0 C63,0 117,63 180,63" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+
+    <!-- TRUNK 2  centre x=133 -->
+    <g transform="translate(124,90)  rotate(130)"> <path d="M0,0 C38,-42 98,27 150,53 C98,79 38,42 0,0 Z"/><path d="M0,0 C53,0 98,53 150,53" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(142,175) rotate(62)">  <path d="M0,0 C40,-45 104,28 160,56 C104,84 40,45 0,0 Z"/><path d="M0,0 C56,0 104,56 160,56" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(124,280) rotate(118)"> <path d="M0,0 C35,-39 91,24 140,49 C91,73 35,39 0,0 Z"/><path d="M0,0 C49,0 91,49 140,49" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(142,355) rotate(48)">  <path d="M0,0 C43,-48 111,30 170,60 C111,89 43,48 0,0 Z"/><path d="M0,0 C60,0 111,60 170,60" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(124,510) rotate(145)"> <path d="M0,0 C38,-42 98,27 150,53 C98,79 38,42 0,0 Z"/><path d="M0,0 C53,0 98,53 150,53" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+
+    <!-- TRUNK 3  centre x=300 -->
+    <g transform="translate(312,60)  rotate(42)">  <path d="M0,0 C45,-50 117,32 180,63 C117,95 45,50 0,0 Z"/><path d="M0,0 C63,0 117,63 180,63" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(288,155) rotate(135)"> <path d="M0,0 C40,-45 104,28 160,56 C104,84 40,45 0,0 Z"/><path d="M0,0 C56,0 104,56 160,56" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(312,265) rotate(58)">  <path d="M0,0 C35,-39 91,24 140,49 C91,73 35,39 0,0 Z"/><path d="M0,0 C49,0 91,49 140,49" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(288,380) rotate(122)"> <path d="M0,0 C43,-48 111,30 170,60 C111,89 43,48 0,0 Z"/><path d="M0,0 C60,0 111,60 170,60" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(312,480) rotate(35)">  <path d="M0,0 C38,-42 98,27 150,53 C98,79 38,42 0,0 Z"/><path d="M0,0 C53,0 98,53 150,53" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+
+    <!-- TRUNK 4  centre x=438 -->
+    <g transform="translate(428,110) rotate(140)"> <path d="M0,0 C40,-45 104,28 160,56 C104,84 40,45 0,0 Z"/><path d="M0,0 C56,0 104,56 160,56" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(448,195) rotate(50)">  <path d="M0,0 C38,-42 98,27 150,53 C98,79 38,42 0,0 Z"/><path d="M0,0 C53,0 98,53 150,53" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(428,305) rotate(115)"> <path d="M0,0 C45,-50 117,32 180,63 C117,95 45,50 0,0 Z"/><path d="M0,0 C63,0 117,63 180,63" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(448,445) rotate(65)">  <path d="M0,0 C35,-39 91,24 140,49 C91,73 35,39 0,0 Z"/><path d="M0,0 C49,0 91,49 140,49" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(428,535) rotate(132)"> <path d="M0,0 C40,-45 104,28 160,56 C104,84 40,45 0,0 Z"/><path d="M0,0 C56,0 104,56 160,56" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+
+    <!-- TRUNK 5  centre x=571 -->
+    <g transform="translate(583,75)  rotate(44)">  <path d="M0,0 C43,-48 111,30 170,60 C111,89 43,48 0,0 Z"/><path d="M0,0 C60,0 111,60 170,60" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(560,200) rotate(148)"> <path d="M0,0 C38,-42 98,27 150,53 C98,79 38,42 0,0 Z"/><path d="M0,0 C53,0 98,53 150,53" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(583,290) rotate(30)">  <path d="M0,0 C40,-45 104,28 160,56 C104,84 40,45 0,0 Z"/><path d="M0,0 C56,0 104,56 160,56" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(560,400) rotate(120)"> <path d="M0,0 C35,-39 91,24 140,49 C91,73 35,39 0,0 Z"/><path d="M0,0 C49,0 91,49 140,49" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(583,520) rotate(58)">  <path d="M0,0 C45,-50 117,32 180,63 C117,95 45,50 0,0 Z"/><path d="M0,0 C63,0 117,63 180,63" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+
+    <!-- TRUNK 6  centre x=706 -->
+    <g transform="translate(696,95)  rotate(138)"> <path d="M0,0 C38,-42 98,27 150,53 C98,79 38,42 0,0 Z"/><path d="M0,0 C53,0 98,53 150,53" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(716,210) rotate(46)">  <path d="M0,0 C43,-48 111,30 170,60 C111,89 43,48 0,0 Z"/><path d="M0,0 C60,0 111,60 170,60" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(696,330) rotate(125)"> <path d="M0,0 C40,-45 104,28 160,56 C104,84 40,45 0,0 Z"/><path d="M0,0 C56,0 104,56 160,56" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(716,415) rotate(62)">  <path d="M0,0 C35,-39 91,24 140,49 C91,73 35,39 0,0 Z"/><path d="M0,0 C49,0 91,49 140,49" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+    <g transform="translate(696,555) rotate(142)"> <path d="M0,0 C45,-50 117,32 180,63 C117,95 45,50 0,0 Z"/><path d="M0,0 C63,0 117,63 180,63" fill="none" stroke="#5ab840" stroke-width="1.6"/></g>
+
+  </g>
 </svg>
