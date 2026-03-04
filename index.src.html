@@ -3062,7 +3062,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         .scuba-tooltip {
             bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) + 24px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 18 - var(--item-offset) + 12px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 18 - var(--item-offset) + 27px);
             transform: translateX(-50%);
         }
         .scuba-hover-area {
@@ -5658,6 +5658,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
+        .loot-S6-L9-P24 .tooltip {
+            transform: translateX(calc(-50% - 15px));
+        }
         .loot-hover-area {
             position: absolute;
             top: 0;
@@ -6942,7 +6945,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </symbol>
     </svg>
     <div class="game-container">
-        <input type="checkbox" id="debug-toggle" accesskey="d" title="debug">
+        <input type="checkbox" id="debug-toggle" accesskey="d" title="debug" checked>
         <h2>NIBO'S WAY OUT</h2>
         <!-- Lives radio group -->
         <input type="radio" name="lives" id="lives-3" checked title="3 lives">
@@ -6952,13 +6955,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="lives" id="lives-1" title="1 life">
         <input type="radio" name="lives" id="death-3" title="death 3 (game over)">
         <!-- Radio buttons for level (vertical) -->
-        <input type="radio" name="level" id="level-0" class="level-radio" title="level-0" checked>
+        <input type="radio" name="level" id="level-0" class="level-radio" title="level-0">
         <input type="radio" name="level" id="level-1" class="level-radio" title="level-1">
         <input type="radio" name="level" id="level-2" class="level-radio" title="level-2">
         <input type="radio" name="level" id="level-3" class="level-radio" title="level-3">
         <input type="radio" name="level" id="level-4" class="level-radio" title="level-4">
         <!-- Levels 5-9 for S2/S3 -->
-        <input type="radio" name="level" id="level-5" class="level-radio" title="level-5">
+        <input type="radio" name="level" id="level-5" class="level-radio" title="level-5" checked>
         <input type="radio" name="level" id="level-6" class="level-radio" title="level-6">
         <input type="radio" name="level" id="level-7" class="level-radio" title="level-7">
         <input type="radio" name="level" id="level-8" class="level-radio" title="level-8">
@@ -6972,7 +6975,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="layer" id="layer-η" class="layer-radio" title="layer-η">
         <input type="radio" name="layer" id="layer-θ" class="layer-radio" title="layer-θ">
         <!-- Radio buttons for position (horizontal) -->
-        <input type="radio" name="position" id="pos-1" class="position-radio" title="pos-1" checked>
+        <input type="radio" name="position" id="pos-1" class="position-radio" title="pos-1">
         <input type="radio" name="position" id="pos-2" class="position-radio" title="pos-2">
         <input type="radio" name="position" id="pos-3" class="position-radio" title="pos-3">
         <input type="radio" name="position" id="pos-4" class="position-radio" title="pos-4">
@@ -6993,7 +6996,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="position" id="pos-17" class="position-radio" title="pos-17">
         <input type="radio" name="position" id="pos-18" class="position-radio" title="pos-18">
         <!-- S6/S7 positions -->
-        <input type="radio" name="position" id="pos-19" class="position-radio" title="pos-19">
+        <input type="radio" name="position" id="pos-19" class="position-radio" title="pos-19" checked>
         <input type="radio" name="position" id="pos-20" class="position-radio" title="pos-20">
         <input type="radio" name="position" id="pos-21" class="position-radio" title="pos-21">
         <input type="radio" name="position" id="pos-22" class="position-radio" title="pos-22">
@@ -7001,7 +7004,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="position" id="pos-24" class="position-radio" title="pos-24">
         <input type="radio" name="position" id="pos-φ" class="position-radio" title="pos-φ">
         <!-- Title screen toggle -->
-        <input type="checkbox" id="title-screen-toggle" autofocus title="title screen">
+        <input type="checkbox" id="title-screen-toggle" autofocus title="title screen" checked>
         <!-- Key pickup checkbox -->
         <input type="checkbox" id="key-pickup" title="key">
         <!-- Safe unlock checkbox -->

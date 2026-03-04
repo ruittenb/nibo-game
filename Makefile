@@ -14,3 +14,6 @@ minify-fast: ## Minify the html/css file
 minify: ## Minify the html/css file
 	scripts/html_minify.py $(INPUT) -o $(OUTPUT)
 
+.PHONY: diff
+diff: ## Show git diff of source html file
+	git diff -- index.src.html
