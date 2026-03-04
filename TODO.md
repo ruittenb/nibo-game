@@ -9,6 +9,7 @@
 S6: I would like to combine Rear of the Spaceship + Alien Outpost / Signal Tower.
     Contains an important part for reparation. Or fuel/oxygen.
     But requires a special radioactivity suit.
+    Fake alien ID to enter the tower?
 
 S7: Then on S7 I love the idea of an ancient alien temple with a guardian that wants payment.
     Contains the radiation shield.

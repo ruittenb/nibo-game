@@ -4720,6 +4720,40 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
+        /* Stage 6 Radiation */
+        .radiation {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            padding: 3px;
+            --radiation-bg-purple: #4a0050;
+            color: purple;
+            background: linear-gradient(to top, transparent 0%, var(--radiation-bg-purple) 12.5%, transparent 25%, var(--radiation-bg-purple) 37.5%, transparent 50%, var(--radiation-bg-purple) 62.5%, transparent 75%, var(--radiation-bg-purple) 87.5%, transparent 100%);
+            background-size: 100% 200%;
+            animation: hazard-roll 1s linear infinite;
+            border-radius: 6px;
+            z-index: var(--z-hazards);
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+            &:hover {
+                z-index: var(--z-tooltip);
+
+                .tooltip { opacity: 1; }
+            }
+        }
+        .radiation-S6-L7-P24 {
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) + 14px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 23 - var(--item-offset) - 12px);
+        }
+        .radiation-tooltip {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
         /* Sprout on stage 2, level 0, pos 6 */
         .tree-container {
             position: absolute;
@@ -5132,6 +5166,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Bird θ-L3-P17: from θ-L3-P16 right */
         :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
             #layer-θ:checked ~ #pos-16:checked ~
+            .death-screen-overlay,
+        /* Radiation S6-L7-P24: from L6-P24 up or L8-P24 down */
+        :is(#death-1, #death-2, #death-3):checked ~
+            :is(#level-6, #level-8):checked ~ #pos-24:checked ~
             .death-screen-overlay {
             opacity: 1;
             pointer-events: auto;
@@ -5150,6 +5188,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             :is(#layer-N, #layer-η, #layer-θ, #layer-ζ):checked ~
             :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17):checked ~
             .death-screen-overlay .message::after { content: "You were killed by a bird of prey"; }
+        :is(#death-1, #death-2, #death-3):checked ~
+            :is(#level-6, #level-8):checked ~ #pos-24:checked ~
+            .death-screen-overlay .message::after { content: "You died from radiation"; }
 
         /* Player visual override during death — show player at hazard location */
         /* Poison: player shown at P6 (approach from P5) */
@@ -5204,6 +5245,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
             #layer-θ:checked ~ #pos-16:checked ~
             .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 16); }
+
+        /* Radiation S6-L7-P24: player shown at P24 L7 (approach from L6 up) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-6:checked ~ #pos-24:checked ~
+            .game-world .player {
+                left: calc(var(--pos-offset) + var(--pos-width) * 23);
+                bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness));
+            }
+        /* Radiation S6-L7-P24: player shown at P24 L7 (approach from L8 down) */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-8:checked ~ #pos-24:checked ~
+            .game-world .player {
+                left: calc(var(--pos-offset) + var(--pos-width) * 23);
+                bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness));
+            }
 
         /* Bird at player position during death — override bird-level/bird-pos to match hazard */
         /* Bird at N-L3-P13 */
@@ -5397,6 +5451,32 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #lives-3:checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .nav-panel .nav-death-right-1,
         #lives-2:checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .nav-panel .nav-death-right-2,
         #lives-1:checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .nav-panel .nav-death-right-3 { display: block; }
+
+        /* --- Radiation S6-L7-P24: from L6-P24 up --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-6:checked ~ #pos-24:checked ~ .game-world .arrow-L6-up { display: none; }
+        #lives-3:checked ~ #level-6:checked ~ #pos-24:checked ~ .game-world .death-up-1,
+        #lives-2:checked ~ #level-6:checked ~ #pos-24:checked ~ .game-world .death-up-2,
+        #lives-1:checked ~ #level-6:checked ~ #pos-24:checked ~ .game-world .death-up-3 {
+            display: block;
+            bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) + 72.5px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-6:checked ~ #pos-24:checked ~ .nav-panel .nav-up[for="level-7"] { display: none; }
+        #lives-3:checked ~ #level-6:checked ~ #pos-24:checked ~ .nav-panel .nav-death-up-1,
+        #lives-2:checked ~ #level-6:checked ~ #pos-24:checked ~ .nav-panel .nav-death-up-2,
+        #lives-1:checked ~ #level-6:checked ~ #pos-24:checked ~ .nav-panel .nav-death-up-3 { display: block; }
+
+        /* --- Radiation S6-L7-P24: from L8-P24 down --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-8:checked ~ #pos-24:checked ~ .game-world .arrow-L8-down { display: none; }
+        #lives-3:checked ~ #level-8:checked ~ #pos-24:checked ~ .game-world .death-down-1,
+        #lives-2:checked ~ #level-8:checked ~ #pos-24:checked ~ .game-world .death-down-2,
+        #lives-1:checked ~ #level-8:checked ~ #pos-24:checked ~ .game-world .death-down-3 {
+            display: block;
+            bottom: calc(var(--stage-height) + var(--level-height) * 3);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-8:checked ~ #pos-24:checked ~ .nav-panel .nav-down[for="level-7"] { display: none; }
+        #lives-3:checked ~ #level-8:checked ~ #pos-24:checked ~ .nav-panel .nav-death-down-1,
+        #lives-2:checked ~ #level-8:checked ~ #pos-24:checked ~ .nav-panel .nav-death-down-2,
+        #lives-1:checked ~ #level-8:checked ~ #pos-24:checked ~ .nav-panel .nav-death-down-3 { display: block; }
 
         /* Escape overlay */
         .escape-screen-overlay.overlay {
@@ -6584,14 +6664,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <line x1="170" y1="308" x2="224" y2="308" stroke="#1a3040" stroke-width="1"/>
             <rect x="96"  y="285" width="54" height="3" fill="#00e5cc" opacity="0.3" filter="url(#alien-tower-glow)"/>
             <rect x="170" y="285" width="54" height="3" fill="#00e5cc" opacity="0.3" filter="url(#alien-tower-glow)"/>
-            <!-- 2nd floor -->
-            <rect x="105" y="189" width="110" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
-            <rect x="105" y="189" width="110" height="42" rx="2" fill="#0055aa" opacity="0.08"/>
-            <line x1="160" y1="189" x2="160" y2="231" stroke="#1a3040" stroke-width="1"/>
-            <line x1="105" y1="210" x2="215" y2="210" stroke="#1a3040" stroke-width="1"/>
-            <text x="90" y="217" font-size="13" fill="#ff00ff" opacity="1" font-family="monospace">&#x2B21;</text>
-            <text x="225" y="217" font-size="13" fill="#ff00ff" opacity="1" font-family="monospace">&#x2B21;</text>
-            <rect x="100" y="187" width="120" height="2" fill="#00e5cc" opacity="0.35" filter="url(#alien-tower-glow)"/>
+            <!-- 2nd floor — hexagonal window -->
+            <polygon points="130,189 190,189 205,210 190,231 130,231 115,210" fill="#0a1520" stroke="#1a4060" stroke-width="1.2"/>
+            <polygon points="130,189 190,189 205,210 190,231 130,231 115,210" fill="#0055aa" opacity="0.1"/>
+            <line x1="160" y1="189" x2="160" y2="231" stroke="#1a3040" stroke-width="0.8" opacity="0.6"/>
+            <line x1="115" y1="210" x2="205" y2="210" stroke="#1a3040" stroke-width="0.8" opacity="0.6"/>
+            <rect x="130" y="187" width="60" height="2" fill="#cc00ff" opacity="0.35" filter="url(#alien-tower-glow)"/>
+            <line x1="130" y1="189" x2="190" y2="189" stroke="#00e5cc" stroke-width="1.5" opacity="0.35" filter="url(#alien-tower-glow)"/>
             <!-- 3rd floor -->
             <rect x="95"  y="96" width="48" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
             <rect x="177" y="96" width="48" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
@@ -7530,6 +7609,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="pos-21" class="arrow arrow-left arrow-h arrow-P22-left"></label>
         <label for="pos-22" class="arrow arrow-left arrow-h arrow-P23-left"></label>
         <label for="pos-23" class="arrow arrow-left arrow-h arrow-P24-left"></label>
+        <!-- S6 radiation hazard -->
+        <div class="radiation radiation-S6-L7-P24">
+            <span class="tooltip radiation-tooltip">Radiation</span>
+            <svg><use href="#radiation"/></svg>
+        </div>
         <!-- S3↔S6 cross-stage arrows -->
         <label for="pos-19" class="arrow arrow-right arrow-h arrow-P18-right"></label>
         <label for="pos-18" class="arrow arrow-left arrow-h arrow-P19-left"></label>
