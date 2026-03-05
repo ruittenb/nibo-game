@@ -235,6 +235,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --idcard-color: #4a9f4a;
             --alien-idcard-color: #9acd32;
             --scuba-color: #F0A500;
+            --engine-part-color: #708090;
             --seashell-color: #ff69b4;
             --cave-rock-color: #4a3a2a;   /* Stalactite/stalagmite color */
             --cave-rock-shadow: drop-shadow(2px 0 2px #66aaff80);
@@ -412,6 +413,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --inv-has-torch: 0;
             --inv-has-scuba: 0;
             --inv-has-alien-idcard: 0;
+            --inv-has-engine-part: 0;
             /* Inventory slot positioning */
             --inv-slot-width: calc(var(--pickup-size) + 8px);  /* item width + gap */
         }
@@ -506,6 +508,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #torch-pickup:checked ~ .game-world { --inv-has-torch: 1; }
         #scuba-pickup:checked ~ .game-world { --inv-has-scuba: 1; }
         #alien-idcard-pickup:checked ~ .game-world { --inv-has-alien-idcard: 1; }
+        #engine-part-pickup:checked ~ .game-world { --inv-has-engine-part: 1; }
         /* Reset when items consumed */
         #toolbox-unlocked:checked ~ .game-world { --inv-has-key: 0; }
         #door-unlocked:checked ~ .game-world { --inv-has-wrench: 0; }
@@ -1488,7 +1491,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Hide radio buttons and checkboxes by default */
         .position-radio, .level-radio, .layer-radio, .loot-checkbox,
-        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #alien-idcard-pickup, #tower-open,
+        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #alien-idcard-pickup, #tower-open, #engine-part-pickup,
         #lives-3, #death-1, #lives-2, #death-2, #lives-1, #death-3 {
             display: none;
             /* When unhidden for debugging: */
@@ -1588,6 +1591,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #escaped { top: 50px; left: 390px; }
         #scuba-pickup { top: 50px; left: 440px; }
         #tower-open { top: 50px; left: 460px; }
+        #engine-part-pickup { top: 50px; left: 480px; }
         /* Debug positions - S4 items */
         #torch-pickup { top: 120px; left: 180px; }
         #darkness-toggle { top: 140px; left: 180px; }
@@ -1621,6 +1625,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ #torch-pickup,
         #debug-toggle:checked ~ #alien-idcard-pickup,
         #debug-toggle:checked ~ #tower-open,
+        #debug-toggle:checked ~ #engine-part-pickup,
         #debug-toggle:checked ~ #lives-3,
         #debug-toggle:checked ~ #death-1,
         #debug-toggle:checked ~ #lives-2,
@@ -1659,6 +1664,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-battery,
         .inventory-scuba,
         .inventory-torch,
+        .inventory-engine-part,
         .inventory-alien-idcard {
             position: relative;
             width: var(--pickup-size);
@@ -1682,6 +1688,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-battery svg,
         .inventory-scuba svg,
         .inventory-torch svg,
+        .inventory-engine-part svg,
         .inventory-alien-idcard svg {
             width: 24px;
             height: 24px;
@@ -1692,6 +1699,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-idcard svg { color: var(--idcard-color); }
         .inventory-battery svg { color: var(--battery-color); }
         .inventory-alien-idcard svg { color: var(--alien-idcard-color); }
+        .inventory-engine-part svg { color: var(--engine-part-color); }
         /* Scuba and torch have their own colors in the SVG */
         /* Show inventory items when picked up (delayed fade-in after fly animation) */
         #key-pickup:checked ~ .inv-panel .inventory-key,
@@ -1701,7 +1709,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #battery-pickup:checked ~ .inv-panel .inventory-battery,
         #scuba-pickup:checked ~ .inv-panel .inventory-scuba,
         #torch-pickup:checked ~ .inv-panel .inventory-torch,
-        #alien-idcard-pickup:checked ~ .inv-panel .inventory-alien-idcard {
+        #alien-idcard-pickup:checked ~ .inv-panel .inventory-alien-idcard,
+        #engine-part-pickup:checked ~ .inv-panel .inventory-engine-part {
             display: flex;
             opacity: 0;
             animation: inventory-fade-in 0.2s ease-out 0.4s forwards;
@@ -3052,6 +3061,66 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
             pointer-events: auto;
             animation: alien-idcard-hovering-pulse 1s ease-in-out infinite;
+        }
+        /* Engine part on top of tower (S6-L9-P24) */
+        .engine-part-in-game {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 23 - var(--item-offset));
+            z-index: var(--z-items);
+            pointer-events: none;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+        }
+        .engine-part-in-game svg {
+            width: 100%;
+            height: 100%;
+            color: var(--engine-part-color);
+        }
+        .engine-part-tooltip {
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 23 - var(--item-offset) + var(--pickup-size) / 2);
+            transform: translateX(-50%);
+        }
+        .engine-part-hover-area {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 23 - var(--item-offset));
+            pointer-events: auto;
+            z-index: var(--z-item-hover);
+        }
+        /* Hide hover area and tooltip when picked up */
+        #engine-part-pickup:checked ~ .game-world .engine-part-hover-area,
+        #engine-part-pickup:checked ~ .game-world .engine-part-tooltip {
+            display: none;
+        }
+        /* Hide hover area when player is at engine part (so label click works) */
+        #level-9:checked ~ #pos-24:checked ~ .game-world .engine-part-hover-area {
+            display: none;
+        }
+        /* Show tooltip on hover */
+        .engine-part-hover-area:hover ~ .engine-part-tooltip {
+            opacity: 1;
+        }
+        #level-9:checked ~ #pos-24:checked ~ #engine-part-pickup:not(:checked) ~ .game-world .engine-part-in-game:hover ~ .engine-part-tooltip {
+            opacity: 1;
+        }
+        /* Enable clicking + pulse when player is adjacent */
+        #level-9:checked ~ #pos-24:checked ~ #engine-part-pickup:not(:checked) ~ .game-world .engine-part-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: engine-part-pulse 1s ease-in-out infinite;
+        }
+        /* Fly engine part to inventory when picked up */
+        #engine-part-pickup:checked ~ .game-world .engine-part-in-game {
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 24 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery) + var(--inv-has-torch) + var(--inv-has-scuba) + var(--inv-has-alien-idcard)));
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Aurora background in Stage 6 */
         .aurora-bg {
@@ -4616,6 +4685,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             0%, 100% { filter: drop-shadow(0 0 4px var(--alien-idcard-color)); }
             50% { filter: drop-shadow(0 0 12px var(--alien-idcard-color)) drop-shadow(0 0 20px var(--alien-idcard-color)); }
         }
+        @keyframes engine-part-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--engine-part-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--engine-part-color)) drop-shadow(0 0 20px var(--engine-part-color)); }
+        }
         @keyframes idcard-hovering-pulse {
             0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--idcard-color)); }
             50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--idcard-color)) drop-shadow(0 0 25px var(--idcard-color)); }
@@ -6113,7 +6186,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <ellipse cx="120.9" cy="285.2" rx="30.3" ry="15.4" fill="currentColor" transform="rotate(10,120.9,285.2)"/>
             <ellipse cx="193.1" cy="285.2" rx="30.3" ry="15.4" fill="currentColor" transform="rotate(-10,193.1,285.2)"/>
         </symbol>
-        <symbol id="machine-part" viewBox="0 0 448 512">
+        <symbol id="engine-part" viewBox="0 0 448 512">
             <path fill="currentColor" d="M248 106.6c18.9-9 32-28.3 32-50.6c0-30.9-25.1-56-56-56s-56 25.1-56 56c0 22.3 13.1 41.6 32 50.6l0 98.8c-2.8 1.3-5.5 2.9-8 4.7l-80.1-45.8c1.6-20.8-8.6-41.6-27.9-52.8C57.2 96 23 105.2 7.5 132S1.2 193 28 208.5c1.3 .8 2.6 1.5 4 2.1l0 90.8c-1.3 .6-2.7 1.3-4 2.1C1.2 319-8 353.2 7.5 380S57.2 416 84 400.5c19.3-11.1 29.4-32 27.8-52.8l50.5-28.9c-11.5-11.2-19.9-25.6-23.8-41.7L88 306.1c-2.6-1.8-5.2-3.3-8-4.7l0-90.8c2.8-1.3 5.5-2.9 8-4.7l80.1 45.8c-.1 1.4-.2 2.8-.2 4.3c0 22.3 13.1 41.6 32 50.6l0 98.8c-18.9 9-32 28.3-32 50.6c0 30.9 25.1 56 56 56s56-25.1 56-56c0-22.3-13.1-41.6-32-50.6l0-98.8c2.8-1.3 5.5-2.9 8-4.7l80.1 45.8c-1.6 20.8 8.6 41.6 27.8 52.8c26.8 15.5 61 6.3 76.5-20.5s6.3-61-20.5-76.5c-1.3-.8-2.7-1.5-4-2.1l0-90.8c1.4-.6 2.7-1.3 4-2.1c26.8-15.5 36-49.7 20.5-76.5S390.8 96 364 111.5c-19.3 11.1-29.4 32-27.8 52.8l-50.6 28.9c11.5 11.2 19.9 25.6 23.8 41.7L360 205.9c2.6 1.8 5.2 3.3 8 4.7l0 90.8c-2.8 1.3-5.5 2.9-8 4.6l-80.1-45.8c.1-1.4 .2-2.8 .2-4.3c0-22.3-13.1-41.6-32-50.6l0-98.8z"/>
         </symbol>
         <symbol id="barrel" viewBox="0 0 24 24">
@@ -7182,6 +7255,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="idcard-pickup" title="idcard">
         <!-- S6 checkboxes -->
         <input type="checkbox" id="tower-open" title="tower-open">
+        <input type="checkbox" id="engine-part-pickup" title="engine-part">
         <!-- S3 checkboxes -->
         <input type="checkbox" id="alien-idcard-pickup" title="alien-idcard">
         <!-- loot pickup checkboxes -->
@@ -7381,6 +7455,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="inventory-torch"><svg><use href="#torch"/></svg><span class="tooltip">Torch</span></span>
             <span class="inventory-scuba"><svg><use href="#scuba"/></svg><span class="tooltip">Scuba Gear</span></span>
             <span class="inventory-alien-idcard"><svg><use href="#id-card-alien"/></svg><span class="tooltip">Alien ID Card</span></span>
+            <span class="inventory-engine-part"><svg><use href="#engine-part"/></svg><span class="tooltip">Engine Part</span></span>
         </div>
         <!-- loot counter -->
         <div class="counter-panel">
@@ -8000,6 +8075,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="loot-hover-area"></span>
             <span class="tooltip">Seashell</span>
         </div>
+        <!-- Engine part on top of tower -->
+        <span class="engine-part-hover-area"></span>
+        <label for="engine-part-pickup" class="engine-part-in-game"><svg><use href="#engine-part"/></svg></label>
+        <span class="tooltip engine-part-tooltip">Engine Part</span>
         <!-- ==================== STAGE 6 LOOT ==================== -->
         <div class="container aquamarine loot-S6-L9-P24">
             <label for="loot-S6-L9-P24-pickup" class="loot-in-game"><svg><use href="#gem"/></svg></label>
