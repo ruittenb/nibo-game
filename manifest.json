@@ -1,18 +1,18 @@
 {
   "name": "Nibo's Way Out",
   "short_name": "Nibo",
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#181e36",
   "theme_color": "#181e36",
   "icons": [
     {
-      "src": "/images/favicon-192.png",
+      "src": "images/favicon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/images/favicon-512.png",
+      "src": "images/favicon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
