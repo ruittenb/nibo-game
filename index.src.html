@@ -237,7 +237,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --scuba-color: #F0A500;
             --engine-part-color: #cc4020;
             --engine-part-highlight: #ffe040;
-            --defective-engine-part-color: #606060;
+            --broken-engine-part-color: #606060;
             --seashell-color: #ff69b4;
             --cave-rock-color: #4a3a2a;   /* Stalactite/stalagmite color */
             --cave-rock-shadow: drop-shadow(2px 0 2px #66aaff80);
@@ -2949,7 +2949,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: var(--stage-height);
         }
         .stars-bg-S6 {
-            left: calc(var(--pos-width) * 18 - 100px);
+            left: calc(var(--pos-width) * 18 - 150px);
             bottom: var(--stage-height);
             height: var(--stage-height);
 
@@ -2986,7 +2986,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Dots overlay on alien tower ground-floor door */
         .alien-tower-door {
             position: absolute;
-            left: calc(var(--pos-offset) + var(--pos-width) * 22.29 - 10px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 22.29);
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--pos-width) * 0.435 - 64px);
             width: calc(var(--pos-width) * 0.3);
             height: calc(var(--pos-width) * 0.4875);
@@ -3011,7 +3011,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         .alien-tower-door-hover-area {
             position: absolute;
-            left: calc(var(--pos-offset) + var(--pos-width) * 22.29 - 10px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 22.29);
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--pos-width) * 0.435 - 64px);
             width: calc(var(--pos-width) * 0.3);
             height: calc(var(--pos-width) * 0.4875);
@@ -3133,8 +3133,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
-        /* Defective engine part at S6-L7-P20 */
-        .defective-engine-part-hover-area {
+        /* Broken engine part at S6-L7-P20 */
+        .broken-engine-part-hover-area {
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
@@ -3142,7 +3142,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 19 - var(--item-offset));
             z-index: var(--z-item-hover);
         }
-        .defective-engine-part {
+        .broken-engine-part {
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
@@ -3156,35 +3156,35 @@ AAAAAAAAAAAAAAAAAAAAAA==
             svg {
                 width: 100%;
                 height: 100%;
-                color: var(--defective-engine-part-color);
+                color: var(--broken-engine-part-color);
                 filter: drop-shadow(0 0 3px #00000080);
             }
         }
-        .defective-engine-part-tooltip {
+        .broken-engine-part-tooltip {
             bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) + var(--pickup-size));
             left: calc(var(--pos-offset) + var(--pos-width) * 19 - var(--item-offset) + var(--pickup-size) / 2);
             transform: translateX(-50%);
         }
-        /* Show defective engine part tooltip on hover */
-        .defective-engine-part-hover-area:hover ~ .defective-engine-part-tooltip {
+        /* Show broken engine part tooltip on hover */
+        .broken-engine-part-hover-area:hover ~ .broken-engine-part-tooltip {
             opacity: 1;
         }
-        /* Hide defective engine part when engine is installed */
-        #engine-installed:checked ~ .game-world .defective-engine-part,
-        #engine-installed:checked ~ .game-world .defective-engine-part-hover-area,
-        #engine-installed:checked ~ .game-world .defective-engine-part-tooltip {
+        /* Hide broken engine part when engine is installed */
+        #engine-installed:checked ~ .game-world .broken-engine-part,
+        #engine-installed:checked ~ .game-world .broken-engine-part-hover-area,
+        #engine-installed:checked ~ .game-world .broken-engine-part-tooltip {
             display: none;
         }
-        /* Only allow clicking defective part when player has engine part and is at the right position */
-        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .defective-engine-part {
+        /* Only allow clicking broken part when player has engine part and is at the right position */
+        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .broken-engine-part {
             pointer-events: auto;
         }
-        /* Hide hover area when player can click defective part */
-        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .defective-engine-part-hover-area {
+        /* Hide hover area when player can click broken part */
+        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .broken-engine-part-hover-area {
             display: none;
         }
-        /* Engine part floating above defective part */
-        .engine-part-at-defective {
+        /* Engine part floating above broken part */
+        .engine-part-replacement {
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
@@ -3201,9 +3201,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 color: var(--engine-part-color);
             }
         }
-        /* Show engine part at defective when player is next to it, has engine part, AND engine not yet installed */
-        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .defective-engine-part:hover ~ .engine-part-at-defective,
-        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .engine-part-at-defective:hover {
+        /* Show engine part at broken when player is next to it, has engine part, AND engine not yet installed */
+        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .broken-engine-part:hover ~ .engine-part-replacement,
+        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .engine-part-replacement:hover {
             opacity: 1;
             pointer-events: auto;
             animation: engine-part-hovering-pulse 1s ease-in-out infinite;
@@ -5133,8 +5133,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Stage 6 Radiation */
         .radiation {
             position: absolute;
-            width: 32px;
-            height: 32px;
+            width: 49px;
+            height: 49px;
             padding: 3px;
             --radiation-bg-purple: #4a0050;
             color: purple;
@@ -5155,8 +5155,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             }
         }
         .radiation-S6-L7-P24 {
-            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) + 14px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 23 - var(--item-offset) - 12px);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) + 38px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 23 - var(--item-offset) - 26px);
         }
         .radiation-tooltip {
             bottom: 100%;
@@ -7049,76 +7049,62 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 </filter>
             </defs>
             <!-- Tower walls -->
-            <rect x="80" y="60" width="160" height="430" fill="url(#alien-tower-concrete)" rx="3"/>
-            <rect x="80" y="60" width="12" height="430" fill="#1e2224" opacity="0.5" rx="2"/>
+            <rect x="70" y="60" width="170" height="430" fill="url(#alien-tower-concrete)" rx="3"/>
+            <rect x="70" y="60" width="12" height="430" fill="#1e2224" opacity="0.5" rx="2"/>
             <rect x="228" y="60" width="12" height="430" fill="#1e2224" opacity="0.5" rx="2"/>
             <!-- Floor slabs -->
-            <rect x="76" y="462" width="168" height="12" fill="url(#alien-tower-floorSlab)" rx="1"/>
-            <rect x="76" y="360" width="168" height="12" fill="url(#alien-tower-floorSlab)" rx="1"/>
-            <rect x="76" y="260" width="168" height="12" fill="url(#alien-tower-floorSlab)" rx="1"/>
-            <rect x="76" y="162" width="168" height="12" fill="url(#alien-tower-floorSlab)" rx="1"/>
+            <rect x="66" y="462" width="178" height="12" fill="url(#alien-tower-floorSlab)" rx="1"/>
+            <rect x="66" y="360" width="178" height="12" fill="url(#alien-tower-floorSlab)" rx="1"/>
+            <rect x="66" y="260" width="178" height="12" fill="url(#alien-tower-floorSlab)" rx="1"/>
+            <rect x="66" y="162" width="178" height="12" fill="url(#alien-tower-floorSlab)" rx="1"/>
             <!-- Observation deck overhang -->
-            <rect x="60" y="70" width="200" height="14" fill="url(#alien-tower-floorSlab)" rx="2"/>
-            <rect x="60" y="82" width="200" height="3" fill="#151819" opacity="0.7"/>
+            <rect x="50" y="70" width="210" height="14" fill="url(#alien-tower-floorSlab)" rx="2"/>
+            <rect x="50" y="82" width="210" height="3" fill="#151819" opacity="0.7"/>
             <!-- Deck railing -->
-            <rect x="62" y="58" width="196" height="14" fill="#2a2d2f" rx="2"/>
-            <rect x="62" y="58" width="196" height="3" fill="#00e5cc" opacity="0.25" rx="1" filter="url(#alien-tower-glow)"/>
-            <rect x="70"  y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="52" y="58" width="206" height="14" fill="#2a2d2f" rx="2"/>
+            <rect x="52" y="58" width="206" height="3" fill="#00e5cc" opacity="0.25" rx="1" filter="url(#alien-tower-glow)"/>
+            <rect x="72"  y="58" width="3" height="14" fill="#1a1c1e"/>
             <rect x="95"  y="58" width="3" height="14" fill="#1a1c1e"/>
-            <rect x="120" y="58" width="3" height="14" fill="#1a1c1e"/>
-            <rect x="145" y="58" width="3" height="14" fill="#1a1c1e"/>
-            <rect x="170" y="58" width="3" height="14" fill="#1a1c1e"/>
-            <rect x="195" y="58" width="3" height="14" fill="#1a1c1e"/>
-            <rect x="220" y="58" width="3" height="14" fill="#1a1c1e"/>
-            <rect x="245" y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="118" y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="142" y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="165" y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="188" y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="211" y="58" width="3" height="14" fill="#1a1c1e"/>
+            <rect x="234" y="58" width="3" height="14" fill="#1a1c1e"/>
             <!-- Antenna -->
-            <rect x="158" y="18" width="4" height="42" fill="#2a2d2f"/>
-            <circle cx="160" cy="16" r="5" fill="#00e5cc" opacity="0.9" filter="url(#alien-tower-glow)"/>
-            <circle cx="160" cy="16" r="9" fill="none" stroke="#00e5cc" stroke-width="2" opacity="0.4"/>
+            <rect x="108" y="18" width="4" height="42" fill="#2a2d2f"/>
+            <circle cx="110" cy="16" r="5" fill="#00e5cc" opacity="0.9" filter="url(#alien-tower-glow)"/>
+            <circle cx="110" cy="16" r="9" fill="none" stroke="#00e5cc" stroke-width="2" opacity="0.4"/>
             <!-- Ground floor -->
             <rect x="92" y="397" width="40" height="65" rx="2" fill="#111315" stroke="#1e2a2a" stroke-width="1"/>
             <rect x="92" y="397" width="40" height="4" fill="#00e5cc" opacity="0.4" filter="url(#alien-tower-glow)"/>
 
-            <rect x="155" y="397" width="70" height="3" fill="#00e5cc" opacity="0.3" filter="url(#alien-tower-glow)"/>
-            <rect x="155" y="400" width="70" height="36" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
-            <rect x="155" y="400" width="70" height="36" rx="2" fill="#00aaff" opacity="0.1"/>
-            <line x1="190" y1="400" x2="190" y2="436" stroke="#1a3040" stroke-width="1"/>
-            <line x1="155" y1="418" x2="225" y2="418" stroke="#1a3040" stroke-width="1"/>
+            <rect x="151" y="397" width="70" height="3" fill="#00e5cc" opacity="0.3" filter="url(#alien-tower-glow)"/>
+            <rect x="151" y="400" width="70" height="36" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
+            <rect x="151" y="400" width="70" height="36" rx="2" fill="#00aaff" opacity="0.1"/>
+            <line x1="186" y1="400" x2="186" y2="436" stroke="#1a3040" stroke-width="1"/>
+            <line x1="151" y1="418" x2="221" y2="418" stroke="#1a3040" stroke-width="1"/>
             <!-- 1st floor -->
-            <rect x="96" y="287" width="54" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
-            <rect x="170" y="287" width="54" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
-            <rect x="96"  y="287" width="54" height="42" rx="2" fill="#0044ff" opacity="0.07"/>
-            <rect x="170" y="287" width="54" height="42" rx="2" fill="#0044ff" opacity="0.07"/>
-            <line x1="123" y1="287" x2="123" y2="329" stroke="#1a3040" stroke-width="1"/>
-            <line x1="96"  y1="308" x2="150" y2="308" stroke="#1a3040" stroke-width="1"/>
-            <line x1="197" y1="287" x2="197" y2="329" stroke="#1a3040" stroke-width="1"/>
-            <line x1="170" y1="308" x2="224" y2="308" stroke="#1a3040" stroke-width="1"/>
-            <rect x="96"  y="285" width="54" height="3" fill="#00e5cc" opacity="0.3" filter="url(#alien-tower-glow)"/>
-            <rect x="170" y="285" width="54" height="3" fill="#00e5cc" opacity="0.3" filter="url(#alien-tower-glow)"/>
-            <!-- 2nd floor — hexagonal window -->
-            <polygon points="130,189 190,189 205,210 190,231 130,231 115,210" fill="#0a1520" stroke="#1a4060" stroke-width="1.2"/>
-            <polygon points="130,189 190,189 205,210 190,231 130,231 115,210" fill="#0055aa" opacity="0.1"/>
-            <line x1="160" y1="189" x2="160" y2="231" stroke="#1a3040" stroke-width="0.8" opacity="0.6"/>
-            <line x1="115" y1="210" x2="205" y2="210" stroke="#1a3040" stroke-width="0.8" opacity="0.6"/>
-            <rect x="130" y="187" width="60" height="2" fill="#cc00ff" opacity="0.35" filter="url(#alien-tower-glow)"/>
-            <line x1="130" y1="189" x2="190" y2="189" stroke="#00e5cc" stroke-width="1.5" opacity="0.35" filter="url(#alien-tower-glow)"/>
-            <!-- 3rd floor -->
-            <rect x="95"  y="96" width="48" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
-            <rect x="177" y="96" width="48" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
-            <rect x="95"  y="96" width="48" height="42" rx="2" fill="#440088" opacity="0.12"/>
-            <rect x="177" y="96" width="48" height="42" rx="2" fill="#440088" opacity="0.12"/>
-            <circle cx="103" cy="130" r="2" fill="#00e5cc" opacity="0.8" filter="url(#alien-tower-glow)"/>
-            <circle cx="112" cy="130" r="2" fill="#00e5cc" opacity="0.6" filter="url(#alien-tower-glow)"/>
-            <circle cx="121" cy="130" r="2" fill="#007777" opacity="0.6"/>
-            <circle cx="185" cy="130" r="2" fill="#00e5cc" opacity="0.8" filter="url(#alien-tower-glow)"/>
-            <circle cx="194" cy="130" r="2" fill="#00e5cc" opacity="0.5" filter="url(#alien-tower-glow)"/>
-            <circle cx="203" cy="130" r="2" fill="#007777" opacity="0.6"/>
-            <!-- Observation deck figures -->
-            <ellipse cx="100" cy="68" rx="4" ry="5" fill="#111416"/>
-            <ellipse cx="100" cy="79" rx="5" ry="7" fill="#111416"/>
-            <ellipse cx="220" cy="66" rx="5" ry="6" fill="#111416"/>
-            <ellipse cx="220" cy="79" rx="4" ry="7" fill="#111416"/>
-            <rect x="64" y="83" width="192" height="2" fill="#00e5cc" opacity="0.4" filter="url(#alien-tower-glow)"/>
+            <rect x="90" y="287" width="54" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
+            <rect x="166" y="287" width="54" height="42" rx="2" fill="#0a1520" stroke="#1a3040" stroke-width="1"/>
+            <rect x="90"  y="287" width="54" height="42" rx="2" fill="#0044ff" opacity="0.07"/>
+            <rect x="166" y="287" width="54" height="42" rx="2" fill="#0044ff" opacity="0.07"/>
+            <line x1="117" y1="287" x2="117" y2="329" stroke="#1a3040" stroke-width="1"/>
+            <line x1="90"  y1="308" x2="144" y2="308" stroke="#1a3040" stroke-width="1"/>
+            <line x1="193" y1="287" x2="193" y2="329" stroke="#1a3040" stroke-width="1"/>
+            <line x1="166" y1="308" x2="220" y2="308" stroke="#1a3040" stroke-width="1"/>
+            <rect x="90"  y="285" width="54" height="3" fill="#00e5cc" opacity="0.3" filter="url(#alien-tower-glow)"/>
+            <rect x="166" y="285" width="54" height="3" fill="#00e5cc" opacity="0.3" filter="url(#alien-tower-glow)"/>
+            <!-- 2nd floor (empty) -->
+            <!-- 3rd floor — hexagonal window -->
+            <polygon points="115,102 195,102 210,123 195,144 115,144 100,123" fill="#0a1520" stroke="#1a4060" stroke-width="1.2"/>
+            <polygon points="115,102 195,102 210,123 195,144 115,144 100,123" fill="#0055aa" opacity="0.1"/>
+            <line x1="155" y1="102" x2="155" y2="144" stroke="#1a3040" stroke-width="0.8" opacity="0.6"/>
+            <line x1="100" y1="123" x2="210" y2="123" stroke="#1a3040" stroke-width="0.8" opacity="0.6"/>
+            <rect x="115" y="100" width="80" height="2" fill="#00e5cc" opacity="0.35" filter="url(#alien-tower-glow)"/>
+            <line x1="115" y1="102" x2="195" y2="102" stroke="#00e5cc" stroke-width="1.5" opacity="0.35" filter="url(#alien-tower-glow)"/>
+
+            <rect x="54" y="83" width="202" height="2" fill="#00e5cc" opacity="0.4" filter="url(#alien-tower-glow)"/>
         </symbol>
         <symbol id="aurora" viewBox="-40 -40 280 480">
             <path d="M 200,0 C 200,133 0,67 0,200" transform="scale(1,2)"
@@ -8211,11 +8197,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <span class="engine-part-hover-area"></span>
         <label for="engine-part-pickup" class="engine-part-in-game"><svg><use href="#engine-part"/></svg></label>
         <span class="tooltip engine-part-tooltip">Engine Part</span>
-        <!-- Defective engine part at S6-L7-P20 -->
-        <span class="defective-engine-part-hover-area"></span>
-        <label for="engine-installed" class="defective-engine-part"><svg><use href="#engine-part"/></svg></label>
-        <span class="tooltip defective-engine-part-tooltip">Defective Engine Part</span>
-        <label for="engine-installed" class="engine-part-at-defective"><svg><use href="#engine-part"/></svg></label>
+        <!-- Broken engine part at S6-L7-P20 -->
+        <span class="broken-engine-part-hover-area"></span>
+        <label for="engine-installed" class="broken-engine-part"><svg><use href="#engine-part"/></svg></label>
+        <span class="tooltip broken-engine-part-tooltip">Broken Engine Part</span>
+        <label for="engine-installed" class="engine-part-replacement"><svg><use href="#engine-part"/></svg></label>
         <div class="engine-installed-part">
             <svg><use href="#engine-part"/></svg>
             <span class="tooltip">Engine Part</span>
