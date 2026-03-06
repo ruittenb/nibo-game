@@ -304,10 +304,10 @@ Key distinction between the two checkbox types:
 ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
 │ 600     │ --z-arrows           │ In-game navigation arrows                                                           │
 ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
-│ 700     │ --z-darkness         │ Darkness mask (caves)                                                               │
+│ 700     │ --z-items            │ Pickable items (key, wrench, axe, battery, idcard, torch)                           │
+│ 700     │ --z-loot             │ Loot (coins, gems) and containers                                                   │
 ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
-│ 800     │ --z-items            │ Pickable items (key, wrench, axe, battery, idcard, torch)                           │
-│ 800     │ --z-loot             │ Loot (coins, gems) and containers                                                   │
+│ 800     │ --z-darkness         │ Darkness mask (caves)                                                               │
 ┝━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┥
 │ 900     │ --z-ui               │ UI elements (inv-panel, counter-panel, nav-panel, title, subtitle)                  │
 ├─────────┼──────────────────────┼─────────────────────────────────────────────────────────────────────────────────────┤
