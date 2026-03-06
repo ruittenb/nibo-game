@@ -3,7 +3,8 @@
     "allow": [
       "WebSearch",
       "Bash(git -C /Users/reneuittenbogaard/Desktop/projects/nibo-game log --oneline -20)",
-      "Bash(make minify:*)"
+      "Bash(make minify:*)",
+      "Bash(make minify-fast:*)"
     ]
   }
 }

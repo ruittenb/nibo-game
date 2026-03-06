@@ -235,7 +235,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --idcard-color: #4a9f4a;
             --alien-idcard-color: #9acd32;
             --scuba-color: #F0A500;
-            --engine-part-color: #708090;
+            --engine-part-color: #cc4020;
+            --engine-part-highlight: #ffe040;
+            --defective-engine-part-color: #606060;
             --seashell-color: #ff69b4;
             --cave-rock-color: #4a3a2a;   /* Stalactite/stalagmite color */
             --cave-rock-shadow: drop-shadow(2px 0 2px #66aaff80);
@@ -1491,7 +1493,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Hide radio buttons and checkboxes by default */
         .position-radio, .level-radio, .layer-radio, .loot-checkbox,
-        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #alien-idcard-pickup, #tower-open, #engine-part-pickup,
+        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #alien-idcard-pickup, #tower-open, #engine-part-pickup, #engine-installed,
         #lives-3, #death-1, #lives-2, #death-2, #lives-1, #death-3 {
             display: none;
             /* When unhidden for debugging: */
@@ -1592,6 +1594,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #scuba-pickup { top: 50px; left: 440px; }
         #tower-open { top: 50px; left: 460px; }
         #engine-part-pickup { top: 50px; left: 480px; }
+        #engine-installed { top: 50px; left: 500px; }
         /* Debug positions - S4 items */
         #torch-pickup { top: 120px; left: 180px; }
         #darkness-toggle { top: 140px; left: 180px; }
@@ -1626,6 +1629,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ #alien-idcard-pickup,
         #debug-toggle:checked ~ #tower-open,
         #debug-toggle:checked ~ #engine-part-pickup,
+        #debug-toggle:checked ~ #engine-installed,
         #debug-toggle:checked ~ #lives-3,
         #debug-toggle:checked ~ #death-1,
         #debug-toggle:checked ~ #lives-2,
@@ -3128,6 +3132,115 @@ AAAAAAAAAAAAAAAAAAAAAA==
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery) + var(--inv-has-torch) + var(--inv-has-scuba) + var(--inv-has-alien-idcard)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
+        }
+        /* Defective engine part at S6-L7-P20 */
+        .defective-engine-part-hover-area {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 19 - var(--item-offset));
+            z-index: var(--z-item-hover);
+        }
+        .defective-engine-part {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 19 - var(--item-offset));
+            z-index: var(--z-scenery);
+            pointer-events: none;
+            cursor: pointer;
+            --engine-part-highlight: transparent;
+
+            svg {
+                width: 100%;
+                height: 100%;
+                color: var(--defective-engine-part-color);
+                filter: drop-shadow(0 0 3px #00000080);
+            }
+        }
+        .defective-engine-part-tooltip {
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 19 - var(--item-offset) + var(--pickup-size) / 2);
+            transform: translateX(-50%);
+        }
+        /* Show defective engine part tooltip on hover */
+        .defective-engine-part-hover-area:hover ~ .defective-engine-part-tooltip {
+            opacity: 1;
+        }
+        /* Hide defective engine part when engine is installed */
+        #engine-installed:checked ~ .game-world .defective-engine-part,
+        #engine-installed:checked ~ .game-world .defective-engine-part-hover-area,
+        #engine-installed:checked ~ .game-world .defective-engine-part-tooltip {
+            display: none;
+        }
+        /* Only allow clicking defective part when player has engine part and is at the right position */
+        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .defective-engine-part {
+            pointer-events: auto;
+        }
+        /* Hide hover area when player can click defective part */
+        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .defective-engine-part-hover-area {
+            display: none;
+        }
+        /* Engine part floating above defective part */
+        .engine-part-at-defective {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) + var(--pickup-size) + 5px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 19 - var(--item-offset));
+            z-index: var(--z-floating-item);
+            opacity: 0;
+            pointer-events: none;
+            cursor: pointer;
+
+            svg {
+                width: 100%;
+                height: 100%;
+                color: var(--engine-part-color);
+            }
+        }
+        /* Show engine part at defective when player is next to it, has engine part, AND engine not yet installed */
+        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .defective-engine-part:hover ~ .engine-part-at-defective,
+        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .engine-part-at-defective:hover {
+            opacity: 1;
+            pointer-events: auto;
+            animation: engine-part-hovering-pulse 1s ease-in-out infinite;
+        }
+        /* Installed engine part (shown after engine is installed) */
+        .engine-installed-part {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 19 - var(--item-offset));
+            color: var(--engine-part-color);
+            z-index: var(--z-scenery);
+            display: none;
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+            .tooltip {
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                margin-bottom: 8px;
+            }
+            &:hover {
+                z-index: var(--z-tooltip);
+
+                .tooltip { opacity: 1; }
+            }
+        }
+        #engine-installed:checked ~ .game-world .engine-installed-part {
+            display: block;
+        }
+        /* Hide engine part from inventory when installed */
+        #engine-installed:checked ~ .inv-panel .inventory-engine-part {
+            display: none;
         }
         /* Aurora background in Stage 6 */
         .aurora-bg {
@@ -4696,6 +4809,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             0%, 100% { filter: drop-shadow(0 0 4px var(--engine-part-color)); }
             50% { filter: drop-shadow(0 0 12px var(--engine-part-color)) drop-shadow(0 0 20px var(--engine-part-color)); }
         }
+        @keyframes engine-part-hovering-pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--engine-part-color)); }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--engine-part-color)) drop-shadow(0 0 25px var(--engine-part-color)); }
+        }
         @keyframes idcard-hovering-pulse {
             0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--idcard-color)); }
             50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--idcard-color)) drop-shadow(0 0 25px var(--idcard-color)); }
@@ -6195,6 +6312,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </symbol>
         <symbol id="engine-part" viewBox="0 0 448 512">
             <path fill="currentColor" d="M248 106.6c18.9-9 32-28.3 32-50.6c0-30.9-25.1-56-56-56s-56 25.1-56 56c0 22.3 13.1 41.6 32 50.6l0 98.8c-2.8 1.3-5.5 2.9-8 4.7l-80.1-45.8c1.6-20.8-8.6-41.6-27.9-52.8C57.2 96 23 105.2 7.5 132S1.2 193 28 208.5c1.3 .8 2.6 1.5 4 2.1l0 90.8c-1.3 .6-2.7 1.3-4 2.1C1.2 319-8 353.2 7.5 380S57.2 416 84 400.5c19.3-11.1 29.4-32 27.8-52.8l50.5-28.9c-11.5-11.2-19.9-25.6-23.8-41.7L88 306.1c-2.6-1.8-5.2-3.3-8-4.7l0-90.8c2.8-1.3 5.5-2.9 8-4.7l80.1 45.8c-.1 1.4-.2 2.8-.2 4.3c0 22.3 13.1 41.6 32 50.6l0 98.8c-18.9 9-32 28.3-32 50.6c0 30.9 25.1 56 56 56s56-25.1 56-56c0-22.3-13.1-41.6-32-50.6l0-98.8c2.8-1.3 5.5-2.9 8-4.7l80.1 45.8c-1.6 20.8 8.6 41.6 27.8 52.8c26.8 15.5 61 6.3 76.5-20.5s6.3-61-20.5-76.5c-1.3-.8-2.7-1.5-4-2.1l0-90.8c1.4-.6 2.7-1.3 4-2.1c26.8-15.5 36-49.7 20.5-76.5S390.8 96 364 111.5c-19.3 11.1-29.4 32-27.8 52.8l-50.6 28.9c11.5 11.2 19.9 25.6 23.8 41.7L360 205.9c2.6 1.8 5.2 3.3 8 4.7l0 90.8c-2.8 1.3-5.5 2.9-8 4.6l-80.1-45.8c.1-1.4 .2-2.8 .2-4.3c0-22.3-13.1-41.6-32-50.6l0-98.8z"/>
+            <circle cx="224" cy="56" r="56" fill="var(--engine-part-highlight, transparent)"><animate attributeName="opacity" values="0.8;0;0;0;0;0" dur="1.2s" repeatCount="indefinite" calcMode="discrete"/></circle>
+            <circle cx="392" cy="160" r="56" fill="var(--engine-part-highlight, transparent)"><animate attributeName="opacity" values="0;0.8;0;0;0;0" dur="1.2s" repeatCount="indefinite" calcMode="discrete"/></circle>
+            <circle cx="392" cy="352" r="56" fill="var(--engine-part-highlight, transparent)"><animate attributeName="opacity" values="0;0;0.8;0;0;0" dur="1.2s" repeatCount="indefinite" calcMode="discrete"/></circle>
+            <circle cx="224" cy="456" r="56" fill="var(--engine-part-highlight, transparent)"><animate attributeName="opacity" values="0;0;0;0.8;0;0" dur="1.2s" repeatCount="indefinite" calcMode="discrete"/></circle>
+            <circle cx="56" cy="352" r="56" fill="var(--engine-part-highlight, transparent)"><animate attributeName="opacity" values="0;0;0;0;0.8;0" dur="1.2s" repeatCount="indefinite" calcMode="discrete"/></circle>
+            <circle cx="56" cy="160" r="56" fill="var(--engine-part-highlight, transparent)"><animate attributeName="opacity" values="0;0;0;0;0;0.8" dur="1.2s" repeatCount="indefinite" calcMode="discrete"/></circle>
         </symbol>
         <symbol id="barrel" viewBox="0 0 24 24">
             <path fill="currentColor" d="M 20 13 C 20.55 13 21 12.55 21 12 S 20.55 11 20 11 H 19 V 5 H 20 C 20.55 5 21 4.55 21 4 S 20.55 3 20 3 H 4 C 3.45 3 3 3.45 3 4 S 3.45 5 4 5 H 5 V 11 H 4 C 3.45 11 3 11.45 3 12 S 3.45 13 4 13 H 5 V 19 H 4 C 3.45 19 3 19.45 3 20 S 3.45 21 4 21 H 20 C 20.55 21 21 20.55 21 20 S 20.55 19 20 19 H 19 V 13 H 20 M 5 11 h 14 v 2 h -14 Z"/>
@@ -7263,6 +7386,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- S6 checkboxes -->
         <input type="checkbox" id="tower-open" title="tower-open">
         <input type="checkbox" id="engine-part-pickup" title="engine-part">
+        <input type="checkbox" id="engine-installed" title="engine-installed">
         <!-- S3 checkboxes -->
         <input type="checkbox" id="alien-idcard-pickup" title="alien-idcard">
         <!-- loot pickup checkboxes -->
@@ -8087,6 +8211,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <span class="engine-part-hover-area"></span>
         <label for="engine-part-pickup" class="engine-part-in-game"><svg><use href="#engine-part"/></svg></label>
         <span class="tooltip engine-part-tooltip">Engine Part</span>
+        <!-- Defective engine part at S6-L7-P20 -->
+        <span class="defective-engine-part-hover-area"></span>
+        <label for="engine-installed" class="defective-engine-part"><svg><use href="#engine-part"/></svg></label>
+        <span class="tooltip defective-engine-part-tooltip">Defective engine part</span>
+        <label for="engine-installed" class="engine-part-at-defective"><svg><use href="#engine-part"/></svg></label>
+        <div class="engine-installed-part">
+            <svg><use href="#engine-part"/></svg>
+            <span class="tooltip">Engine part</span>
+        </div>
         <!-- ==================== STAGE 6 LOOT ==================== -->
         <div class="container aquamarine loot-S6-L9-P24">
             <label for="loot-S6-L9-P24-pickup" class="loot-in-game"><svg><use href="#gem"/></svg></label>
