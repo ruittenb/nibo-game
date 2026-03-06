@@ -237,7 +237,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --scuba-color: #F0A500;
             --engine-part-color: #cc4020;
             --engine-part-highlight: #ffe040;
-            --defective-engine-part-color: #606060;
+            --broken-engine-part-color: #606060;
             --seashell-color: #ff69b4;
             --cave-rock-color: #4a3a2a;   /* Stalactite/stalagmite color */
             --cave-rock-shadow: drop-shadow(2px 0 2px #66aaff80);
@@ -2949,7 +2949,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: var(--stage-height);
         }
         .stars-bg-S6 {
-            left: calc(var(--pos-width) * 18 - 100px);
+            left: calc(var(--pos-width) * 18 - 150px);
             bottom: var(--stage-height);
             height: var(--stage-height);
 
@@ -3133,8 +3133,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
-        /* Defective engine part at S6-L7-P20 */
-        .defective-engine-part-hover-area {
+        /* Broken engine part at S6-L7-P20 */
+        .broken-engine-part-hover-area {
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
@@ -3142,7 +3142,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 19 - var(--item-offset));
             z-index: var(--z-item-hover);
         }
-        .defective-engine-part {
+        .broken-engine-part {
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
@@ -3156,35 +3156,35 @@ AAAAAAAAAAAAAAAAAAAAAA==
             svg {
                 width: 100%;
                 height: 100%;
-                color: var(--defective-engine-part-color);
+                color: var(--broken-engine-part-color);
                 filter: drop-shadow(0 0 3px #00000080);
             }
         }
-        .defective-engine-part-tooltip {
+        .broken-engine-part-tooltip {
             bottom: calc(var(--stage-height) + var(--level-height) * 2 + var(--platform-thickness) + var(--pickup-size));
             left: calc(var(--pos-offset) + var(--pos-width) * 19 - var(--item-offset) + var(--pickup-size) / 2);
             transform: translateX(-50%);
         }
-        /* Show defective engine part tooltip on hover */
-        .defective-engine-part-hover-area:hover ~ .defective-engine-part-tooltip {
+        /* Show broken engine part tooltip on hover */
+        .broken-engine-part-hover-area:hover ~ .broken-engine-part-tooltip {
             opacity: 1;
         }
-        /* Hide defective engine part when engine is installed */
-        #engine-installed:checked ~ .game-world .defective-engine-part,
-        #engine-installed:checked ~ .game-world .defective-engine-part-hover-area,
-        #engine-installed:checked ~ .game-world .defective-engine-part-tooltip {
+        /* Hide broken engine part when engine is installed */
+        #engine-installed:checked ~ .game-world .broken-engine-part,
+        #engine-installed:checked ~ .game-world .broken-engine-part-hover-area,
+        #engine-installed:checked ~ .game-world .broken-engine-part-tooltip {
             display: none;
         }
-        /* Only allow clicking defective part when player has engine part and is at the right position */
-        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .defective-engine-part {
+        /* Only allow clicking broken part when player has engine part and is at the right position */
+        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .broken-engine-part {
             pointer-events: auto;
         }
-        /* Hide hover area when player can click defective part */
-        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .defective-engine-part-hover-area {
+        /* Hide hover area when player can click broken part */
+        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .broken-engine-part-hover-area {
             display: none;
         }
-        /* Engine part floating above defective part */
-        .engine-part-at-defective {
+        /* Engine part floating above broken part */
+        .engine-part-replacement {
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
@@ -3201,9 +3201,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 color: var(--engine-part-color);
             }
         }
-        /* Show engine part at defective when player is next to it, has engine part, AND engine not yet installed */
-        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .defective-engine-part:hover ~ .engine-part-at-defective,
-        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .engine-part-at-defective:hover {
+        /* Show engine part at broken when player is next to it, has engine part, AND engine not yet installed */
+        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .broken-engine-part:hover ~ .engine-part-replacement,
+        #level-7:checked ~ #pos-20:checked ~ #engine-part-pickup:checked ~ #engine-installed:not(:checked) ~ .game-world .engine-part-replacement:hover {
             opacity: 1;
             pointer-events: auto;
             animation: engine-part-hovering-pulse 1s ease-in-out infinite;
@@ -8197,11 +8197,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <span class="engine-part-hover-area"></span>
         <label for="engine-part-pickup" class="engine-part-in-game"><svg><use href="#engine-part"/></svg></label>
         <span class="tooltip engine-part-tooltip">Engine Part</span>
-        <!-- Defective engine part at S6-L7-P20 -->
-        <span class="defective-engine-part-hover-area"></span>
-        <label for="engine-installed" class="defective-engine-part"><svg><use href="#engine-part"/></svg></label>
-        <span class="tooltip defective-engine-part-tooltip">Defective Engine Part</span>
-        <label for="engine-installed" class="engine-part-at-defective"><svg><use href="#engine-part"/></svg></label>
+        <!-- Broken engine part at S6-L7-P20 -->
+        <span class="broken-engine-part-hover-area"></span>
+        <label for="engine-installed" class="broken-engine-part"><svg><use href="#engine-part"/></svg></label>
+        <span class="tooltip broken-engine-part-tooltip">Broken Engine Part</span>
+        <label for="engine-installed" class="engine-part-replacement"><svg><use href="#engine-part"/></svg></label>
         <div class="engine-installed-part">
             <svg><use href="#engine-part"/></svg>
             <span class="tooltip">Engine Part</span>
