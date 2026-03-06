@@ -516,6 +516,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #door-unlocked:checked ~ .game-world { --inv-has-wrench: 0; }
         #tree-chopped:checked ~ .game-world { --inv-has-axe: 0; }
         #bolt-fixed:checked ~ .game-world { --inv-has-battery: 0; }
+        #tower-open:checked ~ .game-world { --inv-has-alien-idcard: 0; }
         .platform {
             position: absolute;
             height: var(--platform-thickness);
@@ -1733,6 +1734,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Hide battery from inventory when bolt is fixed (battery used) */
         #bolt-fixed:checked ~ .inv-panel .inventory-battery {
+            display: none;
+        }
+        /* Hide alien ID card from inventory when tower door is opened (card used) */
+        #tower-open:checked ~ .inv-panel .inventory-alien-idcard {
             display: none;
         }
         /* Hide torch from inventory when in S4 (shown next to player instead) */
@@ -2986,9 +2991,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
             svg {
                 position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+                top: 30px;
+                left: 6px;
                 width: 25%;
                 height: 25%;
                 opacity: 0.8;
@@ -3045,8 +3049,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             width: 24px;
             height: 24px;
-            bottom: calc(var(--stage-height) + var(--ground-height) + var(--pos-width) * 0.4875 + var(--pos-width) * 0.435 - 56px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 22.29 + var(--pos-width) * 0.15 - 22px);
+            bottom: calc(var(--stage-height) + var(--ground-height) + var(--pos-width) * 0.4875 + var(--pos-width) * 0.435 - 64px);
+            padding-bottom: 8px;
+            left: calc(var(--pos-offset) + var(--pos-width) * 22.29 + var(--pos-width) * 0.15 - 12px);
             z-index: var(--z-floating-item);
             opacity: 0;
             pointer-events: none;
