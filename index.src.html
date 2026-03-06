@@ -2944,6 +2944,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: 0;
             height: var(--stage-height);
         }
+        .stars-bg-S6 {
+            left: calc(var(--pos-width) * 18 - 100px);
+            bottom: var(--stage-height);
+            height: var(--stage-height);
+
+            svg { transform: scaleX(-1); }
+        }
         /* Spaceship background in Stage 3 (doesn't use stage-bg) */
         .spacecraft-bg {
             position: absolute;
@@ -6913,7 +6920,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </symbol>
         <symbol id="alien-tower" viewBox="0 0 320 520">
             <defs>
-                <filter id="alien-tower-glow">
+                <filter id="alien-tower-glow" x="-100%" y="-100%" width="300%" height="300%">
                     <feGaussianBlur stdDeviation="3" result="b"/>
                     <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
                 </filter>
@@ -6944,7 +6951,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <!-- Antenna -->
             <rect x="158" y="18" width="4" height="42" fill="#2a2d2f"/>
             <circle cx="160" cy="16" r="5" fill="#00e5cc" opacity="0.9" filter="url(#alien-tower-glow)"/>
-            <circle cx="160" cy="16" r="9" fill="none" stroke="#00e5cc" stroke-width="0.8" opacity="0.4"/>
+            <circle cx="160" cy="16" r="9" fill="none" stroke="#00e5cc" stroke-width="2" opacity="0.4"/>
             <!-- Ground floor -->
             <rect x="92" y="397" width="40" height="65" rx="2" fill="#111315" stroke="#1e2a2a" stroke-width="1"/>
             <rect x="92" y="397" width="40" height="4" fill="#00e5cc" opacity="0.4" filter="url(#alien-tower-glow)"/>
@@ -7857,6 +7864,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- ==================== STAGE 6 LAYOUT ==================== -->
         <!-- S6 is listed before S3 so the spacecraft (which visually extends
              into S6 territory) renders on top of the aurora by DOM order. -->
+        <div class="stars-bg stars-bg-S6"><svg><use href="#stars"/></svg></div>
         <!-- Aurora -->
         <div class="aurora-bg">
             <svg>
