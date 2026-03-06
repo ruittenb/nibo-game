@@ -256,9 +256,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --z-floating-item: 500;       /* Floating item icons when using items */
             --z-underwater: 550;          /* Underwater filter overlay */
             --z-arrows: 600;              /* In-game navigation arrows */
-            --z-darkness: 700;            /* Caves darkness */
-            --z-items: 800;               /* Pickupable items (key, wrench, axe, battery, idcard, torch) */
-            --z-loot: 800;               /* Loot (coins, gems) */
+            --z-items: 700;               /* Pickupable items (key, wrench, axe, battery, idcard, torch) */
+            --z-loot: 700;               /* Loot (coins, gems) */
+            --z-darkness: 800;            /* Caves darkness (above items/loot) */
             --z-ui: 900;                  /* UI elements (title, inventory, counter) */
             --z-title-overlay: 1000;      /* Title screen overlay */
             --z-player: 1100;             /* Player (above title screen) */
@@ -2171,7 +2171,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             z-index: var(--z-items);
             pointer-events: none;
-            display: none;
+            display: flex;
             justify-content: center;
             align-items: center;
         }
@@ -2211,15 +2211,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Show tooltip when player is at torch and hovers */
         #level-0:checked ~ #pos-12:checked ~ #torch-pickup:not(:checked) ~ .game-world .torch-in-game:hover ~ .torch-tooltip {
             opacity: 1;
-        }
-        /* Show torch when player is adjacent (hidden by darkness otherwise) */
-        :is(#level-0:checked ~ #pos-11:checked, #level-0:checked ~ #pos-12:checked, #level-1:checked ~ #pos-12:checked) ~
-        #torch-pickup:not(:checked) ~ .game-world .torch-in-game {
-            display: flex;
-        }
-        :is(#level-0:checked ~ #pos-11:checked, #level-1:checked ~ #pos-12:checked) ~
-        #torch-pickup:not(:checked) ~ .game-world .torch-hover-area {
-            display: block;
         }
         /* Enable clicking torch only when player is next to it - S4 uses levels 0-4 */
         #level-0:checked ~ #pos-12:checked ~ #torch-pickup:not(:checked) ~ .game-world .torch-in-game {
@@ -4636,14 +4627,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--ground-height));
             left: calc(var(--pos-offset) + var(--pos-width) * 23 - var(--item-offset));
         }
-        /* Stage 4 loot positions - hidden by default, only show when player adjacent */
-        .container.loot-S4-L3-P7,
-        .container.loot-S4-L3-P8,
-        .container.loot-S4-L3-P12,
-        .container.loot-S4-L1-P10,
-        .container.loot-S4-L0-P9 {
-            display: none;
-        }
         .loot-S4-L3-P7 {
             bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 6 - var(--item-offset));
@@ -4664,17 +4647,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
         }
-        /* Show S4 loot only when player is at that position */
-        #level-3:checked ~ #pos-7:checked ~ #loot-S4-L3-P7-pickup:not(:checked) ~ .game-world .loot-S4-L3-P7,
-        :is(#level-2:checked ~ #pos-7:checked, #level-4:checked ~ #pos-7:checked, #level-3:checked ~ #pos-8:checked) ~ #torch-pickup:checked ~ #loot-S4-L3-P7-pickup:not(:checked) ~ .game-world .loot-S4-L3-P7 { display: block; }
-        #level-3:checked ~ #pos-8:checked ~ #loot-S4-L3-P8-pickup:not(:checked) ~ .game-world .loot-S4-L3-P8,
-        :is(#level-2:checked ~ #pos-8:checked, #level-3:checked ~ #pos-9:checked, #level-3:checked ~ #pos-7:checked, #level-4:checked ~ #pos-8:checked) ~ #torch-pickup:checked ~ #loot-S4-L3-P8-pickup:not(:checked) ~ .game-world .loot-S4-L3-P8 { display: block; }
-        #level-3:checked ~ #pos-12:checked ~ #loot-S4-L3-P12-pickup:not(:checked) ~ .game-world .loot-S4-L3-P12,
-        :is(#level-2:checked ~ #pos-12:checked, #level-4:checked ~ #pos-12:checked, #level-3:checked ~ #pos-11:checked) ~ #torch-pickup:checked ~ #loot-S4-L3-P12-pickup:not(:checked) ~ .game-world .loot-S4-L3-P12 { display: block; }
-        #level-1:checked ~ #pos-10:checked ~ #loot-S4-L1-P10-pickup:not(:checked) ~ .game-world .loot-S4-L1-P10,
-        :is(#level-0:checked ~ #pos-10:checked, #level-2:checked ~ #pos-10:checked, #level-1:checked ~ #pos-9:checked, #level-1:checked ~ #pos-11:checked) ~ #torch-pickup:checked ~ #loot-S4-L1-P10-pickup:not(:checked) ~ .game-world .loot-S4-L1-P10 { display: block; }
-        #level-0:checked ~ #pos-9:checked ~ #loot-S4-L0-P9-pickup:not(:checked) ~ .game-world .loot-S4-L0-P9,
-        :is(#level-1:checked ~ #pos-9:checked, #level-0:checked ~ #pos-8:checked, #level-0:checked ~ #pos-10:checked) ~ #torch-pickup:checked ~ #loot-S4-L0-P9-pickup:not(:checked) ~ .game-world .loot-S4-L0-P9 { display: block; }
         /* ========== KEYFRAME ANIMATIONS ========== */
         @keyframes idle {
             0%, 100% { transform: translateY(0); }
@@ -5029,13 +5001,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Move Stage 4 loot to counter when picked up (S4 is at bottom, no stage-height offset) */
-        /* display: flex overrides the S4 display: none so the flight transition plays */
+        /* z-index lifts the flying loot above the darkness overlay during the animation */
         #loot-S4-L3-P7-pickup:checked ~ .game-world .loot-S4-L3-P7,
         #loot-S4-L3-P8-pickup:checked ~ .game-world .loot-S4-L3-P8,
         #loot-S4-L3-P12-pickup:checked ~ .game-world .loot-S4-L3-P12,
         #loot-S4-L1-P10-pickup:checked ~ .game-world .loot-S4-L1-P10,
         #loot-S4-L0-P9-pickup:checked ~ .game-world .loot-S4-L0-P9 {
             display: flex;
+            z-index: calc(var(--z-darkness) + 1);
             bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
             left: calc(var(--pos-width) * 12 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
