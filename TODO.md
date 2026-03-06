@@ -5,9 +5,13 @@
  - gold eating NPC / requiring payment
  - fly item to in-game location when applied
 
+ - color arrow purple when it leads to death?
+ - pick up objects in center of nav-panel?
+
+ - start with some boxes already checked?
 
 
-S6: Contains an important part for repairs. Or fuel/oxygen.
+S6: Contains an important part for repairs.
     But requires a special radioactivity suit.
 
 S7: Then on S7 I love the idea of an ancient alien temple with a guardian that wants payment.

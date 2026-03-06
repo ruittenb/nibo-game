@@ -2349,8 +2349,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform-origin: bottom left;
         }
         /* Only show axe at tree when player is next to it, has axe, AND tree not yet chopped - S2 uses levels 5-9 */
-        #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree-container:hover ~ .axe-at-tree,
-        #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .axe-at-tree:hover {
+        #level-5:checked ~ #pos-12:checked ~ #tree-chopped:not(:checked) ~ #axe-pickup:checked ~ .game-world .tree-container:hover ~ .axe-at-tree,
+        #level-5:checked ~ #pos-12:checked ~ #tree-chopped:not(:checked) ~ #axe-pickup:checked ~ .game-world .axe-at-tree:hover {
             opacity: 1;
             pointer-events: auto;
             animation: axe-chop 1s ease-in infinite;
@@ -3041,11 +3041,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
         /* Hide hover area when player has alien ID card at door (so label click works) */
-        #level-5:checked ~ #pos-23:checked ~ #tower-open:not(:checked) ~ #alien-idcard-pickup:checked ~ .game-world .alien-tower-door-hover-area {
+        #level-5:checked ~ #pos-23:checked ~ #alien-idcard-pickup:checked ~ #tower-open:not(:checked) ~ .game-world .alien-tower-door-hover-area {
             display: none;
         }
         /* Enable clicking on door label when player has alien ID card */
-        #level-5:checked ~ #pos-23:checked ~ #tower-open:not(:checked) ~ #alien-idcard-pickup:checked ~ .game-world .alien-tower-door {
+        #level-5:checked ~ #pos-23:checked ~ #alien-idcard-pickup:checked ~ #tower-open:not(:checked) ~ .game-world .alien-tower-door {
             pointer-events: auto;
             cursor: pointer;
         }
@@ -3067,8 +3067,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             color: var(--alien-idcard-color);
         }
         /* Show alien ID card above door on hover */
-        #level-5:checked ~ #pos-23:checked ~ #tower-open:not(:checked) ~ #alien-idcard-pickup:checked ~ .game-world .alien-tower-door:hover ~ .alien-idcard-at-door,
-        #level-5:checked ~ #pos-23:checked ~ #tower-open:not(:checked) ~ #alien-idcard-pickup:checked ~ .game-world .alien-idcard-at-door:hover {
+        #level-5:checked ~ #pos-23:checked ~ #alien-idcard-pickup:checked ~ #tower-open:not(:checked) ~ .game-world .alien-tower-door:hover ~ .alien-idcard-at-door,
+        #level-5:checked ~ #pos-23:checked ~ #alien-idcard-pickup:checked ~ #tower-open:not(:checked) ~ .game-world .alien-idcard-at-door:hover {
             opacity: 1;
             pointer-events: auto;
             animation: alien-idcard-hovering-pulse 1s ease-in-out infinite;
@@ -5185,11 +5185,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             }
         }
         /* Tree pulsates when player is next to it, has axe, AND tree not yet chopped */
-        #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree svg {
+        #level-5:checked ~ #pos-12:checked ~ #tree-chopped:not(:checked) ~ #axe-pickup:checked ~ .game-world .tree svg {
             animation: tree-pulse 1s ease-in-out infinite;
         }
         /* Enable clicking tree only when player is next to it, has axe */
-        #level-5:checked ~ #pos-12:checked ~ #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree {
+        #level-5:checked ~ #pos-12:checked ~ #tree-chopped:not(:checked) ~ #axe-pickup:checked ~ .game-world .tree {
             pointer-events: auto;
             cursor: pointer;
         }
@@ -5227,11 +5227,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: none;
         }
         /* Show "blocked" tooltip on hover (without axe, tree not chopped) */
-        #axe-pickup:not(:checked) ~ #tree-chopped:not(:checked) ~ .game-world .tree-hover-area:hover ~ .tree-tooltip {
+        #tree-chopped:not(:checked) ~ #axe-pickup:not(:checked) ~ .game-world .tree-hover-area:hover ~ .tree-tooltip {
             opacity: 1;
         }
         /* Show "chop" tooltip on hover (with axe, tree not chopped) */
-        #axe-pickup:checked ~ #tree-chopped:not(:checked) ~ .game-world .tree-container:hover .tree-tooltip-axe {
+        #tree-chopped:not(:checked) ~ #axe-pickup:checked ~ .game-world .tree-container:hover .tree-tooltip-axe {
             opacity: 1;
         }
         /* Door */
@@ -7353,28 +7353,25 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- S1 checkboxes -->
         <input type="checkbox" id="wrench-pickup" title="wrench">
         <input type="checkbox" id="door-unlocked" title="door">
-        <!-- S3 checkboxes -->
-        <input type="checkbox" id="axe-pickup" title="axe">
+        <!-- S4 checkboxes -->
+        <input type="checkbox" id="torch-pickup" title="torch">
+        <input type="checkbox" id="darkness-toggle" title="darkness">
         <!-- S2 checkboxes -->
-        <input type="checkbox" id="tree-chopped" title="tree">
-        <!-- S3 checkboxes -->
         <input type="checkbox" id="battery-pickup" title="battery">
-        <input type="checkbox" id="scuba-pickup" title="scuba">
+        <input type="checkbox" id="tree-chopped" title="tree">
+        <input type="checkbox" id="axe-pickup" title="axe">
+        <!-- S3 checkboxes -->
+        <input type="checkbox" id="alien-idcard-pickup" title="alien-idcard">
         <input type="checkbox" id="bolt-fixed" title="bolt">
         <input type="checkbox" id="flight-controls-used" title="flight-controls">
         <input type="checkbox" id="escaped" title="escaped">
-        <!-- S4 checkboxes -->
-        <input type="checkbox" id="darkness-toggle" title="darkness">
-        <input type="checkbox" id="torch-pickup" title="torch">
-        <!-- S5 valuables -->
         <!-- S5 checkboxes -->
         <input type="checkbox" id="idcard-pickup" title="idcard">
         <!-- S6 checkboxes -->
+        <input type="checkbox" id="scuba-pickup" title="scuba">
         <input type="checkbox" id="tower-open" title="tower-open">
         <input type="checkbox" id="engine-part-pickup" title="engine-part">
         <input type="checkbox" id="engine-installed" title="engine-installed">
-        <!-- S3 checkboxes -->
-        <input type="checkbox" id="alien-idcard-pickup" title="alien-idcard">
         <!-- loot pickup checkboxes -->
         <input type="checkbox" id="loot-S1-L0-P3-pickup" class="loot-checkbox" title="coin">
         <input type="checkbox" id="loot-S1-L1-P4-pickup" class="loot-checkbox" title="coin">
