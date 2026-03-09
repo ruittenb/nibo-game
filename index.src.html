@@ -236,6 +236,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --alien-idcard-color: #9acd32;
             --scuba-color: #F0A500;
             --engine-part-color: #cc4020;
+            --suit-color: #f9f9f9;
             --engine-part-highlight: #ffe040;
             --broken-engine-part-color: #606060;
             --seashell-color: #ff69b4;
@@ -415,6 +416,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --inv-has-torch: 0;
             --inv-has-scuba: 0;
             --inv-has-alien-idcard: 0;
+            --inv-has-suit: 0;
             --inv-has-engine-part: 0;
             /* Inventory slot positioning */
             --inv-slot-width: calc(var(--pickup-size) + 8px);  /* item width + gap */
@@ -506,6 +508,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #wrench-pickup:checked ~ .game-world { --inv-has-wrench: 1; }
         #axe-pickup:checked ~ .game-world { --inv-has-axe: 1; }
         #idcard-pickup:checked ~ .game-world { --inv-has-idcard: 1; }
+        #suit-pickup:checked ~ .game-world { --inv-has-suit: 1; }
         #battery-pickup:checked ~ .game-world { --inv-has-battery: 1; }
         #torch-pickup:checked ~ .game-world { --inv-has-torch: 1; }
         #scuba-pickup:checked ~ .game-world { --inv-has-scuba: 1; }
@@ -1494,7 +1497,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Hide radio buttons and checkboxes by default */
         .position-radio, .level-radio, .layer-radio, .loot-checkbox,
-        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #alien-idcard-pickup, #tower-open, #engine-part-pickup, #engine-installed,
+        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #suit-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #alien-idcard-pickup, #tower-open, #engine-part-pickup, #engine-installed,
         #lives-3, #death-1, #lives-2, #death-2, #lives-1, #death-3 {
             display: none;
             /* When unhidden for debugging: */
@@ -1601,6 +1604,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #darkness-toggle { top: 140px; left: 180px; }
         /* Debug positions - S5 items */
         #idcard-pickup { top: 120px; left: 310px; }
+        #suit-pickup { top: 120px; left: 330px; }
         /* Debug positions - lives (left column, below layers, at phantom level height) */
         #lives-3 { top: 170px; left: 10px; }
         #death-1 { top: 190px; left: 10px; }
@@ -1618,6 +1622,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ #wrench-pickup,
         #debug-toggle:checked ~ #door-unlocked,
         #debug-toggle:checked ~ #idcard-pickup,
+        #debug-toggle:checked ~ #suit-pickup,
         #debug-toggle:checked ~ #axe-pickup,
         #debug-toggle:checked ~ #tree-chopped,
         #debug-toggle:checked ~ #battery-pickup,
@@ -1666,6 +1671,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-wrench,
         .inventory-axe,
         .inventory-idcard,
+        .inventory-suit,
         .inventory-battery,
         .inventory-scuba,
         .inventory-torch,
@@ -1690,6 +1696,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-wrench svg,
         .inventory-axe svg,
         .inventory-idcard svg,
+        .inventory-suit svg,
         .inventory-battery svg,
         .inventory-scuba svg,
         .inventory-torch svg,
@@ -1702,6 +1709,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-wrench svg { color: var(--wrench-color); }
         .inventory-axe svg { color: var(--wrench-color); }
         .inventory-idcard svg { color: var(--idcard-color); }
+        .inventory-suit svg { color: var(--suit-color); }
         .inventory-battery svg { color: var(--battery-color); }
         .inventory-alien-idcard svg { color: var(--alien-idcard-color); }
         .inventory-engine-part svg { color: var(--engine-part-color); }
@@ -1711,6 +1719,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #wrench-pickup:checked ~ .inv-panel .inventory-wrench,
         #axe-pickup:checked ~ .inv-panel .inventory-axe,
         #idcard-pickup:checked ~ .inv-panel .inventory-idcard,
+        #suit-pickup:checked ~ .inv-panel .inventory-suit,
         #battery-pickup:checked ~ .inv-panel .inventory-battery,
         #scuba-pickup:checked ~ .inv-panel .inventory-scuba,
         #torch-pickup:checked ~ .inv-panel .inventory-torch,
@@ -2101,6 +2110,74 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
+        /* Suit on S5, level 3, pos 18 */
+        .suit-in-game {
+            position: absolute;
+            width: calc(var(--pickup-size) * 1.2);
+            height: calc(var(--pickup-size) * 1.2);
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 6px - var(--pickup-size) * 0.1);
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset) - var(--pickup-size) * 0.1);
+            z-index: var(--z-items);
+            pointer-events: none;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+        }
+        .suit-in-game svg {
+            width: 100%;
+            height: 100%;
+            color: var(--suit-color);
+        }
+        .suit-tooltip {
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 6px - var(--pickup-size) * 0.1 + var(--pickup-size) * 1.2);
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset) - var(--pickup-size) * 0.1 + var(--pickup-size) * 1.2 / 2);
+            transform: translateX(-50%);
+        }
+        /* Hover area for suit tooltip (when not adjacent) */
+        .suit-hover-area {
+            position: absolute;
+            width: calc(var(--pickup-size) * 1.2);
+            height: calc(var(--pickup-size) * 1.2);
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 6px - var(--pickup-size) * 0.1);
+            left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset) - var(--pickup-size) * 0.1);
+            pointer-events: auto;
+            z-index: var(--z-item-hover);
+        }
+        /* Hide suit hover area and tooltip when picked up */
+        #suit-pickup:checked ~ .game-world .suit-hover-area,
+        #suit-pickup:checked ~ .game-world .suit-tooltip {
+            display: none;
+        }
+        /* Hide hover area when player is at suit (so label click works) */
+        /* N/θ at P18 or ζ/η at P17 (visual position swap) */
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-18:checked ~ .game-world .suit-hover-area,
+        #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ .game-world .suit-hover-area {
+            display: none;
+        }
+        /* Show tooltip on hover area hover */
+        .suit-hover-area:hover ~ .suit-tooltip {
+            opacity: 1;
+        }
+        /* Show tooltip when player is at suit and hovers */
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-18:checked ~ #suit-pickup:not(:checked) ~ .game-world .suit-in-game:hover ~ .suit-tooltip,
+        #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ #suit-pickup:not(:checked) ~ .game-world .suit-in-game:hover ~ .suit-tooltip {
+            opacity: 1;
+        }
+        /* Enable clicking suit when player is adjacent - S5 uses levels 0-4 */
+        /* N/θ at P18 or ζ/η at P17 (visual position swap) */
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-18:checked ~ #suit-pickup:not(:checked) ~ .game-world .suit-in-game,
+        #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ #suit-pickup:not(:checked) ~ .game-world .suit-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: suit-pulse 1s ease-in-out infinite;
+        }
+        /* Fly suit to inventory when picked up (Stage 5: viewport right = pos-width * 18) */
+        /* Suit slot = slot 0 offset by key + wrench + axe + idcard */
+        #suit-pickup:checked ~ .game-world .suit-in-game {
+            bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 18 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard)));
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
+        }
         /* Battery on stage 2, level 4, pos 12 (where ID card was) */
         .battery-in-game {
             position: absolute;
@@ -2159,11 +2236,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             animation: battery-pulse 1s ease-in-out infinite;
         }
         /* Fly battery to inventory when picked up (Stage 2: viewport right = pos-width * 12) */
-        /* Battery slot = slot 0 offset by key + wrench + axe + idcard */
+        /* Battery slot = slot 0 offset by key + wrench + axe + idcard + suit */
         #battery-pickup:checked ~ .game-world .battery-in-game {
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 12 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
-                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard)));
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -2228,7 +2305,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             display: flex;
             bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 12 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
-                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery)));
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit) + var(--inv-has-battery)));
             opacity: 0;
             transition: none;
         }
@@ -3125,7 +3202,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #engine-part-pickup:checked ~ .game-world .engine-part-in-game {
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 24 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
-                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery) + var(--inv-has-torch) + var(--inv-has-scuba) + var(--inv-has-alien-idcard)));
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit) + var(--inv-has-battery) + var(--inv-has-torch) + var(--inv-has-scuba) + var(--inv-has-alien-idcard)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -3288,7 +3365,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             left: calc(var(--pos-width) * 12);
             bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + 28px);
             width: calc(var(--pos-width) * 6);
-            height: calc(var(--level-height) * 1 - 12px);
+            height: calc(var(--level-height) * 1 - 2px);
             background: linear-gradient(to bottom, #d4c48a, #c4a868);
             mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 110' preserveAspectRatio='none'%3E%3Cpath d='M0 20 Q75 0 150 18 Q225 36 300 14 Q375 -4 450 16 Q525 34 600 12 Q675 -2 750 20 Q825 38 900 15 L900 110 L0 110Z' fill='black'/%3E%3C/svg%3E");
             mask-size: 100% 100%;
@@ -3399,7 +3476,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #scuba-pickup:checked ~ .game-world .scuba-in-game {
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - 12px - 4px);
             left: calc(var(--pos-width) * 24 - var(--panel-right) - 2px - var(--panel-padding) - 24px - 4px
-                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery) + var(--inv-has-torch)));
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit) + var(--inv-has-battery) + var(--inv-has-torch)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -3462,7 +3539,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #alien-idcard-pickup:checked ~ .game-world .alien-idcard-in-game {
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 18 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
-                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-battery) + var(--inv-has-torch) + var(--inv-has-scuba)));
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit) + var(--inv-has-battery) + var(--inv-has-torch) + var(--inv-has-scuba)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -4777,6 +4854,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         @keyframes idcard-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--idcard-color)); }
             50% { filter: drop-shadow(0 0 12px var(--idcard-color)) drop-shadow(0 0 20px var(--idcard-color)); }
+        }
+        @keyframes suit-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--suit-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--suit-color)) drop-shadow(0 0 20px var(--suit-color)); }
         }
         @keyframes alien-idcard-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--alien-idcard-color)); }
@@ -6307,6 +6388,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <symbol id="heart" viewBox="0 0 512 512">
             <path fill="currentColor" d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
         </symbol>
+        <symbol id="suit" viewBox="40 40 400 400">
+          <g transform="rotate(90 240 240)">
+            <path fill="currentColor" d="m 239 50 c 32 0 61 32 61 32 1 31 0 68 0 68 36 3 41 38 41 38 0 52 2 126 2 126 -14 19 -9 27 -39 9 -1 86 6 69 -4 85 -6 23 -32 26 -61 2 -28 29 -57 20 -57 -8 3 -71 2 -95 -11 -79 -12 16 -32 -4 -32 -4 C 140 197 127 166 166 152 208 129 161 94 185 75 190 42 239 50 239 50 Z"/>
+            <g fill="#222" fill-rule="evenodd">
+                <path d="M 170 90 a 50 50 0 0 1 50 -50 h 40 a 50 50 0 0 1 50 50 v 51 c 23 5 40 25 40 49 v 120 a 30 30 0 0 1 -40 28 V 400 a 40 40 0 0 1 -70 26 A 40 40 0 0 1 170 400 v -62 A 30 30 0 0 1 130 310 V 190 a 50 50 0 0 1 40 -49 z m 130 70 a 30 30 0 0 1 30 30 v 90 h -20 v -90 h -20 v 50 h -40 v -80 z m 20 160 a 10 10 0 0 1 -10 -10 v -10 h 20 v 10 a 10 10 0 0 1 -10 10 m -50 100 a 20 20 0 0 1 -20 -20 V 300 h 40 v 100 a 20 20 0 0 1 -20 20 m -90 -260 a 30 30 0 0 0 -30 30 v 90 h 20 v -90 h 20 v 50 h 40 v -80 z m 30 260 a 20 20 0 0 0 20 -20 V 300 h -40 v 100 a 20 20 0 0 0 20 20 m -50 -100 a 10 10 0 0 0 10 -10 v -10 h -20 v 10 a 10 10 0 0 0 10 10 M 260 60 a 30 30 0 0 1 30 30 v 50 H 190 V 90 a 30 30 0 0 1 30 -30 z m 30 200 v 20 h -40 v -20 z m -100 0 v 20 h 40 v -20 z"/>
+                <path d="m 250 70 c 17 0 30 13 30 30 0 16 -11 30 -31 30 C 227 130 250 130 230 130 212 130 199 117 200 100 201 83 213 70 230 70 Z m -20 20 c -6 0 -10 4 -10 10 0 6 4 11 10 12 13 1 9 1 22 0 C 258 112 260 107 260 100 260 94 256 90 250 90 Z"/>
+            </g>
+          </g>
+        </symbol>
         <symbol id="spacecraft" viewBox="0 252 1540 438">
             <path fill="#393d3a" d="M1294 252 L1295 254 L1289 265 L1285 273 L1283 277 L1268 306 L1251 338 L1262 333 L1273 327 L1276 326 L1282 323 L1300 313 L1330 298 L1336 295 L1344 291 L1349 288q12 -4 23 -5h15l53 -1l-8 10l-10 11l-15 15l-20 21l-10 11l-15 15l-10 11l-7 7l2 3l1 6h3l32 3q14 2 27 6l7 2l8 3l8 6l8 1l17 3q6 1 9 7c6 15 5 36 0 51q-2 5 -8 7l-5 1l-11 3h-5c-6 1 -7 2 -12 6l-10 3v9l3 1l3 1l4 1l6 4q3 4 9 3c9 0 21 1 28 7c9 16 6 40 2 56q-7 8 -18 8l-4 1l-1 1h-5l-11 4c-14 10 -31 10 -47 10h-12c-9 0 -9 0 -12 -3h-44v5q0 6 -4 10q-11 6 -25 7c-13 1 -13 1 -25 6q-11 4 -23 3h-5c-12 0 -12 0 -17 -2l-26 4l-7 1v12h-49l-21 4 L293 648 l-5 1l-9 -6c-5 -3 -5 -3 -11 -4l-1 2q-8 1 -16 -2l-1 -6h-4l-25 -5l-10 -2l-6 -1l-6 -1l-7 -3v-2l-5 -2l-6 -4l-3 -3q-2 -1 -2 -6h-3q-6 -4 -7 -11q-4 -11 -16 -14l-12 -3l-6 -2l-13 -3l-29 -8l-9 -3l-6 -1l-4 -2q-4 0 -7 -5q-7 -18 -11 -37l-1 -4l-1 -4l-1 -3l1 -9q5 -5 12 -8l4 -2l4 -2l5 -1l14 -6l4 -2l4 -1q36 -15 69 -31c76 -36 157 -64 241 -71q18 -1 32 -10q17 -10 36 -10v-2h5l23 -1q30 -3 61 -3h24c20 0 20 0 29 4q15 6 31 7l12 1l5 1l11 1h4q13 3 25 9l14 2h50l54 1h17l63 1h10c20 1 20 1 38 -7l6 -6q7 -4 13 -5l4 -1a460 460 0 0 1 106 1q11 -2 17 -12l8 -6l4 -3l34 -24l13 -9l17 -13l26 -18l5 -3l4 -3c22 -15 60 -12 85 -11"/>
             <path fill="#304044" d="M1294 252 L1295 254 L1289 265 L1285 273 L1283 277 L1268 306 L1251 338 L1262 333 L1273 327 L1276 326 L1282 323 L1300 313 L1330 298 L1336 295 L1344 291 L1349 288q12 -4 23 -5h15l53 -1l-8 10l-10 11l-15 15l-20 21l-10 11l-15 15l-10 11l-7 7l2 3l1 6h3l32 3q14 2 27 6l7 2l8 3l8 6l8 1l17 3q6 1 9 7c6 15 5 36 0 51q-2 5 -8 7l-5 1l-11 3h-5c-6 1 -7 2 -12 6l-10 3v9l3 1l3 1l4 1l6 4q3 4 9 3c9 0 21 1 28 7c9 16 6 40 2 56q-7 8 -18 8l-4 1l-1 1h-5l-11 4c-14 10 -31 10 -47 10h-12c-9 0 -9 0 -12 -3h-44v5q0 6 -4 10q-11 6 -25 7c-13 1 -13 1 -25 6q-11 4 -23 3h-5c-12 0 -12 0 -17 -2l-26 4l-7 1v12h-49l-21 4c-21 7 -44 6 -66 6l2 3l1 5l8 -1v8h3l59 -1h36l25 1v1l44 1v-2l4 1h32l35 -1l45 -1v1l-6 1h25l8 -1h16l18 1v1h-12l-3 1l-11 1h-13l-6 1h-18l18 1v2l33 2h20l62 2v1l-46 1l52 8q-8 3 -16 2h-76l-84 1l-26 1 L288 671 l1 -3l16 -1h8q-3 -5 -9 -7q-7 -4 -11 -12l-5 1l-9 -6c-5 -3 -5 -3 -11 -4l-1 2q-8 1 -16 -2l-1 -6h-4l-25 -5l-10 -2l-6 -1l-6 -1l-7 -3v-2l-5 -2l-6 -4l-3 -3q-2 -1 -2 -6h-3q-6 -4 -7 -11q-4 -11 -16 -14l-12 -3l-6 -2l-13 -3l-29 -8l-9 -3l-6 -1l-4 -2q-4 0 -7 -5q-7 -18 -11 -37l-1 -4l-1 -4l-1 -3l1 -9q5 -5 12 -8l4 -2l4 -2l5 -1l14 -6l4 -2l4 -1q36 -15 69 -31c76 -36 157 -64 241 -71q18 -1 32 -10q17 -10 36 -10v-2h5l23 -1q30 -3 61 -3h24c20 0 20 0 29 4q15 6 31 7l12 1l5 1l11 1h4q13 3 25 9l14 2h50l54 1h17l63 1h10c20 1 20 1 38 -7l6 -6q7 -4 13 -5l4 -1a460 460 0 0 1 106 1q11 -2 17 -12l8 -6l4 -3l34 -24l13 -9l17 -13l26 -18l5 -3l4 -3c22 -15 60 -12 85 -11"/>
@@ -7345,6 +7435,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="escaped" title="escaped">
         <!-- S5 checkboxes -->
         <input type="checkbox" id="idcard-pickup" title="idcard">
+        <input type="checkbox" id="suit-pickup" title="suit">
         <!-- S6 checkboxes -->
         <input type="checkbox" id="scuba-pickup" title="scuba">
         <input type="checkbox" id="tower-open" title="tower-open">
@@ -7543,6 +7634,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="inventory-wrench"><svg><use href="#wrench"/></svg><span class="tooltip">Wrench</span></span>
             <span class="inventory-axe"><svg><use href="#axe"/></svg><span class="tooltip">Axe</span></span>
             <span class="inventory-idcard"><svg><use href="#id-card"/></svg><span class="tooltip">ID Card</span></span>
+            <span class="inventory-suit"><svg><use href="#suit"/></svg><span class="tooltip">Radiation Suit</span></span>
             <span class="inventory-battery"><svg><use href="#battery"/></svg><span class="tooltip">Battery</span></span>
             <span class="inventory-torch"><svg><use href="#torch"/></svg><span class="tooltip">Torch</span></span>
             <span class="inventory-scuba"><svg><use href="#scuba"/></svg><span class="tooltip">Scuba Gear</span></span>
@@ -7622,6 +7714,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <label for="idcard-pickup" class="idcard-in-game"><svg><use href="#id-card"/></svg></label>
             <span class="tooltip idcard-tooltip">ID Card</span>
         </div>
+        <!-- Suit on S5, level 3, pos 18 (clickable to pick up) -->
+        <span class="suit-hover-area"></span>
+        <label for="suit-pickup" class="suit-in-game"><svg><use href="#suit"/></svg></label>
+        <span class="tooltip suit-tooltip">Radiation Suit</span>
         <!-- Battery on stage 3, level 2, pos 1 (clickable to pick up) -->
         <span class="battery-hover-area"></span>
         <label for="battery-pickup" class="battery-in-game"><svg><use href="#battery"/></svg></label>
