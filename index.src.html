@@ -5639,54 +5639,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#death-1, #death-2, #death-3):is(#death-1, #death-2, #death-3):is(#death-1, #death-2, #death-3):is(#death-1, #death-2, #death-3):checked ~ .game-world .arrow {
             display: none;
         }
-        /* Show death overlay when player is at approach position during death state */
-        /* Poison: approached from L1-P5 going right */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-1:checked ~ #pos-5:checked ~
-            .death-screen-overlay,
-        /* Disease L5: approached from L5-P9 right or L5-P11 left */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-5:checked ~
-            :is(#pos-9, #pos-11):checked ~
-            .death-screen-overlay,
-        /* Disease L6: approached from L6-P8 right or L6-P10 left */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-6:checked ~
-            :is(#pos-8, #pos-10):checked ~
-            .death-screen-overlay,
-        /* Bird N/θ-L3-P13: from N/θ-L2-P13 up */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
-            :is(#layer-N, #layer-θ):checked ~ #pos-13:checked ~
-            .death-screen-overlay,
-        /* Bird N/θ-L3-P13: from η/ζ-L3-P13 left (vis P14) */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
-            :is(#layer-η, #layer-ζ):checked ~ #pos-13:checked ~
-            .death-screen-overlay,
-        /* Bird N-L3-P14: from N-L2-P14 up */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
-            #layer-N:checked ~ #pos-14:checked ~
-            .death-screen-overlay,
-        /* Bird N-L3-P14: from η-L3-P14 right (vis P13) */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
-            #layer-η:checked ~ #pos-14:checked ~
-            .death-screen-overlay,
-        /* Bird N-L3-P14: from N-L3-P15 left */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
-            #layer-N:checked ~ #pos-15:checked ~
-            .death-screen-overlay,
-        /* Bird θ-L3-P17: from θ-L2-P17 up */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
-            #layer-θ:checked ~ #pos-17:checked ~
-            .death-screen-overlay,
-        /* Bird θ-L3-P17: from ζ-L3-P17 left (vis P18) */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
-            #layer-ζ:checked ~ #pos-17:checked ~
-            .death-screen-overlay,
-        /* Bird θ-L3-P17: from θ-L3-P16 right */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
-            #layer-θ:checked ~ #pos-16:checked ~
-            .death-screen-overlay,
-        /* Radiation S6-L7-P24: from L6-P24 up or L8-P24 down */
-        :is(#death-1, #death-2, #death-3):checked ~
-            :is(#level-6, #level-8):checked ~ #pos-24:checked ~
-            .death-screen-overlay {
+        /* Show death overlay when any death checkbox is checked */
+        :is(#death-1, #death-2, #death-3):checked ~ .death-screen-overlay {
             opacity: 1;
             pointer-events: auto;
         }
@@ -5738,13 +5692,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 left: calc(var(--pos-offset) + var(--pos-width) * 13);
                 bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
             }
-        /* Bird N-L3-P14: player shown at P14 L3 (approach from η-L3-P14, vis P13) */
+        /* Bird N-L3-P14: player shown at P14 L3 (approach from η/ζ-L3-P14, vis P13) */
         :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
-            #layer-η:checked ~ #pos-14:checked ~
+            :is(#layer-η, #layer-ζ):checked ~ #pos-14:checked ~
             .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 13); }
-        /* Bird N-L3-P14: player shown at P14 L3 (approach from N-L3-P15) */
+        /* Bird N-L3-P14: player shown at P14 L3 (approach from N/θ-L3-P15) */
         :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
-            #layer-N:checked ~ #pos-15:checked ~
+            :is(#layer-N, #layer-θ):checked ~ #pos-15:checked ~
             .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 13); }
         /* Bird θ-L3-P17: player shown at P17 L3 (approach from θ-L2-P17) */
         :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
@@ -5784,8 +5738,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Bird at N-L3-P14 */
         :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world,
-        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .game-world,
-        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world {
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~ :is(#layer-η, #layer-ζ):checked ~ #pos-14:checked ~ .game-world,
+        :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-15:checked ~ .game-world {
             --bird-level: 3; --bird-pos: 14;
         }
         /* Bird at θ-L3-P17 */
@@ -5917,18 +5871,18 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #lives-2:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-13:checked ~ .nav-panel .nav-death-left-2,
         #lives-1:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-13:checked ~ .nav-panel .nav-death-left-3 { display: block; }
 
-        /* --- Bird N-L3-P14: from N-L2-P14 up --- */
-        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world .arrow-L2-up { display: none; }
-        #lives-3:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world .death-up-1,
-        #lives-2:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world .death-up-2,
-        #lives-1:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world .death-up-3 {
+        /* --- Bird N/θ-L3-P14: from N/θ-L2-P14 up --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-2:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ .game-world .arrow-L2-up { display: none; }
+        #lives-3:checked ~ #level-2:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ .game-world .death-up-1,
+        #lives-2:checked ~ #level-2:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ .game-world .death-up-2,
+        #lives-1:checked ~ #level-2:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ .game-world .death-up-3 {
             display: block;
             bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + 72.5px);
         }
-        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .nav-panel .nav-up[for="level-3"] { display: none; }
-        #lives-3:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .nav-panel .nav-death-up-1,
-        #lives-2:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .nav-panel .nav-death-up-2,
-        #lives-1:checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .nav-panel .nav-death-up-3 { display: block; }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-2:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ .nav-panel .nav-up[for="level-3"] { display: none; }
+        #lives-3:checked ~ #level-2:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ .nav-panel .nav-death-up-1,
+        #lives-2:checked ~ #level-2:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ .nav-panel .nav-death-up-2,
+        #lives-1:checked ~ #level-2:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ .nav-panel .nav-death-up-3 { display: block; }
 
         /* --- Bird N-L3-P14: from η-L3-P14 right (vis P13, layer change η→N) --- */
         :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .game-world .arrow-right[for="layer-N"] { display: none; }
@@ -5943,18 +5897,31 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #lives-2:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .nav-panel .nav-death-right-2,
         #lives-1:checked ~ #level-3:checked ~ #layer-η:checked ~ #pos-14:checked ~ .nav-panel .nav-death-right-3 { display: block; }
 
-        /* --- Bird N-L3-P14: from N-L3-P15 left (position change) --- */
-        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world .arrow-P15-left { display: none; }
-        #lives-3:checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world .death-left-1,
-        #lives-2:checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world .death-left-2,
-        #lives-1:checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .game-world .death-left-3 {
+        /* --- Bird θ-L3-P14: from ζ-L3-P14 right (vis P13, layer change ζ→θ) --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-14:checked ~ .game-world .arrow-right[for="layer-θ"] { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-14:checked ~ .game-world .death-right-1,
+        #lives-2:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-14:checked ~ .game-world .death-right-2,
+        #lives-1:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-14:checked ~ .game-world .death-right-3 {
+            display: block;
+            left: calc(var(--pos-offset) + var(--pos-width) * 12.5 + 12px);
+        }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-14:checked ~ .nav-panel .nav-right[for="layer-θ"] { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-14:checked ~ .nav-panel .nav-death-right-1,
+        #lives-2:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-14:checked ~ .nav-panel .nav-death-right-2,
+        #lives-1:checked ~ #level-3:checked ~ #layer-ζ:checked ~ #pos-14:checked ~ .nav-panel .nav-death-right-3 { display: block; }
+
+        /* --- Bird N/θ-L3-P14: from N/θ-L3-P15 left (position change) --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-15:checked ~ .game-world .arrow-P15-left { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-15:checked ~ .game-world .death-left-1,
+        #lives-2:checked ~ #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-15:checked ~ .game-world .death-left-2,
+        #lives-1:checked ~ #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-15:checked ~ .game-world .death-left-3 {
             display: block;
             left: calc(var(--pos-offset) + var(--pos-width) * 13.5 + 12px);
         }
-        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .nav-panel .nav-left[for="pos-14"] { display: none; }
-        #lives-3:checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .nav-panel .nav-death-left-1,
-        #lives-2:checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .nav-panel .nav-death-left-2,
-        #lives-1:checked ~ #level-3:checked ~ #layer-N:checked ~ #pos-15:checked ~ .nav-panel .nav-death-left-3 { display: block; }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-15:checked ~ .nav-panel .nav-left[for="pos-14"] { display: none; }
+        #lives-3:checked ~ #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-15:checked ~ .nav-panel .nav-death-left-1,
+        #lives-2:checked ~ #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-15:checked ~ .nav-panel .nav-death-left-2,
+        #lives-1:checked ~ #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-15:checked ~ .nav-panel .nav-death-left-3 { display: block; }
 
         /* --- Bird θ-L3-P17: from θ-L2-P17 up --- */
         :is(#lives-3, #lives-2, #lives-1):checked ~ #level-2:checked ~ #layer-θ:checked ~ #pos-17:checked ~ .game-world .arrow-L2-up { display: none; }
