@@ -1498,7 +1498,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Hide radio buttons and checkboxes by default */
         .position-radio, .level-radio, .layer-radio, .loot-checkbox,
         #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #suit-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #alien-idcard-pickup, #tower-open, #engine-part-pickup, #engine-installed,
-        #lives-3, #death-1, #lives-2, #death-2, #lives-1, #death-3 {
+        #lives-3, #death-1, #lives-2, #death-2, #lives-1, #death-3,
+        #artwork-toggle {
             display: none;
             /* When unhidden for debugging: */
             z-index: var(--z-state-controls);
@@ -1612,6 +1613,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #death-2 { top: 230px; left: 10px; }
         #lives-1 { top: 250px; left: 10px; }
         #death-3 { top: 270px; left: 10px; }
+        /* Debug positions - artwork */
+        #artwork-toggle { top: 140px; left: 10px; }
         /* Show game state inputs when debug is checked */
         #debug-toggle:checked ~ .position-radio,
         #debug-toggle:checked ~ .level-radio,
@@ -1641,7 +1644,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ #lives-2,
         #debug-toggle:checked ~ #death-2,
         #debug-toggle:checked ~ #lives-1,
-        #debug-toggle:checked ~ #death-3 {
+        #debug-toggle:checked ~ #death-3,
+        #debug-toggle:checked ~ #artwork-toggle {
             display: block;
         }
         /* Inventory area */
@@ -3564,6 +3568,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             font-size: 14px;
             font-style: italic;
             text-shadow: 1px 1px 0 #b8860b;
+            cursor: pointer;
         }
         .subtitle-S1,
         .subtitle-S2,
@@ -5979,6 +5984,43 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
             pointer-events: auto;
         }
+        /* Artwork overlay */
+        .artwork-overlay {
+            z-index: var(--z-endgame-overlay);
+            background-color: #000;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: pointer;
+        }
+        #artwork-toggle:checked ~ .artwork-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        /* S1: pos 1-6 + levels 0-4 */
+        #artwork-toggle:checked ~ :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ :is(#pos-1, #pos-2, #pos-3, #pos-4, #pos-5, #pos-6):checked ~ .artwork-overlay {
+            background-image: url(images/nibo-S1.png);
+        }
+        /* S4: pos 7-12 + levels 0-4 */
+        #artwork-toggle:checked ~ :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~ .artwork-overlay {
+            background-image: url(images/nibo-S4.png);
+        }
+        /* S2: pos 7-12 + levels 5-9 */
+        #artwork-toggle:checked ~ :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~ .artwork-overlay {
+            background-image: url(images/nibo-S2.png);
+        }
+        /* S3: pos 13-18 + levels 5-9 (+ phantom levels ρ/σ, phantom pos φ) */
+        #artwork-toggle:checked ~ :is(#level-5, #level-6, #level-7, #level-8, #level-9, #level-ρ, #level-σ):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18, #pos-φ):checked ~ .artwork-overlay {
+            background-image: url(images/nibo-S3.png);
+        }
+        /* S5: pos 13-18 + levels 0-4 (+ phantom level τ) */
+        #artwork-toggle:checked ~ :is(#level-0, #level-1, #level-2, #level-3, #level-4, #level-τ):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .artwork-overlay {
+            background-image: url(images/nibo-S5.png);
+        }
+        /* S6: pos 19-24 + levels 5-9 */
+        #artwork-toggle:checked ~ :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-19, #pos-20, #pos-21, #pos-22, #pos-23, #pos-24):checked ~ .artwork-overlay {
+            background-image: url(images/nibo-S6.png);
+        }
         /* Tooltip styling */
         .tooltip {
             position: absolute;
@@ -7363,6 +7405,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="lives" id="death-2" title="death 2">
         <input type="radio" name="lives" id="lives-1" title="1 life">
         <input type="radio" name="lives" id="death-3" title="death 3 (game over)">
+        <!-- Artwork overlay toggle -->
+        <input type="checkbox" id="artwork-toggle" title="artwork">
         <!-- Radio buttons for level (vertical) -->
         <input type="radio" name="level" id="level-0" class="level-radio" title="level-0">
         <input type="radio" name="level" id="level-1" class="level-radio" title="level-1">
@@ -7471,12 +7515,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Stage 6 loot -->
         <input type="checkbox" id="loot-S6-L9-P24-pickup" class="loot-checkbox" title="aquamarine">
         <input type="checkbox" id="loot-S6-L5-P24-pickup" class="loot-checkbox" title="coin">
-        <div class="subtitle subtitle-S1">The Factory</div>
-        <div class="subtitle subtitle-S2">The Jungle</div>
-        <div class="subtitle subtitle-S3">The Hangar</div>
-        <div class="subtitle subtitle-S4">The Caves</div>
-        <div class="subtitle subtitle-S5">The Sunken City</div>
-        <div class="subtitle subtitle-S6">Observation Tower</div>
+        <label for="artwork-toggle" class="subtitle subtitle-S1">The Factory</label>
+        <label for="artwork-toggle" class="subtitle subtitle-S2">The Jungle</label>
+        <label for="artwork-toggle" class="subtitle subtitle-S3">The Hangar</label>
+        <label for="artwork-toggle" class="subtitle subtitle-S4">The Caves</label>
+        <label for="artwork-toggle" class="subtitle subtitle-S5">The Sunken City</label>
+        <label for="artwork-toggle" class="subtitle subtitle-S6">Observation Tower</label>
         <!-- Fixed navigation panel -->
         <div class="nav-panel">
             <!-- Up cell -->
@@ -8326,6 +8370,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 </video>
             </div>
         </div>
+        <!-- Artwork overlay -->
+        <label for="artwork-toggle" class="overlay artwork-overlay"></label>
     </div>
 </body>
 </html>
