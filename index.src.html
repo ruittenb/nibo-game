@@ -1615,6 +1615,47 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #death-3 { top: 270px; left: 10px; }
         /* Debug positions - artwork */
         #artwork-toggle { top: 140px; left: 10px; }
+        /* Debug backgrounds */
+        .debug-bg-positions, .debug-bg-layers, .debug-bg-levels, .debug-bg-lives {
+            display: none;
+            position: fixed;
+            border-radius: 4px;
+            z-index: calc(var(--z-state-controls) - 1);
+        }
+        .debug-bg-positions {
+            top: 7px;
+            left: 47px;
+            width: 540px;
+            height: 20px;
+            background: #358f;
+        }
+        .debug-bg-layers {
+            top: 27px;
+            left: 7px;
+            width: 20px;
+            height: 80px;
+            background: #aa08;
+        }
+        .debug-bg-levels {
+            top: 27px;
+            left: 27px;
+            width: 30px;
+            height: 198px;
+            background: #0a05;
+        }
+        .debug-bg-lives {
+            top: 165px;
+            left: 7px;
+            width: 20px;
+            height: 120px;
+            background: #910b;
+        }
+        #debug-toggle:checked ~ .debug-bg-positions,
+        #debug-toggle:checked ~ .debug-bg-layers,
+        #debug-toggle:checked ~ .debug-bg-levels,
+        #debug-toggle:checked ~ .debug-bg-lives {
+            display: block;
+        }
         /* Show game state inputs when debug is checked */
         #debug-toggle:checked ~ .position-radio,
         #debug-toggle:checked ~ .level-radio,
@@ -5998,27 +6039,27 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: auto;
         }
         /* S1: pos 1-6 + levels 0-4 */
-        #artwork-toggle:checked ~ :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ :is(#pos-1, #pos-2, #pos-3, #pos-4, #pos-5, #pos-6):checked ~ .artwork-overlay {
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ :is(#pos-1, #pos-2, #pos-3, #pos-4, #pos-5, #pos-6):checked ~ #artwork-toggle:checked ~ .artwork-overlay {
             background-image: url(images/nibo-S1.png);
         }
         /* S4: pos 7-12 + levels 0-4 */
-        #artwork-toggle:checked ~ :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~ .artwork-overlay {
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~ #artwork-toggle:checked ~ .artwork-overlay {
             background-image: url(images/nibo-S4.png);
         }
         /* S2: pos 7-12 + levels 5-9 */
-        #artwork-toggle:checked ~ :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~ .artwork-overlay {
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~ #artwork-toggle:checked ~ .artwork-overlay {
             background-image: url(images/nibo-S2.png);
         }
         /* S3: pos 13-18 + levels 5-9 (+ phantom levels ρ/σ, phantom pos φ) */
-        #artwork-toggle:checked ~ :is(#level-5, #level-6, #level-7, #level-8, #level-9, #level-ρ, #level-σ):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18, #pos-φ):checked ~ .artwork-overlay {
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9, #level-ρ, #level-σ):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18, #pos-φ):checked ~ #artwork-toggle:checked ~ .artwork-overlay {
             background-image: url(images/nibo-S3.png);
         }
         /* S5: pos 13-18 + levels 0-4 (+ phantom level τ) */
-        #artwork-toggle:checked ~ :is(#level-0, #level-1, #level-2, #level-3, #level-4, #level-τ):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ .artwork-overlay {
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4, #level-τ):checked ~ :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18):checked ~ #artwork-toggle:checked ~ .artwork-overlay {
             background-image: url(images/nibo-S5.png);
         }
         /* S6: pos 19-24 + levels 5-9 */
-        #artwork-toggle:checked ~ :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-19, #pos-20, #pos-21, #pos-22, #pos-23, #pos-24):checked ~ .artwork-overlay {
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-19, #pos-20, #pos-21, #pos-22, #pos-23, #pos-24):checked ~ #artwork-toggle:checked ~ .artwork-overlay {
             background-image: url(images/nibo-S6.png);
         }
         /* Tooltip styling */
@@ -7397,6 +7438,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
     </svg>
     <div class="game-container">
         <input type="checkbox" id="debug-toggle" accesskey="d" title="debug" checked>
+        <div class="debug-bg-positions"></div>
+        <div class="debug-bg-layers"></div>
+        <div class="debug-bg-levels"></div>
+        <div class="debug-bg-lives"></div>
         <h2>NIBO'S WAY OUT</h2>
         <!-- Lives radio group -->
         <input type="radio" name="lives" id="lives-3" checked title="3 lives">
@@ -7405,8 +7450,6 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="lives" id="death-2" title="death 2">
         <input type="radio" name="lives" id="lives-1" title="1 life">
         <input type="radio" name="lives" id="death-3" title="death 3 (game over)">
-        <!-- Artwork overlay toggle -->
-        <input type="checkbox" id="artwork-toggle" title="artwork">
         <!-- Radio buttons for level (vertical) -->
         <input type="radio" name="level" id="level-0" class="level-radio" title="level-0">
         <input type="radio" name="level" id="level-1" class="level-radio" title="level-1">
@@ -7458,6 +7501,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="position" id="pos-φ" class="position-radio" title="pos-φ">
         <!-- Title screen toggle -->
         <input type="checkbox" id="title-screen-toggle" autofocus title="title screen" checked>
+        <!-- Artwork overlay toggle -->
+        <input type="checkbox" id="artwork-toggle" title="artwork">
         <!-- Key pickup checkbox -->
         <input type="checkbox" id="key-pickup" title="key">
         <!-- Safe unlock checkbox -->
