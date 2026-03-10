@@ -3611,6 +3611,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             font-style: italic;
             text-shadow: 1px 1px 0 #b8860b;
             cursor: pointer;
+            padding: 0 10px 10px 10px;
         }
         .subtitle-S1,
         .subtitle-S2,
@@ -5685,9 +5686,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~
             :is(#layer-η, #layer-ζ):checked ~ #pos-13:checked ~
             .game-world .player { left: calc(var(--pos-offset) + var(--pos-width) * 12); }
-        /* Bird N-L3-P14: player shown at P14 L3 (approach from N-L2-P14) */
+        /* Bird N/θ-L3-P14: player shown at P14 L3 (approach from N/θ-L2-P14) */
         :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~
-            #layer-N:checked ~ #pos-14:checked ~
+            :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~
             .game-world .player {
                 left: calc(var(--pos-offset) + var(--pos-width) * 13);
                 bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
@@ -5736,8 +5737,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~ :is(#layer-η, #layer-ζ):checked ~ #pos-13:checked ~ .game-world {
             --bird-level: 3; --bird-pos: 13;
         }
-        /* Bird at N-L3-P14 */
-        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~ #layer-N:checked ~ #pos-14:checked ~ .game-world,
+        /* Bird at N/θ-L3-P14 */
+        :is(#death-1, #death-2, #death-3):checked ~ #level-2:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ .game-world,
         :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~ :is(#layer-η, #layer-ζ):checked ~ #pos-14:checked ~ .game-world,
         :is(#death-1, #death-2, #death-3):checked ~ #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-15:checked ~ .game-world {
             --bird-level: 3; --bird-pos: 14;
