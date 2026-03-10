@@ -1614,46 +1614,33 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #lives-1 { top: 250px; left: 10px; }
         #death-3 { top: 270px; left: 10px; }
         /* Debug positions - artwork */
-        #artwork-toggle { top: 140px; left: 10px; }
+        #artwork-toggle { top: 130px; left: 10px; }
         /* Debug backgrounds */
-        .debug-bg-positions, .debug-bg-layers, .debug-bg-levels, .debug-bg-lives {
+        .debug-bg-positions, .debug-bg-levels {
             display: none;
             position: fixed;
-            border-radius: 4px;
+            border: 1px solid #ddd;
+            background: transparent;
             z-index: calc(var(--z-state-controls) - 1);
         }
         .debug-bg-positions {
             top: 7px;
-            left: 47px;
-            width: 540px;
-            height: 20px;
-            background: #358f;
-        }
-        .debug-bg-layers {
-            top: 27px;
             left: 7px;
-            width: 20px;
-            height: 80px;
-            background: #aa08;
+            width: 580px;
+            height: 20px;
+            border: none;
+            border-bottom: 1px solid #ddd;
         }
         .debug-bg-levels {
             top: 27px;
-            left: 27px;
-            width: 30px;
-            height: 198px;
-            background: #0a05;
-        }
-        .debug-bg-lives {
-            top: 165px;
-            left: 7px;
-            width: 20px;
-            height: 120px;
-            background: #910b;
+            left: 26px;
+            width: 31px;
+            height: 258px;
+            border-top: none;
+            border-bottom: none;
         }
         #debug-toggle:checked ~ .debug-bg-positions,
-        #debug-toggle:checked ~ .debug-bg-layers,
-        #debug-toggle:checked ~ .debug-bg-levels,
-        #debug-toggle:checked ~ .debug-bg-lives {
+        #debug-toggle:checked ~ .debug-bg-levels {
             display: block;
         }
         /* Show game state inputs when debug is checked */
@@ -7435,10 +7422,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
     <div class="game-container">
         <input type="checkbox" id="debug-toggle" accesskey="d" title="debug" checked>
         <div class="debug-bg-positions"></div>
-        <div class="debug-bg-layers"></div>
         <div class="debug-bg-levels"></div>
-        <div class="debug-bg-lives"></div>
-        <h2>NIBO'S WAY OUT</h2>
         <!-- Lives radio group -->
         <input type="radio" name="lives" id="lives-3" checked title="3 lives">
         <input type="radio" name="lives" id="death-1" title="death 1">
@@ -7777,6 +7761,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <svg class="heart-icon heart-icon-2"><use href="#heart"/></svg>
             <svg class="heart-icon heart-icon-3"><use href="#heart"/></svg>
         </div>
+        <h2>NIBO'S WAY OUT</h2>
         <!-- Game world (scrollable content) -->
         <div class="game-world">
         <!-- Key in game world (clickable to pick up) -->
