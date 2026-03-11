@@ -1073,12 +1073,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: auto;
             z-index: 1;
         }
-        /* Hide hover area when player is at button with ID card and bolt fixed (so label click works) - S3 uses levels 5-9 */
-        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ .game-world .flight-controls-hover-area {
+        /* Hide hover area when player is at button with all preconditions (so label click works) - S3 uses levels 5-9 */
+        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ #engine-installed:checked ~ .game-world .flight-controls-hover-area {
             display: none;
         }
-        /* Enable hover on control button when player is at position with ID card and bolt fixed */
-        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ .game-world .flight-controls-unavailable {
+        /* Enable hover on control button when player is at position with all preconditions */
+        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ #engine-installed:checked ~ .game-world .flight-controls-unavailable {
             pointer-events: auto;
             cursor: pointer;
         }
@@ -1103,9 +1103,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
             color: var(--idcard-color);
         }
-        /* Show ID card at button when player is next to it, has ID card, bolt fixed, AND button not yet pressed - S3 uses levels 5-9 */
-        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ .game-world .flight-controls-unavailable:hover ~ .idcard-at-controls,
-        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ .game-world .idcard-at-controls:hover {
+        /* Show ID card at button when player is next to it with all preconditions - S3 uses levels 5-9 */
+        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ #engine-installed:checked ~ .game-world .flight-controls-unavailable:hover ~ .idcard-at-controls,
+        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ #engine-installed:checked ~ .game-world .idcard-at-controls:hover {
             opacity: 1;
             pointer-events: auto;
             animation: idcard-hovering-pulse 1s ease-in-out infinite;
@@ -1122,27 +1122,42 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .flight-controls-hover-area:hover ~ .flight-controls-unavailable {
             z-index: var(--z-tooltip);
         }
-        /* Show "no power" tooltip when bolt not fixed */
+        /* Default: hide engine and idcard tooltips */
+        .flight-controls-unavailable .tooltip-no-engine {
+            display: none;
+        }
         .flight-controls-unavailable .tooltip-no-idcard {
             display: none;
         }
+        /* Tier 1: no power — show "no power" tooltip on hover */
         #bolt-fixed:not(:checked) ~ .game-world .flight-controls-unavailable:hover .tooltip-no-power,
         #bolt-fixed:not(:checked) ~ .game-world .flight-controls-hover-area:hover ~ .flight-controls-unavailable .tooltip-no-power {
             opacity: 1;
         }
-        /* Show "no ID card" tooltip when bolt fixed */
+        /* Tier 2: power but no engine — hide no-power, show no-engine */
         #bolt-fixed:checked ~ .game-world .flight-controls-unavailable .tooltip-no-power {
             display: none;
         }
-        #bolt-fixed:checked ~ .game-world .flight-controls-unavailable .tooltip-no-idcard {
+        #bolt-fixed:checked ~ .game-world .flight-controls-unavailable .tooltip-no-engine {
             display: block;
         }
-        #bolt-fixed:checked ~ .game-world .flight-controls-unavailable:hover .tooltip-no-idcard,
-        #bolt-fixed:checked ~ .game-world .flight-controls-hover-area:hover ~ .flight-controls-unavailable .tooltip-no-idcard {
+        #bolt-fixed:checked ~ .game-world .flight-controls-unavailable:hover .tooltip-no-engine,
+        #bolt-fixed:checked ~ .game-world .flight-controls-hover-area:hover ~ .flight-controls-unavailable .tooltip-no-engine {
             opacity: 1;
         }
-        /* Hide tooltip when player has ID card at controls */
-        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ .game-world .flight-controls-unavailable .tooltip-no-idcard {
+        /* Tier 3: power + engine but no ID card — hide no-engine, show no-idcard */
+        #bolt-fixed:checked ~ #engine-installed:checked ~ .game-world .flight-controls-unavailable .tooltip-no-engine {
+            display: none;
+        }
+        #bolt-fixed:checked ~ #engine-installed:checked ~ .game-world .flight-controls-unavailable .tooltip-no-idcard {
+            display: block;
+        }
+        #bolt-fixed:checked ~ #engine-installed:checked ~ .game-world .flight-controls-unavailable:hover .tooltip-no-idcard,
+        #bolt-fixed:checked ~ #engine-installed:checked ~ .game-world .flight-controls-hover-area:hover ~ .flight-controls-unavailable .tooltip-no-idcard {
+            opacity: 1;
+        }
+        /* Hide tooltip when player has all preconditions at controls */
+        #level-7:checked ~ #pos-15:checked ~ #bolt-fixed:checked ~ #flight-controls-used:not(:checked) ~ #idcard-pickup:checked ~ #engine-installed:checked ~ .game-world .flight-controls-unavailable .tooltip-no-idcard {
             display: none;
         }
         /* Hide red button when pressed, show green button */
@@ -8244,14 +8259,15 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <span class="flight-controls-hover-area"></span>
         <label for="flight-controls-used" class="flight-controls-unavailable">
             <svg><use href="#flight-controls"/></svg>
-            <span class="tooltip tooltip-no-power">Flight controls are offline.<br>You need power.</span>
-            <span class="tooltip tooltip-no-idcard">Flight controls are unavailable.<br>You need your ID card.</span>
+            <span class="tooltip tooltip-no-power">Flight controls are offline.<br>The ship has no power.</span>
+            <span class="tooltip tooltip-no-engine">Flight controls are malfunctioning.<br>The engine needs repair.</span>
+            <span class="tooltip tooltip-no-idcard">Flight controls are locked.<br>You need your ID card.</span>
         </label>
         <label for="flight-controls-used" class="idcard-at-controls"><svg><use href="#id-card"/></svg></label>
         <span class="flight-controls-available-hover-area"></span>
         <label for="escaped" class="flight-controls-available">
             <svg><use href="#flight-controls"/></svg>
-            <span class="tooltip">Flight controls<br>are now available.</span>
+            <span class="tooltip">Flight controls are online.<br>You are cleared for launch.</span>
         </label>
         <!-- ==================== STAGE 1 LOOT ==================== -->
         <div class="container coin loot-S1-L0-P3">
