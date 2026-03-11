@@ -622,13 +622,27 @@ AAAAAAAAAAAAAAAAAAAAAA==
             background: #2e8b2e;
             border-color: #1a5c1a;
         }
-        /* Stage 5 Platform */
+        /* Stage 5 Platform — horizontal deck on vertical supports */
         .platform-S5-L4-P18 {
             bottom: calc(var(--level-height) * 4);
             left: calc(var(--pos-width) * 17);
             width: var(--pos-width);
-            background: #2e8b2e;
-            border-color: #1a5c1a;
+            height: 12px;
+            background: #8b4513;
+            border-color: #5d2e0a;
+            border-radius: 2px;
+        }
+        .platform-S5-L4-P18::before {
+            content: '';
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 12px;
+            right: 12px;
+            height: 12px;
+            background: repeating-linear-gradient(90deg,
+                #8b4513 0px, #8b4513 32px,
+                transparent 32px, transparent 44px
+            );
         }
         /* Stage 3 Platforms (same vertical level as S2) */
         .platform-S3-L4 {
