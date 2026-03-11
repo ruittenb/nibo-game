@@ -5950,31 +5950,31 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #lives-2:checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .nav-panel .nav-death-right-2,
         #lives-1:checked ~ #level-3:checked ~ #layer-θ:checked ~ #pos-16:checked ~ .nav-panel .nav-death-right-3 { display: block; }
 
-        /* --- Radiation S6-L7-P24: from L6-P24 up --- */
-        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-6:checked ~ #pos-24:checked ~ .game-world .arrow-L6-up { display: none; }
-        #lives-3:checked ~ #level-6:checked ~ #pos-24:checked ~ .game-world .death-up-1,
-        #lives-2:checked ~ #level-6:checked ~ #pos-24:checked ~ .game-world .death-up-2,
-        #lives-1:checked ~ #level-6:checked ~ #pos-24:checked ~ .game-world .death-up-3 {
+        /* --- Radiation S6-L7-P24: from L6-P24 up (only without suit) --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-6:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .game-world .arrow-L6-up { display: none; }
+        #lives-3:checked ~ #level-6:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .game-world .death-up-1,
+        #lives-2:checked ~ #level-6:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .game-world .death-up-2,
+        #lives-1:checked ~ #level-6:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .game-world .death-up-3 {
             display: block;
             bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness) + 72.5px);
         }
-        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-6:checked ~ #pos-24:checked ~ .nav-panel .nav-up[for="level-7"] { display: none; }
-        #lives-3:checked ~ #level-6:checked ~ #pos-24:checked ~ .nav-panel .nav-death-up-1,
-        #lives-2:checked ~ #level-6:checked ~ #pos-24:checked ~ .nav-panel .nav-death-up-2,
-        #lives-1:checked ~ #level-6:checked ~ #pos-24:checked ~ .nav-panel .nav-death-up-3 { display: block; }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-6:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .nav-panel .nav-up[for="level-7"] { display: none; }
+        #lives-3:checked ~ #level-6:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .nav-panel .nav-death-up-1,
+        #lives-2:checked ~ #level-6:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .nav-panel .nav-death-up-2,
+        #lives-1:checked ~ #level-6:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .nav-panel .nav-death-up-3 { display: block; }
 
-        /* --- Radiation S6-L7-P24: from L8-P24 down --- */
-        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-8:checked ~ #pos-24:checked ~ .game-world .arrow-L8-down { display: none; }
-        #lives-3:checked ~ #level-8:checked ~ #pos-24:checked ~ .game-world .death-down-1,
-        #lives-2:checked ~ #level-8:checked ~ #pos-24:checked ~ .game-world .death-down-2,
-        #lives-1:checked ~ #level-8:checked ~ #pos-24:checked ~ .game-world .death-down-3 {
+        /* --- Radiation S6-L7-P24: from L8-P24 down (only without suit) --- */
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-8:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .game-world .arrow-L8-down { display: none; }
+        #lives-3:checked ~ #level-8:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .game-world .death-down-1,
+        #lives-2:checked ~ #level-8:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .game-world .death-down-2,
+        #lives-1:checked ~ #level-8:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .game-world .death-down-3 {
             display: block;
             bottom: calc(var(--stage-height) + var(--level-height) * 3);
         }
-        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-8:checked ~ #pos-24:checked ~ .nav-panel .nav-down[for="level-7"] { display: none; }
-        #lives-3:checked ~ #level-8:checked ~ #pos-24:checked ~ .nav-panel .nav-death-down-1,
-        #lives-2:checked ~ #level-8:checked ~ #pos-24:checked ~ .nav-panel .nav-death-down-2,
-        #lives-1:checked ~ #level-8:checked ~ #pos-24:checked ~ .nav-panel .nav-death-down-3 { display: block; }
+        :is(#lives-3, #lives-2, #lives-1):checked ~ #level-8:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .nav-panel .nav-down[for="level-7"] { display: none; }
+        #lives-3:checked ~ #level-8:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .nav-panel .nav-death-down-1,
+        #lives-2:checked ~ #level-8:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .nav-panel .nav-death-down-2,
+        #lives-1:checked ~ #level-8:checked ~ #pos-24:checked ~ #suit-pickup:not(:checked) ~ .nav-panel .nav-death-down-3 { display: block; }
 
         /* Escape overlay */
         .escape-screen-overlay.overlay {
