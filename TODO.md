@@ -1,7 +1,6 @@
 
  - teleporter only works with battery
  - replacement engine part is needed to fly away
- - move position checkboxes 10px right
 
 S6: Contains an important part for repairs.
 
