@@ -1,7 +1,7 @@
 
  - teleporter only works with battery
- - player doesn't die from radiation when wearing radioactivity suit.
  - replacement engine part is needed to fly away
+ - move position checkboxes 10px right
 
 S6: Contains an important part for repairs.
 

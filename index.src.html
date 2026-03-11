@@ -236,7 +236,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --keycard-color: #9acd32;
             --scuba-color: #F0A500;
             --engine-part-color: #cc4020;
-            --suit-color: #f9f9f9;
+            --suit-color: #444;
             --engine-part-highlight: #ffe040;
             --broken-engine-part-color: #606060;
             --seashell-color: #ff69b4;
@@ -1541,33 +1541,33 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-σ { top: 190px; left: 30px; }
         #level-τ { top: 210px; left: 30px; }
         /* Debug positions - positions (row 1) */
-        #pos-1 { top: 10px; left: 50px; }
-        #pos-2 { top: 10px; left: 70px; }
-        #pos-3 { top: 10px; left: 90px; }
-        #pos-4 { top: 10px; left: 110px; }
-        #pos-5 { top: 10px; left: 130px; }
-        #pos-6 { top: 10px; left: 150px; }
-        #pos-7 { top: 10px; left: 180px; }
-        #pos-8 { top: 10px; left: 200px; }
-        #pos-9 { top: 10px; left: 220px; }
-        #pos-10 { top: 10px; left: 240px; }
-        #pos-11 { top: 10px; left: 260px; }
-        #pos-12 { top: 10px; left: 280px; }
+        #pos-1 { top: 10px; left: 60px; }
+        #pos-2 { top: 10px; left: 80px; }
+        #pos-3 { top: 10px; left: 100px; }
+        #pos-4 { top: 10px; left: 120px; }
+        #pos-5 { top: 10px; left: 140px; }
+        #pos-6 { top: 10px; left: 160px; }
+        #pos-7 { top: 10px; left: 190px; }
+        #pos-8 { top: 10px; left: 210px; }
+        #pos-9 { top: 10px; left: 230px; }
+        #pos-10 { top: 10px; left: 250px; }
+        #pos-11 { top: 10px; left: 270px; }
+        #pos-12 { top: 10px; left: 290px; }
         /* Debug positions - S3 */
-        #pos-13 { top: 10px; left: 310px; }
-        #pos-14 { top: 10px; left: 330px; }
-        #pos-15 { top: 10px; left: 350px; }
-        #pos-16 { top: 10px; left: 370px; }
-        #pos-17 { top: 10px; left: 390px; }
-        #pos-18 { top: 10px; left: 410px; }
+        #pos-13 { top: 10px; left: 320px; }
+        #pos-14 { top: 10px; left: 340px; }
+        #pos-15 { top: 10px; left: 360px; }
+        #pos-16 { top: 10px; left: 380px; }
+        #pos-17 { top: 10px; left: 400px; }
+        #pos-18 { top: 10px; left: 420px; }
         /* Debug positions - S6/S7 */
-        #pos-19 { top: 10px; left: 440px; }
-        #pos-20 { top: 10px; left: 460px; }
-        #pos-21 { top: 10px; left: 480px; }
-        #pos-22 { top: 10px; left: 500px; }
-        #pos-23 { top: 10px; left: 520px; }
-        #pos-24 { top: 10px; left: 540px; }
-        #pos-φ { top: 10px; left: 570px; }
+        #pos-19 { top: 10px; left: 450px; }
+        #pos-20 { top: 10px; left: 470px; }
+        #pos-21 { top: 10px; left: 490px; }
+        #pos-22 { top: 10px; left: 510px; }
+        #pos-23 { top: 10px; left: 530px; }
+        #pos-24 { top: 10px; left: 550px; }
+        #pos-φ { top: 10px; left: 580px; }
         /* Debug positions - S1 loot */
         #loot-S1-L0-P3-pickup { top: 100px; left: 70px; }
         #loot-S1-L1-P4-pickup { top: 100px; left: 90px; }
@@ -1640,7 +1640,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .debug-bg-positions {
             top: 7px;
             left: 7px;
-            width: 580px;
+            width: 590px;
             height: 20px;
             border: none;
             border-bottom: 1px solid #ddd;
@@ -6471,12 +6471,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <symbol id="heart" viewBox="0 0 512 512">
             <path fill="currentColor" d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
         </symbol>
-        <symbol id="suit" viewBox="40 40 400 400">
-          <g transform="rotate(90 240 240)">
-            <path fill="currentColor" d="m 239 50 c 32 0 61 32 61 32 1 31 0 68 0 68 36 3 41 38 41 38 0 52 2 126 2 126 -14 19 -9 27 -39 9 -1 86 6 69 -4 85 -6 23 -32 26 -61 2 -28 29 -57 20 -57 -8 3 -71 2 -95 -11 -79 -12 16 -32 -4 -32 -4 C 140 197 127 166 166 152 208 129 161 94 185 75 190 42 239 50 239 50 Z"/>
-            <g fill="#222" fill-rule="evenodd">
-                <path d="M 170 90 a 50 50 0 0 1 50 -50 h 40 a 50 50 0 0 1 50 50 v 51 c 23 5 40 25 40 49 v 120 a 30 30 0 0 1 -40 28 V 400 a 40 40 0 0 1 -70 26 A 40 40 0 0 1 170 400 v -62 A 30 30 0 0 1 130 310 V 190 a 50 50 0 0 1 40 -49 z m 130 70 a 30 30 0 0 1 30 30 v 90 h -20 v -90 h -20 v 50 h -40 v -80 z m 20 160 a 10 10 0 0 1 -10 -10 v -10 h 20 v 10 a 10 10 0 0 1 -10 10 m -50 100 a 20 20 0 0 1 -20 -20 V 300 h 40 v 100 a 20 20 0 0 1 -20 20 m -90 -260 a 30 30 0 0 0 -30 30 v 90 h 20 v -90 h 20 v 50 h 40 v -80 z m 30 260 a 20 20 0 0 0 20 -20 V 300 h -40 v 100 a 20 20 0 0 0 20 20 m -50 -100 a 10 10 0 0 0 10 -10 v -10 h -20 v 10 a 10 10 0 0 0 10 10 M 260 60 a 30 30 0 0 1 30 30 v 50 H 190 V 90 a 30 30 0 0 1 30 -30 z m 30 200 v 20 h -40 v -20 z m -100 0 v 20 h 40 v -20 z"/>
-                <path d="m 250 70 c 17 0 30 13 30 30 0 16 -11 30 -31 30 C 227 130 250 130 230 130 212 130 199 117 200 100 201 83 213 70 230 70 Z m -20 20 c -6 0 -10 4 -10 10 0 6 4 11 10 12 13 1 9 1 22 0 C 258 112 260 107 260 100 260 94 256 90 250 90 Z"/>
+        <symbol id="suit" viewBox="14 -231 924 924"
+          fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="60">
+          <path fill="#fff" stroke="none" d="M89,157C197,79,475,94,550,149,625,203,634,543,559,610,484,677,161,696,101,625,41,555,29,214,89,157Z"/>
+          <g transform="translate(-32,33)">
+            <path d="m210,390h300a120,120,0,0,1,0,240H210A120,120,0,0,1,90,510V210A120,120,0,0,1,210,90h300a120,120,0,0,1,120,120v300"/>
+            <path d="M510,510H210A120,120,0,0,1,90,390"/>
+          </g>
+          <g transform="translate(85)">
+            <path fill="#fff" stroke="none" d="M805,89C802,226,757,323,701,326,644,330,354,361,308,325,261,289,205,205,231,171,256,137,485,186,526,159,567,132,600,99,566,62,532,24,326,-120,350,-159c24,-39,161,-94,323,7,162,101,132,241,132,241z"/>
+            <path fill="#979542" stroke="none" d="M275,23C280,99,248,128,304,155,360,183,442,134,465,78,488,23,477,-87,387,-87,297,-88,275,23,275,23Z"/>
+            <g transform="matrix(-0.710758,-0.703436,-0.703436,0.710758,1019,96)">
+              <path d="m318,402,189,183C516,600,510,618,495,627,453,648,408,660,360,660a60,60,0,0,1,-42,-18l-240,-240A60,60,0,0,1,60,360,300,300,0,0,1,643,261c9,21,-9,39,-30,39H360"/>
+              <circle fill="#fff" cx="360" cy="360" r="60"/>
+              <path d="m486,564c90,-57,132,-165,105,-264"/>
             </g>
           </g>
         </symbol>
