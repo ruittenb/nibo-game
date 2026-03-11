@@ -1,11 +1,13 @@
 
+ - teleporter only works with battery
+ - player doesn't die from radiation when wearing radioactivity suit.
+ - replacement engine part is needed to fly away
+
 S6: Contains an important part for repairs.
-    But requires a special radioactivity suit.
 
 S7: Then on S7 I love the idea of an ancient alien temple with a guardian that wants payment.
     Contains the radiation shield/suit.
     What kinds of interesting obstacles could we have here? moving platforms? Falling blocks?
-
 
  - fix landing gear of ship
 
@@ -13,7 +15,6 @@ S7: Then on S7 I love the idea of an ancient alien temple with a guardian that w
  - fly item to in-game location when applied?
  - color arrow purple when it leads to death?
  - pick up items in center of nav-panel?
-
 
 --------------------------------------------------------------------------------
 To S3:
