@@ -5258,6 +5258,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
+        /* Purple glow on player at radiation source (with suit) */
+        #level-7:checked ~ #pos-24:checked ~ #suit-pickup:checked ~ .game-world .player {
+            filter: drop-shadow(0 0 8px purple) drop-shadow(0 0 16px purple);
+        }
         /* Sprout on stage 2, level 0, pos 6 */
         .tree-container {
             position: absolute;
