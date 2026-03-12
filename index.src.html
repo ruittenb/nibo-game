@@ -848,6 +848,77 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 89px;
             filter: none;
         }
+        .bat {
+            position: absolute;
+            z-index: var(--z-scenery);
+            width: 48px;
+            height: 58px;
+
+            .tooltip {
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                margin-top: 3px;
+            }
+            &:hover {
+                z-index: var(--z-tooltip);
+
+                .tooltip { opacity: 1; }
+            }
+        }
+        .bat svg {
+            width: 100%;
+            height: 100%;
+        }
+        .bat-fleeing {
+            display: none;
+            transform: scale(1.3);
+        }
+        .bat-S4-L2-P7 {
+            bottom: calc(var(--level-height) * 3 - 58px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 6 - var(--item-offset) - 5px);
+        }
+        .bat-S4-L2-P9 {
+            bottom: calc(var(--level-height) * 3 - 58px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset) - 5px);
+        }
+        .bat-S4-L4-P10 {
+            bottom: calc(var(--level-height) * 5 - 58px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset) - 5px);
+        }
+        .bat-S4-L1-P12 {
+            bottom: calc(var(--level-height) * 2 - 58px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 + var(--ladder-offset) - 3px);
+        }
+        .bat-S4-L1-P8 {
+            bottom: calc(var(--level-height) * 2 - 58px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 7 - var(--item-offset) - 5px);
+        }
+        .bat-S4-L4-P12 {
+            bottom: calc(var(--level-height) * 5 - 58px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset) - 5px);
+        }
+        .bat-S4-L0-P10 {
+            bottom: calc(var(--level-height) * 1 - 58px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 9 + var(--ladder-offset) - 3px);
+        }
+        /* Bat flee: when Nibo has torch and is at bat's position */
+        #level-2:checked ~ #pos-7:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L2-P7,
+        #level-2:checked ~ #pos-9:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L2-P9,
+        #level-4:checked ~ #pos-10:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L4-P10,
+        #level-1:checked ~ #pos-12:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L1-P12,
+        #level-1:checked ~ #pos-8:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L1-P8,
+        #level-4:checked ~ #pos-12:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L4-P12,
+        #level-0:checked ~ #pos-10:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L0-P10 {
+            .bat-hanging { display: none; }
+            .bat-fleeing { display: block; animation: bat-flee-left 0.64s ease-out forwards; }
+            .tooltip { display: none; }
+        }
+        #level-1:checked ~ #pos-12:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L1-P12 .bat-fleeing,
+        #level-0:checked ~ #pos-10:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L0-P10 .bat-fleeing {
+            animation-name: bat-flee-right;
+        }
+
         /* Grate (diamond mesh pattern) */
         .grate {
             position: absolute;
@@ -1610,6 +1681,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S4-L3-P12-pickup { top: 100px; left: 230px; }
         #loot-S4-L1-P10-pickup { top: 100px; left: 250px; }
         #loot-S4-L0-P9-pickup { top: 100px; left: 270px; }
+        #loot-S4-L2-P10-pickup { top: 100px; left: 290px; }
         /* Debug positions - S5 loot */
         #loot-S5-L3-P13-pickup { top: 100px; left: 320px; }
         #loot-S5-L2-P17-pickup { top: 100px; left: 340px; }
@@ -1856,7 +1928,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 (var(--loot-S1-L0-P3, 0) + var(--loot-S1-L1-P4, 0) + var(--loot-S1-L3-P5, 0) + var(--loot-S1-L2-P1, 0) + var(--loot-S1-L4-P2, 0) +
                  var(--loot-S2-L5-P8, 0) + var(--loot-S2-L6-P11, 0) + var(--loot-S2-L7-P7, 0) + var(--loot-S2-L8-P9, 0) + var(--loot-S2-L9-P10, 0) +
                  var(--loot-S3-L5-P15, 0) + var(--loot-S3-L5-P18, 0) + var(--loot-S3-L8-P18, 0) + var(--loot-S3-L9-P14, 0) +
-                 var(--loot-S4-L3-P7, 0) + var(--loot-S4-L3-P8, 0) + var(--loot-S4-L3-P12, 0) + var(--loot-S4-L1-P10, 0) + var(--loot-S4-L0-P9, 0) +
+                 var(--loot-S4-L3-P7, 0) + var(--loot-S4-L3-P8, 0) + var(--loot-S4-L3-P12, 0) + var(--loot-S4-L1-P10, 0) + var(--loot-S4-L0-P9, 0) + var(--loot-S4-L2-P10, 0) +
                  var(--loot-S5-L3-P13, 0) + var(--loot-S5-L2-P17, 0) + var(--loot-S5-L0-P18, 0) +
                  var(--loot-S6-L9-P24, 0) + var(--loot-S6-L5-P24, 0))
                 * -24px
@@ -1889,6 +1961,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S4-L3-P12-pickup:checked ~ .counter-panel { --loot-S4-L3-P12: 1; }
         #loot-S4-L1-P10-pickup:checked ~ .counter-panel { --loot-S4-L1-P10: 2; }
         #loot-S4-L0-P9-pickup:checked ~ .counter-panel { --loot-S4-L0-P9: 1; }
+        #loot-S4-L2-P10-pickup:checked ~ .counter-panel { --loot-S4-L2-P10: 1; }
         #loot-S5-L3-P13-pickup:checked ~ .counter-panel { --loot-S5-L3-P13: 2; }
         #loot-S5-L2-P17-pickup:checked ~ .counter-panel { --loot-S5-L2-P17: 2; }
         #loot-S5-L0-P18-pickup:checked ~ .counter-panel { --loot-S5-L0-P18: 1; }
@@ -4820,6 +4893,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 8 - var(--item-offset));
         }
+        .loot-S4-L2-P10 {
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 9 - var(--item-offset));
+        }
         /* ========== KEYFRAME ANIMATIONS ========== */
         @keyframes idle {
             0%, 100% { transform: translateY(0); }
@@ -4978,6 +5055,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(8px) rotate(-10deg); }
         }
+        @keyframes bat-flee-left {
+            0%   { translate: 0 -20px; }
+            30%  { translate: 40px 20px; }
+            60%  { translate: 0px 40px; }
+            90%  { translate: 20px -20px; }
+            100% { translate: 9000px 9000px; }
+        }
+        @keyframes bat-flee-right {
+            0%   { translate: 0 -20px; }
+            30%  { translate: -40px 20px; }
+            60%  { translate: 0px 40px; }
+            90%  { translate: -20px -20px; }
+            100% { translate: 9000px 9000px; }
+        }
         /* Enable clicking and pulsing when player is adjacent */
         #level-0:checked ~ #pos-3:checked ~ #loot-S1-L0-P3-pickup:not(:checked) ~ .game-world .loot-S1-L0-P3 .loot-in-game {
             pointer-events: auto;
@@ -5077,6 +5168,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
+        #level-2:checked ~ #pos-10:checked ~ #loot-S4-L2-P10-pickup:not(:checked) ~ .game-world .loot-S4-L2-P10 .loot-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: coin-pulse 1s ease-in-out infinite;
+        }
         /* Stage 5 loot pulse/click */
         #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13 .loot-in-game,
         #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13 .loot-in-game {
@@ -5131,6 +5227,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ #pos-12:checked ~ #loot-S4-L3-P12-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L3-P12-pickup"] { display: block; }
         #level-1:checked ~ #pos-10:checked ~ #loot-S4-L1-P10-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L1-P10-pickup"] { display: block; }
         #level-0:checked ~ #pos-9:checked ~ #loot-S4-L0-P9-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L0-P9-pickup"] { display: block; }
+        #level-2:checked ~ #pos-10:checked ~ #loot-S4-L2-P10-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L2-P10-pickup"] { display: block; }
         /* S5 (dual selectors for ζ/η visual swap) */
         #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L3-P13-pickup"],
         #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L3-P13-pickup"] { display: block; }
@@ -5179,6 +5276,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S4-L3-P8-pickup:checked ~ .game-world .loot-S4-L3-P8,
         #loot-S4-L3-P12-pickup:checked ~ .game-world .loot-S4-L3-P12,
         #loot-S4-L1-P10-pickup:checked ~ .game-world .loot-S4-L1-P10,
+        #loot-S4-L2-P10-pickup:checked ~ .game-world .loot-S4-L2-P10,
         #loot-S4-L0-P9-pickup:checked ~ .game-world .loot-S4-L0-P9 {
             display: flex;
             z-index: calc(var(--z-darkness) + 1);
@@ -7488,6 +7586,66 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <circle cx="123" cy="118" r="17"/>
             </g>
         </symbol>
+        <symbol id="bat" viewBox="0 0 200 240">
+            <line x1="96" y1="0" x2="94" y2="55" stroke="#4a2510" stroke-width="2.5"/>
+            <line x1="104" y1="0" x2="106" y2="55" stroke="#4a2510" stroke-width="2.5"/>
+            <line x1="94" y1="2" x2="89" y2="8" stroke="#4a2510" stroke-width="1.5"/>
+            <line x1="94" y1="2" x2="94" y2="9" stroke="#4a2510" stroke-width="1.5"/>
+            <line x1="94" y1="2" x2="99" y2="8" stroke="#4a2510" stroke-width="1.5"/>
+            <line x1="106" y1="2" x2="101" y2="8" stroke="#4a2510" stroke-width="1.5"/>
+            <line x1="106" y1="2" x2="106" y2="9" stroke="#4a2510" stroke-width="1.5"/>
+            <line x1="106" y1="2" x2="111" y2="8" stroke="#4a2510" stroke-width="1.5"/>
+            <polygon points="94,55 70,65 50,90 58,135 72,175 88,195 96,175 95,100" fill="#7a4518"/>
+            <polygon points="106,55 130,65 150,90 142,135 128,175 112,195 104,175 105,100" fill="#7a4518"/>
+            <ellipse cx="100" cy="78" rx="14" ry="30" fill="#582f0e"/>
+            <ellipse cx="100" cy="115" rx="17" ry="16" fill="#582f0e"/>
+            <polygon points="83,108 72,88 88,105" fill="#7a4518"/>
+            <polygon points="117,108 128,88 112,105" fill="#7a4518"/>
+            <circle cx="93" cy="116" r="3" fill="#cc0000"/>
+            <circle cx="107" cy="116" r="3" fill="#cc0000"/>
+            <ellipse cx="100" cy="124" rx="4" ry="2.5" fill="#4a2510"/>
+        </symbol>
+        <symbol id="bat-fleeing" viewBox="0 0 340 220">
+            <g fill="#7a4518">
+                <path d="M 145,95 L 30,42 Q 55,80 25,108 Q 50,120 48,145 Q 70,140 82,162 Q 100,148 115,152 L 148,135 Z"/>
+                <path d="M 195,95 L 310,42 Q 285,80 315,108 Q 290,120 292,145 Q 270,140 258,162 Q 240,148 225,152 L 192,135 Z"/>
+                <polygon points="152,80 146,62 162,76"/>
+                <polygon points="188,80 194,62 178,76"/>
+            </g>
+            <g fill="#582f0e">
+                <ellipse cx="170" cy="115" rx="28" ry="22"/>
+                <ellipse cx="170" cy="88" rx="22" ry="19"/>
+            </g>
+            <g stroke="#4a2510" fill="none">
+                <g stroke-width="1.3">
+                    <line x1="145" y1="95" x2="30" y2="42"/>
+                    <line x1="145" y1="97" x2="25" y2="108"/>
+                    <line x1="146" y1="108" x2="48" y2="145"/>
+                    <line x1="147" y1="118" x2="82" y2="162"/>
+                    <line x1="195" y1="95" x2="310" y2="42"/>
+                    <line x1="195" y1="97" x2="315" y2="108"/>
+                    <line x1="194" y1="108" x2="292" y2="145"/>
+                    <line x1="193" y1="118" x2="258" y2="162"/>
+                </g>
+                <g stroke-width="2">
+                    <line x1="155" y1="133" x2="148" y2="155"/>
+                    <line x1="185" y1="133" x2="192" y2="155"/>
+                </g>
+                <g stroke-width="1.5">
+                    <line x1="148" y1="155" x2="142" y2="163"/>
+                    <line x1="148" y1="155" x2="148" y2="164"/>
+                    <line x1="148" y1="155" x2="154" y2="163"/>
+                    <line x1="192" y1="155" x2="186" y2="163"/>
+                    <line x1="192" y1="155" x2="192" y2="164"/>
+                    <line x1="192" y1="155" x2="198" y2="163"/>
+                </g>
+            </g>
+            <ellipse cx="170" cy="100" rx="5" ry="3" fill="#4a2510"/>
+            <g fill="#cc0000">
+                <circle cx="161" cy="88" r="4"/>
+                <circle cx="179" cy="88" r="4"/>
+            </g>
+        </symbol>
     </svg>
     <div class="game-container">
         <input type="checkbox" id="debug-toggle" accesskey="d" title="debug" checked>
@@ -7603,6 +7761,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="loot-S4-L3-P12-pickup" class="loot-checkbox" title="coin">
         <input type="checkbox" id="loot-S4-L1-P10-pickup" class="loot-checkbox" title="aquamarine">
         <input type="checkbox" id="loot-S4-L0-P9-pickup" class="loot-checkbox" title="coin">
+        <input type="checkbox" id="loot-S4-L2-P10-pickup" class="loot-checkbox" title="coin">
         <!-- Stage 5 loot -->
         <input type="checkbox" id="loot-S5-L3-P13-pickup" class="loot-checkbox" title="seashell">
         <input type="checkbox" id="loot-S5-L2-P17-pickup" class="loot-checkbox" title="seashell">
@@ -7740,6 +7899,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <label for="loot-S4-L3-P12-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
                 <label for="loot-S4-L1-P10-pickup" class="nav-loot nav-loot-aquamarine"><svg><use href="#gem"/></svg></label>
                 <label for="loot-S4-L0-P9-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <label for="loot-S4-L2-P10-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
                 <!-- S5 -->
                 <label for="loot-S5-L3-P13-pickup" class="nav-loot nav-loot-seashell"><svg><use href="#seashell"/></svg></label>
                 <label for="loot-S5-L2-P17-pickup" class="nav-loot nav-loot-seashell"><svg><use href="#seashell"/></svg></label>
@@ -8168,6 +8328,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="stalagmite-S4 stalagmite-S4-L3-P8-P9"><svg><use href="#stalagmite-1"/></svg></div>
             <div class="stalactite-S4 stalactite-S4-L2-P8-P9"><svg><use href="#stalactite-2"/></svg></div>
             <div class="stalagmite-S4 stalagmite-S4-L2-P8-P9"><svg><use href="#stalagmite-2"/></svg></div>
+            <div class="bat bat-S4-L2-P7"><svg class="bat-hanging"><use href="#bat"/></svg><svg class="bat-fleeing"><use href="#bat-fleeing"/></svg><span class="tooltip">Bat</span></div>
+            <div class="bat bat-S4-L2-P9"><svg class="bat-hanging"><use href="#bat"/></svg><svg class="bat-fleeing"><use href="#bat-fleeing"/></svg><span class="tooltip">Bat</span></div>
+            <div class="bat bat-S4-L4-P10"><svg class="bat-hanging"><use href="#bat"/></svg><svg class="bat-fleeing"><use href="#bat-fleeing"/></svg><span class="tooltip">Bat</span></div>
+            <div class="bat bat-S4-L1-P12"><svg class="bat-hanging"><use href="#bat"/></svg><svg class="bat-fleeing"><use href="#bat-fleeing"/></svg><span class="tooltip">Bat</span></div>
+            <div class="bat bat-S4-L1-P8"><svg class="bat-hanging"><use href="#bat"/></svg><svg class="bat-fleeing"><use href="#bat-fleeing"/></svg><span class="tooltip">Bat</span></div>
+            <div class="bat bat-S4-L4-P12"><svg class="bat-hanging"><use href="#bat"/></svg><svg class="bat-fleeing"><use href="#bat-fleeing"/></svg><span class="tooltip">Bat</span></div>
+            <div class="bat bat-S4-L0-P10"><svg class="bat-hanging"><use href="#bat"/></svg><svg class="bat-fleeing"><use href="#bat-fleeing"/></svg><span class="tooltip">Bat</span></div>
             <!-- S4 Cave ceiling -->
             <div class="cave-ceiling-S4"><svg><use href="#cave-ceiling"/></svg></div>
         </div>
@@ -8343,6 +8510,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
         <div class="container coin loot-S4-L0-P9">
             <label for="loot-S4-L0-P9-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
+        </div>
+        <div class="container coin loot-S4-L2-P10">
+            <label for="loot-S4-L2-P10-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
         </div>
         <!-- ==================== STAGE 2 LOOT ==================== -->
         <div class="stage-2-elements">

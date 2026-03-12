@@ -1,11 +1,12 @@
 
  - teleporter only works with battery
- - add a bat in the caves? Some bats that only show when you're not shining a torch?
 
 
 S7: Ancient alien temple with a guardian that wants payment.
     It is here that the radiation suit can be obtained..
     What kinds of interesting obstacles could we have here? moving platforms? Falling blocks? Elevators? Escalators?
+
+ - compact file: use nested & notation?
 
  - burn disease with torch?
  - fly item to in-game location when applied?
