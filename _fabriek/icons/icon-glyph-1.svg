@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <g fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+    <!-- stroke 1: top horizontal arc -->
+    <path d="M 20 40 C 50 10 110 10 140 40"/>
+    <!-- stroke 2: left leg -->
+    <path d="M 20 40 C 15 75 30 110 55 140"/>
+    <!-- stroke 3: right leg -->
+    <path d="M 140 40 C 148 80 130 118 95 140"/>
+    <!-- stroke 4: middle crossbar -->
+    <path d="M 35 88 Q 80 72 125 88"/>
+    <!-- stroke 5: bottom connector -->
+    <path d="M 55 140 Q 75 152 95 140"/>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-40 -40 280 480" width="200" height="400">
+  <defs>
+    <linearGradient id="aurora" gradientUnits="userSpaceOnUse" x1="80" y1="0" x2="120" y2="400">
+      <stop offset="0%"   stop-color="#c8ff00" stop-opacity="0.9"/>
+      <stop offset="45%"  stop-color="#00e640" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#00cc44" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="blur" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5 14"/>
+    </filter>
+  </defs>
+  <path
+    d="M 200,0 C 200,133 0,67 0,200"
+    transform="scale(1,2)"
+    stroke="url(#aurora)"
+    stroke-width="55"
+    filter="url(#blur)"
+  />
+</svg>

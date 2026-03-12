@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+  <!-- card -->
+  <rect x="0" y="32" width="576" height="448" rx="64" ry="64" fill="currentColor"/>
+  <!-- magnetic strip -->
+  <rect x="0" y="96" width="576" height="48" fill="#444"/>
+  <!-- text lines -->
+  <rect x="336" y="208" width="160" height="48" rx="24" fill="#444"/>
+  <rect x="336" y="304" width="160" height="48" rx="24" fill="#444"/>
+  <!-- alien head: drop shape, round top pointy bottom -->
+  <path
+    fill="#444"
+    d="M 157 207.2
+       C 209 207.2 250.60000000000002 243.6 250.60000000000002 290.4
+       C 250.60000000000002 334.6 214.2 373.6 157 404.8
+       C 99.8 373.6 63.400000000000006 334.6 63.400000000000006 290.4
+       C 63.400000000000006 243.6 105 207.2 157 207.2 Z"
+  />
+  <!-- left almond eye -->
+  <ellipse cx="120.9" cy="285.2" rx="30.3" ry="15.4" fill="currentColor" transform="rotate(10,120.9,285.2)"/>
+  <!-- right almond eye -->
+  <ellipse cx="193.1" cy="285.2" rx="30.3" ry="15.4" fill="currentColor" transform="rotate(-10,193.1,285.2)"/>
+</svg>
