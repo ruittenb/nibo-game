@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="200" height="240">
+
+  <!-- Legs reaching from top down to torso -->
+  <line x1="96" y1="0" x2="94" y2="55" stroke="#4a2510" stroke-width="2.5"/>
+  <line x1="104" y1="0" x2="106" y2="55" stroke="#4a2510" stroke-width="2.5"/>
+  <!-- Tiny clawed feet at top -->
+  <line x1="94" y1="2" x2="89" y2="8"  stroke="#4a2510" stroke-width="1.5"/>
+  <line x1="94" y1="2" x2="94" y2="9"  stroke="#4a2510" stroke-width="1.5"/>
+  <line x1="94" y1="2" x2="99" y2="8"  stroke="#4a2510" stroke-width="1.5"/>
+  <line x1="106" y1="2" x2="101" y2="8" stroke="#4a2510" stroke-width="1.5"/>
+  <line x1="106" y1="2" x2="106" y2="9" stroke="#4a2510" stroke-width="1.5"/>
+  <line x1="106" y1="2" x2="111" y2="8" stroke="#4a2510" stroke-width="1.5"/>
+
+  <!-- Left wing - angular, folded tight like a cloak -->
+  <polygon points="
+    94,55
+    70,65
+    50,90
+    58,135
+    72,175
+    88,195
+    96,175
+    95,100
+  " fill="#7a4518"/>
+
+  <!-- Right wing - mirror -->
+  <polygon points="
+    106,55
+    130,65
+    150,90
+    142,135
+    128,175
+    112,195
+    104,175
+    105,100
+  " fill="#7a4518"/>
+
+  <!-- Body -->
+  <ellipse cx="100" cy="78" rx="14" ry="30" fill="#582f0e"/>
+
+  <!-- Head (at bottom, hanging down) -->
+  <ellipse cx="100" cy="115" rx="17" ry="16" fill="#582f0e"/>
+
+  <!-- Ears - large and pointed -->
+  <polygon points="83,108 72,88 88,105" fill="#7a4518"/>
+  <polygon points="117,108 128,88 112,105" fill="#7a4518"/>
+
+  <!-- Eyes - bright red -->
+  <circle cx="93" cy="116" r="3" fill="#cc0000"/>
+  <circle cx="107" cy="116" r="3" fill="#cc0000"/>
+
+
+  <!-- Tiny nose -->
+  <ellipse cx="100" cy="124" rx="4" ry="2.5" fill="#4a2510"/>
+
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 200">
+<circle fill="currentColor" cx="25" cy="25" r="20"/>
+<circle fill="currentColor" cx="75" cy="25" r="20"/>
+<circle fill="currentColor" cx="125" cy="25" r="20"/>
+<circle fill="currentColor" cx="75" cy="75" r="20"/>
+<circle fill="currentColor" cx="175" cy="75" r="20"/>
+<circle fill="currentColor" cx="225" cy="75" r="20"/>
+<circle fill="currentColor" cx="25" cy="125" r="20"/>
+<circle fill="currentColor" cx="125" cy="125" r="20"/>
+<circle fill="currentColor" cx="175" cy="125" r="20"/>
+<circle fill="currentColor" cx="75" cy="175" r="20"/>
+<circle fill="currentColor" cx="125" cy="175" r="20"/>
+<circle fill="currentColor" cx="225" cy="175" r="20"/>
+</svg>
