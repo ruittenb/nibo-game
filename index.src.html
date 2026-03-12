@@ -870,6 +870,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
             width: 100%;
             height: 100%;
         }
+        .bat-fleeing {
+            display: none;
+            transform: scale(1.3);
+        }
         .bat-S4-L2-P7 {
             bottom: calc(var(--level-height) * 3 - 58px);
             left: calc(var(--pos-offset) + var(--pos-width) * 6 - var(--item-offset) - 5px);
@@ -889,6 +893,19 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .bat-S4-L1-P8 {
             bottom: calc(var(--level-height) * 2 - 58px);
             left: calc(var(--pos-offset) + var(--pos-width) * 7 - var(--item-offset) - 5px);
+        }
+        /* Bat flee: when Nibo has torch and is at bat's position */
+        #level-2:checked ~ #pos-7:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L2-P7,
+        #level-2:checked ~ #pos-9:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L2-P9,
+        #level-4:checked ~ #pos-10:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L4-P10,
+        #level-1:checked ~ #pos-12:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L1-P12,
+        #level-1:checked ~ #pos-8:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L1-P8 {
+            .bat-hanging { display: none; }
+            .bat-fleeing { display: block; animation: bat-flee-left 0.64s ease-out forwards; }
+            .tooltip { display: none; }
+        }
+        #level-1:checked ~ #pos-12:checked ~ #torch-pickup:checked ~ .game-world .bat-S4-L1-P12 .bat-fleeing {
+            animation-name: bat-flee-right;
         }
 
         /* Grate (diamond mesh pattern) */
@@ -5021,6 +5038,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(8px) rotate(-10deg); }
         }
+        @keyframes bat-flee-left {
+            0%   { translate: 0 -20px; }
+            30%  { translate: 40px 20px; }
+            60%  { translate: 0px 40px; }
+            90%  { translate: 20px -20px; }
+            100% { translate: 9000px 9000px; }
+        }
+        @keyframes bat-flee-right {
+            0%   { translate: 0 -20px; }
+            30%  { translate: -40px 20px; }
+            60%  { translate: 0px 40px; }
+            90%  { translate: -20px -20px; }
+            100% { translate: 9000px 9000px; }
+        }
         /* Enable clicking and pulsing when player is adjacent */
         #level-0:checked ~ #pos-3:checked ~ #loot-S1-L0-P3-pickup:not(:checked) ~ .game-world .loot-S1-L0-P3 .loot-in-game {
             pointer-events: auto;
@@ -7550,7 +7581,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <circle cx="107" cy="116" r="3" fill="#cc0000"/>
             <ellipse cx="100" cy="124" rx="4" ry="2.5" fill="#4a2510"/>
         </symbol>
-        <symbol id="bat-flying" viewBox="0 0 340 220">
+        <symbol id="bat-fleeing" viewBox="0 0 340 220">
             <g fill="#7a4518">
                 <path d="M 145,95 L 30,42 Q 55,80 25,108 Q 50,120 48,145 Q 70,140 82,162 Q 100,148 115,152 L 148,135 Z"/>
                 <path d="M 195,95 L 310,42 Q 285,80 315,108 Q 290,120 292,145 Q 270,140 258,162 Q 240,148 225,152 L 192,135 Z"/>
@@ -8271,11 +8302,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <div class="stalagmite-S4 stalagmite-S4-L3-P8-P9"><svg><use href="#stalagmite-1"/></svg></div>
             <div class="stalactite-S4 stalactite-S4-L2-P8-P9"><svg><use href="#stalactite-2"/></svg></div>
             <div class="stalagmite-S4 stalagmite-S4-L2-P8-P9"><svg><use href="#stalagmite-2"/></svg></div>
-            <div class="bat bat-S4-L2-P7"><svg><use href="#bat"/></svg><span class="tooltip">Bat</span></div>
-            <div class="bat bat-S4-L2-P9"><svg><use href="#bat"/></svg><span class="tooltip">Bat</span></div>
-            <div class="bat bat-S4-L4-P10"><svg><use href="#bat"/></svg><span class="tooltip">Bat</span></div>
-            <div class="bat bat-S4-L1-P12"><svg><use href="#bat"/></svg><span class="tooltip">Bat</span></div>
-            <div class="bat bat-S4-L1-P8"><svg><use href="#bat"/></svg><span class="tooltip">Bat</span></div>
+            <div class="bat bat-S4-L2-P7"><svg class="bat-hanging"><use href="#bat"/></svg><svg class="bat-fleeing"><use href="#bat-fleeing"/></svg><span class="tooltip">Bat</span></div>
+            <div class="bat bat-S4-L2-P9"><svg class="bat-hanging"><use href="#bat"/></svg><svg class="bat-fleeing"><use href="#bat-fleeing"/></svg><span class="tooltip">Bat</span></div>
+            <div class="bat bat-S4-L4-P10"><svg class="bat-hanging"><use href="#bat"/></svg><svg class="bat-fleeing"><use href="#bat-fleeing"/></svg><span class="tooltip">Bat</span></div>
+            <div class="bat bat-S4-L1-P12"><svg class="bat-hanging"><use href="#bat"/></svg><svg class="bat-fleeing"><use href="#bat-fleeing"/></svg><span class="tooltip">Bat</span></div>
+            <div class="bat bat-S4-L1-P8"><svg class="bat-hanging"><use href="#bat"/></svg><svg class="bat-fleeing"><use href="#bat-fleeing"/></svg><span class="tooltip">Bat</span></div>
             <!-- S4 Cave ceiling -->
             <div class="cave-ceiling-S4"><svg><use href="#cave-ceiling"/></svg></div>
         </div>
