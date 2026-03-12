@@ -1,7 +1,6 @@
 
  - teleporter only works with battery
 
-
 S7: Ancient alien temple with a guardian that wants payment.
     It is here that the radiation suit can be obtained..
     What kinds of interesting obstacles could we have here? moving platforms? Falling blocks? Elevators? Escalators?
