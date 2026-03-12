@@ -431,76 +431,27 @@ AAAAAAAAAAAAAAAAAAAAAA==
          */
         /* Vertical: levels 0-4 show bottom row (default top offset shows S1/S4/S5) */
         /* Levels 5-9 show top row - need to scroll up by one stage-height */
-        #level-5:checked ~ .game-world,
-        #level-6:checked ~ .game-world,
-        #level-7:checked ~ .game-world,
-        #level-8:checked ~ .game-world,
-        #level-9:checked ~ .game-world,
-        #level-ρ:checked ~ .game-world,
-        #level-σ:checked ~ .game-world {
+        :is(#level-5, #level-6, #level-7, #level-8, #level-9, #level-ρ, #level-σ):checked ~ .game-world {
             --world-translateY: var(--stage-height);
         }
         /* Horizontal: positions 7-12 scroll left by 6 positions */
-        #pos-7:checked ~ .game-world,
-        #pos-8:checked ~ .game-world,
-        #pos-9:checked ~ .game-world,
-        #pos-10:checked ~ .game-world,
-        #pos-11:checked ~ .game-world,
-        #pos-12:checked ~ .game-world {
+        :is(#pos-7, #pos-8, #pos-9, #pos-10, #pos-11, #pos-12):checked ~ .game-world {
             --world-translateX: calc(var(--pos-width) * -6);
         }
         /* Horizontal: positions 13-18 and φ scroll left by 12 positions */
-        #pos-13:checked ~ .game-world,
-        #pos-14:checked ~ .game-world,
-        #pos-15:checked ~ .game-world,
-        #pos-16:checked ~ .game-world,
-        #pos-17:checked ~ .game-world,
-        #pos-18:checked ~ .game-world,
-        #pos-φ:checked ~ .game-world {
+        :is(#pos-13, #pos-14, #pos-15, #pos-16, #pos-17, #pos-18, #pos-φ):checked ~ .game-world {
             --world-translateX: calc(var(--pos-width) * -12);
         }
         /* Horizontal: positions 19-24 scroll left by 18 positions */
-        #pos-19:checked ~ .game-world,
-        #pos-20:checked ~ .game-world,
-        #pos-21:checked ~ .game-world,
-        #pos-22:checked ~ .game-world,
-        #pos-23:checked ~ .game-world,
-        #pos-24:checked ~ .game-world {
+        :is(#pos-19, #pos-20, #pos-21, #pos-22, #pos-23, #pos-24):checked ~ .game-world {
             --world-translateX: calc(var(--pos-width) * -18);
         }
         /* S1 (pos 1-6, levels 0-4): no translate to avoid stacking context on title screen */
         /* This rule must come AFTER the level-based translateY rules so it overrides them */
         /* Level checks included to allow future S0 implementation (pos 1-6, levels 5-9) */
-        #level-0:checked ~ #pos-1:checked ~ .game-world,
-        #level-0:checked ~ #pos-2:checked ~ .game-world,
-        #level-0:checked ~ #pos-3:checked ~ .game-world,
-        #level-0:checked ~ #pos-4:checked ~ .game-world,
-        #level-0:checked ~ #pos-5:checked ~ .game-world,
-        #level-0:checked ~ #pos-6:checked ~ .game-world,
-        #level-1:checked ~ #pos-1:checked ~ .game-world,
-        #level-1:checked ~ #pos-2:checked ~ .game-world,
-        #level-1:checked ~ #pos-3:checked ~ .game-world,
-        #level-1:checked ~ #pos-4:checked ~ .game-world,
-        #level-1:checked ~ #pos-5:checked ~ .game-world,
-        #level-1:checked ~ #pos-6:checked ~ .game-world,
-        #level-2:checked ~ #pos-1:checked ~ .game-world,
-        #level-2:checked ~ #pos-2:checked ~ .game-world,
-        #level-2:checked ~ #pos-3:checked ~ .game-world,
-        #level-2:checked ~ #pos-4:checked ~ .game-world,
-        #level-2:checked ~ #pos-5:checked ~ .game-world,
-        #level-2:checked ~ #pos-6:checked ~ .game-world,
-        #level-3:checked ~ #pos-1:checked ~ .game-world,
-        #level-3:checked ~ #pos-2:checked ~ .game-world,
-        #level-3:checked ~ #pos-3:checked ~ .game-world,
-        #level-3:checked ~ #pos-4:checked ~ .game-world,
-        #level-3:checked ~ #pos-5:checked ~ .game-world,
-        #level-3:checked ~ #pos-6:checked ~ .game-world,
-        #level-4:checked ~ #pos-1:checked ~ .game-world,
-        #level-4:checked ~ #pos-2:checked ~ .game-world,
-        #level-4:checked ~ #pos-3:checked ~ .game-world,
-        #level-4:checked ~ #pos-4:checked ~ .game-world,
-        #level-4:checked ~ #pos-5:checked ~ .game-world,
-        #level-4:checked ~ #pos-6:checked ~ .game-world {
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~
+        :is(#pos-1, #pos-2, #pos-3, #pos-4, #pos-5, #pos-6):checked ~
+        .game-world {
             translate: none;
         }
         /* Inventory state tracking: set variables when items picked up */
