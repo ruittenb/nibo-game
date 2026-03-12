@@ -1257,6 +1257,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
             pointer-events: auto;
             animation: teleporter-pulse 1s ease-in-out infinite, teleporter-cycle-orange 1.5s linear infinite;
         }
+        /* Show nav-panel teleporter icon when player is at S3-L7-P18 */
+        #level-7:checked ~ #pos-18:checked ~ .nav-panel .nav-teleporter[for="level-τ"] { display: block; }
         /* Hide hover area when player can click teleporter */
         #level-7:checked ~ #pos-18:checked ~ .game-world .teleporter-hover-area {
             display: none;
@@ -1320,6 +1322,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-14:checked ~ .game-world .teleporter-S5-L3-P13-hover-area {
             display: none;
         }
+        /* Show nav-panel teleporter icon when player is at S5 teleporter locations */
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-13:checked ~ .nav-panel .nav-teleporter[for="level-ρ"] { display: block; }
+        #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-14:checked ~ .nav-panel .nav-teleporter[for="level-σ"] { display: block; }
         .teleporter-S5-L3-P13-hover-area:hover ~ .teleporter-S5-L3-P13-tooltip {
             opacity: 1;
         }
@@ -3130,10 +3135,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
             svg {
                 position: absolute;
-                top: 30px;
-                left: 6px;
-                width: 25%;
-                height: 25%;
+                top: 6px;
+                left: 11px;
+                width: 26px;
+                height: 42px;
                 opacity: 0.8;
             }
             .tooltip {
@@ -4438,6 +4443,28 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .nav-loot-aquamarine { color: var(--aquamarine-color-1); animation: aquamarine-pulse 1s ease-in-out infinite; }
         .nav-loot-ruby { color: var(--ruby-color-1); animation: ruby-pulse 1s ease-in-out infinite; }
         .nav-loot-seashell { color: var(--seashell-color); animation: seashell-pulse 1s ease-in-out infinite; }
+        /* Nav-panel center teleporter icon */
+        .nav-teleporter {
+            display: none;
+            cursor: pointer;
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: 20px;
+            height: 20px;
+            --teleporter-color-1: #e08030;
+            --teleporter-color-2: #e08030;
+            --teleporter-color-3: #e08030;
+        }
+        .nav-teleporter-blue {
+            --teleporter-color-1: #48f;
+            --teleporter-color-2: #48f;
+            --teleporter-color-3: #48f;
+        }
+        .nav-teleporter svg {
+            width: 20px;
+            height: 20px;
+        }
         .nav-loot-tooltip {
             bottom: 100%;
             left: 50%;
@@ -5529,14 +5556,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transition: opacity 0.5s ease-out;
 
             .message {
-                font-size: 28px;
+                font-size: 30px;
                 font-weight: bold;
                 text-shadow: 2px 2px 4px #000;
                 text-align: center;
             }
             .submessage {
                 color: #888;
-                font-size: 18px;
+                font-size: 20px;
                 margin-top: 10px;
             }
         }
@@ -5551,18 +5578,18 @@ AAAAAAAAAAAAAAAAAAAAAA==
 
             h1 {
                 color: #48d8d8;
-                font-size: 36px;
+                font-size: 38px;
                 letter-spacing: 3px;
             }
             .story {
                 color: #aaa;
-                font-size: 16px;
+                font-size: 18px;
                 text-align: center;
                 line-height: 1.7;
                 margin-top: 25px;
             }
             .submessage {
-                font-size: 16px;
+                font-size: 18px;
                 margin-top: 30px;
                 text-decoration: underline;
                 &:hover { color: #ccc; }
@@ -5572,7 +5599,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 bottom: 34px;
                 left: 50%;
                 transform: translateX(-50%);
-                font-size: 16px;
+                font-size: 18px;
                 color: #666;
                 text-shadow: 2px 2px 4px black, 0 0 8px black;
                 background: #00000080;
@@ -7451,11 +7478,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             c -36,208 -165,551 -207,551 -12,0 -18,-10 -13,-23 5,-12 38,-115 74,-228 106,-332 132,-545 96,-771 -15,-91 -92,-316 -104,-303 -3,3 -13,79 -22,168 -21,208 -54,371 -115,572 -49,161 -150,376 -176,376 -27,0 -13,-65 49,-230 77,-206 105,-401 94,-671 -7,-170 -16,-218 -68,-375 -33,-99 -74,-196 -91,-216 l -33,-35 19,39 c 29,58 38,391 15,571 -40,322 -123,629 -238,874 -56,121 -94,152 -89,74 2,-21 15,-103 29,-182 63,-343 47,-649 -50,-954 -40,-127 -146,-360 -158,-347 -3,3 2,42 11,86 30,142 21,663 -16,872 -32,182 -70,304 -96,304 -7,0 -13,-103 -13,-228 0,-141 -8,-255 -21,-300 -30,-102 -119,-289 -160,-336 l -35,-40 12,120 c 18,180 9,562 -18,752 -13,92 -61,339 -105,549 -101,476 -121,650 -97,875 75,706 465,1362 1137,1916 130,107 496,372 514,372 6,0 71,-14 144,-31 z M 2020,5934 c 66,-288 67,-303 34,-546 -14,-104 17,-100 49,7 37,124 31,334 -12,460 -19,57 -45,106 -58,110 -16,5 -20,-3 -13,-31 z m -174,-202 c 24,-153 30,-465 10,-579 l -20,-119 -29,55 c -16,30 -48,136 -72,235 -23,99 -50,180 -59,180 -15,0 -12,-44 14,-208 8,-53 8,-54 -15,-24 -42,55 -48,15 -18,-115 31,-135 38,-452 11,-541 -15,-48 -15,-48 -51,48 -32,83 -61,214 -109,480 l -11,64 -5,-78 c -5,-70 -7,-75 -27,-48 -38,52 -44,11 -16,-101 31,-121 26,-383 -10,-549 -17,-81 -20,-85 -34,-48 -42,107 -78,259 -87,365 -17,196 -44,112 -55,-170 -9,-200 -18,-274 -47,-363 l -37,-112 -15,64 c -8,35 -12,195 -8,356 7,279 -4,362 -32,232 -7,-33 -13,-168 -13,-300 0,-251 27,-440 64,-440 41,0 136,263 136,375 0,56 18,41 48,-39 31,-83 48,-100 74,-78 35,29 69,168 80,329 l 11,150 44,-113 c 46,-116 73,-160 98,-160 8,0 14,11 40,70 26,58 30,102 30,290 0,124 -5,254 -12,289 l -12,64 27,-64 c 35,-84 98,-184 116,-184 8,0 14,16 14,36 0,20 11,79 25,132 14,53 29,145 35,204 l 10,108 43,-84 c 23,-46 55,-87 70,-89 23,-4 20,10 -19,88 -25,51 -62,161 -82,245 -32,133 -69,208 -104,208 -6,0 -6,-27 -1,-60 z m 233,2651 c 49,-42 97,-61 97,-40 0,12 -118,89 -136,88 -9,0 9,-22 39,-48 z m -61,-58 c 8,-65 72,-93 170,-72 52,11 81,11 96,-1 25,-21 43,-6 31,25 -11,28 -81,42
             -152,31 -40,-6 -66,0 -102,27 l -48,36 z"/>
         </symbol>
-        <symbol id="dots" viewBox="0 0 300 340">
-            <g fill="currentColor">
-                <path d="M 64,144 C 33,144 8,119 8,88 8,57 33,32 64,32 c 31,0 56,25 56,56 0,31 -25,56 -56,56 z"/>
-                <path d="M 233,200 c 31,0 56,25 56,56 0,31 -25,56 -56,56 -31,0 -56,-25 -56,-56 0,-31 25,-56 56,-56 z"/>
-                <path d="M 120,256 c 0,31 -25,56 -56,56 -31,0 -56,-25 -56,-56 0,-31 25,-56 56,-56 31,0 56,25 56,56 z"/>
+        <symbol id="dots" viewBox="0 0 160 160">
+            <g fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M 18 38 L 142 38"/>
+                <path d="M 42 38 C 42 80 30 110 22 138"/>
+                <path d="m 88,38 c 1,17 12,94 29,96"/>
+                <path d="m 97,101 c -16,8 -48,-26 -55,-40"/>
+                <path d="M 118,38 C 118,18 132,7 142,14"/>
+                <circle cx="123" cy="118" r="17"/>
             </g>
         </symbol>
     </svg>
@@ -7717,6 +7747,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <!-- S6 -->
                 <label for="loot-S6-L9-P24-pickup" class="nav-loot nav-loot-aquamarine"><svg><use href="#gem"/></svg></label>
                 <label for="loot-S6-L5-P24-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <!-- Teleporters -->
+                <label for="level-τ" class="nav-teleporter"><svg><use href="#teleporter-platform"/></svg></label>
+                <label for="level-ρ" class="nav-teleporter nav-teleporter-blue"><svg><use href="#teleporter-platform"/></svg></label>
+                <label for="level-σ" class="nav-teleporter nav-teleporter-blue"><svg><use href="#teleporter-platform"/></svg></label>
                 <span class="tooltip nav-loot-tooltip">Pick Up</span>
             </div>
             <!-- Down cell -->
@@ -7748,7 +7782,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="inventory-torch"><svg><use href="#torch"/></svg><span class="tooltip">Torch</span></span>
             <span class="inventory-scuba"><svg><use href="#scuba"/></svg><span class="tooltip">Scuba Gear</span></span>
             <span class="inventory-keycard"><svg><use href="#keycard"/></svg><span class="tooltip">Key Card</span></span>
-            <span class="inventory-engine-part"><svg><use href="#engine-part"/></svg><span class="tooltip">Engine Part</span></span>
+            <span class="inventory-engine-part"><svg><use href="#engine-part"/></svg><span class="tooltip">Working Engine Part</span></span>
         </div>
         <!-- loot counter -->
         <div class="counter-panel">
@@ -8186,8 +8220,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <span class="alien-tower-door-hover-area"></span>
         <label for="tower-open" class="alien-tower-door">
             <svg><use href="#dots"/></svg>
-            <span class="tooltip alien-tower-door-locked-tooltip">The door is locked.</span>
-            <span class="tooltip alien-tower-door-unlocked-tooltip">The door is unlocked.</span>
+            <span class="tooltip alien-tower-door-locked-tooltip">"Observation tower"<br>The door is locked.</span>
+            <span class="tooltip alien-tower-door-unlocked-tooltip">"Observation tower"<br>The door is unlocked.</span>
         </label>
         <label for="tower-open" class="keycard-at-door"><svg><use href="#keycard"/></svg></label>
         <!-- Ground -->
@@ -8378,7 +8412,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- Engine part on top of tower -->
         <span class="engine-part-hover-area"></span>
         <label for="engine-part-pickup" class="engine-part-in-game"><svg><use href="#engine-part"/></svg></label>
-        <span class="tooltip engine-part-tooltip">Engine Part</span>
+        <span class="tooltip engine-part-tooltip">Working Engine Part</span>
         <!-- Broken engine part at S6-L7-P20 -->
         <span class="broken-engine-part-hover-area"></span>
         <label for="engine-installed" class="broken-engine-part"><svg><use href="#engine-part"/></svg></label>
@@ -8386,7 +8420,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="engine-installed" class="engine-part-replacement"><svg><use href="#engine-part"/></svg></label>
         <div class="engine-installed-part">
             <svg><use href="#engine-part"/></svg>
-            <span class="tooltip">Engine Part</span>
+            <span class="tooltip">Working Engine Part</span>
         </div>
         <!-- ==================== STAGE 6 LOOT ==================== -->
         <div class="container aquamarine loot-S6-L9-P24">
