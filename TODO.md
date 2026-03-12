@@ -1,14 +1,11 @@
 
  - teleporter only works with battery
- - replacement engine part is needed to fly away
 
 S6: Contains an important part for repairs.
 
 S7: Then on S7 I love the idea of an ancient alien temple with a guardian that wants payment.
     Contains the radiation shield/suit.
     What kinds of interesting obstacles could we have here? moving platforms? Falling blocks?
-
- - fix landing gear of ship
 
  - burn disease with torch?
  - fly item to in-game location when applied?
