@@ -1865,23 +1865,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 0;
             animation: inventory-fade-in 0.2s ease-out 0.4s forwards;
         }
-        /* Hide key from inventory when toolbox is unlocked (key used) */
-        #toolbox-unlocked:checked ~ .inv-panel .inventory-key {
-            display: none;
-        }
-        /* Hide axe from inventory when tree is chopped (axe used) */
-        #tree-chopped:checked ~ .inv-panel .inventory-axe {
-            display: none;
-        }
-        /* Hide wrench from inventory when door is unlocked (wrench used) */
-        #door-unlocked:checked ~ .inv-panel .inventory-wrench {
-            display: none;
-        }
-        /* Hide battery from inventory when bolt is fixed (battery used) */
-        #bolt-fixed:checked ~ .inv-panel .inventory-battery {
-            display: none;
-        }
-        /* Hide key card from inventory when tower door is opened (card used) */
+        /* Hide consumed items from inventory */
+        #toolbox-unlocked:checked ~ .inv-panel .inventory-key,
+        #tree-chopped:checked ~ .inv-panel .inventory-axe,
+        #door-unlocked:checked ~ .inv-panel .inventory-wrench,
+        #bolt-fixed:checked ~ .inv-panel .inventory-battery,
         #tower-open:checked ~ .inv-panel .inventory-keycard {
             display: none;
         }
@@ -5067,175 +5055,89 @@ AAAAAAAAAAAAAAAAAAAAAA==
             90%  { translate: -20px -20px; }
             100% { translate: 9000px 9000px; }
         }
-        /* Enable clicking and pulsing when player is adjacent */
-        #level-0:checked ~ #pos-3:checked ~ #loot-S1-L0-P3-pickup:not(:checked) ~ .game-world .loot-S1-L0-P3 .loot-in-game {
+        /* Enable clicking and pulsing when player is adjacent — grouped by animation */
+        /* coin-pulse */
+        #level-0:checked ~ #pos-3:checked ~ #loot-S1-L0-P3-pickup:not(:checked) ~ .game-world .loot-S1-L0-P3 .loot-in-game,
+        #level-1:checked ~ #pos-4:checked ~ #loot-S1-L1-P4-pickup:not(:checked) ~ .game-world .loot-S1-L1-P4 .loot-in-game,
+        #level-3:checked ~ #pos-5:checked ~ #loot-S1-L3-P5-pickup:not(:checked) ~ .game-world .loot-S1-L3-P5 .loot-in-game,
+        #level-2:checked ~ #pos-1:checked ~ #loot-S1-L2-P1-pickup:not(:checked) ~ .game-world .loot-S1-L2-P1 .loot-in-game,
+        #level-4:checked ~ #pos-2:checked ~ #loot-S1-L4-P2-pickup:not(:checked) ~ .game-world .loot-S1-L4-P2 .loot-in-game,
+        #level-5:checked ~ #pos-8:checked ~ #loot-S2-L5-P8-pickup:not(:checked) ~ .game-world .loot-S2-L5-P8 .loot-in-game,
+        #level-7:checked ~ #pos-7:checked ~ #loot-S2-L7-P7-pickup:not(:checked) ~ .game-world .loot-S2-L7-P7 .loot-in-game,
+        #level-9:checked ~ #pos-10:checked ~ #loot-S2-L9-P10-pickup:not(:checked) ~ .game-world .loot-S2-L9-P10 .loot-in-game,
+        #level-5:checked ~ #pos-15:checked ~ #loot-S3-L5-P15-pickup:not(:checked) ~ .game-world .loot-S3-L5-P15 .loot-in-game,
+        #level-8:checked ~ #pos-18:checked ~ #loot-S3-L8-P18-pickup:not(:checked) ~ .game-world .loot-S3-L8-P18 .loot-in-game,
+        #level-9:checked ~ #pos-14:checked ~ #loot-S3-L9-P14-pickup:not(:checked) ~ .game-world .loot-S3-L9-P14 .loot-in-game,
+        #level-3:checked ~ #pos-7:checked ~ #loot-S4-L3-P7-pickup:not(:checked) ~ .game-world .loot-S4-L3-P7 .loot-in-game,
+        #level-3:checked ~ #pos-12:checked ~ #loot-S4-L3-P12-pickup:not(:checked) ~ .game-world .loot-S4-L3-P12 .loot-in-game,
+        #level-0:checked ~ #pos-9:checked ~ #loot-S4-L0-P9-pickup:not(:checked) ~ .game-world .loot-S4-L0-P9 .loot-in-game,
+        #level-2:checked ~ #pos-10:checked ~ #loot-S4-L2-P10-pickup:not(:checked) ~ .game-world .loot-S4-L2-P10 .loot-in-game,
+        #level-0:checked ~ #pos-18:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .game-world .loot-S5-L0-P18 .loot-in-game,
+        #level-0:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .game-world .loot-S5-L0-P18 .loot-in-game,
+        #level-5:checked ~ #pos-24:checked ~ #loot-S6-L5-P24-pickup:not(:checked) ~ .game-world .loot-S6-L5-P24 .loot-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: coin-pulse 1s ease-in-out infinite;
         }
-        #level-1:checked ~ #pos-4:checked ~ #loot-S1-L1-P4-pickup:not(:checked) ~ .game-world .loot-S1-L1-P4 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        #level-3:checked ~ #pos-5:checked ~ #loot-S1-L3-P5-pickup:not(:checked) ~ .game-world .loot-S1-L3-P5 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        #level-2:checked ~ #pos-1:checked ~ #loot-S1-L2-P1-pickup:not(:checked) ~ .game-world .loot-S1-L2-P1 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        #level-4:checked ~ #pos-2:checked ~ #loot-S1-L4-P2-pickup:not(:checked) ~ .game-world .loot-S1-L4-P2 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        /* Stage 2 loot pulse/click (S2 uses levels 5-9, so L0->L5, L1->L6, etc) */
-        #level-5:checked ~ #pos-8:checked ~ #loot-S2-L5-P8-pickup:not(:checked) ~ .game-world .loot-S2-L5-P8 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        #level-6:checked ~ #pos-11:checked ~ #loot-S2-L6-P11-pickup:not(:checked) ~ .game-world .loot-S2-L6-P11 .loot-in-game {
+        /* aquamarine-pulse */
+        #level-6:checked ~ #pos-11:checked ~ #loot-S2-L6-P11-pickup:not(:checked) ~ .game-world .loot-S2-L6-P11 .loot-in-game,
+        #level-8:checked ~ #pos-9:checked ~ #loot-S2-L8-P9-pickup:not(:checked) ~ .game-world .loot-S2-L8-P9 .loot-in-game,
+        #level-3:checked ~ #pos-8:checked ~ #loot-S4-L3-P8-pickup:not(:checked) ~ .game-world .loot-S4-L3-P8 .loot-in-game,
+        #level-1:checked ~ #pos-10:checked ~ #loot-S4-L1-P10-pickup:not(:checked) ~ .game-world .loot-S4-L1-P10 .loot-in-game,
+        #level-9:checked ~ #pos-24:checked ~ #loot-S6-L9-P24-pickup:not(:checked) ~ .game-world .loot-S6-L9-P24 .loot-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: aquamarine-pulse 1s ease-in-out infinite;
         }
-        #level-7:checked ~ #pos-7:checked ~ #loot-S2-L7-P7-pickup:not(:checked) ~ .game-world .loot-S2-L7-P7 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        #level-8:checked ~ #pos-9:checked ~ #loot-S2-L8-P9-pickup:not(:checked) ~ .game-world .loot-S2-L8-P9 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: aquamarine-pulse 1s ease-in-out infinite;
-        }
-        #level-9:checked ~ #pos-10:checked ~ #loot-S2-L9-P10-pickup:not(:checked) ~ .game-world .loot-S2-L9-P10 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        /* Stage 3 loot pulse/click */
+        /* ruby-pulse */
         #level-5:checked ~ #pos-18:checked ~ #loot-S3-L5-P18-pickup:not(:checked) ~ .game-world .loot-S3-L5-P18 .loot-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: ruby-pulse 1s ease-in-out infinite;
         }
-        #level-5:checked ~ #pos-15:checked ~ #loot-S3-L5-P15-pickup:not(:checked) ~ .game-world .loot-S3-L5-P15 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        #level-8:checked ~ #pos-18:checked ~ #loot-S3-L8-P18-pickup:not(:checked) ~ .game-world .loot-S3-L8-P18 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        #level-9:checked ~ #pos-14:checked ~ #loot-S3-L9-P14-pickup:not(:checked) ~ .game-world .loot-S3-L9-P14 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        /* Stage 4 loot pulse/click */
-        #level-3:checked ~ #pos-7:checked ~ #loot-S4-L3-P7-pickup:not(:checked) ~ .game-world .loot-S4-L3-P7 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        #level-3:checked ~ #pos-8:checked ~ #loot-S4-L3-P8-pickup:not(:checked) ~ .game-world .loot-S4-L3-P8 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: aquamarine-pulse 1s ease-in-out infinite;
-        }
-        #level-3:checked ~ #pos-12:checked ~ #loot-S4-L3-P12-pickup:not(:checked) ~ .game-world .loot-S4-L3-P12 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        #level-1:checked ~ #pos-10:checked ~ #loot-S4-L1-P10-pickup:not(:checked) ~ .game-world .loot-S4-L1-P10 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: aquamarine-pulse 1s ease-in-out infinite;
-        }
-        #level-0:checked ~ #pos-9:checked ~ #loot-S4-L0-P9-pickup:not(:checked) ~ .game-world .loot-S4-L0-P9 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        #level-2:checked ~ #pos-10:checked ~ #loot-S4-L2-P10-pickup:not(:checked) ~ .game-world .loot-S4-L2-P10 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        /* Stage 5 loot pulse/click */
+        /* seashell-pulse */
         #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13 .loot-in-game,
-        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: seashell-pulse 1s ease-in-out infinite;
-        }
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .game-world .loot-S5-L3-P13 .loot-in-game,
         #level-2:checked ~ #pos-17:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .game-world .loot-S5-L2-P17 .loot-in-game,
         #level-2:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .game-world .loot-S5-L2-P17 .loot-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: seashell-pulse 1s ease-in-out infinite;
         }
-        #level-0:checked ~ #pos-18:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .game-world .loot-S5-L0-P18 .loot-in-game,
-        #level-0:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .game-world .loot-S5-L0-P18 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
-        /* Stage 6 loot pulse/click */
-        #level-9:checked ~ #pos-24:checked ~ #loot-S6-L9-P24-pickup:not(:checked) ~ .game-world .loot-S6-L9-P24 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: aquamarine-pulse 1s ease-in-out infinite;
-        }
-        #level-5:checked ~ #pos-24:checked ~ #loot-S6-L5-P24-pickup:not(:checked) ~ .game-world .loot-S6-L5-P24 .loot-in-game {
-            pointer-events: auto;
-            cursor: pointer;
-            animation: coin-pulse 1s ease-in-out infinite;
-        }
         /* Nav-panel center loot pickup activation */
-        /* S1 */
-        #level-0:checked ~ #pos-3:checked ~ #loot-S1-L0-P3-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L0-P3-pickup"] { display: block; }
-        #level-1:checked ~ #pos-4:checked ~ #loot-S1-L1-P4-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L1-P4-pickup"] { display: block; }
-        #level-3:checked ~ #pos-5:checked ~ #loot-S1-L3-P5-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L3-P5-pickup"] { display: block; }
-        #level-2:checked ~ #pos-1:checked ~ #loot-S1-L2-P1-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L2-P1-pickup"] { display: block; }
-        #level-4:checked ~ #pos-2:checked ~ #loot-S1-L4-P2-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L4-P2-pickup"] { display: block; }
-        /* S2 */
-        #level-5:checked ~ #pos-8:checked ~ #loot-S2-L5-P8-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L5-P8-pickup"] { display: block; }
-        #level-6:checked ~ #pos-11:checked ~ #loot-S2-L6-P11-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L6-P11-pickup"] { display: block; }
-        #level-7:checked ~ #pos-7:checked ~ #loot-S2-L7-P7-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L7-P7-pickup"] { display: block; }
-        #level-8:checked ~ #pos-9:checked ~ #loot-S2-L8-P9-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L8-P9-pickup"] { display: block; }
-        #level-9:checked ~ #pos-10:checked ~ #loot-S2-L9-P10-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L9-P10-pickup"] { display: block; }
-        /* S3 */
-        #level-5:checked ~ #pos-15:checked ~ #loot-S3-L5-P15-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S3-L5-P15-pickup"] { display: block; }
-        #level-5:checked ~ #pos-18:checked ~ #loot-S3-L5-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S3-L5-P18-pickup"] { display: block; }
-        #level-8:checked ~ #pos-18:checked ~ #loot-S3-L8-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S3-L8-P18-pickup"] { display: block; }
-        #level-9:checked ~ #pos-14:checked ~ #loot-S3-L9-P14-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S3-L9-P14-pickup"] { display: block; }
-        /* S4 */
-        #level-3:checked ~ #pos-7:checked ~ #loot-S4-L3-P7-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L3-P7-pickup"] { display: block; }
-        #level-3:checked ~ #pos-8:checked ~ #loot-S4-L3-P8-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L3-P8-pickup"] { display: block; }
-        #level-3:checked ~ #pos-12:checked ~ #loot-S4-L3-P12-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L3-P12-pickup"] { display: block; }
-        #level-1:checked ~ #pos-10:checked ~ #loot-S4-L1-P10-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L1-P10-pickup"] { display: block; }
-        #level-0:checked ~ #pos-9:checked ~ #loot-S4-L0-P9-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L0-P9-pickup"] { display: block; }
-        #level-2:checked ~ #pos-10:checked ~ #loot-S4-L2-P10-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L2-P10-pickup"] { display: block; }
-        /* S5 (dual selectors for ζ/η visual swap) */
+        #level-0:checked ~ #pos-3:checked ~ #loot-S1-L0-P3-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L0-P3-pickup"],
+        #level-1:checked ~ #pos-4:checked ~ #loot-S1-L1-P4-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L1-P4-pickup"],
+        #level-3:checked ~ #pos-5:checked ~ #loot-S1-L3-P5-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L3-P5-pickup"],
+        #level-2:checked ~ #pos-1:checked ~ #loot-S1-L2-P1-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L2-P1-pickup"],
+        #level-4:checked ~ #pos-2:checked ~ #loot-S1-L4-P2-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L4-P2-pickup"],
+        #level-5:checked ~ #pos-8:checked ~ #loot-S2-L5-P8-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L5-P8-pickup"],
+        #level-6:checked ~ #pos-11:checked ~ #loot-S2-L6-P11-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L6-P11-pickup"],
+        #level-7:checked ~ #pos-7:checked ~ #loot-S2-L7-P7-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L7-P7-pickup"],
+        #level-8:checked ~ #pos-9:checked ~ #loot-S2-L8-P9-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L8-P9-pickup"],
+        #level-9:checked ~ #pos-10:checked ~ #loot-S2-L9-P10-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L9-P10-pickup"],
+        #level-5:checked ~ #pos-15:checked ~ #loot-S3-L5-P15-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S3-L5-P15-pickup"],
+        #level-5:checked ~ #pos-18:checked ~ #loot-S3-L5-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S3-L5-P18-pickup"],
+        #level-8:checked ~ #pos-18:checked ~ #loot-S3-L8-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S3-L8-P18-pickup"],
+        #level-9:checked ~ #pos-14:checked ~ #loot-S3-L9-P14-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S3-L9-P14-pickup"],
+        #level-3:checked ~ #pos-7:checked ~ #loot-S4-L3-P7-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L3-P7-pickup"],
+        #level-3:checked ~ #pos-8:checked ~ #loot-S4-L3-P8-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L3-P8-pickup"],
+        #level-3:checked ~ #pos-12:checked ~ #loot-S4-L3-P12-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L3-P12-pickup"],
+        #level-1:checked ~ #pos-10:checked ~ #loot-S4-L1-P10-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L1-P10-pickup"],
+        #level-0:checked ~ #pos-9:checked ~ #loot-S4-L0-P9-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L0-P9-pickup"],
+        #level-2:checked ~ #pos-10:checked ~ #loot-S4-L2-P10-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S4-L2-P10-pickup"],
+        #level-9:checked ~ #pos-24:checked ~ #loot-S6-L9-P24-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S6-L9-P24-pickup"],
+        #level-5:checked ~ #pos-24:checked ~ #loot-S6-L5-P24-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S6-L5-P24-pickup"] {
+            display: block;
+        }
+        /* S5 nav-panel loot (dual selectors for ζ/η visual swap) */
         #level-3:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-13:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L3-P13-pickup"],
-        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L3-P13-pickup"] { display: block; }
+        #level-3:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-14:checked ~ #loot-S5-L3-P13-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L3-P13-pickup"],
         #level-2:checked ~ #pos-17:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L2-P17-pickup"],
-        #level-2:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L2-P17-pickup"] { display: block; }
+        #level-2:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-18:checked ~ #loot-S5-L2-P17-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L2-P17-pickup"],
         #level-0:checked ~ :is(#layer-N, #layer-θ):checked ~ #pos-18:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L0-P18-pickup"],
-        #level-0:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L0-P18-pickup"] { display: block; }
-        /* S6 */
-        #level-9:checked ~ #pos-24:checked ~ #loot-S6-L9-P24-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S6-L9-P24-pickup"] { display: block; }
-        #level-5:checked ~ #pos-24:checked ~ #loot-S6-L5-P24-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S6-L5-P24-pickup"] { display: block; }
+        #level-0:checked ~ :is(#layer-ζ, #layer-η):checked ~ #pos-17:checked ~ #loot-S5-L0-P18-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S5-L0-P18-pickup"] {
+            display: block;
+        }
         /* Move Stage 1 loot to counter when picked up */
         #loot-S1-L0-P3-pickup:checked ~ .game-world .loot-S1-L0-P3,
         #loot-S1-L1-P4-pickup:checked ~ .game-world .loot-S1-L1-P4,
