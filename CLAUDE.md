@@ -214,10 +214,13 @@ Items pulse/glow when the player can interact with them. This requires combining
 3. Pick up **wrench** from toolbox
 4. Use wrench on **door** (S1-L0-P6) → door opens
 5. Enter S4 through door (S4-L0-P7)
-6. Climb up to S2 (S2-L5-P7)
-7. Pick up **axe** (S2-L9-P12)
-8. Use axe on **tree** (S2-L5-P12) → tree chopped
-9. Enter S3 → navigate to escape → victory
+6. Pick up **crowbar** (S4-L2-P12)
+7. Climb up to S2 (S2-L5-P7)
+8. Use crowbar on **crate** (S2-L9-P12) → crate opened, crowbar consumed
+9. Pick up **battery** from crate
+10. Pick up **axe** (S3-L8-Pφ, floating platform)
+11. Use axe on **tree** (S2-L5-P12) → tree chopped
+12. Enter S3 → navigate through S3/S5 → escape → victory
 
 ## Phantom Locations
 
