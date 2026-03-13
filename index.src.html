@@ -473,6 +473,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #tree-chopped:checked ~ .game-world { --inv-has-axe: 0; }
         #bolt-fixed:checked ~ .game-world { --inv-has-battery: 0; }
         #tower-open:checked ~ .game-world { --inv-has-keycard: 0; }
+        #crate-opened:checked ~ .game-world { --inv-has-crowbar: 0; }
         .platform {
             position: absolute;
             height: var(--platform-thickness);
@@ -1553,7 +1554,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Hide radio buttons and checkboxes by default */
         .position-radio, .level-radio, .layer-radio, .loot-checkbox,
-        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #suit-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #crowbar-pickup, #keycard-pickup, #tower-open, #engine-part-pickup, #engine-installed,
+        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #suit-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #crowbar-pickup, #crate-opened, #keycard-pickup, #tower-open, #engine-part-pickup, #engine-installed,
         #lives-3, #death-1, #lives-2, #death-2, #lives-1, #death-3,
         #artwork-toggle {
             display: none;
@@ -1648,6 +1649,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Debug positions - S2/S3 items */
         #tree-chopped { top: 50px; left: 210px; }
         #axe-pickup { top: 50px; left: 320px; }
+        #crate-opened { top: 50px; left: 170px; }
         #battery-pickup { top: 50px; left: 190px; }
         #keycard-pickup { top: 50px; left: 340px; }
         #bolt-fixed { top: 50px; left: 360px; }
@@ -1722,6 +1724,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ #darkness-toggle,
         #debug-toggle:checked ~ #torch-pickup,
         #debug-toggle:checked ~ #crowbar-pickup,
+        #debug-toggle:checked ~ #crate-opened,
         #debug-toggle:checked ~ #keycard-pickup,
         #debug-toggle:checked ~ #tower-open,
         #debug-toggle:checked ~ #engine-part-pickup,
@@ -1827,6 +1830,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #toolbox-unlocked:checked ~ .inv-panel .inventory-key,
         #tree-chopped:checked ~ .inv-panel .inventory-axe,
         #door-unlocked:checked ~ .inv-panel .inventory-wrench,
+        #crate-opened:checked ~ .inv-panel .inventory-crowbar,
         #bolt-fixed:checked ~ .inv-panel .inventory-battery,
         #tower-open:checked ~ .inv-panel .inventory-keycard {
             display: none;
@@ -2241,6 +2245,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+            display: none;
         }
         .battery-in-game svg {
             color: var(--battery-color);
@@ -2250,11 +2255,22 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) + var(--pickup-size));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset) + var(--pickup-size) / 2);
             transform: translateX(-50%);
+            display: none;
         }
         /* Hover area for battery tooltip (when not adjacent) */
         .battery-hover-area {
             bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
+            display: none;
+        }
+        /* Show battery when crate is opened */
+        #crate-opened:checked ~ .game-world .battery-in-game {
+            display: block;
+        }
+        /* Show battery hover area and tooltip when crate opened but battery not picked up */
+        #crate-opened:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-hover-area,
+        #crate-opened:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-tooltip {
+            display: block;
         }
         /* Hide battery hover area and tooltip when picked up or bolt fixed */
         #battery-pickup:checked ~ .game-world .battery-hover-area,
@@ -2272,23 +2288,92 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
         }
         /* Show tooltip when player is at battery and hovers */
-        #level-9:checked ~ #pos-12:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game:hover ~ .battery-tooltip {
+        #level-9:checked ~ #pos-12:checked ~ #crate-opened:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game:hover ~ .battery-tooltip {
             opacity: 1;
         }
-        /* Enable clicking battery only when player is next to it - S2 uses levels 5-9, L4 -> L9 */
-        #level-9:checked ~ #pos-12:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game {
+        /* Enable clicking battery only when player is next to it and crate is opened */
+        #level-9:checked ~ #pos-12:checked ~ #crate-opened:checked ~ #battery-pickup:not(:checked) ~ .game-world .battery-in-game {
             pointer-events: auto;
             cursor: pointer;
             animation: battery-pulse 1s ease-in-out infinite;
         }
         /* Fly battery to inventory when picked up (Stage 2: viewport right = pos-width * 12) */
         /* Battery slot = slot 0 offset by key + wrench + axe + idcard + suit */
-        #battery-pickup:checked ~ .game-world .battery-in-game {
+        #crate-opened:checked ~ #battery-pickup:checked ~ .game-world .battery-in-game {
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 12 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
+        }
+        /* Crate on S2, level 4, position 12 */
+        .crate-hover-area {
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
+        }
+        .crate {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
+            z-index: var(--z-scenery);
+            pointer-events: none;
+
+            svg {
+                width: 100%;
+                height: 100%;
+                color: #9B7A3C;
+                transform: scale(1.1);
+            }
+        }
+        /* Only allow clicking crate when player has crowbar and is at the right position */
+        #level-9:checked ~ #pos-12:checked ~ #crowbar-pickup:checked ~ #crate-opened:not(:checked) ~ .game-world .crate {
+            pointer-events: auto;
+            cursor: pointer;
+        }
+        /* Hide hover area when player can click crate (so label receives clicks) */
+        #level-9:checked ~ #pos-12:checked ~ #crowbar-pickup:checked ~ #crate-opened:not(:checked) ~ .game-world .crate-hover-area {
+            display: none;
+        }
+        /* Hide crate, hover area, and tooltip when opened */
+        #crate-opened:checked ~ .game-world .crate,
+        #crate-opened:checked ~ .game-world .crate-hover-area,
+        #crate-opened:checked ~ .game-world .crate-tooltip {
+            display: none;
+        }
+        /* Show tooltip on hover */
+        .crate-hover-area:hover ~ .crate-tooltip {
+            opacity: 1;
+        }
+        .crate-tooltip {
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset) + var(--pickup-size) / 2);
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
+        /* Crowbar above crate — pulsates when player has crowbar, clickable to open */
+        .crowbar-at-crate {
+            position: absolute;
+            width: 19px;
+            height: 19px;
+            bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) + 35px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - 28px);
+            z-index: var(--z-floating-item);
+            opacity: 0;
+            pointer-events: none;
+            cursor: pointer;
+        }
+        .crowbar-at-crate svg {
+            width: 100%;
+            height: 100%;
+            color: var(--wrench-color);
+        }
+        #level-9:checked ~ #pos-12:checked ~ #crowbar-pickup:checked ~ #crate-opened:not(:checked) ~ .game-world .crate:hover ~ .crowbar-at-crate,
+        #level-9:checked ~ #pos-12:checked ~ #crowbar-pickup:checked ~ #crate-opened:not(:checked) ~ .game-world .crowbar-at-crate:hover {
+            opacity: 1;
+            pointer-events: auto;
+            animation: crowbar-hovering-pulse 1s ease-in-out infinite;
         }
         /* Torch - S4 (caves) L0-P12 */
         .torch-in-game {
@@ -2367,9 +2452,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
         }
-        /* Hide crowbar hover area and tooltip when picked up */
+        /* Hide crowbar hover area and tooltip when picked up or crate opened */
         #crowbar-pickup:checked ~ .game-world .crowbar-hover-area,
-        #crowbar-pickup:checked ~ .game-world .crowbar-tooltip {
+        #crowbar-pickup:checked ~ .game-world .crowbar-tooltip,
+        #crate-opened:checked ~ .game-world .crowbar-hover-area,
+        #crate-opened:checked ~ .game-world .crowbar-tooltip {
             display: none;
         }
         /* Hide hover area when player is at crowbar (so label click works) */
@@ -2397,6 +2484,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit) + var(--inv-has-battery) + var(--inv-has-torch)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
+        }
+        /* Hide crowbar when crate is opened (crowbar consumed) */
+        #crate-opened:checked ~ .game-world .crowbar-in-game {
+            display: none;
         }
         /* Wrench - single element that animates from game world to inventory */
         .wrench-in-game {
@@ -4922,6 +5013,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         @keyframes crowbar-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--wrench-color)); }
             50% { filter: drop-shadow(0 0 12px var(--wrench-color)) drop-shadow(0 0 20px var(--wrench-color)); }
+        }
+        @keyframes crowbar-hovering-pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--wrench-color)); }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--wrench-color)) drop-shadow(0 0 25px var(--wrench-color)); }
         }
         @keyframes idcard-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--idcard-color)); }
@@ -7555,6 +7650,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="crowbar-pickup" title="crowbar">
         <input type="checkbox" id="darkness-toggle" title="darkness">
         <!-- S2 checkboxes -->
+        <input type="checkbox" id="crate-opened" title="crate">
         <input type="checkbox" id="battery-pickup" title="battery">
         <input type="checkbox" id="tree-chopped" title="tree">
         <input type="checkbox" id="axe-pickup" title="axe">
@@ -7862,6 +7958,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <span class="item-hover battery-hover-area"></span>
         <label for="battery-pickup" class="item battery-in-game"><svg><use href="#battery"/></svg></label>
         <span class="tooltip battery-tooltip">Battery</span>
+        <!-- Crate on S2, level 4, position 12 -->
+        <span class="item-hover crate-hover-area"></span>
+        <label for="crate-opened" class="crate"><svg><use href="#crate"/></svg></label>
+        <span class="tooltip crate-tooltip">The crate is nailed shut.</span>
         <!-- Torch on stage 4, level 0, pos 12 (clickable to pick up) -->
         <span class="item-hover torch-hover-area"></span>
         <label for="torch-pickup" class="item torch-in-game"><svg><use href="#torch"/></svg></label>
@@ -7876,6 +7976,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <span class="tooltip wrench-tooltip">Wrench</span>
         <!-- Key above toolbox (clickable to unlock) -->
         <label for="toolbox-unlocked" class="key-at-toolbox"><svg><use href="#key"/></svg></label>
+        <!-- Crowbar above crate (clickable to open) -->
+        <label for="crate-opened" class="crowbar-at-crate"><svg><use href="#crowbar"/></svg></label>
         <!-- Horizontal arrow labels (right) -->
         <label for="pos-2" class="arrow arrow-right arrow-h arrow-P1-right"></label>
         <label for="pos-3" class="arrow arrow-right arrow-h arrow-P2-right"></label>
