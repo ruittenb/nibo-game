@@ -231,6 +231,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --unavailable: #c41616;
             --available: #1aa33a;
             --wrench-color: #708090;
+            --crowbar-color: #fff;
             --axe-color: #cc1010;
             --idcard-color: #4a9f4a;
             --keycard-color: #9acd32;
@@ -1647,10 +1648,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #wrench-pickup { top: 120px; left: 100px; }
         #door-unlocked { top: 120px; left: 120px; }
         /* Debug positions - S2/S3 items */
-        #tree-chopped { top: 50px; left: 210px; }
+        #tree-chopped { top: 50px; left: 230px; }
         #axe-pickup { top: 50px; left: 320px; }
-        #crate-opened { top: 50px; left: 170px; }
-        #battery-pickup { top: 50px; left: 190px; }
+        #crate-opened { top: 50px; left: 190px; }
+        #battery-pickup { top: 50px; left: 210px; }
         #keycard-pickup { top: 50px; left: 340px; }
         #bolt-fixed { top: 50px; left: 360px; }
         #flight-controls-used { top: 50px; left: 380px; }
@@ -2355,10 +2356,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Crowbar above crate — pulsates when player has crowbar, clickable to open */
         .crowbar-at-crate {
             position: absolute;
-            width: 19px;
-            height: 19px;
+            width: 23px;
+            height: 23px;
             bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness) + 35px);
-            left: calc(var(--pos-offset) + var(--pos-width) * 11 - 28px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - 30px);
             z-index: var(--z-floating-item);
             opacity: 0;
             pointer-events: none;
@@ -5011,12 +5012,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             50% { filter: drop-shadow(0 0 12px yellow) drop-shadow(0 0 20px yellow); }
         }
         @keyframes crowbar-pulse {
-            0%, 100% { filter: drop-shadow(0 0 4px var(--wrench-color)); }
-            50% { filter: drop-shadow(0 0 12px var(--wrench-color)) drop-shadow(0 0 20px var(--wrench-color)); }
+            0%, 100% { filter: drop-shadow(0 0 2px var(--crowbar-color)); }
+            50% { filter: drop-shadow(0 0 6px var(--crowbar-color)) drop-shadow(0 0 10px var(--crowbar-color)); }
         }
         @keyframes crowbar-hovering-pulse {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--wrench-color)); }
-            50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--wrench-color)) drop-shadow(0 0 25px var(--wrench-color)); }
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px var(--crowbar-color)); }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 8px var(--crowbar-color)) drop-shadow(0 0 13px var(--crowbar-color)); }
         }
         @keyframes idcard-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--idcard-color)); }
