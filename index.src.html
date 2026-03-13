@@ -257,7 +257,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --z-floating-item: 500;       /* Floating item icons when using items */
             --z-underwater: 550;          /* Underwater filter overlay */
             --z-arrows: 600;              /* In-game navigation arrows */
-            --z-items: 700;               /* Pickupable items (key, wrench, axe, battery, idcard, torch) */
+            --z-items: 700;               /* Pickupable items (key, wrench, axe, battery, idcard, torch, crowbar) */
             --z-loot: 700;               /* Loot (coins, gems) */
             --z-darkness: 800;            /* Caves darkness (above items/loot) */
             --z-ui: 900;                  /* UI elements (title, inventory, counter) */
@@ -414,6 +414,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             --inv-has-idcard: 0;
             --inv-has-battery: 0;
             --inv-has-torch: 0;
+            --inv-has-crowbar: 0;
             --inv-has-scuba: 0;
             --inv-has-keycard: 0;
             --inv-has-suit: 0;
@@ -462,6 +463,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #suit-pickup:checked ~ .game-world { --inv-has-suit: 1; }
         #battery-pickup:checked ~ .game-world { --inv-has-battery: 1; }
         #torch-pickup:checked ~ .game-world { --inv-has-torch: 1; }
+        #crowbar-pickup:checked ~ .game-world { --inv-has-crowbar: 1; }
         #scuba-pickup:checked ~ .game-world { --inv-has-scuba: 1; }
         #keycard-pickup:checked ~ .game-world { --inv-has-keycard: 1; }
         #engine-part-pickup:checked ~ .game-world { --inv-has-engine-part: 1; }
@@ -1551,7 +1553,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Hide radio buttons and checkboxes by default */
         .position-radio, .level-radio, .layer-radio, .loot-checkbox,
-        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #suit-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #keycard-pickup, #tower-open, #engine-part-pickup, #engine-installed,
+        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #suit-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #crowbar-pickup, #keycard-pickup, #tower-open, #engine-part-pickup, #engine-installed,
         #lives-3, #death-1, #lives-2, #death-2, #lives-1, #death-3,
         #artwork-toggle {
             display: none;
@@ -1657,6 +1659,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #engine-installed { top: 50px; left: 510px; }
         /* Debug positions - S4 items */
         #torch-pickup { top: 120px; left: 190px; }
+        #crowbar-pickup { top: 120px; left: 210px; }
         #darkness-toggle { top: 140px; left: 190px; }
         /* Debug positions - S5 items */
         #idcard-pickup { top: 120px; left: 320px; }
@@ -1718,6 +1721,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ #escaped,
         #debug-toggle:checked ~ #darkness-toggle,
         #debug-toggle:checked ~ #torch-pickup,
+        #debug-toggle:checked ~ #crowbar-pickup,
         #debug-toggle:checked ~ #keycard-pickup,
         #debug-toggle:checked ~ #tower-open,
         #debug-toggle:checked ~ #engine-part-pickup,
@@ -1762,6 +1766,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-battery,
         .inventory-scuba,
         .inventory-torch,
+        .inventory-crowbar,
         .inventory-engine-part,
         .inventory-keycard {
             position: relative;
@@ -1787,6 +1792,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .inventory-battery svg,
         .inventory-scuba svg,
         .inventory-torch svg,
+        .inventory-crowbar svg,
         .inventory-engine-part svg,
         .inventory-keycard svg {
             width: 24px;
@@ -1810,6 +1816,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #battery-pickup:checked ~ .inv-panel .inventory-battery,
         #scuba-pickup:checked ~ .inv-panel .inventory-scuba,
         #torch-pickup:checked ~ .inv-panel .inventory-torch,
+        #crowbar-pickup:checked ~ .inv-panel .inventory-crowbar,
         #keycard-pickup:checked ~ .inv-panel .inventory-keycard,
         #engine-part-pickup:checked ~ .inv-panel .inventory-engine-part {
             display: flex;
@@ -2384,6 +2391,69 @@ AAAAAAAAAAAAAAAAAAAAAA==
                        - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit) + var(--inv-has-battery)));
             opacity: 0;
             transition: none;
+        }
+        /* Crowbar - S4 (caves) L2-P12 */
+        .crowbar-in-game {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
+            z-index: var(--z-items);
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .crowbar-in-game svg {
+            width: 24px;
+            height: 24px;
+        }
+        .crowbar-tooltip {
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) + var(--pickup-size));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset) + var(--pickup-size) / 2);
+            transform: translateX(-50%);
+        }
+        /* Hover area for crowbar tooltip (when not adjacent) */
+        .crowbar-hover-area {
+            position: absolute;
+            width: var(--pickup-size);
+            height: var(--pickup-size);
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
+            pointer-events: auto;
+            z-index: var(--z-item-hover);
+        }
+        /* Hide crowbar hover area and tooltip when picked up */
+        #crowbar-pickup:checked ~ .game-world .crowbar-hover-area,
+        #crowbar-pickup:checked ~ .game-world .crowbar-tooltip {
+            display: none;
+        }
+        /* Hide hover area when player is at crowbar (so label click works) */
+        #level-2:checked ~ #pos-12:checked ~ .game-world .crowbar-hover-area {
+            display: none;
+        }
+        /* Show tooltip on hover area hover */
+        .crowbar-hover-area:hover ~ .crowbar-tooltip {
+            opacity: 1;
+        }
+        /* Show tooltip when player is at crowbar and hovers */
+        #level-2:checked ~ #pos-12:checked ~ #crowbar-pickup:not(:checked) ~ .game-world .crowbar-in-game:hover ~ .crowbar-tooltip {
+            opacity: 1;
+        }
+        /* Enable clicking crowbar only when player is next to it - S4 uses levels 0-4 */
+        #level-2:checked ~ #pos-12:checked ~ #crowbar-pickup:not(:checked) ~ .game-world .crowbar-in-game {
+            pointer-events: auto;
+            cursor: pointer;
+            animation: crowbar-pulse 1s ease-in-out infinite;
+        }
+        /* Fly crowbar to inventory when picked up (S4: viewport right = pos-width * 12) */
+        #crowbar-pickup:checked ~ .game-world .crowbar-in-game {
+            bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
+            left: calc(var(--pos-width) * 12 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit) + var(--inv-has-battery) + var(--inv-has-torch)));
+            opacity: 0;
+            transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
         /* Wrench - single element that animates from game world to inventory */
         .wrench-in-game {
@@ -3279,7 +3349,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #engine-part-pickup:checked ~ .game-world .engine-part-in-game {
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 24 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
-                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit) + var(--inv-has-battery) + var(--inv-has-torch) + var(--inv-has-scuba) + var(--inv-has-keycard)));
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit) + var(--inv-has-battery) + var(--inv-has-torch) + var(--inv-has-crowbar) + var(--inv-has-scuba) + var(--inv-has-keycard)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -3553,7 +3623,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #scuba-pickup:checked ~ .game-world .scuba-in-game {
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - 12px - 4px);
             left: calc(var(--pos-width) * 24 - var(--panel-right) - 2px - var(--panel-padding) - 24px - 4px
-                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit) + var(--inv-has-battery) + var(--inv-has-torch)));
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit) + var(--inv-has-battery) + var(--inv-has-torch) + var(--inv-has-crowbar)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -3616,7 +3686,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #keycard-pickup:checked ~ .game-world .keycard-in-game {
             bottom: calc(var(--stage-height) + var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) / 2 - var(--pickup-size) / 2 - 4px);
             left: calc(var(--pos-width) * 18 - var(--panel-right) - 2px - var(--panel-padding) - var(--pickup-size) - 4px
-                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit) + var(--inv-has-battery) + var(--inv-has-torch) + var(--inv-has-scuba)));
+                       - var(--inv-slot-width) * (var(--inv-has-key) + var(--inv-has-wrench) + var(--inv-has-axe) + var(--inv-has-idcard) + var(--inv-has-suit) + var(--inv-has-battery) + var(--inv-has-torch) + var(--inv-has-crowbar) + var(--inv-has-scuba)));
             opacity: 0;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.3s ease-in-out 0.4s;
         }
@@ -4951,6 +5021,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         @keyframes torch-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px yellow); }
             50% { filter: drop-shadow(0 0 12px yellow) drop-shadow(0 0 20px yellow); }
+        }
+        @keyframes crowbar-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--wrench-color)); }
+            50% { filter: drop-shadow(0 0 12px var(--wrench-color)) drop-shadow(0 0 20px var(--wrench-color)); }
         }
         @keyframes idcard-pulse {
             0%, 100% { filter: drop-shadow(0 0 4px var(--idcard-color)); }
@@ -7581,6 +7655,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="door-unlocked" title="door">
         <!-- S4 checkboxes -->
         <input type="checkbox" id="torch-pickup" title="torch">
+        <input type="checkbox" id="crowbar-pickup" title="crowbar">
         <input type="checkbox" id="darkness-toggle" title="darkness">
         <!-- S2 checkboxes -->
         <input type="checkbox" id="battery-pickup" title="battery">
@@ -7801,6 +7876,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="inventory-suit"><svg><use href="#suit"/></svg><span class="tooltip">Radiation Suit</span></span>
             <span class="inventory-battery"><svg><use href="#battery"/></svg><span class="tooltip">Battery</span></span>
             <span class="inventory-torch"><svg><use href="#torch"/></svg><span class="tooltip">Torch</span></span>
+            <span class="inventory-crowbar"><svg><use href="#crowbar"/></svg><span class="tooltip">Crowbar</span></span>
             <span class="inventory-scuba"><svg><use href="#scuba"/></svg><span class="tooltip">Scuba Gear</span></span>
             <span class="inventory-keycard"><svg><use href="#keycard"/></svg><span class="tooltip">Key Card</span></span>
             <span class="inventory-engine-part"><svg><use href="#engine-part"/></svg><span class="tooltip">Working Engine Part</span></span>
@@ -7893,6 +7969,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <span class="torch-hover-area"></span>
         <label for="torch-pickup" class="torch-in-game"><svg><use href="#torch"/></svg></label>
         <span class="tooltip torch-tooltip">Torch</span>
+        <!-- Crowbar on stage 4, level 2, pos 12 (clickable to pick up) -->
+        <span class="crowbar-hover-area"></span>
+        <label for="crowbar-pickup" class="crowbar-in-game"><svg><use href="#crowbar"/></svg></label>
+        <span class="tooltip crowbar-tooltip">Crowbar</span>
         <!-- Wrench in game world (clickable to pick up) -->
         <span class="wrench-hover-area"></span>
         <label for="wrench-pickup" class="wrench-in-game"><svg><use href="#wrench"/></svg></label>
