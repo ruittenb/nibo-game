@@ -1940,15 +1940,18 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#death-2, #lives-1, #death-3):checked ~ .heart-panel .heart-icon-2 { color: var(--heart-lost-color); filter: none; }
         /* Heart 1 fades on game over */
         #death-3:checked ~ .heart-panel .heart-icon-1 { color: var(--heart-lost-color); filter: none; }
-        /* Key - single element that animates from game world to inventory */
-        .key-in-game {
+        /* Shared item base: all pickupable in-game items */
+        .item {
             position: absolute;
             width: var(--pickup-size);
             height: var(--pickup-size);
-            bottom: calc(var(--level-height) * 4 + var(--platform-thickness));
-            left: calc(var(--pos-offset) - var(--item-offset));
             z-index: var(--z-items);
             pointer-events: none;
+        }
+        /* Key - single element that animates from game world to inventory */
+        .key-in-game {
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness));
+            left: calc(var(--pos-offset) - var(--item-offset));
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out;
             display: flex;
             justify-content: center;
@@ -2063,13 +2066,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Axe on stage 3, level 4, pos φ (floating platform) */
         .axe-in-game {
-            position: absolute;
-            width: var(--pickup-size);
-            height: var(--pickup-size);
             bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 16 - var(--item-offset));
-            z-index: var(--z-items);
-            pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
         }
         .axe-in-game svg {
@@ -2127,13 +2125,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* ID card on stage 5, level 0, pos 13 */
         .idcard-in-game {
-            position: absolute;
-            width: var(--pickup-size);
-            height: var(--pickup-size);
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 12 - var(--item-offset));
-            z-index: var(--z-items);
-            pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
         }
         .idcard-in-game svg {
@@ -2195,13 +2188,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Suit on S5, level 3, pos 18 */
         .suit-in-game {
-            position: absolute;
             width: calc(var(--pickup-size) * 1.2);
             height: calc(var(--pickup-size) * 1.2);
             bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 6px - var(--pickup-size) * 0.1);
             left: calc(var(--pos-offset) + var(--pos-width) * 17 - var(--item-offset) - var(--pickup-size) * 0.1);
-            z-index: var(--z-items);
-            pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
         }
         .suit-in-game svg {
@@ -2263,13 +2253,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Battery on stage 2, level 4, pos 12 (where ID card was) */
         .battery-in-game {
-            position: absolute;
-            width: var(--pickup-size);
-            height: var(--pickup-size);
             bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
-            z-index: var(--z-items);
-            pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
         }
         .battery-in-game svg {
@@ -2329,13 +2314,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Torch - S4 (caves) L0-P12 */
         .torch-in-game {
-            position: absolute;
-            width: var(--pickup-size);
-            height: var(--pickup-size);
             bottom: var(--ground-height);
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
-            z-index: var(--z-items);
-            pointer-events: none;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -2394,13 +2374,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Crowbar - S4 (caves) L2-P12 */
         .crowbar-in-game {
-            position: absolute;
-            width: var(--pickup-size);
-            height: var(--pickup-size);
             bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 11 - var(--item-offset));
-            z-index: var(--z-items);
-            pointer-events: none;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -2457,14 +2432,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Wrench - single element that animates from game world to inventory */
         .wrench-in-game {
-            position: absolute;
-            width: var(--pickup-size);
-            height: var(--pickup-size);
             bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 5 - var(--item-offset));
-            z-index: var(--z-items);
             display: none;
-            pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
         }
         .wrench-in-game svg {
@@ -3295,13 +3265,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Engine part on top of tower (S6-L9-P24) */
         .engine-part-in-game {
-            position: absolute;
-            width: var(--pickup-size);
-            height: var(--pickup-size);
             bottom: calc(var(--stage-height) + var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 23 - var(--item-offset));
-            z-index: var(--z-items);
-            pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
         }
         .engine-part-in-game svg {
@@ -3569,14 +3534,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Scuba gear S3-L6-P14 */
         .scuba-in-game {
-            position: absolute;
             bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 18 - var(--item-offset));
             width: 28px;
             height: 28px;
             color: #cc1010;
-            z-index: var(--z-items);
-            pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
         }
         .scuba-in-game svg {
@@ -3629,13 +3591,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Key card on S3-L6-P14 */
         .keycard-in-game {
-            position: absolute;
-            width: var(--pickup-size);
-            height: var(--pickup-size);
             bottom: calc(var(--stage-height) + var(--level-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 13 - var(--item-offset));
-            z-index: var(--z-items);
-            pointer-events: none;
             transition: bottom 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
         }
         .keycard-in-game svg {
@@ -7939,7 +7896,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="game-world">
         <!-- Key in game world (clickable to pick up) -->
         <span class="key-hover-area"></span>
-        <label for="key-pickup" class="key-in-game"><svg><use href="#key"/></svg></label>
+        <label for="key-pickup" class="item key-in-game"><svg><use href="#key"/></svg></label>
         <span class="tooltip key-tooltip">Key</span>
         <!-- Toolbox on level 2, position 6 -->
         <span class="toolbox-hover-area"></span>
@@ -7949,33 +7906,33 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <span class="tooltip toolbox-tooltip">A locked toolbox.<br>You need a key.</span>
         <!-- Axe on stage 3, level 4, pos φ (clickable to pick up) -->
         <span class="axe-hover-area"></span>
-        <label for="axe-pickup" class="axe-in-game"><svg><use href="#axe"/></svg></label>
+        <label for="axe-pickup" class="item axe-in-game"><svg><use href="#axe"/></svg></label>
         <span class="tooltip axe-tooltip">Axe</span>
         <!-- ID card on stage 2, level 4, pos 6 (clickable to pick up) -->
         <div class="stage-2-elements">
             <span class="idcard-hover-area"></span>
-            <label for="idcard-pickup" class="idcard-in-game"><svg><use href="#id-card"/></svg></label>
+            <label for="idcard-pickup" class="item idcard-in-game"><svg><use href="#id-card"/></svg></label>
             <span class="tooltip idcard-tooltip">ID Card</span>
         </div>
         <!-- Suit on S5, level 3, pos 18 (clickable to pick up) -->
         <span class="suit-hover-area"></span>
-        <label for="suit-pickup" class="suit-in-game"><svg><use href="#suit"/></svg></label>
+        <label for="suit-pickup" class="item suit-in-game"><svg><use href="#suit"/></svg></label>
         <span class="tooltip suit-tooltip">Radiation Suit</span>
         <!-- Battery on stage 3, level 2, pos 1 (clickable to pick up) -->
         <span class="battery-hover-area"></span>
-        <label for="battery-pickup" class="battery-in-game"><svg><use href="#battery"/></svg></label>
+        <label for="battery-pickup" class="item battery-in-game"><svg><use href="#battery"/></svg></label>
         <span class="tooltip battery-tooltip">Battery</span>
         <!-- Torch on stage 4, level 0, pos 12 (clickable to pick up) -->
         <span class="torch-hover-area"></span>
-        <label for="torch-pickup" class="torch-in-game"><svg><use href="#torch"/></svg></label>
+        <label for="torch-pickup" class="item torch-in-game"><svg><use href="#torch"/></svg></label>
         <span class="tooltip torch-tooltip">Torch</span>
         <!-- Crowbar on stage 4, level 2, pos 12 (clickable to pick up) -->
         <span class="crowbar-hover-area"></span>
-        <label for="crowbar-pickup" class="crowbar-in-game"><svg><use href="#crowbar"/></svg></label>
+        <label for="crowbar-pickup" class="item crowbar-in-game"><svg><use href="#crowbar"/></svg></label>
         <span class="tooltip crowbar-tooltip">Crowbar</span>
         <!-- Wrench in game world (clickable to pick up) -->
         <span class="wrench-hover-area"></span>
-        <label for="wrench-pickup" class="wrench-in-game"><svg><use href="#wrench"/></svg></label>
+        <label for="wrench-pickup" class="item wrench-in-game"><svg><use href="#wrench"/></svg></label>
         <span class="tooltip wrench-tooltip">Wrench</span>
         <!-- Key above toolbox (clickable to unlock) -->
         <label for="toolbox-unlocked" class="key-at-toolbox"><svg><use href="#key"/></svg></label>
@@ -8377,11 +8334,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="ladder spine-ladder ladder-S3-L8-P17"></div>
         <!-- Scuba gear -->
         <span class="scuba-hover-area"></span>
-        <label for="scuba-pickup" class="scuba-in-game"><svg><use href="#scuba"/></svg></label>
+        <label for="scuba-pickup" class="item scuba-in-game"><svg><use href="#scuba"/></svg></label>
         <span class="tooltip scuba-tooltip">Scuba Gear</span>
         <!-- Key card at S3-L6-P14 -->
         <span class="keycard-hover-area"></span>
-        <label for="keycard-pickup" class="keycard-in-game"><svg><use href="#keycard"/></svg></label>
+        <label for="keycard-pickup" class="item keycard-in-game"><svg><use href="#keycard"/></svg></label>
         <span class="tooltip keycard-tooltip">Key Card</span>
         <!-- Teleporter at L7-P18 -->
         <span class="teleporter-hover-area"></span>
@@ -8524,7 +8481,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </div>
         <!-- Engine part on top of tower -->
         <span class="engine-part-hover-area"></span>
-        <label for="engine-part-pickup" class="engine-part-in-game"><svg><use href="#engine-part"/></svg></label>
+        <label for="engine-part-pickup" class="item engine-part-in-game"><svg><use href="#engine-part"/></svg></label>
         <span class="tooltip engine-part-tooltip">Working Engine Part</span>
         <!-- Broken engine part at S6-L7-P20 -->
         <span class="broken-engine-part-hover-area"></span>
