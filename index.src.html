@@ -1270,6 +1270,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             z-index: var(--z-scenery);
             pointer-events: none;
             cursor: pointer;
+            --teleporter-color-1: #f90;
+            --teleporter-color-2: #f90;
+            --teleporter-color-3: #f90;
+        }
+        #bolt-fixed:checked ~ .game-world .teleporter-S3-L7-P18 {
             animation: teleporter-cycle-orange 1.5s linear infinite;
         }
         .teleporter-S3-L7-P18 svg {
@@ -1277,14 +1282,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
             height: 100%;
         }
         /* Enable clicking teleporter when player is at S3-L7-P18 */
-        #level-7:checked ~ #pos-18:checked ~ .game-world .teleporter-S3-L7-P18 {
+        #level-7:checked ~ #pos-18:checked ~ #bolt-fixed:checked ~ .game-world .teleporter-S3-L7-P18 {
             pointer-events: auto;
             animation: teleporter-pulse 1s ease-in-out infinite, teleporter-cycle-orange 1.5s linear infinite;
         }
         /* Show nav-panel teleporter icon when player is at S3-L7-P18 */
-        #level-7:checked ~ #pos-18:checked ~ .nav-panel .nav-teleporter[for="level-τ"] { display: block; }
+        #level-7:checked ~ #pos-18:checked ~ #bolt-fixed:checked ~ .nav-panel .nav-teleporter[for="level-τ"] { display: block; }
         /* Hide hover area when player can click teleporter */
-        #level-7:checked ~ #pos-18:checked ~ .game-world .teleporter-hover-area {
+        #level-7:checked ~ #pos-18:checked ~ #bolt-fixed:checked ~ .game-world .teleporter-hover-area {
             display: none;
         }
         /* Teleporter tooltip */
@@ -1297,6 +1302,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             transform: translateX(-50%);
             margin-bottom: 8px;
         }
+        .teleporter-tooltip-powered { display: none; }
+        #bolt-fixed:checked ~ .game-world .teleporter-tooltip-nopower { display: none; }
+        #bolt-fixed:checked ~ .game-world .teleporter-tooltip-powered { display: block; }
         /* Teleporter platform at S5-L3-P13 (decorative) */
         .teleporter-S5-L3-P13-hover-area {
             position: absolute;
@@ -4521,9 +4529,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             margin: auto;
             width: 20px;
             height: 20px;
-            --teleporter-color-1: #e08030;
-            --teleporter-color-2: #e08030;
-            --teleporter-color-3: #e08030;
+            --teleporter-color-1: #f90;
+            --teleporter-color-2: #f90;
+            --teleporter-color-3: #f90;
         }
         .nav-teleporter-blue {
             --teleporter-color-1: #48f;
@@ -8388,7 +8396,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="level-τ" class="teleporter-S3-L7-P18">
             <svg><use href="#teleporter-platform"/></svg>
         </label>
-        <span class="tooltip teleporter-tooltip">Teleporter</span>
+        <span class="tooltip teleporter-tooltip teleporter-tooltip-nopower">Teleporter<br>It has no power.</span>
+        <span class="tooltip teleporter-tooltip teleporter-tooltip-powered">The teleporter<br>is operational.</span>
         <!-- Bolt -->
         <span class="bolt-hover-area"></span>
         <label for="bolt-fixed" class="bolt">
