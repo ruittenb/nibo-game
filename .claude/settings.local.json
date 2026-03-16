@@ -6,7 +6,9 @@
       "Bash(make minify:*)",
       "Bash(make minify-fast:*)",
       "Bash(pip3 install:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(xargs cat:*)",
+      "Bash(python3:*)"
     ]
   }
 }

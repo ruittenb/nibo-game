@@ -601,15 +601,22 @@ def shorten_zero_units(text):
 
 def remove_unnecessary_quotes(html):
     """Remove quotes from attribute values where they're not needed.
-    HTML spec allows unquoted values that don't contain spaces, quotes, =, <, >, or backticks."""
+    HTML spec allows unquoted values that don't contain spaces, quotes, =, <, >, or backticks.
+    Preserves quotes when the value immediately precedes /> to avoid the HTML5 parser
+    consuming the / as part of an unquoted attribute value."""
     def _unquote(m):
         before = m.group(1)  # attr=
         quote = m.group(2)
         value = m.group(3)
+        after = m.group(4)   # character(s) after closing quote
         if re.match(r'^[a-zA-Z0-9._-]+$', value):
-            return before + value
+            # Don't unquote if immediately followed by /> (self-closing tag)
+            # because the / would be parsed as part of the unquoted value
+            if after == '/>':
+                return m.group(0)
+            return before + value + after
         return m.group(0)
-    return re.sub(r'(\w+=)(["\'])([^"\']*)\2', _unquote, html)
+    return re.sub(r'(\w+=)(["\'])([^"\']*)\2(/>|)', _unquote, html)
 
 
 TAG_RENAMES = {
