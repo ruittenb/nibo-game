@@ -4934,8 +4934,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
             50% { opacity: 0.9; transform: translateY(-8px) scaleX(1.15); filter: blur(4px); }
         }
         @keyframes valve-pulse {
-            0%, 100% { box-shadow: 0 0 4px rgba(0,0,0,0.5), 0 0 6px #c33, inset 0 0 6px rgba(0,0,0,0.3); }
-            50% { box-shadow: 0 0 4px rgba(0,0,0,0.5), 0 0 14px #c33, 0 0 22px #c33, inset 0 0 6px rgba(0,0,0,0.3); }
+            0%, 100% { filter: drop-shadow(0 0 4px #c33); }
+            50% { filter: drop-shadow(0 0 12px #c33) drop-shadow(0 0 20px #c33); }
+        }
+        @keyframes valve-pulse-green {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--available)); }
+            50% { filter: drop-shadow(0 0 12px var(--available)) drop-shadow(0 0 20px var(--available)); }
         }
         @keyframes bolt-flicker {
             0%, 5% { opacity: 1; filter: drop-shadow(0 0 8px var(--bolt-color-1)) drop-shadow(0 0 15px var(--bolt-color-2)); translate: 2px -1px; }
@@ -5602,7 +5606,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             position: absolute;
             top: 0;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) rotate(-22deg);
             width: 28px;
             height: 28px;
             border: 4px solid #933;
@@ -5666,6 +5670,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-1:checked ~ #pos-2:checked ~ #steam-off:not(:checked) ~ .game-world .valve-label {
             animation: valve-pulse 1s ease-in-out infinite;
         }
+        #level-1:checked ~ #pos-2:checked ~ #steam-off:checked ~ .game-world .valve-label {
+            animation: valve-pulse-green 1s ease-in-out infinite;
+        }
         /* Hide hover area when player can click valve */
         #level-1:checked ~ #pos-2:checked ~ .game-world .valve-hover-area {
             display: none;
@@ -5674,7 +5681,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #steam-off:checked ~ .game-world .valve-label {
             border-color: var(--available);
             background: radial-gradient(circle, #2a5a2a 30%, #1a4a1a 70%);
-            transform: translateX(-50%) rotate(45deg);
+            transform: translateX(-50%) rotate(23deg);
         }
         #steam-off:checked ~ .game-world .valve-label::before,
         #steam-off:checked ~ .game-world .valve-label::after {
@@ -8394,7 +8401,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <label for="steam-off" class="valve-label"></label>
             <span class="valve-hover-area"></span>
             <span class="tooltip valve-tooltip">Steam valve. It controls<br>the steam pipes.</span>
-            <span class="tooltip valve-tooltip-off">The steam has been<br>shut off.</span>
+            <span class="tooltip valve-tooltip-off">The steam has<br>been rerouted.</span>
         </div>
         <!-- Skull hazard -->
         <div class="skull skull-S1-L1-P6">
