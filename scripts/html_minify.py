@@ -144,26 +144,48 @@ def minify_html_whitespace(html):
 
 def find_var_declarations(css_text):
     """Find all --var: value declarations across CSS text.
-    Returns dict of var_name -> list of values (multiple means redefined)."""
+    Returns dict of var_name -> list of (value, conditional) tuples.
+    A declaration is conditional if its selector contains pseudo-classes
+    like :checked or :hover that make it state-dependent."""
     cleaned = re.sub(r'/\*.*?\*/', '', css_text, flags=re.DOTALL)
     cleaned = re.sub(r'"[^"]*"', '""', cleaned)
     cleaned = re.sub(r"'[^']*'", "''", cleaned)
+
+    # Build a map of position -> selector for each rule block
+    # so we can check if a var declaration is inside a conditional selector
+    conditional_pseudo = re.compile(r':(?:checked|hover|focus|active|target|disabled|enabled|indeterminate)')
+    selector_ranges = []
+    for m in re.finditer(r'([^{}]*)\{([^{}]*)\}', cleaned):
+        selector = m.group(1)
+        is_conditional = bool(conditional_pseudo.search(selector))
+        body_start = m.start(2)
+        body_end = m.end(2)
+        selector_ranges.append((body_start, body_end, is_conditional))
 
     declarations = {}
     for m in re.finditer(r'(--[\w-]+)\s*:\s*([^;{}]+?)\s*(?:;|(?=\}))', cleaned):
         name = m.group(1)
         value = m.group(2).strip()
-        declarations.setdefault(name, []).append(value)
+        pos = m.start()
+        conditional = False
+        for start, end, is_cond in selector_ranges:
+            if start <= pos <= end:
+                conditional = is_cond
+                break
+        declarations.setdefault(name, []).append((value, conditional))
     return declarations
 
 
 def identify_constants(declarations):
     """Return {var_name: value} for variables defined exactly once
-    with a simple constant value (no var() references)."""
+    with a simple constant value (no var() references).
+    Excludes variables declared inside conditional selectors (:checked, :hover, etc.)."""
     constants = {}
-    for name, values in declarations.items():
-        if len(values) == 1 and 'var(' not in values[0]:
-            constants[name] = values[0]
+    for name, entries in declarations.items():
+        if len(entries) == 1:
+            value, conditional = entries[0]
+            if not conditional and 'var(' not in value:
+                constants[name] = value
     return constants
 
 
@@ -174,10 +196,12 @@ def resolve_var_chains(constants, declarations):
         if not changed:
             break
         changed = False
-        for name, values in declarations.items():
-            if len(values) != 1 or name in constants:
+        for name, entries in declarations.items():
+            if len(entries) != 1 or name in constants:
                 continue
-            value = values[0]
+            value, conditional = entries[0]
+            if conditional:
+                continue
 
             def _replace(m):
                 ref = m.group(1)
