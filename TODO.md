@@ -6,8 +6,6 @@ S7: Ancient alien temple with a guardian that wants payment.
  - compact file: use nested & notation?
  - burn disease with torch?
  - fly item to in-game location when applied?
- - color arrow purple when it leads to death?
- - pick up items in center of nav-panel?
 
 --------------------------------------------------------------------------------
 To S3:
