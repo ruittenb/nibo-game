@@ -207,6 +207,13 @@ Items pulse/glow when the player can interact with them. This requires combining
 }
 ```
 
+## Hover Area Patterns
+
+Two patterns exist for tooltip hover areas, depending on whether the element moves:
+
+- **Container-relative** (stationary scenery: door, tree, valve, loot, steam vent): The hover area is a child of a container div, positioned with `top`/`left` relative to the parent. Use this when the element stays in place.
+- **Game-world siblings** (pickupable items: key, wrench, axe, crowbar, battery, torch, etc.): The hover area is a direct child of `.game-world`, positioned with its own absolute `bottom`/`left` matching the item. Use this when the item animates (fly-to-inventory), because the label needs to move independently and CSS sibling selectors (`.hover-area:hover ~ .tooltip`) require them at the same DOM level.
+
 ## Winning Route
 
 1. Pick up **key** (S1-L4-P1)
