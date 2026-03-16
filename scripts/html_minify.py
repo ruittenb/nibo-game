@@ -603,7 +603,15 @@ def remove_unnecessary_quotes(html):
     """Remove quotes from attribute values where they're not needed.
     HTML spec allows unquoted values that don't contain spaces, quotes, =, <, >, or backticks.
     Preserves quotes when the value immediately precedes /> to avoid the HTML5 parser
-    consuming the / as part of an unquoted attribute value."""
+    consuming the / as part of an unquoted attribute value.
+    Protects url(...) content from being modified (data URIs contain embedded attributes)."""
+    # Temporarily replace url(...) content to protect embedded attributes
+    url_placeholders = []
+    def _protect_url(m):
+        url_placeholders.append(m.group(0))
+        return f'__URL_PLACEHOLDER_{len(url_placeholders) - 1}__'
+    protected = re.sub(r'url\([^)]*\)', _protect_url, html)
+
     def _unquote(m):
         before = m.group(1)  # attr=
         quote = m.group(2)
@@ -616,7 +624,12 @@ def remove_unnecessary_quotes(html):
                 return m.group(0)
             return before + value + after
         return m.group(0)
-    return re.sub(r'(\w+=)(["\'])([^"\']*)\2(/>|)', _unquote, html)
+    result = re.sub(r'(\w+=)(["\'])([^"\']*)\2(/>|)', _unquote, protected)
+
+    # Restore url(...) content
+    for i, original in enumerate(url_placeholders):
+        result = result.replace(f'__URL_PLACEHOLDER_{i}__', original)
+    return result
 
 
 TAG_RENAMES = {
