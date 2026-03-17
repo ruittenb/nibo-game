@@ -3204,14 +3204,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .wall-S7-inner {
             left: calc(var(--pos-width) * 23);
             bottom: var(--level-height);
-            height: calc(var(--level-height) * 3 + var(--platform-thickness));
+            height: calc(var(--level-height) * 2 + var(--platform-thickness));
             background:
                 /* Embedded rocks */
-                radial-gradient(ellipse 7px 5px at 40% 12%, #6b5a4a 0%, #5a4a3a 60%, transparent 70%),
-                radial-gradient(ellipse 5px 4px at 65% 30%, #7a6a5a 0%, #5a4a3a 60%, transparent 70%),
-                radial-gradient(ellipse 8px 5px at 35% 50%, #6b5a4a 0%, #4a3a2a 60%, transparent 70%),
-                radial-gradient(ellipse 6px 5px at 60% 70%, #7a6a5a 0%, #5a4a3a 60%, transparent 70%),
-                radial-gradient(ellipse 7px 4px at 45% 88%, #6b5a4a 0%, #4a3a2a 60%, transparent 70%),
+                radial-gradient(ellipse 7px 5px at 40% 15%, #6b5a4a 0%, #5a4a3a 60%, transparent 70%),
+                radial-gradient(ellipse 5px 4px at 65% 35%, #7a6a5a 0%, #5a4a3a 60%, transparent 70%),
+                radial-gradient(ellipse 8px 5px at 35% 55%, #6b5a4a 0%, #4a3a2a 60%, transparent 70%),
+                radial-gradient(ellipse 6px 5px at 60% 75%, #7a6a5a 0%, #5a4a3a 60%, transparent 70%),
+                radial-gradient(ellipse 7px 4px at 45% 90%, #6b5a4a 0%, #4a3a2a 60%, transparent 70%),
                 /* Base earth */
                 linear-gradient(to right, #5d3a1a 0%, #6b4423 40%, #8b5a2b 100%);
             box-shadow: inset 2px 0 3px #00000066, inset -2px 0 3px #00000066;
@@ -3220,6 +3220,33 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 70% 48%, 100% 55%, 75% 65%, 100% 70%, 80% 78%, 100% 85%, 70% 90%, 100% 95%,
                 100% 100%, 0% 100%
             );
+        }
+        .wall-S7-L3 {
+            position: absolute;
+            left: calc(var(--pos-width) * 22);
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
+            width: 12px;
+            z-index: var(--z-walls);
+            height: calc(var(--level-height) - var(--platform-thickness));
+            background: linear-gradient(to bottom, #1a3a8a 0%, #0e2460 50%, #091a4a 100%);
+            border-left: 2px solid #c8a832;
+            border-right: 2px solid #c8a832;
+            box-shadow: inset 0 -5px 0 #0000004d, 0 1px 3px rgba(200, 168, 50, 0.3);
+        }
+        .rope-S7-P24 {
+            position: absolute;
+            left: calc(var(--pos-width) * 23.5 - 2px);
+            bottom: calc(var(--level-height) * 2);
+            width: 4px;
+            height: calc(var(--stage-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px - var(--level-height) * 2);
+            background: repeating-linear-gradient(
+                45deg,
+                #8b6914 0px, #a07828 3px,
+                #6b5010 3px, #8b6914 6px
+            );
+            border-radius: 2px;
+            z-index: var(--z-climbables);
+            box-shadow: 1px 0 2px #00000044;
         }
         /* Manhole and cover at S2-L5-P7 */
         .manhole-S2-L5-P7 {
@@ -4170,7 +4197,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .arrow-L8-up { bottom: calc(var(--stage-height) + var(--level-height) * 3 + var(--platform-thickness) + 72.5px); }
         /* Down arrow bottom positions (one per departure level) */
         .arrow-L1-down { bottom: var(--level-height); }
-        .arrow-L2-down { bottom: calc(var(--level-height) * 2); }
+        .arrow-L2-down, .arrow-S7-L2-down { bottom: calc(var(--level-height) * 2); }
         .arrow-L3-down { bottom: calc(var(--level-height) * 3); }
         .arrow-L4-down { bottom: calc(var(--level-height) * 4); }
         .arrow-L5-down { bottom: calc(var(--stage-height) + var(--platform-thickness) / 2); }
@@ -4443,6 +4470,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-5:checked ~ #pos-15:checked ~ .game-world .arrow-L5-up { display: block; }
         #level-6:checked ~ #pos-16:checked ~ .game-world .arrow-L6-up { display: block; }
         #level-8:checked ~ #pos-17:checked ~ .game-world .arrow-φ-up { display: block; }
+        /* Stage 7 up arrows */
+        #level-1:checked ~ #pos-24:checked ~ .game-world .arrow-L1-up { display: block; }
+        #level-2:checked ~ #pos-24:checked ~ .game-world .arrow-L2-up { display: block; }
+        #level-3:checked ~ #pos-24:checked ~ .game-world .arrow-L3-up { display: block; }
+        #level-4:checked ~ #pos-24:checked ~ .game-world .arrow-L4-up { display: block; }
         /* Stage 6 up arrows */
         #level-5:checked ~ #pos-24:checked ~ .game-world .arrow-L5-up { display: block; }
         #level-6:checked ~ #pos-24:checked ~ .game-world .arrow-L6-up { display: block; }
@@ -4490,6 +4522,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-7:checked ~ #pos-13:checked ~ .game-world .arrow-L7-down { display: block; }
         #level-7:checked ~ #pos-14:checked ~ .game-world .arrow-L7-down { display: block; }
         #level-7:checked ~ #pos-16:checked ~ .game-world .arrow-L7-down { display: block; }
+        /* Stage 7 down arrows */
+        #level-4:checked ~ #pos-24:checked ~ .game-world .arrow-L4-down { display: block; }
+        #level-3:checked ~ #pos-24:checked ~ .game-world .arrow-L3-down { display: block; }
+        #level-2:checked ~ #pos-24:checked ~ .game-world .arrow-S7-L2-down { display: block; }
+        #level-1:checked ~ #pos-24:checked ~ .game-world .arrow-L1-down { display: block; }
         /* Stage 6 down arrows */
         #level-6:checked ~ #pos-24:checked ~ .game-world .arrow-L6-down { display: block; }
         #level-7:checked ~ #pos-24:checked ~ .game-world .arrow-L7-down { display: block; }
@@ -4759,6 +4796,14 @@ AAAAAAAAAAAAAAAAAAAAAA==
         :is(#level-0, #level-3):checked ~ #pos-23:checked ~ .game-world .arrow-P23-right { display: block; }
         :is(#level-0, #level-3):checked ~ #pos-24:checked ~ .game-world .arrow-P24-left { display: block; }
         #level-4:checked ~ #pos-23:checked ~ .game-world .arrow-P23-right { display: block; }
+        /* Stage 7: L3 wall between P22 and P23 blocks horizontal movement */
+        #level-3:checked ~ #pos-22:checked ~ .game-world .arrow-P22-right { display: none; }
+        #level-3:checked ~ #pos-23:checked ~ .game-world .arrow-P23-left { display: none; }
+        #level-3:checked ~ #pos-22:checked ~ .nav-panel .nav-right[for="pos-23"] { display: none; }
+        #level-3:checked ~ #pos-23:checked ~ .nav-panel .nav-left[for="pos-22"] { display: none; }
+        /* Stage 7: no left arrow at L4-P24 */
+        #level-4:checked ~ #pos-24:checked ~ .game-world .arrow-P24-left { display: none; }
+        #level-4:checked ~ #pos-24:checked ~ .nav-panel .nav-left[for="pos-23"] { display: none; }
         /* Stage 7 nav panel: P23→P24 without tower-open at L0-L4 */
         :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-23:checked ~ .nav-panel .nav-right[for="pos-24"] { display: block; }
         /* S3↔S6 cross-stage nav arrows (L5-L8) */
@@ -4842,6 +4887,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-5:checked ~ #pos-15:checked ~ .nav-panel .nav-up[for="level-6"] { display: block; }
         #level-6:checked ~ #pos-16:checked ~ .nav-panel .nav-up[for="level-7"] { display: block; }
         #level-8:checked ~ #pos-17:checked ~ .nav-panel .nav-up[for="pos-φ"] { display: block; }
+        /* Stage 7 nav up */
+        #level-1:checked ~ #pos-24:checked ~ .nav-panel .nav-up[for="level-2"] { display: block; }
+        #level-2:checked ~ #pos-24:checked ~ .nav-panel .nav-up[for="level-3"] { display: block; }
+        #level-3:checked ~ #pos-24:checked ~ .nav-panel .nav-up[for="level-4"] { display: block; }
+        #level-4:checked ~ #pos-24:checked ~ .nav-panel .nav-up[for="level-5"] { display: block; }
+        /* Stage 7 nav down */
+        #level-4:checked ~ #pos-24:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
+        #level-3:checked ~ #pos-24:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
+        #level-2:checked ~ #pos-24:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
+        #level-1:checked ~ #pos-24:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
         /* Stage 6 nav up */
         #level-5:checked ~ #pos-24:checked ~ .nav-panel .nav-up[for="level-6"] { display: block; }
         #level-6:checked ~ #pos-24:checked ~ .nav-panel .nav-up[for="level-7"] { display: block; }
@@ -7919,7 +7974,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </symbol>
     </svg>
     <div class="game-container">
-        <input type="checkbox" id="debug-toggle" accesskey="d" title="debug">
+        <input type="checkbox" id="debug-toggle" accesskey="d" title="debug" checked>
         <div class="debug-bg-positions"></div>
         <div class="debug-bg-levels"></div>
         <!-- Lives radio group -->
@@ -7950,7 +8005,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="layer" id="layer-η" class="layer-radio" title="layer-η">
         <input type="radio" name="layer" id="layer-θ" class="layer-radio" title="layer-θ">
         <!-- Radio buttons for position (horizontal) -->
-        <input type="radio" name="position" id="pos-1" class="position-radio" title="pos-1" checked>
+        <input type="radio" name="position" id="pos-1" class="position-radio" title="pos-1">
         <input type="radio" name="position" id="pos-2" class="position-radio" title="pos-2">
         <input type="radio" name="position" id="pos-3" class="position-radio" title="pos-3">
         <input type="radio" name="position" id="pos-4" class="position-radio" title="pos-4">
@@ -7971,7 +8026,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="position" id="pos-17" class="position-radio" title="pos-17">
         <input type="radio" name="position" id="pos-18" class="position-radio" title="pos-18">
         <!-- S6/S7 positions -->
-        <input type="radio" name="position" id="pos-19" class="position-radio" title="pos-19">
+        <input type="radio" name="position" id="pos-19" class="position-radio" title="pos-19" checked>
         <input type="radio" name="position" id="pos-20" class="position-radio" title="pos-20">
         <input type="radio" name="position" id="pos-21" class="position-radio" title="pos-21">
         <input type="radio" name="position" id="pos-22" class="position-radio" title="pos-22">
@@ -7979,7 +8034,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="position" id="pos-24" class="position-radio" title="pos-24">
         <input type="radio" name="position" id="pos-φ" class="position-radio" title="pos-φ">
         <!-- Title screen toggle -->
-        <input type="checkbox" id="title-screen-toggle" autofocus title="title screen">
+        <input type="checkbox" id="title-screen-toggle" autofocus title="title screen" checked>
         <!-- Artwork overlay toggle -->
         <input type="checkbox" id="artwork-toggle" title="artwork">
         <!-- S1 checkboxes -->
@@ -8378,6 +8433,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="level-6" class="arrow arrow-down arrow-v arrow-L7-down"></label>
         <label for="level-7" class="arrow arrow-down arrow-v arrow-L8-down"></label>
         <label for="level-8" class="arrow arrow-down arrow-v arrow-L9-down"></label>
+        <label for="level-0" class="arrow arrow-down arrow-v arrow-S7-L2-down"></label>
         <!-- Phantom position arrows -->
         <label for="pos-φ" class="arrow arrow-up arrow-v arrow-φ-up"></label>
         <label for="pos-16" class="arrow arrow-left arrow-φ-left"></label>
@@ -8721,6 +8777,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="rock-wall wall-S7-left"></div>
         <div class="rock-wall wall-S7-right"></div>
         <div class="rock-wall wall-S7-inner"></div>
+        <div class="wall-S7-L3"></div>
+        <div class="rope-S7-P24"></div>
         <div class="platform platform-S7-L1"></div>
         <div class="platform platform-S7-L2"></div>
         <div class="platform platform-S7-L3"></div>
