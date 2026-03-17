@@ -599,6 +599,37 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 transparent 32px, transparent 44px
             );
         }
+        /* Stage 7 Platforms (levels 0-4, positions 19-23) */
+        .platform-S7-L1 {
+            bottom: var(--level-height);
+            left: calc(var(--pos-width) * 18);
+            width: calc(var(--pos-width) * 5);
+        }
+        .platform-S7-L2 {
+            bottom: calc(var(--level-height) * 2);
+            left: calc(var(--pos-width) * 18);
+            width: calc(var(--pos-width) * 5);
+        }
+        .platform-S7-L3 {
+            bottom: calc(var(--level-height) * 3);
+            left: calc(var(--pos-width) * 18);
+            width: calc(var(--pos-width) * 5);
+        }
+        .platform-S7-L4 {
+            bottom: calc(var(--level-height) * 4);
+            left: calc(var(--pos-width) * 18);
+            width: calc(var(--pos-width) * 5);
+        }
+        /* Stage 7 platforms are intense blue with golden edges */
+        .platform-S7-L1,
+        .platform-S7-L2,
+        .platform-S7-L3,
+        .platform-S7-L4 {
+            background:
+                linear-gradient(to bottom, #1a3a8a 0%, #0e2460 50%, #091a4a 100%);
+            border-color: #c8a832;
+            box-shadow: inset 0 -5px 0 #0000004d, 0 1px 3px rgba(200, 168, 50, 0.3);
+        }
         /* Stage 3 Platforms (same vertical level as S2) */
         .platform-S3-L4 {
             bottom: calc(var(--stage-height) + var(--level-height) * 4);
@@ -8608,6 +8639,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- S3↔S6 cross-stage arrows -->
         <label for="pos-19" class="arrow arrow-right arrow-h arrow-P18-right"></label>
         <label for="pos-18" class="arrow arrow-left arrow-h arrow-P19-left"></label>
+        <!-- ==================== STAGE 7 LAYOUT ==================== -->
+        <div class="platform platform-S7-L1"></div>
+        <div class="platform platform-S7-L2"></div>
+        <div class="platform platform-S7-L3"></div>
+        <div class="platform platform-S7-L4"></div>
         <!-- ==================== STAGE 3 LAYOUT ==================== -->
         <!-- Spaceship background -->
         <div class="stars-bg stars-bg-S3"><svg><use href="#stars"/></svg></div>
