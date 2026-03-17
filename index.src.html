@@ -493,12 +493,12 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .platform-S1-L2-left {
             bottom: calc(var(--level-height) * 2);
             left: var(--warning-wall-width);
-            width: calc(var(--pos-width) * 4 - var(--warning-wall-width));
+            width: calc(var(--pos-width) * 3 - var(--warning-wall-width));
         }
         .platform-S1-L2-right {
             bottom: calc(var(--level-height) * 2);
-            left: calc(var(--pos-width) * 5);
-            width: calc(var(--pos-width) - var(--warning-wall-width) - 4px);
+            left: calc(var(--pos-width) * 4);
+            width: calc(var(--pos-width) * 2 - var(--warning-wall-width) - 4px);
         }
         /* Platform 3 (second from above): split with gap at position 3 */
         .platform-S1-L3-left {
@@ -932,9 +932,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--level-height) + var(--platform-thickness) - 16px);
             left: 0;
         }
-        .grate-S1-L2-P5 {
+        .grate-S1-L2-P4 {
             bottom: calc(var(--level-height) * 2 + var(--platform-thickness) - 16px);
-            left: calc(var(--pos-width) * 4);
+            left: calc(var(--pos-width) * 3);
         }
         .grate-S1-L3-P3 {
             bottom: calc(var(--level-height) * 3 + var(--platform-thickness) - 16px);
@@ -1563,7 +1563,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Hide radio buttons and checkboxes by default */
         .position-radio, .level-radio, .layer-radio, .loot-checkbox,
-        #key-pickup, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #suit-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #crowbar-pickup, #crate-opened, #keycard-pickup, #tower-open, #engine-part-pickup, #engine-installed,
+        #key-pickup, #steam-off, #toolbox-unlocked, #wrench-pickup, #door-unlocked, #idcard-pickup, #suit-pickup, #axe-pickup, #tree-chopped, #battery-pickup, #scuba-pickup, #bolt-fixed, #flight-controls-used, #escaped, #darkness-toggle, #torch-pickup, #crowbar-pickup, #crate-opened, #keycard-pickup, #tower-open, #engine-part-pickup, #engine-installed,
         #lives-3, #death-1, #lives-2, #death-2, #lives-1, #death-3,
         #artwork-toggle {
             display: none;
@@ -1623,9 +1623,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Debug positions - S1 loot */
         #loot-S1-L0-P3-pickup { top: 100px; left: 60px; }
         #loot-S1-L1-P4-pickup { top: 100px; left: 80px; }
-        #loot-S1-L3-P5-pickup { top: 100px; left: 100px; }
+        #loot-S1-L4-P5-pickup { top: 100px; left: 100px; }
         #loot-S1-L2-P1-pickup { top: 100px; left: 120px; }
-        #loot-S1-L4-P2-pickup { top: 100px; left: 140px; }
+        #loot-S1-L3-P2-pickup { top: 100px; left: 140px; }
         /* Debug positions - S2/S3 loot */
         #loot-S2-L5-P8-pickup { top: 30px; left: 190px; }
         #loot-S2-L6-P11-pickup { top: 30px; left: 210px; }
@@ -1652,9 +1652,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #loot-S6-L5-P24-pickup { top: 30px; left: 470px; }
         /* Debug positions - S1 items */
         #key-pickup { top: 120px; left: 60px; }
-        #toolbox-unlocked { top: 120px; left: 80px; }
-        #wrench-pickup { top: 120px; left: 100px; }
-        #door-unlocked { top: 120px; left: 120px; }
+        #steam-off { top: 120px; left: 80px; }
+        #toolbox-unlocked { top: 120px; left: 100px; }
+        #wrench-pickup { top: 120px; left: 120px; }
+        #door-unlocked { top: 120px; left: 140px; }
         /* Debug positions - S2/S3 items */
         #tree-chopped { top: 50px; left: 230px; }
         #axe-pickup { top: 50px; left: 320px; }
@@ -1718,6 +1719,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #debug-toggle:checked ~ .layer-radio,
         #debug-toggle:checked ~ .loot-checkbox,
         #debug-toggle:checked ~ #key-pickup,
+        #debug-toggle:checked ~ #steam-off,
         #debug-toggle:checked ~ #toolbox-unlocked,
         #debug-toggle:checked ~ #wrench-pickup,
         #debug-toggle:checked ~ #door-unlocked,
@@ -1882,7 +1884,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
             align-items: center;
             transition: transform 0.5s ease-out;
             transform: translateY(calc(
-                (var(--loot-S1-L0-P3, 0) + var(--loot-S1-L1-P4, 0) + var(--loot-S1-L3-P5, 0) + var(--loot-S1-L2-P1, 0) + var(--loot-S1-L4-P2, 0) +
+                (var(--loot-S1-L0-P3, 0) + var(--loot-S1-L1-P4, 0) + var(--loot-S1-L4-P5, 0) + var(--loot-S1-L2-P1, 0) + var(--loot-S1-L3-P2, 0) +
                  var(--loot-S2-L5-P8, 0) + var(--loot-S2-L6-P11, 0) + var(--loot-S2-L7-P7, 0) + var(--loot-S2-L8-P9, 0) + var(--loot-S2-L9-P10, 0) +
                  var(--loot-S3-L5-P15, 0) + var(--loot-S3-L5-P18, 0) + var(--loot-S3-L8-P18, 0) + var(--loot-S3-L9-P14, 0) +
                  var(--loot-S4-L3-P7, 0) + var(--loot-S4-L3-P8, 0) + var(--loot-S4-L3-P12, 0) + var(--loot-S4-L1-P10, 0) + var(--loot-S4-L0-P9, 0) + var(--loot-S4-L2-P10, 0) +
@@ -1901,9 +1903,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* loot collection: 0 = not collected, 1 for coins, 2 for aquamarine */
         #loot-S1-L0-P3-pickup:checked ~ .counter-panel { --loot-S1-L0-P3: 1; }
         #loot-S1-L1-P4-pickup:checked ~ .counter-panel { --loot-S1-L1-P4: 1; }
-        #loot-S1-L3-P5-pickup:checked ~ .counter-panel { --loot-S1-L3-P5: 1; }
+        #loot-S1-L4-P5-pickup:checked ~ .counter-panel { --loot-S1-L4-P5: 1; }
         #loot-S1-L2-P1-pickup:checked ~ .counter-panel { --loot-S1-L2-P1: 1; }
-        #loot-S1-L4-P2-pickup:checked ~ .counter-panel { --loot-S1-L4-P2: 1; }
+        #loot-S1-L3-P2-pickup:checked ~ .counter-panel { --loot-S1-L3-P2: 1; }
         #loot-S2-L5-P8-pickup:checked ~ .counter-panel { --loot-S2-L5-P8: 1; }
         #loot-S2-L6-P11-pickup:checked ~ .counter-panel { --loot-S2-L6-P11: 2; }
         #loot-S2-L7-P7-pickup:checked ~ .counter-panel { --loot-S2-L7-P7: 1; }
@@ -4134,6 +4136,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-6:checked ~ .game-world .arrow-P6-left { display: block; }
         /* Hide left arrow at poison location (S1-L1-P6) */
         #level-1:checked ~ #pos-6:checked ~ .game-world .arrow-P6-left { display: none; }
+        /* Hide arrows at steam vent (S1-L2 between P5 and P6) */
+        #level-2:checked ~ #steam-off:not(:checked) ~ .game-world .arrow-P5-right { display: none; }
+        #level-2:checked ~ #steam-off:not(:checked) ~ .game-world .arrow-P6-left { display: none; }
+        /* Hide left arrow at rerouted steam vent (S1-L4-P2) */
+        #level-4:checked ~ #steam-off:checked ~ .game-world .arrow-P2-left { display: none; }
         /* Arrow to S4 area when door is open and player at S1-P6 (enters S4-L0-P7) */
         #level-0:checked ~ #pos-6:checked ~ #door-unlocked:checked ~ .game-world .arrow-P6-right { display: block; }
         #pos-6:checked ~ #door-unlocked:checked ~ .nav-panel .nav-right[for="pos-7"] { display: block; }
@@ -4354,7 +4361,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Show down arrows */
         /* Stage 1 down arrows */
         #level-1:checked ~ #pos-1:checked ~ .game-world .arrow-L1-down { display: block; }
-        #level-2:checked ~ #pos-5:checked ~ .game-world .arrow-L2-down { display: block; }
+        #level-2:checked ~ #pos-4:checked ~ .game-world .arrow-L2-down { display: block; }
         #level-3:checked ~ #pos-3:checked ~ .game-world .arrow-L3-down { display: block; }
         #level-4:checked ~ #pos-6:checked ~ .game-world .arrow-L4-down { display: block; }
         /* Stage 2 down arrows */
@@ -4557,6 +4564,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-6:checked ~ .nav-panel .nav-left[for="pos-5"] { display: block; }
         /* Hide left arrow at poison location (S1-L1-P6) */
         #level-1:checked ~ #pos-6:checked ~ .nav-panel .nav-left[for="pos-5"] { display: none; }
+        /* Hide nav arrows at steam vent (S1-L2 between P5 and P6) */
+        #level-2:checked ~ #pos-5:checked ~ #steam-off:not(:checked) ~ .nav-panel .nav-right[for="pos-6"] { display: none; }
+        #level-2:checked ~ #pos-6:checked ~ #steam-off:not(:checked) ~ .nav-panel .nav-left[for="pos-5"] { display: none; }
+        /* Hide nav left arrow at rerouted steam vent (S1-L4-P2) */
+        #level-4:checked ~ #pos-2:checked ~ #steam-off:checked ~ .nav-panel .nav-left[for="pos-1"] { display: none; }
         /* Show correct right arrow based on current position */
         #pos-1:checked ~ .nav-panel .nav-right[for="pos-2"] { display: block; }
         #pos-2:checked ~ .nav-panel .nav-right[for="pos-3"] { display: block; }
@@ -4730,7 +4742,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-8:checked ~ #pos-24:checked ~ .nav-panel .nav-up[for="level-9"] { display: block; }
         /* Show down arrow at grate locations */
         #level-1:checked ~ #pos-1:checked ~ .nav-panel .nav-down[for="level-0"] { display: block; }
-        #level-2:checked ~ #pos-5:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
+        #level-2:checked ~ #pos-4:checked ~ .nav-panel .nav-down[for="level-1"] { display: block; }
         #level-3:checked ~ #pos-3:checked ~ .nav-panel .nav-down[for="level-2"] { display: block; }
         #level-4:checked ~ #pos-6:checked ~ .nav-panel .nav-down[for="level-3"] { display: block; }
         /* S2→S4 climb down at P7 */
@@ -4804,16 +4816,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
             bottom: calc(var(--level-height) + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 3 - var(--item-offset));
         }
-        .loot-S1-L3-P5 {
-            bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
+        .loot-S1-L4-P5 {
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 4 - var(--item-offset));
         }
         .loot-S1-L2-P1 {
             bottom: calc(var(--level-height) * 2 + var(--platform-thickness));
             left: calc(var(--pos-offset) - var(--item-offset));
         }
-        .loot-S1-L4-P2 {
-            bottom: calc(var(--level-height) * 4 + var(--platform-thickness));
+        .loot-S1-L3-P2 {
+            bottom: calc(var(--level-height) * 3 + var(--platform-thickness));
             left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset));
         }
         /* Stage 2 loot positions */
@@ -4920,6 +4932,18 @@ AAAAAAAAAAAAAAAAAAAAAA==
         @keyframes door-pulse {
             0%, 100% { filter: drop-shadow(1px 1px 0 #aaa) drop-shadow(-1px -1px 0 #444) drop-shadow(0 0 4px #6a6a6a); }
             50% { filter: drop-shadow(1px 1px 0 #aaa) drop-shadow(-1px -1px 0 #444) drop-shadow(0 0 12px #9a9a9a) drop-shadow(0 0 20px #6a6a6a); }
+        }
+        @keyframes steam-rise {
+            0%, 100% { opacity: 0.6; transform: translateY(0) scaleX(1); filter: blur(2px); }
+            50% { opacity: 0.9; transform: translateY(-8px) scaleX(1.15); filter: blur(4px); }
+        }
+        @keyframes valve-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px #c33); }
+            50% { filter: drop-shadow(0 0 12px #c33) drop-shadow(0 0 20px #c33); }
+        }
+        @keyframes valve-pulse-green {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--available)); }
+            50% { filter: drop-shadow(0 0 12px var(--available)) drop-shadow(0 0 20px var(--available)); }
         }
         @keyframes bolt-flicker {
             0%, 5% { opacity: 1; filter: drop-shadow(0 0 8px var(--bolt-color-1)) drop-shadow(0 0 15px var(--bolt-color-2)); translate: 2px -1px; }
@@ -5085,9 +5109,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* coin-pulse */
         #level-0:checked ~ #pos-3:checked ~ #loot-S1-L0-P3-pickup:not(:checked) ~ .game-world .loot-S1-L0-P3 .loot-in-game,
         #level-1:checked ~ #pos-4:checked ~ #loot-S1-L1-P4-pickup:not(:checked) ~ .game-world .loot-S1-L1-P4 .loot-in-game,
-        #level-3:checked ~ #pos-5:checked ~ #loot-S1-L3-P5-pickup:not(:checked) ~ .game-world .loot-S1-L3-P5 .loot-in-game,
+        #level-4:checked ~ #pos-5:checked ~ #loot-S1-L4-P5-pickup:not(:checked) ~ .game-world .loot-S1-L4-P5 .loot-in-game,
         #level-2:checked ~ #pos-1:checked ~ #loot-S1-L2-P1-pickup:not(:checked) ~ .game-world .loot-S1-L2-P1 .loot-in-game,
-        #level-4:checked ~ #pos-2:checked ~ #loot-S1-L4-P2-pickup:not(:checked) ~ .game-world .loot-S1-L4-P2 .loot-in-game,
+        #level-3:checked ~ #pos-2:checked ~ #loot-S1-L3-P2-pickup:not(:checked) ~ .game-world .loot-S1-L3-P2 .loot-in-game,
         #level-5:checked ~ #pos-8:checked ~ #loot-S2-L5-P8-pickup:not(:checked) ~ .game-world .loot-S2-L5-P8 .loot-in-game,
         #level-7:checked ~ #pos-7:checked ~ #loot-S2-L7-P7-pickup:not(:checked) ~ .game-world .loot-S2-L7-P7 .loot-in-game,
         #level-9:checked ~ #pos-10:checked ~ #loot-S2-L9-P10-pickup:not(:checked) ~ .game-world .loot-S2-L9-P10 .loot-in-game,
@@ -5133,9 +5157,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Nav-panel center loot pickup activation */
         #level-0:checked ~ #pos-3:checked ~ #loot-S1-L0-P3-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L0-P3-pickup"],
         #level-1:checked ~ #pos-4:checked ~ #loot-S1-L1-P4-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L1-P4-pickup"],
-        #level-3:checked ~ #pos-5:checked ~ #loot-S1-L3-P5-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L3-P5-pickup"],
+        #level-4:checked ~ #pos-5:checked ~ #loot-S1-L4-P5-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L4-P5-pickup"],
         #level-2:checked ~ #pos-1:checked ~ #loot-S1-L2-P1-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L2-P1-pickup"],
-        #level-4:checked ~ #pos-2:checked ~ #loot-S1-L4-P2-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L4-P2-pickup"],
+        #level-3:checked ~ #pos-2:checked ~ #loot-S1-L3-P2-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S1-L3-P2-pickup"],
         #level-5:checked ~ #pos-8:checked ~ #loot-S2-L5-P8-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L5-P8-pickup"],
         #level-6:checked ~ #pos-11:checked ~ #loot-S2-L6-P11-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L6-P11-pickup"],
         #level-7:checked ~ #pos-7:checked ~ #loot-S2-L7-P7-pickup:not(:checked) ~ .nav-panel .nav-loot[for="loot-S2-L7-P7-pickup"],
@@ -5167,9 +5191,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Move Stage 1 loot to counter when picked up */
         #loot-S1-L0-P3-pickup:checked ~ .game-world .loot-S1-L0-P3,
         #loot-S1-L1-P4-pickup:checked ~ .game-world .loot-S1-L1-P4,
-        #loot-S1-L3-P5-pickup:checked ~ .game-world .loot-S1-L3-P5,
+        #loot-S1-L4-P5-pickup:checked ~ .game-world .loot-S1-L4-P5,
         #loot-S1-L2-P1-pickup:checked ~ .game-world .loot-S1-L2-P1,
-        #loot-S1-L4-P2-pickup:checked ~ .game-world .loot-S1-L4-P2 {
+        #loot-S1-L3-P2-pickup:checked ~ .game-world .loot-S1-L3-P2 {
             bottom: calc(var(--ground-height) + var(--level-height) * 5 + var(--top-margin) - var(--panel-top) - var(--panel-height) - var(--panel-top) - var(--panel-height) / 2 - 18px);
             left: calc(var(--pos-width) * 6 - var(--panel-right) - var(--counter-panel-width) + var(--panel-padding) - 4px);
             opacity: 0;
@@ -5482,6 +5506,215 @@ AAAAAAAAAAAAAAAAAAAAAA==
             opacity: 1;
             pointer-events: auto;
             animation: wrench-rotate 1s ease-in-out infinite;
+        }
+        /* Steam vents */
+        .steam-vent {
+            position: absolute;
+            width: calc(var(--pos-width) * 0.3);
+            height: calc(var(--level-height) * 0.8 + 8px);
+            z-index: var(--z-scenery);
+        }
+        .steam-vent-S1-L2-P5 {
+            bottom: calc(var(--level-height) * 2 + var(--platform-thickness) - 10px);
+            left: calc(var(--pos-width) * 4.65);
+        }
+        .steam-vent-S1-L4-P2 {
+            bottom: calc(var(--level-height) * 4 + var(--platform-thickness) - 10px);
+            left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset) - 6px);
+        }
+        /* Metal grate base — sunk into the floor */
+        .steam-vent::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 80%;
+            height: 8px;
+            background:
+                repeating-linear-gradient(90deg, #666 0px, #666 3px, #333 3px, #333 6px);
+            border: 1px solid #555;
+            border-radius: 2px;
+            box-shadow: 0 -1px 3px rgba(0,0,0,0.4);
+        }
+        /* Steam plume — back layer (wider, more diffuse) */
+        .steam-vent::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 10%;
+            width: 80%;
+            height: calc(100% - 8px);
+            background: linear-gradient(to top,
+                rgba(220,220,220,0.4) 0%,
+                rgba(220,220,220,0.2) 40%,
+                rgba(220,220,220,0.05) 75%,
+                transparent 100%);
+            border-radius: 50% 50% 20% 20%;
+            animation: steam-rise 2s ease-in-out infinite;
+        }
+        /* Steam plume — front layer (narrower, brighter) */
+        .steam-plume {
+            position: absolute;
+            bottom: 8px;
+            left: 25%;
+            width: 50%;
+            height: calc(100% - 8px);
+            background: linear-gradient(to top,
+                rgba(255,255,255,0.5) 0%,
+                rgba(245,245,245,0.35) 30%,
+                rgba(240,240,240,0.15) 65%,
+                transparent 100%);
+            border-radius: 50% 50% 20% 20%;
+            animation: steam-rise 2s ease-in-out infinite;
+        }
+        .steam-vent-hover-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: var(--z-item-hover);
+        }
+        .steam-vent-tooltip {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: -30px;
+        }
+        .steam-vent-hover-area:hover ~ .steam-vent-tooltip {
+            opacity: 1;
+        }
+        /* First vent (L2-P5): hide plumes when valve turned */
+        #steam-off:checked ~ .game-world .steam-vent-S1-L2-P5::after,
+        #steam-off:checked ~ .game-world .steam-vent-S1-L2-P5 .steam-plume {
+            display: none;
+        }
+        /* Second vent (L4-P2): plumes hidden by default, shown when rerouted */
+        .steam-vent-S1-L4-P2::after,
+        .steam-vent-S1-L4-P2 .steam-plume {
+            display: none;
+        }
+        #steam-off:checked ~ .game-world .steam-vent-S1-L4-P2::after,
+        #steam-off:checked ~ .game-world .steam-vent-S1-L4-P2 .steam-plume {
+            display: block;
+        }
+        /* Valve at S1-L1-P2 */
+        .valve-container {
+            position: absolute;
+            width: 36px;
+            height: 44px;
+            bottom: calc(var(--level-height) + var(--platform-thickness));
+            left: calc(var(--pos-offset) + var(--pos-width) * 1 - var(--item-offset));
+            z-index: var(--z-scenery);
+        }
+        /* Pipe mount */
+        .valve-container::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 18px;
+            background: linear-gradient(90deg, #888, #aaa, #888);
+            border-radius: 2px;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+        }
+        /* Valve wheel */
+        .valve-label {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) rotate(-22deg);
+            width: 28px;
+            height: 28px;
+            border: 4px solid #933;
+            border-radius: 50%;
+            background: radial-gradient(circle, #644 30%, #533 70%);
+            box-shadow: 0 0 4px rgba(0,0,0,0.5), inset 0 0 6px rgba(0,0,0,0.3);
+            pointer-events: none;
+            cursor: pointer;
+        }
+        /* Cross-piece horizontal */
+        .valve-label::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: #933;
+            transform: translateY(-50%);
+            border-radius: 1px;
+        }
+        /* Cross-piece vertical */
+        .valve-label::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 10%;
+            width: 3px;
+            height: 80%;
+            background: #933;
+            transform: translateX(-50%);
+            border-radius: 1px;
+        }
+        /* Valve hover area for tooltip */
+        .valve-hover-area {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            width: calc(100% + 8px);
+            height: calc(100% + 4px);
+            z-index: var(--z-item-hover);
+        }
+        /* Valve tooltips */
+        .valve-tooltip, .valve-tooltip-off {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 4px;
+        }
+        .valve-tooltip-off {
+            display: none;
+        }
+        /* Show default tooltip on hover (steam active) */
+        #steam-off:not(:checked) ~ .game-world .valve-hover-area:hover ~ .valve-tooltip {
+            opacity: 1;
+        }
+        /* When player is at L1-P2: make valve clickable (+ pulse when steam active) */
+        #level-1:checked ~ #pos-2:checked ~ .game-world .valve-label {
+            pointer-events: auto;
+        }
+        #level-1:checked ~ #pos-2:checked ~ #steam-off:not(:checked) ~ .game-world .valve-label {
+            animation: valve-pulse 1s ease-in-out infinite;
+        }
+        #level-1:checked ~ #pos-2:checked ~ #steam-off:checked ~ .game-world .valve-label {
+            animation: valve-pulse-green 1s ease-in-out infinite;
+        }
+        /* Hide hover area when player can click valve */
+        #level-1:checked ~ #pos-2:checked ~ .game-world .valve-hover-area {
+            display: none;
+        }
+        /* After activation: valve turns green + rotated */
+        #steam-off:checked ~ .game-world .valve-label {
+            border-color: var(--available);
+            background: radial-gradient(circle, #2a5a2a 30%, #1a4a1a 70%);
+            transform: translateX(-50%) rotate(23deg);
+        }
+        #steam-off:checked ~ .game-world .valve-label::before,
+        #steam-off:checked ~ .game-world .valve-label::after {
+            background: var(--available);
+        }
+        /* Hide default tooltip, show off tooltip when steam is off */
+        #steam-off:checked ~ .game-world .valve-tooltip {
+            display: none;
+        }
+        #steam-off:checked ~ .game-world .valve-tooltip-off {
+            display: block;
+        }
+        #steam-off:checked ~ .game-world .valve-hover-area:hover ~ .valve-tooltip-off {
+            opacity: 1;
         }
         /* On S4, we achieve a small FOV using four rectangles arranged
          * around a central hole that follows the player position.
@@ -6213,9 +6446,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Hide hover area when player is at loot location (so pickup works) */
         #level-0:checked ~ #pos-3:checked ~ .game-world .loot-S1-L0-P3 .loot-hover-area,
         #level-1:checked ~ #pos-4:checked ~ .game-world .loot-S1-L1-P4 .loot-hover-area,
-        #level-3:checked ~ #pos-5:checked ~ .game-world .loot-S1-L3-P5 .loot-hover-area,
+        #level-4:checked ~ #pos-5:checked ~ .game-world .loot-S1-L4-P5 .loot-hover-area,
         #level-2:checked ~ #pos-1:checked ~ .game-world .loot-S1-L2-P1 .loot-hover-area,
-        #level-4:checked ~ #pos-2:checked ~ .game-world .loot-S1-L4-P2 .loot-hover-area,
+        #level-3:checked ~ #pos-2:checked ~ .game-world .loot-S1-L3-P2 .loot-hover-area,
         /* S2 uses levels 5-9 */
         #level-5:checked ~ #pos-8:checked ~ .game-world .loot-S2-L5-P8 .loot-hover-area,
         #level-6:checked ~ #pos-11:checked ~ .game-world .loot-S2-L6-P11 .loot-hover-area,
@@ -6233,9 +6466,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         /* Show tooltip on hover */
         #loot-S1-L0-P3-pickup:not(:checked) ~ .game-world .loot-S1-L0-P3 .loot-hover-area:hover ~ .tooltip,
         #loot-S1-L1-P4-pickup:not(:checked) ~ .game-world .loot-S1-L1-P4 .loot-hover-area:hover ~ .tooltip,
-        #loot-S1-L3-P5-pickup:not(:checked) ~ .game-world .loot-S1-L3-P5 .loot-hover-area:hover ~ .tooltip,
+        #loot-S1-L4-P5-pickup:not(:checked) ~ .game-world .loot-S1-L4-P5 .loot-hover-area:hover ~ .tooltip,
         #loot-S1-L2-P1-pickup:not(:checked) ~ .game-world .loot-S1-L2-P1 .loot-hover-area:hover ~ .tooltip,
-        #loot-S1-L4-P2-pickup:not(:checked) ~ .game-world .loot-S1-L4-P2 .loot-hover-area:hover ~ .tooltip,
+        #loot-S1-L3-P2-pickup:not(:checked) ~ .game-world .loot-S1-L3-P2 .loot-hover-area:hover ~ .tooltip,
         #loot-S2-L5-P8-pickup:not(:checked) ~ .game-world .loot-S2-L5-P8 .loot-hover-area:hover ~ .tooltip,
         #loot-S2-L6-P11-pickup:not(:checked) ~ .game-world .loot-S2-L6-P11 .loot-hover-area:hover ~ .tooltip,
         #loot-S2-L7-P7-pickup:not(:checked) ~ .game-world .loot-S2-L7-P7 .loot-hover-area:hover ~ .tooltip,
@@ -7642,11 +7875,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="checkbox" id="title-screen-toggle" autofocus title="title screen">
         <!-- Artwork overlay toggle -->
         <input type="checkbox" id="artwork-toggle" title="artwork">
-        <!-- Key pickup checkbox -->
-        <input type="checkbox" id="key-pickup" title="key">
-        <!-- Safe unlock checkbox -->
-        <input type="checkbox" id="toolbox-unlocked" title="toolbox">
         <!-- S1 checkboxes -->
+        <input type="checkbox" id="key-pickup" title="key">
+        <input type="checkbox" id="steam-off" title="steam">
+        <input type="checkbox" id="toolbox-unlocked" title="toolbox">
         <input type="checkbox" id="wrench-pickup" title="wrench">
         <input type="checkbox" id="door-unlocked" title="door">
         <!-- S4 checkboxes -->
@@ -7674,9 +7906,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <!-- loot pickup checkboxes -->
         <input type="checkbox" id="loot-S1-L0-P3-pickup" class="loot-checkbox" title="coin">
         <input type="checkbox" id="loot-S1-L1-P4-pickup" class="loot-checkbox" title="coin">
-        <input type="checkbox" id="loot-S1-L3-P5-pickup" class="loot-checkbox" title="coin">
+        <input type="checkbox" id="loot-S1-L4-P5-pickup" class="loot-checkbox" title="coin">
         <input type="checkbox" id="loot-S1-L2-P1-pickup" class="loot-checkbox" title="coin">
-        <input type="checkbox" id="loot-S1-L4-P2-pickup" class="loot-checkbox" title="coin">
+        <input type="checkbox" id="loot-S1-L3-P2-pickup" class="loot-checkbox" title="coin">
         <!-- Stage 2 loot pickup checkboxes -->
         <input type="checkbox" id="loot-S2-L5-P8-pickup" class="loot-checkbox" title="coin">
         <input type="checkbox" id="loot-S2-L6-P11-pickup" class="loot-checkbox" title="aquamarine">
@@ -7812,9 +8044,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 <!-- S1 coins -->
                 <label for="loot-S1-L0-P3-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
                 <label for="loot-S1-L1-P4-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
-                <label for="loot-S1-L3-P5-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <label for="loot-S1-L4-P5-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
                 <label for="loot-S1-L2-P1-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
-                <label for="loot-S1-L4-P2-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
+                <label for="loot-S1-L3-P2-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
                 <!-- S2 -->
                 <label for="loot-S2-L5-P8-pickup" class="nav-loot nav-loot-coin"><svg><use href="#coin"/></svg></label>
                 <label for="loot-S2-L6-P11-pickup" class="nav-loot nav-loot-aquamarine"><svg><use href="#gem"/></svg></label>
@@ -8163,7 +8395,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <div class="ladder wooden-ladder ladder-S4-L4-P7"></div>
         <!-- Grates (down) -->
         <div class="grate grate-S1-L1-P1"></div>
-        <div class="grate grate-S1-L2-P5"></div>
+        <div class="grate grate-S1-L2-P4"></div>
         <div class="grate grate-S1-L3-P3"></div>
         <div class="grate grate-S1-L4-P6"></div>
         <!-- Door -->
@@ -8177,6 +8409,24 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <span class="tooltip door-tooltip-wrench">Repair the door handle.</span>
         </div>
         <label for="door-unlocked" class="wrench-at-door"><svg><use href="#wrench"/></svg></label>
+        <!-- Steam vents -->
+        <div class="steam-vent steam-vent-S1-L2-P5">
+            <span class="steam-plume"></span>
+            <span class="steam-vent-hover-area"></span>
+            <span class="tooltip steam-vent-tooltip">Steam Vent</span>
+        </div>
+        <div class="steam-vent steam-vent-S1-L4-P2">
+            <span class="steam-plume"></span>
+            <span class="steam-vent-hover-area"></span>
+            <span class="tooltip steam-vent-tooltip">Steam Vent</span>
+        </div>
+        <!-- Valve -->
+        <div class="valve-container">
+            <label for="steam-off" class="valve-label"></label>
+            <span class="valve-hover-area"></span>
+            <span class="tooltip valve-tooltip">Steam valve. It controls<br>the steam pipes.</span>
+            <span class="tooltip valve-tooltip-off">The steam has<br>been rerouted.</span>
+        </div>
         <!-- Skull hazard -->
         <div class="skull skull-S1-L1-P6">
             <span class="tooltip skull-tooltip">Poison</span>
@@ -8426,16 +8676,16 @@ AAAAAAAAAAAAAAAAAAAAAA==
             <label for="loot-S1-L1-P4-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
             <span class="loot-hover-area"></span>
         </div>
-        <div class="container coin loot-S1-L3-P5">
-            <label for="loot-S1-L3-P5-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
+        <div class="container coin loot-S1-L4-P5">
+            <label for="loot-S1-L4-P5-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
             <span class="loot-hover-area"></span>
         </div>
         <div class="container coin loot-S1-L2-P1">
             <label for="loot-S1-L2-P1-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
             <span class="loot-hover-area"></span>
         </div>
-        <div class="container coin loot-S1-L4-P2">
-            <label for="loot-S1-L4-P2-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
+        <div class="container coin loot-S1-L3-P2">
+            <label for="loot-S1-L3-P2-pickup" class="loot-in-game"><svg><use href="#coin"/></svg></label>
             <span class="loot-hover-area"></span>
         </div>
         <!-- ==================== STAGE 4 LOOT ==================== -->

@@ -6,8 +6,17 @@ S7: Ancient alien temple with a guardian that wants payment.
  - compact file: use nested & notation?
  - burn disease with torch?
  - fly item to in-game location when applied?
- - color arrow purple when it leads to death?
- - pick up items in center of nav-panel?
+
+Ideas:
+
+  1. Block access to one of the existing coins behind a small obstacle. E.g., a barrel you need to push/break to reach a coin. Low stakes, but adds a "huh,
+  how do I get that?" moment.
+
+  2. Maybe a grate is bolted shut and blocks a shortcut or a coin.  This makes the wrench feel more versatile and adds a routing decision: do I use it on the
+  grate first or go straight to the door?
+
+  3. A hidden area — A non-obvious path (behind machinery, through a vent) that rewards exploration with a coin or a visual surprise, without being required for
+  progression.
 
 --------------------------------------------------------------------------------
 To S3:
