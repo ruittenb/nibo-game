@@ -3070,8 +3070,9 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .ground-S6 { left: calc(var(--pos-width) * 18); }
         .ground-S7 {
             left: calc(var(--pos-width) * 18);
-            background: linear-gradient(to bottom, #8b5a2b 0%, #5d3a1a 100%);
-            border-top: 3px solid #a0522d;
+            background: linear-gradient(to bottom, #1a3a8a 0%, #0e2460 50%, #091a4a 100%);
+            border-top: 3px solid #c8a832;
+            box-shadow: inset 0 -5px 0 #0000004d, 0 1px 3px rgba(200, 168, 50, 0.3);
         }
         /* Warning walls - yellow/black diagonal stripes marking stage edges */
         .warning-wall {
@@ -3232,6 +3233,30 @@ AAAAAAAAAAAAAAAAAAAAAA==
             border-left: 2px solid #c8a832;
             border-right: 2px solid #c8a832;
             box-shadow: inset 0 -5px 0 #0000004d, 0 1px 3px rgba(200, 168, 50, 0.3);
+        }
+        .ceiling-S7 {
+            position: absolute;
+            left: calc(var(--pos-width) * 18);
+            bottom: calc(var(--stage-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px - 22px);
+            width: calc(var(--pos-width) * 5);
+            height: 22px;
+            z-index: var(--z-walls);
+            background:
+                /* Embedded rocks - tiled */
+                radial-gradient(ellipse 8px 5px at 25% 35%, #6b5a4a 0%, #4a3a2a 60%, transparent 70%),
+                radial-gradient(ellipse 6px 5px at 70% 60%, #7a6a5a 0%, #5a4a3a 60%, transparent 70%),
+                /* Base earth */
+                linear-gradient(to bottom, #5d3a1a 0%, #6b4423 40%, #8b5a2b 100%);
+            background-size: calc(var(--pos-width) * 2) 22px, calc(var(--pos-width) * 2) 22px, 100% 100%;
+            box-shadow: inset 0 -2px 3px #00000066;
+            clip-path: polygon(
+                0% 0%, 100% 0%, 100% 100%,
+                97% 70%, 93% 100%, 89% 65%, 85% 100%, 81% 75%, 77% 100%,
+                73% 60%, 69% 100%, 65% 70%, 61% 100%, 57% 65%, 53% 100%,
+                49% 75%, 45% 100%, 41% 60%, 37% 100%, 33% 70%, 29% 100%,
+                25% 65%, 21% 100%, 17% 75%, 13% 100%, 9% 60%, 5% 100%,
+                2% 70%, 0% 100%
+            );
         }
         .rope-S7-P24 {
             position: absolute;
@@ -8773,6 +8798,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="pos-19" class="arrow arrow-right arrow-h arrow-P18-right"></label>
         <label for="pos-18" class="arrow arrow-left arrow-h arrow-P19-left"></label>
         <!-- ==================== STAGE 7 LAYOUT ==================== -->
+        <div class="ceiling-S7"></div>
         <div class="ground-S7"></div>
         <div class="rock-wall wall-S7-left"></div>
         <div class="rock-wall wall-S7-right"></div>
