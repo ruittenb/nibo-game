@@ -3005,7 +3005,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .ground-S2,
         .ground-S3,
         .ground-S4,
-        .ground-S6 {
+        .ground-S6,
+        .ground-S7 {
             position: absolute;
             bottom: 0;
             width: calc(var(--pos-width) * 6);
@@ -3066,7 +3067,11 @@ AAAAAAAAAAAAAAAAAAAAAA==
             border-top: 3px solid #7a7e82;
         }
         .ground-S3 { left: calc(var(--pos-width) * 12); }
-        .ground-S6 { left: calc(var(--pos-width) * 18);
+        .ground-S6 { left: calc(var(--pos-width) * 18); }
+        .ground-S7 {
+            left: calc(var(--pos-width) * 18);
+            background: linear-gradient(to bottom, #8b5a2b 0%, #5d3a1a 100%);
+            border-top: 3px solid #a0522d;
         }
         /* Warning walls - yellow/black diagonal stripes marking stage edges */
         .warning-wall {
@@ -3107,7 +3112,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* Rock wall positions - left edge variant (jagged right edge) */
         .wall-S2-left,
-        .wall-S4-left {
+        .wall-S4-left,
+        .wall-S7-left {
             background: repeating-linear-gradient(
                 10deg,
                 #777 0px,
@@ -3162,6 +3168,57 @@ AAAAAAAAAAAAAAAAAAAAAA==
                 0% 59%, 10% 56%, 32% 53%, 0% 48%, 18% 46%, 0% 41%, 30% 38%,
                 0% 34%, 12% 31%, 35% 27%, 0% 23%, 22% 21%, 0% 16%, 32% 13%,
                 15% 9%, 0% 7%, 28% 4%, 0% 2%
+            );
+        }
+        /* Stage 7 walls */
+        .wall-S7-left {
+            left: calc(var(--pos-width) * 18);
+            bottom: var(--ground-height);
+            height: calc(var(--stage-height) - var(--ground-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px);
+        }
+        .wall-S7-right {
+            left: calc(var(--pos-width) * 24 - 16px);
+            bottom: var(--ground-height);
+            height: calc(var(--stage-height) - var(--ground-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px);
+            background:
+                /* Embedded rocks */
+                radial-gradient(ellipse 8px 6px at 40% 8%, #6b5a4a 0%, #5a4a3a 60%, transparent 70%),
+                radial-gradient(ellipse 6px 5px at 70% 18%, #7a6a5a 0%, #5a4a3a 60%, transparent 70%),
+                radial-gradient(ellipse 9px 5px at 30% 30%, #6b5a4a 0%, #4a3a2a 60%, transparent 70%),
+                radial-gradient(ellipse 7px 6px at 60% 42%, #7a6a5a 0%, #5a4a3a 60%, transparent 70%),
+                radial-gradient(ellipse 6px 4px at 45% 55%, #6b5a4a 0%, #4a3a2a 60%, transparent 70%),
+                radial-gradient(ellipse 8px 5px at 70% 65%, #7a6a5a 0%, #5a4a3a 60%, transparent 70%),
+                radial-gradient(ellipse 5px 6px at 35% 75%, #6b5a4a 0%, #4a3a2a 60%, transparent 70%),
+                radial-gradient(ellipse 7px 5px at 55% 88%, #7a6a5a 0%, #5a4a3a 60%, transparent 70%),
+                /* Base earth */
+                linear-gradient(to right, #8b5a2b 0%, #6b4423 60%, #5d3a1a 100%);
+            box-shadow: inset 2px 0 3px #00000066;
+            clip-path: polygon(
+                0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 97%, 32% 94%, 0% 91%,
+                20% 86%, 28% 83%, 0% 78%, 15% 75%, 35% 72%, 0% 67%, 25% 64%,
+                0% 59%, 10% 56%, 32% 53%, 0% 48%, 18% 46%, 0% 41%, 30% 38%,
+                0% 34%, 12% 31%, 35% 27%, 0% 23%, 22% 21%, 0% 16%, 32% 13%,
+                15% 9%, 0% 7%, 28% 4%, 0% 2%
+            );
+        }
+        .wall-S7-inner {
+            left: calc(var(--pos-width) * 23);
+            bottom: var(--level-height);
+            height: calc(var(--level-height) * 3 + var(--platform-thickness));
+            background:
+                /* Embedded rocks */
+                radial-gradient(ellipse 7px 5px at 40% 12%, #6b5a4a 0%, #5a4a3a 60%, transparent 70%),
+                radial-gradient(ellipse 5px 4px at 65% 30%, #7a6a5a 0%, #5a4a3a 60%, transparent 70%),
+                radial-gradient(ellipse 8px 5px at 35% 50%, #6b5a4a 0%, #4a3a2a 60%, transparent 70%),
+                radial-gradient(ellipse 6px 5px at 60% 70%, #7a6a5a 0%, #5a4a3a 60%, transparent 70%),
+                radial-gradient(ellipse 7px 4px at 45% 88%, #6b5a4a 0%, #4a3a2a 60%, transparent 70%),
+                /* Base earth */
+                linear-gradient(to right, #5d3a1a 0%, #6b4423 40%, #8b5a2b 100%);
+            box-shadow: inset 2px 0 3px #00000066, inset -2px 0 3px #00000066;
+            clip-path: polygon(
+                0% 0%, 100% 0%, 80% 5%, 100% 10%, 72% 18%, 100% 25%, 85% 33%, 100% 40%,
+                70% 48%, 100% 55%, 75% 65%, 100% 70%, 80% 78%, 100% 85%, 70% 90%, 100% 95%,
+                100% 100%, 0% 100%
             );
         }
         /* Manhole and cover at S2-L5-P7 */
@@ -3749,7 +3806,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .subtitle-S3,
         .subtitle-S4,
         .subtitle-S5,
-        .subtitle-S6 {
+        .subtitle-S6,
+        .subtitle-S7 {
             display: none;
         }
         /* S1: pos 1-6 + levels 0-4 */
@@ -3774,6 +3832,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         }
         /* S6: pos 19-24 + levels 5-9 */
         :is(#level-5, #level-6, #level-7, #level-8, #level-9):checked ~ :is(#pos-19, #pos-20, #pos-21, #pos-22, #pos-23, #pos-24):checked ~ .subtitle-S6 {
+            display: block;
+        }
+        /* S7: pos 19-24 + levels 0-4 */
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ :is(#pos-19, #pos-20, #pos-21, #pos-22, #pos-23, #pos-24):checked ~ .subtitle-S7 {
             display: block;
         }
         /* Base ladder styles */
@@ -4685,6 +4747,20 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #pos-23:checked ~ .nav-panel .nav-left[for="pos-22"] { display: block; }
         #pos-23:checked ~ #tower-open:checked ~ .nav-panel .nav-right[for="pos-24"] { display: block; }
         #pos-24:checked ~ .nav-panel .nav-left[for="pos-23"] { display: block; }
+        /* Stage 7 horizontal arrows in game world (L0-L4) */
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-19:checked ~ .game-world .arrow-P19-right { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-20:checked ~ .game-world .arrow-P20-left { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-20:checked ~ .game-world .arrow-P20-right { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-21:checked ~ .game-world .arrow-P21-left { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-21:checked ~ .game-world .arrow-P21-right { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-22:checked ~ .game-world .arrow-P22-left { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-22:checked ~ .game-world .arrow-P22-right { display: block; }
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-23:checked ~ .game-world .arrow-P23-left { display: block; }
+        :is(#level-0, #level-3):checked ~ #pos-23:checked ~ .game-world .arrow-P23-right { display: block; }
+        :is(#level-0, #level-3):checked ~ #pos-24:checked ~ .game-world .arrow-P24-left { display: block; }
+        #level-4:checked ~ #pos-23:checked ~ .game-world .arrow-P23-right { display: block; }
+        /* Stage 7 nav panel: P23→P24 without tower-open at L0-L4 */
+        :is(#level-0, #level-1, #level-2, #level-3, #level-4):checked ~ #pos-23:checked ~ .nav-panel .nav-right[for="pos-24"] { display: block; }
         /* S3↔S6 cross-stage nav arrows (L5-L8) */
         :is(#level-5, #level-6, #level-7, #level-8):checked ~ #pos-18:checked ~ .nav-panel .nav-right[for="pos-19"] { display: block; }
         :is(#level-5, #level-6, #level-7, #level-8):checked ~ #pos-19:checked ~ .nav-panel .nav-left[for="pos-18"] { display: block; }
@@ -7970,7 +8046,8 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="artwork-toggle" class="subtitle subtitle-S3">The Hangar</label>
         <label for="artwork-toggle" class="subtitle subtitle-S4">The Caves</label>
         <label for="artwork-toggle" class="subtitle subtitle-S5">The Sunken City</label>
-        <label for="artwork-toggle" class="subtitle subtitle-S6">Observation Tower</label>
+        <label for="artwork-toggle" class="subtitle subtitle-S6">The Observation Tower</label>
+        <label for="artwork-toggle" class="subtitle subtitle-S7">The Ancient Alien Temple</label>
         <!-- Fixed navigation panel -->
         <div class="nav-panel">
             <!-- Up cell -->
@@ -8640,6 +8717,10 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <label for="pos-19" class="arrow arrow-right arrow-h arrow-P18-right"></label>
         <label for="pos-18" class="arrow arrow-left arrow-h arrow-P19-left"></label>
         <!-- ==================== STAGE 7 LAYOUT ==================== -->
+        <div class="ground-S7"></div>
+        <div class="rock-wall wall-S7-left"></div>
+        <div class="rock-wall wall-S7-right"></div>
+        <div class="rock-wall wall-S7-inner"></div>
         <div class="platform platform-S7-L1"></div>
         <div class="platform platform-S7-L2"></div>
         <div class="platform platform-S7-L3"></div>
