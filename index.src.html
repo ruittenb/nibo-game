@@ -3237,25 +3237,25 @@ AAAAAAAAAAAAAAAAAAAAAA==
         .ceiling-S7 {
             position: absolute;
             left: calc(var(--pos-width) * 18);
-            bottom: calc(var(--stage-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px - 22px);
+            bottom: calc(var(--stage-height) - var(--panel-top) * 2 - var(--panel-height) * 2 - 10px - 36px);
             width: calc(var(--pos-width) * 5);
-            height: 22px;
+            height: 36px;
             z-index: var(--z-walls);
             background:
                 /* Embedded rocks - tiled */
-                radial-gradient(ellipse 8px 5px at 25% 35%, #6b5a4a 0%, #4a3a2a 60%, transparent 70%),
-                radial-gradient(ellipse 6px 5px at 70% 60%, #7a6a5a 0%, #5a4a3a 60%, transparent 70%),
+                radial-gradient(ellipse 8px 5px at 25% 30%, #6b5a4a 0%, #4a3a2a 60%, transparent 70%),
+                radial-gradient(ellipse 6px 5px at 70% 50%, #7a6a5a 0%, #5a4a3a 60%, transparent 70%),
                 /* Base earth */
                 linear-gradient(to bottom, #5d3a1a 0%, #6b4423 40%, #8b5a2b 100%);
-            background-size: calc(var(--pos-width) * 2) 22px, calc(var(--pos-width) * 2) 22px, 100% 100%;
+            background-size: calc(var(--pos-width) * 2) 36px, calc(var(--pos-width) * 2) 36px, 100% 100%;
             box-shadow: inset 0 -2px 3px #00000066;
             clip-path: polygon(
-                0% 0%, 100% 0%, 100% 100%,
-                97% 70%, 93% 100%, 89% 65%, 85% 100%, 81% 75%, 77% 100%,
-                73% 60%, 69% 100%, 65% 70%, 61% 100%, 57% 65%, 53% 100%,
-                49% 75%, 45% 100%, 41% 60%, 37% 100%, 33% 70%, 29% 100%,
-                25% 65%, 21% 100%, 17% 75%, 13% 100%, 9% 60%, 5% 100%,
-                2% 70%, 0% 100%
+                0% 0%, 100% 0%, 100% 45%,
+                96% 62%, 93% 48%, 88% 78%, 84% 55%, 80% 90%, 76% 58%,
+                71% 72%, 67% 50%, 62% 85%, 58% 55%, 54% 68%, 50% 95%,
+                46% 60%, 42% 75%, 38% 52%, 33% 82%, 29% 58%, 25% 70%,
+                20% 48%, 16% 88%, 12% 55%, 8% 72%, 4% 50%, 1% 65%,
+                0% 45%
             );
         }
         .rope-S7-P24 {
