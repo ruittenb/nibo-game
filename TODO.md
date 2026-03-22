@@ -1,7 +1,8 @@
 
 S7: Ancient alien temple with a guardian that wants payment.
     It is here that the radiation suit can be obtained..
-    What kinds of interesting obstacles could we have here? moving platforms? Falling blocks? Elevators? Escalators?
+    What kinds of interesting obstacles could we have here? moving platforms? Falling blocks? Elevators? Escalators? Collapsing platform?
+    "Offer tribute and you may pass."
 
  - compact file: use nested & notation?
  - burn disease with torch?
@@ -9,14 +10,17 @@ S7: Ancient alien temple with a guardian that wants payment.
 
 Ideas:
 
-  1. Block access to one of the existing coins behind a small obstacle. E.g., a barrel you need to push/break to reach a coin. Low stakes, but adds a "huh,
-  how do I get that?" moment.
+  1. Block access to one of the existing coins behind a small obstacle.
+  E.g., a barrel you need to push/break to reach a coin. Low stakes, but
+  adds a "huh, how do I get that?" moment.
 
-  2. Maybe a grate is bolted shut and blocks a shortcut or a coin.  This makes the wrench feel more versatile and adds a routing decision: do I use it on the
-  grate first or go straight to the door?
+  2. Maybe a grate is bolted shut and blocks a shortcut or a coin.  This
+  makes the wrench feel more versatile and adds a routing decision: do I
+  use it on the grate first or go straight to the door?
 
-  3. A hidden area — A non-obvious path (behind machinery, through a vent) that rewards exploration with a coin or a visual surprise, without being required for
-  progression.
+  3. A hidden area — A non-obvious path (behind machinery, through a
+  vent) that rewards exploration with a coin or a visual surprise,
+  without being required for progression.
 
 --------------------------------------------------------------------------------
 To S3:
