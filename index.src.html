@@ -5998,6 +5998,13 @@ AAAAAAAAAAAAAAAAAAAAAA==
         #level-1:checked ~ #pos-2:checked ~ .game-world .valve-hover-area {
             display: none;
         }
+        /* Show tooltip when hovering the valve label at adjacency */
+        #level-1:checked ~ #pos-2:checked ~ #steam-off:not(:checked) ~ .game-world .valve-label:hover ~ .valve-tooltip {
+            opacity: 1;
+        }
+        #level-1:checked ~ #pos-2:checked ~ #steam-off:checked ~ .game-world .valve-label:hover ~ .valve-tooltip-off {
+            opacity: 1;
+        }
         /* After activation: valve turns green + rotated */
         #steam-off:checked ~ .game-world .valve-label {
             border-color: var(--available);
@@ -8118,7 +8125,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         </symbol>
     </svg>
     <div class="game-container">
-        <input type="checkbox" id="debug-toggle" accesskey="d" title="debug" checked>
+        <input type="checkbox" id="debug-toggle" accesskey="d" title="debug">
         <div class="debug-bg-positions"></div>
         <div class="debug-bg-levels"></div>
         <!-- Lives radio group -->
@@ -8149,7 +8156,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="layer" id="layer-η" class="layer-radio" title="layer-η">
         <input type="radio" name="layer" id="layer-θ" class="layer-radio" title="layer-θ">
         <!-- Radio buttons for position (horizontal) -->
-        <input type="radio" name="position" id="pos-1" class="position-radio" title="pos-1">
+        <input type="radio" name="position" id="pos-1" class="position-radio" title="pos-1" checked>
         <input type="radio" name="position" id="pos-2" class="position-radio" title="pos-2">
         <input type="radio" name="position" id="pos-3" class="position-radio" title="pos-3">
         <input type="radio" name="position" id="pos-4" class="position-radio" title="pos-4">
@@ -8170,7 +8177,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="position" id="pos-17" class="position-radio" title="pos-17">
         <input type="radio" name="position" id="pos-18" class="position-radio" title="pos-18">
         <!-- S6/S7 positions -->
-        <input type="radio" name="position" id="pos-19" class="position-radio" title="pos-19" checked>
+        <input type="radio" name="position" id="pos-19" class="position-radio" title="pos-19">
         <input type="radio" name="position" id="pos-20" class="position-radio" title="pos-20">
         <input type="radio" name="position" id="pos-21" class="position-radio" title="pos-21">
         <input type="radio" name="position" id="pos-22" class="position-radio" title="pos-22">
@@ -8178,7 +8185,7 @@ AAAAAAAAAAAAAAAAAAAAAA==
         <input type="radio" name="position" id="pos-24" class="position-radio" title="pos-24">
         <input type="radio" name="position" id="pos-φ" class="position-radio" title="pos-φ">
         <!-- Title screen toggle -->
-        <input type="checkbox" id="title-screen-toggle" autofocus title="title screen" checked>
+        <input type="checkbox" id="title-screen-toggle" autofocus title="title screen">
         <!-- Artwork overlay toggle -->
         <input type="checkbox" id="artwork-toggle" title="artwork">
         <!-- S1 checkboxes -->

@@ -109,6 +109,15 @@ def find_html_classes_and_ids(html):
     return classes, ids
 
 
+def find_keyframe_names(css):
+    """Find all @keyframes animation names in CSS."""
+    cleaned = re.sub(r'/\*.*?\*/', '', css, flags=re.DOTALL)
+    names = set()
+    for m in re.finditer(r'@keyframes\s+([\w-]+)', cleaned):
+        names.add(m.group(1))
+    return names
+
+
 def minify_css(css):
     """Basic CSS minification: remove comments, collapse whitespace.
     
@@ -474,8 +483,8 @@ def inline_constant_vars(style_blocks, html_content):
     return style_blocks, html_content, to_inline
 
 
-def rename_in_css(css, class_map, id_map, var_map):
-    """Replace class selectors, ID selectors, and CSS variables in CSS."""
+def rename_in_css(css, class_map, id_map, var_map, anim_map):
+    """Replace class selectors, ID selectors, CSS variables, and animation names in CSS."""
     # 1. Rename CSS custom properties (longest-first, word-boundary aware)
     for old, new in sorted(var_map.items(), key=lambda x: -len(x[0])):
         css = re.sub(re.escape(old) + r'(?![\w-])', new, css)
@@ -512,11 +521,28 @@ def rename_in_css(css, class_map, id_map, var_map):
         replace_attr_selector, css
     )
 
+    # 6. Rename @keyframes declarations
+    for old, new in sorted(anim_map.items(), key=lambda x: -len(x[0])):
+        css = re.sub(
+            r'(@keyframes\s+)' + re.escape(old) + r'(?=\s*\{)',
+            r'\1' + new, css
+        )
+
+    # 7. Rename animation names in animation: and animation-name: values
+    def replace_anim_value(m):
+        prop = m.group(1)
+        value = m.group(2)
+        for old, new in sorted(anim_map.items(), key=lambda x: -len(x[0])):
+            value = re.sub(r'(?<![a-zA-Z0-9_-])' + re.escape(old) + r'(?![a-zA-Z0-9_-])', new, value)
+        return prop + value
+
+    css = re.sub(r'(animation(?:-name)?\s*:\s*)([^;{}]+)', replace_anim_value, css)
+
     return css
 
 
-def rename_in_html(html, class_map, id_map, var_map):
-    """Replace class, id, for, href=#, url(#), and CSS variable references in HTML."""
+def rename_in_html(html, class_map, id_map, var_map, anim_map):
+    """Replace class, id, for, href=#, url(#), CSS variable, and animation name references in HTML."""
 
     # 1. class="..."
     def replace_class_attr(m):
@@ -575,6 +601,21 @@ def rename_in_html(html, class_map, id_map, var_map):
     # 6. CSS variables in inline style="" attributes
     for old, new in sorted(var_map.items(), key=lambda x: -len(x[0])):
         html = re.sub(re.escape(old) + r'(?![\w-])', new, html)
+
+    # 7. Animation names in inline style="" attributes
+    def replace_inline_anim(m):
+        prefix = m.group(1)
+        style = m.group(2)
+        def _replace_anim_value(m2):
+            prop = m2.group(1)
+            value = m2.group(2)
+            for old, new in sorted(anim_map.items(), key=lambda x: -len(x[0])):
+                value = re.sub(r'(?<![a-zA-Z0-9_-])' + re.escape(old) + r'(?![a-zA-Z0-9_-])', new, value)
+            return prop + value
+        style = re.sub(r'(animation(?:-name)?\s*:\s*)([^;"\']+)', _replace_anim_value, style)
+        return prefix + style
+
+    html = re.sub(r'(style\s*=\s*["\'])([^"\']*)', replace_inline_anim, html)
 
     return html
 
@@ -773,19 +814,30 @@ def process(html_content, fast=False):
         if len(short_var) < len(var_name):
             var_map[var_name] = short_var
 
+    # Build animation name map
+    all_anims = find_keyframe_names(all_css)
+    anim_map = {}
+    anim_gen = generate_short_names()
+    for anim_name in sorted(all_anims):
+        short = next(anim_gen)
+        while short in reserved:
+            short = next(anim_gen)
+        if len(short) < len(anim_name):
+            anim_map[anim_name] = short
+
     # Process CSS blocks (rename + minify)
     print("Shortening CSS variable names...", file=sys.stderr)
     result = html_content
     for block in reversed(style_blocks):
         css = block['css']
-        css = rename_in_css(css, class_map, id_map, var_map)
+        css = rename_in_css(css, class_map, id_map, var_map, anim_map)
         css = minify_css(css)
         replacement = block['open_tag'] + css + block['close_tag']
         result = result[:block['start']] + replacement + result[block['end']:]
 
     # Rename in HTML
     print("Shortening class names and IDs...", file=sys.stderr)
-    result = rename_in_html(result, class_map, id_map, var_map)
+    result = rename_in_html(result, class_map, id_map, var_map, anim_map)
 
     # Shorten colors and units in inline styles
     print("Shortening colors and zero values...", file=sys.stderr)
@@ -804,7 +856,7 @@ def process(html_content, fast=False):
     print("Collapsing whitespace...", file=sys.stderr)
     result = minify_html_whitespace(result)
 
-    return result, class_map, id_map, var_map, inlined_map
+    return result, class_map, id_map, var_map, anim_map, inlined_map
 
 
 def main():
@@ -821,7 +873,7 @@ def main():
     with open(args.input, 'r', encoding='utf-8') as f:
         html_content = f.read()
 
-    result, class_map, id_map, var_map, inlined_map = process(html_content, fast=args.fast)
+    result, class_map, id_map, var_map, anim_map, inlined_map = process(html_content, fast=args.fast)
 
     if args.output:
         with open(args.output, 'w', encoding='utf-8') as f:
@@ -852,6 +904,10 @@ def main():
         if var_map:
             print("\nCSS variable renaming:", file=sys.stderr)
             for old, new in sorted(var_map.items()):
+                print(f"  {old} -> {new}", file=sys.stderr)
+        if anim_map:
+            print("\nAnimation renaming:", file=sys.stderr)
+            for old, new in sorted(anim_map.items()):
                 print(f"  {old} -> {new}", file=sys.stderr)
 
 
